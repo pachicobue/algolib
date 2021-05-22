@@ -1,5 +1,3 @@
 # algolib
 
-競プロライブラリ
-
-verifyとdoc生成は [verification-helper](https://github.com/online-judge-tools/verification-helper) を使用
+[![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)](https://pachicobue.github.io/algolib/)
