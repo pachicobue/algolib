@@ -1,0 +1,11 @@
+#pragma once
+#include "common/type_alias.hpp"
+#include "common/constants.hpp"
+#include "common/func_alias.hpp"
+#include "common/show.hpp"
+#include "common/bit_ops.hpp"
+#include "common/fixpoint.hpp"
+#include "common/nd_vec.hpp"
+#include "common/range.hpp"
+#include "common/rng.hpp"
+#include "common/xoshiro.hpp"
