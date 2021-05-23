@@ -1,6 +1,7 @@
 #pragma once
-#include "./misc/common.hpp"
-template<typename T> class MonotonicCHT
+#include "../misc/common.hpp"
+template<typename T>
+class MonotonicCHT
 {
     using L = Pair<T, T>;
     static constexpr L NIL = {0, INF<T>};
@@ -24,6 +25,7 @@ template<typename T> class MonotonicCHT
             return fdiv(b1 - b2, a2 - a1) < x;
         }
     }
+
 public:
     MonotonicCHT(bool query_inc = true)
         : m_query_inc{query_inc}, m_prev_x{m_query_inc ? -INF<T> : INF<T>}
@@ -91,6 +93,7 @@ public:
             return m_lines.back();
         }
     }
+
 private:
     bool m_query_inc;
     T m_prev_x;

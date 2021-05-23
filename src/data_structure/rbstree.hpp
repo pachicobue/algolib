@@ -1,5 +1,5 @@
 #pragma once
-#include "misc/common.hpp"
+#include "../misc/common.hpp"
 template<typename T>
 class RBST
 {
@@ -12,6 +12,7 @@ class RBST
         Arr<int, 2> sons = {-1, -1};
     };
     using P = Pair<int, int>;
+
 public:
     RBST() {}
     const Node& operator[](int r) const
