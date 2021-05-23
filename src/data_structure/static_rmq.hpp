@@ -5,6 +5,7 @@ template<typename TotalOrd, typename B = u64>
 class StaticRMQ
 {
     using T = typename TotalOrd::T;
+
 public:
     StaticRMQ(const Vec<T>& vs)
         : m_size(vs.size()),
@@ -12,10 +13,10 @@ public:
           m_vals{vs},
           m_bucket_vals([&]() {
               Vec<T> ans(m_bn);
-              for (int i = 0; i < m_size; i++) {
-                  ans[wind(i)] = i % bs == 0
-                                     ? m_vals[i]
-                                     : std::min(ans[wind(i)], m_vals[i], comp);
+              for (int i : rep(m_size)) {
+                  ans[wind(i)]
+                      = (i % bs == 0 ? m_vals[i]
+                                     : std::min(ans[wind(i)], m_vals[i], comp));
               }
               return ans;
           }()),
@@ -67,18 +68,19 @@ public:
                               : (bs * rb < r ? brmq(bs * rb, r) : T{}));
         }
     }
+
 private:
     static constexpr int bs = sizeof(B) * 8;
     static constexpr int bslog = log2p1(bs) - 1;
-    static constexpr int wind(const int n)
+    static constexpr int wind(int n)
     {
         return n >> (bslog);
     }
-    static constexpr int bind(const int n)
+    static constexpr int bind(int n)
     {
         return n ^ (wind(n) << bslog);
     }
-    static constexpr int ind(const int w, const int b)
+    static constexpr int ind(int w, int b)
     {
         return (w << bslog) | b;
     }

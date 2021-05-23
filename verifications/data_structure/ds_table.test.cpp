@@ -16,6 +16,7 @@ int main()
     };
     const auto rmq = DSTable<SemiGroup>(as);
     for (int q : rep(Q)) {
+        USE(q);
         const auto [l, r] = in.tup<int, int>();
         out.ln(rmq.fold(l, r));
     }
