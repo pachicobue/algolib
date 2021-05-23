@@ -1,16 +1,20 @@
 {
+"verifications/data_structure/ds_table.test.cpp": "2021-05-23 20:19:02 +0900",
 "verifications/data_structure/fenwick.test.cpp": "2021-05-23 15:28:30 +0900",
 "verifications/data_structure/intdict.test.cpp": "2021-05-23 15:28:30 +0900",
 "verifications/data_structure/mo.test.cpp": "2021-05-23 19:30:31 +0900",
 "verifications/data_structure/segtree.test.cpp": "2021-05-23 19:52:02 +0900",
+"verifications/data_structure/static_rmq.test.cpp": "2021-05-23 20:19:02 +0900",
 "verifications/data_structure/unionfind.test.cpp": "2021-05-23 15:28:30 +0900",
 "verifications/data_structure/wavelet.test.cpp": "2021-05-23 15:28:30 +0900",
 "verifications/graph/bcc.test.cpp": "2021-05-23 15:28:30 +0900",
 "verifications/graph/diameter.test.cpp": "2021-05-23 15:28:30 +0900",
 "verifications/graph/dijkstra.test.cpp": "2021-05-23 15:28:30 +0900",
 "verifications/graph/hld.test.cpp": "2021-05-23 19:52:02 +0900",
+"verifications/graph/lca.test.cpp": "2021-05-23 20:19:02 +0900",
 "verifications/math/and_convolution.test.cpp": "2021-05-23 19:52:02 +0900",
 "verifications/math/berlekamp_massey.test.cpp": "2021-05-23 19:52:02 +0900",
+"verifications/math/gcd_convolution.test.cpp": "2021-05-23 19:52:02 +0900",
 "verifications/math/prime_powsum.test.cpp": "2021-05-23 15:28:30 +0900",
 "verifications/misc/fastio.test.cpp": "2021-05-23 15:28:30 +0900"
 }
