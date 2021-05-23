@@ -40,17 +40,17 @@ data:
   - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/printer.hpp
     title: src/misc/printer.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/scanner.hpp
     title: src/misc/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/many_aplusb
@@ -276,7 +276,7 @@ data:
   path: verifications/misc/io.test.cpp
   requiredBy: []
   timestamp: '2021-05-23 15:28:30+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/misc/io.test.cpp
 layout: document

@@ -50,7 +50,7 @@ data:
   - icon: ':x:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
   - icon: ':warning:'
@@ -62,7 +62,7 @@ data:
   - icon: ':x:'
     path: src/math/nth_term.hpp
     title: src/math/nth_term.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':warning:'
@@ -129,10 +129,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
   _isVerificationFailed: true

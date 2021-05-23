@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/lazyseg.hpp
     title: Lazy Segment Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/data_structure/li_chao_tree.hpp
     title: Li Chao Tree
   - icon: ':heavy_check_mark:'
@@ -152,7 +152,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/gcd_convolution.hpp
     title: src/math/gcd_convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
   - icon: ':warning:'
@@ -167,7 +167,7 @@ data:
   - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
   - icon: ':warning:'
@@ -185,7 +185,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/prime_enumerate.hpp
     title: src/math/prime_enumerate.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':heavy_check_mark:'
@@ -200,7 +200,7 @@ data:
   - icon: ':warning:'
     path: src/math/seg_sieve.hpp
     title: src/math/seg_sieve.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/set_hadamard.hpp
     title: src/math/set_hadamard.hpp
   - icon: ':heavy_check_mark:'
@@ -209,7 +209,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/set_zeta.hpp
     title: src/math/set_zeta.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/xor_convolution.hpp
     title: src/math/xor_convolution.hpp
   - icon: ':question:'
@@ -221,10 +221,10 @@ data:
   - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/printer.hpp
     title: src/misc/printer.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/scanner.hpp
     title: src/misc/scanner.hpp
   - icon: ':warning:'
@@ -264,7 +264,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/lazyseg.test.cpp
     title: verifications/data_structure/lazyseg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/li_chao_tree.line.test.cpp
     title: verifications/data_structure/li_chao_tree.line.test.cpp
   - icon: ':x:'
@@ -351,19 +351,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/math/prime_powsum.test.cpp
     title: verifications/math/prime_powsum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/misc/fastio.test.cpp
     title: verifications/misc/fastio.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/io.test.cpp
     title: verifications/misc/io.test.cpp
   _isVerificationFailed: true

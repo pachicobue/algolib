@@ -42,7 +42,7 @@ data:
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/li_chao_tree.line.test.cpp
     title: verifications/data_structure/li_chao_tree.line.test.cpp
   - icon: ':x:'
@@ -50,7 +50,7 @@ data:
     title: verifications/data_structure/li_chao_tree.segment.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -214,7 +214,7 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n#pragma endregion\n\
-    template<typename T> class LiChaoTree\n{\n    using L = Pair<T, T>;\n    static\
+    template<typename T>\nclass LiChaoTree\n{\n    using L = Pair<T, T>;\n    static\
     \ constexpr L NIL = {0, INF<T>};\n    struct Node\n    {\n        L line = NIL;\n\
     \        Arr<int, 2> sons{-1, -1};\n    };\n    static bool comp(const L& l1,\
     \ const L& l2, T x)\n    {\n        if (l1 == NIL or l2 == NIL) { return l2 ==\
@@ -236,26 +236,28 @@ data:
     \ < x_right and x_left < rx) {\n                    if (ri == -1) { ri = alloc();\
     \ }\n                    dfs(ri, mx, rx);\n                }\n            }\n\
     \        })(0, m_xmin, m_xsup);\n    }\n    Pair<bool, L> minLine(const T x) const\n\
-    \    {\n        T lx = m_xmin, rx = m_xsup;\n        L ans = NIL;\n        for\
-    \ (int i = 0; i != -1;) {\n            const auto& pl = m_nodes[i].line;\n   \
-    \         if (comp(pl, ans, x)) { ans = pl; }\n            const auto& [li, ri]\
-    \ = m_nodes[i].sons;\n            const T mx = (lx + rx) / 2;\n            if\
-    \ (x < mx) {\n                i = li;\n                rx = mx;\n            }\
-    \ else {\n                i = ri;\n                lx = mx;\n            }\n \
-    \       }\n        return {ans != NIL, ans};\n    }\nprivate:\n    void add(L\
-    \ l, int i, T lx, T rx)\n    {\n        for (;;) {\n            const auto& pl\
-    \ = m_nodes[i].line;\n            const T mx = (lx + rx) / 2;\n            const\
-    \ bool lunder = comp(l, pl, lx);\n            const bool runder = comp(l, pl,\
-    \ rx);\n            const bool munder = comp(l, pl, mx);\n            if (munder)\
-    \ { std::swap(l, m_nodes[i].line); }\n            if (rx - lx == 1) { break; }\n\
-    \            if (lunder == runder) { break; }\n            auto& [li, ri] = m_nodes[i].sons;\n\
-    \            if (lunder == munder) {\n                if (ri == -1) { ri = alloc();\
-    \ }\n                i = ri;\n                lx = mx;\n            } else {\n\
-    \                if (li == -1) { li = alloc(); }\n                i = li;\n  \
-    \              rx = mx;\n            }\n        }\n    }\n    int alloc()\n  \
-    \  {\n        m_nodes.push_back(Node{});\n        return (int)m_nodes.size() -\
-    \ 1;\n    }\n    T m_xmin, m_xsup;\n    Vec<Node> m_nodes;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T> class\
+    \    {\n        T lx = m_xmin, rx = m_xsup;\n        Pair<bool, L> ans = {false,\
+    \ NIL};\n        for (int i = 0; i != -1;) {\n            const auto& pl = m_nodes[i].line;\n\
+    \            if ((not ans.first) or comp(pl, ans.second, x)) {\n             \
+    \   ans.first = true;\n                ans.second = pl;\n            }\n     \
+    \       const auto& [li, ri] = m_nodes[i].sons;\n            const T mx = (lx\
+    \ + rx) / 2;\n            if (x < mx) {\n                i = li;\n           \
+    \     rx = mx;\n            } else {\n                i = ri;\n              \
+    \  lx = mx;\n            }\n        }\n        return ans;\n    }\nprivate:\n\
+    \    void add(L l, int i, T lx, T rx)\n    {\n        for (;;) {\n           \
+    \ const auto& pl = m_nodes[i].line;\n            const T mx = (lx + rx) / 2;\n\
+    \            const bool lunder = comp(l, pl, lx);\n            const bool runder\
+    \ = comp(l, pl, rx);\n            const bool munder = comp(l, pl, mx);\n     \
+    \       if (munder) { std::swap(l, m_nodes[i].line); }\n            if (lunder\
+    \ == runder) { break; }\n            int dir = (lunder == munder ? 1 : 0);\n \
+    \           if (rx - lx == 1) { break; }\n            int nind = m_nodes[i].sons[dir];\n\
+    \            if (nind == -1) { nind = m_nodes[i].sons[dir] = alloc(); }\n    \
+    \        i = nind;\n            if (rx - lx == 1) { break; }\n            if (lunder\
+    \ == munder) {\n                lx = mx;\n            } else {\n             \
+    \   rx = mx;\n            }\n        }\n    }\n    int alloc()\n    {\n      \
+    \  m_nodes.push_back(Node{});\n        return (int)m_nodes.size() - 1;\n    }\n\
+    \    T m_xmin, m_xsup;\n    Vec<Node> m_nodes;\n};\n"
+  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nclass\
     \ LiChaoTree\n{\n    using L = Pair<T, T>;\n    static constexpr L NIL = {0, INF<T>};\n\
     \    struct Node\n    {\n        L line = NIL;\n        Arr<int, 2> sons{-1, -1};\n\
     \    };\n    static bool comp(const L& l1, const L& l2, T x)\n    {\n        if\
@@ -278,23 +280,25 @@ data:
     \ {\n                    if (ri == -1) { ri = alloc(); }\n                   \
     \ dfs(ri, mx, rx);\n                }\n            }\n        })(0, m_xmin, m_xsup);\n\
     \    }\n    Pair<bool, L> minLine(const T x) const\n    {\n        T lx = m_xmin,\
-    \ rx = m_xsup;\n        L ans = NIL;\n        for (int i = 0; i != -1;) {\n  \
-    \          const auto& pl = m_nodes[i].line;\n            if (comp(pl, ans, x))\
-    \ { ans = pl; }\n            const auto& [li, ri] = m_nodes[i].sons;\n       \
-    \     const T mx = (lx + rx) / 2;\n            if (x < mx) {\n               \
-    \ i = li;\n                rx = mx;\n            } else {\n                i =\
-    \ ri;\n                lx = mx;\n            }\n        }\n        return {ans\
-    \ != NIL, ans};\n    }\n\nprivate:\n    void add(L l, int i, T lx, T rx)\n   \
-    \ {\n        for (;;) {\n            const auto& pl = m_nodes[i].line;\n     \
-    \       const T mx = (lx + rx) / 2;\n            const bool lunder = comp(l, pl,\
-    \ lx);\n            const bool runder = comp(l, pl, rx);\n            const bool\
-    \ munder = comp(l, pl, mx);\n            if (munder) { std::swap(l, m_nodes[i].line);\
-    \ }\n            if (rx - lx == 1) { break; }\n            if (lunder == runder)\
-    \ { break; }\n            auto& [li, ri] = m_nodes[i].sons;\n            if (lunder\
-    \ == munder) {\n                if (ri == -1) { ri = alloc(); }\n            \
-    \    i = ri;\n                lx = mx;\n            } else {\n               \
-    \ if (li == -1) { li = alloc(); }\n                i = li;\n                rx\
-    \ = mx;\n            }\n        }\n    }\n    int alloc()\n    {\n        m_nodes.push_back(Node{});\n\
+    \ rx = m_xsup;\n        Pair<bool, L> ans = {false, NIL};\n        for (int i\
+    \ = 0; i != -1;) {\n            const auto& pl = m_nodes[i].line;\n          \
+    \  if ((not ans.first) or comp(pl, ans.second, x)) {\n                ans.first\
+    \ = true;\n                ans.second = pl;\n            }\n            const\
+    \ auto& [li, ri] = m_nodes[i].sons;\n            const T mx = (lx + rx) / 2;\n\
+    \            if (x < mx) {\n                i = li;\n                rx = mx;\n\
+    \            } else {\n                i = ri;\n                lx = mx;\n   \
+    \         }\n        }\n        return ans;\n    }\n\nprivate:\n    void add(L\
+    \ l, int i, T lx, T rx)\n    {\n        for (;;) {\n            const auto& pl\
+    \ = m_nodes[i].line;\n            const T mx = (lx + rx) / 2;\n            const\
+    \ bool lunder = comp(l, pl, lx);\n            const bool runder = comp(l, pl,\
+    \ rx);\n            const bool munder = comp(l, pl, mx);\n            if (munder)\
+    \ { std::swap(l, m_nodes[i].line); }\n            if (lunder == runder) { break;\
+    \ }\n            int dir = (lunder == munder ? 1 : 0);\n            if (rx - lx\
+    \ == 1) { break; }\n            int nind = m_nodes[i].sons[dir];\n           \
+    \ if (nind == -1) { nind = m_nodes[i].sons[dir] = alloc(); }\n            i =\
+    \ nind;\n            if (rx - lx == 1) { break; }\n            if (lunder == munder)\
+    \ {\n                lx = mx;\n            } else {\n                rx = mx;\n\
+    \            }\n        }\n    }\n    int alloc()\n    {\n        m_nodes.push_back(Node{});\n\
     \        return (int)m_nodes.size() - 1;\n    }\n    T m_xmin, m_xsup;\n    Vec<Node>\
     \ m_nodes;\n};\n"
   dependsOn:
@@ -314,8 +318,8 @@ data:
   isVerificationFile: false
   path: src/data_structure/li_chao_tree.hpp
   requiredBy: []
-  timestamp: '2021-05-23 15:00:11+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-05-23 21:21:45+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verifications/data_structure/li_chao_tree.line.test.cpp
   - verifications/data_structure/li_chao_tree.segment.test.cpp

@@ -57,7 +57,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/lazyseg.test.cpp
     title: verifications/data_structure/lazyseg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/li_chao_tree.line.test.cpp
     title: verifications/data_structure/li_chao_tree.line.test.cpp
   - icon: ':x:'
@@ -144,13 +144,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/math/prime_powsum.test.cpp
     title: verifications/math/prime_powsum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
   - icon: ':heavy_check_mark:'

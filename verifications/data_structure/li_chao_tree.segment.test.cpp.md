@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/data_structure/li_chao_tree.hpp
     title: Li Chao Tree
   - icon: ':question:'
@@ -220,7 +220,7 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n#pragma endregion\n\
-    template<typename T> class LiChaoTree\n{\n    using L = Pair<T, T>;\n    static\
+    template<typename T>\nclass LiChaoTree\n{\n    using L = Pair<T, T>;\n    static\
     \ constexpr L NIL = {0, INF<T>};\n    struct Node\n    {\n        L line = NIL;\n\
     \        Arr<int, 2> sons{-1, -1};\n    };\n    static bool comp(const L& l1,\
     \ const L& l2, T x)\n    {\n        if (l1 == NIL or l2 == NIL) { return l2 ==\
@@ -242,28 +242,30 @@ data:
     \ < x_right and x_left < rx) {\n                    if (ri == -1) { ri = alloc();\
     \ }\n                    dfs(ri, mx, rx);\n                }\n            }\n\
     \        })(0, m_xmin, m_xsup);\n    }\n    Pair<bool, L> minLine(const T x) const\n\
-    \    {\n        T lx = m_xmin, rx = m_xsup;\n        L ans = NIL;\n        for\
-    \ (int i = 0; i != -1;) {\n            const auto& pl = m_nodes[i].line;\n   \
-    \         if (comp(pl, ans, x)) { ans = pl; }\n            const auto& [li, ri]\
-    \ = m_nodes[i].sons;\n            const T mx = (lx + rx) / 2;\n            if\
-    \ (x < mx) {\n                i = li;\n                rx = mx;\n            }\
-    \ else {\n                i = ri;\n                lx = mx;\n            }\n \
-    \       }\n        return {ans != NIL, ans};\n    }\nprivate:\n    void add(L\
-    \ l, int i, T lx, T rx)\n    {\n        for (;;) {\n            const auto& pl\
-    \ = m_nodes[i].line;\n            const T mx = (lx + rx) / 2;\n            const\
-    \ bool lunder = comp(l, pl, lx);\n            const bool runder = comp(l, pl,\
-    \ rx);\n            const bool munder = comp(l, pl, mx);\n            if (munder)\
-    \ { std::swap(l, m_nodes[i].line); }\n            if (rx - lx == 1) { break; }\n\
-    \            if (lunder == runder) { break; }\n            auto& [li, ri] = m_nodes[i].sons;\n\
-    \            if (lunder == munder) {\n                if (ri == -1) { ri = alloc();\
-    \ }\n                i = ri;\n                lx = mx;\n            } else {\n\
-    \                if (li == -1) { li = alloc(); }\n                i = li;\n  \
-    \              rx = mx;\n            }\n        }\n    }\n    int alloc()\n  \
-    \  {\n        m_nodes.push_back(Node{});\n        return (int)m_nodes.size() -\
-    \ 1;\n    }\n    T m_xmin, m_xsup;\n    Vec<Node> m_nodes;\n};\n#pragma region\
-    \ FastIO Printer\nclass printer\n{\npublic:\n    printer() {}\n    template<typename...\
-    \ Args>\n    int operator()(const Args&... args)\n    {\n        dump(args...);\n\
-    \        return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
+    \    {\n        T lx = m_xmin, rx = m_xsup;\n        Pair<bool, L> ans = {false,\
+    \ NIL};\n        for (int i = 0; i != -1;) {\n            const auto& pl = m_nodes[i].line;\n\
+    \            if ((not ans.first) or comp(pl, ans.second, x)) {\n             \
+    \   ans.first = true;\n                ans.second = pl;\n            }\n     \
+    \       const auto& [li, ri] = m_nodes[i].sons;\n            const T mx = (lx\
+    \ + rx) / 2;\n            if (x < mx) {\n                i = li;\n           \
+    \     rx = mx;\n            } else {\n                i = ri;\n              \
+    \  lx = mx;\n            }\n        }\n        return ans;\n    }\nprivate:\n\
+    \    void add(L l, int i, T lx, T rx)\n    {\n        for (;;) {\n           \
+    \ const auto& pl = m_nodes[i].line;\n            const T mx = (lx + rx) / 2;\n\
+    \            const bool lunder = comp(l, pl, lx);\n            const bool runder\
+    \ = comp(l, pl, rx);\n            const bool munder = comp(l, pl, mx);\n     \
+    \       if (munder) { std::swap(l, m_nodes[i].line); }\n            if (lunder\
+    \ == runder) { break; }\n            int dir = (lunder == munder ? 1 : 0);\n \
+    \           if (rx - lx == 1) { break; }\n            int nind = m_nodes[i].sons[dir];\n\
+    \            if (nind == -1) { nind = m_nodes[i].sons[dir] = alloc(); }\n    \
+    \        i = nind;\n            if (rx - lx == 1) { break; }\n            if (lunder\
+    \ == munder) {\n                lx = mx;\n            } else {\n             \
+    \   rx = mx;\n            }\n        }\n    }\n    int alloc()\n    {\n      \
+    \  m_nodes.push_back(Node{});\n        return (int)m_nodes.size() - 1;\n    }\n\
+    \    T m_xmin, m_xsup;\n    Vec<Node> m_nodes;\n};\n#pragma region FastIO Printer\n\
+    class printer\n{\npublic:\n    printer() {}\n    template<typename... Args>\n\
+    \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
+    \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
     \ args)\n    {\n        dump(args...), putchar('\\n');\n        return 0;\n  \
     \  }\nprivate:\n    template<typename T>\n    void dump(T v)\n    {\n        static\
     \ char tmp[30];\n        if (v < 0) {\n            putchar('-');\n           \
@@ -341,7 +343,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/li_chao_tree.segment.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 15:28:30+09:00'
+  timestamp: '2021-05-23 21:21:45+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/data_structure/li_chao_tree.segment.test.cpp
