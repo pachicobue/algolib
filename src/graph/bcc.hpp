@@ -10,7 +10,7 @@ public:
         auto dfs = Fixpoint([&](auto dfs, int u) -> void {
             m_cs[u] = m_cnum;
             for (int v : g[u]) {
-                if (m_cs[v] == -1 and m_lowlink.isBridge(u, v)) { dfs(v); }
+                if (m_cs[v] == -1 and not m_lowlink.isBridge(u, v)) { dfs(v); }
             }
         });
         for (int i : rep(g.v())) {

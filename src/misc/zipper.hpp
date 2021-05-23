@@ -16,14 +16,14 @@ public:
     int zip(T v)
     {
         calc();
-        return std::lower_bound(m_vs.begin(), m_vs.end(), v) - m_vs.begin();
+        return lbInd(m_vs, v);
     }
     void add(T v)
     {
         m_vs.push_back(v);
         m_calced = false;
     }
-    void add(const std::vector<T>& vs)
+    void add(const Vec<T>& vs)
     {
         for (const auto v : vs) {
             m_vs.push_back(v);

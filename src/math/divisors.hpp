@@ -1,10 +1,9 @@
 #pragma once
-#include <algorithm>
-#include <vector>
+#include "../misc/common.hpp"
 template<typename T>
-std::vector<T> divisors(const T n)
+Vec<T> divisors(const T n)
 {
-    std::vector<T> head, tail;
+    Vec<T> head, tail;
     for (T i = 1; i * i <= n; i++) {
         if (n % i == 0) {
             head.push_back(i);

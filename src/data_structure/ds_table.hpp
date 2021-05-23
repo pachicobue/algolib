@@ -4,6 +4,7 @@ template<typename SemiGroup>
 class DSTable
 {
     using T = typename SemiGroup::T;
+
 public:
     DSTable(const Vec<T>& vs)
         : m_size(vs.size()), m_depth(log2p1(m_size)), m_vss(m_depth, vs)
@@ -21,13 +22,14 @@ public:
             }
         }
     }
-    T fold(const int l, const int r) const
+    T fold(int l, int r) const
     {
         assert(0 <= l and l < r and r <= m_size);
         if (r - l == 1) { return m_vss.back()[l]; }
         const int d = m_depth - log2p1(l ^ (r - 1));
         return merge(m_vss[d][l], m_vss[d][r - 1]);
     }
+
 private:
     int m_size, m_depth;
     Vec<Vec<T>> m_vss;

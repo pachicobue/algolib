@@ -11,32 +11,37 @@ public:
         : m_v(g.v()), m_ords(m_v), m_lows(m_v), m_is_art(m_v)
     {
         const int N = g.v();
-        int visited = 0;
+        int ord = 0;
         Vec<bool> used(N, false);
-        Fixpoint([&](auto dfs, int s, int p) -> void {
-            used[s] = true;
-            m_ords[s] = visited++;
+        auto dfs = Fixpoint([&](auto dfs, int u, int pe) -> void {
+            used[u] = true;
+            m_ords[u] = ord++;
+            m_lows[u] = m_ords[u];
             bool is_art = false;
             int dim = 0;
-            for (int to : g[s]) {
-                if (not used[to]) {
+            for (const auto& [id, v, c] : g[u]) {
+                USE(c);
+                if (not used[v]) {
                     dim++;
-                    dfs(to, s);
-                    chmin(m_lows[s], m_lows[to]);
-                    is_art |= m_ords[s] > m_lows[to];
-                    if (isBridge(s, to)) {
-                        m_bridges.push_back(std::minmax({s, to}));
+                    dfs(v, id);
+                    chmin(m_lows[u], m_lows[v]);
+                    is_art |= m_ords[u] > m_lows[v];
+                    if (isBridge(u, v)) {
+                        m_bridges.push_back(std::minmax({u, v}));
                     }
-                } else if (to != p) {
-                    chmin(m_lows[s], m_ords[to]);
+                } else if (id != pe) {
+                    chmin(m_lows[u], m_ords[v]);
                 }
             }
-            if (p == -1) {
-                m_is_art[s] = (dim >= 2);
+            if (pe == -1) {
+                m_is_art[u] = (dim >= 2);
             } else {
-                m_is_art[s] = is_art;
+                m_is_art[u] = is_art;
             }
-        })(0, -1);
+        });
+        for (int i : rep(N)) {
+            if (not used[i]) { dfs(i, -1); }
+        }
     }
     bool isArt(int i) const
     {

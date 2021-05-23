@@ -1,11 +1,10 @@
 #pragma once
-#include <vector>
-#include "../misc/types.hpp"
-#include "moddint.hpp"
-#include "moddint64.hpp"
+#include "../misc/common.hpp"
+#include "modint.hpp"
+#include "modint64.hpp"
 
 template<typename mint>
-inline bool miller_rabin(const u64 n, const std::vector<u64>& as)
+bool millerRabin(u64 n, const Vec<u64>& as)
 {
     auto d = n - 1;
     for (; (d & 1) == 0; d >>= 1) {}
@@ -13,24 +12,24 @@ inline bool miller_rabin(const u64 n, const std::vector<u64>& as)
         if (n <= a) { break; }
         auto s = d;
         mint x = mint(a).pow(s);
-        while (x.get() != 1 and x.get() != n - 1 and s != n - 1) { x *= x, s <<= 1; }
-        if (x.get() != n - 1 and s % 2 == 0) { return false; }
+        while (x.val() != 1 and x.val() != n - 1 and s != n - 1) {
+            x *= x, s <<= 1;
+        }
+        if (x.val() != n - 1 and s % 2 == 0) { return false; }
     }
     return true;
 }
-inline bool is_prime(const u64 n)
+bool isPrime(u64 n)
 {
-    static moddinfo info;
-    static moddinfo64 info64;
-    using mint   = moddint<info>;
-    using mint64 = moddint64<info64>;
+    using mint = modint_dynamic<873293817>;
+    using mint64 = modint64_dynamic<828271328>;
     if (n == 1) { return false; }
     if ((n & 1) == 0) { return n == 2; }
     if (n < (1ULL << 30)) {
-        info.set_mod(n);
-        return miller_rabin<mint>(n, {2, 7, 61});
+        mint::setMod(n);
+        return millerRabin<mint>(n, {2, 7, 61});
     } else {
-        info64.set_mod(n);
-        return miller_rabin<mint64>(n, {2, 325, 9375, 28178, 450775, 9780504});
+        mint64::setMod(n);
+        return millerRabin<mint64>(n, {2, 325, 9375, 28178, 450775, 9780504});
     }
 }

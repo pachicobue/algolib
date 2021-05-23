@@ -1,4 +1,5 @@
 #pragma once
+#include "common/macros.hpp"
 #include "common/type_alias.hpp"
 #include "common/constants.hpp"
 #include "common/func_alias.hpp"

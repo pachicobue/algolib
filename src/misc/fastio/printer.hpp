@@ -17,6 +17,7 @@ public:
         dump(args...), putchar('\n');
         return 0;
     }
+
 private:
     template<typename T>
     void dump(T v)
@@ -33,6 +34,16 @@ private:
         } while (v);
         while (i) {
             putchar(tmp[--i]);
+        }
+    }
+    void dump(bool b)
+    {
+        dump<int>(b);
+    }
+    void dump(const Str& cs)
+    {
+        for (char c : cs) {
+            dump(c);
         }
     }
     template<typename T>

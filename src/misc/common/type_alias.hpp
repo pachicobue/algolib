@@ -14,7 +14,7 @@ constexpr i32 operator"" _i32(u64 v)
 {
     return v;
 }
-constexpr u32 operator"" _u32(u64 v)
+constexpr i32 operator"" _u32(u64 v)
 {
     return v;
 }

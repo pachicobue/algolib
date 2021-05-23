@@ -1,11 +1,12 @@
 #pragma once
+#include "../misc/common.hpp"
 #include "prime_factors.hpp"
 template<typename mint>
-mint primitive_root()
+mint primitiveRoot()
 {
-    const auto p = mint::mod;
+    const auto p = mint::mod();
     if (p == 2) { return 1; }
-    const auto fs = prime_factors(p - 1);
+    const auto fs = primeFactors(p - 1);
     for (mint g = 2;; g += 1) {
         bool ok = true;
         for (const auto& [p, n] : fs) {

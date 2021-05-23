@@ -10,8 +10,8 @@ public:
         const int N = g.v();
         Graph<T> rg(N);
         for (int u : rep(N)) {
-            for (const auto& [v, cost] : g[i]) {
-                rg.add_edge(v, u, cost);
+            for (const auto& [v, cost] : g[u]) {
+                rg.addEdge(v, u, cost);
             }
         }
         Vec<int> st;

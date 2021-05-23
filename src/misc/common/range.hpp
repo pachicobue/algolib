@@ -23,6 +23,7 @@ private:
         int m_cnt, m_step;
     };
     int m_start, m_end, m_step;
+
 public:
     range(int start, int end, int step = 1)
         : m_start{start}, m_end{end}, m_step{step}
@@ -46,6 +47,7 @@ range per(int rend)
 {
     return range(rend - 1, -1, -1);
 }
+
 class ndRep
 {
 private:
@@ -77,6 +79,7 @@ private:
         bool m_end;
     };
     Vec<int> m_ns;
+
 public:
     ndRep(const Vec<int>& ns) : m_ns{ns} {}
     itr begin() const

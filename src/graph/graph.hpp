@@ -6,7 +6,8 @@ class Graph
     struct Edge
     {
         Edge() = default;
-        Edge(int t, T c) : to{t}, cost{c} {}
+        Edge(int i, int t, T c) : id{i}, to{t}, cost{c} {}
+        int id;
         int to;
         T cost;
         operator int() const
@@ -21,15 +22,17 @@ public:
     {
         assert(0 <= u and u < m_v);
         assert(0 <= v and v < m_v);
-        m_edges[u].emplace_back(v, 1);
-        if (bi) { m_edges[v].emplace_back(u, T{1}); }
+        m_edges[u].emplace_back(m_e, v, 1);
+        if (bi) { m_edges[v].emplace_back(m_e, u, 1); }
+        m_e++;
     }
     void addEdge(int u, int v, const T& c, bool bi = false)
     {
         assert(0 <= u and u < m_v);
         assert(0 <= v and v < m_v);
-        m_edges[u].emplace_back(v, c);
-        if (bi) { m_edges[v].emplace_back(u, c); }
+        m_edges[u].emplace_back(m_e, v, c);
+        if (bi) { m_edges[v].emplace_back(m_e, u, c); }
+        m_e++;
     }
     const Vec<Edge>& operator[](const int u) const
     {
@@ -45,11 +48,16 @@ public:
     {
         return m_v;
     }
+    int e() const
+    {
+        return m_e;
+    }
     friend Ostream& operator<<(Ostream& os, const Graph& g)
     {
-        for (int u : rep(g.m_v)) {
-            for (const auto& e : g[u]) {
-                os << e.from << "->" << e.to << "(" << e.cost << ")\n";
+        for (int u : rep(g.v())) {
+            for (const auto& [id, v, c] : g[u]) {
+                os << "[" << id << "]: ";
+                os << u << "->" << v << "(" << c << ")\n";
             }
         }
         return os;
@@ -60,7 +68,8 @@ public:
         assert(0 <= root and root < N);
         Vec<T> ss(N, 1);
         Fixpoint([&](auto dfs, int u, int p) -> void {
-            for (const auto& [v, c] : m_edges[u]) {
+            for (const auto& [id, v, c] : m_edges[u]) {
+                USE(id);
                 if (v == p) { continue; }
                 dfs(v, u);
                 ss[v] += ss[u];
@@ -74,7 +83,8 @@ public:
         assert(0 <= root and root < N);
         Vec<T> ds(N, 0);
         Fixpoint([&](auto dfs, int u, int p) -> void {
-            for (const auto& [v, c] : m_edges[u]) {
+            for (const auto& [id, v, c] : m_edges[u]) {
+                USE(id);
                 if (v == p) { continue; }
                 ds[v] = ds[u] + c;
                 dfs(v, u);
@@ -88,7 +98,8 @@ public:
         assert(0 <= root and root < N);
         Vec<int> ps(N, -1);
         Fixpoint([&](auto dfs, int u, int p) -> void {
-            for (const auto& [v, c] : m_edges[u]) {
+            for (const auto& [id, v, c] : m_edges[u]) {
+                USE(id);
                 if (v == p) { continue; }
                 ps[v] = u;
                 dfs(v, u);
@@ -99,5 +110,6 @@ public:
 
 private:
     int m_v;
+    int m_e = 0;
     Vec<Vec<Edge>> m_edges;
 };

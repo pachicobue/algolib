@@ -1,29 +1,32 @@
 #pragma once
-#include <cmath>
-
-#include "../data_structure/hashmap.hpp"
-#include "../misc/types.hpp"
+#include "../misc/common.hpp"
+#include "../data_structure/intdict.hpp"
 #include "extgcd.hpp"
 #include "prime_factors.hpp"
 
 template<typename mint>
-mint mod_nthroot(mint A, ull k)
+mint modNthRoot(mint A, u64 k)
 {
-    const ull P = mint::mod;
+    const u64 P = mint::mod();
     if (A == 0) { return 0; }
     if (k == 0) { return A; }
-    const ull g = std::gcd(P - 1, k);
-    if (A.pow((P - 1) / g)() != 1) { return 0; }
-    A = A.pow(inverse<ULL>(k / g, (P - 1) / g));
+    const u64 g = std::gcd(P - 1, k);
+    if (A.pow((P - 1) / g).val() != 1) { return 0; }
+    A = A.pow(inverse<u128>(k / g, (P - 1) / g));
 
     if (g == 1) { return A; }
-    const auto fs = prime_factors(g);
+    const auto fs = primeFactors(g);
     for (const auto& [p, e] : fs) {
-        ull pe = 1;
-        for (int i = 0; i < e; i++) { pe *= p; }
-        ull q = P - 1, Q = 0;
-        while (q % p == 0) { q /= p, Q++; }
-        const ull y = pe - inverse<ULL>(q, pe), z = ((ULL)y * q + 1) / (ULL)pe;
+        u64 pe = 1;
+        for (int i = 0; i < e; i++) {
+            pe *= p;
+        }
+        u64 q = P - 1, Q = 0;
+        while (q % p == 0) {
+            q /= p, Q++;
+        }
+        const u64 y = pe - inverse<u128>(q, pe);
+        const u64 z = ((u128)y * q + 1) / (u128)pe;
         mint X = A.pow(z);
         if ((int)Q == e) {
             A = X;
@@ -31,31 +34,37 @@ mint mod_nthroot(mint A, ull k)
         }
 
         mint Eraser = 1;
-        const ull h = (P - 1) / p;
+        const u64 h = (P - 1) / p;
         for (mint Z = 2;; Z += 1) {
             if (Z.pow(h) != 1) {
                 Eraser = Z.pow(q);
                 break;
             }
         }
-        mint Error = A.pow((ULL)y * q);
+        mint Error = A.pow((u128)y * q);
 
         mint pEraser = Eraser;
-        for (ull i = 0; i < Q - 1; i++) { pEraser = pEraser.pow(p); }
+        for (u64 i = 0; i < Q - 1; i++) {
+            pEraser = pEraser.pow(p);
+        }
         const mint ipEraser = pEraser.inv();
 
-        hashmap<ull, ull> memo;
+        IntDict<u64, u64> memo;
         {
-            const ull M = std::max(1ULL, (ull)(std::sqrt(p) * std::sqrt(Q - e))), B = std::max(1ULL, ((ull)p - 1) / M);
+            const u64 M
+                = std::max(1_u64, (u64)(std::sqrt(p) * std::sqrt(Q - e)));
+            const u64 B = std::max(1_u64, ((u64)p - 1) / M);
             const mint ppEraser = pEraser.pow(B);
-            mint prod           = 1;
-            for (ull i = 0; i < p; i += B, prod *= ppEraser) { memo[prod()] = i; }
+            mint prod = 1;
+            for (u64 i = 0; i < p; i += B, prod *= ppEraser) {
+                memo[prod.val()] = i;
+            }
         }
 
-        while (Error() != 1) {
-            ull l       = 0;
+        while (Error.val() != 1) {
+            u64 l = 0;
             mint pError = Error;
-            for (ull i = 0; i < Q; i++) {
+            for (u64 i = 0; i < Q; i++) {
                 const auto npError = pError.pow(p);
                 if (npError == 1) {
                     l = Q - (i + 1);
@@ -64,19 +73,21 @@ mint mod_nthroot(mint A, ull k)
                 pError = npError;
             }
 
-            ull c = -1;
+            u64 c = -1;
             {
                 mint small = pError.inv();
-                for (ull j = 0;; j++, small *= ipEraser) {
-                    if (memo.count(small())) {
-                        const ull i = memo[small()];
-                        c           = i + j;
+                for (u64 j = 0;; j++, small *= ipEraser) {
+                    if (memo.contains(small.val())) {
+                        const u64 i = memo[small.val()];
+                        c = i + j;
                         break;
                     }
                 }
             }
             auto pEraser2 = Eraser.pow(c);
-            for (ull i = 0; i < l - e; i++) { pEraser2 = pEraser2.pow(p); }
+            for (u64 i = 0; i < l - e; i++) {
+                pEraser2 = pEraser2.pow(p);
+            }
             X *= pEraser2, Error *= pEraser2.pow(pe);
         }
         A = X;

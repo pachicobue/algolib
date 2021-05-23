@@ -22,19 +22,28 @@ bool chmax(T& a, const T& b)
     }
 }
 template<typename T>
-T fdiv(T x, T y)
+constexpr T fdiv(T x, T y)
 {
     if (y < T{}) { x = -x, y = -y; }
     return x >= T{} ? x / y : (x - y + 1) / y;
 }
 template<typename T>
-T cdiv(T x, T y)
+constexpr T cdiv(T x, T y)
 {
     if (y < T{}) { x = -x, y = -y; }
     return x >= T{} ? (x + y - 1) / y : x / y;
 }
 template<typename T, typename I>
-T power(T v, I n)
+constexpr T modPower(T v, I n, T mod)
+{
+    T ans = 1 % mod;
+    for (; n > 0; n >>= 1, (v *= v) %= mod) {
+        if (n % 2 == 1) { (ans *= v) %= mod; }
+    }
+    return ans;
+}
+template<typename T, typename I>
+constexpr T power(T v, I n)
 {
     T ans = 1;
     for (; n > 0; n >>= 1, v *= v) {
@@ -43,7 +52,7 @@ T power(T v, I n)
     return ans;
 }
 template<typename T, typename I>
-T power(T v, I n, const T& e)
+constexpr T power(T v, I n, const T& e)
 {
     T ans = e;
     for (; n > 0; n >>= 1, v *= v) {

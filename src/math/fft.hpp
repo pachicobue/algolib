@@ -1,30 +1,26 @@
 #pragma once
-#include <cassert>
-#include <cmath>
-#include <vector>
-#include "../math/complex.hpp"
-#include "../math/modint.hpp"
-#include "../misc/bit_ops.hpp"
-#include "../misc/constants.hpp"
+#include "../misc/common.hpp"
+#include "complex.hpp"
+#include "modint.hpp"
 template<typename R>
-class fft
+class FFT
 {
 private:
-    static constexpr R pi  = pi_v<R>;
+    static constexpr R pi = PI<R>;
     static constexpr int D = 30;
     static constexpr int B = 14;
-    static void trans(std::vector<complex<R>>& as, const int lg, const bool rev)
+    static void trans(Vec<complex<R>>& as, const int lg, const bool rev)
     {
         const int N = as.size();
-        static std::vector<complex<R>> root[D];
+        static Vec<complex<R>> root[D];
         if (root[lg].empty()) {
             root[lg].resize(N);
             for (int i = 0; i < N; i++) {
                 const R theta = pi * R(2 * i) / R(N);
-                root[lg][i]   = complex<R>(std::cos(theta), std::sin(theta));
+                root[lg][i] = complex<R>(std::cos(theta), std::sin(theta));
             }
         }
-        std::vector<complex<R>> tmp(N);
+        Vec<complex<R>> tmp(N);
         for (int w = (N >> 1); w > 0; w >>= 1) {
             for (int y = 0; y < (N >> 1); y += w) {
                 const complex<R> r = rev ? root[lg][y].conj() : root[lg][y];
@@ -38,19 +34,29 @@ private:
     }
 
 public:
-    fft() = delete;
+    FFT() = delete;
     template<typename T, typename V = T>
-    static std::vector<V> convolute(const std::vector<T>& as, const std::vector<T>& bs)
+    static Vec<V> convolute(const Vec<T>& as, const Vec<T>& bs)
     {
-        const int need = as.size() + bs.size() - 1, lg = clog(need), sz = 1UL << lg;
-        std::vector<complex<R>> xs(sz), ys(sz);
-        for (int i = 0; i < as.size(); i++) { xs[i] = {(R)as[i], (R)0}; }
-        for (int i = 0; i < bs.size(); i++) { ys[i] = {(R)bs[i], (R)0}; }
+        const int need = as.size() + bs.size() - 1;
+        const int lg = clog(need);
+        const int sz = 1UL << lg;
+        Vec<complex<R>> xs(sz), ys(sz);
+        for (int i : rep(as.size())) {
+            xs[i] = {(R)as[i], (R)0};
+        }
+        for (int i : rep(bs.size())) {
+            ys[i] = {(R)bs[i], (R)0};
+        }
         trans(xs, lg, false), trans(ys, lg, false);
-        for (int i = 0; i < sz; i++) { xs[i] *= ys[i]; }
+        for (int i : rep(sz)) {
+            xs[i] *= ys[i];
+        }
         trans(xs, lg, true);
-        std::vector<T> ans(need);
-        for (int i = 0; i < need; i++) { ans[i] = (T)std::round(xs[i].real / (R)sz); }
+        Vec<T> ans(need);
+        for (int i : rep(need)) {
+            ans[i] = (T)std::round(xs[i].real / (R)sz);
+        }
         return ans;
     }
 };

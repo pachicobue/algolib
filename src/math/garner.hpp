@@ -1,21 +1,20 @@
 #pragma once
-#include <vector>
-#include "mod_pow.hpp"
+#include "../misc/common.hpp"
 template<typename T>
-std::vector<T> garner(const std::vector<T>& xs, const std::vector<T>& ms)
+Vec<T> garner(const Vec<T>& xs, const Vec<T>& ms)
 {
     const int N = (int)xs.size();
-    std::vector<T> as(N);
-    for (int i = 0; i < N; i++) {
+    Vec<T> as(N);
+    for (int i : rep(N)) {
         const T xi = xs[i], mod = ms[i];
         T p = 1, sum = 0;
-        for (int j = 0; j < i; j++) {
+        for (int j : rep(i)) {
             const T xj = xs[j];
             (sum += p * as[j] % mod) %= mod;
             (p *= (xi + mod - xj)) %= mod;
         }
         const T res = (xi + mod - sum) % mod;
-        as[i]       = res * mod_pow(p, mod - 2, mod) % mod;
+        as[i] = res * modPower(p, mod - 2, mod) % mod;
     }
     return as;
 }

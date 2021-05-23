@@ -43,6 +43,7 @@ public:
     {
         return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });
     }
+
 private:
     Rng m_rng;
 };

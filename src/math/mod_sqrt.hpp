@@ -1,17 +1,19 @@
 #pragma once
-#include "../misc/types.hpp"
+#include "../misc/common.hpp"
 
 template<typename mint>
 mint modsqrt(const mint& A)
 {
-    const ull P = mint::mod;
+    const u64 P = mint::mod();
     if (A == 0) { return 0; }
     if (P == 2) { return 1; }
-    const ull h = (P - 1) >> 1;
-    if (A.pow(h)() != 1) { return 0; }
+    const u64 h = (P - 1) >> 1;
+    if (A.pow(h).val() != 1) { return 0; }
 
-    ull q = P - 1, Q = 0;
-    while ((q & 1) == 0) { q >>= 1, Q++; }
+    u64 q = P - 1, Q = 0;
+    while ((q & 1) == 0) {
+        q >>= 1, Q++;
+    }
 
     mint Eraser = 1;
     for (mint Z = 2;; Z += 1) {
@@ -21,17 +23,17 @@ mint modsqrt(const mint& A)
         }
     }
     mint Error = A.pow(q), X = A.pow((q + 1) / 2);
-    while (Error() != 1) {
-        ull l       = 0;
+    while (Error.val() != 1) {
+        u64 l = 0;
         mint pError = Error;
-        for (ull i = 0; i < Q; i++, pError *= pError) {
-            if (pError() == 1) {
+        for (u64 i = 0; i < Q; i++, pError *= pError) {
+            if (pError.val() == 1) {
                 l = Q - i;
                 break;
             }
         }
         mint pEraser = Eraser;
-        for (ull i = 0; i < l - 1; i++, pEraser *= pEraser) {}
+        for (u64 i = 0; i < l - 1; i++, pEraser *= pEraser) {}
         X *= pEraser, Error *= (pEraser * pEraser);
     }
     return X;
