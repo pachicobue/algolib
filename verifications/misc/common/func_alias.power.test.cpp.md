@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/graph/graph.hpp
-    title: src/graph/graph.hpp
-  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
   - icon: ':heavy_check_mark:'
@@ -43,16 +40,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verifications/graph/scc.test.cpp
-    title: verifications/graph/scc.test.cpp
+    path: src/misc/printer.hpp
+    title: src/misc/printer.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: src/misc/scanner.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
+    links:
+    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
     #pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned int;\nusing i64\
     \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
@@ -214,84 +217,59 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n#pragma endregion\n\
-    template<typename T = int>\nclass Graph\n{\n    struct Edge\n    {\n        Edge()\
-    \ = default;\n        Edge(int i, int t, T c) : id{i}, to{t}, cost{c} {}\n   \
-    \     int id;\n        int to;\n        T cost;\n        operator int() const\n\
-    \        {\n            return to;\n        }\n    };\npublic:\n    Graph(int\
-    \ n) : m_v{n}, m_edges(n) {}\n    void addEdge(int u, int v, bool bi = false)\n\
-    \    {\n        assert(0 <= u and u < m_v);\n        assert(0 <= v and v < m_v);\n\
-    \        m_edges[u].emplace_back(m_e, v, 1);\n        if (bi) { m_edges[v].emplace_back(m_e,\
-    \ u, 1); }\n        m_e++;\n    }\n    void addEdge(int u, int v, const T& c,\
-    \ bool bi = false)\n    {\n        assert(0 <= u and u < m_v);\n        assert(0\
-    \ <= v and v < m_v);\n        m_edges[u].emplace_back(m_e, v, c);\n        if\
-    \ (bi) { m_edges[v].emplace_back(m_e, u, c); }\n        m_e++;\n    }\n    const\
-    \ Vec<Edge>& operator[](const int u) const\n    {\n        assert(0 <= u and u\
-    \ < m_v);\n        return m_edges[u];\n    }\n    Vec<Edge>& operator[](const\
-    \ int u)\n    {\n        assert(0 <= u and u < m_v);\n        return m_edges[u];\n\
-    \    }\n    int v() const\n    {\n        return m_v;\n    }\n    int e() const\n\
-    \    {\n        return m_e;\n    }\n    friend Ostream& operator<<(Ostream& os,\
-    \ const Graph& g)\n    {\n        for (int u : rep(g.v())) {\n            for\
-    \ (const auto& [id, v, c] : g[u]) {\n                os << \"[\" << id << \"]:\
-    \ \";\n                os << u << \"->\" << v << \"(\" << c << \")\\n\";\n   \
-    \         }\n        }\n        return os;\n    }\n    Vec<T> sizes(int root =\
-    \ 0) const\n    {\n        const int N = v();\n        assert(0 <= root and root\
-    \ < N);\n        Vec<T> ss(N, 1);\n        Fixpoint([&](auto dfs, int u, int p)\
-    \ -> void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n       \
-    \         static_cast<void>(id);\n                if (v == p) { continue; }\n\
-    \                dfs(v, u);\n                ss[v] += ss[u];\n            }\n\
-    \        })(root, -1);\n        return ss;\n    }\n    Vec<T> depths(int root\
-    \ = 0) const\n    {\n        const int N = v();\n        assert(0 <= root and\
-    \ root < N);\n        Vec<T> ds(N, 0);\n        Fixpoint([&](auto dfs, int u,\
-    \ int p) -> void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n\
-    \                static_cast<void>(id);\n                if (v == p) { continue;\
-    \ }\n                ds[v] = ds[u] + c;\n                dfs(v, u);\n        \
-    \    }\n        })(root, -1);\n        return ds;\n    }\n    Vec<int> parents(int\
-    \ root = 0) const\n    {\n        const int N = v();\n        assert(0 <= root\
-    \ and root < N);\n        Vec<int> ps(N, -1);\n        Fixpoint([&](auto dfs,\
-    \ int u, int p) -> void {\n            for (const auto& [id, v, c] : m_edges[u])\
-    \ {\n                static_cast<void>(id);\n                if (v == p) { continue;\
-    \ }\n                ps[v] = u;\n                dfs(v, u);\n            }\n \
-    \       })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n   \
-    \ int m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nclass sc_comp\n\
-    {\npublic:\n    sc_comp(const Graph<T>& g) : m_v(g.v()), m_cs(m_v, -1)\n    {\n\
-    \        const int N = g.v();\n        Graph<> rg(N);\n        for (int u : rep(N))\
-    \ {\n            for (int v : g[u]) {\n                rg.addEdge(v, u);\n   \
-    \         }\n        }\n        Vec<int> st;\n        Vec<bool> used(N, false);\n\
-    \        auto dfs = Fixpoint([&](auto dfs, int u) -> void {\n            used[u]\
-    \ = true;\n            for (int v : g[u]) {\n                if (not used[v])\
-    \ { dfs(v); }\n            }\n            st.push_back(u);\n        });\n    \
-    \    auto rdfs = Fixpoint([&](auto dfs, int v) -> void {\n            m_cs[v]\
-    \ = m_cnum;\n            for (int u : rg[v]) {\n                if (m_cs[u] !=\
-    \ -1) { continue; }\n                dfs(u);\n            }\n        });\n   \
-    \     for (int i : rep(N)) {\n            if (used[i]) { continue; }\n       \
-    \     dfs(i);\n        }\n        reverseAll(st);\n        for (int i : st) {\n\
-    \            if (m_cs[i] != -1) { continue; }\n            rdfs(i);\n        \
-    \    m_cnum++;\n        }\n    }\n    int operator[](int v) const\n    {\n   \
-    \     assert(0 <= v and v < m_v);\n        return m_cs[v];\n    }\n    int cnum()\
-    \ const\n    {\n        return m_cnum;\n    }\n    Vec<Vec<int>> groups() const\n\
-    \    {\n        Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v))\
-    \ {\n            iss[m_cs[i]].push_back(i);\n        }\n        return iss;\n\
-    \    }\nprivate:\n    int m_v;\n    int m_cnum = 0;\n    Vec<int> m_cs;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename\
-    \ T>\nclass sc_comp\n{\npublic:\n    sc_comp(const Graph<T>& g) : m_v(g.v()),\
-    \ m_cs(m_v, -1)\n    {\n        const int N = g.v();\n        Graph<> rg(N);\n\
-    \        for (int u : rep(N)) {\n            for (int v : g[u]) {\n          \
-    \      rg.addEdge(v, u);\n            }\n        }\n        Vec<int> st;\n   \
-    \     Vec<bool> used(N, false);\n        auto dfs = Fixpoint([&](auto dfs, int\
-    \ u) -> void {\n            used[u] = true;\n            for (int v : g[u]) {\n\
-    \                if (not used[v]) { dfs(v); }\n            }\n            st.push_back(u);\n\
-    \        });\n        auto rdfs = Fixpoint([&](auto dfs, int v) -> void {\n  \
-    \          m_cs[v] = m_cnum;\n            for (int u : rg[v]) {\n            \
-    \    if (m_cs[u] != -1) { continue; }\n                dfs(u);\n            }\n\
-    \        });\n        for (int i : rep(N)) {\n            if (used[i]) { continue;\
-    \ }\n            dfs(i);\n        }\n        reverseAll(st);\n        for (int\
-    \ i : st) {\n            if (m_cs[i] != -1) { continue; }\n            rdfs(i);\n\
-    \            m_cnum++;\n        }\n    }\n    int operator[](int v) const\n  \
-    \  {\n        assert(0 <= v and v < m_v);\n        return m_cs[v];\n    }\n  \
-    \  int cnum() const\n    {\n        return m_cnum;\n    }\n    Vec<Vec<int>> groups()\
-    \ const\n    {\n        Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v))\
-    \ {\n            iss[m_cs[i]].push_back(i);\n        }\n        return iss;\n\
-    \    }\n\nprivate:\n    int m_v;\n    int m_cnum = 0;\n    Vec<int> m_cs;\n};\n"
+    #pragma region Printer\nclass Printer\n{\npublic:\n    Printer(Ostream& os = std::cout)\
+    \ : m_os{os}\n    {\n        m_os << std::fixed << std::setprecision(15);\n  \
+    \  }\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
+    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), m_os <<\
+    \ '\\n';\n        return 0;\n    }\n    template<typename... Args>\n    int el(const\
+    \ Args&... args)\n    {\n        dump(args...), m_os << std::endl;\n        return\
+    \ 0;\n    }\nprivate:\n    template<typename T>\n    void dump(const T& v)\n \
+    \   {\n        m_os << v;\n    }\n    template<typename T>\n    void dump(const\
+    \ Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size())) {\n         \
+    \   m_os << (i ? \" \" : \"\"), dump(vs[i]);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i :\
+    \ rep(vss.size())) {\n            m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n\
+    \        }\n    }\n    template<typename T, typename... Ts>\n    int dump(const\
+    \ T& v, const Ts&... args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n\
+    \        return 0;\n    }\n    Ostream& m_os;\n};\nPrinter out;\n#pragma endregion\n\
+    #pragma region Scanner\nclass Scanner\n{\npublic:\n    Scanner(Istream& is = std::cin)\
+    \ : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n    }\n\
+    \    template<typename T>\n    T val()\n    {\n        T v;\n        return m_is\
+    \ >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n    \
+    \    return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T> vec(int\
+    \ n)\n    {\n        return genVec<T>(n, [&]() { return val<T>(); });\n    }\n\
+    \    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n        return\
+    \ genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, const T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return Tup<Args...>{val<Args>()...};\n    }\n\
+    \    template<typename... Args>\n    auto tup(const Args&... offsets)\n    {\n\
+    \        return Tup<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n    Istream&\
+    \ m_is;\n};\nScanner in;\n#pragma endregion\nconstexpr i64 mod = 1000000007;\n\
+    struct mint\n{\n    mint() = default;\n    mint(i64 v_) : v{v_} {}\n    friend\
+    \ mint operator+(const mint& m1, const mint& m2)\n    {\n        return mint(m1.v\
+    \ + m2.v);\n    }\n    friend mint operator*(const mint& m1, const mint& m2)\n\
+    \    {\n        return mint(m1.v * m2.v % mod);\n    }\n    friend mint& operator+=(mint&\
+    \ m1, const mint& m2)\n    {\n        m1 = m1 + m2;\n        return m1;\n    }\n\
+    \    friend mint& operator*=(mint& m1, const mint& m2)\n    {\n        m1 = m1\
+    \ * m2;\n        return m1;\n    }\n    i64 v = 0;\n};\nint main()\n{\n    const\
+    \ auto [m, n] = in.tup<i64, i64>();\n    mint M{m};\n    const mint ans = power(M,\
+    \ n);\n    out.ln(ans.v);\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B\"\
+    \n#include \"../../../src/misc/common.hpp\"\n#include \"../../../src/misc/printer.hpp\"\
+    \n#include \"../../../src/misc/scanner.hpp\"\n\nconstexpr i64 mod = 1000000007;\n\
+    struct mint\n{\n    mint() = default;\n    mint(i64 v_) : v{v_} {}\n    friend\
+    \ mint operator+(const mint& m1, const mint& m2)\n    {\n        return mint(m1.v\
+    \ + m2.v);\n    }\n    friend mint operator*(const mint& m1, const mint& m2)\n\
+    \    {\n        return mint(m1.v * m2.v % mod);\n    }\n    friend mint& operator+=(mint&\
+    \ m1, const mint& m2)\n    {\n        m1 = m1 + m2;\n        return m1;\n    }\n\
+    \    friend mint& operator*=(mint& m1, const mint& m2)\n    {\n        m1 = m1\
+    \ * m2;\n        return m1;\n    }\n    i64 v = 0;\n};\n\nint main()\n{\n    const\
+    \ auto [m, n] = in.tup<i64, i64>();\n    mint M{m};\n    const mint ans = power(M,\
+    \ n);\n    out.ln(ans.v);\n    return 0;\n}\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -306,18 +284,18 @@ data:
   - src/misc/common/range.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/graph/graph.hpp
-  isVerificationFile: false
-  path: src/graph/scc.hpp
+  - src/misc/printer.hpp
+  - src/misc/scanner.hpp
+  isVerificationFile: true
+  path: verifications/misc/common/func_alias.power.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 21:51:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verifications/graph/scc.test.cpp
-documentation_of: src/graph/scc.hpp
+  timestamp: '2021-05-24 03:23:11+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verifications/misc/common/func_alias.power.test.cpp
 layout: document
 redirect_from:
-- /library/src/graph/scc.hpp
-- /library/src/graph/scc.hpp.html
-title: src/graph/scc.hpp
+- /verify/verifications/misc/common/func_alias.power.test.cpp
+- /verify/verifications/misc/common/func_alias.power.test.cpp.html
+title: verifications/misc/common/func_alias.power.test.cpp
 ---
