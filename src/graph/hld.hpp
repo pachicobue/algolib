@@ -19,10 +19,11 @@ public:
         Vec<int> szs(N, 1);
         Fixpoint([&](auto dfs, int u, int p) -> int {
             m_ps[u] = p;
-            for (int v : g[u]) {
+            for (int i : rep(g[u].size())) {
+                const int v = g[u][i];
                 if (p == v) { continue; }
                 szs[u] += dfs(v, u);
-                if (szs[(int)g[u][0]] < szs[v]) { std::swap(g[u][0], g[u][v]); }
+                if (szs[(int)g[u][0]] < szs[v]) { std::swap(g[u][0], g[u][i]); }
             }
             return szs[u];
         })(r, -1);
