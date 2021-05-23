@@ -240,14 +240,15 @@ data:
     \ i = 0;\n        do {\n            tmp[i++] = v % T{10} + '0';\n            v\
     \ /= T{10};\n        } while (v);\n        while (i) {\n            putchar(tmp[--i]);\n\
     \        }\n    }\n    void dump(bool b)\n    {\n        dump<int>(b);\n    }\n\
-    \    void dump(const Str& cs)\n    {\n        for (char c : cs) {\n          \
-    \  dump(c);\n        }\n    }\n    template<typename T>\n    void dump(const Vec<T>&\
-    \ vs)\n    {\n        for (const int i : rep(vs.size())) {\n            if (i)\
-    \ { putchar(' '); }\n            dump(vs[i]);\n        }\n    }\n    template<typename\
-    \ T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i :\
-    \ rep(vss.size())) {\n            if (i) { putchar('\\n'); }\n            dump(vss[i]);\n\
-    \        }\n    }\n    template<typename T, typename... Ts>\n    int dump(const\
-    \ T& v, const Ts&... args)\n    {\n        dump(v), putchar(' '), dump(args...);\n\
+    \    void dump(char c)\n    {\n        putchar(c);\n    }\n    void dump(const\
+    \ Str& cs)\n    {\n        for (char c : cs) {\n            dump(c);\n       \
+    \ }\n    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n\
+    \        for (const int i : rep(vs.size())) {\n            if (i) { putchar('\
+    \ '); }\n            dump(vs[i]);\n        }\n    }\n    template<typename T>\n\
+    \    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size()))\
+    \ {\n            if (i) { putchar('\\n'); }\n            dump(vss[i]);\n     \
+    \   }\n    }\n    template<typename T, typename... Ts>\n    int dump(const T&\
+    \ v, const Ts&... args)\n    {\n        dump(v), putchar(' '), dump(args...);\n\
     \        return 0;\n    }\n    static inline void putchar(char c)\n    {\n   \
     \     putchar_unlocked(c);\n    }\n} out;\n#pragma endregion\n#pragma region FastIO\
     \ Scanner\nclass scanner\n{\npublic:\n    scanner() {}\n    template<typename\
@@ -301,7 +302,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 15:28:30+09:00'
+  timestamp: '2021-05-23 23:16:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/unionfind.test.cpp

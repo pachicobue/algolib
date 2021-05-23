@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#include <unordered_set>\n#include <iostream>\ntemplate<typename...\
+  bundledCode: "#include <iostream>\n#include <unordered_set>\ntemplate<typename...\
     \ Ts>\nstd::ostream& operator<<(std::ostream& os, const std::unordered_set<Ts...>&\
     \ vs)\n{\n    os << \"[\";\n    for (const auto& v : vs) { os << v << \",\"; }\n\
     \    return (os << \"]\" << std::endl);\n}\n"

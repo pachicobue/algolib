@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/data_structure/intdict.hpp
     title: src/data_structure/intdict.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':question:'
@@ -69,15 +69,15 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_root_mod
     links:
     - https://judge.yosupo.jp/problem/kth_root_mod
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -458,32 +458,33 @@ data:
     \  }\n        int i = 0;\n        do {\n            tmp[i++] = v % T{10} + '0';\n\
     \            v /= T{10};\n        } while (v);\n        while (i) {\n        \
     \    putchar(tmp[--i]);\n        }\n    }\n    void dump(bool b)\n    {\n    \
-    \    dump<int>(b);\n    }\n    void dump(const Str& cs)\n    {\n        for (char\
-    \ c : cs) {\n            dump(c);\n        }\n    }\n    template<typename T>\n\
-    \    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
-    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
-    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
-    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
-    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
-    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
-    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
-    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass scanner\n{\npublic:\n\
-    \    scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
-    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
-    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
-    \        }\n        while (true) {\n            c = getchar();\n            if\
-    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
-    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
-    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
-    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
-    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
-    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
-    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
-    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
-    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
-    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
-    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
+    \    dump<int>(b);\n    }\n    void dump(char c)\n    {\n        putchar(c);\n\
+    \    }\n    void dump(const Str& cs)\n    {\n        for (char c : cs) {\n   \
+    \         dump(c);\n        }\n    }\n    template<typename T>\n    void dump(const\
+    \ Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size())) {\n         \
+    \   if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n    }\n   \
+    \ template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n       \
+    \ for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\n');\
+    \ }\n            dump(vss[i]);\n        }\n    }\n    template<typename T, typename...\
+    \ Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n        dump(v), putchar('\
+    \ '), dump(args...);\n        return 0;\n    }\n    static inline void putchar(char\
+    \ c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n#pragma endregion\n\
+    #pragma region FastIO Scanner\nclass scanner\n{\npublic:\n    scanner() {}\n \
+    \   template<typename T>\n    T val()\n    {\n        T ans = 0;\n        bool\
+    \ neg = false;\n        char c = getchar();\n        if (c < '0') {\n        \
+    \    neg = true;\n        } else {\n            ans = c - '0';\n        }\n  \
+    \      while (true) {\n            c = getchar();\n            if (c < '0') {\
+    \ break; }\n            ans = ans * T{10} + (c - '0');\n        }\n        if\
+    \ (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename T>\n\
+    \    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n    template<typename\
+    \ T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n, [&]() { return\
+    \ val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n\
+    \    {\n        return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n\
+    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n       \
+    \ return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
     \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
     \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
@@ -530,8 +531,8 @@ data:
   isVerificationFile: true
   path: verifications/math/mod_nthroot.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 19:52:02+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-05-23 23:16:18+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/math/mod_nthroot.test.cpp
 layout: document

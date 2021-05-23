@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/berlekamp_massey.hpp
     title: src/math/berlekamp_massey.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/nth_term.hpp
     title: src/math/nth_term.hpp
   - icon: ':question:'
@@ -63,15 +63,15 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -498,9 +498,10 @@ data:
     \ v = -v;\n        }\n        int i = 0;\n        do {\n            tmp[i++] =\
     \ v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n        while\
     \ (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void dump(bool\
-    \ b)\n    {\n        dump<int>(b);\n    }\n    void dump(const Str& cs)\n    {\n\
-    \        for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
-    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n    {\n    \
+    \    putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n        for (char\
+    \ c : cs) {\n            dump(c);\n        }\n    }\n    template<typename T>\n\
+    \    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
     \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
     \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
     \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
@@ -594,8 +595,8 @@ data:
   isVerificationFile: true
   path: verifications/math/fps.nth.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 22:52:45+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-05-23 23:16:18+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/math/fps.nth.test.cpp
 layout: document

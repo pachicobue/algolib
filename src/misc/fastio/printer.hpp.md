@@ -60,7 +60,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/li_chao_tree.line.test.cpp
     title: verifications/data_structure/li_chao_tree.line.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/li_chao_tree.segment.test.cpp
     title: verifications/data_structure/li_chao_tree.segment.test.cpp
   - icon: ':heavy_check_mark:'
@@ -117,43 +117,43 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/fps.exp.test.cpp
     title: verifications/math/fps.exp.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.inv.test.cpp
     title: verifications/math/fps.inv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.log.test.cpp
     title: verifications/math/fps.log.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.nth.test.cpp
     title: verifications/math/fps.nth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.pow.test.cpp
     title: verifications/math/fps.pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.tshift.test.cpp
     title: verifications/math/fps.tshift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/mod_sqrt.test.cpp
     title: verifications/math/mod_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/prime_powsum.test.cpp
     title: verifications/math/prime_powsum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/fastio.test.cpp
     title: verifications/misc/fastio.test.cpp
   _isVerificationFailed: true
@@ -331,17 +331,18 @@ data:
     \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
     \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
     \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
-    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(const Str&\
-    \ cs)\n    {\n        for (char c : cs) {\n            dump(c);\n        }\n \
-    \   }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n    \
-    \    for (const int i : rep(vs.size())) {\n            if (i) { putchar(' ');\
-    \ }\n            dump(vs[i]);\n        }\n    }\n    template<typename T>\n  \
-    \  void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size()))\
-    \ {\n            if (i) { putchar('\\n'); }\n            dump(vss[i]);\n     \
-    \   }\n    }\n    template<typename T, typename... Ts>\n    int dump(const T&\
-    \ v, const Ts&... args)\n    {\n        dump(v), putchar(' '), dump(args...);\n\
-    \        return 0;\n    }\n    static inline void putchar(char c)\n    {\n   \
-    \     putchar_unlocked(c);\n    }\n} out;\n#pragma endregion\n"
+    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
+    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
+    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
+    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
+    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
+    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
+    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
+    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
+    #pragma endregion\n"
   code: "#pragma once\n#include \"../common.hpp\"\n#pragma region FastIO Printer\n\
     class printer\n{\npublic:\n    printer() {}\n    template<typename... Args>\n\
     \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
@@ -352,9 +353,10 @@ data:
     \         v = -v;\n        }\n        int i = 0;\n        do {\n            tmp[i++]\
     \ = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n        while\
     \ (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void dump(bool\
-    \ b)\n    {\n        dump<int>(b);\n    }\n    void dump(const Str& cs)\n    {\n\
-    \        for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
-    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n    {\n    \
+    \    putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n        for (char\
+    \ c : cs) {\n            dump(c);\n        }\n    }\n    template<typename T>\n\
+    \    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
     \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
     \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
     \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
@@ -381,7 +383,7 @@ data:
   path: src/misc/fastio/printer.hpp
   requiredBy:
   - verifications/math/mod_nthroot.yuki981.cpp
-  timestamp: '2021-05-23 15:00:11+09:00'
+  timestamp: '2021-05-23 23:16:18+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verifications/misc/fastio.test.cpp
