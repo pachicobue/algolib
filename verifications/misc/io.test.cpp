@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/many_aplusb"
-#include "misc/common.hpp"
-#include "misc/printer.hpp"
-#include "misc/scanner.hpp"
+#include "../../src/misc/common.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 int main()
 {
     const auto T = in.val<int>();

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-#include "math/nth_term.hpp"
-#include "misc/fastio/printer.hpp"
-#include "misc/fastio/scanner.hpp"
+#include "../../src/math/nth_term.hpp"
+#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/fastio/scanner.hpp"
 int main()
 {
     const auto [A, B] = in.tup<int, int>();

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
-#include "data_structure/segtree.hpp"
-#include "math/modint.hpp"
-#include "misc/fastio/printer.hpp"
-#include "misc/fastio/scanner.hpp"
+#include "../../src/data_structure/segtree.hpp"
+#include "../../src/math/modint.hpp"
+#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/fastio/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

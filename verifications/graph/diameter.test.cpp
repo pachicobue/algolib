@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
-#include "misc/fastio/printer.hpp"
-#include "misc/fastio/scanner.hpp"
-#include "graph/diameter.hpp"
+#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/graph/diameter.hpp"
 int main()
 {
     const auto N = in.val<int>();

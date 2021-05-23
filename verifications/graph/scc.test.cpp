@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
-#include "graph/scc.hpp"
-#include "graph/top_sort.hpp"
-#include "misc/fastio/printer.hpp"
-#include "misc/fastio/scanner.hpp"
+#include "../../src/graph/scc.hpp"
+#include "../../src/graph/top_sort.hpp"
+#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/fastio/scanner.hpp"
 int main()
 {
     const auto [N, M] = in.tup<int, int>();

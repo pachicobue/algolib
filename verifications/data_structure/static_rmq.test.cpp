@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
-#include "data_structure/static_rmq.hpp"
-#include "misc/fastio/printer.hpp"
-#include "misc/fastio/scanner.hpp"
+#include "../../src/data_structure/static_rmq.hpp"
+#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/fastio/scanner.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();

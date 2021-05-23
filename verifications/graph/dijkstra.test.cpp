@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
-#include "misc/fastio/printer.hpp"
-#include "misc/fastio/scanner.hpp"
-#include "graph/dijkstra.hpp"
+#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/graph/dijkstra.hpp"
 int main()
 {
     const auto [N, M, S, T] = in.tup<int, int, int, int>();

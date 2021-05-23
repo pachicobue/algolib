@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/segment_add_get_min"
-#include "data_structure/li_chao_tree.hpp"
-#include "misc/fastio/printer.hpp"
-#include "misc/fastio/scanner.hpp"
+#include "../../src/data_structure/li_chao_tree.hpp"
+#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/fastio/scanner.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();

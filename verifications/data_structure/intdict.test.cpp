@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
-#include "data_structure/intdict.hpp"
-#include "misc/fastio/printer.hpp"
-#include "misc/fastio/scanner.hpp"
+#include "../../src/data_structure/intdict.hpp"
+#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/fastio/scanner.hpp"
 int main()
 {
     IntDict<u64, u64> dict;

@@ -1,9 +1,9 @@
 #define PROBLEM "https://yukicoder.me/problems/no/981"
-#include "math/modint.hpp"
-#include "math/modint64.hpp"
-#include "math/mod_nthroot.hpp"
-#include "misc/fastio/printer.hpp"
-#include "misc/fastio/scanner.hpp"
+#include "../../src/math/modint.hpp"
+#include "../../src/math/modint64.hpp"
+#include "../../src/math/mod_nthroot.hpp"
+#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/fastio/scanner.hpp"
 using mint = modint_dynamic<0>;
 using mint64 = modint64_dynamic<0>;
 int main()

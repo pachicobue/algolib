@@ -1,8 +1,8 @@
 #define PROBLEM "https://yukicoder.me/problems/no/886"
-#include "math/gcd_convolution.hpp"
-#include "math/modint.hpp"
-#include "misc/fastio/printer.hpp"
-#include "misc/fastio/scanner.hpp"
+#include "../../src/math/gcd_convolution.hpp"
+#include "../../src/math/modint.hpp"
+#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/fastio/scanner.hpp"
 int main()
 {
     using mint = modint_1000000007;
