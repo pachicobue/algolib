@@ -7,49 +7,49 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/mo.hpp
     title: Mo's Algorithm
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   - icon: ':heavy_check_mark:'
@@ -259,7 +259,7 @@ data:
     \ m_y);\n        }\n        for (; m_y > ny; m_y--) {\n            up(m_x, m_y);\n\
     \        }\n        return i;\n    }\nprivate:\n    int m_ii = 0;\n    int m_x\
     \ = 0, m_y = 0;\n    Vec<int> m_xs, m_ys;\n    Vec<int> m_is;\n};\n#pragma region\
-    \ FastIO Printer\nclass printer\n{\npublic:\n    printer() {}\n    template<typename...\
+    \ FastIO Printer\nclass Printer\n{\npublic:\n    Printer() {}\n    template<typename...\
     \ Args>\n    int operator()(const Args&... args)\n    {\n        dump(args...);\n\
     \        return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
     \ args)\n    {\n        dump(args...), putchar('\\n');\n        return 0;\n  \
@@ -279,8 +279,8 @@ data:
     \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
     \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
     \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass scanner\n{\npublic:\n\
-    \    scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
     \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
     \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
     \        }\n        while (true) {\n            c = getchar();\n            if\
@@ -298,16 +298,20 @@ data:
     \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
     \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\n#pragma region Zipper\ntemplate<typename T>\nclass Zipper\n{\n\
-    public:\n    Zipper() {}\n    Zipper(const Vec<T>& vs) : m_vs(vs), m_calced(false)\
-    \ {}\n    T unzip(int n)\n    {\n        assert(0 <= n and n < (int)m_vs.size());\n\
-    \        calc();\n        return m_vs[n];\n    }\n    int zip(T v)\n    {\n  \
-    \      calc();\n        return lbInd(m_vs, v);\n    }\n    void add(T v)\n   \
-    \ {\n        m_vs.push_back(v);\n        m_calced = false;\n    }\n    void add(const\
-    \ Vec<T>& vs)\n    {\n        for (const auto v : vs) {\n            m_vs.push_back(v);\n\
-    \        }\n        m_calced = false;\n    }\n    int size()\n    {\n        calc();\n\
-    \        return m_vs.size();\n    }\nprivate:\n    void calc()\n    {\n      \
-    \  if (not m_calced) {\n            uniqueAll(m_vs);\n            m_calced = true;\n\
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    #pragma region Zipper\ntemplate<typename T>\nclass Zipper\n{\npublic:\n    Zipper()\
+    \ {}\n    Zipper(const Vec<T>& vs) : m_vs(vs), m_calced(false) {}\n    T unzip(int\
+    \ n)\n    {\n        assert(0 <= n and n < (int)m_vs.size());\n        calc();\n\
+    \        return m_vs[n];\n    }\n    int zip(T v)\n    {\n        calc();\n  \
+    \      return lbInd(m_vs, v);\n    }\n    void add(T v)\n    {\n        m_vs.push_back(v);\n\
+    \        m_calced = false;\n    }\n    void add(const Vec<T>& vs)\n    {\n   \
+    \     for (const auto v : vs) {\n            m_vs.push_back(v);\n        }\n \
+    \       m_calced = false;\n    }\n    int size()\n    {\n        calc();\n   \
+    \     return m_vs.size();\n    }\nprivate:\n    void calc()\n    {\n        if\
+    \ (not m_calced) {\n            uniqueAll(m_vs);\n            m_calced = true;\n\
     \        }\n    }\n    Vec<T> m_vs;\n    bool m_calced = true;\n};\n#pragma endregion\n\
     int main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    auto as = in.vec<u32>(N);\n\
     \    Zipper<u32> zip(as);\n    for (auto& a : as) {\n        a = zip.zip(a);\n\
@@ -364,7 +368,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/mo.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 23:16:18+09:00'
+  timestamp: '2021-05-24 03:04:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/mo.test.cpp

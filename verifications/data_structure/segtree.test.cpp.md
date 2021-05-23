@@ -4,52 +4,52 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/segtree.hpp
     title: src/data_structure/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
@@ -302,7 +302,7 @@ data:
     \    {\n        return norm(u32(x % (i64)mod() + (i64)mod()));\n    }\n    u32\
     \ m_val;\n};\nusing modint_1000000007 = modint<1000000007, 5, 1>;\nusing modint_998244353\
     \ = modint<998244353, 3, 23>;\ntemplate<int id>\nusing modint_dynamic = modint<0,\
-    \ 0, id>;\n#pragma region FastIO Printer\nclass printer\n{\npublic:\n    printer()\
+    \ 0, id>;\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer()\
     \ {}\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
     \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
     \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
@@ -322,8 +322,8 @@ data:
     \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
     \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
     \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass scanner\n{\npublic:\n\
-    \    scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
     \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
     \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
     \        }\n        while (true) {\n            c = getchar();\n            if\
@@ -341,19 +341,23 @@ data:
     \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
     \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\nint main()\n{\n    using mint = modint_998244353;\n    using Func\
-    \ = Pair<mint, mint>;\n    struct Monoid\n    {\n        using T = Func;\n   \
-    \     static const T e()\n        {\n            return T{1, 0};\n        }\n\
-    \        T operator()(const T& f2, const T& f1) const\n        {\n           \
-    \ return T{f1.first * f2.first, f1.first * f2.second + f1.second};\n        }\n\
-    \    };\n    const auto [N, Q] = in.tup<int, int>();\n    Vec<Func> fs(N);\n \
-    \   for (int i : rep(N)) {\n        std::tie(fs[i].first, fs[i].second) = in.tup<mint,\
-    \ mint>();\n    }\n    auto seg = SegTree<Monoid>(fs);\n    for (int q : rep(Q))\
-    \ {\n        const auto t = in.val<int>();\n        if (t == 0) {\n          \
-    \  const auto [p, c, d] = in.tup<int, mint, mint>();\n            seg.set(p, Func{c,\
-    \ d});\n        } else {\n            const auto [l, r, x] = in.tup<int, int,\
-    \ mint>();\n            const auto [a, b] = seg.fold(l, r);\n            out.ln((a\
-    \ * x + b).val());\n        }\n    }\n    return 0;\n}\n"
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    int main()\n{\n    using mint = modint_998244353;\n    using Func = Pair<mint,\
+    \ mint>;\n    struct Monoid\n    {\n        using T = Func;\n        static const\
+    \ T e()\n        {\n            return T{1, 0};\n        }\n        T operator()(const\
+    \ T& f2, const T& f1) const\n        {\n            return T{f1.first * f2.first,\
+    \ f1.first * f2.second + f1.second};\n        }\n    };\n    const auto [N, Q]\
+    \ = in.tup<int, int>();\n    Vec<Func> fs(N);\n    for (int i : rep(N)) {\n  \
+    \      std::tie(fs[i].first, fs[i].second) = in.tup<mint, mint>();\n    }\n  \
+    \  auto seg = SegTree<Monoid>(fs);\n    for (int q : rep(Q)) {\n        const\
+    \ auto t = in.val<int>();\n        if (t == 0) {\n            const auto [p, c,\
+    \ d] = in.tup<int, mint, mint>();\n            seg.set(p, Func{c, d});\n     \
+    \   } else {\n            const auto [l, r, x] = in.tup<int, int, mint>();\n \
+    \           const auto [a, b] = seg.fold(l, r);\n            out.ln((a * x + b).val());\n\
+    \        }\n    }\n    return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n#include \"../../src/data_structure/segtree.hpp\"\n#include \"../../src/math/modint.hpp\"\
     \n#include \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
@@ -391,7 +395,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/segtree.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 23:16:18+09:00'
+  timestamp: '2021-05-24 03:04:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/segtree.test.cpp

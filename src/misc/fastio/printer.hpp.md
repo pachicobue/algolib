@@ -1,43 +1,43 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
@@ -120,45 +120,45 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/fps.inv.test.cpp
     title: verifications/math/fps.inv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.log.test.cpp
     title: verifications/math/fps.log.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.nth.test.cpp
     title: verifications/math/fps.nth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.pow.test.cpp
     title: verifications/math/fps.pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.tshift.test.cpp
     title: verifications/math/fps.tshift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/mod_sqrt.test.cpp
     title: verifications/math/mod_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/prime_powsum.test.cpp
     title: verifications/math/prime_powsum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/misc/fastio.test.cpp
-    title: verifications/misc/fastio.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: verifications/misc/fastio/fastio.test.cpp
+    title: verifications/misc/fastio/fastio.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -322,7 +322,7 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n#pragma endregion\n\
-    #pragma region FastIO Printer\nclass printer\n{\npublic:\n    printer() {}\n \
+    #pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer() {}\n \
     \   template<typename... Args>\n    int operator()(const Args&... args)\n    {\n\
     \        dump(args...);\n        return 0;\n    }\n    template<typename... Args>\n\
     \    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\n');\n\
@@ -344,7 +344,7 @@ data:
     \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
     #pragma endregion\n"
   code: "#pragma once\n#include \"../common.hpp\"\n#pragma region FastIO Printer\n\
-    class printer\n{\npublic:\n    printer() {}\n    template<typename... Args>\n\
+    class Printer\n{\npublic:\n    Printer() {}\n    template<typename... Args>\n\
     \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
     \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
     \ args)\n    {\n        dump(args...), putchar('\\n');\n        return 0;\n  \
@@ -383,10 +383,10 @@ data:
   path: src/misc/fastio/printer.hpp
   requiredBy:
   - verifications/math/mod_nthroot.yuki981.cpp
-  timestamp: '2021-05-23 23:16:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-05-24 03:04:00+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verifications/misc/fastio.test.cpp
+  - verifications/misc/fastio/fastio.test.cpp
   - verifications/math/fps.exp.test.cpp
   - verifications/math/fps.inv.test.cpp
   - verifications/math/fps.convolution1000000007.test.cpp

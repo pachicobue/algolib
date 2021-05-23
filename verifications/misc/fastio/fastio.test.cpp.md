@@ -40,13 +40,22 @@ data:
   - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
+  - icon: ':question:'
+    path: src/misc/fastio/printer.hpp
+    title: src/misc/fastio/printer.hpp
+  - icon: ':question:'
+    path: src/misc/fastio/scanner.hpp
+    title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _isVerificationFailed: true
+  _pathExtension: cpp
+  _verificationStatusIcon: ':x:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/many_aplusb
+    links:
+    - https://judge.yosupo.jp/problem/many_aplusb
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
     #pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned int;\nusing i64\
     \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
@@ -208,33 +217,58 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n#pragma endregion\n\
-    template<typename T>\nclass StaticRSQ\n{\npublic:\n    StaticRSQ(const Vec<T>&\
-    \ vs)\n        : m_size(vs.size()),\n          m_prefs(vs.size() + 1, T{}),\n\
-    \          m_suffs(vs.size() + 1, T{})\n    {\n        std::copy(vs.begin(), vs.end(),\
-    \ m_prefs.begin() + 1);\n        for (int i : rep(m_size)) {\n            m_prefs[i\
-    \ + 1] += m_prefs[i];\n        }\n        std::copy(vs.begin(), vs.end(), m_suffs.begin());\n\
-    \        for (int i : per(m_size)) {\n            m_suffs[i] += m_suffs[i + 1];\n\
-    \        }\n    }\n    void unsafeSet(int i, const T& v)\n    {\n        assert(0\
-    \ < i and i < m_size);\n        m_prefs[i + 1] = m_prefs[i] + v, m_suffs[i] =\
-    \ m_suffs[i + 1] + v;\n    }\n    T prefixSum(int l, int r) const\n    {\n   \
-    \     assert(0 <= l and l <= r and r <= m_size);\n        return m_prefs[r] -\
-    \ m_prefs[l];\n    }\n    T suffixSum(int l, int r) const\n    {\n        assert(0\
-    \ <= l and l <= r and r <= m_size);\n        return m_suffs[l] - m_suffs[r];\n\
-    \    }\nprivate:\n    int m_size;\n    Vec<T> m_prefs, m_suffs;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nclass\
-    \ StaticRSQ\n{\npublic:\n    StaticRSQ(const Vec<T>& vs)\n        : m_size(vs.size()),\n\
-    \          m_prefs(vs.size() + 1, T{}),\n          m_suffs(vs.size() + 1, T{})\n\
-    \    {\n        std::copy(vs.begin(), vs.end(), m_prefs.begin() + 1);\n      \
-    \  for (int i : rep(m_size)) {\n            m_prefs[i + 1] += m_prefs[i];\n  \
-    \      }\n        std::copy(vs.begin(), vs.end(), m_suffs.begin());\n        for\
-    \ (int i : per(m_size)) {\n            m_suffs[i] += m_suffs[i + 1];\n       \
-    \ }\n    }\n    void unsafeSet(int i, const T& v)\n    {\n        assert(0 < i\
-    \ and i < m_size);\n        m_prefs[i + 1] = m_prefs[i] + v, m_suffs[i] = m_suffs[i\
-    \ + 1] + v;\n    }\n    T prefixSum(int l, int r) const\n    {\n        assert(0\
-    \ <= l and l <= r and r <= m_size);\n        return m_prefs[r] - m_prefs[l];\n\
-    \    }\n    T suffixSum(int l, int r) const\n    {\n        assert(0 <= l and\
-    \ l <= r and r <= m_size);\n        return m_suffs[l] - m_suffs[r];\n    }\nprivate:\n\
-    \    int m_size;\n    Vec<T> m_prefs, m_suffs;\n};\n"
+    #pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer() {}\n \
+    \   template<typename... Args>\n    int operator()(const Args&... args)\n    {\n\
+    \        dump(args...);\n        return 0;\n    }\n    template<typename... Args>\n\
+    \    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\n');\n\
+    \        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
+    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
+    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
+    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
+    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
+    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
+    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
+    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
+    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
+    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
+    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
+    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
+    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
+    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
+    \        }\n        while (true) {\n            c = getchar();\n            if\
+    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
+    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
+    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
+    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
+    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
+    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
+    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
+    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
+    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
+    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
+    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
+    \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
+    \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
+    \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    int main()\n{\n    const auto T = in.val<int>();\n    for (int t : rep(T)) {\n\
+    \        static_cast<void>(t);\n        const auto [A, B] = in.tup<i64, i64>();\n\
+    \        out.ln(A + B);\n    }\n    return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb\"\n#include\
+    \ \"../../../src/misc/common.hpp\"\n#include \"../../../src/misc/fastio/printer.hpp\"\
+    \n#include \"../../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const\
+    \ auto T = in.val<int>();\n    for (int t : rep(T)) {\n        USE(t);\n     \
+    \   const auto [A, B] = in.tup<i64, i64>();\n        out.ln(A + B);\n    }\n \
+    \   return 0;\n}\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -249,16 +283,18 @@ data:
   - src/misc/common/range.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/data_structure/static_rsq.hpp
+  - src/misc/fastio/printer.hpp
+  - src/misc/fastio/scanner.hpp
+  isVerificationFile: true
+  path: verifications/misc/fastio/fastio.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 15:00:11+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-05-24 03:04:00+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: src/data_structure/static_rsq.hpp
+documentation_of: verifications/misc/fastio/fastio.test.cpp
 layout: document
 redirect_from:
-- /library/src/data_structure/static_rsq.hpp
-- /library/src/data_structure/static_rsq.hpp.html
-title: src/data_structure/static_rsq.hpp
+- /verify/verifications/misc/fastio/fastio.test.cpp
+- /verify/verifications/misc/fastio/fastio.test.cpp.html
+title: verifications/misc/fastio/fastio.test.cpp
 ---

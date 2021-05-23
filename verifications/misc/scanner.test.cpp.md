@@ -40,13 +40,19 @@ data:
   - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
+  - icon: ':x:'
+    path: src/misc/scanner.hpp
+    title: src/misc/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _isVerificationFailed: true
+  _pathExtension: cpp
+  _verificationStatusIcon: ':x:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
+    links:
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
     #pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned int;\nusing i64\
     \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
@@ -208,33 +214,113 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n#pragma endregion\n\
-    template<typename T>\nclass StaticRSQ\n{\npublic:\n    StaticRSQ(const Vec<T>&\
-    \ vs)\n        : m_size(vs.size()),\n          m_prefs(vs.size() + 1, T{}),\n\
-    \          m_suffs(vs.size() + 1, T{})\n    {\n        std::copy(vs.begin(), vs.end(),\
-    \ m_prefs.begin() + 1);\n        for (int i : rep(m_size)) {\n            m_prefs[i\
-    \ + 1] += m_prefs[i];\n        }\n        std::copy(vs.begin(), vs.end(), m_suffs.begin());\n\
-    \        for (int i : per(m_size)) {\n            m_suffs[i] += m_suffs[i + 1];\n\
-    \        }\n    }\n    void unsafeSet(int i, const T& v)\n    {\n        assert(0\
-    \ < i and i < m_size);\n        m_prefs[i + 1] = m_prefs[i] + v, m_suffs[i] =\
-    \ m_suffs[i + 1] + v;\n    }\n    T prefixSum(int l, int r) const\n    {\n   \
-    \     assert(0 <= l and l <= r and r <= m_size);\n        return m_prefs[r] -\
-    \ m_prefs[l];\n    }\n    T suffixSum(int l, int r) const\n    {\n        assert(0\
-    \ <= l and l <= r and r <= m_size);\n        return m_suffs[l] - m_suffs[r];\n\
-    \    }\nprivate:\n    int m_size;\n    Vec<T> m_prefs, m_suffs;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nclass\
-    \ StaticRSQ\n{\npublic:\n    StaticRSQ(const Vec<T>& vs)\n        : m_size(vs.size()),\n\
-    \          m_prefs(vs.size() + 1, T{}),\n          m_suffs(vs.size() + 1, T{})\n\
-    \    {\n        std::copy(vs.begin(), vs.end(), m_prefs.begin() + 1);\n      \
-    \  for (int i : rep(m_size)) {\n            m_prefs[i + 1] += m_prefs[i];\n  \
-    \      }\n        std::copy(vs.begin(), vs.end(), m_suffs.begin());\n        for\
-    \ (int i : per(m_size)) {\n            m_suffs[i] += m_suffs[i + 1];\n       \
-    \ }\n    }\n    void unsafeSet(int i, const T& v)\n    {\n        assert(0 < i\
-    \ and i < m_size);\n        m_prefs[i + 1] = m_prefs[i] + v, m_suffs[i] = m_suffs[i\
-    \ + 1] + v;\n    }\n    T prefixSum(int l, int r) const\n    {\n        assert(0\
-    \ <= l and l <= r and r <= m_size);\n        return m_prefs[r] - m_prefs[l];\n\
-    \    }\n    T suffixSum(int l, int r) const\n    {\n        assert(0 <= l and\
-    \ l <= r and r <= m_size);\n        return m_suffs[l] - m_suffs[r];\n    }\nprivate:\n\
-    \    int m_size;\n    Vec<T> m_prefs, m_suffs;\n};\n"
+    #pragma region Scanner\nclass Scanner\n{\npublic:\n    Scanner(Istream& is = std::cin)\
+    \ : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n    }\n\
+    \    template<typename T>\n    T val()\n    {\n        T v;\n        return m_is\
+    \ >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n    \
+    \    return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T> vec(int\
+    \ n)\n    {\n        return genVec<T>(n, [&]() { return val<T>(); });\n    }\n\
+    \    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n        return\
+    \ genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, const T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return Tup<Args...>{val<Args>()...};\n    }\n\
+    \    template<typename... Args>\n    auto tup(const Args&... offsets)\n    {\n\
+    \        return Tup<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n    Istream&\
+    \ m_is;\n};\nScanner in;\n#pragma endregion\nstd::stringstream ss;\nScanner scanner{ss};\n\
+    class C\n{\npublic:\n    C() = default;\n    C(int s_) : s{s_} {}\n    friend\
+    \ Istream& operator>>(Istream& is, C& cls)\n    {\n        char c;\n        is\
+    \ >> c;\n        assert(c == '{');\n        is >> cls.s;\n        is >> c;\n \
+    \       assert(c == '}');\n        return is;\n    }\n    friend bool operator==(const\
+    \ C& c1, const C& c2)\n    {\n        return c1.s == c2.s;\n    }\nprivate:\n\
+    \    int s;\n};\nvoid valTest()\n{\n    {\n        const int v = 100;\n      \
+    \  ss << \"100\";\n        const auto rv = scanner.val<int>();\n        assert(v\
+    \ == rv);\n        ss.clear();\n    }\n    {\n        const char c = 'a';\n  \
+    \      ss << \"a\";\n        const auto rc = scanner.val<char>();\n        assert(c\
+    \ == rc);\n        ss.clear();\n    }\n    {\n        const Str s = \"ABCabc012\"\
+    ;\n        ss << \"ABCabc012\";\n        const auto rs = scanner.val<Str>();\n\
+    \        assert(s == rs);\n        ss.clear();\n    }\n    {\n        const C\
+    \ cls{100};\n        ss << \"{100}\";\n        const auto rcls = scanner.val<C>();\n\
+    \        assert(cls == rcls);\n        ss.clear();\n    }\n}\nvoid valOffsetTest()\n\
+    {\n    {\n        const int v = 100;\n        const int offset = 10;\n       \
+    \ ss << \"100\";\n        const auto rv = scanner.val<int>(offset);\n        assert(v\
+    \ - offset == rv);\n        ss.clear();\n    }\n}\nvoid vecTest()\n{\n    const\
+    \ int n = 5;\n    Vec<int> vs = {1, 2, 3, 4, 5};\n    ss << \"1 2 3 4 5\";\n \
+    \   const auto rvs = scanner.vec<int>(n);\n    for (int i : rep(n)) {\n      \
+    \  assert(vs[i] == rvs[i]);\n    }\n    ss.clear();\n}\nvoid vecOffsetTest()\n\
+    {\n    const int n = 5;\n    const int offset = 1;\n    Vec<int> vs = {1, 2, 3,\
+    \ 4, 5};\n    ss << \"1 2 3 4 5\";\n    const auto rvs = scanner.vec<int>(n, offset);\n\
+    \    for (int i : rep(n)) {\n        assert(vs[i] - offset == rvs[i]);\n    }\n\
+    \    ss.clear();\n}\nvoid vvecTest()\n{\n    const int m = 2;\n    const int n\
+    \ = 3;\n    Vec<Vec<int>> vss = {{1, 2, 3}, {4, 5, 6}};\n    ss << \"1 2 3\\n\"\
+    \n          \"4 5 6\";\n    const auto rvss = scanner.vvec<int>(m, n);\n    for\
+    \ (int i : rep(m)) {\n        for (int j : rep(n)) {\n            assert(vss[i][j]\
+    \ == rvss[i][j]);\n        }\n    }\n    ss.clear();\n}\nvoid vvecOffsetTest()\n\
+    {\n    const int m = 2;\n    const int n = 3;\n    const int offset = 1;\n   \
+    \ Vec<Vec<int>> vss = {{1, 2, 3}, {4, 5, 6}};\n    ss << \"1 2 3\\n\"\n      \
+    \    \"4 5 6\";\n    const auto rvss = scanner.vvec<int>(m, n, offset);\n    for\
+    \ (int i : rep(m)) {\n        for (int j : rep(n)) {\n            assert(vss[i][j]\
+    \ - offset == rvss[i][j]);\n        }\n    }\n    ss.clear();\n}\nvoid tupTest()\n\
+    {\n    const int v = 100;\n    const char c = 'a';\n    const Str s = \"abcABC012\"\
+    ;\n    const C cls{100};\n    ss << \"100 a abcABC012 {100}\";\n    const auto\
+    \ [rv, rc, rs, rcls] = scanner.tup<int, char, Str, C>();\n    assert(v == rv);\n\
+    \    assert(c == rc);\n    assert(s == rs);\n    assert(cls == rcls);\n    ss.clear();\n\
+    }\nvoid tupOffsetTest()\n{\n    const int v1 = 100;\n    const int v2 = 1000;\n\
+    \    const int offset1 = 10;\n    const int offset2 = 100;\n    ss << \"100 1000\"\
+    ;\n    const auto [rv1, rv2] = scanner.tup<int, int>(offset1, offset2);\n    assert(v1\
+    \ - offset1 == rv1);\n    assert(v2 - offset2 == rv2);\n    ss.clear();\n}\nint\
+    \ main()\n{\n    valTest();\n    valOffsetTest();\n    vecTest();\n    vecOffsetTest();\n\
+    \    vvecTest();\n    vvecOffsetTest();\n    tupTest();\n    tupOffsetTest();\n\
+    \    std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
+    \n#include \"../../src/misc/common.hpp\"\n#include \"../../src/misc/scanner.hpp\"\
+    \n\nstd::stringstream ss;\nScanner scanner{ss};\n\nclass C\n{\npublic:\n    C()\
+    \ = default;\n    C(int s_) : s{s_} {}\n    friend Istream& operator>>(Istream&\
+    \ is, C& cls)\n    {\n        char c;\n        is >> c;\n        assert(c == '{');\n\
+    \        is >> cls.s;\n        is >> c;\n        assert(c == '}');\n        return\
+    \ is;\n    }\n    friend bool operator==(const C& c1, const C& c2)\n    {\n  \
+    \      return c1.s == c2.s;\n    }\n\nprivate:\n    int s;\n};\n\nvoid valTest()\n\
+    {\n    {\n        const int v = 100;\n        ss << \"100\";\n        const auto\
+    \ rv = scanner.val<int>();\n        assert(v == rv);\n        ss.clear();\n  \
+    \  }\n    {\n        const char c = 'a';\n        ss << \"a\";\n        const\
+    \ auto rc = scanner.val<char>();\n        assert(c == rc);\n        ss.clear();\n\
+    \    }\n    {\n        const Str s = \"ABCabc012\";\n        ss << \"ABCabc012\"\
+    ;\n        const auto rs = scanner.val<Str>();\n        assert(s == rs);\n   \
+    \     ss.clear();\n    }\n    {\n        const C cls{100};\n        ss << \"{100}\"\
+    ;\n        const auto rcls = scanner.val<C>();\n        assert(cls == rcls);\n\
+    \        ss.clear();\n    }\n}\n\nvoid valOffsetTest()\n{\n    {\n        const\
+    \ int v = 100;\n        const int offset = 10;\n        ss << \"100\";\n     \
+    \   const auto rv = scanner.val<int>(offset);\n        assert(v - offset == rv);\n\
+    \        ss.clear();\n    }\n}\n\nvoid vecTest()\n{\n    const int n = 5;\n  \
+    \  Vec<int> vs = {1, 2, 3, 4, 5};\n    ss << \"1 2 3 4 5\";\n    const auto rvs\
+    \ = scanner.vec<int>(n);\n    for (int i : rep(n)) {\n        assert(vs[i] ==\
+    \ rvs[i]);\n    }\n    ss.clear();\n}\n\nvoid vecOffsetTest()\n{\n    const int\
+    \ n = 5;\n    const int offset = 1;\n    Vec<int> vs = {1, 2, 3, 4, 5};\n    ss\
+    \ << \"1 2 3 4 5\";\n    const auto rvs = scanner.vec<int>(n, offset);\n    for\
+    \ (int i : rep(n)) {\n        assert(vs[i] - offset == rvs[i]);\n    }\n    ss.clear();\n\
+    }\n\nvoid vvecTest()\n{\n    const int m = 2;\n    const int n = 3;\n    Vec<Vec<int>>\
+    \ vss = {{1, 2, 3}, {4, 5, 6}};\n    ss << \"1 2 3\\n\"\n          \"4 5 6\";\n\
+    \    const auto rvss = scanner.vvec<int>(m, n);\n    for (int i : rep(m)) {\n\
+    \        for (int j : rep(n)) {\n            assert(vss[i][j] == rvss[i][j]);\n\
+    \        }\n    }\n    ss.clear();\n}\n\nvoid vvecOffsetTest()\n{\n    const int\
+    \ m = 2;\n    const int n = 3;\n    const int offset = 1;\n    Vec<Vec<int>> vss\
+    \ = {{1, 2, 3}, {4, 5, 6}};\n    ss << \"1 2 3\\n\"\n          \"4 5 6\";\n  \
+    \  const auto rvss = scanner.vvec<int>(m, n, offset);\n    for (int i : rep(m))\
+    \ {\n        for (int j : rep(n)) {\n            assert(vss[i][j] - offset ==\
+    \ rvss[i][j]);\n        }\n    }\n    ss.clear();\n}\n\nvoid tupTest()\n{\n  \
+    \  const int v = 100;\n    const char c = 'a';\n    const Str s = \"abcABC012\"\
+    ;\n    const C cls{100};\n    ss << \"100 a abcABC012 {100}\";\n    const auto\
+    \ [rv, rc, rs, rcls] = scanner.tup<int, char, Str, C>();\n    assert(v == rv);\n\
+    \    assert(c == rc);\n    assert(s == rs);\n    assert(cls == rcls);\n    ss.clear();\n\
+    }\n\nvoid tupOffsetTest()\n{\n    const int v1 = 100;\n    const int v2 = 1000;\n\
+    \    const int offset1 = 10;\n    const int offset2 = 100;\n    ss << \"100 1000\"\
+    ;\n    const auto [rv1, rv2] = scanner.tup<int, int>(offset1, offset2);\n    assert(v1\
+    \ - offset1 == rv1);\n    assert(v2 - offset2 == rv2);\n    ss.clear();\n}\n\n\
+    int main()\n{\n    valTest();\n    valOffsetTest();\n    vecTest();\n    vecOffsetTest();\n\
+    \    vvecTest();\n    vvecOffsetTest();\n    tupTest();\n    tupOffsetTest();\n\
+    \    std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -249,16 +335,17 @@ data:
   - src/misc/common/range.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/data_structure/static_rsq.hpp
+  - src/misc/scanner.hpp
+  isVerificationFile: true
+  path: verifications/misc/scanner.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 15:00:11+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-05-24 03:04:00+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: src/data_structure/static_rsq.hpp
+documentation_of: verifications/misc/scanner.test.cpp
 layout: document
 redirect_from:
-- /library/src/data_structure/static_rsq.hpp
-- /library/src/data_structure/static_rsq.hpp.html
-title: src/data_structure/static_rsq.hpp
+- /verify/verifications/misc/scanner.test.cpp
+- /verify/verifications/misc/scanner.test.cpp.html
+title: verifications/misc/scanner.test.cpp
 ---

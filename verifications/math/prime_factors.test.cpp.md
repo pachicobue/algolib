@@ -1,68 +1,68 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -388,7 +388,7 @@ data:
     \ u32 dn = ds.size();\n        for (i32 i = 0; i < e; i++, pe *= p) {\n      \
     \      for (u32 j = 0; j < dn; j++) {\n                ds.push_back(ds[j] * pe);\n\
     \            }\n        }\n    }\n    return ds;\n}\n#pragma region FastIO Printer\n\
-    class printer\n{\npublic:\n    printer() {}\n    template<typename... Args>\n\
+    class Printer\n{\npublic:\n    Printer() {}\n    template<typename... Args>\n\
     \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
     \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
     \ args)\n    {\n        dump(args...), putchar('\\n');\n        return 0;\n  \
@@ -408,8 +408,8 @@ data:
     \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
     \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
     \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass scanner\n{\npublic:\n\
-    \    scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
     \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
     \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
     \        }\n        while (true) {\n            c = getchar();\n            if\
@@ -427,12 +427,15 @@ data:
     \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
     \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\nint main()\n{\n    const auto Q = in.val<int>();\n    for (int\
-    \ q : rep(Q)) {\n        const auto a = in.val<u64>();\n        const auto fs\
-    \ = primeFactors(a);\n        std::vector<u64> ans;\n        for (const auto&\
-    \ [p, e] : fs) {\n            for (int i : rep(e)) {\n                ans.push_back(p);\n\
-    \            }\n        }\n        out.ln(ans.size(), ans);\n    }\n    return\
-    \ 0;\n}\n"
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    int main()\n{\n    const auto Q = in.val<int>();\n    for (int q : rep(Q)) {\n\
+    \        const auto a = in.val<u64>();\n        const auto fs = primeFactors(a);\n\
+    \        std::vector<u64> ans;\n        for (const auto& [p, e] : fs) {\n    \
+    \        for (int i : rep(e)) {\n                ans.push_back(p);\n         \
+    \   }\n        }\n        out.ln(ans.size(), ans);\n    }\n    return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include \"\
     ../../src/math/prime_factors.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
     \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const auto\
@@ -464,8 +467,8 @@ data:
   isVerificationFile: true
   path: verifications/math/prime_factors.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 23:16:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-05-24 03:04:00+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/math/prime_factors.test.cpp
 layout: document

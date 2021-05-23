@@ -1,40 +1,40 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
@@ -50,7 +50,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/fenwick.hpp
     title: Fenwick Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/data_structure/intdict.hpp
     title: src/data_structure/intdict.hpp
   - icon: ':warning:'
@@ -152,7 +152,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/and_convolution.hpp
     title: src/math/and_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/berlekamp_massey.hpp
     title: src/math/berlekamp_massey.hpp
   - icon: ':warning:'
@@ -161,70 +161,70 @@ data:
   - icon: ':warning:'
     path: src/math/divisors.hpp
     title: src/math/divisors.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/divisors_moebius.hpp
     title: src/math/divisors_moebius.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/divisors_zeta.hpp
     title: src/math/divisors_zeta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/factor_table.hpp
     title: src/math/factor_table.hpp
   - icon: ':warning:'
     path: src/math/fft.hpp
     title: src/math/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
   - icon: ':warning:'
     path: src/math/garner.hpp
     title: src/math/garner.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/gcd_convolution.hpp
     title: src/math/gcd_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
   - icon: ':warning:'
     path: src/math/lagrange_interpolation.hpp
     title: src/math/lagrange_interpolation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/mod_sqrt.hpp
     title: src/math/mod_sqrt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
   - icon: ':warning:'
     path: src/math/moebius_table.hpp
     title: src/math/moebius_table.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/multiplicative_sum.hpp
     title: src/math/multiplicative_sum.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/nth_term.hpp
     title: src/math/nth_term.hpp
   - icon: ':warning:'
     path: src/math/or_convolution.hpp
     title: src/math/or_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_enumerate.hpp
     title: src/math/prime_enumerate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_powsum.hpp
     title: src/math/prime_powsum.hpp
   - icon: ':warning:'
@@ -236,7 +236,7 @@ data:
   - icon: ':warning:'
     path: src/math/seg_sieve.hpp
     title: src/math/seg_sieve.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/set_hadamard.hpp
     title: src/math/set_hadamard.hpp
   - icon: ':heavy_check_mark:'
@@ -245,19 +245,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/set_zeta.hpp
     title: src/math/set_zeta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/xor_convolution.hpp
     title: src/math/xor_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/misc/printer.hpp
     title: src/misc/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/misc/scanner.hpp
     title: src/misc/scanner.hpp
   - icon: ':warning:'
@@ -360,48 +360,54 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/fps.inv.test.cpp
     title: verifications/math/fps.inv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.log.test.cpp
     title: verifications/math/fps.log.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.nth.test.cpp
     title: verifications/math/fps.nth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.pow.test.cpp
     title: verifications/math/fps.pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.tshift.test.cpp
     title: verifications/math/fps.tshift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/mod_sqrt.test.cpp
     title: verifications/math/mod_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/prime_powsum.test.cpp
     title: verifications/math/prime_powsum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/misc/fastio.test.cpp
-    title: verifications/misc/fastio.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: verifications/misc/fastio/fastio.test.cpp
+    title: verifications/misc/fastio/fastio.test.cpp
+  - icon: ':x:'
     path: verifications/misc/io.test.cpp
     title: verifications/misc/io.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: verifications/misc/printer.test.cpp
+    title: verifications/misc/printer.test.cpp
+  - icon: ':x:'
+    path: verifications/misc/scanner.test.cpp
+    title: verifications/misc/scanner.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -689,10 +695,12 @@ data:
   - src/graph/lowlink.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
   timestamp: '2021-05-23 15:00:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - verifications/misc/scanner.test.cpp
+  - verifications/misc/printer.test.cpp
   - verifications/misc/io.test.cpp
-  - verifications/misc/fastio.test.cpp
+  - verifications/misc/fastio/fastio.test.cpp
   - verifications/math/fps.exp.test.cpp
   - verifications/math/fps.inv.test.cpp
   - verifications/math/fps.convolution1000000007.test.cpp

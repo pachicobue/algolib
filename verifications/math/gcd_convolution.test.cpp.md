@@ -1,74 +1,74 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/divisors_moebius.hpp
     title: src/math/divisors_moebius.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/divisors_zeta.hpp
     title: src/math/divisors_zeta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/factor_table.hpp
     title: src/math/factor_table.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/gcd_convolution.hpp
     title: src/math/gcd_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_enumerate.hpp
     title: src/math/prime_enumerate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/886
@@ -316,7 +316,7 @@ data:
     \    {\n        return norm(u32(x % (i64)mod() + (i64)mod()));\n    }\n    u32\
     \ m_val;\n};\nusing modint_1000000007 = modint<1000000007, 5, 1>;\nusing modint_998244353\
     \ = modint<998244353, 3, 23>;\ntemplate<int id>\nusing modint_dynamic = modint<0,\
-    \ 0, id>;\n#pragma region FastIO Printer\nclass printer\n{\npublic:\n    printer()\
+    \ 0, id>;\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer()\
     \ {}\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
     \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
     \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
@@ -336,8 +336,8 @@ data:
     \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
     \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
     \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass scanner\n{\npublic:\n\
-    \    scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
     \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
     \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
     \        }\n        while (true) {\n            c = getchar();\n            if\
@@ -355,12 +355,16 @@ data:
     \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
     \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\nint main()\n{\n    using mint = modint_1000000007;\n    const auto\
-    \ [H, W] = in.tup<int, int>();\n    mint ans = mint(H) * (W - 1) + mint(H - 1)\
-    \ * W;\n    Vec<mint> as(H), bs(W);\n    for (int i : range(1, H)) {\n       \
-    \ as[i] = H - i;\n    }\n    for (int i : range(1, W)) {\n        bs[i] = W -\
-    \ i;\n    }\n    const auto cs = gcdConvolute(as, bs);\n    ans += (cs.size()\
-    \ < 2 ? mint{0} : cs[1]) * 2;\n    out.ln(ans.val());\n    return 0;\n}\n"
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    int main()\n{\n    using mint = modint_1000000007;\n    const auto [H, W] = in.tup<int,\
+    \ int>();\n    mint ans = mint(H) * (W - 1) + mint(H - 1) * W;\n    Vec<mint>\
+    \ as(H), bs(W);\n    for (int i : range(1, H)) {\n        as[i] = H - i;\n   \
+    \ }\n    for (int i : range(1, W)) {\n        bs[i] = W - i;\n    }\n    const\
+    \ auto cs = gcdConvolute(as, bs);\n    ans += (cs.size() < 2 ? mint{0} : cs[1])\
+    \ * 2;\n    out.ln(ans.val());\n    return 0;\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/886\"\n#include \"../../src/math/gcd_convolution.hpp\"\
     \n#include \"../../src/math/modint.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
     \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    using mint\
@@ -395,8 +399,8 @@ data:
   isVerificationFile: true
   path: verifications/math/gcd_convolution.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 23:16:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-05-24 03:04:00+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/math/gcd_convolution.test.cpp
 layout: document

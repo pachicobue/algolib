@@ -1,58 +1,58 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
@@ -470,7 +470,7 @@ data:
     \ i += 2) {\n                f[i >> 1] = fmg[i];\n            }\n        } else\
     \ {\n            for (int i = 1; i < fmg.size(); i += 2) {\n                f[i\
     \ >> 1] = fmg[i];\n            }\n        }\n    }\n    return offset + f.at(0);\n\
-    }\n#pragma region FastIO Printer\nclass printer\n{\npublic:\n    printer() {}\n\
+    }\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer() {}\n\
     \    template<typename... Args>\n    int operator()(const Args&... args)\n   \
     \ {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
     \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
@@ -490,8 +490,8 @@ data:
     \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
     \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
     \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass scanner\n{\npublic:\n\
-    \    scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
     \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
     \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
     \        }\n        while (true) {\n            c = getchar();\n            if\
@@ -509,25 +509,28 @@ data:
     \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
     \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\nint main()\n{\n    const auto [A, B] = in.tup<int, int>();\n  \
-    \  using mint = modint_1000000007;\n    const auto K = rng.val<int>(2, 10);\n\
-    \    const auto N = rng.val<i64>(1, 1000000000);\n    using vec = std::vector<mint>;\n\
-    \    using mat = std::vector<vec>;\n    Vec<mint> as(K);\n    for (auto& a : as)\
-    \ {\n        a = rng.val<int>(0, mint::mod() - 1);\n    }\n    mat css(K, vec(K,\
-    \ 0));\n    for (int i : rep(K - 1)) {\n        css[i][i + 1] = 1;\n    }\n  \
-    \  for (int j : rep(K)) {\n        css[K - 1][j] = 1;\n    }\n    auto mul = [&](const\
-    \ mat& m1, const mat& m2) {\n        mat ans(K, vec(K, 0));\n        for (int\
-    \ i : rep(K)) {\n            for (int j : rep(K)) {\n                for (int\
-    \ k : rep(K)) {\n                    ans[i][j] += m1[i][k] * m2[k][j];\n     \
-    \           }\n            }\n        }\n        return ans;\n    };\n    auto\
-    \ pow = Fixpoint([&](auto dfs, const mat& m, i64 n) -> mat {\n        if (n ==\
-    \ 1) { return m; }\n        if (n % 2 == 0) {\n            return dfs(mul(m, m),\
-    \ n / 2);\n        } else {\n            return mul(m, dfs(m, n - 1));\n     \
-    \   }\n    });\n    const auto Mat = pow(css, N);\n    mint actual = 0;\n    for\
-    \ (int j = 0; j < K; j++) {\n        actual += Mat[0][j] * as[j];\n    }\n   \
-    \ FPS<mint> f(as);\n    FPS<mint> g(K + 1, -1);\n    g[0] = 1;\n    f = f.mult(g,\
-    \ K);\n    const mint ans = divNth(f, g, N);\n    assert(actual == ans);\n   \
-    \ out.ln(A + B);\n    return 0;\n}\n"
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    int main()\n{\n    const auto [A, B] = in.tup<int, int>();\n    using mint = modint_1000000007;\n\
+    \    const auto K = rng.val<int>(2, 10);\n    const auto N = rng.val<i64>(1, 1000000000);\n\
+    \    using vec = std::vector<mint>;\n    using mat = std::vector<vec>;\n    Vec<mint>\
+    \ as(K);\n    for (auto& a : as) {\n        a = rng.val<int>(0, mint::mod() -\
+    \ 1);\n    }\n    mat css(K, vec(K, 0));\n    for (int i : rep(K - 1)) {\n   \
+    \     css[i][i + 1] = 1;\n    }\n    for (int j : rep(K)) {\n        css[K - 1][j]\
+    \ = 1;\n    }\n    auto mul = [&](const mat& m1, const mat& m2) {\n        mat\
+    \ ans(K, vec(K, 0));\n        for (int i : rep(K)) {\n            for (int j :\
+    \ rep(K)) {\n                for (int k : rep(K)) {\n                    ans[i][j]\
+    \ += m1[i][k] * m2[k][j];\n                }\n            }\n        }\n     \
+    \   return ans;\n    };\n    auto pow = Fixpoint([&](auto dfs, const mat& m, i64\
+    \ n) -> mat {\n        if (n == 1) { return m; }\n        if (n % 2 == 0) {\n\
+    \            return dfs(mul(m, m), n / 2);\n        } else {\n            return\
+    \ mul(m, dfs(m, n - 1));\n        }\n    });\n    const auto Mat = pow(css, N);\n\
+    \    mint actual = 0;\n    for (int j = 0; j < K; j++) {\n        actual += Mat[0][j]\
+    \ * as[j];\n    }\n    FPS<mint> f(as);\n    FPS<mint> g(K + 1, -1);\n    g[0]\
+    \ = 1;\n    f = f.mult(g, K);\n    const mint ans = divNth(f, g, N);\n    assert(actual\
+    \ == ans);\n    out.ln(A + B);\n    return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include \"../../src/math/fps_div_nth.hpp\"\
     \n#include \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
     \nint main()\n{\n    const auto [A, B] = in.tup<int, int>();\n    using mint =\
@@ -570,7 +573,7 @@ data:
   isVerificationFile: true
   path: verifications/math/fps.div_nth.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 23:16:18+09:00'
+  timestamp: '2021-05-24 03:04:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/math/fps.div_nth.test.cpp

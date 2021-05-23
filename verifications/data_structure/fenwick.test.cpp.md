@@ -4,49 +4,49 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/fenwick.hpp
     title: Fenwick Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
@@ -239,8 +239,8 @@ data:
     \ fw)\n    {\n        os << \"[\";\n        for (int i : rep(fw.m_size)) {\n \
     \           os << (i == 0 ? \"\" : \",\") << fw.sum(i, i + 1);\n        }\n  \
     \      return (os << \"]\\n\");\n    }\nprivate:\n    int m_size, m_cap;\n   \
-    \ Vec<T> m_vs;\n};\n#pragma region FastIO Printer\nclass printer\n{\npublic:\n\
-    \    printer() {}\n    template<typename... Args>\n    int operator()(const Args&...\
+    \ Vec<T> m_vs;\n};\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n\
+    \    Printer() {}\n    template<typename... Args>\n    int operator()(const Args&...\
     \ args)\n    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
     \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
     n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
@@ -259,8 +259,8 @@ data:
     \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
     \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
     \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass scanner\n{\npublic:\n\
-    \    scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
     \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
     \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
     \        }\n        while (true) {\n            c = getchar();\n            if\
@@ -278,12 +278,16 @@ data:
     \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
     \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n  \
-    \  const auto as = in.vec<u64>(N);\n    auto bit = Fenwick(as);\n    for (int\
-    \ q : rep(Q)) {\n        const auto t = in.val<int>();\n        if (t == 0) {\n\
-    \            const auto [p, x] = in.tup<int, u64>();\n            bit.add(p, x);\n\
-    \        } else {\n            const auto [l, r] = in.tup<int, int>();\n     \
-    \       out.ln(bit.sum(l, r));\n        }\n    }\n    return 0;\n}\n"
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    int main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    const auto as\
+    \ = in.vec<u64>(N);\n    auto bit = Fenwick(as);\n    for (int q : rep(Q)) {\n\
+    \        const auto t = in.val<int>();\n        if (t == 0) {\n            const\
+    \ auto [p, x] = in.tup<int, u64>();\n            bit.add(p, x);\n        } else\
+    \ {\n            const auto [l, r] = in.tup<int, int>();\n            out.ln(bit.sum(l,\
+    \ r));\n        }\n    }\n    return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
     #include \"../../src/data_structure/fenwick.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
     \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const auto\
@@ -313,7 +317,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/fenwick.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 23:16:18+09:00'
+  timestamp: '2021-05-24 03:04:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/fenwick.test.cpp

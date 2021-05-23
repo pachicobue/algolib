@@ -1,53 +1,56 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/io.test.cpp
     title: verifications/misc/io.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: verifications/misc/printer.test.cpp
+    title: verifications/misc/printer.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -211,7 +214,7 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n#pragma endregion\n\
-    #pragma region Printer\nclass printer\n{\npublic:\n    printer(Ostream& os = std::cout)\
+    #pragma region Printer\nclass Printer\n{\npublic:\n    Printer(Ostream& os = std::cout)\
     \ : m_os{os}\n    {\n        m_os << std::fixed << std::setprecision(15);\n  \
     \  }\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
     \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
@@ -226,9 +229,9 @@ data:
     \ rep(vss.size())) {\n            m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n\
     \        }\n    }\n    template<typename T, typename... Ts>\n    int dump(const\
     \ T& v, const Ts&... args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n\
-    \        return 0;\n    }\n    Ostream& m_os;\n};\nprinter out;\n#pragma endregion\n"
-  code: "#pragma once\n#include \"common.hpp\"\n#pragma region Printer\nclass printer\n\
-    {\npublic:\n    printer(Ostream& os = std::cout) : m_os{os}\n    {\n        m_os\
+    \        return 0;\n    }\n    Ostream& m_os;\n};\nPrinter out;\n#pragma endregion\n"
+  code: "#pragma once\n#include \"common.hpp\"\n#pragma region Printer\nclass Printer\n\
+    {\npublic:\n    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n        m_os\
     \ << std::fixed << std::setprecision(15);\n    }\n    template<typename... Args>\n\
     \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
     \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
@@ -243,7 +246,7 @@ data:
     \          m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n        }\n    }\n   \
     \ template<typename T, typename... Ts>\n    int dump(const T& v, const Ts&...\
     \ args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n        return 0;\n\
-    \    }\n    Ostream& m_os;\n};\nprinter out;\n#pragma endregion\n"
+    \    }\n    Ostream& m_os;\n};\nPrinter out;\n#pragma endregion\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -261,9 +264,10 @@ data:
   isVerificationFile: false
   path: src/misc/printer.hpp
   requiredBy: []
-  timestamp: '2021-05-23 15:00:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-05-24 03:04:00+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - verifications/misc/printer.test.cpp
   - verifications/misc/io.test.cpp
 documentation_of: src/misc/printer.hpp
 layout: document

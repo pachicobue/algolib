@@ -7,49 +7,49 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
@@ -223,7 +223,7 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n#pragma endregion\n\
-    #pragma region FastIO Printer\nclass printer\n{\npublic:\n    printer() {}\n \
+    #pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer() {}\n \
     \   template<typename... Args>\n    int operator()(const Args&... args)\n    {\n\
     \        dump(args...);\n        return 0;\n    }\n    template<typename... Args>\n\
     \    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\n');\n\
@@ -243,8 +243,8 @@ data:
     \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
     \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
     \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass scanner\n{\npublic:\n\
-    \    scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
     \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
     \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
     \        }\n        while (true) {\n            c = getchar();\n            if\
@@ -262,19 +262,23 @@ data:
     \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
     \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\ntemplate<typename T = int>\nclass Graph\n{\n    struct Edge\n \
-    \   {\n        Edge() = default;\n        Edge(int i, int t, T c) : id{i}, to{t},\
-    \ cost{c} {}\n        int id;\n        int to;\n        T cost;\n        operator\
-    \ int() const\n        {\n            return to;\n        }\n    };\npublic:\n\
-    \    Graph(int n) : m_v{n}, m_edges(n) {}\n    void addEdge(int u, int v, bool\
-    \ bi = false)\n    {\n        assert(0 <= u and u < m_v);\n        assert(0 <=\
-    \ v and v < m_v);\n        m_edges[u].emplace_back(m_e, v, 1);\n        if (bi)\
-    \ { m_edges[v].emplace_back(m_e, u, 1); }\n        m_e++;\n    }\n    void addEdge(int\
-    \ u, int v, const T& c, bool bi = false)\n    {\n        assert(0 <= u and u <\
-    \ m_v);\n        assert(0 <= v and v < m_v);\n        m_edges[u].emplace_back(m_e,\
-    \ v, c);\n        if (bi) { m_edges[v].emplace_back(m_e, u, c); }\n        m_e++;\n\
-    \    }\n    const Vec<Edge>& operator[](const int u) const\n    {\n        assert(0\
-    \ <= u and u < m_v);\n        return m_edges[u];\n    }\n    Vec<Edge>& operator[](const\
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    template<typename T = int>\nclass Graph\n{\n    struct Edge\n    {\n        Edge()\
+    \ = default;\n        Edge(int i, int t, T c) : id{i}, to{t}, cost{c} {}\n   \
+    \     int id;\n        int to;\n        T cost;\n        operator int() const\n\
+    \        {\n            return to;\n        }\n    };\npublic:\n    Graph(int\
+    \ n) : m_v{n}, m_edges(n) {}\n    void addEdge(int u, int v, bool bi = false)\n\
+    \    {\n        assert(0 <= u and u < m_v);\n        assert(0 <= v and v < m_v);\n\
+    \        m_edges[u].emplace_back(m_e, v, 1);\n        if (bi) { m_edges[v].emplace_back(m_e,\
+    \ u, 1); }\n        m_e++;\n    }\n    void addEdge(int u, int v, const T& c,\
+    \ bool bi = false)\n    {\n        assert(0 <= u and u < m_v);\n        assert(0\
+    \ <= v and v < m_v);\n        m_edges[u].emplace_back(m_e, v, c);\n        if\
+    \ (bi) { m_edges[v].emplace_back(m_e, u, c); }\n        m_e++;\n    }\n    const\
+    \ Vec<Edge>& operator[](const int u) const\n    {\n        assert(0 <= u and u\
+    \ < m_v);\n        return m_edges[u];\n    }\n    Vec<Edge>& operator[](const\
     \ int u)\n    {\n        assert(0 <= u and u < m_v);\n        return m_edges[u];\n\
     \    }\n    int v() const\n    {\n        return m_v;\n    }\n    int e() const\n\
     \    {\n        return m_e;\n    }\n    friend Ostream& operator<<(Ostream& os,\
@@ -344,7 +348,7 @@ data:
   isVerificationFile: true
   path: verifications/graph/diameter.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 23:16:18+09:00'
+  timestamp: '2021-05-24 03:04:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/graph/diameter.test.cpp
