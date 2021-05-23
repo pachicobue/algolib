@@ -54,7 +54,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/intdict.test.cpp
     title: verifications/data_structure/intdict.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/lazyseg.test.cpp
     title: verifications/data_structure/lazyseg.test.cpp
   - icon: ':x:'
@@ -135,13 +135,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_sqrt.test.cpp
     title: verifications/math/mod_sqrt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
   - icon: ':x:'

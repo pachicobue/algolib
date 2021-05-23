@@ -50,19 +50,19 @@ data:
   - icon: ':x:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
   - icon: ':warning:'
     path: src/math/lagrange_interpolation.hpp
     title: src/math/lagrange_interpolation.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
   - icon: ':x:'
     path: src/math/nth_term.hpp
     title: src/math/nth_term.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':warning:'
@@ -72,7 +72,7 @@ data:
     path: verifications/math/mod_nthroot.yuki981.cpp
     title: verifications/math/mod_nthroot.yuki981.cpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/lazyseg.test.cpp
     title: verifications/data_structure/lazyseg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -120,13 +120,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_sqrt.test.cpp
     title: verifications/math/mod_sqrt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
   - icon: ':x:'

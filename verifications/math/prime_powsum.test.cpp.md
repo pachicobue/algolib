@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/prime_powsum.hpp
     title: src/math/prime_powsum.hpp
   - icon: ':question:'

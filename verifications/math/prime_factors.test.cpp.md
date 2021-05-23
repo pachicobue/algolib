@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
   - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':question:'
@@ -68,7 +68,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/factorize
     links:
     - https://judge.yosupo.jp/problem/factorize
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\

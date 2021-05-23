@@ -14,13 +14,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/fenwick.hpp
     title: Fenwick Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/intdict.hpp
     title: src/data_structure/intdict.hpp
   - icon: ':warning:'
     path: src/data_structure/intset.hpp
     title: src/data_structure/intset.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/lazyseg.hpp
     title: Lazy Segment Tree
   - icon: ':x:'
@@ -131,7 +131,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/divisors_zeta.hpp
     title: src/math/divisors_zeta.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
   - icon: ':heavy_check_mark:'
@@ -152,28 +152,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/gcd_convolution.hpp
     title: src/math/gcd_convolution.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
   - icon: ':warning:'
     path: src/math/lagrange_interpolation.hpp
     title: src/math/lagrange_interpolation.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/mod_sqrt.hpp
     title: src/math/mod_sqrt.hpp
   - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
   - icon: ':warning:'
     path: src/math/moebius_table.hpp
     title: src/math/moebius_table.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/multiplicative_sum.hpp
     title: src/math/multiplicative_sum.hpp
   - icon: ':x:'
@@ -185,10 +185,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/prime_enumerate.hpp
     title: src/math/prime_enumerate.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/prime_powsum.hpp
     title: src/math/prime_powsum.hpp
   - icon: ':warning:'
@@ -261,7 +261,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/intdict.test.cpp
     title: verifications/data_structure/intdict.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/lazyseg.test.cpp
     title: verifications/data_structure/lazyseg.test.cpp
   - icon: ':x:'
@@ -342,13 +342,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_sqrt.test.cpp
     title: verifications/math/mod_sqrt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
   - icon: ':x:'

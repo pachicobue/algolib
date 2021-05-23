@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/lazyseg.hpp
     title: Lazy Segment Tree
   - icon: ':question:'
@@ -54,15 +54,15 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
     links:
     - https://judge.yosupo.jp/problem/range_affine_range_sum
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -230,23 +230,23 @@ data:
     \    LazySeg(const Vec<T>& vs)\n        : m_size(vs.size()),\n          m_depth(clog(m_size)\
     \ + 1),\n          m_half(1 << m_depth),\n          m_vs(m_half << 1, e()),\n\
     \          m_ops(m_half << 1, id())\n    {\n        std::copy(vs.begin(), vs.end(),\
-    \ m_vs.begin() + m_half);\n        for (int i : range(1, m_half)) {\n        \
-    \    up(i);\n        }\n    }\n    T get(const int a)\n    {\n        assert(a\
-    \ < m_size);\n        return fold(a, a + 1);\n    }\n    void set(int i, const\
-    \ T& v)\n    {\n        assert(0 <= i and i < m_size);\n        i += m_half;\n\
-    \        topDown(i), topDown(i + 1);\n        m_ops[i] = id();\n        m_vs[i]\
-    \ = v;\n        while (i >>= 1) {\n            up(i);\n        }\n    }\n    T\
-    \ fold(int l, int r)\n    {\n        assert(0 <= l and l <= r and r <= m_size);\n\
-    \        if (l >= r) { return e(); }\n        l += m_half, r += m_half;\n    \
-    \    topDown(l), topDown(r);\n        T accl = e(), accr = e();\n        for (;\
-    \ l < r; l >>= 1, r >>= 1) {\n            if (l & 1) { accl = merge(accl, m_vs[l++]);\
-    \ }\n            if (r & 1) { accr = merge(m_vs[--r], accr); }\n        }\n  \
-    \      return merge(accl, accr);\n    }\n    void act(int l, int r, const F& f)\n\
-    \    {\n        assert(0 <= l and l <= r and r <= m_size);\n        int li = l\
-    \ + m_half, ri = r + m_half;\n        topDown(li), topDown(ri);\n        for (;\
-    \ li < ri; li >>= 1, ri >>= 1) {\n            if (li & 1) { update(li++, f); }\n\
-    \            if (ri & 1) { update(--ri, f); }\n        }\n        bottomUp(l +\
-    \ m_half), bottomUp(r + m_half);\n    }\n    friend Ostream& operator<<(Ostream&\
+    \ m_vs.begin() + m_half);\n        for (int i : range(m_half - 1, 0, -1)) {\n\
+    \            up(i);\n        }\n    }\n    T get(const int a)\n    {\n       \
+    \ assert(a < m_size);\n        return fold(a, a + 1);\n    }\n    void set(int\
+    \ i, const T& v)\n    {\n        assert(0 <= i and i < m_size);\n        i +=\
+    \ m_half;\n        topDown(i), topDown(i + 1);\n        m_ops[i] = id();\n   \
+    \     m_vs[i] = v;\n        while (i >>= 1) {\n            up(i);\n        }\n\
+    \    }\n    T fold(int l, int r)\n    {\n        assert(0 <= l and l <= r and\
+    \ r <= m_size);\n        if (l >= r) { return e(); }\n        l += m_half, r +=\
+    \ m_half;\n        topDown(l), topDown(r);\n        T accl = e(), accr = e();\n\
+    \        for (; l < r; l >>= 1, r >>= 1) {\n            if (l & 1) { accl = merge(accl,\
+    \ m_vs[l++]); }\n            if (r & 1) { accr = merge(m_vs[--r], accr); }\n \
+    \       }\n        return merge(accl, accr);\n    }\n    void act(int l, int r,\
+    \ const F& f)\n    {\n        assert(0 <= l and l <= r and r <= m_size);\n   \
+    \     int li = l + m_half, ri = r + m_half;\n        topDown(li), topDown(ri);\n\
+    \        for (; li < ri; li >>= 1, ri >>= 1) {\n            if (li & 1) { update(li++,\
+    \ f); }\n            if (ri & 1) { update(--ri, f); }\n        }\n        bottomUp(l\
+    \ + m_half), bottomUp(r + m_half);\n    }\n    friend Ostream& operator<<(Ostream&\
     \ os, const LazySeg& lseg)\n    {\n        auto lseg2 = lseg;\n        os << \"\
     [\";\n        for (int i : rep(lseg.m_size)) {\n            os << (i == 0 ? \"\
     \" : \",\") << lseg2.get(i);\n        }\n        return (os << \"]\\n\");\n  \
@@ -375,11 +375,11 @@ data:
     \ [N, Q] = in.tup<int, int>();\n    Vec<Pair<mint, int>> as(N, {0, 1});\n    for\
     \ (int i : rep(N)) {\n        as[i].first = in.val<mint>();\n    }\n    auto seg\
     \ = LazySeg<MergeMonoid, OpMonoid, Act>(as);\n    for (int q : rep(Q)) {\n   \
-    \     const auto t = in.val<int>();\n        if (t == 0) {\n            const\
-    \ auto [l, r, b, c] = in.tup<int, int, mint, mint>();\n            seg.act(l,\
-    \ r, Func{b, c});\n        } else {\n            const auto [l, r] = in.tup<int,\
-    \ int>();\n            out.ln(seg.fold(l, r).first.val());\n        }\n    }\n\
-    \    return 0;\n}\n"
+    \     static_cast<void>(q);\n        const auto t = in.val<int>();\n        if\
+    \ (t == 0) {\n            const auto [l, r, b, c] = in.tup<int, int, mint, mint>();\n\
+    \            seg.act(l, r, Func{b, c});\n        } else {\n            const auto\
+    \ [l, r] = in.tup<int, int>();\n            out.ln(seg.fold(l, r).first.val());\n\
+    \        }\n    }\n    return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n#include \"../../src/data_structure/lazyseg.hpp\"\n#include \"../../src/math/modint.hpp\"\
     \n#include \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
@@ -398,11 +398,11 @@ data:
     \ = in.tup<int, int>();\n    Vec<Pair<mint, int>> as(N, {0, 1});\n    for (int\
     \ i : rep(N)) {\n        as[i].first = in.val<mint>();\n    }\n    auto seg =\
     \ LazySeg<MergeMonoid, OpMonoid, Act>(as);\n    for (int q : rep(Q)) {\n     \
-    \   const auto t = in.val<int>();\n        if (t == 0) {\n            const auto\
-    \ [l, r, b, c] = in.tup<int, int, mint, mint>();\n            seg.act(l, r, Func{b,\
-    \ c});\n        } else {\n            const auto [l, r] = in.tup<int, int>();\n\
-    \            out.ln(seg.fold(l, r).first.val());\n        }\n    }\n    return\
-    \ 0;\n}\n"
+    \   USE(q);\n        const auto t = in.val<int>();\n        if (t == 0) {\n  \
+    \          const auto [l, r, b, c] = in.tup<int, int, mint, mint>();\n       \
+    \     seg.act(l, r, Func{b, c});\n        } else {\n            const auto [l,\
+    \ r] = in.tup<int, int>();\n            out.ln(seg.fold(l, r).first.val());\n\
+    \        }\n    }\n    return 0;\n}\n"
   dependsOn:
   - src/data_structure/lazyseg.hpp
   - src/misc/common.hpp
@@ -424,8 +424,8 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/lazyseg.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 19:52:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-23 20:48:55+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/lazyseg.test.cpp
 layout: document

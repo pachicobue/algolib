@@ -42,12 +42,12 @@ data:
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/lazyseg.test.cpp
     title: verifications/data_structure/lazyseg.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -218,23 +218,23 @@ data:
     \    LazySeg(const Vec<T>& vs)\n        : m_size(vs.size()),\n          m_depth(clog(m_size)\
     \ + 1),\n          m_half(1 << m_depth),\n          m_vs(m_half << 1, e()),\n\
     \          m_ops(m_half << 1, id())\n    {\n        std::copy(vs.begin(), vs.end(),\
-    \ m_vs.begin() + m_half);\n        for (int i : range(1, m_half)) {\n        \
-    \    up(i);\n        }\n    }\n    T get(const int a)\n    {\n        assert(a\
-    \ < m_size);\n        return fold(a, a + 1);\n    }\n    void set(int i, const\
-    \ T& v)\n    {\n        assert(0 <= i and i < m_size);\n        i += m_half;\n\
-    \        topDown(i), topDown(i + 1);\n        m_ops[i] = id();\n        m_vs[i]\
-    \ = v;\n        while (i >>= 1) {\n            up(i);\n        }\n    }\n    T\
-    \ fold(int l, int r)\n    {\n        assert(0 <= l and l <= r and r <= m_size);\n\
-    \        if (l >= r) { return e(); }\n        l += m_half, r += m_half;\n    \
-    \    topDown(l), topDown(r);\n        T accl = e(), accr = e();\n        for (;\
-    \ l < r; l >>= 1, r >>= 1) {\n            if (l & 1) { accl = merge(accl, m_vs[l++]);\
-    \ }\n            if (r & 1) { accr = merge(m_vs[--r], accr); }\n        }\n  \
-    \      return merge(accl, accr);\n    }\n    void act(int l, int r, const F& f)\n\
-    \    {\n        assert(0 <= l and l <= r and r <= m_size);\n        int li = l\
-    \ + m_half, ri = r + m_half;\n        topDown(li), topDown(ri);\n        for (;\
-    \ li < ri; li >>= 1, ri >>= 1) {\n            if (li & 1) { update(li++, f); }\n\
-    \            if (ri & 1) { update(--ri, f); }\n        }\n        bottomUp(l +\
-    \ m_half), bottomUp(r + m_half);\n    }\n    friend Ostream& operator<<(Ostream&\
+    \ m_vs.begin() + m_half);\n        for (int i : range(m_half - 1, 0, -1)) {\n\
+    \            up(i);\n        }\n    }\n    T get(const int a)\n    {\n       \
+    \ assert(a < m_size);\n        return fold(a, a + 1);\n    }\n    void set(int\
+    \ i, const T& v)\n    {\n        assert(0 <= i and i < m_size);\n        i +=\
+    \ m_half;\n        topDown(i), topDown(i + 1);\n        m_ops[i] = id();\n   \
+    \     m_vs[i] = v;\n        while (i >>= 1) {\n            up(i);\n        }\n\
+    \    }\n    T fold(int l, int r)\n    {\n        assert(0 <= l and l <= r and\
+    \ r <= m_size);\n        if (l >= r) { return e(); }\n        l += m_half, r +=\
+    \ m_half;\n        topDown(l), topDown(r);\n        T accl = e(), accr = e();\n\
+    \        for (; l < r; l >>= 1, r >>= 1) {\n            if (l & 1) { accl = merge(accl,\
+    \ m_vs[l++]); }\n            if (r & 1) { accr = merge(m_vs[--r], accr); }\n \
+    \       }\n        return merge(accl, accr);\n    }\n    void act(int l, int r,\
+    \ const F& f)\n    {\n        assert(0 <= l and l <= r and r <= m_size);\n   \
+    \     int li = l + m_half, ri = r + m_half;\n        topDown(li), topDown(ri);\n\
+    \        for (; li < ri; li >>= 1, ri >>= 1) {\n            if (li & 1) { update(li++,\
+    \ f); }\n            if (ri & 1) { update(--ri, f); }\n        }\n        bottomUp(l\
+    \ + m_half), bottomUp(r + m_half);\n    }\n    friend Ostream& operator<<(Ostream&\
     \ os, const LazySeg& lseg)\n    {\n        auto lseg2 = lseg;\n        os << \"\
     [\";\n        for (int i : rep(lseg.m_size)) {\n            os << (i == 0 ? \"\
     \" : \",\") << lseg2.get(i);\n        }\n        return (os << \"]\\n\");\n  \
@@ -258,14 +258,14 @@ data:
     \        : m_size(vs.size()),\n          m_depth(clog(m_size) + 1),\n        \
     \  m_half(1 << m_depth),\n          m_vs(m_half << 1, e()),\n          m_ops(m_half\
     \ << 1, id())\n    {\n        std::copy(vs.begin(), vs.end(), m_vs.begin() + m_half);\n\
-    \        for (int i : range(1, m_half)) {\n            up(i);\n        }\n   \
-    \ }\n    T get(const int a)\n    {\n        assert(a < m_size);\n        return\
-    \ fold(a, a + 1);\n    }\n    void set(int i, const T& v)\n    {\n        assert(0\
-    \ <= i and i < m_size);\n        i += m_half;\n        topDown(i), topDown(i +\
-    \ 1);\n        m_ops[i] = id();\n        m_vs[i] = v;\n        while (i >>= 1)\
-    \ {\n            up(i);\n        }\n    }\n    T fold(int l, int r)\n    {\n \
-    \       assert(0 <= l and l <= r and r <= m_size);\n        if (l >= r) { return\
-    \ e(); }\n        l += m_half, r += m_half;\n        topDown(l), topDown(r);\n\
+    \        for (int i : range(m_half - 1, 0, -1)) {\n            up(i);\n      \
+    \  }\n    }\n    T get(const int a)\n    {\n        assert(a < m_size);\n    \
+    \    return fold(a, a + 1);\n    }\n    void set(int i, const T& v)\n    {\n \
+    \       assert(0 <= i and i < m_size);\n        i += m_half;\n        topDown(i),\
+    \ topDown(i + 1);\n        m_ops[i] = id();\n        m_vs[i] = v;\n        while\
+    \ (i >>= 1) {\n            up(i);\n        }\n    }\n    T fold(int l, int r)\n\
+    \    {\n        assert(0 <= l and l <= r and r <= m_size);\n        if (l >= r)\
+    \ { return e(); }\n        l += m_half, r += m_half;\n        topDown(l), topDown(r);\n\
     \        T accl = e(), accr = e();\n        for (; l < r; l >>= 1, r >>= 1) {\n\
     \            if (l & 1) { accl = merge(accl, m_vs[l++]); }\n            if (r\
     \ & 1) { accr = merge(m_vs[--r], accr); }\n        }\n        return merge(accl,\
@@ -307,8 +307,8 @@ data:
   isVerificationFile: false
   path: src/data_structure/lazyseg.hpp
   requiredBy: []
-  timestamp: '2021-05-23 15:00:11+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-05-23 20:48:55+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/data_structure/lazyseg.test.cpp
 documentation_of: src/data_structure/lazyseg.hpp

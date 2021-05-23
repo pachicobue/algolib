@@ -41,7 +41,7 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
   - icon: ':warning:'
@@ -51,12 +51,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/intdict.test.cpp
     title: verifications/data_structure/intdict.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -269,7 +269,7 @@ data:
   - src/math/mod_nthroot.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
   timestamp: '2021-05-23 15:00:11+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/math/mod_nthroot.test.cpp
   - verifications/data_structure/intdict.test.cpp
