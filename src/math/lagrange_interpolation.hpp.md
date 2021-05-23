@@ -53,7 +53,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
+  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -260,7 +260,7 @@ data:
     \ n);\n    }\n    constexpr modint inv() const\n    {\n        return pow(mod()\
     \ - 2);\n    }\n    static modint sinv(u32 n)\n    {\n        static Vec<modint>\
     \ is{1, 1};\n        for (u32 i = (u32)is.size(); i <= n; i++) {\n           \
-    \ is.push_back(-is[mod % i] * (mod() / i));\n        }\n        return is[n];\n\
+    \ is.push_back(-is[mod() % i] * (mod() / i));\n        }\n        return is[n];\n\
     \    }\n    static modint fact(u32 n)\n    {\n        static Vec<modint> fs{1,\
     \ 1};\n        for (u32 i = (u32)fs.size(); i <= n; i++) {\n            fs.push_back(fs.back()\
     \ * i);\n        }\n        return fs[n];\n    }\n    static modint ifact(u32\
@@ -404,8 +404,8 @@ data:
     \ - M + 1), N - M + 1).rev();\n    }\n    FPS rem(const FPS& g) const\n    {\n\
     \        return (*this) - g * quot(g);\n    }\nprivate:\n    int lsb() const\n\
     \    {\n        return lsb(deg());\n    }\n    int lsb(int sz) const\n    {\n\
-    \        for (int p : rep(sz + 1)) {\n            if ((*this)[p]() != 0) { return\
-    \ p; }\n        }\n        return -1;\n    }\n    using submint1 = modint<469762049,\
+    \        for (int p : rep(sz + 1)) {\n            if ((*this)[p].val() != 0) {\
+    \ return p; }\n        }\n        return -1;\n    }\n    using submint1 = modint<469762049,\
     \ 3, 26>;\n    using submint2 = modint<167772161, 3, 25>;\n    using submint3\
     \ = modint<754974721, 11, 24>;\n    template<typename submint>\n    static void\
     \ trans(Vec<submint>& as, int lg, bool rev)\n    {\n        const int N = 1 <<\
@@ -483,7 +483,7 @@ data:
   isVerificationFile: false
   path: src/math/lagrange_interpolation.hpp
   requiredBy: []
-  timestamp: '2021-05-23 15:00:11+09:00'
+  timestamp: '2021-05-23 19:52:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/lagrange_interpolation.hpp

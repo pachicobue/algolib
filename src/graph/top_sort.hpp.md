@@ -259,7 +259,7 @@ data:
     \ else if (used[s] == 0) {\n            used[s] = 1;\n            for (int to\
     \ : g[s]) {\n                if (not dfs(to)) { return false; }\n            }\n\
     \            used[s] = 2;\n            ans.push_back(s);\n        }\n        return\
-    \ true;\n    });\n    for (int i : rep(N)) {\n        if (not dfs(dfs, i)) { return\
+    \ true;\n    });\n    for (int i : rep(N)) {\n        if (not dfs(i)) { return\
     \ {false, ans}; }\n    }\n    reverseAll(ans);\n    return {true, ans};\n}\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename\
     \ T>\nPair<bool, Vec<int>> topSort(const Graph<T>& g)\n{\n    const int N = g.v();\n\
@@ -268,9 +268,9 @@ data:
     \        } else if (used[s] == 0) {\n            used[s] = 1;\n            for\
     \ (int to : g[s]) {\n                if (not dfs(to)) { return false; }\n    \
     \        }\n            used[s] = 2;\n            ans.push_back(s);\n        }\n\
-    \        return true;\n    });\n    for (int i : rep(N)) {\n        if (not dfs(dfs,\
-    \ i)) { return {false, ans}; }\n    }\n    reverseAll(ans);\n    return {true,\
-    \ ans};\n}\n"
+    \        return true;\n    });\n    for (int i : rep(N)) {\n        if (not dfs(i))\
+    \ { return {false, ans}; }\n    }\n    reverseAll(ans);\n    return {true, ans};\n\
+    }\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -289,7 +289,7 @@ data:
   isVerificationFile: false
   path: src/graph/top_sort.hpp
   requiredBy: []
-  timestamp: '2021-05-23 15:00:11+09:00'
+  timestamp: '2021-05-23 19:52:02+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verifications/graph/scc.test.cpp

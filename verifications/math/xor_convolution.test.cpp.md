@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/set_hadamard.hpp
     title: src/math/set_hadamard.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/xor_convolution.hpp
     title: src/math/xor_convolution.hpp
   - icon: ':question:'
@@ -57,15 +57,15 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bitwise_xor_convolution
     links:
     - https://judge.yosupo.jp/problem/bitwise_xor_convolution
-  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
+  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -272,7 +272,7 @@ data:
     \ n);\n    }\n    constexpr modint inv() const\n    {\n        return pow(mod()\
     \ - 2);\n    }\n    static modint sinv(u32 n)\n    {\n        static Vec<modint>\
     \ is{1, 1};\n        for (u32 i = (u32)is.size(); i <= n; i++) {\n           \
-    \ is.push_back(-is[mod % i] * (mod() / i));\n        }\n        return is[n];\n\
+    \ is.push_back(-is[mod() % i] * (mod() / i));\n        }\n        return is[n];\n\
     \    }\n    static modint fact(u32 n)\n    {\n        static Vec<modint> fs{1,\
     \ 1};\n        for (u32 i = (u32)fs.size(); i <= n; i++) {\n            fs.push_back(fs.back()\
     \ * i);\n        }\n        return fs[n];\n    }\n    static modint ifact(u32\
@@ -370,8 +370,8 @@ data:
   isVerificationFile: true
   path: verifications/math/xor_convolution.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 15:28:30+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-05-23 19:52:02+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/math/xor_convolution.test.cpp
 layout: document

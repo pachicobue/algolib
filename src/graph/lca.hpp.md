@@ -327,9 +327,9 @@ data:
     \  const int u = s.second;\n                  used[u] = true;\n              \
     \    m_ins[u] = ans.size();\n                  ans.push_back(s);\n           \
     \       for (int v : g[u]) {\n                      if (used[v]) { continue; }\n\
-    \                      dfs({s.first + 1, v});\n                      ans.push_back(s);\n\
-    \                  }\n              })({0, r});\n              return ans;\n \
-    \         }()),\n          m_rmq(m_ds)\n    {}\n    int operator()(int u, int\
+    \                      dfs(P{s.first + 1, v});\n                      ans.push_back(s);\n\
+    \                  }\n              })(P{0, r});\n              return ans;\n\
+    \          }()),\n          m_rmq(m_ds)\n    {}\n    int operator()(int u, int\
     \ v) const\n    {\n        const auto [ul, vl] = std::minmax({m_ins[u], m_ins[v]});\n\
     \        return m_rmq.fold(ul, vl + 1).second;\n    }\nprivate:\n    struct Ord\n\
     \    {\n        using T = P;\n        bool operator()(const T& p1, const T& p2)\
@@ -337,21 +337,22 @@ data:
     \    Vec<int> m_ins;\n    Vec<P> m_ds;\n    StaticRMQ<Ord> m_rmq;\n};\n"
   code: "#pragma once\n#include \"../data_structure/static_rmq.hpp\"\n#include \"\
     ../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename C>\nclass LCA\n\
-    {\n    using P = Pair<int, int>;\npublic:\n    LCA(const Graph<C>& g, int r =\
-    \ 0)\n        : m_v(g.v()),\n          m_ins(g.v(), 0),\n          m_ds([&]()\
+    {\n    using P = Pair<int, int>;\n\npublic:\n    LCA(const Graph<C>& g, int r\
+    \ = 0)\n        : m_v(g.v()),\n          m_ins(g.v(), 0),\n          m_ds([&]()\
     \ {\n              Vec<P> ans;\n              Vec<bool> used(g.v(), false);\n\
     \              Fixpoint([&](auto dfs, const P& s) -> void {\n                \
     \  const int u = s.second;\n                  used[u] = true;\n              \
     \    m_ins[u] = ans.size();\n                  ans.push_back(s);\n           \
     \       for (int v : g[u]) {\n                      if (used[v]) { continue; }\n\
-    \                      dfs({s.first + 1, v});\n                      ans.push_back(s);\n\
-    \                  }\n              })({0, r});\n              return ans;\n \
-    \         }()),\n          m_rmq(m_ds)\n    {}\n    int operator()(int u, int\
+    \                      dfs(P{s.first + 1, v});\n                      ans.push_back(s);\n\
+    \                  }\n              })(P{0, r});\n              return ans;\n\
+    \          }()),\n          m_rmq(m_ds)\n    {}\n    int operator()(int u, int\
     \ v) const\n    {\n        const auto [ul, vl] = std::minmax({m_ins[u], m_ins[v]});\n\
-    \        return m_rmq.fold(ul, vl + 1).second;\n    }\nprivate:\n    struct Ord\n\
-    \    {\n        using T = P;\n        bool operator()(const T& p1, const T& p2)\
-    \ const\n        {\n            return p1 < p2;\n        }\n    };\n    int m_v;\n\
-    \    Vec<int> m_ins;\n    Vec<P> m_ds;\n    StaticRMQ<Ord> m_rmq;\n};\n"
+    \        return m_rmq.fold(ul, vl + 1).second;\n    }\n\nprivate:\n    struct\
+    \ Ord\n    {\n        using T = P;\n        bool operator()(const T& p1, const\
+    \ T& p2) const\n        {\n            return p1 < p2;\n        }\n    };\n  \
+    \  int m_v;\n    Vec<int> m_ins;\n    Vec<P> m_ds;\n    StaticRMQ<Ord> m_rmq;\n\
+    };\n"
   dependsOn:
   - src/data_structure/static_rmq.hpp
   - src/misc/common.hpp
@@ -372,7 +373,7 @@ data:
   isVerificationFile: false
   path: src/graph/lca.hpp
   requiredBy: []
-  timestamp: '2021-05-23 15:00:11+09:00'
+  timestamp: '2021-05-23 19:52:02+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verifications/graph/lca.test.cpp

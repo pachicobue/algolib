@@ -336,9 +336,9 @@ data:
     \  const int u = s.second;\n                  used[u] = true;\n              \
     \    m_ins[u] = ans.size();\n                  ans.push_back(s);\n           \
     \       for (int v : g[u]) {\n                      if (used[v]) { continue; }\n\
-    \                      dfs({s.first + 1, v});\n                      ans.push_back(s);\n\
-    \                  }\n              })({0, r});\n              return ans;\n \
-    \         }()),\n          m_rmq(m_ds)\n    {}\n    int operator()(int u, int\
+    \                      dfs(P{s.first + 1, v});\n                      ans.push_back(s);\n\
+    \                  }\n              })(P{0, r});\n              return ans;\n\
+    \          }()),\n          m_rmq(m_ds)\n    {}\n    int operator()(int u, int\
     \ v) const\n    {\n        const auto [ul, vl] = std::minmax({m_ins[u], m_ins[v]});\n\
     \        return m_rmq.fold(ul, vl + 1).second;\n    }\nprivate:\n    struct Ord\n\
     \    {\n        using T = P;\n        bool operator()(const T& p1, const T& p2)\
@@ -417,7 +417,7 @@ data:
   isVerificationFile: true
   path: verifications/graph/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 15:28:30+09:00'
+  timestamp: '2021-05-23 19:52:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/graph/lca.test.cpp

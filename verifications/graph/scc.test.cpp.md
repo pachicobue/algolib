@@ -291,25 +291,25 @@ data:
     \ = 1;\n            for (int to : g[s]) {\n                if (not dfs(to)) {\
     \ return false; }\n            }\n            used[s] = 2;\n            ans.push_back(s);\n\
     \        }\n        return true;\n    });\n    for (int i : rep(N)) {\n      \
-    \  if (not dfs(dfs, i)) { return {false, ans}; }\n    }\n    reverseAll(ans);\n\
-    \    return {true, ans};\n}\n#pragma region FastIO Printer\nclass printer\n{\n\
-    public:\n    printer() {}\n    template<typename... Args>\n    int operator()(const\
-    \ Args&... args)\n    {\n        dump(args...);\n        return 0;\n    }\n  \
-    \  template<typename... Args>\n    int ln(const Args&... args)\n    {\n      \
-    \  dump(args...), putchar('\\n');\n        return 0;\n    }\nprivate:\n    template<typename\
-    \ T>\n    void dump(T v)\n    {\n        static char tmp[30];\n        if (v <\
-    \ 0) {\n            putchar('-');\n            v = -v;\n        }\n        int\
-    \ i = 0;\n        do {\n            tmp[i++] = v % T{10} + '0';\n            v\
-    \ /= T{10};\n        } while (v);\n        while (i) {\n            putchar(tmp[--i]);\n\
-    \        }\n    }\n    void dump(bool b)\n    {\n        dump<int>(b);\n    }\n\
-    \    void dump(const Str& cs)\n    {\n        for (char c : cs) {\n          \
-    \  dump(c);\n        }\n    }\n    template<typename T>\n    void dump(const Vec<T>&\
-    \ vs)\n    {\n        for (const int i : rep(vs.size())) {\n            if (i)\
-    \ { putchar(' '); }\n            dump(vs[i]);\n        }\n    }\n    template<typename\
-    \ T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i :\
-    \ rep(vss.size())) {\n            if (i) { putchar('\\n'); }\n            dump(vss[i]);\n\
-    \        }\n    }\n    template<typename T, typename... Ts>\n    int dump(const\
-    \ T& v, const Ts&... args)\n    {\n        dump(v), putchar(' '), dump(args...);\n\
+    \  if (not dfs(i)) { return {false, ans}; }\n    }\n    reverseAll(ans);\n   \
+    \ return {true, ans};\n}\n#pragma region FastIO Printer\nclass printer\n{\npublic:\n\
+    \    printer() {}\n    template<typename... Args>\n    int operator()(const Args&...\
+    \ args)\n    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
+    n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
+    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
+    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
+    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
+    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
+    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(const Str&\
+    \ cs)\n    {\n        for (char c : cs) {\n            dump(c);\n        }\n \
+    \   }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n    \
+    \    for (const int i : rep(vs.size())) {\n            if (i) { putchar(' ');\
+    \ }\n            dump(vs[i]);\n        }\n    }\n    template<typename T>\n  \
+    \  void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size()))\
+    \ {\n            if (i) { putchar('\\n'); }\n            dump(vss[i]);\n     \
+    \   }\n    }\n    template<typename T, typename... Ts>\n    int dump(const T&\
+    \ v, const Ts&... args)\n    {\n        dump(v), putchar(' '), dump(args...);\n\
     \        return 0;\n    }\n    static inline void putchar(char c)\n    {\n   \
     \     putchar_unlocked(c);\n    }\n} out;\n#pragma endregion\n#pragma region FastIO\
     \ Scanner\nclass scanner\n{\npublic:\n    scanner() {}\n    template<typename\
@@ -376,7 +376,7 @@ data:
   isVerificationFile: true
   path: verifications/graph/scc.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 15:28:30+09:00'
+  timestamp: '2021-05-23 19:52:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/graph/scc.test.cpp

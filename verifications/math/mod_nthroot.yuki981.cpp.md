@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/data_structure/intdict.hpp
     title: src/data_structure/intdict.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
   - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':question:'
@@ -75,7 +75,7 @@ data:
   attributes:
     links:
     - https://yukicoder.me/problems/no/981
-  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
+  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -282,7 +282,7 @@ data:
     \ n);\n    }\n    constexpr modint inv() const\n    {\n        return pow(mod()\
     \ - 2);\n    }\n    static modint sinv(u32 n)\n    {\n        static Vec<modint>\
     \ is{1, 1};\n        for (u32 i = (u32)is.size(); i <= n; i++) {\n           \
-    \ is.push_back(-is[mod % i] * (mod() / i));\n        }\n        return is[n];\n\
+    \ is.push_back(-is[mod() % i] * (mod() / i));\n        }\n        return is[n];\n\
     \    }\n    static modint fact(u32 n)\n    {\n        static Vec<modint> fs{1,\
     \ 1};\n        for (u32 i = (u32)fs.size(); i <= n; i++) {\n            fs.push_back(fs.back()\
     \ * i);\n        }\n        return fs[n];\n    }\n    static modint ifact(u32\
@@ -536,7 +536,7 @@ data:
   isVerificationFile: false
   path: verifications/math/mod_nthroot.yuki981.cpp
   requiredBy: []
-  timestamp: '2021-05-23 15:28:30+09:00'
+  timestamp: '2021-05-23 19:52:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verifications/math/mod_nthroot.yuki981.cpp

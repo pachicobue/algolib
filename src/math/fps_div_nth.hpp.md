@@ -62,7 +62,7 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
+  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -269,7 +269,7 @@ data:
     \ n);\n    }\n    constexpr modint inv() const\n    {\n        return pow(mod()\
     \ - 2);\n    }\n    static modint sinv(u32 n)\n    {\n        static Vec<modint>\
     \ is{1, 1};\n        for (u32 i = (u32)is.size(); i <= n; i++) {\n           \
-    \ is.push_back(-is[mod % i] * (mod() / i));\n        }\n        return is[n];\n\
+    \ is.push_back(-is[mod() % i] * (mod() / i));\n        }\n        return is[n];\n\
     \    }\n    static modint fact(u32 n)\n    {\n        static Vec<modint> fs{1,\
     \ 1};\n        for (u32 i = (u32)fs.size(); i <= n; i++) {\n            fs.push_back(fs.back()\
     \ * i);\n        }\n        return fs[n];\n    }\n    static modint ifact(u32\
@@ -413,8 +413,8 @@ data:
     \ - M + 1), N - M + 1).rev();\n    }\n    FPS rem(const FPS& g) const\n    {\n\
     \        return (*this) - g * quot(g);\n    }\nprivate:\n    int lsb() const\n\
     \    {\n        return lsb(deg());\n    }\n    int lsb(int sz) const\n    {\n\
-    \        for (int p : rep(sz + 1)) {\n            if ((*this)[p]() != 0) { return\
-    \ p; }\n        }\n        return -1;\n    }\n    using submint1 = modint<469762049,\
+    \        for (int p : rep(sz + 1)) {\n            if ((*this)[p].val() != 0) {\
+    \ return p; }\n        }\n        return -1;\n    }\n    using submint1 = modint<469762049,\
     \ 3, 26>;\n    using submint2 = modint<167772161, 3, 25>;\n    using submint3\
     \ = modint<754974721, 11, 24>;\n    template<typename submint>\n    static void\
     \ trans(Vec<submint>& as, int lg, bool rev)\n    {\n        const int N = 1 <<\
@@ -457,7 +457,7 @@ data:
     \ * (x3 - k0) - ip2 * k1).val();\n        return p1p2 * k2 + p1 * k1 + k0;\n \
     \   }\n};\ntemplate<typename mint, typename I>\nmint divNth(FPS<mint> f, FPS<mint>\
     \ g, I N)\n{\n    if (f.size() == 0) { return 0; }\n    const int n = g.size();\n\
-    \    int mi = 0;\n    mint a;\n    for (int i : rep(n)) {\n        if (g[i]()\
+    \    int mi = 0;\n    mint a;\n    for (int i : rep(n)) {\n        if (g[i].val()\
     \ != 0) {\n            mi = i;\n            a = g[i];\n            break;\n  \
     \      }\n    }\n    g >>= mi;\n    const mint ia = a.inv();\n    for (auto& c\
     \ : f) {\n        c *= ia;\n    }\n    for (auto& c : g) {\n        c *= ia;\n\
@@ -474,11 +474,11 @@ data:
   code: "#pragma once\n#include \"fps.hpp\"\ntemplate<typename mint, typename I>\n\
     mint divNth(FPS<mint> f, FPS<mint> g, I N)\n{\n    if (f.size() == 0) { return\
     \ 0; }\n    const int n = g.size();\n    int mi = 0;\n    mint a;\n    for (int\
-    \ i : rep(n)) {\n        if (g[i]() != 0) {\n            mi = i;\n           \
-    \ a = g[i];\n            break;\n        }\n    }\n    g >>= mi;\n    const mint\
-    \ ia = a.inv();\n    for (auto& c : f) {\n        c *= ia;\n    }\n    for (auto&\
-    \ c : g) {\n        c *= ia;\n    }\n    FPS p = f.quot(g);\n    f -= g * p;\n\
-    \    N += mi;\n    if (N < 0) { return 0; }\n    const mint offset = p.at(N);\n\
+    \ i : rep(n)) {\n        if (g[i].val() != 0) {\n            mi = i;\n       \
+    \     a = g[i];\n            break;\n        }\n    }\n    g >>= mi;\n    const\
+    \ mint ia = a.inv();\n    for (auto& c : f) {\n        c *= ia;\n    }\n    for\
+    \ (auto& c : g) {\n        c *= ia;\n    }\n    FPS p = f.quot(g);\n    f -= g\
+    \ * p;\n    N += mi;\n    if (N < 0) { return 0; }\n    const mint offset = p.at(N);\n\
     \    for (; N > 0; N >>= 1) {\n        FPS mg = g;\n        for (int i = 1; i\
     \ < n; i += 2) {\n            mg[i] = -mg[i];\n        }\n        const auto fmg\
     \ = f * mg;\n        const auto gmg = g * mg;\n        f.clear(), g.clear();\n\
@@ -508,7 +508,7 @@ data:
   path: src/math/fps_div_nth.hpp
   requiredBy:
   - src/math/nth_term.hpp
-  timestamp: '2021-05-23 15:00:11+09:00'
+  timestamp: '2021-05-23 19:52:02+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verifications/math/fps.div_nth.test.cpp
