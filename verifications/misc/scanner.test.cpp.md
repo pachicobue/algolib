@@ -42,7 +42,7 @@ data:
     title: src/misc/common/xoshiro.hpp
   - icon: ':heavy_check_mark:'
     path: src/misc/scanner.hpp
-    title: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
