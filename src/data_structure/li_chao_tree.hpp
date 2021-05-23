@@ -1,6 +1,7 @@
 #pragma once
 #include "../misc/common.hpp"
-template<typename T> class LiChaoTree
+template<typename T>
+class LiChaoTree
 {
     using L = Pair<T, T>;
     static constexpr L NIL = {0, INF<T>};
@@ -57,10 +58,13 @@ public:
     Pair<bool, L> minLine(const T x) const
     {
         T lx = m_xmin, rx = m_xsup;
-        L ans = NIL;
+        Pair<bool, L> ans = {false, NIL};
         for (int i = 0; i != -1;) {
             const auto& pl = m_nodes[i].line;
-            if (comp(pl, ans, x)) { ans = pl; }
+            if ((not ans.first) or comp(pl, ans.second, x)) {
+                ans.first = true;
+                ans.second = pl;
+            }
             const auto& [li, ri] = m_nodes[i].sons;
             const T mx = (lx + rx) / 2;
             if (x < mx) {
@@ -71,7 +75,7 @@ public:
                 lx = mx;
             }
         }
-        return {ans != NIL, ans};
+        return ans;
     }
 
 private:
@@ -84,16 +88,16 @@ private:
             const bool runder = comp(l, pl, rx);
             const bool munder = comp(l, pl, mx);
             if (munder) { std::swap(l, m_nodes[i].line); }
-            if (rx - lx == 1) { break; }
             if (lunder == runder) { break; }
-            auto& [li, ri] = m_nodes[i].sons;
+            int dir = (lunder == munder ? 1 : 0);
+            if (rx - lx == 1) { break; }
+            int nind = m_nodes[i].sons[dir];
+            if (nind == -1) { nind = m_nodes[i].sons[dir] = alloc(); }
+            i = nind;
+            if (rx - lx == 1) { break; }
             if (lunder == munder) {
-                if (ri == -1) { ri = alloc(); }
-                i = ri;
                 lx = mx;
             } else {
-                if (li == -1) { li = alloc(); }
-                i = li;
                 rx = mx;
             }
         }
