@@ -1,6 +1,7 @@
 #pragma once
 #include "../misc/common.hpp"
-template<int block_size> class Mo
+template<int block_size>
+class Mo
 {
 public:
     Mo(const Vec<int>& xs, const Vec<int>& ys)
@@ -33,6 +34,7 @@ public:
         }
         return i;
     }
+
 private:
     int m_ii = 0;
     int m_x = 0, m_y = 0;

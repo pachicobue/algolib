@@ -1,2 +1,2 @@
-exclude: ['tools', 'src/']
-title: pachicobue's library
+exclude: ['tools', 'dummy_headers']
+title: Pachico's Library
