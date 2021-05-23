@@ -1,6 +1,0 @@
-{
-    "python.pythonPath": "/usr/sbin/python",
-    "python.analysis.extraPaths": [
-        "expander",
-    ]
-}
