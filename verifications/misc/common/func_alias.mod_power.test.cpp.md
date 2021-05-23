@@ -42,7 +42,7 @@ data:
     title: src/misc/common/xoshiro.hpp
   - icon: ':heavy_check_mark:'
     path: src/misc/printer.hpp
-    title: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   - icon: ':heavy_check_mark:'
     path: src/misc/scanner.hpp
     title: src/misc/scanner.hpp
