@@ -1,10 +1,10 @@
 #pragma once
 #include "common.hpp"
 #pragma region Printer
-class printer
+class Printer
 {
 public:
-    printer(Ostream& os = std::cout) : m_os{os}
+    Printer(Ostream& os = std::cout) : m_os{os}
     {
         m_os << std::fixed << std::setprecision(15);
     }
@@ -55,5 +55,5 @@ private:
     }
     Ostream& m_os;
 };
-printer out;
+Printer out;
 #pragma endregion

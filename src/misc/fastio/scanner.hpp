@@ -1,10 +1,10 @@
 #pragma once
 #include "../common.hpp"
 #pragma region FastIO Scanner
-class scanner
+class Scanner
 {
 public:
-    scanner() {}
+    Scanner() {}
     template<typename T>
     T val()
     {
@@ -59,10 +59,28 @@ public:
     {
         return std::tuple<Args...>{val<Args>(offsets)...};
     }
+
 private:
     static inline char getchar()
     {
         return getchar_unlocked();
     }
 } in;
+template<>
+char Scanner::val()
+{
+    return Scanner::getchar();
+}
+template<>
+Str Scanner::val()
+{
+    Str ans;
+    while (true) {
+        const char c = Scanner::getchar();
+        if (c == ' ' or c == '\n' or c == EOF) { break; }
+        ans.push_back(c);
+    }
+    return ans;
+}
+
 // #pragma endregion

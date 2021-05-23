@@ -1,10 +1,10 @@
 #pragma once
 #include "../misc/common.hpp"
 #pragma region Scanner
-class scanner
+class Scanner
 {
 public:
-    scanner(Istream& is = std::cin) : m_is{is}
+    Scanner(Istream& is = std::cin) : m_is{is}
     {
         m_is.tie(nullptr)->sync_with_stdio(false);
     }
@@ -49,8 +49,9 @@ public:
     {
         return Tup<Args...>{val<Args>(offsets)...};
     }
+
 private:
     Istream& m_is;
 };
-scanner in;
+Scanner in;
 #pragma endregion

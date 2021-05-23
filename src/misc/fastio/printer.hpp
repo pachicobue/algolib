@@ -1,10 +1,10 @@
 #pragma once
 #include "../common.hpp"
 #pragma region FastIO Printer
-class printer
+class Printer
 {
 public:
-    printer() {}
+    Printer() {}
     template<typename... Args>
     int operator()(const Args&... args)
     {
