@@ -3,12 +3,14 @@ title: Disjoint Sparse Table
 documentation_of: //src/data_structure/ds_table.hpp
 ---
 
-## Disjoint Sparse Table
+## 概要
 
 半群 $(T, \ast)$ 上の要素数 $N$ の 数列 $A = \lbrack A_0, A_1, \dots , A_{N-1}\rbrack$ について、  
 以下の操作が $\mathrm{O}(1)$ でできる。
 
 - 範囲総積取得: $A_l \ast \dots \ast A_{r-1}$
+
+## I/F
 
 ### コンストラクタ
 
@@ -18,11 +20,12 @@ ds_table<SemiGroup> ds(const Vec<T>& A)
 
 数列 $A$ で初期化する
 
+#### 制約
+
 テンプレート引数`SemiGroup`は以下のようなフィールドを持つクラス
-
 - `T`:型
-- `operator()(T x1, T x2)`: $x_1 \ast xx_2$
-
+- `operator()(T x1, T x2)`: $x_1 \ast x_2$
+  
 ```cpp
 struct SemiGroup
 {
@@ -39,11 +42,11 @@ struct SemiGroup
 
 ### add
 
-$A _ i$ に $x$ を加算
-
 ```cpp
 void bit.add(int i, const T& x)
 ```
+
+$A_i$ に $x$ を加算
 
 #### 計算量
 
@@ -51,11 +54,11 @@ void bit.add(int i, const T& x)
 
 ### fold
 
-$A_l \ast \dots \ast A_{r-1}$ を取得
-
 ```cpp
 T ds.fold(int l, int r)
 ```
+
+$A_l \ast \dots \ast A_{r-1}$ を取得
 
 #### 計算量
 
