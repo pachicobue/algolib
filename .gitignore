@@ -7,6 +7,9 @@ tools/verifier/__pycache__
 verifications/a.exe
 verifications/cases
 
+# dummy_headers
+dummy_headers
+
 # ccls
 .ccls-cache
 
