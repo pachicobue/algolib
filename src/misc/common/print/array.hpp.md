@@ -8,10 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/misc/common/print/array.hpp\"\n#include <array>\n#include\
-    \ <iostream>\ntemplate<typename T, int n>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const std::array<T, n>& vs)\n{\n    os << \"[\";\n    for (const auto& v\
-    \ : vs) { os << v << \",\"; }\n    return (os << \"]\" << std::endl);\n}\n"
+  bundledCode: "#include <array>\n#include <iostream>\ntemplate<typename T, int n>\n\
+    std::ostream& operator<<(std::ostream& os, const std::array<T, n>& vs)\n{\n  \
+    \  os << \"[\";\n    for (const auto& v : vs) { os << v << \",\"; }\n    return\
+    \ (os << \"]\" << std::endl);\n}\n"
   code: "#pragma once\n#include <array>\n#include <iostream>\ntemplate<typename T,\
     \ int n>\nstd::ostream& operator<<(std::ostream& os, const std::array<T, n>& vs)\n\
     {\n    os << \"[\";\n    for (const auto& v : vs) { os << v << \",\"; }\n    return\

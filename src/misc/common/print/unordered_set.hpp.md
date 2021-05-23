@@ -8,11 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/misc/common/print/unordered_set.hpp\"\n#include <iostream>\n\
-    #include <unordered_set>\ntemplate<typename... Ts>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const std::unordered_set<Ts...>& vs)\n{\n    os << \"[\";\n    for (const\
-    \ auto& v : vs) { os << v << \",\"; }\n    return (os << \"]\" << std::endl);\n\
-    }\n"
+  bundledCode: "#include <iostream>\n#include <unordered_set>\ntemplate<typename...\
+    \ Ts>\nstd::ostream& operator<<(std::ostream& os, const std::unordered_set<Ts...>&\
+    \ vs)\n{\n    os << \"[\";\n    for (const auto& v : vs) { os << v << \",\"; }\n\
+    \    return (os << \"]\" << std::endl);\n}\n"
   code: "#pragma once\n#include <iostream>\n#include <unordered_set>\ntemplate<typename...\
     \ Ts>\nstd::ostream& operator<<(std::ostream& os, const std::unordered_set<Ts...>&\
     \ vs)\n{\n    os << \"[\";\n    for (const auto& v : vs) { os << v << \",\"; }\n\

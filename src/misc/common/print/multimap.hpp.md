@@ -8,11 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/misc/common/print/multimap.hpp\"\n#include <iostream>\n\
-    #include <map>\ntemplate<typename... Ts>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const std::multimap<Ts...>& v)\n{\n    os << \"[\";\n    for (const auto&\
-    \ [k, v] : v) { os << \"(\" << k << \" -> \" << v << \"),\"; }\n    return (os\
-    \ << \"]\" << std::endl);\n}\n"
+  bundledCode: "#include <iostream>\n#include <map>\ntemplate<typename... Ts>\nstd::ostream&\
+    \ operator<<(std::ostream& os, const std::multimap<Ts...>& v)\n{\n    os << \"\
+    [\";\n    for (const auto& [k, v] : v) { os << \"(\" << k << \" -> \" << v <<\
+    \ \"),\"; }\n    return (os << \"]\" << std::endl);\n}\n"
   code: "#pragma once\n#include <iostream>\n#include <map>\ntemplate<typename... Ts>\n\
     std::ostream& operator<<(std::ostream& os, const std::multimap<Ts...>& v)\n{\n\
     \    os << \"[\";\n    for (const auto& [k, v] : v) { os << \"(\" << k << \" ->\

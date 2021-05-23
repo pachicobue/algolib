@@ -3,55 +3,55 @@ data:
   libraryCategories:
   - name: src/data_structure
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/data_structure/ds_table.hpp
       title: Disjoint Sparse Table
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/data_structure/dsu.hpp
       title: src/data_structure/dsu.hpp
     - icon: ':warning:'
       path: src/data_structure/dualseg.hpp
       title: Dual Segment Tree
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/data_structure/fenwick.hpp
       title: Fenwick Tree
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/data_structure/intdict.hpp
       title: src/data_structure/intdict.hpp
     - icon: ':warning:'
       path: src/data_structure/intset.hpp
       title: src/data_structure/intset.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/data_structure/lazyseg.hpp
       title: Lazy Segment Tree
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/data_structure/li_chao_tree.hpp
       title: Li Chao Tree
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/data_structure/mo.hpp
       title: Mo's Algorithm
     - icon: ':warning:'
       path: src/data_structure/monotonic_cht.hpp
-      title: "\u533A\u9593\u3092map\u3067\u7BA1\u7406\u3059\u308B\u3084\u3064"
+      title: "\u5358\u8ABF\u6027\u306E\u3042\u308B Convex Hull Trick"
     - icon: ':warning:'
       path: src/data_structure/rbstree.hpp
       title: src/data_structure/rbstree.hpp
     - icon: ':warning:'
       path: src/data_structure/segments.hpp
       title: src/data_structure/segments.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/data_structure/segtree.hpp
       title: src/data_structure/segtree.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/data_structure/static_rmq.hpp
       title: src/data_structure/static_rmq.hpp
     - icon: ':warning:'
       path: src/data_structure/static_rsq.hpp
       title: src/data_structure/static_rsq.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/data_structure/swag.hpp
       title: src/data_structure/swag.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/data_structure/wavelet.hpp
       title: src/data_structure/wavelet.hpp
   - name: src/flow
@@ -64,7 +64,7 @@ data:
       title: src/flow/mincost_flow.hpp
   - name: src/graph
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/bcc.hpp
       title: src/graph/bcc.hpp
     - icon: ':warning:'
@@ -73,31 +73,31 @@ data:
     - icon: ':warning:'
       path: src/graph/centroid_decomp.hpp
       title: src/graph/centroid_decomp.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/diameter.hpp
       title: src/graph/diameter.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/dijkstra.hpp
       title: src/graph/dijkstra.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/graph/graph.hpp
       title: src/graph/graph.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/hld.hpp
       title: src/graph/hld.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/graph/lca.hpp
       title: src/graph/lca.hpp
     - icon: ':warning:'
       path: src/graph/level_ancestor.hpp
       title: src/graph/level_ancestor.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/lowlink.hpp
       title: src/graph/lowlink.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/graph/scc.hpp
       title: src/graph/scc.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/graph/top_sort.hpp
       title: src/graph/top_sort.hpp
     - icon: ':warning:'
@@ -122,97 +122,82 @@ data:
       title: src/linear/matrix.hpp
   - name: src/math
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/and_convolution.hpp
       title: src/math/and_convolution.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/math/berlekamp_massey.hpp
       title: src/math/berlekamp_massey.hpp
-    - icon: ':warning:'
-      path: src/math/common.hpp
-      title: src/math/common.hpp
     - icon: ':warning:'
       path: src/math/complex.hpp
       title: src/math/complex.hpp
     - icon: ':warning:'
       path: src/math/divisors.hpp
       title: src/math/divisors.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/divisors_moebius.hpp
       title: src/math/divisors_moebius.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/divisors_zeta.hpp
       title: src/math/divisors_zeta.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/extgcd.hpp
       title: src/math/extgcd.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/factor_table.hpp
       title: src/math/factor_table.hpp
     - icon: ':warning:'
       path: src/math/fft.hpp
       title: src/math/fft.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/math/fps.hpp
       title: src/math/fps.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/math/fps_div_nth.hpp
       title: src/math/fps_div_nth.hpp
     - icon: ':warning:'
       path: src/math/garner.hpp
       title: src/math/garner.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/gcd_convolution.hpp
       title: src/math/gcd_convolution.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/is_prime.hpp
       title: src/math/is_prime.hpp
     - icon: ':warning:'
       path: src/math/lagrange_interpolation.hpp
       title: src/math/lagrange_interpolation.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/mod_nthroot.hpp
       title: src/math/mod_nthroot.hpp
-    - icon: ':warning:'
-      path: src/math/mod_pow.hpp
-      title: src/math/mod_pow.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/mod_sqrt.hpp
       title: src/math/mod_sqrt.hpp
-    - icon: ':warning:'
-      path: src/math/moddint.hpp
-      title: src/math/moddint.hpp
-    - icon: ':warning:'
-      path: src/math/moddint64.hpp
-      title: src/math/moddint64.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/math/modint.hpp
       title: src/math/modint.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/modint64.hpp
       title: src/math/modint64.hpp
     - icon: ':warning:'
       path: src/math/moebius_table.hpp
       title: src/math/moebius_table.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/multiplicative_sum.hpp
       title: src/math/multiplicative_sum.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/math/nth_term.hpp
       title: src/math/nth_term.hpp
     - icon: ':warning:'
       path: src/math/or_convolution.hpp
       title: src/math/or_convolution.hpp
-    - icon: ':warning:'
-      path: src/math/prime_accum.hpp
-      title: src/math/prime_accum.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/prime_enumerate.hpp
       title: src/math/prime_enumerate.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/prime_factors.hpp
       title: src/math/prime_factors.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/prime_powsum.hpp
       title: src/math/prime_powsum.hpp
     - icon: ':warning:'
@@ -224,51 +209,51 @@ data:
     - icon: ':warning:'
       path: src/math/seg_sieve.hpp
       title: src/math/seg_sieve.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/set_hadamard.hpp
       title: src/math/set_hadamard.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/set_moebius.hpp
       title: src/math/set_moebius.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/set_zeta.hpp
       title: src/math/set_zeta.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/xor_convolution.hpp
       title: src/math/xor_convolution.hpp
-    - icon: ':warning:'
-      path: src/math/zetainv_sum.hpp
-      title: src/math/zetainv_sum.hpp
   - name: src/misc/common
     pages:
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common/bit_ops.hpp
       title: src/misc/common/bit_ops.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common/constants.hpp
       title: src/misc/common/constants.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common/fixpoint.hpp
       title: src/misc/common/fixpoint.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common/func_alias.hpp
       title: src/misc/common/func_alias.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
+      path: src/misc/common/macros.hpp
+      title: src/misc/common/macros.hpp
+    - icon: ':question:'
       path: src/misc/common/nd_vec.hpp
       title: src/misc/common/nd_vec.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common/range.hpp
       title: src/misc/common/range.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common/rng.hpp
       title: src/misc/common/rng.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common/show.hpp
       title: src/misc/common/show.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common/type_alias.hpp
       title: src/misc/common/type_alias.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common/xoshiro.hpp
       title: src/misc/common/xoshiro.hpp
   - name: src/misc/common/print
@@ -279,7 +264,7 @@ data:
     - icon: ':warning:'
       path: src/misc/common/print/deque.hpp
       title: src/misc/common/print/deque.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common/print/int128_t.hpp
       title: src/misc/common/print/int128_t.hpp
     - icon: ':warning:'
@@ -326,27 +311,27 @@ data:
       title: src/misc/common/print/vector.hpp
   - name: src/misc
     pages:
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/common.hpp
       title: src/misc/common.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/misc/printer.hpp
       title: src/misc/printer.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/misc/scanner.hpp
       title: src/misc/scanner.hpp
     - icon: ':warning:'
       path: src/misc/stopwatch.hpp
       title: src/misc/stopwatch.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/zipper.hpp
       title: src/misc/zipper.hpp
   - name: src/misc/fastio
     pages:
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/fastio/printer.hpp
       title: src/misc/fastio/printer.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: src/misc/fastio/scanner.hpp
       title: src/misc/fastio/scanner.hpp
   - name: src/string
@@ -366,6 +351,133 @@ data:
     - icon: ':warning:'
       path: src/string/z_algorithm.hpp
       title: src/string/z_algorithm.hpp
-  verificationCategories: []
+  - name: verifications/math
+    pages:
+    - icon: ':warning:'
+      path: verifications/math/mod_nthroot.yuki981.cpp
+      title: verifications/math/mod_nthroot.yuki981.cpp
+  verificationCategories:
+  - name: verifications/data_structure
+    pages:
+    - icon: ':x:'
+      path: verifications/data_structure/ds_table.test.cpp
+      title: verifications/data_structure/ds_table.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/data_structure/fenwick.test.cpp
+      title: verifications/data_structure/fenwick.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/data_structure/intdict.test.cpp
+      title: verifications/data_structure/intdict.test.cpp
+    - icon: ':x:'
+      path: verifications/data_structure/lazyseg.test.cpp
+      title: verifications/data_structure/lazyseg.test.cpp
+    - icon: ':x:'
+      path: verifications/data_structure/li_chao_tree.line.test.cpp
+      title: verifications/data_structure/li_chao_tree.line.test.cpp
+    - icon: ':x:'
+      path: verifications/data_structure/li_chao_tree.segment.test.cpp
+      title: verifications/data_structure/li_chao_tree.segment.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/data_structure/mo.test.cpp
+      title: verifications/data_structure/mo.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/data_structure/segtree.test.cpp
+      title: verifications/data_structure/segtree.test.cpp
+    - icon: ':x:'
+      path: verifications/data_structure/static_rmq.test.cpp
+      title: verifications/data_structure/static_rmq.test.cpp
+    - icon: ':x:'
+      path: verifications/data_structure/swag.test.cpp
+      title: verifications/data_structure/swag.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/data_structure/unionfind.test.cpp
+      title: verifications/data_structure/unionfind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/data_structure/wavelet.test.cpp
+      title: verifications/data_structure/wavelet.test.cpp
+  - name: verifications/graph
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verifications/graph/bcc.test.cpp
+      title: verifications/graph/bcc.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/graph/diameter.test.cpp
+      title: verifications/graph/diameter.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/graph/dijkstra.test.cpp
+      title: verifications/graph/dijkstra.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/graph/hld.test.cpp
+      title: verifications/graph/hld.test.cpp
+    - icon: ':x:'
+      path: verifications/graph/lca.test.cpp
+      title: verifications/graph/lca.test.cpp
+    - icon: ':x:'
+      path: verifications/graph/scc.test.cpp
+      title: verifications/graph/scc.test.cpp
+  - name: verifications/math
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verifications/math/and_convolution.test.cpp
+      title: verifications/math/and_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/math/berlekamp_massey.test.cpp
+      title: verifications/math/berlekamp_massey.test.cpp
+    - icon: ':x:'
+      path: verifications/math/fps.convolution.test.cpp
+      title: verifications/math/fps.convolution.test.cpp
+    - icon: ':x:'
+      path: verifications/math/fps.convolution1000000007.test.cpp
+      title: verifications/math/fps.convolution1000000007.test.cpp
+    - icon: ':x:'
+      path: verifications/math/fps.div_nth.test.cpp
+      title: verifications/math/fps.div_nth.test.cpp
+    - icon: ':x:'
+      path: verifications/math/fps.exp.test.cpp
+      title: verifications/math/fps.exp.test.cpp
+    - icon: ':x:'
+      path: verifications/math/fps.inv.test.cpp
+      title: verifications/math/fps.inv.test.cpp
+    - icon: ':x:'
+      path: verifications/math/fps.log.test.cpp
+      title: verifications/math/fps.log.test.cpp
+    - icon: ':x:'
+      path: verifications/math/fps.nth.test.cpp
+      title: verifications/math/fps.nth.test.cpp
+    - icon: ':x:'
+      path: verifications/math/fps.pow.test.cpp
+      title: verifications/math/fps.pow.test.cpp
+    - icon: ':x:'
+      path: verifications/math/fps.tshift.test.cpp
+      title: verifications/math/fps.tshift.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/math/gcd_convolution.test.cpp
+      title: verifications/math/gcd_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/math/mod_nthroot.test.cpp
+      title: verifications/math/mod_nthroot.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/math/mod_sqrt.test.cpp
+      title: verifications/math/mod_sqrt.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/math/multiplicative_sum.test.cpp
+      title: verifications/math/multiplicative_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/math/prime_factors.test.cpp
+      title: verifications/math/prime_factors.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/math/prime_powsum.test.cpp
+      title: verifications/math/prime_powsum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/math/xor_convolution.test.cpp
+      title: verifications/math/xor_convolution.test.cpp
+  - name: verifications/misc
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verifications/misc/fastio.test.cpp
+      title: verifications/misc/fastio.test.cpp
+    - icon: ':x:'
+      path: verifications/misc/io.test.cpp
+      title: verifications/misc/io.test.cpp
 layout: toppage
 ---

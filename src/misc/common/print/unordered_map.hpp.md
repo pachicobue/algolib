@@ -8,11 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/misc/common/print/unordered_map.hpp\"\n#include <iostream>\n\
-    #include <unordered_map>\ntemplate<typename... Ts>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const std::unordered_map<Ts...>& vs)\n{\n    os << \"[\";\n    for (const\
-    \ auto& [k, v] : vs) { os << \"(\" << k << \"->\" << v << \"),\"; }\n    return\
-    \ (os << \"]\" << std::endl);\n}\n"
+  bundledCode: "#include <unordered_map>\n#include <iostream>\ntemplate<typename...\
+    \ Ts>\nstd::ostream& operator<<(std::ostream& os, const std::unordered_map<Ts...>&\
+    \ vs)\n{\n    os << \"[\";\n    for (const auto& [k, v] : vs) { os << \"(\" <<\
+    \ k << \"->\" << v << \"),\"; }\n    return (os << \"]\" << std::endl);\n}\n"
   code: "#pragma once\n#include <iostream>\n#include <unordered_map>\ntemplate<typename...\
     \ Ts>\nstd::ostream& operator<<(std::ostream& os, const std::unordered_map<Ts...>&\
     \ vs)\n{\n    os << \"[\";\n    for (const auto& [k, v] : vs) { os << \"(\" <<\

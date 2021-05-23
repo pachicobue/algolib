@@ -8,11 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/misc/common/print/stack.hpp\"\n#include <iostream>\n\
-    #include <stack>\ntemplate<typename... Ts>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const std::stack<Ts...>& vs)\n{\n    auto q = vs;\n    os << \"[\";\n  \
-    \  while (not q.empty()) { os << q.top() << \",\", q.pop(); }\n    return os <<\
-    \ \"]\\n\";\n}\n"
+  bundledCode: "#include <iostream>\n#include <stack>\ntemplate<typename... Ts>\n\
+    std::ostream& operator<<(std::ostream& os, const std::stack<Ts...>& vs)\n{\n \
+    \   auto q = vs;\n    os << \"[\";\n    while (not q.empty()) { os << q.top()\
+    \ << \",\", q.pop(); }\n    return os << \"]\\n\";\n}\n"
   code: "#pragma once\n#include <iostream>\n#include <stack>\ntemplate<typename...\
     \ Ts>\nstd::ostream& operator<<(std::ostream& os, const std::stack<Ts...>& vs)\n\
     {\n    auto q = vs;\n    os << \"[\";\n    while (not q.empty()) { os << q.top()\

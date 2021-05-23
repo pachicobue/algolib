@@ -8,10 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/misc/common/print/deque.hpp\"\n#include <deque>\n#include\
-    \ <iostream>\ntemplate<typename... Ts>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const std::deque<Ts...>& vs)\n{\n    os << \"[\";\n    for (const auto&\
-    \ v : vs) { os << v << \",\"; }\n    return (os << \"]\" << std::endl);\n}\n"
+  bundledCode: "#include <iostream>\n#include <deque>\ntemplate<typename... Ts>\n\
+    std::ostream& operator<<(std::ostream& os, const std::deque<Ts...>& vs)\n{\n \
+    \   os << \"[\";\n    for (const auto& v : vs) { os << v << \",\"; }\n    return\
+    \ (os << \"]\" << std::endl);\n}\n"
   code: "#pragma once\n#include <deque>\n#include <iostream>\ntemplate<typename...\
     \ Ts>\nstd::ostream& operator<<(std::ostream& os, const std::deque<Ts...>& vs)\n\
     {\n    os << \"[\";\n    for (const auto& v : vs) { os << v << \",\"; }\n    return\

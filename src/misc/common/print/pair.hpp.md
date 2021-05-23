@@ -8,9 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: '#line 2 "src/misc/common/print/pair.hpp"
-
-    #include <iostream>
+  bundledCode: '#include <iostream>
 
     #include <utility>
 
