@@ -152,7 +152,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/and_convolution.hpp
     title: src/math/and_convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/berlekamp_massey.hpp
     title: src/math/berlekamp_massey.hpp
   - icon: ':warning:'
@@ -176,10 +176,10 @@ data:
   - icon: ':warning:'
     path: src/math/fft.hpp
     title: src/math/fft.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
   - icon: ':warning:'
@@ -200,7 +200,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/mod_sqrt.hpp
     title: src/math/mod_sqrt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
   - icon: ':heavy_check_mark:'
@@ -212,7 +212,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/multiplicative_sum.hpp
     title: src/math/multiplicative_sum.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/nth_term.hpp
     title: src/math/nth_term.hpp
   - icon: ':warning:'
@@ -345,31 +345,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/berlekamp_massey.test.cpp
     title: verifications/math/berlekamp_massey.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.convolution.test.cpp
     title: verifications/math/fps.convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.convolution1000000007.test.cpp
     title: verifications/math/fps.convolution1000000007.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.div_nth.test.cpp
     title: verifications/math/fps.div_nth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.exp.test.cpp
     title: verifications/math/fps.exp.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.inv.test.cpp
     title: verifications/math/fps.inv.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.log.test.cpp
     title: verifications/math/fps.log.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.nth.test.cpp
     title: verifications/math/fps.nth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.pow.test.cpp
     title: verifications/math/fps.pow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.tshift.test.cpp
     title: verifications/math/fps.tshift.test.cpp
   - icon: ':heavy_check_mark:'

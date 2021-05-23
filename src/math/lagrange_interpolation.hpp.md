@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
   - icon: ':question:'
@@ -53,7 +53,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
+  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -283,42 +283,38 @@ data:
     \ ans;\n    }\n    mint eval(const mint& x) const\n    {\n        mint ans = 0;\n\
     \        mint power = 1;\n        for (int i : rep(size())) {\n            ans\
     \ += power * (*this)[i];\n            power *= x;\n        }\n        return ans;\n\
-    \    }\n    mint& operator[](const int n)\n    {\n        if (size() < n + 1)\
-    \ { resize(n + 1); }\n        return Vec<mint>::operator[](n);\n    }\n    const\
-    \ mint& operator[](const int n) const\n    {\n        return Vec<mint>::operator[](n);\n\
-    \    }\n    mint at(const int n) const\n    {\n        return (n < size() ? (*this)[n]\
-    \ : mint{0});\n    }\n    FPS operator-() const\n    {\n        FPS ans = *this;\n\
-    \        for (auto& v : ans) {\n            v = -v;\n        }\n        return\
-    \ ans;\n    }\n    FPS& operator+=(const FPS& f)\n    {\n        for (int i :\
-    \ rep(f.size())) {\n            (*this)[i] += f[i];\n        }\n        return\
-    \ *this;\n    }\n    FPS& operator-=(const FPS& f)\n    {\n        for (int i\
-    \ : rep(f.size())) {\n            (*this)[i] -= f[i];\n        }\n        return\
-    \ *this;\n    }\n    FPS& operator*=(const FPS& f)\n    {\n        return (*this)\
-    \ = (*this) * f;\n    }\n    FPS& operator<<=(const int s)\n    {\n        return\
-    \ *this = (*this << s);\n    }\n    FPS& operator>>=(const int s)\n    {\n   \
-    \     return *this = (*this >> s);\n    }\n    FPS operator+(const FPS& f) const\n\
-    \    {\n        return FPS(*this) += f;\n    }\n    FPS operator-(const FPS& f)\
-    \ const\n    {\n        return FPS(*this) -= f;\n    }\n    FPS operator*(const\
-    \ FPS& f) const\n    {\n        return mult(f, size() + f.size() - 1);\n    }\n\
-    \    FPS operator<<(const int s) const\n    {\n        FPS ans(size() + s);\n\
-    \        for (int i = 0; i < size(); i++) {\n            ans[i + s] = (*this)[i];\n\
-    \        }\n        return ans;\n    }\n    FPS operator>>(const int s) const\n\
-    \    {\n        FPS ans;\n        for (int i : range(s, size())) {\n         \
-    \   ans[i - s] = (*this)[i];\n        }\n        return ans;\n    }\n    friend\
-    \ Ostream& operator<<(Ostream& os, const FPS& f)\n    {\n        return os <<\
-    \ static_cast<Vec<mint>>(f);\n    }\n    FPS derivative() const\n    {\n     \
-    \   FPS ans;\n        for (int i = 1; i < size(); i++) {\n            ans[i -\
-    \ 1] = (*this)[i] * i;\n        }\n        return ans;\n    }\n    FPS integral()\
-    \ const\n    {\n        FPS ans;\n        for (int i = 1; i <= size(); i++) {\n\
-    \            ans[i] = (*this)[i - 1] * mint::sinv(i);\n        }\n        return\
-    \ ans;\n    }\n    FPS mult(const FPS& f, int sz) const\n    {\n        if (sz\
-    \ == 0) { return FPS{}; }\n        const int N = std::min(size(), sz) + std::min(f.size(),\
-    \ sz) - 1;\n        if (N <= 16) {\n            FPS ans(sz);\n            for\
-    \ (int i = 0; i < std::min(size(), sz); i++) {\n                for (int j = 0;\
-    \ j < f.size() and i + j < sz; j++) {\n                    ans[i + j] += (*this)[i]\
-    \ * f[j];\n                }\n            }\n            return ans;\n       \
-    \ } else if (N <= (1 << mint::max2p())) {\n            auto ans = conv<mint>(*this,\
-    \ f, sz);\n            return ans;\n        } else {\n            const auto cs1\
+    \    }\n    mint& operator[](const int n)\n    {\n        if (deg() < n) { resize(n\
+    \ + 1); }\n        return Vec<mint>::operator[](n);\n    }\n    const mint& operator[](const\
+    \ int n) const\n    {\n        return Vec<mint>::operator[](n);\n    }\n    mint\
+    \ at(const int n) const\n    {\n        return (n < size() ? (*this)[n] : mint{0});\n\
+    \    }\n    FPS operator-() const\n    {\n        FPS ans = *this;\n        for\
+    \ (auto& v : ans) {\n            v = -v;\n        }\n        return ans;\n   \
+    \ }\n    FPS& operator+=(const FPS& f)\n    {\n        for (int i : rep(f.size()))\
+    \ {\n            (*this)[i] += f[i];\n        }\n        return *this;\n    }\n\
+    \    FPS& operator-=(const FPS& f)\n    {\n        for (int i : rep(f.size()))\
+    \ {\n            (*this)[i] -= f[i];\n        }\n        return *this;\n    }\n\
+    \    FPS& operator*=(const FPS& f)\n    {\n        return (*this) = (*this) *\
+    \ f;\n    }\n    FPS& operator<<=(const int s)\n    {\n        return *this =\
+    \ (*this << s);\n    }\n    FPS& operator>>=(const int s)\n    {\n        return\
+    \ *this = (*this >> s);\n    }\n    FPS operator+(const FPS& f) const\n    {\n\
+    \        return FPS(*this) += f;\n    }\n    FPS operator-(const FPS& f) const\n\
+    \    {\n        return FPS(*this) -= f;\n    }\n    FPS operator*(const FPS& f)\
+    \ const\n    {\n        return mult(f, size() + f.size() - 1);\n    }\n    FPS\
+    \ operator<<(const int s) const\n    {\n        FPS ans(size() + s);\n       \
+    \ for (int i : rep(size())) {\n            ans[i + s] = (*this)[i];\n        }\n\
+    \        return ans;\n    }\n    FPS operator>>(const int s) const\n    {\n  \
+    \      FPS ans;\n        for (int i : range(s, size())) {\n            ans[i -\
+    \ s] = (*this)[i];\n        }\n        return ans;\n    }\n    friend Ostream&\
+    \ operator<<(Ostream& os, const FPS& f)\n    {\n        return os << static_cast<Vec<mint>>(f);\n\
+    \    }\n    FPS derivative() const\n    {\n        FPS ans;\n        for (int\
+    \ i : range(1, size())) {\n            ans[i - 1] = (*this)[i] * i;\n        }\n\
+    \        return ans;\n    }\n    FPS integral() const\n    {\n        FPS ans;\n\
+    \        for (int i : range(1, size() + 1)) {\n            ans[i] = (*this)[i\
+    \ - 1] * mint::sinv(i);\n        }\n        return ans;\n    }\n    FPS mult(const\
+    \ FPS& f, int sz) const\n    {\n        if (sz == 0) { return FPS{}; }\n     \
+    \   const int N = std::min(size(), sz) + std::min(f.size(), sz) - 1;\n       \
+    \ if (N <= (1 << mint::max2p())) {\n            auto ans = conv<mint>(*this, f,\
+    \ sz);\n            return ans;\n        } else {\n            const auto cs1\
     \ = conv<submint1>(*this, f, sz);\n            const auto cs2 = conv<submint2>(*this,\
     \ f, sz);\n            const auto cs3 = conv<submint3>(*this, f, sz);\n      \
     \      FPS ans((int)cs1.size());\n            for (int i : rep(cs1.size())) {\n\
@@ -386,75 +382,75 @@ data:
     \ I>\n    FPS pow(I n) const\n    {\n        return pow(n, deg() * n + 1);\n \
     \   }\n    template<typename I>\n    FPS pow(I n, int sz) const\n    {\n     \
     \   if (n == 0) { return FPS{1}.low(sz); }\n        if (size() == 0) { return\
-    \ FPS{}; }\n        const int p = lsb((size() - 1) / n);\n        if (p == -1)\
-    \ { return FPS{}; }\n        const mint a = (*this)[p];\n        FPS f = (*this)\
-    \ >> p;\n        for (auto& c : f) {\n            c /= a;\n        }\n       \
-    \ f = f.log(sz - p * n);\n        for (auto& c : f) {\n            c *= n;\n \
-    \       }\n        f = f.exp(sz - p * n);\n        FPS g;\n        for (int i\
-    \ : rep(f.size())) {\n            g[i + p * n] = f[i] * a.pow(n);\n        }\n\
-    \        return g;\n    }\n    FPS tshift(const mint& c) const\n    {\n      \
-    \  const int N = size();\n        FPS f(N), d(N);\n        for (int i = 0; i <\
-    \ N; i++) {\n            d[i] = c.pow(N - 1 - i) * mint::ifact(N - 1 - i);\n \
-    \       }\n        for (int i = 0; i < N; i++) {\n            f[i] = (*this)[i]\
-    \ * mint::fact(i);\n        }\n        f = f * d;\n        FPS g(N);\n       \
-    \ for (int i = 0; i < N; i++) {\n            g[i] = f[i + N - 1] * mint::ifact(i);\n\
-    \        }\n        return g;\n    }\n    FPS quot(const FPS& g) const\n    {\n\
-    \        const int N = size(), M = g.size();\n        if (N < M) { return FPS{};\
-    \ }\n        const auto fR = rev(), gR = g.rev();\n        return fR.mult(gR.inv(N\
-    \ - M + 1), N - M + 1).rev();\n    }\n    FPS rem(const FPS& g) const\n    {\n\
-    \        return (*this) - g * quot(g);\n    }\nprivate:\n    int lsb() const\n\
-    \    {\n        return lsb(deg());\n    }\n    int lsb(int sz) const\n    {\n\
-    \        for (int p : rep(sz + 1)) {\n            if ((*this)[p].val() != 0) {\
-    \ return p; }\n        }\n        return -1;\n    }\n    using submint1 = modint<469762049,\
-    \ 3, 26>;\n    using submint2 = modint<167772161, 3, 25>;\n    using submint3\
-    \ = modint<754974721, 11, 24>;\n    template<typename submint>\n    static void\
-    \ trans(Vec<submint>& as, int lg, bool rev)\n    {\n        const int N = 1 <<\
-    \ lg;\n        assert((int)as.size() == N);\n        Vec<submint> rs, irs;\n \
-    \       if (rs.empty()) {\n            const submint r = submint(submint::root()),\
-    \ ir = r.inv();\n            rs.resize(submint::max2p() + 1), irs.resize(submint::max2p()\
-    \ + 1);\n            rs.back() = -r.pow((submint::mod() - 1) >> submint::max2p()),\n\
-    \            irs.back() = -ir.pow((submint::mod() - 1) >> submint::max2p());\n\
-    \            for (uint i = submint::max2p(); i >= 1; i--) {\n                rs[i\
-    \ - 1] = -(rs[i] * rs[i]);\n                irs[i - 1] = -(irs[i] * irs[i]);\n\
-    \            }\n        }\n        const auto drange = (rev ? rep(lg) : per(lg));\n\
-    \        for (const int d : drange) {\n            const int width = 1 << d;\n\
-    \            submint e = 1;\n            for (int i = 0, j = 1; i < N; i += width\
-    \ * 2, j++) {\n                for (int l = i, r = i + width; l < i + width; l++,\
-    \ r++) {\n                    if (rev) {\n                        as[l] = as[l]\
-    \ + as[r], as[r] = (as[l] - as[r]) * e;\n                        e *= irs[lsbp1(j)\
-    \ + 1];\n                    } else {\n                        as[l] = as[l] +\
-    \ as[r] * e, as[r] = as[l] - as[r] * e;\n                        e *= rs[lsbp1(j)\
-    \ + 1];\n                    }\n                }\n            }\n        }\n\
-    \        if (rev) {\n            const submint iN = submint{N}.inv();\n      \
-    \      for (auto& a : as) {\n                a *= iN;\n            }\n       \
-    \ }\n    }\n    template<typename submint>\n    static Vec<submint> conv(const\
-    \ Vec<mint>& as, const Vec<mint>& bs, int sz)\n    {\n        const int M\n  \
-    \          = std::min((int)as.size(), sz) + std::min((int)bs.size(), sz) - 1;\n\
-    \        const int lg = clog(M);\n        const int L = 1 << lg;\n        Vec<submint>\
-    \ As(L), Bs(L);\n        for (int i = 0; i < std::min((int)as.size(), sz); i++)\
-    \ {\n            As[i] = as[i].val();\n        }\n        for (int i = 0; i <\
-    \ std::min((int)bs.size(), sz); i++) {\n            Bs[i] = bs[i].val();\n   \
-    \     }\n        trans(As, lg, false), trans(Bs, lg, false);\n        for (int\
+    \ FPS{}; }\n        const int p = lsb(deg() / n);\n        if (p == -1) { return\
+    \ FPS{}; }\n        const mint a = (*this)[p];\n        FPS f = (*this) >> p;\n\
+    \        for (auto& c : f) {\n            c /= a;\n        }\n        f = f.log(sz\
+    \ - p * n);\n        for (auto& c : f) {\n            c *= n;\n        }\n   \
+    \     f = f.exp(sz - p * n);\n        FPS g;\n        for (int i : rep(f.size()))\
+    \ {\n            g[i + p * n] = f[i] * a.pow(n);\n        }\n        return g;\n\
+    \    }\n    FPS tshift(const mint& c) const\n    {\n        const int N = size();\n\
+    \        FPS f(N), d(N);\n        for (int i = 0; i < N; i++) {\n            d[i]\
+    \ = c.pow(N - 1 - i) * mint::ifact(N - 1 - i);\n        }\n        for (int i\
+    \ = 0; i < N; i++) {\n            f[i] = (*this)[i] * mint::fact(i);\n       \
+    \ }\n        f = f * d;\n        FPS g(N);\n        for (int i = 0; i < N; i++)\
+    \ {\n            g[i] = f[i + N - 1] * mint::ifact(i);\n        }\n        return\
+    \ g;\n    }\n    FPS quot(const FPS& g) const\n    {\n        const int N = size(),\
+    \ M = g.size();\n        if (N < M) { return FPS{}; }\n        const auto fR =\
+    \ rev(), gR = g.rev();\n        return fR.mult(gR.inv(N - M + 1), N - M + 1).rev();\n\
+    \    }\n    FPS rem(const FPS& g) const\n    {\n        return (*this) - g * quot(g);\n\
+    \    }\nprivate:\n    int lsb() const\n    {\n        return lsb(deg());\n   \
+    \ }\n    int lsb(int sz) const\n    {\n        for (int p : rep(sz + 1)) {\n \
+    \           if ((*this)[p].val() != 0) { return p; }\n        }\n        return\
+    \ -1;\n    }\n    using submint1 = modint<469762049, 3, 26>;\n    using submint2\
+    \ = modint<167772161, 3, 25>;\n    using submint3 = modint<754974721, 11, 24>;\n\
+    \    template<typename submint>\n    static void trans(Vec<submint>& as, int lg,\
+    \ bool rev)\n    {\n        const int N = 1 << lg;\n        assert((int)as.size()\
+    \ == N);\n        Vec<submint> rs, irs;\n        if (rs.empty()) {\n         \
+    \   const submint r = submint(submint::root()), ir = r.inv();\n            rs.resize(submint::max2p()\
+    \ + 1), irs.resize(submint::max2p() + 1);\n            rs.back() = -r.pow((submint::mod()\
+    \ - 1) >> submint::max2p()),\n            irs.back() = -ir.pow((submint::mod()\
+    \ - 1) >> submint::max2p());\n            for (u32 i : range(submint::max2p(),\
+    \ 0, -1)) {\n                rs[i - 1] = -(rs[i] * rs[i]);\n                irs[i\
+    \ - 1] = -(irs[i] * irs[i]);\n            }\n        }\n        const auto drange\
+    \ = (rev ? range(0, lg, 1) : range(lg - 1, -1, -1));\n        for (const int d\
+    \ : drange) {\n            const int width = 1 << d;\n            submint e =\
+    \ 1;\n            for (int i = 0, j = 1; i < N; i += width * 2, j++) {\n     \
+    \           for (int l = i, r = i + width; l < i + width; l++, r++) {\n      \
+    \              if (rev) {\n                        const submint x = as[l], y\
+    \ = as[r];\n                        as[l] = x + y, as[r] = (x - y) * e;\n    \
+    \                } else {\n                        const submint x = as[l], y\
+    \ = as[r] * e;\n                        as[l] = x + y, as[r] = x - y;\n      \
+    \              }\n                }\n                e *= (rev ? irs : rs)[lsbp1(j)\
+    \ + 1];\n            }\n        }\n        if (rev) {\n            const submint\
+    \ iN = submint{N}.inv();\n            for (auto& a : as) {\n                a\
+    \ *= iN;\n            }\n        }\n    }\n    template<typename submint>\n  \
+    \  static Vec<submint> conv(const Vec<mint>& as, const Vec<mint>& bs, int sz)\n\
+    \    {\n        const int an = std::min((int)as.size(), sz);\n        const int\
+    \ bn = std::min((int)bs.size(), sz);\n        const int M = an + bn - 1;\n   \
+    \     const int lg = clog(M);\n        const int L = 1 << lg;\n        Vec<submint>\
+    \ As(L), Bs(L);\n        for (int i : rep(an)) {\n            As[i] = as[i].val();\n\
+    \        }\n        for (int i : rep(bn)) {\n            Bs[i] = bs[i].val();\n\
+    \        }\n        trans(As, lg, false), trans(Bs, lg, false);\n        for (int\
     \ i : rep(L)) {\n            As[i] *= Bs[i];\n        }\n        trans(As, lg,\
     \ true);\n        const int N = std::min(sz, (int)as.size() + (int)bs.size() -\
     \ 1);\n        As.resize(N);\n        return As;\n    }\n    static constexpr\
     \ submint2 ip1 = submint2{submint1::mod()}.inv();\n    static constexpr submint3\
-    \ ip2 = submint3{submint2::mod()}.inv();\n    static constexpr submint3 ip1p2\n\
-    \        = submint3{submint1::mod()}.inv() * submint3{submint2::mod()}.inv();\n\
-    \    static constexpr mint p1 = mint{submint1::mod()};\n    static constexpr mint\
-    \ p1p2 = mint{submint1::mod()} * mint{submint2::mod()};\n    static constexpr\
-    \ mint restore(int x1, int x2, int x3)\n    {\n        const int k0 = x1;\n  \
-    \      const int k1 = (ip1 * (x2 - k0)).val();\n        const int k2 = (ip1p2\
-    \ * (x3 - k0) - ip2 * k1).val();\n        return p1p2 * k2 + p1 * k1 + k0;\n \
-    \   }\n};\ntemplate<typename mint>\nFPS<mint> lagrangeInterpolate(const Vec<mint>\
-    \ ys)\n{\n    const int N = ys.size();\n    Vec<mint> fs(N + 1);\n    iotaAll(fs);\n\
-    \    for (int i = 2; i <= N; i++) {\n        fs[i] = fs[i - 1] * i;\n    }\n \
-    \   Vec<mint> as(N + 1);\n    for (int i = 0; i <= N; i++) {\n        mint res\
-    \ = fs[i];\n        for (int j = 0; j < i; j++) {\n            res -= as[i] *\
-    \ mint::fact(i) * mint::ifact(i - j);\n        }\n        as[i] = res * mint::ifact(i);\n\
-    \    }\n    FPS<mint> ans, g{1};\n    for (int i = 0; i <= N; i++) {\n       \
-    \ ans += as[i] * g;\n        g *= FPS<mint>{1, -i};\n    }\n    return ans;\n\
-    }\n"
+    \ ip2 = submint3{submint2::mod()}.inv();\n    static constexpr submint3 ip1p2\
+    \ = submint3{submint1::mod()}.inv() * ip2;\n    static constexpr mint p1()\n \
+    \   {\n        return mint{submint1::mod()};\n    }\n    static constexpr mint\
+    \ p1p2()\n    {\n        return p1() * mint{submint2::mod()};\n    }\n    static\
+    \ constexpr mint restore(int x1, int x2, int x3)\n    {\n        const int k0\
+    \ = x1;\n        const int k1 = (ip1 * (x2 - k0)).val();\n        const int k2\
+    \ = (ip1p2 * (x3 - k0) - ip2 * k1).val();\n        return p1p2() * k2 + p1() *\
+    \ k1 + k0;\n    }\n};\ntemplate<typename mint>\nFPS<mint> lagrangeInterpolate(const\
+    \ Vec<mint> ys)\n{\n    const int N = ys.size();\n    Vec<mint> fs(N + 1);\n \
+    \   iotaAll(fs);\n    for (int i = 2; i <= N; i++) {\n        fs[i] = fs[i - 1]\
+    \ * i;\n    }\n    Vec<mint> as(N + 1);\n    for (int i = 0; i <= N; i++) {\n\
+    \        mint res = fs[i];\n        for (int j = 0; j < i; j++) {\n          \
+    \  res -= as[i] * mint::fact(i) * mint::ifact(i - j);\n        }\n        as[i]\
+    \ = res * mint::ifact(i);\n    }\n    FPS<mint> ans, g{1};\n    for (int i = 0;\
+    \ i <= N; i++) {\n        ans += as[i] * g;\n        g *= FPS<mint>{1, -i};\n\
+    \    }\n    return ans;\n}\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"fps.hpp\"\ntemplate<typename\
     \ mint>\nFPS<mint> lagrangeInterpolate(const Vec<mint> ys)\n{\n    const int N\
     \ = ys.size();\n    Vec<mint> fs(N + 1);\n    iotaAll(fs);\n    for (int i = 2;\
@@ -483,7 +479,7 @@ data:
   isVerificationFile: false
   path: src/math/lagrange_interpolation.hpp
   requiredBy: []
-  timestamp: '2021-05-23 19:52:02+09:00'
+  timestamp: '2021-05-23 22:52:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/lagrange_interpolation.hpp

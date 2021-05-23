@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/berlekamp_massey.hpp
     title: src/math/berlekamp_massey.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
   - icon: ':question:'
@@ -62,7 +62,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
     links:
     - https://judge.yosupo.jp/problem/find_linear_recurrence
-  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
+  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
