@@ -5,12 +5,14 @@
 int main()
 {
     const auto Q = in.val<int>();
-    for (int q = 0; q < Q; q++) {
-        const auto a  = in.val<u64>();
-        const auto fs = prime_factors(a);
+    for (int q : rep(Q)) {
+        const auto a = in.val<u64>();
+        const auto fs = primeFactors(a);
         std::vector<u64> ans;
         for (const auto& [p, e] : fs) {
-            for (int i = 0; i < e; i++) { ans.push_back(p); }
+            for (int i : rep(e)) {
+                ans.push_back(p);
+            }
         }
         out.ln(ans.size(), ans);
     }

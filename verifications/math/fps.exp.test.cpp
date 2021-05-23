@@ -4,13 +4,17 @@
 #include "misc/fastio/scanner.hpp"
 int main()
 {
-    using mint   = modint_998244353;
+    using mint = modint_998244353;
     const auto N = in.val<int>();
-    fps<mint> as(N);
-    for (auto& a : as) { a.set_raw(in.val<int>()); }
+    FPS<mint> as(N);
+    for (auto& a : as) {
+        a.setRaw(in.val<int>());
+    }
     const auto bs = as.exp(N);
     std::vector<int> ans(N);
-    for (int i = 0; i < N; i++) { ans[i] = bs.at(i)(); }
+    for (int i : rep(N)) {
+        ans[i] = bs.at(i).val();
+    }
     out.ln(ans);
     return 0;
 }

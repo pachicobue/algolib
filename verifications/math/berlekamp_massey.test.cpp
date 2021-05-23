@@ -5,14 +5,18 @@
 #include "misc/fastio/scanner.hpp"
 int main()
 {
-    using mint   = modint_998244353;
+    using mint = modint_998244353;
     const auto N = in.val<int>();
-    std::vector<mint> as(N);
-    for (auto& a : as) { a = in.val<int>(); }
-    const auto cs = berlekamp_massey(as);
-    const int d   = cs.size();
-    std::vector<int> ans(d - 1);
-    for (int i = 1; i < d; i++) { ans[i - 1] = (-cs[i])(); }
+    Vec<mint> as(N);
+    for (auto& a : as) {
+        a = in.val<int>();
+    }
+    const auto cs = berlekampMassey(as);
+    const int d = cs.size();
+    Vec<int> ans(d - 1);
+    for (int i : range(1, d)) {
+        ans[i - 1] = (-cs[i]).val();
+    }
     out.ln(d - 1);
     out.ln(ans);
     return 0;

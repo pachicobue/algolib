@@ -5,9 +5,9 @@
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();
-    const auto as     = in.vec<u64>(N);
-    auto bit          = Fenwick(as);
-    for (int q = 0; q < Q; q++) {
+    const auto as = in.vec<u64>(N);
+    auto bit = Fenwick(as);
+    for (int q : rep(Q)) {
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [p, x] = in.tup<int, u64>();

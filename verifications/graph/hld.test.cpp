@@ -9,7 +9,7 @@ int main()
     using mint = modint_998244353;
     const auto [N, Q] = in.tup<int, int>();
     Graph g(N);
-    using Func = std::pair<mint, mint>;
+    using Func = Pair<mint, mint>;
     struct Monoid
     {
         using T = Func;
@@ -36,21 +36,21 @@ int main()
     };
 
     std::vector<mint> as(N), bs(N);
-    for (int i = 0; i < N; i++) {
+    for (int i : rep(N)) {
         std::tie(as[i], bs[i]) = in.tup<mint, mint>();
     }
-    for (int i = 0; i < N - 1; i++) {
+    for (int i : rep(N - 1)) {
         const auto [u, v] = in.tup<int, int>();
         g.addEdge(u, v, true);
     }
     const HLD hld{g};
     std::vector<Func> vs(N);
-    for (int i = 0; i < N; i++) {
+    for (int i : rep(N)) {
         vs[hld.pos(i)] = Func{as[i], bs[i]};
     }
     auto seg = SegTree<Monoid>(vs);
     auto rseg = SegTree<RMonoid>(vs);
-    for (int q = 0; q < Q; q++) {
+    for (int q : rep(Q)) {
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [p, c, d] = in.tup<int, mint, mint>();
@@ -63,7 +63,7 @@ int main()
                 f = Monoid{}(f,
                              a <= b ? seg.fold(a, b + 1) : rseg.fold(b, a + 1));
             }
-            out.ln((f.first * x + f.second)());
+            out.ln((f.first * x + f.second).val());
         }
     }
     return 0;

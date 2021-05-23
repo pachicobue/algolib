@@ -3,18 +3,16 @@
 #include "math/modint.hpp"
 #include "misc/fastio/printer.hpp"
 #include "misc/fastio/scanner.hpp"
-#include "misc/random.hpp"
-modinfo info;
-using mint = modint<info>;
+using mint = modint_dynamic<0>;
 int main()
 {
     const int T = in.val<int>();
-    for (int t = 0; t < T; t++) {
+    for (int t : rep(T)) {
         const auto [Y, P] = in.tup<uint, uint>();
-        info.set_mod(P);
+        mint::setMod(P);
         const mint ans = modsqrt(mint{Y});
         if (ans * ans == Y) {
-            out.ln(ans());
+            out.ln(ans.val());
         } else {
             out.ln(-1);
         }

@@ -5,14 +5,18 @@
 #include "misc/fastio/scanner.hpp"
 int main()
 {
-    using mint        = modint_1000000007;
+    using mint = modint_1000000007;
     const auto [H, W] = in.tup<int, int>();
-    mint ans          = mint(H) * (W - 1) + mint(H - 1) * W;
-    std::vector<mint> as(H), bs(W);
-    for (int i = 1; i < H; i++) { as[i] = H - i; }
-    for (int i = 1; i < W; i++) { bs[i] = W - i; }
-    const auto cs = gcd_convolute(as, bs);
+    mint ans = mint(H) * (W - 1) + mint(H - 1) * W;
+    Vec<mint> as(H), bs(W);
+    for (int i : range(1, H)) {
+        as[i] = H - i;
+    }
+    for (int i : range(1, W)) {
+        bs[i] = W - i;
+    }
+    const auto cs = gcdConvolute(as, bs);
     ans += (cs.size() < 2 ? mint{0} : cs[1]) * 2;
-    out.ln(ans());
+    out.ln(ans.val());
     return 0;
 }
