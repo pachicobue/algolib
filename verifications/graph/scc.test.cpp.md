@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/scc.hpp
     title: src/graph/scc.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/top_sort.hpp
     title: src/graph/top_sort.hpp
   - icon: ':question:'
@@ -57,9 +57,9 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/scc
@@ -266,22 +266,22 @@ data:
     \       })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n   \
     \ int m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nclass sc_comp\n\
     {\npublic:\n    sc_comp(const Graph<T>& g) : m_v(g.v()), m_cs(m_v, -1)\n    {\n\
-    \        const int N = g.v();\n        Graph<T> rg(N);\n        for (int u : rep(N))\
-    \ {\n            for (const auto& [v, cost] : g[u]) {\n                rg.addEdge(v,\
-    \ u, cost);\n            }\n        }\n        Vec<int> st;\n        Vec<bool>\
-    \ used(N, false);\n        auto dfs = Fixpoint([&](auto dfs, int u) -> void {\n\
-    \            used[u] = true;\n            for (int v : g[u]) {\n             \
-    \   if (not used[v]) { dfs(v); }\n            }\n            st.push_back(u);\n\
-    \        });\n        auto rdfs = Fixpoint([&](auto dfs, int v) -> void {\n  \
-    \          m_cs[v] = m_cnum;\n            for (int u : rg[v]) {\n            \
-    \    if (m_cs[u] != -1) { continue; }\n                dfs(u);\n            }\n\
-    \        });\n        for (int i : rep(N)) {\n            if (used[i]) { continue;\
-    \ }\n            dfs(i);\n        }\n        reverseAll(st);\n        for (int\
-    \ i : st) {\n            if (m_cs[i] != -1) { continue; }\n            rdfs(i);\n\
-    \            m_cnum++;\n        }\n    }\n    int operator[](int v) const\n  \
-    \  {\n        assert(0 <= v and v < m_v);\n        return m_cs[v];\n    }\n  \
-    \  int cnum() const\n    {\n        return m_cnum;\n    }\n    Vec<Vec<int>> groups()\
-    \ const\n    {\n        Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v))\
+    \        const int N = g.v();\n        Graph<> rg(N);\n        for (int u : rep(N))\
+    \ {\n            for (int v : g[u]) {\n                rg.addEdge(v, u);\n   \
+    \         }\n        }\n        Vec<int> st;\n        Vec<bool> used(N, false);\n\
+    \        auto dfs = Fixpoint([&](auto dfs, int u) -> void {\n            used[u]\
+    \ = true;\n            for (int v : g[u]) {\n                if (not used[v])\
+    \ { dfs(v); }\n            }\n            st.push_back(u);\n        });\n    \
+    \    auto rdfs = Fixpoint([&](auto dfs, int v) -> void {\n            m_cs[v]\
+    \ = m_cnum;\n            for (int u : rg[v]) {\n                if (m_cs[u] !=\
+    \ -1) { continue; }\n                dfs(u);\n            }\n        });\n   \
+    \     for (int i : rep(N)) {\n            if (used[i]) { continue; }\n       \
+    \     dfs(i);\n        }\n        reverseAll(st);\n        for (int i : st) {\n\
+    \            if (m_cs[i] != -1) { continue; }\n            rdfs(i);\n        \
+    \    m_cnum++;\n        }\n    }\n    int operator[](int v) const\n    {\n   \
+    \     assert(0 <= v and v < m_v);\n        return m_cs[v];\n    }\n    int cnum()\
+    \ const\n    {\n        return m_cnum;\n    }\n    Vec<Vec<int>> groups() const\n\
+    \    {\n        Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v))\
     \ {\n            iss[m_cs[i]].push_back(i);\n        }\n        return iss;\n\
     \    }\nprivate:\n    int m_v;\n    int m_cnum = 0;\n    Vec<int> m_cs;\n};\n\
     template<typename T>\nPair<bool, Vec<int>> topSort(const Graph<T>& g)\n{\n   \
@@ -376,8 +376,8 @@ data:
   isVerificationFile: true
   path: verifications/graph/scc.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 19:52:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-23 21:51:53+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/graph/scc.test.cpp
 layout: document

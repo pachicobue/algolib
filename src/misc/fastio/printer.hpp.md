@@ -72,7 +72,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/static_rmq.test.cpp
     title: verifications/data_structure/static_rmq.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/swag.test.cpp
     title: verifications/data_structure/swag.test.cpp
   - icon: ':heavy_check_mark:'
@@ -96,7 +96,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/scc.test.cpp
     title: verifications/graph/scc.test.cpp
   - icon: ':heavy_check_mark:'

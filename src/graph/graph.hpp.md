@@ -68,10 +68,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/lowlink.hpp
     title: src/graph/lowlink.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/scc.hpp
     title: src/graph/scc.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/top_sort.hpp
     title: src/graph/top_sort.hpp
   - icon: ':warning:'
@@ -93,12 +93,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/scc.test.cpp
     title: verifications/graph/scc.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -370,7 +370,7 @@ data:
   - src/graph/lca.hpp
   - src/graph/lowlink.hpp
   timestamp: '2021-05-23 15:00:11+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/graph/diameter.test.cpp
   - verifications/graph/dijkstra.test.cpp

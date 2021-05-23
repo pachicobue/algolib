@@ -53,7 +53,7 @@ data:
   - icon: ':warning:'
     path: src/data_structure/static_rsq.hpp
     title: src/data_structure/static_rsq.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/swag.hpp
     title: src/data_structure/swag.hpp
   - icon: ':heavy_check_mark:'
@@ -80,7 +80,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/dijkstra.hpp
     title: src/graph/dijkstra.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
   - icon: ':heavy_check_mark:'
@@ -95,10 +95,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/lowlink.hpp
     title: src/graph/lowlink.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/scc.hpp
     title: src/graph/scc.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/top_sort.hpp
     title: src/graph/top_sort.hpp
   - icon: ':warning:'
@@ -285,7 +285,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/static_rmq.test.cpp
     title: verifications/data_structure/static_rmq.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/swag.test.cpp
     title: verifications/data_structure/swag.test.cpp
   - icon: ':heavy_check_mark:'
@@ -309,7 +309,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/scc.test.cpp
     title: verifications/graph/scc.test.cpp
   - icon: ':heavy_check_mark:'

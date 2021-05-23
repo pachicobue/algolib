@@ -78,7 +78,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/segtree.test.cpp
     title: verifications/data_structure/segtree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/swag.test.cpp
     title: verifications/data_structure/swag.test.cpp
   - icon: ':heavy_check_mark:'
@@ -140,7 +140,7 @@ data:
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\

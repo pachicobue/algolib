@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/swag.hpp
     title: src/data_structure/swag.hpp
   - icon: ':question:'
@@ -54,15 +54,15 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/queue_operate_all_composite
     links:
     - https://judge.yosupo.jp/problem/queue_operate_all_composite
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -232,30 +232,31 @@ data:
     \  Vec<T> as = m_fronts;\n            m_fronts.clear(), m_Fronts.clear();\n  \
     \          reverseAll(as);\n            const int f = (int)as.size() / 2;\n  \
     \          for (int i : per(f)) {\n                m_fronts.push_back(as[i]);\n\
-    \            }\n            for (int i : range(f, (int)as.size())) {\n       \
-    \         m_backs.push_back(as[i]);\n            }\n            calc();\n    \
-    \    } else {\n            m_backs.pop_back(), m_Backs.pop_back();\n        }\n\
-    \    }\n    void popFront()\n    {\n        if (m_Fronts.empty()) {\n        \
-    \    Vec<T> as = m_backs;\n            m_backs.clear(), m_Backs.clear();\n   \
-    \         const int f = ((int)as.size() + 1) / 2;\n            for (int i : per(f))\
-    \ {\n                m_fronts.push_back(as[i]);\n            }\n            for\
-    \ (int i : range(f, (int)as.size())) {\n                m_backs.push_back(as[i]);\n\
-    \            }\n            calc();\n        } else {\n            m_fronts.pop_back(),\
-    \ m_Fronts.pop_back();\n        }\n    }\n    T fold() const\n    {\n        return\
-    \ m_fronts.empty()\n                   ? m_Backs.back()\n                   :\
-    \ (m_backs.empty()\n                          ? m_Fronts.back()\n            \
-    \              : m_merge(m_Fronts.back(), m_Backs.back()));\n    }\n    friend\
-    \ Ostream& operator<<(Ostream& os, const SWAG& sw)\n    {\n        Vec<T> as =\
-    \ sw.fs;\n        reverseAll(as);\n        as += sw.bs;\n        os << \"vs =\
-    \ [\";\n        for (const T& a : as) {\n            os << a << \",\";\n     \
-    \   }\n        return os << \"]\";\n    }\n    int size() const\n    {\n     \
-    \   return (int)m_fronts.size() + (int)m_backs.size();\n    }\n    bool empty()\
-    \ const\n    {\n        return m_fronts.empty() and m_backs.empty();\n    }\n\
-    private:\n    void calc()\n    {\n        if (not m_fronts.empty()) {\n      \
-    \      m_Fronts.push_back(m_fronts[0]);\n            for (int i : range(1, m_fronts.size()))\
-    \ {\n                m_Fronts.push_back(m_merge(m_fronts[i], m_Fronts.back()));\n\
-    \            }\n        }\n        if (not m_backs.empty()) {\n            m_Backs.push_back(m_backs[0]);\n\
-    \            for (int i : range(1, m_backs.size())) {\n                m_Backs.push_back(m_merge(m_Backs.back(),\
+    \            }\n            for (int i : range(f, (int)as.size() - 1)) {\n   \
+    \             m_backs.push_back(as[i]);\n            }\n            calc();\n\
+    \        } else {\n            m_backs.pop_back(), m_Backs.pop_back();\n     \
+    \   }\n    }\n    void popFront()\n    {\n        if (m_Fronts.empty()) {\n  \
+    \          Vec<T> as = m_backs;\n            m_backs.clear(), m_Backs.clear();\n\
+    \            const int f = ((int)as.size() + 1) / 2;\n            for (int i :\
+    \ range(f - 1, 0, -1)) {\n                m_fronts.push_back(as[i]);\n       \
+    \     }\n            for (int i : range(f, (int)as.size())) {\n              \
+    \  m_backs.push_back(as[i]);\n            }\n            calc();\n        } else\
+    \ {\n            m_fronts.pop_back(), m_Fronts.pop_back();\n        }\n    }\n\
+    \    T fold() const\n    {\n        return m_fronts.empty()\n                \
+    \   ? m_Backs.back()\n                   : (m_backs.empty()\n                \
+    \          ? m_Fronts.back()\n                          : m_merge(m_Fronts.back(),\
+    \ m_Backs.back()));\n    }\n    friend Ostream& operator<<(Ostream& os, const\
+    \ SWAG& sw)\n    {\n        Vec<T> as = sw.fs;\n        reverseAll(as);\n    \
+    \    as += sw.bs;\n        os << \"vs = [\";\n        for (const T& a : as) {\n\
+    \            os << a << \",\";\n        }\n        return os << \"]\";\n    }\n\
+    \    int size() const\n    {\n        return (int)m_fronts.size() + (int)m_backs.size();\n\
+    \    }\n    bool empty() const\n    {\n        return m_fronts.empty() and m_backs.empty();\n\
+    \    }\nprivate:\n    void calc()\n    {\n        if (not m_fronts.empty()) {\n\
+    \            m_Fronts.push_back(m_fronts[0]);\n            for (int i : range(1,\
+    \ m_fronts.size())) {\n                m_Fronts.push_back(m_merge(m_fronts[i],\
+    \ m_Fronts.back()));\n            }\n        }\n        if (not m_backs.empty())\
+    \ {\n            m_Backs.push_back(m_backs[0]);\n            for (int i : range(1,\
+    \ m_backs.size())) {\n                m_Backs.push_back(m_merge(m_Backs.back(),\
     \ m_backs[i]));\n            }\n        }\n    }\n    Vec<T> m_fronts, m_backs;\n\
     \    Vec<T> m_Fronts, m_Backs;\n    SemiGroup m_merge;\n};\ntemplate<u32 mod_,\
     \ u32 root_, u32 max2p_>\nclass modint\n{\n    template<typename U = u32&>\n \
@@ -361,13 +362,14 @@ data:
     \    {\n        using T = Func;\n        T operator()(const T& f2, const T& f1)\
     \ const\n        {\n            return T{f1.first * f2.first, f1.first * f2.second\
     \ + f1.second};\n        }\n    };\n    auto deque = SWAG<SemiGroup>{};\n    for\
-    \ (int q : rep(Q)) {\n        const auto t = in.val<int>();\n        if (t ==\
-    \ 0) {\n            const auto [a, b] = in.tup<mint, mint>();\n            deque.pushBack(Func{a,\
-    \ b});\n        } else if (t == 1) {\n            deque.popFront();\n        }\
-    \ else {\n            const auto x = in.val<mint>();\n            if (deque.empty())\
-    \ {\n                out.ln(x.val());\n            } else {\n                const\
-    \ auto [a, b] = deque.fold();\n                out.ln((a * x + b).val());\n  \
-    \          }\n        }\n    }\n    return 0;\n}\n"
+    \ (int q : rep(Q)) {\n        static_cast<void>(q);\n        const auto t = in.val<int>();\n\
+    \        if (t == 0) {\n            const auto [a, b] = in.tup<mint, mint>();\n\
+    \            deque.pushBack(Func{a, b});\n        } else if (t == 1) {\n     \
+    \       deque.popFront();\n        } else {\n            const auto x = in.val<mint>();\n\
+    \            if (deque.empty()) {\n                out.ln(x.val());\n        \
+    \    } else {\n                const auto [a, b] = deque.fold();\n           \
+    \     out.ln((a * x + b).val());\n            }\n        }\n    }\n    return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
     \n#include \"../../src/data_structure/swag.hpp\"\n#include \"../../src/math/modint.hpp\"\
     \n#include \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
@@ -376,8 +378,8 @@ data:
     \     using T = Func;\n        T operator()(const T& f2, const T& f1) const\n\
     \        {\n            return T{f1.first * f2.first, f1.first * f2.second + f1.second};\n\
     \        }\n    };\n\n    auto deque = SWAG<SemiGroup>{};\n    for (int q : rep(Q))\
-    \ {\n        const auto t = in.val<int>();\n        if (t == 0) {\n          \
-    \  const auto [a, b] = in.tup<mint, mint>();\n            deque.pushBack(Func{a,\
+    \ {\n        USE(q);\n        const auto t = in.val<int>();\n        if (t ==\
+    \ 0) {\n            const auto [a, b] = in.tup<mint, mint>();\n            deque.pushBack(Func{a,\
     \ b});\n        } else if (t == 1) {\n            deque.popFront();\n        }\
     \ else {\n            const auto x = in.val<mint>();\n            if (deque.empty())\
     \ {\n                out.ln(x.val());\n            } else {\n                const\
@@ -404,8 +406,8 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/swag.test.cpp
   requiredBy: []
-  timestamp: '2021-05-23 19:52:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-23 21:51:53+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/swag.test.cpp
 layout: document
