@@ -6,8 +6,8 @@ documentation_of: //src/misc/scanner.hpp
 ## 概要
 
 入力を行うクラス  
-入力した値を返すので `const` で受け取ったりできるのが利点
-複数の入力を `tuple` で返したり、vector配列で返したりできる
+入力した値を返すので `const` で受け取ったりできるのが利点。  
+複数の入力を `tuple` にして返したり、vector配列で返したりできる
 
 ## I/F
 
@@ -85,7 +85,7 @@ const auto as = in.vec<int>(N, 1); // 標準入力から 長さNのint配列を�
 
 ```cpp
 (1) Tup<Args...> scanner.tup()
-(2) Tup<Args...> scanner.tup(int n, Args... offsets)
+(2) Tup<Args...> scanner.tup(Args... offsets)
 ```
 
 (1) 任意型の入力を 任意個受け取って tupleにして返す。  
