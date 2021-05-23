@@ -49,6 +49,7 @@ int main()
     }
     auto seg = LazySeg<MergeMonoid, OpMonoid, Act>(as);
     for (int q : rep(Q)) {
+        USE(q);
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [l, r, b, c] = in.tup<int, int, mint, mint>();
