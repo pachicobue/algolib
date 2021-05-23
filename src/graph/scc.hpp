@@ -8,10 +8,10 @@ public:
     sc_comp(const Graph<T>& g) : m_v(g.v()), m_cs(m_v, -1)
     {
         const int N = g.v();
-        Graph<T> rg(N);
+        Graph<> rg(N);
         for (int u : rep(N)) {
-            for (const auto& [v, cost] : g[u]) {
-                rg.addEdge(v, u, cost);
+            for (int v : g[u]) {
+                rg.addEdge(v, u);
             }
         }
         Vec<int> st;

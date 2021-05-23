@@ -19,6 +19,7 @@ int main()
 
     auto deque = SWAG<SemiGroup>{};
     for (int q : rep(Q)) {
+        USE(q);
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [a, b] = in.tup<mint, mint>();

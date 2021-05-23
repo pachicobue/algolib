@@ -4,6 +4,7 @@ template<typename SemiGroup>
 class SWAG
 {
     using T = typename SemiGroup::T;
+
 public:
     SWAG() : m_merge{} {}
     void pushBack(const T& x)
@@ -26,7 +27,7 @@ public:
             for (int i : per(f)) {
                 m_fronts.push_back(as[i]);
             }
-            for (int i : range(f, (int)as.size())) {
+            for (int i : range(f, (int)as.size() - 1)) {
                 m_backs.push_back(as[i]);
             }
             calc();
@@ -40,7 +41,7 @@ public:
             Vec<T> as = m_backs;
             m_backs.clear(), m_Backs.clear();
             const int f = ((int)as.size() + 1) / 2;
-            for (int i : per(f)) {
+            for (int i : range(f - 1, 0, -1)) {
                 m_fronts.push_back(as[i]);
             }
             for (int i : range(f, (int)as.size())) {
@@ -78,6 +79,7 @@ public:
     {
         return m_fronts.empty() and m_backs.empty();
     }
+
 private:
     void calc()
     {
