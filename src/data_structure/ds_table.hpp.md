@@ -41,25 +41,25 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/static_rmq.hpp
     title: src/data_structure/static_rmq.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/lca.hpp
     title: src/graph/lca.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/ds_table.test.cpp
     title: verifications/data_structure/ds_table.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/static_rmq.test.cpp
     title: verifications/data_structure/static_rmq.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -228,7 +228,7 @@ data:
     \ m_vss(m_depth, vs)\n    {\n        for (int d : rep(m_depth)) {\n          \
     \  const int w = 1 << (m_depth - d - 1);\n            for (int i = 1; i * w <\
     \ m_size; i += 2) {\n                int l = i * w - 1, r = i * w;\n         \
-    \       for (int j : rep(w)) {\n                    m_vss[d][l - j] = merge(vs[l\
+    \       for (int j : range(1, w)) {\n                    m_vss[d][l - j] = merge(vs[l\
     \ - j], m_vss[d][l - j + 1]);\n                    if (r + j < m_size) {\n   \
     \                     m_vss[d][r + j] = merge(vs[r + j], m_vss[d][r + j - 1]);\n\
     \                    }\n                }\n            }\n        }\n    }\n \
@@ -243,7 +243,7 @@ data:
     \ vs)\n    {\n        for (int d : rep(m_depth)) {\n            const int w =\
     \ 1 << (m_depth - d - 1);\n            for (int i = 1; i * w < m_size; i += 2)\
     \ {\n                int l = i * w - 1, r = i * w;\n                for (int j\
-    \ : rep(w)) {\n                    m_vss[d][l - j] = merge(vs[l - j], m_vss[d][l\
+    \ : range(1, w)) {\n                    m_vss[d][l - j] = merge(vs[l - j], m_vss[d][l\
     \ - j + 1]);\n                    if (r + j < m_size) {\n                    \
     \    m_vss[d][r + j] = merge(vs[r + j], m_vss[d][r + j - 1]);\n              \
     \      }\n                }\n            }\n        }\n    }\n    T fold(int l,\
@@ -271,8 +271,8 @@ data:
   requiredBy:
   - src/data_structure/static_rmq.hpp
   - src/graph/lca.hpp
-  timestamp: '2021-05-23 15:00:11+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-05-23 20:19:02+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/data_structure/ds_table.test.cpp
   - verifications/data_structure/static_rmq.test.cpp

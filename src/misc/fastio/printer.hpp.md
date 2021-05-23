@@ -45,7 +45,7 @@ data:
     path: verifications/math/mod_nthroot.yuki981.cpp
     title: verifications/math/mod_nthroot.yuki981.cpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/ds_table.test.cpp
     title: verifications/data_structure/ds_table.test.cpp
   - icon: ':heavy_check_mark:'
@@ -69,7 +69,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/segtree.test.cpp
     title: verifications/data_structure/segtree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/static_rmq.test.cpp
     title: verifications/data_structure/static_rmq.test.cpp
   - icon: ':x:'
@@ -93,7 +93,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/hld.test.cpp
     title: verifications/graph/hld.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
   - icon: ':x:'
@@ -132,7 +132,7 @@ data:
   - icon: ':x:'
     path: verifications/math/fps.tshift.test.cpp
     title: verifications/math/fps.tshift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
   - icon: ':x:'

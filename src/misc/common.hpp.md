@@ -38,7 +38,7 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/ds_table.hpp
     title: Disjoint Sparse Table
   - icon: ':heavy_check_mark:'
@@ -77,7 +77,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/segtree.hpp
     title: src/data_structure/segtree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/static_rmq.hpp
     title: src/data_structure/static_rmq.hpp
   - icon: ':warning:'
@@ -116,7 +116,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/hld.hpp
     title: src/graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/lca.hpp
     title: src/graph/lca.hpp
   - icon: ':warning:'
@@ -161,16 +161,16 @@ data:
   - icon: ':warning:'
     path: src/math/divisors.hpp
     title: src/math/divisors.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/divisors_moebius.hpp
     title: src/math/divisors_moebius.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/divisors_zeta.hpp
     title: src/math/divisors_zeta.hpp
   - icon: ':x:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/factor_table.hpp
     title: src/math/factor_table.hpp
   - icon: ':warning:'
@@ -185,7 +185,7 @@ data:
   - icon: ':warning:'
     path: src/math/garner.hpp
     title: src/math/garner.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/gcd_convolution.hpp
     title: src/math/gcd_convolution.hpp
   - icon: ':x:'
@@ -218,7 +218,7 @@ data:
   - icon: ':warning:'
     path: src/math/or_convolution.hpp
     title: src/math/or_convolution.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/prime_enumerate.hpp
     title: src/math/prime_enumerate.hpp
   - icon: ':x:'
@@ -285,7 +285,7 @@ data:
     path: verifications/math/mod_nthroot.yuki981.cpp
     title: verifications/math/mod_nthroot.yuki981.cpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/ds_table.test.cpp
     title: verifications/data_structure/ds_table.test.cpp
   - icon: ':heavy_check_mark:'
@@ -309,7 +309,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/segtree.test.cpp
     title: verifications/data_structure/segtree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/static_rmq.test.cpp
     title: verifications/data_structure/static_rmq.test.cpp
   - icon: ':x:'
@@ -333,7 +333,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/hld.test.cpp
     title: verifications/graph/hld.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
   - icon: ':x:'
@@ -372,7 +372,7 @@ data:
   - icon: ':x:'
     path: verifications/math/fps.tshift.test.cpp
     title: verifications/math/fps.tshift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
   - icon: ':x:'

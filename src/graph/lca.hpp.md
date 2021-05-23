@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/ds_table.hpp
     title: Disjoint Sparse Table
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/static_rmq.hpp
     title: src/data_structure/static_rmq.hpp
   - icon: ':question:'
@@ -51,12 +51,12 @@ data:
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -225,7 +225,7 @@ data:
     \ m_vss(m_depth, vs)\n    {\n        for (int d : rep(m_depth)) {\n          \
     \  const int w = 1 << (m_depth - d - 1);\n            for (int i = 1; i * w <\
     \ m_size; i += 2) {\n                int l = i * w - 1, r = i * w;\n         \
-    \       for (int j : rep(w)) {\n                    m_vss[d][l - j] = merge(vs[l\
+    \       for (int j : range(1, w)) {\n                    m_vss[d][l - j] = merge(vs[l\
     \ - j], m_vss[d][l - j + 1]);\n                    if (r + j < m_size) {\n   \
     \                     m_vss[d][r + j] = merge(vs[r + j], m_vss[d][r + j - 1]);\n\
     \                    }\n                }\n            }\n        }\n    }\n \
@@ -237,47 +237,46 @@ data:
     \ B = u64>\nclass StaticRMQ\n{\n    using T = typename TotalOrd::T;\npublic:\n\
     \    StaticRMQ(const Vec<T>& vs)\n        : m_size(vs.size()),\n          m_bn(wind(m_size\
     \ + bs - 1)),\n          m_vals{vs},\n          m_bucket_vals([&]() {\n      \
-    \        Vec<T> ans(m_bn);\n              for (int i = 0; i < m_size; i++) {\n\
-    \                  ans[wind(i)] = i % bs == 0\n                              \
-    \       ? m_vals[i]\n                                     : std::min(ans[wind(i)],\
-    \ m_vals[i], comp);\n              }\n              return ans;\n          }()),\n\
-    \          m_masks(m_size, 0),\n          m_st(m_bucket_vals)\n    {\n       \
-    \ for (int i : rep(m_bn)) {\n            Vec<int> g(bs, m_size), stack;\n    \
-    \        for (const int j : rep(bs)) {\n                if (ind(i, j) >= m_size)\
-    \ { break; }\n                for (; not stack.empty()\n                     \
-    \  and not comp(m_vals[stack.back()], m_vals[ind(i, j)]);\n                  \
-    \   stack.pop_back()) {}\n                g[j] = stack.empty() ? m_size : stack.back(),\n\
-    \                stack.push_back(ind(i, j));\n            }\n            for (int\
-    \ j : rep(bs)) {\n                if (ind(i, j) >= m_size) { break; }\n      \
-    \          m_masks[ind(i, j)]\n                    = g[j] == m_size ? static_cast<B>(0)\n\
-    \                                     : (m_masks[g[j]]\n                     \
-    \                   | static_cast<B>(1) << (g[j] - i * bs));\n            }\n\
-    \        }\n    }\n    T fold(int l, int r) const\n    {\n        assert(0 <=\
-    \ l and l < r and r <= m_size);\n        const int lb = (l + bs - 1) / bs, rb\
-    \ = r / bs;\n        if (lb > rb) {\n            return brmq(l, r);\n        }\
-    \ else {\n            return lb < rb\n                       ? (l < bs * lb\n\
-    \                              ? (bs * rb < r ? std::min({m_st.fold(lb, rb),\n\
-    \                                                         brmq(l, bs * lb),\n\
-    \                                                         brmq(bs * rb, r)},\n\
-    \                                                        comp)\n             \
-    \                                : std::min(m_st.fold(lb, rb),\n             \
-    \                                           brmq(l, bs * lb),\n              \
-    \                                          comp))\n                          \
-    \    : (bs * rb < r ? std::min(\n                                     m_st.fold(lb,\
-    \ rb), brmq(bs * rb, r), comp)\n                                             :\
-    \ m_st.fold(lb, rb)))\n                       : (l < bs * lb\n               \
-    \               ? (bs * rb < r ? std::min(\n                                 \
-    \    brmq(l, bs * lb), brmq(bs * rb, r), comp)\n                             \
-    \                : brmq(l, bs * lb))\n                              : (bs * rb\
-    \ < r ? brmq(bs * rb, r) : T{}));\n        }\n    }\nprivate:\n    static constexpr\
-    \ int bs = sizeof(B) * 8;\n    static constexpr int bslog = log2p1(bs) - 1;\n\
-    \    static constexpr int wind(const int n)\n    {\n        return n >> (bslog);\n\
-    \    }\n    static constexpr int bind(const int n)\n    {\n        return n ^\
-    \ (wind(n) << bslog);\n    }\n    static constexpr int ind(const int w, const\
-    \ int b)\n    {\n        return (w << bslog) | b;\n    }\n    T brmq(int l, int\
-    \ r) const\n    {\n        const B w = m_masks[r - 1] >> (l % bs);\n        return\
-    \ w == 0 ? m_vals[r - 1] : m_vals[l + lsbp1(w) - 1];\n    }\n    struct SemiGroup\n\
-    \    {\n        using T = typename TotalOrd::T;\n        T operator()(const T&\
+    \        Vec<T> ans(m_bn);\n              for (int i : rep(m_size)) {\n      \
+    \            ans[wind(i)]\n                      = (i % bs == 0 ? m_vals[i]\n\
+    \                                     : std::min(ans[wind(i)], m_vals[i], comp));\n\
+    \              }\n              return ans;\n          }()),\n          m_masks(m_size,\
+    \ 0),\n          m_st(m_bucket_vals)\n    {\n        for (int i : rep(m_bn)) {\n\
+    \            Vec<int> g(bs, m_size), stack;\n            for (const int j : rep(bs))\
+    \ {\n                if (ind(i, j) >= m_size) { break; }\n                for\
+    \ (; not stack.empty()\n                       and not comp(m_vals[stack.back()],\
+    \ m_vals[ind(i, j)]);\n                     stack.pop_back()) {}\n           \
+    \     g[j] = stack.empty() ? m_size : stack.back(),\n                stack.push_back(ind(i,\
+    \ j));\n            }\n            for (int j : rep(bs)) {\n                if\
+    \ (ind(i, j) >= m_size) { break; }\n                m_masks[ind(i, j)]\n     \
+    \               = g[j] == m_size ? static_cast<B>(0)\n                       \
+    \              : (m_masks[g[j]]\n                                        | static_cast<B>(1)\
+    \ << (g[j] - i * bs));\n            }\n        }\n    }\n    T fold(int l, int\
+    \ r) const\n    {\n        assert(0 <= l and l < r and r <= m_size);\n       \
+    \ const int lb = (l + bs - 1) / bs, rb = r / bs;\n        if (lb > rb) {\n   \
+    \         return brmq(l, r);\n        } else {\n            return lb < rb\n \
+    \                      ? (l < bs * lb\n                              ? (bs * rb\
+    \ < r ? std::min({m_st.fold(lb, rb),\n                                       \
+    \                  brmq(l, bs * lb),\n                                       \
+    \                  brmq(bs * rb, r)},\n                                      \
+    \                  comp)\n                                             : std::min(m_st.fold(lb,\
+    \ rb),\n                                                        brmq(l, bs * lb),\n\
+    \                                                        comp))\n            \
+    \                  : (bs * rb < r ? std::min(\n                              \
+    \       m_st.fold(lb, rb), brmq(bs * rb, r), comp)\n                         \
+    \                    : m_st.fold(lb, rb)))\n                       : (l < bs *\
+    \ lb\n                              ? (bs * rb < r ? std::min(\n             \
+    \                        brmq(l, bs * lb), brmq(bs * rb, r), comp)\n         \
+    \                                    : brmq(l, bs * lb))\n                   \
+    \           : (bs * rb < r ? brmq(bs * rb, r) : T{}));\n        }\n    }\nprivate:\n\
+    \    static constexpr int bs = sizeof(B) * 8;\n    static constexpr int bslog\
+    \ = log2p1(bs) - 1;\n    static constexpr int wind(int n)\n    {\n        return\
+    \ n >> (bslog);\n    }\n    static constexpr int bind(int n)\n    {\n        return\
+    \ n ^ (wind(n) << bslog);\n    }\n    static constexpr int ind(int w, int b)\n\
+    \    {\n        return (w << bslog) | b;\n    }\n    T brmq(int l, int r) const\n\
+    \    {\n        const B w = m_masks[r - 1] >> (l % bs);\n        return w == 0\
+    \ ? m_vals[r - 1] : m_vals[l + lsbp1(w) - 1];\n    }\n    struct SemiGroup\n \
+    \   {\n        using T = typename TotalOrd::T;\n        T operator()(const T&\
     \ x1, const T& x2) const\n        {\n            return std::min(x1, x2, comp);\n\
     \        }\n    };\n    static inline TotalOrd comp;\n    int m_size, m_bn;\n\
     \    Vec<T> m_vals, m_bucket_vals;\n    Vec<B> m_masks;\n    DSTable<SemiGroup>\
@@ -373,8 +372,8 @@ data:
   isVerificationFile: false
   path: src/graph/lca.hpp
   requiredBy: []
-  timestamp: '2021-05-23 19:52:02+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-05-23 20:19:02+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/graph/lca.test.cpp
 documentation_of: src/graph/lca.hpp

@@ -59,7 +59,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/hld.hpp
     title: src/graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/lca.hpp
     title: src/graph/lca.hpp
   - icon: ':warning:'
@@ -90,7 +90,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/hld.test.cpp
     title: verifications/graph/hld.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
   - icon: ':x:'
