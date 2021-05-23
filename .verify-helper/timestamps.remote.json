@@ -10,5 +10,9 @@
 "verifications/graph/dijkstra.test.cpp": "2021-05-23 15:28:30 +0900",
 "verifications/graph/hld.test.cpp": "2021-05-23 15:28:30 +0900",
 "verifications/math/and_convolution.test.cpp": "2021-05-23 15:28:30 +0900",
-"verifications/math/berlekamp_massey.test.cpp": "2021-05-23 15:28:30 +0900"
+"verifications/math/berlekamp_massey.test.cpp": "2021-05-23 15:28:30 +0900",
+"verifications/math/gcd_convolution.test.cpp": "2021-05-23 15:28:30 +0900",
+"verifications/math/mod_nthroot.test.cpp": "2021-05-23 15:28:30 +0900",
+"verifications/math/mod_sqrt.test.cpp": "2021-05-23 15:28:30 +0900",
+"verifications/math/multiplicative_sum.test.cpp": "2021-05-23 15:28:30 +0900"
 }
