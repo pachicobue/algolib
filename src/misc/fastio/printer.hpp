@@ -40,6 +40,10 @@ private:
     {
         dump<int>(b);
     }
+    void dump(char c)
+    {
+        putchar(c);
+    }
     void dump(const Str& cs)
     {
         for (char c : cs) {

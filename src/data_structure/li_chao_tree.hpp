@@ -42,14 +42,14 @@ public:
                 add(L{a, b}, i, lx, rx);
             } else {
                 if (rx - lx == 1) { return; }
-                auto& [li, ri] = m_nodes[i].sons;
+                auto [li, ri] = m_nodes[i].sons;
                 const T mx = (lx + rx) / 2;
                 if (lx < x_right and x_left < mx) {
-                    if (li == -1) { li = alloc(); }
+                    if (li == -1) { li = m_nodes[i].sons[0] = alloc(); }
                     dfs(li, lx, mx);
                 }
                 if (mx < x_right and x_left < rx) {
-                    if (ri == -1) { ri = alloc(); }
+                    if (ri == -1) { ri = m_nodes[i].sons[1] = alloc(); }
                     dfs(ri, mx, rx);
                 }
             }
@@ -61,9 +61,11 @@ public:
         Pair<bool, L> ans = {false, NIL};
         for (int i = 0; i != -1;) {
             const auto& pl = m_nodes[i].line;
-            if ((not ans.first) or comp(pl, ans.second, x)) {
-                ans.first = true;
-                ans.second = pl;
+            if (pl != NIL) {
+                if ((not ans.first) or comp(pl, ans.second, x)) {
+                    ans.first = true;
+                    ans.second = pl;
+                }
             }
             const auto& [li, ri] = m_nodes[i].sons;
             const T mx = (lx + rx) / 2;
@@ -90,7 +92,6 @@ private:
             if (munder) { std::swap(l, m_nodes[i].line); }
             if (lunder == runder) { break; }
             int dir = (lunder == munder ? 1 : 0);
-            if (rx - lx == 1) { break; }
             int nind = m_nodes[i].sons[dir];
             if (nind == -1) { nind = m_nodes[i].sons[dir] = alloc(); }
             i = nind;
