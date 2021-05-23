@@ -1,43 +1,43 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/nd_vec.hpp
     title: src/misc/common/nd_vec.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/range.hpp
     title: src/misc/common/range.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
@@ -284,19 +284,15 @@ title: Disjoint Sparse Table
 
 ## Disjoint Sparse Table
 
-### 概要
-
-半群 $(T, \ast)$ 上の要素数 $N$ の 数列 $A = \lbrack A _ 0, A _ 1, \dots , A _ {N-1}\rbrack$ について、  
+半群 $(T, \ast)$ 上の要素数 $N$ の 数列 $A = \lbrack A_0, A_1, \dots , A_{N-1}\rbrack$ について、  
 以下の操作が $\mathrm{O}(1)$ でできる。
 
-- 範囲総積取得: $A _ l \ast \dots \ast A _ {r-1}$
+- 範囲総積取得: $A_l \ast \dots \ast A_{r-1}$
 
-### I/F
+### コンストラクタ
 
-#### コンストラクタ
-
-```
-ds_table<SemiGroup> ds(const std::vector<T>& A)
+```cpp
+ds_table<SemiGroup> ds(const Vec<T>& A)
 ```
 
 数列 $A$ で初期化する
@@ -304,41 +300,42 @@ ds_table<SemiGroup> ds(const std::vector<T>& A)
 テンプレート引数`SemiGroup`は以下のようなフィールドを持つクラス
 
 - `T`:型
-- `operator()(T x1, T x2)`: $x _ 1 \ast x _ 2$
+- `operator()(T x1, T x2)`: $x_1 \ast xx_2$
 
-```
+```cpp
 struct SemiGroup
 {
     using T = int;
-    T operator()(const T& x1, const T& x2) const { return std::min(x1, x2); }
+    T operator()(const T& x1, const T& x2) const { 
+        return std::min(x1, x2); 
+    }
 };
 ```
 
-##### 計算量
+#### 計算量
 
 - $\mathrm{O}(N\log N)$
 
-#### add
-
-```
-void bit.add(int i, const T& x)
-```
+### add
 
 $A _ i$ に $x$ を加算
 
-##### 計算量
+```cpp
+void bit.add(int i, const T& x)
+```
+
+#### 計算量
 
 - $\mathrm{O}(\log N)$
 
-#### fold
+### fold
 
-```
+$A_l \ast \dots \ast A_{r-1}$ を取得
+
+```cpp
 T ds.fold(int l, int r)
 ```
 
-$A _ l \ast \dots \ast A _ {r-1}$ を取得
-
-##### 計算量
+#### 計算量
 
 - $\mathrm{O}(1)$
-
