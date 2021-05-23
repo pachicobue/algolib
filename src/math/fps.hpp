@@ -360,7 +360,7 @@ private:
     int lsb(int sz) const
     {
         for (int p : rep(sz + 1)) {
-            if ((*this)[p]() != 0) { return p; }
+            if ((*this)[p].val() != 0) { return p; }
         }
         return -1;
     }

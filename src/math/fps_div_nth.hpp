@@ -8,7 +8,7 @@ mint divNth(FPS<mint> f, FPS<mint> g, I N)
     int mi = 0;
     mint a;
     for (int i : rep(n)) {
-        if (g[i]() != 0) {
+        if (g[i].val() != 0) {
             mi = i;
             a = g[i];
             break;

@@ -6,6 +6,7 @@ template<typename C>
 class LCA
 {
     using P = Pair<int, int>;
+
 public:
     LCA(const Graph<C>& g, int r = 0)
         : m_v(g.v()),
@@ -20,10 +21,10 @@ public:
                   ans.push_back(s);
                   for (int v : g[u]) {
                       if (used[v]) { continue; }
-                      dfs({s.first + 1, v});
+                      dfs(P{s.first + 1, v});
                       ans.push_back(s);
                   }
-              })({0, r});
+              })(P{0, r});
               return ans;
           }()),
           m_rmq(m_ds)
@@ -33,6 +34,7 @@ public:
         const auto [ul, vl] = std::minmax({m_ins[u], m_ins[v]});
         return m_rmq.fold(ul, vl + 1).second;
     }
+
 private:
     struct Ord
     {

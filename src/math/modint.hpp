@@ -150,7 +150,7 @@ public:
     {
         static Vec<modint> is{1, 1};
         for (u32 i = (u32)is.size(); i <= n; i++) {
-            is.push_back(-is[mod % i] * (mod() / i));
+            is.push_back(-is[mod() % i] * (mod() / i));
         }
         return is[n];
     }

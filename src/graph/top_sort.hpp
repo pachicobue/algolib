@@ -21,7 +21,7 @@ Pair<bool, Vec<int>> topSort(const Graph<T>& g)
         return true;
     });
     for (int i : rep(N)) {
-        if (not dfs(dfs, i)) { return {false, ans}; }
+        if (not dfs(i)) { return {false, ans}; }
     }
     reverseAll(ans);
     return {true, ans};
