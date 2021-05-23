@@ -39,7 +39,7 @@ public:
     }
     mint& operator[](const int n)
     {
-        if (size() < n + 1) { resize(n + 1); }
+        if (deg() < n) { resize(n + 1); }
         return Vec<mint>::operator[](n);
     }
     const mint& operator[](const int n) const
@@ -99,7 +99,7 @@ public:
     FPS operator<<(const int s) const
     {
         FPS ans(size() + s);
-        for (int i = 0; i < size(); i++) {
+        for (int i : rep(size())) {
             ans[i + s] = (*this)[i];
         }
         return ans;
@@ -120,7 +120,7 @@ public:
     FPS derivative() const
     {
         FPS ans;
-        for (int i = 1; i < size(); i++) {
+        for (int i : range(1, size())) {
             ans[i - 1] = (*this)[i] * i;
         }
         return ans;
@@ -128,7 +128,7 @@ public:
     FPS integral() const
     {
         FPS ans;
-        for (int i = 1; i <= size(); i++) {
+        for (int i : range(1, size() + 1)) {
             ans[i] = (*this)[i - 1] * mint::sinv(i);
         }
         return ans;
@@ -137,15 +137,7 @@ public:
     {
         if (sz == 0) { return FPS{}; }
         const int N = std::min(size(), sz) + std::min(f.size(), sz) - 1;
-        if (N <= 16) {
-            FPS ans(sz);
-            for (int i = 0; i < std::min(size(), sz); i++) {
-                for (int j = 0; j < f.size() and i + j < sz; j++) {
-                    ans[i + j] += (*this)[i] * f[j];
-                }
-            }
-            return ans;
-        } else if (N <= (1 << mint::max2p())) {
+        if (N <= (1 << mint::max2p())) {
             auto ans = conv<mint>(*this, f, sz);
             return ans;
         } else {
@@ -305,7 +297,7 @@ public:
     {
         if (n == 0) { return FPS{1}.low(sz); }
         if (size() == 0) { return FPS{}; }
-        const int p = lsb((size() - 1) / n);
+        const int p = lsb(deg() / n);
         if (p == -1) { return FPS{}; }
         const mint a = (*this)[p];
         FPS f = (*this) >> p;
@@ -379,25 +371,26 @@ private:
             rs.resize(submint::max2p() + 1), irs.resize(submint::max2p() + 1);
             rs.back() = -r.pow((submint::mod() - 1) >> submint::max2p()),
             irs.back() = -ir.pow((submint::mod() - 1) >> submint::max2p());
-            for (uint i = submint::max2p(); i >= 1; i--) {
+            for (u32 i : range(submint::max2p(), 0, -1)) {
                 rs[i - 1] = -(rs[i] * rs[i]);
                 irs[i - 1] = -(irs[i] * irs[i]);
             }
         }
-        const auto drange = (rev ? rep(lg) : per(lg));
+        const auto drange = (rev ? range(0, lg, 1) : range(lg - 1, -1, -1));
         for (const int d : drange) {
             const int width = 1 << d;
             submint e = 1;
             for (int i = 0, j = 1; i < N; i += width * 2, j++) {
                 for (int l = i, r = i + width; l < i + width; l++, r++) {
                     if (rev) {
-                        as[l] = as[l] + as[r], as[r] = (as[l] - as[r]) * e;
-                        e *= irs[lsbp1(j) + 1];
+                        const submint x = as[l], y = as[r];
+                        as[l] = x + y, as[r] = (x - y) * e;
                     } else {
-                        as[l] = as[l] + as[r] * e, as[r] = as[l] - as[r] * e;
-                        e *= rs[lsbp1(j) + 1];
+                        const submint x = as[l], y = as[r] * e;
+                        as[l] = x + y, as[r] = x - y;
                     }
                 }
+                e *= (rev ? irs : rs)[lsbp1(j) + 1];
             }
         }
         if (rev) {
@@ -410,15 +403,16 @@ private:
     template<typename submint>
     static Vec<submint> conv(const Vec<mint>& as, const Vec<mint>& bs, int sz)
     {
-        const int M
-            = std::min((int)as.size(), sz) + std::min((int)bs.size(), sz) - 1;
+        const int an = std::min((int)as.size(), sz);
+        const int bn = std::min((int)bs.size(), sz);
+        const int M = an + bn - 1;
         const int lg = clog(M);
         const int L = 1 << lg;
         Vec<submint> As(L), Bs(L);
-        for (int i = 0; i < std::min((int)as.size(), sz); i++) {
+        for (int i : rep(an)) {
             As[i] = as[i].val();
         }
-        for (int i = 0; i < std::min((int)bs.size(), sz); i++) {
+        for (int i : rep(bn)) {
             Bs[i] = bs[i].val();
         }
         trans(As, lg, false), trans(Bs, lg, false);
@@ -432,15 +426,20 @@ private:
     }
     static constexpr submint2 ip1 = submint2{submint1::mod()}.inv();
     static constexpr submint3 ip2 = submint3{submint2::mod()}.inv();
-    static constexpr submint3 ip1p2
-        = submint3{submint1::mod()}.inv() * submint3{submint2::mod()}.inv();
-    static constexpr mint p1 = mint{submint1::mod()};
-    static constexpr mint p1p2 = mint{submint1::mod()} * mint{submint2::mod()};
+    static constexpr submint3 ip1p2 = submint3{submint1::mod()}.inv() * ip2;
+    static constexpr mint p1()
+    {
+        return mint{submint1::mod()};
+    }
+    static constexpr mint p1p2()
+    {
+        return p1() * mint{submint2::mod()};
+    }
     static constexpr mint restore(int x1, int x2, int x3)
     {
         const int k0 = x1;
         const int k1 = (ip1 * (x2 - k0)).val();
         const int k2 = (ip1p2 * (x3 - k0) - ip2 * k1).val();
-        return p1p2 * k2 + p1 * k1 + k0;
+        return p1p2() * k2 + p1() * k1 + k0;
     }
 };
