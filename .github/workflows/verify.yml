@@ -15,6 +15,12 @@ jobs:
     - name: Install dependencies
       run: pip3 install git+https://github.com/pachicobue/verification-helper.git@master
 
+    - name: Copy verifications
+      run: cp -r verifications/* src/
+
+    - name: Remove verifications dir
+      run: rm -r verifications
+
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
