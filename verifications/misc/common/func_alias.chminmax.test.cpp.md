@@ -14,9 +14,9 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "#include <bits/stdc++.h>\n#pragma region TypeAlias\nusing i32 = int;\n\
     using u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing\
@@ -83,41 +83,47 @@ data:
     \ vs1, const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n\
     \    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const Vec<T>& vs1,\
     \ const Vec<T>& vs2)\n{\n    return Vec<T>{vs1} += vs2;\n}\n#pragma endregion\n\
-    constexpr i64 mod = 1000000007;\nstruct mint\n{\n    mint() = default;\n    mint(i64\
-    \ v_) : v{v_} {}\n    friend mint operator+(const mint& m1, const mint& m2)\n\
-    \    {\n        return mint(m1.v + m2.v);\n    }\n    friend mint operator*(const\
-    \ mint& m1, const mint& m2)\n    {\n        return mint(m1.v * m2.v % mod);\n\
-    \    }\n    friend mint& operator+=(mint& m1, const mint& m2)\n    {\n       \
-    \ m1 = m1 + m2;\n        return m1;\n    }\n    friend mint& operator*=(mint&\
-    \ m1, const mint& m2)\n    {\n        m1 = m1 * m2;\n        return m1;\n    }\n\
-    \    i64 v = 0;\n};\nint main()\n{\n    i64 m, n;\n    std::cin >> m >> n;\n \
-    \   mint M{m};\n    const mint ans = power(M, n);\n    std::cout << ans.v << \"\
-    \\n\";\n    return 0;\n}\n"
-  code: "#define PROBLEM \\\n    \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B\"\
-    \n#include \"../../../src/misc/common/func_alias.hpp\"\n\nconstexpr i64 mod =\
-    \ 1000000007;\nstruct mint\n{\n    mint() = default;\n    mint(i64 v_) : v{v_}\
-    \ {}\n    friend mint operator+(const mint& m1, const mint& m2)\n    {\n     \
-    \   return mint(m1.v + m2.v);\n    }\n    friend mint operator*(const mint& m1,\
-    \ const mint& m2)\n    {\n        return mint(m1.v * m2.v % mod);\n    }\n   \
-    \ friend mint& operator+=(mint& m1, const mint& m2)\n    {\n        m1 = m1 +\
-    \ m2;\n        return m1;\n    }\n    friend mint& operator*=(mint& m1, const\
-    \ mint& m2)\n    {\n        m1 = m1 * m2;\n        return m1;\n    }\n    i64\
-    \ v = 0;\n};\n\nint main()\n{\n    i64 m, n;\n    std::cin >> m >> n;\n    mint\
-    \ M{m};\n    const mint ans = power(M, n);\n    std::cout << ans.v << \"\\n\"\
-    ;\n    return 0;\n}\n"
+    struct C\n{\n    C() = default;\n    C(int v_) : v{v_} {}\n    friend bool operator<(const\
+    \ C& c1, const C& c2)\n    {\n        return c1.v < c2.v;\n    }\n    friend bool\
+    \ operator>(const C& c1, const C& c2)\n    {\n        return c1.v > c2.v;\n  \
+    \  }\n    int v = 0;\n};\nvoid chminTest()\n{\n    int v = 10;\n    for (int i\
+    \ = 100; i >= 0; i--) {\n        assert(chmin(v, i) == (i < 10));\n        assert(v\
+    \ == std::min(i, 10));\n    }\n    C cls{10};\n    for (int i = 100; i >= 0; i--)\
+    \ {\n        assert(chmin(cls, C{i}) == (i < 10));\n        assert(cls.v == std::min(i,\
+    \ 10));\n    }\n}\nvoid chmaxTest()\n{\n    int v = 10;\n    for (int i = 0; i\
+    \ < 100; i++) {\n        assert(chmax(v, i) == (i > 10));\n        assert(v ==\
+    \ std::max(i, 10));\n    }\n    C cls{10};\n    for (int i = 0; i < 100; i++)\
+    \ {\n        assert(chmax(cls, C{i}) == (i > 10));\n        assert(cls.v == std::max(i,\
+    \ 10));\n    }\n}\nint main()\n{\n    chminTest();\n    chmaxTest();\n    std::cout\
+    \ << \"Hello World\\n\";\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
+    \n#include \"../../../src/misc/common/func_alias.hpp\"\n\nstruct C\n{\n    C()\
+    \ = default;\n    C(int v_) : v{v_} {}\n    friend bool operator<(const C& c1,\
+    \ const C& c2)\n    {\n        return c1.v < c2.v;\n    }\n    friend bool operator>(const\
+    \ C& c1, const C& c2)\n    {\n        return c1.v > c2.v;\n    }\n    int v =\
+    \ 0;\n};\n\nvoid chminTest()\n{\n    int v = 10;\n    for (int i = 100; i >= 0;\
+    \ i--) {\n        assert(chmin(v, i) == (i < 10));\n        assert(v == std::min(i,\
+    \ 10));\n    }\n\n    C cls{10};\n    for (int i = 100; i >= 0; i--) {\n     \
+    \   assert(chmin(cls, C{i}) == (i < 10));\n        assert(cls.v == std::min(i,\
+    \ 10));\n    }\n}\n\nvoid chmaxTest()\n{\n    int v = 10;\n    for (int i = 0;\
+    \ i < 100; i++) {\n        assert(chmax(v, i) == (i > 10));\n        assert(v\
+    \ == std::max(i, 10));\n    }\n\n    C cls{10};\n    for (int i = 0; i < 100;\
+    \ i++) {\n        assert(chmax(cls, C{i}) == (i > 10));\n        assert(cls.v\
+    \ == std::max(i, 10));\n    }\n}\n\nint main()\n{\n    chminTest();\n    chmaxTest();\n\
+    \    std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
   dependsOn:
   - src/misc/common/func_alias.hpp
   - src/misc/common/type_alias.hpp
   isVerificationFile: true
-  path: verifications/misc/common/func_alias.power.test.cpp
+  path: verifications/misc/common/func_alias.chminmax.test.cpp
   requiredBy: []
   timestamp: '2021-05-24 21:49:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verifications/misc/common/func_alias.power.test.cpp
+documentation_of: verifications/misc/common/func_alias.chminmax.test.cpp
 layout: document
 redirect_from:
-- /verify/verifications/misc/common/func_alias.power.test.cpp
-- /verify/verifications/misc/common/func_alias.power.test.cpp.html
-title: verifications/misc/common/func_alias.power.test.cpp
+- /verify/verifications/misc/common/func_alias.chminmax.test.cpp
+- /verify/verifications/misc/common/func_alias.chminmax.test.cpp.html
+title: verifications/misc/common/func_alias.chminmax.test.cpp
 ---

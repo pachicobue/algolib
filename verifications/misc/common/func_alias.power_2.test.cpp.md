@@ -14,9 +14,9 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_10_A
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_10_A
   bundledCode: "#include <bits/stdc++.h>\n#pragma region TypeAlias\nusing i32 = int;\n\
     using u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing\
@@ -83,41 +83,46 @@ data:
     \ vs1, const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n\
     \    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const Vec<T>& vs1,\
     \ const Vec<T>& vs2)\n{\n    return Vec<T>{vs1} += vs2;\n}\n#pragma endregion\n\
-    constexpr i64 mod = 1000000007;\nstruct mint\n{\n    mint() = default;\n    mint(i64\
-    \ v_) : v{v_} {}\n    friend mint operator+(const mint& m1, const mint& m2)\n\
-    \    {\n        return mint(m1.v + m2.v);\n    }\n    friend mint operator*(const\
-    \ mint& m1, const mint& m2)\n    {\n        return mint(m1.v * m2.v % mod);\n\
-    \    }\n    friend mint& operator+=(mint& m1, const mint& m2)\n    {\n       \
-    \ m1 = m1 + m2;\n        return m1;\n    }\n    friend mint& operator*=(mint&\
-    \ m1, const mint& m2)\n    {\n        m1 = m1 * m2;\n        return m1;\n    }\n\
-    \    i64 v = 0;\n};\nint main()\n{\n    i64 m, n;\n    std::cin >> m >> n;\n \
-    \   mint M{m};\n    const mint ans = power(M, n);\n    std::cout << ans.v << \"\
-    \\n\";\n    return 0;\n}\n"
-  code: "#define PROBLEM \\\n    \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B\"\
-    \n#include \"../../../src/misc/common/func_alias.hpp\"\n\nconstexpr i64 mod =\
-    \ 1000000007;\nstruct mint\n{\n    mint() = default;\n    mint(i64 v_) : v{v_}\
-    \ {}\n    friend mint operator+(const mint& m1, const mint& m2)\n    {\n     \
-    \   return mint(m1.v + m2.v);\n    }\n    friend mint operator*(const mint& m1,\
-    \ const mint& m2)\n    {\n        return mint(m1.v * m2.v % mod);\n    }\n   \
-    \ friend mint& operator+=(mint& m1, const mint& m2)\n    {\n        m1 = m1 +\
-    \ m2;\n        return m1;\n    }\n    friend mint& operator*=(mint& m1, const\
-    \ mint& m2)\n    {\n        m1 = m1 * m2;\n        return m1;\n    }\n    i64\
-    \ v = 0;\n};\n\nint main()\n{\n    i64 m, n;\n    std::cin >> m >> n;\n    mint\
-    \ M{m};\n    const mint ans = power(M, n);\n    std::cout << ans.v << \"\\n\"\
-    ;\n    return 0;\n}\n"
+    struct M\n{\n    friend M operator*(const M& m1, const M& m2)\n    {\n       \
+    \ M m;\n        m.vss[0][0] = m.vss[0][1] = m.vss[1][0] = m.vss[1][1] = 0;\n \
+    \       for (int i = 0; i < 2; i++) {\n            for (int j = 0; j < 2; j++)\
+    \ {\n                for (int k = 0; k < 2; k++) {\n                    m.vss[i][j]\
+    \ += m1.vss[i][k] * m2.vss[k][j];\n                }\n            }\n        }\n\
+    \        return m;\n    }\n    friend M& operator*=(M& m1, const M& m2)\n    {\n\
+    \        return m1 = (m1 * m2);\n    }\n    static M I()\n    {\n        M m;\n\
+    \        m.vss[0][0] = m.vss[1][1] = 1;\n        m.vss[0][1] = m.vss[1][0] = 0;\n\
+    \        return m;\n    }\n    Arr<Arr<i64, 2>, 2> vss;\n};\nint main()\n{\n \
+    \   int N;\n    std::cin >> N;\n    M mat;\n    mat.vss[0][0] = mat.vss[0][1]\
+    \ = mat.vss[1][0] = 1;\n    mat.vss[1][1] = 0;\n    const M ans = power(mat, N,\
+    \ M::I());\n    std::cout << ans.vss[1][0] + ans.vss[1][1] << \"\\n\";\n    return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_10_A\"\
+    \n#include \"../../../src/misc/common/func_alias.hpp\"\n\nstruct M\n{\n    friend\
+    \ M operator*(const M& m1, const M& m2)\n    {\n        M m;\n        m.vss[0][0]\
+    \ = m.vss[0][1] = m.vss[1][0] = m.vss[1][1] = 0;\n        for (int i = 0; i <\
+    \ 2; i++) {\n            for (int j = 0; j < 2; j++) {\n                for (int\
+    \ k = 0; k < 2; k++) {\n                    m.vss[i][j] += m1.vss[i][k] * m2.vss[k][j];\n\
+    \                }\n            }\n        }\n        return m;\n    }\n    friend\
+    \ M& operator*=(M& m1, const M& m2)\n    {\n        return m1 = (m1 * m2);\n \
+    \   }\n    static M I()\n    {\n        M m;\n        m.vss[0][0] = m.vss[1][1]\
+    \ = 1;\n        m.vss[0][1] = m.vss[1][0] = 0;\n        return m;\n    }\n   \
+    \ Arr<Arr<i64, 2>, 2> vss;\n};\n\nint main()\n{\n    int N;\n    std::cin >> N;\n\
+    \    M mat;\n    mat.vss[0][0] = mat.vss[0][1] = mat.vss[1][0] = 1;\n    mat.vss[1][1]\
+    \ = 0;\n    const M ans = power(mat, N, M::I());\n    std::cout << ans.vss[1][0]\
+    \ + ans.vss[1][1] << \"\\n\";\n    return 0;\n}\n"
   dependsOn:
   - src/misc/common/func_alias.hpp
   - src/misc/common/type_alias.hpp
   isVerificationFile: true
-  path: verifications/misc/common/func_alias.power.test.cpp
+  path: verifications/misc/common/func_alias.power_2.test.cpp
   requiredBy: []
   timestamp: '2021-05-24 21:49:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verifications/misc/common/func_alias.power.test.cpp
+documentation_of: verifications/misc/common/func_alias.power_2.test.cpp
 layout: document
 redirect_from:
-- /verify/verifications/misc/common/func_alias.power.test.cpp
-- /verify/verifications/misc/common/func_alias.power.test.cpp.html
-title: verifications/misc/common/func_alias.power.test.cpp
+- /verify/verifications/misc/common/func_alias.power_2.test.cpp
+- /verify/verifications/misc/common/func_alias.power_2.test.cpp.html
+title: verifications/misc/common/func_alias.power_2.test.cpp
 ---

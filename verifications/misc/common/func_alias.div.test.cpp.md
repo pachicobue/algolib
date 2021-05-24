@@ -14,9 +14,9 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "#include <bits/stdc++.h>\n#pragma region TypeAlias\nusing i32 = int;\n\
     using u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing\
@@ -83,41 +83,41 @@ data:
     \ vs1, const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n\
     \    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const Vec<T>& vs1,\
     \ const Vec<T>& vs2)\n{\n    return Vec<T>{vs1} += vs2;\n}\n#pragma endregion\n\
-    constexpr i64 mod = 1000000007;\nstruct mint\n{\n    mint() = default;\n    mint(i64\
-    \ v_) : v{v_} {}\n    friend mint operator+(const mint& m1, const mint& m2)\n\
-    \    {\n        return mint(m1.v + m2.v);\n    }\n    friend mint operator*(const\
-    \ mint& m1, const mint& m2)\n    {\n        return mint(m1.v * m2.v % mod);\n\
-    \    }\n    friend mint& operator+=(mint& m1, const mint& m2)\n    {\n       \
-    \ m1 = m1 + m2;\n        return m1;\n    }\n    friend mint& operator*=(mint&\
-    \ m1, const mint& m2)\n    {\n        m1 = m1 * m2;\n        return m1;\n    }\n\
-    \    i64 v = 0;\n};\nint main()\n{\n    i64 m, n;\n    std::cin >> m >> n;\n \
-    \   mint M{m};\n    const mint ans = power(M, n);\n    std::cout << ans.v << \"\
-    \\n\";\n    return 0;\n}\n"
-  code: "#define PROBLEM \\\n    \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B\"\
-    \n#include \"../../../src/misc/common/func_alias.hpp\"\n\nconstexpr i64 mod =\
-    \ 1000000007;\nstruct mint\n{\n    mint() = default;\n    mint(i64 v_) : v{v_}\
-    \ {}\n    friend mint operator+(const mint& m1, const mint& m2)\n    {\n     \
-    \   return mint(m1.v + m2.v);\n    }\n    friend mint operator*(const mint& m1,\
-    \ const mint& m2)\n    {\n        return mint(m1.v * m2.v % mod);\n    }\n   \
-    \ friend mint& operator+=(mint& m1, const mint& m2)\n    {\n        m1 = m1 +\
-    \ m2;\n        return m1;\n    }\n    friend mint& operator*=(mint& m1, const\
-    \ mint& m2)\n    {\n        m1 = m1 * m2;\n        return m1;\n    }\n    i64\
-    \ v = 0;\n};\n\nint main()\n{\n    i64 m, n;\n    std::cin >> m >> n;\n    mint\
-    \ M{m};\n    const mint ans = power(M, n);\n    std::cout << ans.v << \"\\n\"\
-    ;\n    return 0;\n}\n"
+    void fdivTest()\n{\n    auto f = [&](auto x, auto y) {\n        auto a = (decltype(x))std::floor((f80)x\
+    \ / y);\n        assert(fdiv(x, y) == a);\n    };\n    for (int x = -100; x <=\
+    \ 100; x++) {\n        for (int y = -100; y <= 100; y++) {\n            if (y\
+    \ == 0) { continue; }\n            f(x, y);\n        }\n    }\n}\nvoid cdivTest()\n\
+    {\n    auto c = [&](auto x, auto y) {\n        auto a = (decltype(x))std::ceil((f80)x\
+    \ / y);\n        assert(cdiv(x, y) == a);\n    };\n    for (int x = -100; x <=\
+    \ 100; x++) {\n        for (int y = -100; y <= 100; y++) {\n            if (y\
+    \ == 0) { continue; }\n            c(x, y);\n        }\n    }\n}\nint main()\n\
+    {\n    fdivTest();\n    cdivTest();\n    std::cout << \"Hello World\\n\";\n  \
+    \  return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
+    \n#include \"../../../src/misc/common/func_alias.hpp\"\nvoid fdivTest()\n{\n \
+    \   auto f = [&](auto x, auto y) {\n        auto a = (decltype(x))std::floor((f80)x\
+    \ / y);\n        assert(fdiv(x, y) == a);\n    };\n    for (int x = -100; x <=\
+    \ 100; x++) {\n        for (int y = -100; y <= 100; y++) {\n            if (y\
+    \ == 0) { continue; }\n            f(x, y);\n        }\n    }\n}\n\nvoid cdivTest()\n\
+    {\n    auto c = [&](auto x, auto y) {\n        auto a = (decltype(x))std::ceil((f80)x\
+    \ / y);\n        assert(cdiv(x, y) == a);\n    };\n    for (int x = -100; x <=\
+    \ 100; x++) {\n        for (int y = -100; y <= 100; y++) {\n            if (y\
+    \ == 0) { continue; }\n            c(x, y);\n        }\n    }\n}\n\nint main()\n\
+    {\n    fdivTest();\n    cdivTest();\n    std::cout << \"Hello World\\n\";\n  \
+    \  return 0;\n}\n"
   dependsOn:
   - src/misc/common/func_alias.hpp
   - src/misc/common/type_alias.hpp
   isVerificationFile: true
-  path: verifications/misc/common/func_alias.power.test.cpp
+  path: verifications/misc/common/func_alias.div.test.cpp
   requiredBy: []
   timestamp: '2021-05-24 21:49:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verifications/misc/common/func_alias.power.test.cpp
+documentation_of: verifications/misc/common/func_alias.div.test.cpp
 layout: document
 redirect_from:
-- /verify/verifications/misc/common/func_alias.power.test.cpp
-- /verify/verifications/misc/common/func_alias.power.test.cpp.html
-title: verifications/misc/common/func_alias.power.test.cpp
+- /verify/verifications/misc/common/func_alias.div.test.cpp
+- /verify/verifications/misc/common/func_alias.div.test.cpp.html
+title: verifications/misc/common/func_alias.div.test.cpp
 ---
