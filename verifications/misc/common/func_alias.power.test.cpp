@@ -1,8 +1,6 @@
 #define PROBLEM \
     "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B"
-#include "../../../src/misc/common.hpp"
-#include "../../../src/misc/printer.hpp"
-#include "../../../src/misc/scanner.hpp"
+#include "../../../src/misc/common/func_alias.hpp"
 
 constexpr i64 mod = 1000000007;
 struct mint
@@ -32,9 +30,10 @@ struct mint
 
 int main()
 {
-    const auto [m, n] = in.tup<i64, i64>();
+    i64 m, n;
+    std::cin >> m >> n;
     mint M{m};
     const mint ans = power(M, n);
-    out.ln(ans.v);
+    std::cout << ans.v << "\n";
     return 0;
 }

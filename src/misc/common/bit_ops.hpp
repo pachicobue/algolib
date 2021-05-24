@@ -19,7 +19,8 @@ constexpr int clog(const u64 v)
 }
 constexpr u64 ceil2(const u64 v)
 {
-    return 1_u64 << clog(v);
+    const int l = clog(v);
+    return (l == 64) ? 0_u64 : (1_u64 << l);
 }
 constexpr u64 floor2(const u64 v)
 {
@@ -27,7 +28,7 @@ constexpr u64 floor2(const u64 v)
 }
 constexpr bool ispow2(const u64 v)
 {
-    return (v & (v - 1)) == 0;
+    return (v > 0) and ((v & (v - 1)) == 0);
 }
 constexpr bool btest(const u64 mask, const int ind)
 {
