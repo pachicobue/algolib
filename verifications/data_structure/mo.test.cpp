@@ -8,11 +8,11 @@ int main()
 {
     const auto [N, Q] = in.tup<int, int>();
     auto as = in.vec<u32>(N);
-    Zipper<u32> zip(as);
+    Zipper<u32> zipper(as);
     for (auto& a : as) {
-        a = zip.zip(a);
+        a = zipper.zip(a);
     }
-    const int L = zip.size();
+    const int L = zipper.size();
     Fenwick<int> bit(Vec<int>(L, 0));
     u64 inv = 0;
     auto left = [&](int x, int) {  // (x,y)->(x-1,y)

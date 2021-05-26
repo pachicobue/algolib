@@ -7,6 +7,7 @@ int main()
     IntDict<u64, u64> dict;
     const auto Q = in.val<int>();
     for (int q : rep(Q)) {
+        USE(q);
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [k, v] = in.tup<u64, u64>();

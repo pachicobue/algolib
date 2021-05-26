@@ -11,6 +11,7 @@ void Test()
         assert(0 <= is[2] and is[2] < 4);
         iss.push_back(is);
     }
+    assert(iss.size() == 2 * 3 * 4);
     assert(std::is_sorted(iss.begin(), iss.end()));
 }
 
