@@ -107,7 +107,7 @@ public:
     FPS operator>>(const int s) const
     {
         FPS ans;
-        for (int i : range(s, size())) {
+        for (int i : irange(s, size())) {
             ans[i - s] = (*this)[i];
         }
         return ans;
@@ -120,7 +120,7 @@ public:
     FPS derivative() const
     {
         FPS ans;
-        for (int i : range(1, size())) {
+        for (int i : irange(1, size())) {
             ans[i - 1] = (*this)[i] * i;
         }
         return ans;
@@ -128,7 +128,7 @@ public:
     FPS integral() const
     {
         FPS ans;
-        for (int i : range(1, size() + 1)) {
+        for (int i : irange(1, size() + 1)) {
             ans[i] = (*this)[i - 1] * mint::sinv(i);
         }
         return ans;
@@ -233,7 +233,7 @@ public:
                     z[i] *= G[i];
                 }
                 trans(z, lg, true);
-                for (int i : range(m / 2, m)) {
+                for (int i : irange(m / 2, m)) {
                     g[i] = -z[i];
                 }
                 G = g, G.resize(m * 2), trans(G, lg + 1, false);
@@ -371,12 +371,12 @@ private:
             rs.resize(submint::max2p() + 1), irs.resize(submint::max2p() + 1);
             rs.back() = -r.pow((submint::mod() - 1) >> submint::max2p()),
             irs.back() = -ir.pow((submint::mod() - 1) >> submint::max2p());
-            for (u32 i : range(submint::max2p(), 0, -1)) {
+            for (u32 i : irange(submint::max2p(), 0, -1)) {
                 rs[i - 1] = -(rs[i] * rs[i]);
                 irs[i - 1] = -(irs[i] * irs[i]);
             }
         }
-        const auto drange = (rev ? range(0, lg, 1) : range(lg - 1, -1, -1));
+        const auto drange = (rev ? irange(0, lg, 1) : irange(lg - 1, -1, -1));
         for (const int d : drange) {
             const int width = 1 << d;
             submint e = 1;

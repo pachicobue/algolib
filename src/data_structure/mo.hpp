@@ -5,9 +5,8 @@ class Mo
 {
 public:
     Mo(const Vec<int>& xs, const Vec<int>& ys)
-        : m_xs{xs}, m_ys{ys}, m_is(m_xs.size())
+        : m_xs{xs}, m_ys{ys}, m_is{iotaVec(m_xs.size())}
     {
-        iotaAll(m_is);
         sortAll(m_is, [&](int i, int j) {
             const int ib = m_xs[i] / block_size;
             const int jb = m_xs[j] / block_size;

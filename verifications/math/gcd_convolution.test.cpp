@@ -9,10 +9,10 @@ int main()
     const auto [H, W] = in.tup<int, int>();
     mint ans = mint(H) * (W - 1) + mint(H - 1) * W;
     Vec<mint> as(H), bs(W);
-    for (int i : range(1, H)) {
+    for (int i : irange(1, H)) {
         as[i] = H - i;
     }
-    for (int i : range(1, W)) {
+    for (int i : irange(1, W)) {
         bs[i] = W - i;
     }
     const auto cs = gcdConvolute(as, bs);

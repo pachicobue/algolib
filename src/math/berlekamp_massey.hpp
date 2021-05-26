@@ -6,7 +6,7 @@ Vec<T> berlekampMassey(const Vec<T>& A)
     const int N = (int)A.size();
     Vec<T> B{1}, C{1};
     T b = 1;
-    for (int j : range(1, N + 1)) {
+    for (int j : irange(1, N + 1)) {
         int m = (int)B.size(), l = (int)C.size();
         T d = 0;
         for (int i : rep(l)) {

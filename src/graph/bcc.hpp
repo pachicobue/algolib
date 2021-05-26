@@ -7,7 +7,7 @@ class BCC
 public:
     BCC(const Graph<T>& g) : m_v(g.v()), m_cs(g.v(), -1), m_lowlink{g}
     {
-        auto dfs = Fixpoint([&](auto dfs, int u) -> void {
+        auto dfs = Fix([&](auto dfs, int u) -> void {
             m_cs[u] = m_cnum;
             for (int v : g[u]) {
                 if (m_cs[v] == -1 and not m_lowlink.isBridge(u, v)) { dfs(v); }

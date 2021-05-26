@@ -14,7 +14,7 @@ int main()
     const auto cs = berlekampMassey(as);
     const int d = cs.size();
     Vec<int> ans(d - 1);
-    for (int i : range(1, d)) {
+    for (int i : irange(1, d)) {
         ans[i - 1] = (-cs[i]).val();
     }
     out.ln(d - 1);

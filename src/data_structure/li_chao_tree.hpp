@@ -37,7 +37,7 @@ public:
     {
         if (x_left >= x_right) { return; }
         assert(m_xmin <= x_left and x_right <= m_xsup);
-        Fixpoint([&](auto dfs, int i, T lx, T rx) -> void {
+        Fix([&](auto dfs, int i, T lx, T rx) -> void {
             if (x_left <= lx and rx <= x_right) {
                 add(L{a, b}, i, lx, rx);
             } else {

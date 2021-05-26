@@ -3,7 +3,7 @@
 class DSU
 {
 public:
-    DSU(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 0) {}
+    DSU(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}
     int root(int i)
     {
         if (m_roots[i] == i) {
@@ -18,12 +18,12 @@ public:
         if (i == j) { return false; }
         if (size(i) > size(j)) { std::swap(i, j); }
         m_roots[i] = j;
-        m_sizes[j] = i;
+        m_sizes[j] += m_sizes[i];
         return true;
     }
     int size(int i)
     {
-        return m_sizes[i];
+        return m_sizes[root(i)];
     }
     Vec<Vec<int>> groups() const
     {

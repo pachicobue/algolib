@@ -2,9 +2,9 @@
 #include "type_alias.hpp"
 #pragma region FixPoint
 template<typename F>
-struct Fixpoint : F
+struct Fix : F
 {
-    Fixpoint(F&& f) : F{std::forward<F>(f)} {}
+    Fix(F&& f) : F{std::forward<F>(f)} {}
     template<typename... Args>
     auto operator()(Args&&... args) const
     {

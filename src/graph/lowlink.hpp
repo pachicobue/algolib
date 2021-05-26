@@ -13,7 +13,7 @@ public:
         const int N = g.v();
         int ord = 0;
         Vec<bool> used(N, false);
-        auto dfs = Fixpoint([&](auto dfs, int u, int pe) -> void {
+        auto dfs = Fix([&](auto dfs, int u, int pe) -> void {
             used[u] = true;
             m_ords[u] = ord++;
             m_lows[u] = m_ords[u];

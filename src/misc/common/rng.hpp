@@ -1,6 +1,6 @@
 #pragma once
 #include "type_alias.hpp"
-#include "func_alias.hpp"
+#include "vec_utils.hpp"
 #include "xoshiro.hpp"
 #pragma region RNG
 template<typename Rng>

@@ -16,14 +16,14 @@ public:
         }
         Vec<int> st;
         Vec<bool> used(N, false);
-        auto dfs = Fixpoint([&](auto dfs, int u) -> void {
+        auto dfs = Fix([&](auto dfs, int u) -> void {
             used[u] = true;
             for (int v : g[u]) {
                 if (not used[v]) { dfs(v); }
             }
             st.push_back(u);
         });
-        auto rdfs = Fixpoint([&](auto dfs, int v) -> void {
+        auto rdfs = Fix([&](auto dfs, int v) -> void {
             m_cs[v] = m_cnum;
             for (int u : rg[v]) {
                 if (m_cs[u] != -1) { continue; }

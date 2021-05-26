@@ -13,7 +13,7 @@ public:
             const int w = 1 << (m_depth - d - 1);
             for (int i = 1; i * w < m_size; i += 2) {
                 int l = i * w - 1, r = i * w;
-                for (int j : range(1, w)) {
+                for (int j : irange(1, w)) {
                     m_vss[d][l - j] = merge(vs[l - j], m_vss[d][l - j + 1]);
                     if (r + j < m_size) {
                         m_vss[d][r + j] = merge(vs[r + j], m_vss[d][r + j - 1]);

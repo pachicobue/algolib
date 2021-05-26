@@ -7,7 +7,7 @@ Pair<bool, Vec<int>> topSort(const Graph<T>& g)
     const int N = g.v();
     Vec<int> ans;
     Vec<int> used(N, 0);
-    auto dfs = Fixpoint([&](auto dfs, int s) -> bool {
+    auto dfs = Fix([&](auto dfs, int s) -> bool {
         if (used[s] == 1) {
             return false;
         } else if (used[s] == 0) {

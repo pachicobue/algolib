@@ -1,13 +1,14 @@
 #pragma once
 #include "../misc/common.hpp"
-template<typename T> class Fenwick
+template<typename T>
+class Fenwick
 {
 public:
     Fenwick(const Vec<T>& vs)
         : m_size(vs.size()), m_cap(ceil2(m_size)), m_vs(m_cap + 1, 0)
     {
         std::copy(vs.begin(), vs.end(), m_vs.begin() + 1);
-        for (int x : range(1, m_cap)) {
+        for (int x : irange(1, m_cap)) {
             m_vs[x + (x & -x)] += m_vs[x];
         }
     }
@@ -32,7 +33,8 @@ public:
         assert(0 <= l and l <= r and r <= m_size);
         return sum(r) - sum(l);
     }
-    template<typename F> int maxRight(F f)
+    template<typename F>
+    int maxRight(F f)
     {
         assert(f(T{}));
         T sum = T{};

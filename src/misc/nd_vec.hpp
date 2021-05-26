@@ -1,5 +1,5 @@
 #pragma once
-#include "type_alias.hpp"
+#include "common.hpp"
 #pragma region NdVec
 template<typename T, int n, int i = 0>
 auto ndVec(int const (&szs)[n], const T x = T{})

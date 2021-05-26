@@ -23,7 +23,7 @@ public:
           m_ops(m_half << 1, id())
     {
         std::copy(vs.begin(), vs.end(), m_vs.begin() + m_half);
-        for (int i : range(m_half - 1, 0, -1)) {
+        for (int i : irange(m_half - 1, 0, -1)) {
             up(i);
         }
     }

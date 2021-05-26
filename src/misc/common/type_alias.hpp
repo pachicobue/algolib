@@ -79,4 +79,9 @@ template<typename T>
 using MaxHeap = std::priority_queue<T>;
 template<typename T>
 using MinHeap = std::priority_queue<T, Vec<T>, Gt<T>>;
+
+using NSec = std::chrono::nanoseconds;
+using USec = std::chrono::microseconds;
+using MSec = std::chrono::milliseconds;
+using Sec = std::chrono::seconds;
 #pragma endregion

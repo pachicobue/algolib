@@ -63,6 +63,7 @@ public:
         }
         return ans;
     }
+
 private:
     static constexpr int bucket_size = sizeof(u64) * 8;
     static constexpr int bslog = log2p1(bucket_size) - 1;
@@ -84,6 +85,7 @@ private:
         int m_size, m_bn;
         Vec<u64> m_datas;
         Vec<int> m_larges;
+
     public:
         FID() : m_size{0} {}
         FID(const int b)
@@ -94,7 +96,7 @@ private:
         {}
         void build()
         {
-            for (int i : range(1, m_larges.size())) {
+            for (int i : irange(1, m_larges.size())) {
                 m_larges[i] = m_larges[i - 1] + popcount(m_datas[i - 1]);
             }
         }

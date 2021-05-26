@@ -32,7 +32,7 @@ int main()
         }
         return ans;
     };
-    auto pow = Fixpoint([&](auto dfs, const mat& m, i64 n) -> mat {
+    auto pow = Fix([&](auto dfs, const mat& m, i64 n) -> mat {
         if (n == 1) { return m; }
         if (n % 2 == 0) {
             return dfs(mul(m, m), n / 2);

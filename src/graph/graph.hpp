@@ -67,7 +67,7 @@ public:
         const int N = v();
         assert(0 <= root and root < N);
         Vec<T> ss(N, 1);
-        Fixpoint([&](auto dfs, int u, int p) -> void {
+        Fix([&](auto dfs, int u, int p) -> void {
             for (const auto& [id, v, c] : m_edges[u]) {
                 USE(id);
                 if (v == p) { continue; }
@@ -82,7 +82,7 @@ public:
         const int N = v();
         assert(0 <= root and root < N);
         Vec<T> ds(N, 0);
-        Fixpoint([&](auto dfs, int u, int p) -> void {
+        Fix([&](auto dfs, int u, int p) -> void {
             for (const auto& [id, v, c] : m_edges[u]) {
                 USE(id);
                 if (v == p) { continue; }
@@ -97,7 +97,7 @@ public:
         const int N = v();
         assert(0 <= root and root < N);
         Vec<int> ps(N, -1);
-        Fixpoint([&](auto dfs, int u, int p) -> void {
+        Fix([&](auto dfs, int u, int p) -> void {
             for (const auto& [id, v, c] : m_edges[u]) {
                 USE(id);
                 if (v == p) { continue; }

@@ -17,7 +17,7 @@ public:
     {
         const int N = g.v();
         Vec<int> szs(N, 1);
-        Fixpoint([&](auto dfs, int u, int p) -> int {
+        Fix([&](auto dfs, int u, int p) -> int {
             m_ps[u] = p;
             for (int i : rep(g[u].size())) {
                 const int v = g[u][i];
@@ -29,7 +29,7 @@ public:
         })(r, -1);
         m_tops[r] = r;
         int index = 0;
-        Fixpoint([&](auto dfs, int u, int p) -> void {
+        Fix([&](auto dfs, int u, int p) -> void {
             m_ins[u] = index++;
             m_ords[m_ins[u]] = u;
             for (int i : rep(g[u].size())) {

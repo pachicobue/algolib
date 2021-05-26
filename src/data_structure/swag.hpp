@@ -27,7 +27,7 @@ public:
             for (int i : per(f)) {
                 m_fronts.push_back(as[i]);
             }
-            for (int i : range(f, (int)as.size() - 1)) {
+            for (int i : irange(f, (int)as.size() - 1)) {
                 m_backs.push_back(as[i]);
             }
             calc();
@@ -41,10 +41,10 @@ public:
             Vec<T> as = m_backs;
             m_backs.clear(), m_Backs.clear();
             const int f = ((int)as.size() + 1) / 2;
-            for (int i : range(f - 1, 0, -1)) {
+            for (int i : irange(f - 1, 0, -1)) {
                 m_fronts.push_back(as[i]);
             }
-            for (int i : range(f, (int)as.size())) {
+            for (int i : irange(f, (int)as.size())) {
                 m_backs.push_back(as[i]);
             }
             calc();
@@ -85,13 +85,13 @@ private:
     {
         if (not m_fronts.empty()) {
             m_Fronts.push_back(m_fronts[0]);
-            for (int i : range(1, m_fronts.size())) {
+            for (int i : irange(1, m_fronts.size())) {
                 m_Fronts.push_back(m_merge(m_fronts[i], m_Fronts.back()));
             }
         }
         if (not m_backs.empty()) {
             m_Backs.push_back(m_backs[0]);
-            for (int i : range(1, m_backs.size())) {
+            for (int i : irange(1, m_backs.size())) {
                 m_Backs.push_back(m_merge(m_Backs.back(), m_backs[i]));
             }
         }

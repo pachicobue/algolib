@@ -6,7 +6,7 @@ int main()
 {
     const auto [N, Q] = in.tup<int, int>();
     Graph g(N);
-    for (int i : range(1, N)) {
+    for (int i : irange(1, N)) {
         const int p = in.val<int>();
         g.addEdge(p, i, true);
     }

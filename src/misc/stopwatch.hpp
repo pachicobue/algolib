@@ -7,17 +7,16 @@ class StopWatch
     using Tp = SysClock::time_point;
 
 public:
-    StopWatch() : m_start{SysClock::now()}, m_rap_point{m_start} {}
-    template<typename D = std::chrono::milliseconds>
+    StopWatch() : m_start{SysClock::now()}, m_rap{m_start} {}
+    template<typename D = MSec>
     typename D::rep rap()
     {
         const auto now = SysClock::now();
-        const auto ans
-            = std::chrono::duration_cast<D>(now - m_rap_point).count();
-        m_rap_point = now;
+        const auto ans = std::chrono::duration_cast<D>(now - m_rap).count();
+        m_rap = now;
         return ans;
     }
-    template<typename D = std::chrono::milliseconds>
+    template<typename D = MSec>
     typename D::rep total()
     {
         const auto now = SysClock::now();
@@ -25,6 +24,6 @@ public:
     }
 
 private:
-    Tp m_start, m_rap_point;
+    Tp m_start, m_rap;
 };
 #pragma endregion

@@ -6,12 +6,13 @@ int main()
 {
     const auto [N, Q] = in.tup<int, int>();
     auto uf = DSU(N);
-    for (int q = 0; q < Q; q++) {
+    for (int q : rep(Q)) {
+        USE(q);
         const auto [t, u, v] = in.tup<int, int, int>();
         if (t == 0) {
             uf.merge(u, v);
         } else {
-            out.ln((int)(uf.root(u) == uf.root(v)));
+            out.ln(uf.root(u) == uf.root(v));
         }
     }
 }

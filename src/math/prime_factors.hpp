@@ -43,7 +43,7 @@ Map<u64, int> primeFactors(u64 n)
     using mint = modint_dynamic<287687412>;
     using mint64 = modint64_dynamic<4832432>;
     Map<u64, int> ans;
-    Fixpoint([&](auto dfs, u64 x) -> void {
+    Fix([&](auto dfs, u64 x) -> void {
         while ((x & 1) == 0) {
             x >>= 1, ans[2]++;
         }

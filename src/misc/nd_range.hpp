@@ -1,53 +1,6 @@
 #pragma once
-#include "type_alias.hpp"
-#pragma region Range
-class range
-{
-private:
-    struct itr
-    {
-        itr(int start = 0, int step = 1) : m_cnt{start}, m_step{step} {}
-        bool operator!=(const itr& it) const
-        {
-            return m_cnt != it.m_cnt;
-        }
-        int operator*()
-        {
-            return m_cnt;
-        }
-        itr& operator++()
-        {
-            m_cnt += m_step;
-            return *this;
-        }
-        int m_cnt, m_step;
-    };
-    int m_start, m_end, m_step;
-
-public:
-    range(int start, int end, int step = 1)
-        : m_start{start}, m_end{end}, m_step{step}
-    {
-        assert(m_step == 1 or m_step == -1);
-    }
-    itr begin() const
-    {
-        return itr{m_start, m_step};
-    }
-    itr end() const
-    {
-        return itr{m_end, m_step};
-    }
-};
-range rep(int end)
-{
-    return range(0, end, 1);
-}
-range per(int rend)
-{
-    return range(rend - 1, -1, -1);
-}
-
+#include "common.hpp"
+#pragma region NdRange
 class ndRep
 {
 private:

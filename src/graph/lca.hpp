@@ -14,7 +14,7 @@ public:
           m_ds([&]() {
               Vec<P> ans;
               Vec<bool> used(g.v(), false);
-              Fixpoint([&](auto dfs, const P& s) -> void {
+              Fix([&](auto dfs, const P& s) -> void {
                   const int u = s.second;
                   used[u] = true;
                   m_ins[u] = ans.size();

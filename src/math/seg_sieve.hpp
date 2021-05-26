@@ -3,8 +3,7 @@
 template<typename T>
 Vec<bool> segSieve(T l, T r, const Vec<T>& ps)
 {
-    Vec<bool> ans(r - l);
-    iotaAll(ans, l);
+    Vec<bool> ans = iotaVec(r - l, l);
     if (l <= 0 and 0 < r) { ans[0 - l] = false; }
     if (l <= 1 and 1 < r) { ans[1 - l] = false; }
     for (const T p : ps) {
