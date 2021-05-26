@@ -4,46 +4,46 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/li_chao_tree.hpp
     title: Li Chao Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   - icon: ':heavy_check_mark:'
@@ -300,21 +300,22 @@ data:
     int main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    auto cht = LiChaoTree<i64>(-TEN<i64>(9),\
     \ TEN<i64>(9));\n    for (int i : rep(N)) {\n        const auto [a, b] = in.tup<i64,\
     \ i64>();\n        cht.addLine(a, b);\n    }\n    for (int q : rep(Q)) {\n   \
-    \     const auto t = in.val<int>();\n        if (t == 0) {\n            const\
-    \ auto [a, b] = in.tup<i64, i64>();\n            cht.addLine(a, b);\n        }\
-    \ else {\n            const auto p = in.val<i64>();\n            const auto [ok,\
-    \ l] = cht.minLine(p);\n            out.ln(l.first * p + l.second);\n        }\n\
-    \    }\n}\n"
+    \     static_cast<void>(q);\n        const auto t = in.val<int>();\n        if\
+    \ (t == 0) {\n            const auto [a, b] = in.tup<i64, i64>();\n          \
+    \  cht.addLine(a, b);\n        } else {\n            const auto p = in.val<i64>();\n\
+    \            const auto [ok, l] = cht.minLine(p);\n            out.ln(l.first\
+    \ * p + l.second);\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/line_add_get_min\"\n#include\
     \ \"../../src/data_structure/li_chao_tree.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
     \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const auto\
     \ [N, Q] = in.tup<int, int>();\n    auto cht = LiChaoTree<i64>(-TEN<i64>(9), TEN<i64>(9));\n\
     \    for (int i : rep(N)) {\n        const auto [a, b] = in.tup<i64, i64>();\n\
-    \        cht.addLine(a, b);\n    }\n    for (int q : rep(Q)) {\n        const\
-    \ auto t = in.val<int>();\n        if (t == 0) {\n            const auto [a, b]\
-    \ = in.tup<i64, i64>();\n            cht.addLine(a, b);\n        } else {\n  \
-    \          const auto p = in.val<i64>();\n            const auto [ok, l] = cht.minLine(p);\n\
-    \            out.ln(l.first * p + l.second);\n        }\n    }\n}\n"
+    \        cht.addLine(a, b);\n    }\n    for (int q : rep(Q)) {\n        USE(q);\n\
+    \        const auto t = in.val<int>();\n        if (t == 0) {\n            const\
+    \ auto [a, b] = in.tup<i64, i64>();\n            cht.addLine(a, b);\n        }\
+    \ else {\n            const auto p = in.val<i64>();\n            const auto [ok,\
+    \ l] = cht.minLine(p);\n            out.ln(l.first * p + l.second);\n        }\n\
+    \    }\n}\n"
   dependsOn:
   - src/data_structure/li_chao_tree.hpp
   - src/misc/common.hpp
@@ -336,7 +337,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/li_chao_tree.line.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-27 04:26:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/li_chao_tree.line.test.cpp

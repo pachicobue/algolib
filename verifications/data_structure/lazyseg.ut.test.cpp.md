@@ -2,11 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/math/set_moebius.hpp
-    title: src/math/set_moebius.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/math/set_zeta.hpp
-    title: src/math/set_zeta.hpp
+    path: src/data_structure/lazyseg.hpp
+    title: Lazy Segment Tree
   - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -49,19 +46,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/math/or_convolution.hpp
-    title: src/math/or_convolution.hpp
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verifications/math/and_convolution.test.cpp
-    title: verifications/math/and_convolution.test.cpp
+    path: src/misc/fastio/printer.hpp
+    title: src/misc/fastio/printer.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/fastio/scanner.hpp
+    title: src/misc/fastio/scanner.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H
+    links:
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
     #pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned int;\nusing i64\
     \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
@@ -211,31 +211,129 @@ data:
     \ vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]()\
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
-    #pragma endregion\ntemplate<typename T>\nVec<T> setMoebius(const Vec<T>& xs, bool\
-    \ subset)\n{\n    const int N = ceil2(xs.size());\n    Vec<T> ys(N);\n    for\
-    \ (int i : rep(xs.size())) {\n        ys[i] = xs[i];\n    }\n    for (int i =\
-    \ 1; i < N; i <<= 1) {\n        for (int j : rep(N)) {\n            if ((j & i)\
-    \ == 0) {\n                if (subset) {\n                    ys[j | i] -= ys[j];\n\
-    \                } else {\n                    ys[j] -= ys[j | i];\n         \
-    \       }\n            }\n        }\n    }\n    return ys;\n}\ntemplate<typename\
-    \ T>\nVec<T> setZeta(const Vec<T>& xs, const bool subset)\n{\n    const int N\
-    \ = ceil2(xs.size());\n    Vec<T> ys(N);\n    for (int i : rep(xs.size())) {\n\
-    \        ys[i] = xs[i];\n    }\n    for (int i = 1; i < N; i <<= 1) {\n      \
-    \  for (int j : rep(N)) {\n            if ((j & i) == 0) {\n                if\
-    \ (subset) {\n                    ys[j | i] += ys[j];\n                } else\
-    \ {\n                    ys[j] += ys[j | i];\n                }\n            }\n\
-    \        }\n    }\n    return ys;\n}\ntemplate<typename T>\nVec<T> andConvolute(Vec<T>\
-    \ f, Vec<T> g)\n{\n    const int N = ceil2(std::max(f.size(), g.size()));\n  \
-    \  f.resize(N), g.resize(N);\n    auto F = setZeta(f, false), G = setZeta(g, false);\n\
-    \    for (int i : rep(N)) {\n        F[i] *= G[i];\n    }\n    return setMoebius(F,\
-    \ false);\n}\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"set_moebius.hpp\"\
-    \n#include \"set_zeta.hpp\"\ntemplate<typename T>\nVec<T> andConvolute(Vec<T>\
-    \ f, Vec<T> g)\n{\n    const int N = ceil2(std::max(f.size(), g.size()));\n  \
-    \  f.resize(N), g.resize(N);\n    auto F = setZeta(f, false), G = setZeta(g, false);\n\
-    \    for (int i : rep(N)) {\n        F[i] *= G[i];\n    }\n    return setMoebius(F,\
-    \ false);\n}\n"
+    #pragma endregion\ntemplate<typename MergeMonoid, typename OpMonoid, typename\
+    \ Act>\nclass LazySeg\n{\n    using T = typename MergeMonoid::T;\n    using F\
+    \ = typename OpMonoid::F;\n    static constexpr T e()\n    {\n        return MergeMonoid::e();\n\
+    \    }\n    static constexpr F id()\n    {\n        return OpMonoid::id();\n \
+    \   }\npublic:\n    LazySeg(const Vec<T>& vs)\n        : m_size(vs.size()),\n\
+    \          m_depth(clog(m_size) + 1),\n          m_half(1 << m_depth),\n     \
+    \     m_vs(m_half << 1, e()),\n          m_ops(m_half << 1, id())\n    {\n   \
+    \     std::copy(vs.begin(), vs.end(), m_vs.begin() + m_half);\n        for (int\
+    \ i : irange(m_half - 1, 0, -1)) {\n            up(i);\n        }\n    }\n   \
+    \ T get(const int a)\n    {\n        assert(a < m_size);\n        return fold(a,\
+    \ a + 1);\n    }\n    void set(int i, const T& v)\n    {\n        assert(0 <=\
+    \ i and i < m_size);\n        i += m_half;\n        topDown(i), topDown(i + 1);\n\
+    \        m_ops[i] = id();\n        m_vs[i] = v;\n        while (i >>= 1) {\n \
+    \           up(i);\n        }\n    }\n    T fold(int l, int r)\n    {\n      \
+    \  assert(0 <= l and l <= r and r <= m_size);\n        if (l >= r) { return e();\
+    \ }\n        l += m_half, r += m_half;\n        topDown(l), topDown(r);\n    \
+    \    T accl = e(), accr = e();\n        for (; l < r; l >>= 1, r >>= 1) {\n  \
+    \          if (l & 1) { accl = merge(accl, m_vs[l++]); }\n            if (r &\
+    \ 1) { accr = merge(m_vs[--r], accr); }\n        }\n        return merge(accl,\
+    \ accr);\n    }\n    void act(int l, int r, const F& f)\n    {\n        assert(0\
+    \ <= l and l <= r and r <= m_size);\n        int li = l + m_half, ri = r + m_half;\n\
+    \        topDown(li), topDown(ri);\n        for (; li < ri; li >>= 1, ri >>= 1)\
+    \ {\n            if (li & 1) { update(li++, f); }\n            if (ri & 1) { update(--ri,\
+    \ f); }\n        }\n        bottomUp(l + m_half), bottomUp(r + m_half);\n    }\n\
+    \    friend Ostream& operator<<(Ostream& os, const LazySeg& lseg)\n    {\n   \
+    \     auto lseg2 = lseg;\n        os << \"[\";\n        for (int i : rep(lseg.m_size))\
+    \ {\n            os << (i == 0 ? \"\" : \",\") << lseg2.get(i);\n        }\n \
+    \       return (os << \"]\\n\");\n    }\nprivate:\n    void up(int i)\n    {\n\
+    \        m_vs[i] = merge(m_vs[i << 1], m_vs[i << 1 | 1]);\n    }\n    void update(int\
+    \ i, const F& f)\n    {\n        m_ops[i] = compose(f, m_ops[i]);\n        m_vs[i]\
+    \ = apply(f, m_vs[i]);\n    }\n    void down(int i)\n    {\n        update(i <<\
+    \ 1, m_ops[i]), update(i << 1 | 1, m_ops[i]);\n        m_ops[i] = id();\n    }\n\
+    \    void topDown(int i)\n    {\n        const int j = (i / (i & -i)) >> 1;\n\
+    \        for (const int h : per(m_depth)) {\n            const int v = i >> h;\n\
+    \            if (v > j) { break; }\n            down(v);\n        }\n    }\n \
+    \   void bottomUp(int i)\n    {\n        i = (i / (i & -i)) >> 1;\n        for\
+    \ (; i >= 1; i >>= 1) {\n            up(i);\n        }\n    }\n    int m_size,\
+    \ m_depth, m_half;\n    Vec<T> m_vs;\n    Vec<F> m_ops;\n    static inline MergeMonoid\
+    \ merge;\n    static inline OpMonoid compose;\n    static inline Act apply;\n\
+    };\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer() {}\n\
+    \    template<typename... Args>\n    int operator()(const Args&... args)\n   \
+    \ {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
+    n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
+    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
+    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
+    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
+    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
+    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
+    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
+    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
+    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
+    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
+    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
+    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
+    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
+    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
+    \        }\n        while (true) {\n            c = getchar();\n            if\
+    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
+    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
+    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
+    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
+    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
+    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
+    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
+    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
+    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
+    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
+    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
+    \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
+    \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
+    \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    int main()\n{\n    struct MergeMonoid\n    {\n        using T = i64;\n       \
+    \ static T e()\n        {\n            return INF<T>;\n        }\n        T operator()(const\
+    \ T& x1, const T& x2) const\n        {\n            return std::min(x1, x2);\n\
+    \        }\n    };\n    struct OpMonoid\n    {\n        using F = i64;\n     \
+    \   static F id()\n        {\n            return 0;\n        }\n        F operator()(const\
+    \ F& f1, const F& f2) const\n        {\n            return f1 + f2;\n        }\n\
+    \    };\n    struct Act\n    {\n        using T = MergeMonoid::T;\n        using\
+    \ F = OpMonoid::F;\n        T operator()(const F& f, const T& x) const\n     \
+    \   {\n            return f + x;\n        }\n    };\n    const auto [N, Q] = in.tup<int,\
+    \ int>();\n    auto seg = LazySeg<MergeMonoid, OpMonoid, Act>(Vec<i64>(N, 1));\n\
+    \    for (int i : rep(N)) {\n        seg.set(i, 0);\n    }\n    for (int q : rep(Q))\
+    \ {\n        static_cast<void>(q);\n        const auto t = in.val<int>();\n  \
+    \      if (t == 0) {\n            const auto [s, t, x] = in.tup<int, int, i64>();\n\
+    \            seg.act(s, t + 1, x);\n        } else {\n            const auto [s,\
+    \ t] = in.tup<int, int>();\n            if (t - s == 0) {\n                out.ln(seg.get(s));\n\
+    \            } else {\n                out.ln(seg.fold(s, t + 1));\n         \
+    \   }\n        }\n    }\n    if (N < 10) { std::cerr << seg << std::endl; }\n\
+    \    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H\"\
+    \n#include \"../../src/data_structure/lazyseg.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
+    \n#include \"../../src/misc/fastio/scanner.hpp\"\n\nint main()\n{\n    struct\
+    \ MergeMonoid\n    {\n        using T = i64;\n        static T e()\n        {\n\
+    \            return INF<T>;\n        }\n        T operator()(const T& x1, const\
+    \ T& x2) const\n        {\n            return std::min(x1, x2);\n        }\n \
+    \   };\n    struct OpMonoid\n    {\n        using F = i64;\n        static F id()\n\
+    \        {\n            return 0;\n        }\n        F operator()(const F& f1,\
+    \ const F& f2) const\n        {\n            return f1 + f2;\n        }\n    };\n\
+    \    struct Act\n    {\n        using T = MergeMonoid::T;\n        using F = OpMonoid::F;\n\
+    \        T operator()(const F& f, const T& x) const\n        {\n            return\
+    \ f + x;\n        }\n    };\n\n    const auto [N, Q] = in.tup<int, int>();\n \
+    \   auto seg = LazySeg<MergeMonoid, OpMonoid, Act>(Vec<i64>(N, 1));\n    for (int\
+    \ i : rep(N)) {\n        seg.set(i, 0);\n    }\n    for (int q : rep(Q)) {\n \
+    \       USE(q);\n        const auto t = in.val<int>();\n        if (t == 0) {\n\
+    \            const auto [s, t, x] = in.tup<int, int, i64>();\n            seg.act(s,\
+    \ t + 1, x);\n        } else {\n            const auto [s, t] = in.tup<int, int>();\n\
+    \            if (t - s == 0) {\n                out.ln(seg.get(s));\n        \
+    \    } else {\n                out.ln(seg.fold(s, t + 1));\n            }\n  \
+    \      }\n    }\n    if (N < 10) { std::cerr << seg << std::endl; }\n    return\
+    \ 0;\n}\n"
   dependsOn:
+  - src/data_structure/lazyseg.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -250,20 +348,18 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/math/set_moebius.hpp
-  - src/math/set_zeta.hpp
-  isVerificationFile: false
-  path: src/math/and_convolution.hpp
-  requiredBy:
-  - src/math/or_convolution.hpp
-  timestamp: '2021-05-27 03:45:14+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verifications/math/and_convolution.test.cpp
-documentation_of: src/math/and_convolution.hpp
+  - src/misc/fastio/printer.hpp
+  - src/misc/fastio/scanner.hpp
+  isVerificationFile: true
+  path: verifications/data_structure/lazyseg.ut.test.cpp
+  requiredBy: []
+  timestamp: '2021-05-27 04:26:42+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verifications/data_structure/lazyseg.ut.test.cpp
 layout: document
 redirect_from:
-- /library/src/math/and_convolution.hpp
-- /library/src/math/and_convolution.hpp.html
-title: src/math/and_convolution.hpp
+- /verify/verifications/data_structure/lazyseg.ut.test.cpp
+- /verify/verifications/data_structure/lazyseg.ut.test.cpp.html
+title: verifications/data_structure/lazyseg.ut.test.cpp
 ---

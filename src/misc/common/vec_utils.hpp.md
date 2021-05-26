@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy:
@@ -212,10 +212,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/xor_convolution.hpp
     title: src/math/xor_convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
   - icon: ':heavy_check_mark:'
@@ -224,22 +224,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/nd_range.hpp
     title: src/misc/nd_range.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/nd_vec.hpp
     title: src/misc/nd_vec.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/printer.hpp
     title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/scanner.hpp
     title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/stopwatch.hpp
     title: src/misc/stopwatch.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/zipper.hpp
     title: src/misc/zipper.hpp
   - icon: ':warning:'
@@ -291,6 +291,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/lazyseg.test.cpp
     title: verifications/data_structure/lazyseg.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/lazyseg.ut.test.cpp
+    title: verifications/data_structure/lazyseg.ut.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/li_chao_tree.line.test.cpp
     title: verifications/data_structure/li_chao_tree.line.test.cpp
@@ -393,30 +396,30 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/misc/fastio/fastio.test.cpp
     title: verifications/misc/fastio/fastio.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/io.test.cpp
     title: verifications/misc/io.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/nd_range.test.cpp
     title: verifications/misc/nd_range.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/nd_vec.test.cpp
     title: verifications/misc/nd_vec.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/printer.test.cpp
     title: verifications/misc/printer.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/scanner.test.cpp
     title: verifications/misc/scanner.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/stopwatch.test.cpp
     title: verifications/misc/stopwatch.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/zipper.test.cpp
     title: verifications/misc/zipper.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region TypeAlias\nusing i32 = int;\n\
@@ -576,7 +579,7 @@ data:
   - src/graph/lowlink.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
   timestamp: '2021-05-27 03:45:14+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/misc/zipper.test.cpp
   - verifications/misc/scanner.test.cpp
@@ -607,6 +610,7 @@ data:
   - verifications/math/fps.pow.test.cpp
   - verifications/math/fps.nth.test.cpp
   - verifications/data_structure/wavelet.test.cpp
+  - verifications/data_structure/lazyseg.ut.test.cpp
   - verifications/data_structure/mo.test.cpp
   - verifications/data_structure/swag.test.cpp
   - verifications/data_structure/dualseg.test.cpp

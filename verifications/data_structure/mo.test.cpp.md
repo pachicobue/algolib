@@ -7,46 +7,46 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/mo.hpp
     title: Mo's Algorithm
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   - icon: ':heavy_check_mark:'
@@ -55,7 +55,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/zipper.hpp
     title: src/misc/zipper.hpp
   _extendedRequiredBy: []
@@ -305,8 +305,8 @@ data:
     \ (not m_calced) {\n            uniqueAll(m_vs);\n            m_calced = true;\n\
     \        }\n    }\n    Vec<T> m_vs;\n    bool m_calced = true;\n};\n#pragma endregion\n\
     int main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    auto as = in.vec<u32>(N);\n\
-    \    Zipper<u32> zip(as);\n    for (auto& a : as) {\n        a = zip.zip(a);\n\
-    \    }\n    const int L = zip.size();\n    Fenwick<int> bit(Vec<int>(L, 0));\n\
+    \    Zipper<u32> zipper(as);\n    for (auto& a : as) {\n        a = zipper.zip(a);\n\
+    \    }\n    const int L = zipper.size();\n    Fenwick<int> bit(Vec<int>(L, 0));\n\
     \    u64 inv = 0;\n    auto left = [&](int x, int) {\n        const int a = as[x\
     \ - 1];\n        inv += bit.sum(0, a);\n        bit.add(a, 1);\n    };\n    auto\
     \ right = [&](int x, int) {\n        const int a = as[x];\n        inv -= bit.sum(0,\
@@ -322,21 +322,21 @@ data:
     \n#include \"../../src/data_structure/fenwick.hpp\"\n#include \"../../src/data_structure/mo.hpp\"\
     \n#include \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
     \n#include \"../../src/misc/zipper.hpp\"\nint main()\n{\n    const auto [N, Q]\
-    \ = in.tup<int, int>();\n    auto as = in.vec<u32>(N);\n    Zipper<u32> zip(as);\n\
-    \    for (auto& a : as) {\n        a = zip.zip(a);\n    }\n    const int L = zip.size();\n\
-    \    Fenwick<int> bit(Vec<int>(L, 0));\n    u64 inv = 0;\n    auto left = [&](int\
-    \ x, int) {  // (x,y)->(x-1,y)\n        const int a = as[x - 1];\n        inv\
-    \ += bit.sum(0, a);\n        bit.add(a, 1);\n    };\n    auto right = [&](int\
-    \ x, int) {  // (x,y)->(x+1,y)\n        const int a = as[x];\n        inv -= bit.sum(0,\
-    \ a);\n        bit.add(a, -1);\n    };\n    auto up = [&](int, int y) {  // (x,y)->(x,y-1)\n\
-    \        const int a = as[y - 1];\n        inv -= bit.sum(a + 1, L);\n       \
-    \ bit.add(a, -1);\n    };\n    auto down = [&](int, int y) {  // (x,y)->(x,y+1)\n\
-    \        const int a = as[y];\n        inv += bit.sum(a + 1, L);\n        bit.add(a,\
-    \ 1);\n    };\n\n    Vec<int> ls(Q), rs(Q);\n    for (int q : rep(Q)) {\n    \
-    \    std::tie(ls[q], rs[q]) = in.tup<int, int>();\n    }\n    Mo<300> mo(ls, rs);\n\
-    \    Vec<u64> ans(Q);\n    for (int q : rep(Q)) {\n        const int it = mo.next(right,\
-    \ left, down, up);\n        ans[it] = inv;\n    }\n    out.ln(ans);\n\n    return\
-    \ 0;\n}\n"
+    \ = in.tup<int, int>();\n    auto as = in.vec<u32>(N);\n    Zipper<u32> zipper(as);\n\
+    \    for (auto& a : as) {\n        a = zipper.zip(a);\n    }\n    const int L\
+    \ = zipper.size();\n    Fenwick<int> bit(Vec<int>(L, 0));\n    u64 inv = 0;\n\
+    \    auto left = [&](int x, int) {  // (x,y)->(x-1,y)\n        const int a = as[x\
+    \ - 1];\n        inv += bit.sum(0, a);\n        bit.add(a, 1);\n    };\n    auto\
+    \ right = [&](int x, int) {  // (x,y)->(x+1,y)\n        const int a = as[x];\n\
+    \        inv -= bit.sum(0, a);\n        bit.add(a, -1);\n    };\n    auto up =\
+    \ [&](int, int y) {  // (x,y)->(x,y-1)\n        const int a = as[y - 1];\n   \
+    \     inv -= bit.sum(a + 1, L);\n        bit.add(a, -1);\n    };\n    auto down\
+    \ = [&](int, int y) {  // (x,y)->(x,y+1)\n        const int a = as[y];\n     \
+    \   inv += bit.sum(a + 1, L);\n        bit.add(a, 1);\n    };\n\n    Vec<int>\
+    \ ls(Q), rs(Q);\n    for (int q : rep(Q)) {\n        std::tie(ls[q], rs[q]) =\
+    \ in.tup<int, int>();\n    }\n    Mo<300> mo(ls, rs);\n    Vec<u64> ans(Q);\n\
+    \    for (int q : rep(Q)) {\n        const int it = mo.next(right, left, down,\
+    \ up);\n        ans[it] = inv;\n    }\n    out.ln(ans);\n\n    return 0;\n}\n"
   dependsOn:
   - src/data_structure/fenwick.hpp
   - src/misc/common.hpp
@@ -360,7 +360,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/mo.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-27 04:26:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/mo.test.cpp

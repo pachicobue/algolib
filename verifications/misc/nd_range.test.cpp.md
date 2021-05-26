@@ -1,56 +1,56 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/nd_range.hpp
     title: src/misc/nd_range.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -221,15 +221,17 @@ data:
     void Test()\n{\n    std::vector<std::vector<int>> iss;\n    for (auto is : ndRep({2,\
     \ 3, 4})) {\n        assert(0 <= is[0] and is[0] < 2);\n        assert(0 <= is[1]\
     \ and is[1] < 3);\n        assert(0 <= is[2] and is[2] < 4);\n        iss.push_back(is);\n\
-    \    }\n    assert(std::is_sorted(iss.begin(), iss.end()));\n}\nint main()\n{\n\
-    \    Test();\n    std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
+    \    }\n    assert(iss.size() == 2 * 3 * 4);\n    assert(std::is_sorted(iss.begin(),\
+    \ iss.end()));\n}\nint main()\n{\n    Test();\n    std::cout << \"Hello World\\\
+    n\";\n    return 0;\n}\n"
   code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \n#include \"../../src/misc/nd_range.hpp\"\n\nvoid Test()\n{\n    std::vector<std::vector<int>>\
     \ iss;\n    for (auto is : ndRep({2, 3, 4})) {\n        assert(0 <= is[0] and\
     \ is[0] < 2);\n        assert(0 <= is[1] and is[1] < 3);\n        assert(0 <=\
-    \ is[2] and is[2] < 4);\n        iss.push_back(is);\n    }\n    assert(std::is_sorted(iss.begin(),\
-    \ iss.end()));\n}\n\nint main()\n{\n    Test();\n    std::cout << \"Hello World\\\
-    n\";\n    return 0;\n}\n"
+    \ is[2] and is[2] < 4);\n        iss.push_back(is);\n    }\n    assert(iss.size()\
+    \ == 2 * 3 * 4);\n    assert(std::is_sorted(iss.begin(), iss.end()));\n}\n\nint\
+    \ main()\n{\n    Test();\n    std::cout << \"Hello World\\n\";\n    return 0;\n\
+    }\n"
   dependsOn:
   - src/misc/nd_range.hpp
   - src/misc/common.hpp
@@ -249,8 +251,8 @@ data:
   isVerificationFile: true
   path: verifications/misc/nd_range.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-27 04:26:42+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/misc/nd_range.test.cpp
 layout: document

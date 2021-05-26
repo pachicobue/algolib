@@ -4,46 +4,46 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/intdict.hpp
     title: src/data_structure/intdict.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   - icon: ':heavy_check_mark:'
@@ -269,17 +269,18 @@ data:
     \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
     \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
     int main()\n{\n    IntDict<u64, u64> dict;\n    const auto Q = in.val<int>();\n\
-    \    for (int q : rep(Q)) {\n        const auto t = in.val<int>();\n        if\
-    \ (t == 0) {\n            const auto [k, v] = in.tup<u64, u64>();\n          \
-    \  dict[k] = v;\n        } else {\n            const auto k = in.val<u64>();\n\
-    \            out.ln(dict[k]);\n        }\n    }\n    return 0;\n}\n"
+    \    for (int q : rep(Q)) {\n        static_cast<void>(q);\n        const auto\
+    \ t = in.val<int>();\n        if (t == 0) {\n            const auto [k, v] = in.tup<u64,\
+    \ u64>();\n            dict[k] = v;\n        } else {\n            const auto\
+    \ k = in.val<u64>();\n            out.ln(dict[k]);\n        }\n    }\n    return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n#include\
     \ \"../../src/data_structure/intdict.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
     \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    IntDict<u64,\
     \ u64> dict;\n    const auto Q = in.val<int>();\n    for (int q : rep(Q)) {\n\
-    \        const auto t = in.val<int>();\n        if (t == 0) {\n            const\
-    \ auto [k, v] = in.tup<u64, u64>();\n            dict[k] = v;\n        } else\
-    \ {\n            const auto k = in.val<u64>();\n            out.ln(dict[k]);\n\
+    \        USE(q);\n        const auto t = in.val<int>();\n        if (t == 0) {\n\
+    \            const auto [k, v] = in.tup<u64, u64>();\n            dict[k] = v;\n\
+    \        } else {\n            const auto k = in.val<u64>();\n            out.ln(dict[k]);\n\
     \        }\n    }\n    return 0;\n}\n"
   dependsOn:
   - src/data_structure/intdict.hpp
@@ -302,7 +303,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/intdict.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-27 04:26:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/intdict.test.cpp
