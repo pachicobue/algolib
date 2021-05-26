@@ -9,6 +9,7 @@ void Test()
     dsu.merge(2, 3);
     dsu.merge(4, 5);
     dsu.merge(5, 6);
+
     assert(dsu.size(0) == 2);
     assert(dsu.size(1) == 2);
     assert(dsu.size(2) == 2);
@@ -16,6 +17,15 @@ void Test()
     assert(dsu.size(4) == 3);
     assert(dsu.size(5) == 3);
     assert(dsu.size(6) == 3);
+
+    assert(dsu.root(0) == 1);
+    assert(dsu.root(1) == 1);
+    assert(dsu.root(2) == 3);
+    assert(dsu.root(3) == 3);
+    assert(dsu.root(4) == 5);
+    assert(dsu.root(5) == 5);
+    assert(dsu.root(6) == 5);
+
     assert(dsu.groups()
            == Vec<Vec<int>>({{}, {0, 1}, {}, {2, 3}, {}, {4, 5, 6}, {}}));
 }
