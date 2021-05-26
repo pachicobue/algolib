@@ -23,17 +23,17 @@ data:
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
   - icon: ':question:'
+    path: src/misc/common/irange.hpp
+    title: src/misc/common/irange.hpp
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
   - icon: ':question:'
-    path: src/misc/common/nd_vec.hpp
-    title: src/misc/common/nd_vec.hpp
+    path: src/misc/common/operator_alias.hpp
+    title: src/misc/common/operator_alias.hpp
   - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
-    path: src/misc/common/range.hpp
-    title: src/misc/common/range.hpp
   - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
@@ -44,6 +44,9 @@ data:
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   - icon: ':question:'
+    path: src/misc/common/vec_utils.hpp
+    title: src/misc/common/vec_utils.hpp
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
@@ -53,7 +56,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -78,58 +81,58 @@ data:
     using Vec = std::vector<Ts...>;\ntemplate<typename... Ts>\nusing Stack = std::stack<Ts...>;\n\
     template<typename... Ts>\nusing Queue = std::queue<Ts...>;\ntemplate<typename\
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
-    \ = std::priority_queue<T, Vec<T>, Gt<T>>;\n#pragma endregion\n#pragma region\
-    \ Constants\ntemplate<typename T>\nconstexpr T INF = std::numeric_limits<T>::max()\
-    \ / 4;\ntemplate<typename T>\nconstexpr T PI = T{3.141592653589793238462643383279502884};\n\
-    template<typename T = u64>\nconstexpr T TEN(const int n)\n{\n    return n == 0\
-    \ ? T{1} : TEN<T>(n - 1) * T{10};\n}\n#pragma endregion\n#pragma region FuncAlias\n\
-    template<typename T>\nbool chmin(T& a, const T& b)\n{\n    if (a > b) {\n    \
-    \    a = b;\n        return true;\n    } else {\n        return false;\n    }\n\
-    }\ntemplate<typename T>\nbool chmax(T& a, const T& b)\n{\n    if (a < b) {\n \
-    \       a = b;\n        return true;\n    } else {\n        return false;\n  \
-    \  }\n}\ntemplate<typename T>\nconstexpr T fdiv(T x, T y)\n{\n    if (y < T{})\
-    \ { x = -x, y = -y; }\n    return x >= T{} ? x / y : (x - y + 1) / y;\n}\ntemplate<typename\
-    \ T>\nconstexpr T cdiv(T x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n  \
-    \  return x >= T{} ? (x + y - 1) / y : x / y;\n}\ntemplate<typename T, typename\
-    \ I>\nconstexpr T modPower(T v, I n, T mod)\n{\n    T ans = 1 % mod;\n    for\
-    \ (; n > 0; n >>= 1, (v *= v) %= mod) {\n        if (n % 2 == 1) { (ans *= v)\
-    \ %= mod; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\nconstexpr\
-    \ T power(T v, I n)\n{\n    T ans = 1;\n    for (; n > 0; n >>= 1, v *= v) {\n\
-    \        if (n % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename\
-    \ T, typename I>\nconstexpr T power(T v, I n, const T& e)\n{\n    T ans = e;\n\
-    \    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n\
-    \    }\n    return ans;\n}\ntemplate<typename T>\nvoid fillAll(Vec<T>& vs, const\
-    \ T& v)\n{\n    std::fill(vs.begin(), vs.end(), v);\n}\ntemplate<typename T, typename\
-    \ C = Lt<T>>\nvoid sortAll(Vec<T>& vs, C comp = C{})\n{\n    std::sort(vs.begin(),\
-    \ vs.end(), comp);\n}\ntemplate<typename T>\nvoid reverseAll(Vec<T>& vs)\n{\n\
-    \    std::reverse(vs.begin(), vs.end());\n}\ntemplate<typename T>\nvoid uniqueAll(Vec<T>&\
-    \ vs)\n{\n    sortAll(vs);\n    vs.erase(std::unique(vs.begin(), vs.end()), vs.end());\n\
-    }\ntemplate<typename T>\nvoid iotaAll(Vec<T>& vs, T offset = T{})\n{\n    std::iota(vs.begin(),\
-    \ vs.end(), offset);\n}\ntemplate<typename T, typename V = T>\nV sumAll(const\
-    \ Vec<T>& vs)\n{\n    return std::accumulate(vs.begin(), vs.end(), V{});\n}\n\
-    template<typename T>\nint minInd(const Vec<T>& vs)\n{\n    return std::min_element(vs.begin(),\
-    \ vs.end()) - vs.begin();\n}\ntemplate<typename T>\nint maxInd(const Vec<T>& vs)\n\
-    {\n    return std::max_element(vs.begin(), vs.end()) - vs.begin();\n}\ntemplate<typename\
-    \ T>\nint lbInd(const Vec<T>& vs, const T& v)\n{\n    return std::lower_bound(vs.begin(),\
-    \ vs.end(), v) - vs.begin();\n}\ntemplate<typename T>\nint ubInd(const Vec<T>&\
-    \ vs, const T& v)\n{\n    return std::lower_bound(vs.begin(), vs.end(), v) - vs.begin();\n\
-    }\ntemplate<typename Vs, typename F>\nvoid eraseIf(Vs& vs, F f)\n{\n    vs.erase(std::remove_if(vs.begin(),\
-    \ vs.end(), f), vs.end());\n}\ntemplate<typename T, typename F>\nVec<T> genVec(int\
-    \ n, F gen)\n{\n    Vec<T> ans;\n    std::generate_n(std::back_insert_iterator(ans),\
+    \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
+    using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
+    using Sec = std::chrono::seconds;\n#pragma endregion\n#pragma region Constants\n\
+    template<typename T>\nconstexpr T INF = std::numeric_limits<T>::max() / 4;\ntemplate<typename\
+    \ T>\nconstexpr T PI = T{3.141592653589793238462643383279502884};\ntemplate<typename\
+    \ T = u64>\nconstexpr T TEN(const int n)\n{\n    return n == 0 ? T{1} : TEN<T>(n\
+    \ - 1) * T{10};\n}\n#pragma endregion\n#pragma region FuncAlias\ntemplate<typename\
+    \ T>\nbool chmin(T& a, const T& b)\n{\n    if (a > b) {\n        a = b;\n    \
+    \    return true;\n    } else {\n        return false;\n    }\n}\ntemplate<typename\
+    \ T>\nbool chmax(T& a, const T& b)\n{\n    if (a < b) {\n        a = b;\n    \
+    \    return true;\n    } else {\n        return false;\n    }\n}\ntemplate<typename\
+    \ T>\nconstexpr T fdiv(T x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n  \
+    \  return x >= T{} ? x / y : (x - y + 1) / y;\n}\ntemplate<typename T>\nconstexpr\
+    \ T cdiv(T x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{}\
+    \ ? (x + y - 1) / y : x / y;\n}\ntemplate<typename T, typename I>\nconstexpr T\
+    \ modPower(T v, I n, T mod)\n{\n    T ans = 1 % mod;\n    for (; n > 0; n >>=\
+    \ 1, (v *= v) %= mod) {\n        if (n % 2 == 1) { (ans *= v) %= mod; }\n    }\n\
+    \    return ans;\n}\ntemplate<typename T, typename I>\nconstexpr T power(T v,\
+    \ I n)\n{\n    T ans = 1;\n    for (; n > 0; n >>= 1, v *= v) {\n        if (n\
+    \ % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename T, typename\
+    \ I>\nconstexpr T power(T v, I n, const T& e)\n{\n    T ans = e;\n    for (; n\
+    \ > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return\
+    \ ans;\n}\n#pragma endregion\n#pragma region OperatorAlias\ntemplate<typename\
+    \ T>\nVec<T> operator+=(Vec<T>& vs1, const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(),\
+    \ vs2.begin(), vs2.end());\n    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const\
+    \ Vec<T>& vs1, const Vec<T>& vs2)\n{\n    auto vs = vs1;\n    vs += vs2;\n   \
+    \ return vs;\n}\n#pragma endregion\n#pragma region VecUtils\ntemplate<typename\
+    \ T>\nvoid fillAll(Vec<T>& vs, const T& v)\n{\n    std::fill(vs.begin(), vs.end(),\
+    \ v);\n}\ntemplate<typename T, typename C = Lt<T>>\nvoid sortAll(Vec<T>& vs, C\
+    \ comp = C{})\n{\n    std::sort(vs.begin(), vs.end(), comp);\n}\ntemplate<typename\
+    \ T>\nvoid reverseAll(Vec<T>& vs)\n{\n    std::reverse(vs.begin(), vs.end());\n\
+    }\ntemplate<typename T>\nvoid uniqueAll(Vec<T>& vs)\n{\n    sortAll(vs);\n   \
+    \ vs.erase(std::unique(vs.begin(), vs.end()), vs.end());\n}\ntemplate<typename\
+    \ T, typename V = T>\nV sumAll(const Vec<T>& vs)\n{\n    return std::accumulate(vs.begin(),\
+    \ vs.end(), V{});\n}\ntemplate<typename T>\nint minInd(const Vec<T>& vs)\n{\n\
+    \    return std::min_element(vs.begin(), vs.end()) - vs.begin();\n}\ntemplate<typename\
+    \ T>\nint maxInd(const Vec<T>& vs)\n{\n    return std::max_element(vs.begin(),\
+    \ vs.end()) - vs.begin();\n}\ntemplate<typename T>\nint lbInd(const Vec<T>& vs,\
+    \ const T& v)\n{\n    return std::lower_bound(vs.begin(), vs.end(), v) - vs.begin();\n\
+    }\ntemplate<typename T>\nint ubInd(const Vec<T>& vs, const T& v)\n{\n    return\
+    \ std::upper_bound(vs.begin(), vs.end(), v) - vs.begin();\n}\ntemplate<typename\
+    \ T, typename F>\nVec<T> genVec(int n, F gen)\n{\n    Vec<T> ans;\n    std::generate_n(std::back_insert_iterator(ans),\
     \ n, gen);\n    return ans;\n}\nVec<int> iotaVec(int n, int offset = 0)\n{\n \
-    \   Vec<int> ans(n);\n    iotaAll(ans, offset);\n    return ans;\n}\ntemplate<typename\
-    \ T, typename F = Lt<T>>\nVec<int> iotaVec(const Vec<T>& vs, F comp = F{})\n{\n\
-    \    auto is = iotaVec(vs.size(), 0);\n    sortAll(is, [&](int i, int j) { return\
-    \ comp(vs[i], vs[j]); });\n    return is;\n}\ntemplate<typename T>\nVec<T> operator+=(Vec<T>&\
-    \ vs1, const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n\
-    \    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const Vec<T>& vs1,\
-    \ const Vec<T>& vs2)\n{\n    return Vec<T>{vs1} += vs2;\n}\n#pragma endregion\n\
-    #pragma region Show\nOstream& operator<<(Ostream& os, i128 v)\n{\n    bool minus\
-    \ = false;\n    if (v < 0) { minus = true, v = -v; }\n    Str ans;\n    if (v\
-    \ == 0) { ans = \"0\"; }\n    while (v) {\n        ans.push_back('0' + v % 10),\
-    \ v /= 10;\n    }\n    std::reverse(ans.begin(), ans.end());\n    return os <<\
-    \ (minus ? \"-\" : \"\") << ans;\n}\nOstream& operator<<(Ostream& os, u128 v)\n\
-    {\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) {\n        ans.push_back('0'\
+    \   Vec<int> ans(n);\n    std::iota(ans.begin(), ans.end(), offset);\n    return\
+    \ ans;\n}\ntemplate<typename T>\nVec<T> revVec(const Vec<T>& vs)\n{\n    auto\
+    \ ans = vs;\n    reverseAll(ans);\n    return ans;\n}\n#pragma endregion\n#pragma\
+    \ region Show\nOstream& operator<<(Ostream& os, i128 v)\n{\n    bool minus = false;\n\
+    \    if (v < 0) { minus = true, v = -v; }\n    Str ans;\n    if (v == 0) { ans\
+    \ = \"0\"; }\n    while (v) {\n        ans.push_back('0' + v % 10), v /= 10;\n\
+    \    }\n    std::reverse(ans.begin(), ans.end());\n    return os << (minus ? \"\
+    -\" : \"\") << ans;\n}\nOstream& operator<<(Ostream& os, u128 v)\n{\n    Str ans;\n\
+    \    if (v == 0) { ans = \"0\"; }\n    while (v) {\n        ans.push_back('0'\
     \ + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(), ans.end());\n    return\
     \ os << ans;\n}\n#pragma endregion\n#pragma region BitOps\nconstexpr int popcount(const\
     \ u64 v)\n{\n    return v ? __builtin_popcountll(v) : 0;\n}\nconstexpr int log2p1(const\
@@ -141,118 +144,105 @@ data:
     \ : 0_u64;\n}\nconstexpr bool ispow2(const u64 v)\n{\n    return (v > 0) and ((v\
     \ & (v - 1)) == 0);\n}\nconstexpr bool btest(const u64 mask, const int ind)\n\
     {\n    return (mask >> ind) & 1_u64;\n}\n#pragma endregion\n#pragma region FixPoint\n\
-    template<typename F>\nstruct Fixpoint : F\n{\n    Fixpoint(F&& f) : F{std::forward<F>(f)}\
+    template<typename F>\nstruct Fix : F\n{\n    Fix(F&& f) : F{std::forward<F>(f)}\
     \ {}\n    template<typename... Args>\n    auto operator()(Args&&... args) const\n\
     \    {\n        return F::operator()(*this, std::forward<Args>(args)...);\n  \
-    \  }\n};\n#pragma endregion\n#pragma region NdVec\ntemplate<typename T, int n,\
-    \ int i = 0>\nauto ndVec(int const (&szs)[n], const T x = T{})\n{\n    if constexpr\
-    \ (i == n) {\n        return x;\n    } else {\n        return std::vector(szs[i],\
-    \ ndVec<T, n, i + 1>(szs, x));\n    }\n}\n#pragma endregion\n#pragma region Range\n\
-    class range\n{\nprivate:\n    struct itr\n    {\n        itr(int start = 0, int\
-    \ step = 1) : m_cnt{start}, m_step{step} {}\n        bool operator!=(const itr&\
-    \ it) const\n        {\n            return m_cnt != it.m_cnt;\n        }\n   \
-    \     int operator*()\n        {\n            return m_cnt;\n        }\n     \
-    \   itr& operator++()\n        {\n            m_cnt += m_step;\n            return\
-    \ *this;\n        }\n        int m_cnt, m_step;\n    };\n    int m_start, m_end,\
-    \ m_step;\npublic:\n    range(int start, int end, int step = 1)\n        : m_start{start},\
-    \ m_end{end}, m_step{step}\n    {\n        assert(m_step == 1 or m_step == -1);\n\
-    \    }\n    itr begin() const\n    {\n        return itr{m_start, m_step};\n \
-    \   }\n    itr end() const\n    {\n        return itr{m_end, m_step};\n    }\n\
-    };\nrange rep(int end)\n{\n    return range(0, end, 1);\n}\nrange per(int rend)\n\
-    {\n    return range(rend - 1, -1, -1);\n}\nclass ndRep\n{\nprivate:\n    struct\
-    \ itr\n    {\n        itr(const Vec<int>& ns) : m_ns{ns}, m_cs(ns.size(), 0),\
-    \ m_end{false} {}\n        bool operator!=(const itr&) const\n        {\n    \
-    \        return not m_end;\n        }\n        const Vec<int>& operator*()\n \
-    \       {\n            return m_cs;\n        }\n        itr& operator++()\n  \
-    \      {\n            for (const int i : per(m_ns.size())) {\n               \
-    \ m_cs[i]++;\n                if (m_cs[i] < m_ns[i]) {\n                    break;\n\
-    \                } else {\n                    if (i == 0) { m_end = true; }\n\
-    \                    m_cs[i] = 0;\n                }\n            }\n        \
-    \    return *this;\n        }\n        Vec<int> m_ns, m_cs;\n        bool m_end;\n\
-    \    };\n    Vec<int> m_ns;\npublic:\n    ndRep(const Vec<int>& ns) : m_ns{ns}\
-    \ {}\n    itr begin() const\n    {\n        return itr{m_ns};\n    }\n    itr\
-    \ end() const\n    {\n        return itr{m_ns};\n    }\n};\n#pragma endregion\n\
-    #pragma COMMENT(\"[REFS] Xoshiro: https://prng.di.unimi.it\")\n#pragma region\
-    \ Xoshiro\nnamespace xoshiro_impl {\nu64 x;\nu64 next()\n{\n    uint64_t z = (x\
-    \ += 0x9e3779b97f4a7c15);\n    z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;\n   \
-    \ z = (z ^ (z >> 27)) * 0x94d049bb133111eb;\n    return z ^ (z >> 31);\n}\n}\n\
-    class Xoshiro32\n{\npublic:\n    using result_type = u32;\n    using T = result_type;\n\
-    \    Xoshiro32(T seed = 0)\n    {\n        xoshiro_impl::x = seed;\n        s[0]\
-    \ = xoshiro_impl::next();\n        s[1] = xoshiro_impl::next();\n        s[2]\
-    \ = xoshiro_impl::next();\n        s[3] = xoshiro_impl::next();\n    }\n    static\
-    \ constexpr T min()\n    {\n        return std::numeric_limits<T>::min();\n  \
-    \  }\n    static constexpr T max()\n    {\n        return std::numeric_limits<T>::max();\n\
-    \    }\n    T operator()()\n    {\n        return next();\n    }\nprivate:\n \
-    \   static constexpr T rotl(const T x, int k)\n    {\n        return (x << k)\
-    \ | (x >> (32 - k));\n    }\n    T next()\n    {\n        const T ans = rotl(s[1]\
-    \ * 5, 7) * 9;\n        const T t = s[1] << 9;\n        s[2] ^= s[0];\n      \
-    \  s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0] ^= s[3];\n        s[2] ^=\
-    \ t;\n        s[3] = rotl(s[3], 11);\n        return ans;\n    }\n    T s[4];\n\
-    };\nclass Xoshiro64\n{\npublic:\n    using result_type = u64;\n    using T = result_type;\n\
-    \    Xoshiro64(T seed = 0)\n    {\n        xoshiro_impl::x = seed;\n        s[0]\
-    \ = xoshiro_impl::next();\n        s[1] = xoshiro_impl::next();\n        s[2]\
-    \ = xoshiro_impl::next();\n        s[3] = xoshiro_impl::next();\n    }\n    static\
-    \ constexpr T min()\n    {\n        return std::numeric_limits<T>::min();\n  \
-    \  }\n    static constexpr T max()\n    {\n        return std::numeric_limits<T>::max();\n\
-    \    }\n    T operator()()\n    {\n        return next();\n    }\nprivate:\n \
-    \   static constexpr T rotl(const T x, int k)\n    {\n        return (x << k)\
-    \ | (x >> (64 - k));\n    }\n    T next()\n    {\n        const T ans = rotl(s[1]\
-    \ * 5, 7) * 9;\n        const T t = s[1] << 17;\n        s[2] ^= s[0];\n     \
-    \   s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0] ^= s[3];\n        s[2]\
-    \ ^= t;\n        s[3] = rotl(s[3], 45);\n        return ans;\n    }\n    T s[4];\n\
-    };\n#pragma endregion\n#pragma region RNG\ntemplate<typename Rng>\nclass RNG\n\
-    {\npublic:\n    using result_type = typename Rng::result_type;\n    using T =\
-    \ result_type;\n    static constexpr T min()\n    {\n        return Rng::min();\n\
-    \    }\n    static constexpr T max()\n    {\n        return Rng::max();\n    }\n\
-    \    RNG() : RNG(std::random_device{}()) {}\n    RNG(T seed) : m_rng(seed) {}\n\
-    \    T operator()()\n    {\n        return m_rng();\n    }\n    template<typename\
-    \ T>\n    T val(T min, T max)\n    {\n        return std::uniform_int_distribution<T>(min,\
-    \ max)(m_rng);\n    }\n    template<typename T>\n    Pair<T, T> pair(T min, T\
-    \ max)\n    {\n        return std::minmax({val<T>(min, max), val<T>(min, max)});\n\
-    \    }\n    template<typename T>\n    Vec<T> vec(int n, T min, T max)\n    {\n\
-    \        return genVec<T>(n, [&]() { return val<T>(min, max); });\n    }\n   \
-    \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
-    \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
-    \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
-    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n#pragma endregion\n\
-    template<u32 mod_, u32 root_, u32 max2p_>\nclass modint\n{\n    template<typename\
-    \ U = u32&>\n    static U modRef()\n    {\n        static u32 s_mod = 0;\n   \
-    \     return s_mod;\n    }\n    template<typename U = u32&>\n    static U rootRef()\n\
-    \    {\n        static u32 s_root = 0;\n        return s_root;\n    }\n    template<typename\
-    \ U = u32&>\n    static U max2pRef()\n    {\n        static u32 s_max2p = 0;\n\
-    \        return s_max2p;\n    }\npublic:\n    template<typename U = const u32>\n\
-    \    static constexpr std::enable_if_t<mod_ != 0, U> mod()\n    {\n        return\
-    \ mod_;\n    }\n    template<typename U = const u32>\n    static std::enable_if_t<mod_\
-    \ == 0, U> mod()\n    {\n        return modRef();\n    }\n    template<typename\
-    \ U = const u32>\n    static constexpr std::enable_if_t<mod_ != 0, U> root()\n\
-    \    {\n        return root_;\n    }\n    template<typename U = const u32>\n \
-    \   static std::enable_if_t<mod_ == 0, U> root()\n    {\n        return rootRef();\n\
-    \    }\n    template<typename U = const u32>\n    static constexpr std::enable_if_t<mod_\
-    \ != 0, U> max2p()\n    {\n        return max2p_;\n    }\n    template<typename\
-    \ U = const u32>\n    static std::enable_if_t<mod_ == 0, U> max2p()\n    {\n \
-    \       return max2pRef();\n    }\n    template<typename U = u32>\n    static\
-    \ void setMod(std::enable_if_t<mod_ == 0, U> m)\n    {\n        modRef() = m;\n\
-    \    }\n    template<typename U = u32>\n    static void setRoot(std::enable_if_t<mod_\
-    \ == 0, U> r)\n    {\n        rootRef() = r;\n    }\n    template<typename U =\
-    \ u32>\n    static void setMax2p(std::enable_if_t<mod_ == 0, U> m)\n    {\n  \
-    \      max2pRef() = m;\n    }\n    constexpr modint() : m_val{0} {}\n    constexpr\
-    \ modint(i64 v) : m_val{normll(v)} {}\n    constexpr void setRaw(u32 v)\n    {\n\
-    \        m_val = v;\n    }\n    constexpr modint operator-() const\n    {\n  \
-    \      return modint{0} - (*this);\n    }\n    constexpr modint& operator+=(const\
-    \ modint& m)\n    {\n        m_val = norm(m_val + m.val());\n        return *this;\n\
-    \    }\n    constexpr modint& operator-=(const modint& m)\n    {\n        m_val\
-    \ = norm(m_val + mod() - m.val());\n        return *this;\n    }\n    constexpr\
-    \ modint& operator*=(const modint& m)\n    {\n        m_val = normll((i64)m_val\
-    \ * (i64)m.val() % (i64)mod());\n        return *this;\n    }\n    constexpr modint&\
-    \ operator/=(const modint& m)\n    {\n        return *this *= m.inv();\n    }\n\
-    \    constexpr modint operator+(const modint& m) const\n    {\n        return\
-    \ modint{*this} += m;\n    }\n    constexpr modint operator-(const modint& m)\
-    \ const\n    {\n        return modint{*this} -= m;\n    }\n    constexpr modint\
-    \ operator*(const modint& m) const\n    {\n        return modint{*this} *= m;\n\
-    \    }\n    constexpr modint operator/(const modint& m) const\n    {\n       \
-    \ return modint{*this} /= m;\n    }\n    constexpr bool operator==(const modint&\
-    \ m) const\n    {\n        return m_val == m.val();\n    }\n    constexpr bool\
-    \ operator!=(const modint& m) const\n    {\n        return not(*this == m);\n\
+    \  }\n};\n#pragma endregion\n#pragma region Range\nclass irange\n{\nprivate:\n\
+    \    struct itr\n    {\n        itr(int start = 0, int step = 1) : m_cnt{start},\
+    \ m_step{step} {}\n        bool operator!=(const itr& it) const\n        {\n \
+    \           return m_cnt != it.m_cnt;\n        }\n        int operator*()\n  \
+    \      {\n            return m_cnt;\n        }\n        itr& operator++()\n  \
+    \      {\n            m_cnt += m_step;\n            return *this;\n        }\n\
+    \        int m_cnt, m_step;\n    };\n    int m_start, m_end, m_step;\npublic:\n\
+    \    irange(int start, int end, int step = 1)\n    {\n        assert(step != 0);\n\
+    \        const int d = std::abs(step);\n        const int l = (step > 0 ? start\
+    \ : end);\n        const int r = (step > 0 ? end : start);\n        int n = (r\
+    \ - l) / d + ((r - l) % d ? 1 : 0);\n        if (l >= r) { n = 0; }\n        m_start\
+    \ = start;\n        m_end = start + step * n;\n        m_step = step;\n    }\n\
+    \    itr begin() const\n    {\n        return itr{m_start, m_step};\n    }\n \
+    \   itr end() const\n    {\n        return itr{m_end, m_step};\n    }\n};\nirange\
+    \ rep(int end)\n{\n    return irange(0, end, 1);\n}\nirange per(int rend)\n{\n\
+    \    return irange(rend - 1, -1, -1);\n}\n#pragma endregion\n#pragma COMMENT(\"\
+    [REFS] Xoshiro: https://prng.di.unimi.it\")\n#pragma region Xoshiro\nnamespace\
+    \ xoshiro_impl {\nu64 x;\nu64 next()\n{\n    uint64_t z = (x += 0x9e3779b97f4a7c15);\n\
+    \    z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;\n    z = (z ^ (z >> 27)) * 0x94d049bb133111eb;\n\
+    \    return z ^ (z >> 31);\n}\n}\nclass Xoshiro32\n{\npublic:\n    using result_type\
+    \ = u32;\n    using T = result_type;\n    Xoshiro32(T seed = 0)\n    {\n     \
+    \   xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n        s[1]\
+    \ = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n        s[3]\
+    \ = xoshiro_impl::next();\n    }\n    static constexpr T min()\n    {\n      \
+    \  return std::numeric_limits<T>::min();\n    }\n    static constexpr T max()\n\
+    \    {\n        return std::numeric_limits<T>::max();\n    }\n    T operator()()\n\
+    \    {\n        return next();\n    }\nprivate:\n    static constexpr T rotl(const\
+    \ T x, int k)\n    {\n        return (x << k) | (x >> (32 - k));\n    }\n    T\
+    \ next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n        const T\
+    \ t = s[1] << 9;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n        s[1] ^=\
+    \ s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3] = rotl(s[3],\
+    \ 11);\n        return ans;\n    }\n    T s[4];\n};\nclass Xoshiro64\n{\npublic:\n\
+    \    using result_type = u64;\n    using T = result_type;\n    Xoshiro64(T seed\
+    \ = 0)\n    {\n        xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n\
+    \        s[1] = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n\
+    \        s[3] = xoshiro_impl::next();\n    }\n    static constexpr T min()\n \
+    \   {\n        return std::numeric_limits<T>::min();\n    }\n    static constexpr\
+    \ T max()\n    {\n        return std::numeric_limits<T>::max();\n    }\n    T\
+    \ operator()()\n    {\n        return next();\n    }\nprivate:\n    static constexpr\
+    \ T rotl(const T x, int k)\n    {\n        return (x << k) | (x >> (64 - k));\n\
+    \    }\n    T next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n  \
+    \      const T t = s[1] << 17;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n\
+    \        s[1] ^= s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3]\
+    \ = rotl(s[3], 45);\n        return ans;\n    }\n    T s[4];\n};\n#pragma endregion\n\
+    #pragma region RNG\ntemplate<typename Rng>\nclass RNG\n{\npublic:\n    using result_type\
+    \ = typename Rng::result_type;\n    using T = result_type;\n    static constexpr\
+    \ T min()\n    {\n        return Rng::min();\n    }\n    static constexpr T max()\n\
+    \    {\n        return Rng::max();\n    }\n    RNG() : RNG(std::random_device{}())\
+    \ {}\n    RNG(T seed) : m_rng(seed) {}\n    T operator()()\n    {\n        return\
+    \ m_rng();\n    }\n    template<typename T>\n    T val(T min, T max)\n    {\n\
+    \        return std::uniform_int_distribution<T>(min, max)(m_rng);\n    }\n  \
+    \  template<typename T>\n    Pair<T, T> pair(T min, T max)\n    {\n        return\
+    \ std::minmax({val<T>(min, max), val<T>(min, max)});\n    }\n    template<typename\
+    \ T>\n    Vec<T> vec(int n, T min, T max)\n    {\n        return genVec<T>(n,\
+    \ [&]() { return val<T>(min, max); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]()\
+    \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
+    \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
+    #pragma endregion\ntemplate<u32 mod_, u32 root_, u32 max2p_>\nclass modint\n{\n\
+    \    template<typename U = u32&>\n    static U modRef()\n    {\n        static\
+    \ u32 s_mod = 0;\n        return s_mod;\n    }\n    template<typename U = u32&>\n\
+    \    static U rootRef()\n    {\n        static u32 s_root = 0;\n        return\
+    \ s_root;\n    }\n    template<typename U = u32&>\n    static U max2pRef()\n \
+    \   {\n        static u32 s_max2p = 0;\n        return s_max2p;\n    }\npublic:\n\
+    \    template<typename U = const u32>\n    static constexpr std::enable_if_t<mod_\
+    \ != 0, U> mod()\n    {\n        return mod_;\n    }\n    template<typename U\
+    \ = const u32>\n    static std::enable_if_t<mod_ == 0, U> mod()\n    {\n     \
+    \   return modRef();\n    }\n    template<typename U = const u32>\n    static\
+    \ constexpr std::enable_if_t<mod_ != 0, U> root()\n    {\n        return root_;\n\
+    \    }\n    template<typename U = const u32>\n    static std::enable_if_t<mod_\
+    \ == 0, U> root()\n    {\n        return rootRef();\n    }\n    template<typename\
+    \ U = const u32>\n    static constexpr std::enable_if_t<mod_ != 0, U> max2p()\n\
+    \    {\n        return max2p_;\n    }\n    template<typename U = const u32>\n\
+    \    static std::enable_if_t<mod_ == 0, U> max2p()\n    {\n        return max2pRef();\n\
+    \    }\n    template<typename U = u32>\n    static void setMod(std::enable_if_t<mod_\
+    \ == 0, U> m)\n    {\n        modRef() = m;\n    }\n    template<typename U =\
+    \ u32>\n    static void setRoot(std::enable_if_t<mod_ == 0, U> r)\n    {\n   \
+    \     rootRef() = r;\n    }\n    template<typename U = u32>\n    static void setMax2p(std::enable_if_t<mod_\
+    \ == 0, U> m)\n    {\n        max2pRef() = m;\n    }\n    constexpr modint() :\
+    \ m_val{0} {}\n    constexpr modint(i64 v) : m_val{normll(v)} {}\n    constexpr\
+    \ void setRaw(u32 v)\n    {\n        m_val = v;\n    }\n    constexpr modint operator-()\
+    \ const\n    {\n        return modint{0} - (*this);\n    }\n    constexpr modint&\
+    \ operator+=(const modint& m)\n    {\n        m_val = norm(m_val + m.val());\n\
+    \        return *this;\n    }\n    constexpr modint& operator-=(const modint&\
+    \ m)\n    {\n        m_val = norm(m_val + mod() - m.val());\n        return *this;\n\
+    \    }\n    constexpr modint& operator*=(const modint& m)\n    {\n        m_val\
+    \ = normll((i64)m_val * (i64)m.val() % (i64)mod());\n        return *this;\n \
+    \   }\n    constexpr modint& operator/=(const modint& m)\n    {\n        return\
+    \ *this *= m.inv();\n    }\n    constexpr modint operator+(const modint& m) const\n\
+    \    {\n        return modint{*this} += m;\n    }\n    constexpr modint operator-(const\
+    \ modint& m) const\n    {\n        return modint{*this} -= m;\n    }\n    constexpr\
+    \ modint operator*(const modint& m) const\n    {\n        return modint{*this}\
+    \ *= m;\n    }\n    constexpr modint operator/(const modint& m) const\n    {\n\
+    \        return modint{*this} /= m;\n    }\n    constexpr bool operator==(const\
+    \ modint& m) const\n    {\n        return m_val == m.val();\n    }\n    constexpr\
+    \ bool operator!=(const modint& m) const\n    {\n        return not(*this == m);\n\
     \    }\n    friend Istream& operator>>(Istream& is, modint& m)\n    {\n      \
     \  i64 v;\n        return is >> v, m = v, is;\n    }\n    friend Ostream& operator<<(Ostream&\
     \ os, const modint& m)\n    {\n        return os << m.val();\n    }\n    constexpr\
@@ -304,13 +294,13 @@ data:
     \ operator<<(const int s) const\n    {\n        FPS ans(size() + s);\n       \
     \ for (int i : rep(size())) {\n            ans[i + s] = (*this)[i];\n        }\n\
     \        return ans;\n    }\n    FPS operator>>(const int s) const\n    {\n  \
-    \      FPS ans;\n        for (int i : range(s, size())) {\n            ans[i -\
-    \ s] = (*this)[i];\n        }\n        return ans;\n    }\n    friend Ostream&\
+    \      FPS ans;\n        for (int i : irange(s, size())) {\n            ans[i\
+    \ - s] = (*this)[i];\n        }\n        return ans;\n    }\n    friend Ostream&\
     \ operator<<(Ostream& os, const FPS& f)\n    {\n        return os << static_cast<Vec<mint>>(f);\n\
     \    }\n    FPS derivative() const\n    {\n        FPS ans;\n        for (int\
-    \ i : range(1, size())) {\n            ans[i - 1] = (*this)[i] * i;\n        }\n\
-    \        return ans;\n    }\n    FPS integral() const\n    {\n        FPS ans;\n\
-    \        for (int i : range(1, size() + 1)) {\n            ans[i] = (*this)[i\
+    \ i : irange(1, size())) {\n            ans[i - 1] = (*this)[i] * i;\n       \
+    \ }\n        return ans;\n    }\n    FPS integral() const\n    {\n        FPS\
+    \ ans;\n        for (int i : irange(1, size() + 1)) {\n            ans[i] = (*this)[i\
     \ - 1] * mint::sinv(i);\n        }\n        return ans;\n    }\n    FPS mult(const\
     \ FPS& f, int sz) const\n    {\n        if (sz == 0) { return FPS{}; }\n     \
     \   const int N = std::min(size(), sz) + std::min(f.size(), sz) - 1;\n       \
@@ -355,7 +345,7 @@ data:
     \                }\n                trans(z, lg, true);\n                std::fill(z.begin(),\
     \ z.begin() + m / 2, 0);\n                trans(z, lg, false);\n             \
     \   for (int i : rep(m)) {\n                    z[i] *= G[i];\n              \
-    \  }\n                trans(z, lg, true);\n                for (int i : range(m\
+    \  }\n                trans(z, lg, true);\n                for (int i : irange(m\
     \ / 2, m)) {\n                    g[i] = -z[i];\n                }\n         \
     \       G = g, G.resize(m * 2), trans(G, lg + 1, false);\n                auto\
     \ q = low(m).derivative();\n                q.resize(m), trans(q, lg, false);\n\
@@ -410,18 +400,18 @@ data:
     \   const submint r = submint(submint::root()), ir = r.inv();\n            rs.resize(submint::max2p()\
     \ + 1), irs.resize(submint::max2p() + 1);\n            rs.back() = -r.pow((submint::mod()\
     \ - 1) >> submint::max2p()),\n            irs.back() = -ir.pow((submint::mod()\
-    \ - 1) >> submint::max2p());\n            for (u32 i : range(submint::max2p(),\
+    \ - 1) >> submint::max2p());\n            for (u32 i : irange(submint::max2p(),\
     \ 0, -1)) {\n                rs[i - 1] = -(rs[i] * rs[i]);\n                irs[i\
     \ - 1] = -(irs[i] * irs[i]);\n            }\n        }\n        const auto drange\
-    \ = (rev ? range(0, lg, 1) : range(lg - 1, -1, -1));\n        for (const int d\
-    \ : drange) {\n            const int width = 1 << d;\n            submint e =\
-    \ 1;\n            for (int i = 0, j = 1; i < N; i += width * 2, j++) {\n     \
-    \           for (int l = i, r = i + width; l < i + width; l++, r++) {\n      \
-    \              if (rev) {\n                        const submint x = as[l], y\
-    \ = as[r];\n                        as[l] = x + y, as[r] = (x - y) * e;\n    \
-    \                } else {\n                        const submint x = as[l], y\
-    \ = as[r] * e;\n                        as[l] = x + y, as[r] = x - y;\n      \
-    \              }\n                }\n                e *= (rev ? irs : rs)[lsbp1(j)\
+    \ = (rev ? irange(0, lg, 1) : irange(lg - 1, -1, -1));\n        for (const int\
+    \ d : drange) {\n            const int width = 1 << d;\n            submint e\
+    \ = 1;\n            for (int i = 0, j = 1; i < N; i += width * 2, j++) {\n   \
+    \             for (int l = i, r = i + width; l < i + width; l++, r++) {\n    \
+    \                if (rev) {\n                        const submint x = as[l],\
+    \ y = as[r];\n                        as[l] = x + y, as[r] = (x - y) * e;\n  \
+    \                  } else {\n                        const submint x = as[l],\
+    \ y = as[r] * e;\n                        as[l] = x + y, as[r] = x - y;\n    \
+    \                }\n                }\n                e *= (rev ? irs : rs)[lsbp1(j)\
     \ + 1];\n            }\n        }\n        if (rev) {\n            const submint\
     \ iN = submint{N}.inv();\n            for (auto& a : as) {\n                a\
     \ *= iN;\n            }\n        }\n    }\n    template<typename submint>\n  \
@@ -444,35 +434,36 @@ data:
     \ = x1;\n        const int k1 = (ip1 * (x2 - k0)).val();\n        const int k2\
     \ = (ip1p2 * (x3 - k0) - ip2 * k1).val();\n        return p1p2() * k2 + p1() *\
     \ k1 + k0;\n    }\n};\ntemplate<typename mint>\nFPS<mint> lagrangeInterpolate(const\
-    \ Vec<mint> ys)\n{\n    const int N = ys.size();\n    Vec<mint> fs(N + 1);\n \
-    \   iotaAll(fs);\n    for (int i = 2; i <= N; i++) {\n        fs[i] = fs[i - 1]\
-    \ * i;\n    }\n    Vec<mint> as(N + 1);\n    for (int i = 0; i <= N; i++) {\n\
-    \        mint res = fs[i];\n        for (int j = 0; j < i; j++) {\n          \
-    \  res -= as[i] * mint::fact(i) * mint::ifact(i - j);\n        }\n        as[i]\
-    \ = res * mint::ifact(i);\n    }\n    FPS<mint> ans, g{1};\n    for (int i = 0;\
-    \ i <= N; i++) {\n        ans += as[i] * g;\n        g *= FPS<mint>{1, -i};\n\
-    \    }\n    return ans;\n}\n"
+    \ Vec<mint> ys)\n{\n    const int N = ys.size();\n    Vec<mint> fs = iotaVec(N\
+    \ + 1);\n    for (int i = 2; i <= N; i++) {\n        fs[i] = fs[i - 1] * i;\n\
+    \    }\n    Vec<mint> as(N + 1);\n    for (int i = 0; i <= N; i++) {\n       \
+    \ mint res = fs[i];\n        for (int j = 0; j < i; j++) {\n            res -=\
+    \ as[i] * mint::fact(i) * mint::ifact(i - j);\n        }\n        as[i] = res\
+    \ * mint::ifact(i);\n    }\n    FPS<mint> ans, g{1};\n    for (int i = 0; i <=\
+    \ N; i++) {\n        ans += as[i] * g;\n        g *= FPS<mint>{1, -i};\n    }\n\
+    \    return ans;\n}\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"fps.hpp\"\ntemplate<typename\
     \ mint>\nFPS<mint> lagrangeInterpolate(const Vec<mint> ys)\n{\n    const int N\
-    \ = ys.size();\n    Vec<mint> fs(N + 1);\n    iotaAll(fs);\n    for (int i = 2;\
-    \ i <= N; i++) {\n        fs[i] = fs[i - 1] * i;\n    }\n\n    Vec<mint> as(N\
-    \ + 1);\n    for (int i = 0; i <= N; i++) {\n        mint res = fs[i];\n     \
-    \   for (int j = 0; j < i; j++) {\n            res -= as[i] * mint::fact(i) *\
-    \ mint::ifact(i - j);\n        }\n        as[i] = res * mint::ifact(i);\n    }\n\
-    \    FPS<mint> ans, g{1};\n    for (int i = 0; i <= N; i++) {\n        ans +=\
-    \ as[i] * g;\n        g *= FPS<mint>{1, -i};\n    }\n    return ans;\n}\n"
+    \ = ys.size();\n    Vec<mint> fs = iotaVec(N + 1);\n    for (int i = 2; i <= N;\
+    \ i++) {\n        fs[i] = fs[i - 1] * i;\n    }\n\n    Vec<mint> as(N + 1);\n\
+    \    for (int i = 0; i <= N; i++) {\n        mint res = fs[i];\n        for (int\
+    \ j = 0; j < i; j++) {\n            res -= as[i] * mint::fact(i) * mint::ifact(i\
+    \ - j);\n        }\n        as[i] = res * mint::ifact(i);\n    }\n    FPS<mint>\
+    \ ans, g{1};\n    for (int i = 0; i <= N; i++) {\n        ans += as[i] * g;\n\
+    \        g *= FPS<mint>{1, -i};\n    }\n    return ans;\n}\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
   - src/misc/common/constants.hpp
   - src/misc/common/func_alias.hpp
+  - src/misc/common/operator_alias.hpp
+  - src/misc/common/vec_utils.hpp
   - src/misc/common/show.hpp
   - src/misc/common/print/int128_t.hpp
   - src/misc/common/bit_ops.hpp
   - src/misc/common/fixpoint.hpp
-  - src/misc/common/nd_vec.hpp
-  - src/misc/common/range.hpp
+  - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
   - src/math/fps.hpp
@@ -480,7 +471,7 @@ data:
   isVerificationFile: false
   path: src/math/lagrange_interpolation.hpp
   requiredBy: []
-  timestamp: '2021-05-24 21:49:34+09:00'
+  timestamp: '2021-05-27 03:45:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/lagrange_interpolation.hpp

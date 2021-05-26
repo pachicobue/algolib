@@ -41,12 +41,14 @@ data:
     using Vec = std::vector<Ts...>;\ntemplate<typename... Ts>\nusing Stack = std::stack<Ts...>;\n\
     template<typename... Ts>\nusing Queue = std::queue<Ts...>;\ntemplate<typename\
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
-    \ = std::priority_queue<T, Vec<T>, Gt<T>>;\n#pragma endregion\n#pragma region\
-    \ FuncAlias\ntemplate<typename T>\nbool chmin(T& a, const T& b)\n{\n    if (a\
-    \ > b) {\n        a = b;\n        return true;\n    } else {\n        return false;\n\
-    \    }\n}\ntemplate<typename T>\nbool chmax(T& a, const T& b)\n{\n    if (a <\
-    \ b) {\n        a = b;\n        return true;\n    } else {\n        return false;\n\
-    \    }\n}\ntemplate<typename T>\nconstexpr T fdiv(T x, T y)\n{\n    if (y < T{})\
+    \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
+    using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
+    using Sec = std::chrono::seconds;\n#pragma endregion\n#pragma region FuncAlias\n\
+    template<typename T>\nbool chmin(T& a, const T& b)\n{\n    if (a > b) {\n    \
+    \    a = b;\n        return true;\n    } else {\n        return false;\n    }\n\
+    }\ntemplate<typename T>\nbool chmax(T& a, const T& b)\n{\n    if (a < b) {\n \
+    \       a = b;\n        return true;\n    } else {\n        return false;\n  \
+    \  }\n}\ntemplate<typename T>\nconstexpr T fdiv(T x, T y)\n{\n    if (y < T{})\
     \ { x = -x, y = -y; }\n    return x >= T{} ? x / y : (x - y + 1) / y;\n}\ntemplate<typename\
     \ T>\nconstexpr T cdiv(T x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n  \
     \  return x >= T{} ? (x + y - 1) / y : x / y;\n}\ntemplate<typename T, typename\
@@ -57,45 +59,20 @@ data:
     \        if (n % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename\
     \ T, typename I>\nconstexpr T power(T v, I n, const T& e)\n{\n    T ans = e;\n\
     \    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n\
-    \    }\n    return ans;\n}\ntemplate<typename T>\nvoid fillAll(Vec<T>& vs, const\
-    \ T& v)\n{\n    std::fill(vs.begin(), vs.end(), v);\n}\ntemplate<typename T, typename\
-    \ C = Lt<T>>\nvoid sortAll(Vec<T>& vs, C comp = C{})\n{\n    std::sort(vs.begin(),\
-    \ vs.end(), comp);\n}\ntemplate<typename T>\nvoid reverseAll(Vec<T>& vs)\n{\n\
-    \    std::reverse(vs.begin(), vs.end());\n}\ntemplate<typename T>\nvoid uniqueAll(Vec<T>&\
-    \ vs)\n{\n    sortAll(vs);\n    vs.erase(std::unique(vs.begin(), vs.end()), vs.end());\n\
-    }\ntemplate<typename T>\nvoid iotaAll(Vec<T>& vs, T offset = T{})\n{\n    std::iota(vs.begin(),\
-    \ vs.end(), offset);\n}\ntemplate<typename T, typename V = T>\nV sumAll(const\
-    \ Vec<T>& vs)\n{\n    return std::accumulate(vs.begin(), vs.end(), V{});\n}\n\
-    template<typename T>\nint minInd(const Vec<T>& vs)\n{\n    return std::min_element(vs.begin(),\
-    \ vs.end()) - vs.begin();\n}\ntemplate<typename T>\nint maxInd(const Vec<T>& vs)\n\
-    {\n    return std::max_element(vs.begin(), vs.end()) - vs.begin();\n}\ntemplate<typename\
-    \ T>\nint lbInd(const Vec<T>& vs, const T& v)\n{\n    return std::lower_bound(vs.begin(),\
-    \ vs.end(), v) - vs.begin();\n}\ntemplate<typename T>\nint ubInd(const Vec<T>&\
-    \ vs, const T& v)\n{\n    return std::lower_bound(vs.begin(), vs.end(), v) - vs.begin();\n\
-    }\ntemplate<typename Vs, typename F>\nvoid eraseIf(Vs& vs, F f)\n{\n    vs.erase(std::remove_if(vs.begin(),\
-    \ vs.end(), f), vs.end());\n}\ntemplate<typename T, typename F>\nVec<T> genVec(int\
-    \ n, F gen)\n{\n    Vec<T> ans;\n    std::generate_n(std::back_insert_iterator(ans),\
-    \ n, gen);\n    return ans;\n}\nVec<int> iotaVec(int n, int offset = 0)\n{\n \
-    \   Vec<int> ans(n);\n    iotaAll(ans, offset);\n    return ans;\n}\ntemplate<typename\
-    \ T, typename F = Lt<T>>\nVec<int> iotaVec(const Vec<T>& vs, F comp = F{})\n{\n\
-    \    auto is = iotaVec(vs.size(), 0);\n    sortAll(is, [&](int i, int j) { return\
-    \ comp(vs[i], vs[j]); });\n    return is;\n}\ntemplate<typename T>\nVec<T> operator+=(Vec<T>&\
-    \ vs1, const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n\
-    \    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const Vec<T>& vs1,\
-    \ const Vec<T>& vs2)\n{\n    return Vec<T>{vs1} += vs2;\n}\n#pragma endregion\n\
-    struct C\n{\n    C() = default;\n    C(int v_) : v{v_} {}\n    friend bool operator<(const\
-    \ C& c1, const C& c2)\n    {\n        return c1.v < c2.v;\n    }\n    friend bool\
-    \ operator>(const C& c1, const C& c2)\n    {\n        return c1.v > c2.v;\n  \
-    \  }\n    int v = 0;\n};\nvoid chminTest()\n{\n    int v = 10;\n    for (int i\
-    \ = 100; i >= 0; i--) {\n        assert(chmin(v, i) == (i < 10));\n        assert(v\
-    \ == std::min(i, 10));\n    }\n    C cls{10};\n    for (int i = 100; i >= 0; i--)\
-    \ {\n        assert(chmin(cls, C{i}) == (i < 10));\n        assert(cls.v == std::min(i,\
-    \ 10));\n    }\n}\nvoid chmaxTest()\n{\n    int v = 10;\n    for (int i = 0; i\
-    \ < 100; i++) {\n        assert(chmax(v, i) == (i > 10));\n        assert(v ==\
-    \ std::max(i, 10));\n    }\n    C cls{10};\n    for (int i = 0; i < 100; i++)\
-    \ {\n        assert(chmax(cls, C{i}) == (i > 10));\n        assert(cls.v == std::max(i,\
-    \ 10));\n    }\n}\nint main()\n{\n    chminTest();\n    chmaxTest();\n    std::cout\
-    \ << \"Hello World\\n\";\n    return 0;\n}\n"
+    \    }\n    return ans;\n}\n#pragma endregion\nstruct C\n{\n    C() = default;\n\
+    \    C(int v_) : v{v_} {}\n    friend bool operator<(const C& c1, const C& c2)\n\
+    \    {\n        return c1.v < c2.v;\n    }\n    friend bool operator>(const C&\
+    \ c1, const C& c2)\n    {\n        return c1.v > c2.v;\n    }\n    int v = 0;\n\
+    };\nvoid chminTest()\n{\n    int v = 10;\n    for (int i = 100; i >= 0; i--) {\n\
+    \        assert(chmin(v, i) == (i < 10));\n        assert(v == std::min(i, 10));\n\
+    \    }\n    C cls{10};\n    for (int i = 100; i >= 0; i--) {\n        assert(chmin(cls,\
+    \ C{i}) == (i < 10));\n        assert(cls.v == std::min(i, 10));\n    }\n}\nvoid\
+    \ chmaxTest()\n{\n    int v = 10;\n    for (int i = 0; i < 100; i++) {\n     \
+    \   assert(chmax(v, i) == (i > 10));\n        assert(v == std::max(i, 10));\n\
+    \    }\n    C cls{10};\n    for (int i = 0; i < 100; i++) {\n        assert(chmax(cls,\
+    \ C{i}) == (i > 10));\n        assert(cls.v == std::max(i, 10));\n    }\n}\nint\
+    \ main()\n{\n    chminTest();\n    chmaxTest();\n    std::cout << \"Hello World\\\
+    n\";\n    return 0;\n}\n"
   code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \n#include \"../../../src/misc/common/func_alias.hpp\"\n\nstruct C\n{\n    C()\
     \ = default;\n    C(int v_) : v{v_} {}\n    friend bool operator<(const C& c1,\
@@ -117,7 +94,7 @@ data:
   isVerificationFile: true
   path: verifications/misc/common/func_alias.chminmax.test.cpp
   requiredBy: []
-  timestamp: '2021-05-24 21:49:34+09:00'
+  timestamp: '2021-05-27 03:45:14+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/misc/common/func_alias.chminmax.test.cpp

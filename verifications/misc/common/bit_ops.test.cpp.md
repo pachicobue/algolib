@@ -41,8 +41,10 @@ data:
     using Vec = std::vector<Ts...>;\ntemplate<typename... Ts>\nusing Stack = std::stack<Ts...>;\n\
     template<typename... Ts>\nusing Queue = std::queue<Ts...>;\ntemplate<typename\
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
-    \ = std::priority_queue<T, Vec<T>, Gt<T>>;\n#pragma endregion\n#pragma region\
-    \ BitOps\nconstexpr int popcount(const u64 v)\n{\n    return v ? __builtin_popcountll(v)\
+    \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
+    using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
+    using Sec = std::chrono::seconds;\n#pragma endregion\n#pragma region BitOps\n\
+    constexpr int popcount(const u64 v)\n{\n    return v ? __builtin_popcountll(v)\
     \ : 0;\n}\nconstexpr int log2p1(const u64 v)\n{\n    return v ? 64 - __builtin_clzll(v)\
     \ : 0;\n}\nconstexpr int lsbp1(const u64 v)\n{\n    return __builtin_ffsll(v);\n\
     }\nconstexpr int clog(const u64 v)\n{\n    return v ? log2p1(v - 1) : 0;\n}\n\
@@ -99,7 +101,7 @@ data:
   isVerificationFile: true
   path: verifications/misc/common/bit_ops.test.cpp
   requiredBy: []
-  timestamp: '2021-05-24 21:49:34+09:00'
+  timestamp: '2021-05-27 03:45:14+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/misc/common/bit_ops.test.cpp

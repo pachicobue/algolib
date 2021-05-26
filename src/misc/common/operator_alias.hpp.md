@@ -59,9 +59,6 @@ data:
   - icon: ':warning:'
     path: src/flow/max_flow.hpp
     title: src/flow/max_flow.hpp
-  - icon: ':warning:'
-    path: src/flow/mincost_flow.hpp
-    title: src/flow/mincost_flow.hpp
   - icon: ':heavy_check_mark:'
     path: src/graph/bcc.hpp
     title: src/graph/bcc.hpp
@@ -225,15 +222,21 @@ data:
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   - icon: ':x:'
+    path: src/misc/nd_range.hpp
+    title: src/misc/nd_range.hpp
+  - icon: ':x:'
+    path: src/misc/nd_vec.hpp
+    title: src/misc/nd_vec.hpp
+  - icon: ':x:'
     path: src/misc/printer.hpp
     title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   - icon: ':x:'
     path: src/misc/scanner.hpp
     title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':warning:'
+  - icon: ':x:'
     path: src/misc/stopwatch.hpp
     title: src/misc/stopwatch.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/zipper.hpp
     title: src/misc/zipper.hpp
   - icon: ':warning:'
@@ -258,6 +261,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/ds_table.test.cpp
     title: verifications/data_structure/ds_table.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/dsu.groups.test.cpp
+    title: verifications/data_structure/dsu.groups.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/dsu.test.cpp
+    title: verifications/data_structure/dsu.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/fenwick.max_right.test.cpp
+    title: verifications/data_structure/fenwick.max_right.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/fenwick.test.cpp
     title: verifications/data_structure/fenwick.test.cpp
@@ -285,9 +297,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/swag.test.cpp
     title: verifications/data_structure/swag.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/unionfind.test.cpp
-    title: verifications/data_structure/unionfind.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/wavelet.test.cpp
     title: verifications/data_structure/wavelet.test.cpp
@@ -327,7 +336,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/fps.exp.test.cpp
     title: verifications/math/fps.exp.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.inv.test.cpp
     title: verifications/math/fps.inv.test.cpp
   - icon: ':x:'
@@ -364,17 +373,32 @@ data:
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
   - icon: ':x:'
+    path: verifications/misc/common/operator_alias.test.cpp
+    title: verifications/misc/common/operator_alias.test.cpp
+  - icon: ':x:'
     path: verifications/misc/fastio/fastio.test.cpp
     title: verifications/misc/fastio/fastio.test.cpp
   - icon: ':x:'
     path: verifications/misc/io.test.cpp
     title: verifications/misc/io.test.cpp
   - icon: ':x:'
+    path: verifications/misc/nd_range.test.cpp
+    title: verifications/misc/nd_range.test.cpp
+  - icon: ':x:'
+    path: verifications/misc/nd_vec.test.cpp
+    title: verifications/misc/nd_vec.test.cpp
+  - icon: ':x:'
     path: verifications/misc/printer.test.cpp
     title: verifications/misc/printer.test.cpp
   - icon: ':x:'
     path: verifications/misc/scanner.test.cpp
     title: verifications/misc/scanner.test.cpp
+  - icon: ':x:'
+    path: verifications/misc/stopwatch.test.cpp
+    title: verifications/misc/stopwatch.test.cpp
+  - icon: ':x:'
+    path: verifications/misc/zipper.test.cpp
+    title: verifications/misc/zipper.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -404,60 +428,22 @@ data:
     using Vec = std::vector<Ts...>;\ntemplate<typename... Ts>\nusing Stack = std::stack<Ts...>;\n\
     template<typename... Ts>\nusing Queue = std::queue<Ts...>;\ntemplate<typename\
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
-    \ = std::priority_queue<T, Vec<T>, Gt<T>>;\n#pragma endregion\n#pragma region\
-    \ Range\nclass range\n{\nprivate:\n    struct itr\n    {\n        itr(int start\
-    \ = 0, int step = 1) : m_cnt{start}, m_step{step} {}\n        bool operator!=(const\
-    \ itr& it) const\n        {\n            return m_cnt != it.m_cnt;\n        }\n\
-    \        int operator*()\n        {\n            return m_cnt;\n        }\n  \
-    \      itr& operator++()\n        {\n            m_cnt += m_step;\n          \
-    \  return *this;\n        }\n        int m_cnt, m_step;\n    };\n    int m_start,\
-    \ m_end, m_step;\npublic:\n    range(int start, int end, int step = 1)\n     \
-    \   : m_start{start}, m_end{end}, m_step{step}\n    {\n        assert(m_step ==\
-    \ 1 or m_step == -1);\n    }\n    itr begin() const\n    {\n        return itr{m_start,\
-    \ m_step};\n    }\n    itr end() const\n    {\n        return itr{m_end, m_step};\n\
-    \    }\n};\nrange rep(int end)\n{\n    return range(0, end, 1);\n}\nrange per(int\
-    \ rend)\n{\n    return range(rend - 1, -1, -1);\n}\nclass ndRep\n{\nprivate:\n\
-    \    struct itr\n    {\n        itr(const Vec<int>& ns) : m_ns{ns}, m_cs(ns.size(),\
-    \ 0), m_end{false} {}\n        bool operator!=(const itr&) const\n        {\n\
-    \            return not m_end;\n        }\n        const Vec<int>& operator*()\n\
-    \        {\n            return m_cs;\n        }\n        itr& operator++()\n \
-    \       {\n            for (const int i : per(m_ns.size())) {\n              \
-    \  m_cs[i]++;\n                if (m_cs[i] < m_ns[i]) {\n                    break;\n\
-    \                } else {\n                    if (i == 0) { m_end = true; }\n\
-    \                    m_cs[i] = 0;\n                }\n            }\n        \
-    \    return *this;\n        }\n        Vec<int> m_ns, m_cs;\n        bool m_end;\n\
-    \    };\n    Vec<int> m_ns;\npublic:\n    ndRep(const Vec<int>& ns) : m_ns{ns}\
-    \ {}\n    itr begin() const\n    {\n        return itr{m_ns};\n    }\n    itr\
-    \ end() const\n    {\n        return itr{m_ns};\n    }\n};\n#pragma endregion\n"
-  code: "#pragma once\n#include \"type_alias.hpp\"\n#pragma region Range\nclass range\n\
-    {\nprivate:\n    struct itr\n    {\n        itr(int start = 0, int step = 1) :\
-    \ m_cnt{start}, m_step{step} {}\n        bool operator!=(const itr& it) const\n\
-    \        {\n            return m_cnt != it.m_cnt;\n        }\n        int operator*()\n\
-    \        {\n            return m_cnt;\n        }\n        itr& operator++()\n\
-    \        {\n            m_cnt += m_step;\n            return *this;\n        }\n\
-    \        int m_cnt, m_step;\n    };\n    int m_start, m_end, m_step;\n\npublic:\n\
-    \    range(int start, int end, int step = 1)\n        : m_start{start}, m_end{end},\
-    \ m_step{step}\n    {\n        assert(m_step == 1 or m_step == -1);\n    }\n \
-    \   itr begin() const\n    {\n        return itr{m_start, m_step};\n    }\n  \
-    \  itr end() const\n    {\n        return itr{m_end, m_step};\n    }\n};\nrange\
-    \ rep(int end)\n{\n    return range(0, end, 1);\n}\nrange per(int rend)\n{\n \
-    \   return range(rend - 1, -1, -1);\n}\n\nclass ndRep\n{\nprivate:\n    struct\
-    \ itr\n    {\n        itr(const Vec<int>& ns) : m_ns{ns}, m_cs(ns.size(), 0),\
-    \ m_end{false} {}\n        bool operator!=(const itr&) const\n        {\n    \
-    \        return not m_end;\n        }\n        const Vec<int>& operator*()\n \
-    \       {\n            return m_cs;\n        }\n        itr& operator++()\n  \
-    \      {\n            for (const int i : per(m_ns.size())) {\n               \
-    \ m_cs[i]++;\n                if (m_cs[i] < m_ns[i]) {\n                    break;\n\
-    \                } else {\n                    if (i == 0) { m_end = true; }\n\
-    \                    m_cs[i] = 0;\n                }\n            }\n        \
-    \    return *this;\n        }\n        Vec<int> m_ns, m_cs;\n        bool m_end;\n\
-    \    };\n    Vec<int> m_ns;\n\npublic:\n    ndRep(const Vec<int>& ns) : m_ns{ns}\
-    \ {}\n    itr begin() const\n    {\n        return itr{m_ns};\n    }\n    itr\
-    \ end() const\n    {\n        return itr{m_ns};\n    }\n};\n#pragma endregion\n"
+    \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
+    using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
+    using Sec = std::chrono::seconds;\n#pragma endregion\n#pragma region OperatorAlias\n\
+    template<typename T>\nVec<T> operator+=(Vec<T>& vs1, const Vec<T>& vs2)\n{\n \
+    \   vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n    return vs1;\n}\ntemplate<typename\
+    \ T>\nVec<T> operator+(const Vec<T>& vs1, const Vec<T>& vs2)\n{\n    auto vs =\
+    \ vs1;\n    vs += vs2;\n    return vs;\n}\n#pragma endregion\n"
+  code: "#pragma once\n#include \"type_alias.hpp\"\n#pragma region OperatorAlias\n\
+    template<typename T>\nVec<T> operator+=(Vec<T>& vs1, const Vec<T>& vs2)\n{\n \
+    \   vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n    return vs1;\n}\ntemplate<typename\
+    \ T>\nVec<T> operator+(const Vec<T>& vs1, const Vec<T>& vs2)\n{\n    auto vs =\
+    \ vs1;\n    vs += vs2;\n    return vs;\n}\n#pragma endregion\n"
   dependsOn:
   - src/misc/common/type_alias.hpp
   isVerificationFile: false
-  path: src/misc/common/range.hpp
+  path: src/misc/common/operator_alias.hpp
   requiredBy:
   - src/string/mp.hpp
   - src/string/manacher.hpp
@@ -466,12 +452,13 @@ data:
   - src/string/rolling_hash.hpp
   - src/misc/common.hpp
   - src/misc/stopwatch.hpp
+  - src/misc/nd_vec.hpp
   - src/misc/zipper.hpp
+  - src/misc/nd_range.hpp
   - src/misc/printer.hpp
   - src/misc/fastio/printer.hpp
   - src/misc/fastio/scanner.hpp
   - src/misc/scanner.hpp
-  - src/flow/mincost_flow.hpp
   - src/flow/max_flow.hpp
   - src/math/prime_enumerate.hpp
   - src/math/gcd_convolution.hpp
@@ -542,12 +529,17 @@ data:
   - src/graph/lca.hpp
   - src/graph/lowlink.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
-  timestamp: '2021-05-23 14:40:20+09:00'
+  timestamp: '2021-05-27 03:45:14+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - verifications/misc/zipper.test.cpp
   - verifications/misc/scanner.test.cpp
+  - verifications/misc/nd_range.test.cpp
   - verifications/misc/printer.test.cpp
+  - verifications/misc/stopwatch.test.cpp
   - verifications/misc/io.test.cpp
+  - verifications/misc/common/operator_alias.test.cpp
+  - verifications/misc/nd_vec.test.cpp
   - verifications/misc/fastio/fastio.test.cpp
   - verifications/math/fps.exp.test.cpp
   - verifications/math/fps.inv.test.cpp
@@ -567,7 +559,6 @@ data:
   - verifications/math/fps.convolution.test.cpp
   - verifications/math/fps.pow.test.cpp
   - verifications/math/fps.nth.test.cpp
-  - verifications/data_structure/unionfind.test.cpp
   - verifications/data_structure/wavelet.test.cpp
   - verifications/data_structure/mo.test.cpp
   - verifications/data_structure/swag.test.cpp
@@ -575,9 +566,12 @@ data:
   - verifications/data_structure/li_chao_tree.line.test.cpp
   - verifications/data_structure/li_chao_tree.segment.test.cpp
   - verifications/data_structure/ds_table.test.cpp
+  - verifications/data_structure/fenwick.max_right.test.cpp
+  - verifications/data_structure/dsu.test.cpp
   - verifications/data_structure/intdict.test.cpp
   - verifications/data_structure/static_rmq.test.cpp
   - verifications/data_structure/segtree.test.cpp
+  - verifications/data_structure/dsu.groups.test.cpp
   - verifications/data_structure/fenwick.test.cpp
   - verifications/graph/diameter.test.cpp
   - verifications/graph/dijkstra.test.cpp
@@ -585,10 +579,10 @@ data:
   - verifications/graph/hld.test.cpp
   - verifications/graph/scc.test.cpp
   - verifications/graph/lca.test.cpp
-documentation_of: src/misc/common/range.hpp
+documentation_of: src/misc/common/operator_alias.hpp
 layout: document
 redirect_from:
-- /library/src/misc/common/range.hpp
-- /library/src/misc/common/range.hpp.html
-title: src/misc/common/range.hpp
+- /library/src/misc/common/operator_alias.hpp
+- /library/src/misc/common/operator_alias.hpp.html
+title: src/misc/common/operator_alias.hpp
 ---
