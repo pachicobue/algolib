@@ -44,10 +44,13 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/dualseg.test.cpp
+    title: verifications/data_structure/dualseg.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -270,8 +273,9 @@ data:
   path: src/data_structure/dualseg.hpp
   requiredBy: []
   timestamp: '2021-05-27 03:45:14+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verifications/data_structure/dualseg.test.cpp
 documentation_of: src/data_structure/dualseg.hpp
 layout: document
 title: Dual Segment Tree

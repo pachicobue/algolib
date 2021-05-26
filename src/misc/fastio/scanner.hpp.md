@@ -55,6 +55,9 @@ data:
     path: verifications/data_structure/dsu.test.cpp
     title: verifications/data_structure/dsu.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/dualseg.test.cpp
+    title: verifications/data_structure/dualseg.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/fenwick.test.cpp
     title: verifications/data_structure/fenwick.test.cpp
   - icon: ':heavy_check_mark:'
@@ -123,45 +126,45 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/fps.inv.test.cpp
     title: verifications/math/fps.inv.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.log.test.cpp
     title: verifications/math/fps.log.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.nth.test.cpp
     title: verifications/math/fps.nth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.pow.test.cpp
     title: verifications/math/fps.pow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.tshift.test.cpp
     title: verifications/math/fps.tshift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_sqrt.test.cpp
     title: verifications/math/mod_sqrt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/prime_powsum.test.cpp
     title: verifications/math/prime_powsum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/fastio/fastio.test.cpp
     title: verifications/misc/fastio/fastio.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -380,7 +383,7 @@ data:
   requiredBy:
   - verifications/math/mod_nthroot.yuki981.cpp
   timestamp: '2021-05-27 03:45:14+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/misc/fastio/fastio.test.cpp
   - verifications/math/fps.exp.test.cpp
@@ -404,6 +407,7 @@ data:
   - verifications/data_structure/wavelet.test.cpp
   - verifications/data_structure/mo.test.cpp
   - verifications/data_structure/swag.test.cpp
+  - verifications/data_structure/dualseg.test.cpp
   - verifications/data_structure/lazyseg.test.cpp
   - verifications/data_structure/li_chao_tree.line.test.cpp
   - verifications/data_structure/li_chao_tree.segment.test.cpp

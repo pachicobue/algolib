@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/dsu.hpp
-    title: src/data_structure/dsu.hpp
+    path: src/data_structure/intset.hpp
+    title: src/data_structure/intset.hpp
   - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -205,34 +205,32 @@ data:
     \ vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]()\
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
-    #pragma endregion\nclass DSU\n{\npublic:\n    DSU(int n) : m_v{n}, m_roots{iotaVec(n)},\
-    \ m_sizes(m_v, 1) {}\n    int root(int i)\n    {\n        if (m_roots[i] == i)\
-    \ {\n            return i;\n        } else {\n            return m_roots[i] =\
-    \ root(m_roots[i]);\n        }\n    }\n    bool merge(int i, int j)\n    {\n \
-    \       i = root(i), j = root(j);\n        if (i == j) { return false; }\n   \
-    \     if (size(i) > size(j)) { std::swap(i, j); }\n        m_roots[i] = j;\n \
-    \       m_sizes[j] += m_sizes[i];\n        return true;\n    }\n    int size(int\
-    \ i)\n    {\n        return m_sizes[root(i)];\n    }\n    Vec<Vec<int>> groups()\
-    \ const\n    {\n        Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v))\
-    \ {\n            iss[m_roots[i]].push_back(i);\n        }\n        return iss;\n\
-    \    }\nprivate:\n    int m_v;\n    Vec<int> m_roots;\n    Vec<int> m_sizes;\n\
-    };\nvoid Test()\n{\n    DSU dsu(7);\n    dsu.merge(0, 1);\n    dsu.merge(2, 3);\n\
-    \    dsu.merge(4, 5);\n    dsu.merge(5, 6);\n    assert(dsu.size(0) == 2);\n \
-    \   assert(dsu.size(1) == 2);\n    assert(dsu.size(2) == 2);\n    assert(dsu.size(3)\
-    \ == 2);\n    assert(dsu.size(4) == 3);\n    assert(dsu.size(5) == 3);\n    assert(dsu.size(6)\
-    \ == 3);\n    assert(dsu.groups()\n           == Vec<Vec<int>>({{}, {0, 1}, {},\
-    \ {2, 3}, {}, {4, 5, 6}, {}}));\n}\nint main()\n{\n    Test();\n    std::cout\
-    \ << \"Hello World\\n\";\n    return 0;\n}\n"
+    #pragma endregion\ntemplate<typename K, int LG = 20> class IntSet\n{\npublic:\n\
+    \    IntSet() = default;\n    void insert(const K& k)\n    {\n        const auto\
+    \ i = index(k);\n        m_used.set(i), m_keys[i] = k;\n    }\n    void erase(const\
+    \ K& k)\n    {\n        m_used.reset(index(k));\n    }\n    bool contains(const\
+    \ K& k) const\n    {\n        const auto i = index(k);\n        return m_used.test(i)\
+    \ and m_keys[i] == k;\n    }\nprivate:\n    u32 index(const K& k) const\n    {\n\
+    \        u32 i = 0;\n        for (i = hash(k); m_used.test(i) and m_keys[i] !=\
+    \ k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static\
+    \ constexpr int N = 1 << LG;\n    static constexpr u64 r = 3970217309729031_u64;\n\
+    \    static constexpr u32 hash(const u64 a)\n    {\n        return (a * r) >>\
+    \ (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n};\nvoid Test()\n\
+    {\n    IntSet<int> set;\n    set.insert(-2);\n    set.insert(0);\n    set.insert(2);\n\
+    \    assert(set.contains(-2));\n    assert(set.contains(0));\n    assert(set.contains(2));\n\
+    \    assert(not set.contains(-3));\n    assert(not set.contains(3));\n    set.erase(0);\n\
+    \    assert(set.contains(-2));\n    assert(not set.contains(0));\n    assert(set.contains(2));\n\
+    }\nint main()\n{\n    Test();\n    std::cout << \"Hello World\\n\";\n    return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
-    \n#include \"../../src/data_structure/dsu.hpp\"\n\nvoid Test()\n{\n    DSU dsu(7);\n\
-    \    dsu.merge(0, 1);\n    dsu.merge(2, 3);\n    dsu.merge(4, 5);\n    dsu.merge(5,\
-    \ 6);\n    assert(dsu.size(0) == 2);\n    assert(dsu.size(1) == 2);\n    assert(dsu.size(2)\
-    \ == 2);\n    assert(dsu.size(3) == 2);\n    assert(dsu.size(4) == 3);\n    assert(dsu.size(5)\
-    \ == 3);\n    assert(dsu.size(6) == 3);\n    assert(dsu.groups()\n           ==\
-    \ Vec<Vec<int>>({{}, {0, 1}, {}, {2, 3}, {}, {4, 5, 6}, {}}));\n}\n\nint main()\n\
+    \n#include \"../../src/data_structure/intset.hpp\"\n\nvoid Test()\n{\n    IntSet<int>\
+    \ set;\n    set.insert(-2);\n    set.insert(0);\n    set.insert(2);\n    assert(set.contains(-2));\n\
+    \    assert(set.contains(0));\n    assert(set.contains(2));\n    assert(not set.contains(-3));\n\
+    \    assert(not set.contains(3));\n\n    set.erase(0);\n    assert(set.contains(-2));\n\
+    \    assert(not set.contains(0));\n    assert(set.contains(2));\n}\n\nint main()\n\
     {\n    Test();\n    std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
   dependsOn:
-  - src/data_structure/dsu.hpp
+  - src/data_structure/intset.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -248,15 +246,15 @@ data:
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
   isVerificationFile: true
-  path: verifications/data_structure/dsu.groups.test.cpp
+  path: verifications/data_structure/intset.ut.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-27 04:14:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verifications/data_structure/dsu.groups.test.cpp
+documentation_of: verifications/data_structure/intset.ut.test.cpp
 layout: document
 redirect_from:
-- /verify/verifications/data_structure/dsu.groups.test.cpp
-- /verify/verifications/data_structure/dsu.groups.test.cpp.html
-title: verifications/data_structure/dsu.groups.test.cpp
+- /verify/verifications/data_structure/intset.ut.test.cpp
+- /verify/verifications/data_structure/intset.ut.test.cpp.html
+title: verifications/data_structure/intset.ut.test.cpp
 ---

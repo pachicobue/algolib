@@ -2,11 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/graph/diameter.hpp
-    title: src/graph/diameter.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/graph/graph.hpp
-    title: src/graph/graph.hpp
+    path: src/data_structure/dualseg.hpp
+    title: Dual Segment Tree
   - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -62,9 +59,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/tree_diameter
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D
     links:
-    - https://judge.yosupo.jp/problem/tree_diameter
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
     #pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned int;\nusing i64\
     \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
@@ -214,27 +211,32 @@ data:
     \ vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]()\
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
-    #pragma endregion\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n\
-    \    Printer() {}\n    template<typename... Args>\n    int operator()(const Args&...\
-    \ args)\n    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
-    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
-    n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
-    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
-    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
-    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
-    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
-    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
-    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
-    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
-    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
-    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
-    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
-    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
-    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
-    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
-    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
-    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    #pragma endregion\ntemplate<typename OpMonoid>\nclass DualSeg\n{\n    using F\
+    \ = typename OpMonoid::F;\n    static constexpr F id()\n    {\n        return\
+    \ OpMonoid::id();\n    }\npublic:\n    DualSeg(const Vec<F>& vs)\n        : m_size(vs.size()),\n\
+    \          m_depth(clog(m_size) + 1),\n          m_half(1 << m_depth),\n     \
+    \     m_ops(m_half << 1, id())\n    {\n        std::copy(vs.begin(), vs.end(),\
+    \ m_ops.begin() + m_half);\n    }\n    F get(int i) const\n    {\n        assert(0\
+    \ <= i and i < m_size);\n        F ans = id();\n        i += m_half;\n       \
+    \ for (int h : per(m_depth)) {\n            ans = compose(ans, m_ops[i >> h]);\n\
+    \        }\n        return ans;\n    }\n    void set(int i, const F& f)\n    {\n\
+    \        assert(0 <= i and i < m_size);\n        i += m_half;\n        clean(i),\
+    \ clean(i + 1);\n        m_ops[i] = f;\n    }\n    void act(int l, int r, const\
+    \ F& f)\n    {\n        assert(0 <= l and r <= m_size);\n        if (l >= r) {\
+    \ return; }\n        int li = l + m_half, ri = r + m_half;\n        clean(li),\
+    \ clean(ri);\n        for (; li < ri; li >>= 1, ri >>= 1) {\n            if (li\
+    \ & 1) { update(li++, f); }\n            if (ri & 1) { update(--ri, f); }\n  \
+    \      }\n    }\n    friend Ostream& operator<<(Ostream& os, const DualSeg& seg)\n\
+    \    {\n        os << \"[\";\n        for (int i : rep(seg.m_size)) {\n      \
+    \      os << (i == 0 ? \"\" : \",\") << seg.get(i);\n        }\n        return\
+    \ (os << \"]\\n\");\n    }\nprivate:\n    void down(int i)\n    {\n        update(i\
+    \ << 1, m_ops[i]), update(i << 1 | 1, m_ops[i]);\n        m_ops[i] = id();\n \
+    \   }\n    void clean(int i)\n    {\n        const int b = (i / (i & -i)) >> 1;\n\
+    \        for (const int h : per(m_depth)) {\n            const int v = i >> h;\n\
+    \            if (v > b) { break; }\n            down(v);\n        }\n    }\n \
+    \   void update(int i, const F& f)\n    {\n        m_ops[i] = compose(f, m_ops[i]);\n\
+    \    }\n    int m_size, m_depth, m_half;\n    Vec<F> m_ops;\n    static inline\
+    \ OpMonoid compose;\n};\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
     \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
     \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
     \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
@@ -257,69 +259,52 @@ data:
     }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
     \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
     \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
-    template<typename T = int>\nclass Graph\n{\n    struct Edge\n    {\n        Edge()\
-    \ = default;\n        Edge(int i, int t, T c) : id{i}, to{t}, cost{c} {}\n   \
-    \     int id;\n        int to;\n        T cost;\n        operator int() const\n\
-    \        {\n            return to;\n        }\n    };\npublic:\n    Graph(int\
-    \ n) : m_v{n}, m_edges(n) {}\n    void addEdge(int u, int v, bool bi = false)\n\
-    \    {\n        assert(0 <= u and u < m_v);\n        assert(0 <= v and v < m_v);\n\
-    \        m_edges[u].emplace_back(m_e, v, 1);\n        if (bi) { m_edges[v].emplace_back(m_e,\
-    \ u, 1); }\n        m_e++;\n    }\n    void addEdge(int u, int v, const T& c,\
-    \ bool bi = false)\n    {\n        assert(0 <= u and u < m_v);\n        assert(0\
-    \ <= v and v < m_v);\n        m_edges[u].emplace_back(m_e, v, c);\n        if\
-    \ (bi) { m_edges[v].emplace_back(m_e, u, c); }\n        m_e++;\n    }\n    const\
-    \ Vec<Edge>& operator[](const int u) const\n    {\n        assert(0 <= u and u\
-    \ < m_v);\n        return m_edges[u];\n    }\n    Vec<Edge>& operator[](const\
-    \ int u)\n    {\n        assert(0 <= u and u < m_v);\n        return m_edges[u];\n\
-    \    }\n    int v() const\n    {\n        return m_v;\n    }\n    int e() const\n\
-    \    {\n        return m_e;\n    }\n    friend Ostream& operator<<(Ostream& os,\
-    \ const Graph& g)\n    {\n        for (int u : rep(g.v())) {\n            for\
-    \ (const auto& [id, v, c] : g[u]) {\n                os << \"[\" << id << \"]:\
-    \ \";\n                os << u << \"->\" << v << \"(\" << c << \")\\n\";\n   \
-    \         }\n        }\n        return os;\n    }\n    Vec<T> sizes(int root =\
-    \ 0) const\n    {\n        const int N = v();\n        assert(0 <= root and root\
-    \ < N);\n        Vec<T> ss(N, 1);\n        Fix([&](auto dfs, int u, int p) ->\
-    \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
-    \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
-    \             dfs(v, u);\n                ss[v] += ss[u];\n            }\n   \
-    \     })(root, -1);\n        return ss;\n    }\n    Vec<T> depths(int root = 0)\
-    \ const\n    {\n        const int N = v();\n        assert(0 <= root and root\
-    \ < N);\n        Vec<T> ds(N, 0);\n        Fix([&](auto dfs, int u, int p) ->\
-    \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
-    \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
-    \             ds[v] = ds[u] + c;\n                dfs(v, u);\n            }\n\
-    \        })(root, -1);\n        return ds;\n    }\n    Vec<int> parents(int root\
-    \ = 0) const\n    {\n        const int N = v();\n        assert(0 <= root and\
-    \ root < N);\n        Vec<int> ps(N, -1);\n        Fix([&](auto dfs, int u, int\
-    \ p) -> void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n    \
-    \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
-    \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
-    \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
-    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\nnamespace diameter_impl {\ntemplate<typename\
-    \ T>\nstruct Edge\n{\n    Edge(int i, int f, int t, T c) : id{i}, from{f}, to{t},\
-    \ cost{c} {}\n    Edge(const Edge&) = default;\n    int id;\n    int from, to;\n\
-    \    T cost;\n};\n};\ntemplate<typename T>\nVec<diameter_impl::Edge<T>> diameter(const\
-    \ Graph<T>& g)\n{\n    const int N = g.v();\n    auto ds = g.depths(0);\n    auto\
-    \ ps = g.parents(0);\n    const int s = maxInd(ds);\n    ds = g.depths(s);\n \
-    \   ps = g.parents(s);\n    const int t = maxInd(ds);\n    Vec<diameter_impl::Edge<T>>\
-    \ es;\n    for (int u = t; ps[u] != -1; u = ps[u]) {\n        for (const auto&\
-    \ [id, v, c] : g[u]) {\n            if (v == ps[u]) { es.emplace_back(id, u, v,\
-    \ c); }\n        }\n    }\n    return es;\n}\nint main()\n{\n    const auto N\
-    \ = in.val<int>();\n    Graph<i64> g(N);\n    for (int i : rep(N - 1)) {\n   \
-    \     const auto [u, v, c] = in.tup<int, int, i64>();\n        g.addEdge(u, v,\
-    \ c, true);\n    }\n    auto es = diameter(g);\n    i64 X = 0;\n    Vec<int> vs{es[0].from};\n\
-    \    for (const auto& e : es) {\n        X += e.cost;\n        vs.push_back(e.to);\n\
-    \    }\n    out.ln(X, vs.size());\n    out.ln(vs);\n    return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tree_diameter\"\n#include\
-    \ \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
-    \n#include \"../../src/graph/diameter.hpp\"\nint main()\n{\n    const auto N =\
-    \ in.val<int>();\n    Graph<i64> g(N);\n    for (int i : rep(N - 1)) {\n     \
-    \   const auto [u, v, c] = in.tup<int, int, i64>();\n        g.addEdge(u, v, c,\
-    \ true);\n    }\n    auto es = diameter(g);\n    i64 X = 0;\n    Vec<int> vs{es[0].from};\n\
-    \    for (const auto& e : es) {\n        X += e.cost;\n        vs.push_back(e.to);\n\
-    \    }\n    out.ln(X, vs.size());\n    out.ln(vs);\n    return 0;\n}\n"
+    #pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer() {}\n \
+    \   template<typename... Args>\n    int operator()(const Args&... args)\n    {\n\
+    \        dump(args...);\n        return 0;\n    }\n    template<typename... Args>\n\
+    \    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\n');\n\
+    \        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
+    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
+    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
+    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
+    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
+    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
+    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
+    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
+    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
+    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
+    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
+    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
+    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
+    #pragma endregion\nint main()\n{\n    struct OpMonoid\n    {\n        using F\
+    \ = i64;\n        static F id()\n        {\n            return INF<F>;\n     \
+    \   }\n        F operator()(const F& f1, const F& f2) const\n        {\n     \
+    \       return f1 != id() ? f1 : f2;\n        }\n    };\n    const auto [N, Q]\
+    \ = in.tup<int, int>();\n    auto seg = DualSeg<OpMonoid>(Vec<i64>(N));\n    for\
+    \ (int i : rep(N)) {\n        seg.set(i, (1_i64 << 31) - 1);\n    }\n    for (int\
+    \ q : rep(Q)) {\n        static_cast<void>(q);\n        const auto t = in.val<int>();\n\
+    \        if (t == 0) {\n            const auto [s, t, x] = in.tup<int, int, i64>();\n\
+    \            seg.act(s, t + 1, x);\n        } else {\n            const auto i\
+    \ = in.val<int>();\n            out.ln(seg.get(i));\n        }\n    }\n    if\
+    \ (N < 10) { std::cerr << seg << std::endl; }\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D\"\
+    \n#include \"../../src/data_structure/dualseg.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
+    \n#include \"../../src/misc/fastio/printer.hpp\"\n\nint main()\n{\n    struct\
+    \ OpMonoid\n    {\n        using F = i64;\n        static F id()\n        {\n\
+    \            return INF<F>;\n        }\n        F operator()(const F& f1, const\
+    \ F& f2) const\n        {\n            return f1 != id() ? f1 : f2;\n        }\n\
+    \    };\n    const auto [N, Q] = in.tup<int, int>();\n    auto seg = DualSeg<OpMonoid>(Vec<i64>(N));\n\
+    \    for (int i : rep(N)) {\n        seg.set(i, (1_i64 << 31) - 1);\n    }\n \
+    \   for (int q : rep(Q)) {\n        USE(q);\n        const auto t = in.val<int>();\n\
+    \        if (t == 0) {\n            const auto [s, t, x] = in.tup<int, int, i64>();\n\
+    \            seg.act(s, t + 1, x);\n        } else {\n            const auto i\
+    \ = in.val<int>();\n            out.ln(seg.get(i));\n        }\n    }\n    if\
+    \ (N < 10) { std::cerr << seg << std::endl; }\n    return 0;\n}\n"
   dependsOn:
-  - src/misc/fastio/printer.hpp
+  - src/data_structure/dualseg.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -335,18 +320,17 @@ data:
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
   - src/misc/fastio/scanner.hpp
-  - src/graph/diameter.hpp
-  - src/graph/graph.hpp
+  - src/misc/fastio/printer.hpp
   isVerificationFile: true
-  path: verifications/graph/diameter.test.cpp
+  path: verifications/data_structure/dualseg.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-27 04:14:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verifications/graph/diameter.test.cpp
+documentation_of: verifications/data_structure/dualseg.test.cpp
 layout: document
 redirect_from:
-- /verify/verifications/graph/diameter.test.cpp
-- /verify/verifications/graph/diameter.test.cpp.html
-title: verifications/graph/diameter.test.cpp
+- /verify/verifications/data_structure/dualseg.test.cpp
+- /verify/verifications/data_structure/dualseg.test.cpp.html
+title: verifications/data_structure/dualseg.test.cpp
 ---

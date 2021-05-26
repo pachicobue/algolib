@@ -46,11 +46,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/dsu.groups.test.cpp
-    title: verifications/data_structure/dsu.groups.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/dsu.test.cpp
     title: verifications/data_structure/dsu.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/dsu.ut.test.cpp
+    title: verifications/data_structure/dsu.ut.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -251,7 +251,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/data_structure/dsu.test.cpp
-  - verifications/data_structure/dsu.groups.test.cpp
+  - verifications/data_structure/dsu.ut.test.cpp
 documentation_of: src/data_structure/dsu.hpp
 layout: document
 redirect_from:
