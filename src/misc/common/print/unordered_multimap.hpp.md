@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#include <unordered_map>\n#include <iostream>\ntemplate<typename...\
+  bundledCode: "#include <iostream>\n#include <unordered_map>\ntemplate<typename...\
     \ Ts>\nstd::ostream& operator<<(std::ostream& os, const std::unordered_multimap<Ts...>&\
     \ vs)\n{\n    os << \"[\";\n    for (const auto& [k, v] : vs) { os << \"(\" <<\
     \ k << \"->\" << v << \"),\"; }\n    return (os << \"]\" << std::endl);\n}\n"

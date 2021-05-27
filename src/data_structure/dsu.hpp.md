@@ -206,25 +206,25 @@ data:
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
     #pragma endregion\nclass DSU\n{\npublic:\n    DSU(int n) : m_v{n}, m_roots{iotaVec(n)},\
-    \ m_sizes(m_v, 1) {}\n    int root(int i)\n    {\n        if (m_roots[i] == i)\
-    \ {\n            return i;\n        } else {\n            return m_roots[i] =\
-    \ root(m_roots[i]);\n        }\n    }\n    bool merge(int i, int j)\n    {\n \
-    \       i = root(i), j = root(j);\n        if (i == j) { return false; }\n   \
-    \     if (size(i) > size(j)) { std::swap(i, j); }\n        m_roots[i] = j;\n \
-    \       m_sizes[j] += m_sizes[i];\n        return true;\n    }\n    int size(int\
-    \ i)\n    {\n        return m_sizes[root(i)];\n    }\n    Vec<Vec<int>> groups()\
+    \ m_sizes(m_v, 1) {}\n    int leader(int i)\n    {\n        if (m_roots[i] ==\
+    \ i) {\n            return i;\n        } else {\n            return m_roots[i]\
+    \ = leader(m_roots[i]);\n        }\n    }\n    bool merge(int i, int j)\n    {\n\
+    \        i = leader(i), j = leader(j);\n        if (i == j) { return false; }\n\
+    \        if (size(i) > size(j)) { std::swap(i, j); }\n        m_roots[i] = j;\n\
+    \        m_sizes[j] += m_sizes[i];\n        return true;\n    }\n    int size(int\
+    \ i)\n    {\n        return m_sizes[leader(i)];\n    }\n    Vec<Vec<int>> groups()\
     \ const\n    {\n        Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v))\
     \ {\n            iss[m_roots[i]].push_back(i);\n        }\n        return iss;\n\
     \    }\nprivate:\n    int m_v;\n    Vec<int> m_roots;\n    Vec<int> m_sizes;\n\
     };\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\nclass DSU\n{\npublic:\n  \
-    \  DSU(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}\n    int root(int\
+    \  DSU(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}\n    int leader(int\
     \ i)\n    {\n        if (m_roots[i] == i) {\n            return i;\n        }\
-    \ else {\n            return m_roots[i] = root(m_roots[i]);\n        }\n    }\n\
-    \    bool merge(int i, int j)\n    {\n        i = root(i), j = root(j);\n    \
-    \    if (i == j) { return false; }\n        if (size(i) > size(j)) { std::swap(i,\
+    \ else {\n            return m_roots[i] = leader(m_roots[i]);\n        }\n   \
+    \ }\n    bool merge(int i, int j)\n    {\n        i = leader(i), j = leader(j);\n\
+    \        if (i == j) { return false; }\n        if (size(i) > size(j)) { std::swap(i,\
     \ j); }\n        m_roots[i] = j;\n        m_sizes[j] += m_sizes[i];\n        return\
-    \ true;\n    }\n    int size(int i)\n    {\n        return m_sizes[root(i)];\n\
+    \ true;\n    }\n    int size(int i)\n    {\n        return m_sizes[leader(i)];\n\
     \    }\n    Vec<Vec<int>> groups() const\n    {\n        Vec<Vec<int>> iss(m_v);\n\
     \        for (const int i : rep(m_v)) {\n            iss[m_roots[i]].push_back(i);\n\
     \        }\n        return iss;\n    }\n\nprivate:\n    int m_v;\n    Vec<int>\
@@ -247,7 +247,7 @@ data:
   isVerificationFile: false
   path: src/data_structure/dsu.hpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-27 15:56:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/data_structure/dsu.test.cpp

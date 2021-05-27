@@ -212,13 +212,13 @@ data:
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
     #pragma endregion\nclass DSU\n{\npublic:\n    DSU(int n) : m_v{n}, m_roots{iotaVec(n)},\
-    \ m_sizes(m_v, 1) {}\n    int root(int i)\n    {\n        if (m_roots[i] == i)\
-    \ {\n            return i;\n        } else {\n            return m_roots[i] =\
-    \ root(m_roots[i]);\n        }\n    }\n    bool merge(int i, int j)\n    {\n \
-    \       i = root(i), j = root(j);\n        if (i == j) { return false; }\n   \
-    \     if (size(i) > size(j)) { std::swap(i, j); }\n        m_roots[i] = j;\n \
-    \       m_sizes[j] += m_sizes[i];\n        return true;\n    }\n    int size(int\
-    \ i)\n    {\n        return m_sizes[root(i)];\n    }\n    Vec<Vec<int>> groups()\
+    \ m_sizes(m_v, 1) {}\n    int leader(int i)\n    {\n        if (m_roots[i] ==\
+    \ i) {\n            return i;\n        } else {\n            return m_roots[i]\
+    \ = leader(m_roots[i]);\n        }\n    }\n    bool merge(int i, int j)\n    {\n\
+    \        i = leader(i), j = leader(j);\n        if (i == j) { return false; }\n\
+    \        if (size(i) > size(j)) { std::swap(i, j); }\n        m_roots[i] = j;\n\
+    \        m_sizes[j] += m_sizes[i];\n        return true;\n    }\n    int size(int\
+    \ i)\n    {\n        return m_sizes[leader(i)];\n    }\n    Vec<Vec<int>> groups()\
     \ const\n    {\n        Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v))\
     \ {\n            iss[m_roots[i]].push_back(i);\n        }\n        return iss;\n\
     \    }\nprivate:\n    int m_v;\n    Vec<int> m_roots;\n    Vec<int> m_sizes;\n\
@@ -268,15 +268,15 @@ data:
     int main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    auto uf = DSU(N);\n\
     \    for (int q : rep(Q)) {\n        static_cast<void>(q);\n        const auto\
     \ [t, u, v] = in.tup<int, int, int>();\n        if (t == 0) {\n            uf.merge(u,\
-    \ v);\n        } else {\n            out.ln(uf.root(u) == uf.root(v));\n     \
-    \   }\n    }\n}\n"
+    \ v);\n        } else {\n            out.ln(uf.leader(u) == uf.leader(v));\n \
+    \       }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include \"\
     ../../src/data_structure/dsu.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
     \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const auto\
     \ [N, Q] = in.tup<int, int>();\n    auto uf = DSU(N);\n    for (int q : rep(Q))\
     \ {\n        USE(q);\n        const auto [t, u, v] = in.tup<int, int, int>();\n\
     \        if (t == 0) {\n            uf.merge(u, v);\n        } else {\n      \
-    \      out.ln(uf.root(u) == uf.root(v));\n        }\n    }\n}\n"
+    \      out.ln(uf.leader(u) == uf.leader(v));\n        }\n    }\n}\n"
   dependsOn:
   - src/data_structure/dsu.hpp
   - src/misc/common.hpp
@@ -298,7 +298,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/dsu.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-27 15:56:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/dsu.test.cpp
