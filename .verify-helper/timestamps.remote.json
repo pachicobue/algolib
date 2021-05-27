@@ -1,7 +1,7 @@
 {
 "verifications/data_structure/ds_table.test.cpp": "2021-05-27 03:45:14 +0900",
-"verifications/data_structure/dsu.test.cpp": "2021-05-27 03:45:14 +0900",
-"verifications/data_structure/dsu.ut.test.cpp": "2021-05-27 04:14:23 +0900",
+"verifications/data_structure/dsu.test.cpp": "2021-05-27 15:56:16 +0900",
+"verifications/data_structure/dsu.ut.test.cpp": "2021-05-27 15:56:16 +0900",
 "verifications/data_structure/dualseg.test.cpp": "2021-05-27 04:14:23 +0900",
 "verifications/data_structure/fenwick.max_right.test.cpp": "2021-05-27 03:45:14 +0900",
 "verifications/data_structure/fenwick.test.cpp": "2021-05-27 03:45:14 +0900",
