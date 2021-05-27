@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/dsu.hpp
-    title: src/data_structure/dsu.hpp
+    title: Disjoint Set Union
   - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp

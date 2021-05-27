@@ -10,7 +10,7 @@ data:
     title: Disjoint Sparse Table
   - icon: ':heavy_check_mark:'
     path: src/data_structure/dsu.hpp
-    title: src/data_structure/dsu.hpp
+    title: Disjoint Set Union
   - icon: ':heavy_check_mark:'
     path: src/data_structure/dualseg.hpp
     title: Dual Segment Tree
