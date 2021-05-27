@@ -13,6 +13,7 @@
 "verifications/data_structure/li_chao_tree.line.test.cpp": "2021-05-27 04:26:42 +0900",
 "verifications/data_structure/li_chao_tree.segment.test.cpp": "2021-05-27 03:45:14 +0900",
 "verifications/data_structure/mo.test.cpp": "2021-05-27 04:26:42 +0900",
+"verifications/data_structure/monotonic_cht.test.cpp": "2021-05-27 14:04:14 +0900",
 "verifications/data_structure/segtree.test.cpp": "2021-05-27 03:45:14 +0900",
 "verifications/data_structure/static_rmq.test.cpp": "2021-05-27 03:45:14 +0900",
 "verifications/data_structure/swag.test.cpp": "2021-05-27 03:45:14 +0900",
