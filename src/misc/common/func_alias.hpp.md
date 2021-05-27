@@ -32,7 +32,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/mo.hpp
     title: Mo's Algorithm
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/monotonic_cht.hpp
     title: "\u5358\u8ABF\u6027\u306E\u3042\u308B Convex Hull Trick"
   - icon: ':warning:'
@@ -300,6 +300,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/mo.test.cpp
     title: verifications/data_structure/mo.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/monotonic_cht.test.cpp
+    title: verifications/data_structure/monotonic_cht.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/segtree.test.cpp
     title: verifications/data_structure/segtree.test.cpp
@@ -611,6 +614,7 @@ data:
   - verifications/math/fps.convolution.test.cpp
   - verifications/math/fps.pow.test.cpp
   - verifications/math/fps.nth.test.cpp
+  - verifications/data_structure/monotonic_cht.test.cpp
   - verifications/data_structure/wavelet.test.cpp
   - verifications/data_structure/lazyseg.ut.test.cpp
   - verifications/data_structure/mo.test.cpp

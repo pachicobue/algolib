@@ -44,10 +44,13 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/monotonic_cht.test.cpp
+    title: verifications/data_structure/monotonic_cht.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
@@ -209,35 +212,21 @@ data:
     \ = l2;\n        if (a1 == a2) {\n            return b1 <= b2;\n        } else\
     \ if (a1 > a2) {\n            return x <= fdiv(b2 - b1, a1 - a2);\n        } else\
     \ {\n            return fdiv(b1 - b2, a2 - a1) < x;\n        }\n    }\npublic:\n\
-    \    MonotonicCHT(bool query_inc = true)\n        : m_query_inc{query_inc}, m_prev_x{m_query_inc\
-    \ ? -INF<T> : INF<T>}\n    {}\n    void addLine(T a, T b)\n    {\n        const\
-    \ L l{a, b};\n        if (m_lines.empty()) {\n            m_lines.push_back(l);\n\
-    \            return;\n        }\n        auto& [Ma, Mb] = m_lines.front();\n \
-    \       auto& [ma, mb] = m_lines.back();\n        assert(a <= ma or Ma <= a);\n\
-    \        if (a <= ma) {\n            if (a == ma) {\n                chmin(mb,\
-    \ b);\n            } else {\n                while (m_lines.size() >= 2) {\n \
-    \                   const int n = m_lines.size();\n                    const auto&\
-    \ l0 = m_lines[n - 2];\n                    const auto& l1 = m_lines[n - 1];\n\
-    \                    if (not needLess(l0, l1, l)) { break; }\n               \
-    \     m_lines.pop_back();\n                }\n                m_lines.push_back(l);\n\
-    \            }\n        } else {\n            if (Ma == a) {\n               \
-    \ chmin(Mb, b);\n            } else {\n                while (m_lines.size() >=\
-    \ 2) {\n                    const auto& l1 = m_lines[0];\n                   \
-    \ const auto& l2 = m_lines[1];\n                    if (not needLess(l, l1, l2))\
-    \ { break; }\n                    m_lines.pop_front();\n                }\n  \
-    \              m_lines.push_front(l);\n            }\n        }\n    }\n    L\
-    \ minLine(const T x)\n    {\n        if (m_lines.empty()) { return NIL; }\n  \
-    \      if (m_query_inc) {\n            assert(m_prev_x <= x);\n            m_prev_x\
-    \ = x;\n            while (m_lines.size() >= 2) {\n                const auto&\
-    \ l0 = m_lines[0];\n                const auto& l1 = m_lines[1];\n           \
-    \     if (comp(l0, l1, x)) { break; }\n                m_lines.pop_front();\n\
-    \            }\n            return m_lines.front();\n        } else {\n      \
-    \      assert(x <= m_prev_x);\n            m_prev_x = x;\n            while (m_lines.size()\
-    \ >= 2) {\n                const int n = m_lines.size();\n                const\
-    \ auto& l0 = m_lines[n - 2];\n                const auto& l1 = m_lines[n - 1];\n\
-    \                if (not comp(l0, l1, x)) { break; }\n                m_lines.pop_back();\n\
-    \            }\n            return m_lines.back();\n        }\n    }\nprivate:\n\
-    \    bool m_query_inc;\n    T m_prev_x;\n    Deq<L> m_lines;\n};\n"
+    \    MonotonicCHT() : m_prev_x{-INF<T>} {}\n    void addLine(T a, T b)\n    {\n\
+    \        const L l{a, b};\n        if (m_lines.empty()) {\n            m_lines.push_back(l);\n\
+    \            return;\n        }\n        auto& [ma, mb] = m_lines.back();\n  \
+    \      assert(ma >= a);\n        if (a == ma) {\n            chmin(mb, b);\n \
+    \       } else {\n            while (m_lines.size() >= 2) {\n                const\
+    \ int n = m_lines.size();\n                const auto& l0 = m_lines[n - 2];\n\
+    \                const auto& l1 = m_lines[n - 1];\n                if (not needLess(l0,\
+    \ l1, l)) { break; }\n                m_lines.pop_back();\n            }\n   \
+    \         m_lines.push_back(l);\n        }\n    }\n    L minLine(const T x)\n\
+    \    {\n        if (m_lines.empty()) { return NIL; }\n        assert(m_prev_x\
+    \ <= x);\n        m_prev_x = x;\n        while (m_lines.size() >= 2) {\n     \
+    \       const auto& l0 = m_lines[0];\n            const auto& l1 = m_lines[1];\n\
+    \            if (comp(l0, l1, x)) { break; }\n            m_lines.pop_front();\n\
+    \        }\n        return m_lines.front();\n    }\nprivate:\n    T m_prev_x;\n\
+    \    Deq<L> m_lines;\n};\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nclass\
     \ MonotonicCHT\n{\n    using L = Pair<T, T>;\n    static constexpr L NIL = {0,\
     \ INF<T>};\n    static bool needLess(const L& l1, const L& l2, const L& l3)\n\
@@ -248,36 +237,21 @@ data:
     \ = l1;\n        const auto [a2, b2] = l2;\n        if (a1 == a2) {\n        \
     \    return b1 <= b2;\n        } else if (a1 > a2) {\n            return x <=\
     \ fdiv(b2 - b1, a1 - a2);\n        } else {\n            return fdiv(b1 - b2,\
-    \ a2 - a1) < x;\n        }\n    }\n\npublic:\n    MonotonicCHT(bool query_inc\
-    \ = true)\n        : m_query_inc{query_inc}, m_prev_x{m_query_inc ? -INF<T> :\
-    \ INF<T>}\n    {}\n    void addLine(T a, T b)\n    {\n        const L l{a, b};\n\
-    \        if (m_lines.empty()) {\n            m_lines.push_back(l);\n         \
-    \   return;\n        }\n        auto& [Ma, Mb] = m_lines.front();\n        auto&\
-    \ [ma, mb] = m_lines.back();\n        assert(a <= ma or Ma <= a);\n        if\
-    \ (a <= ma) {\n            if (a == ma) {\n                chmin(mb, b);\n   \
-    \         } else {\n                while (m_lines.size() >= 2) {\n          \
-    \          const int n = m_lines.size();\n                    const auto& l0 =\
-    \ m_lines[n - 2];\n                    const auto& l1 = m_lines[n - 1];\n    \
-    \                if (not needLess(l0, l1, l)) { break; }\n                   \
-    \ m_lines.pop_back();\n                }\n                m_lines.push_back(l);\n\
-    \            }\n        } else {\n            if (Ma == a) {\n               \
-    \ chmin(Mb, b);\n            } else {\n                while (m_lines.size() >=\
-    \ 2) {\n                    const auto& l1 = m_lines[0];\n                   \
-    \ const auto& l2 = m_lines[1];\n                    if (not needLess(l, l1, l2))\
-    \ { break; }\n                    m_lines.pop_front();\n                }\n  \
-    \              m_lines.push_front(l);\n            }\n        }\n    }\n    L\
-    \ minLine(const T x)\n    {\n        if (m_lines.empty()) { return NIL; }\n  \
-    \      if (m_query_inc) {\n            assert(m_prev_x <= x);\n            m_prev_x\
-    \ = x;\n            while (m_lines.size() >= 2) {\n                const auto&\
-    \ l0 = m_lines[0];\n                const auto& l1 = m_lines[1];\n           \
-    \     if (comp(l0, l1, x)) { break; }\n                m_lines.pop_front();\n\
-    \            }\n            return m_lines.front();\n        } else {\n      \
-    \      assert(x <= m_prev_x);\n            m_prev_x = x;\n            while (m_lines.size()\
-    \ >= 2) {\n                const int n = m_lines.size();\n                const\
-    \ auto& l0 = m_lines[n - 2];\n                const auto& l1 = m_lines[n - 1];\n\
-    \                if (not comp(l0, l1, x)) { break; }\n                m_lines.pop_back();\n\
-    \            }\n            return m_lines.back();\n        }\n    }\n\nprivate:\n\
-    \    bool m_query_inc;\n    T m_prev_x;\n    Deq<L> m_lines;\n};\n"
+    \ a2 - a1) < x;\n        }\n    }\n\npublic:\n    MonotonicCHT() : m_prev_x{-INF<T>}\
+    \ {}\n    void addLine(T a, T b)\n    {\n        const L l{a, b};\n        if\
+    \ (m_lines.empty()) {\n            m_lines.push_back(l);\n            return;\n\
+    \        }\n        auto& [ma, mb] = m_lines.back();\n        assert(ma >= a);\n\
+    \        if (a == ma) {\n            chmin(mb, b);\n        } else {\n       \
+    \     while (m_lines.size() >= 2) {\n                const int n = m_lines.size();\n\
+    \                const auto& l0 = m_lines[n - 2];\n                const auto&\
+    \ l1 = m_lines[n - 1];\n                if (not needLess(l0, l1, l)) { break;\
+    \ }\n                m_lines.pop_back();\n            }\n            m_lines.push_back(l);\n\
+    \        }\n    }\n    L minLine(const T x)\n    {\n        if (m_lines.empty())\
+    \ { return NIL; }\n        assert(m_prev_x <= x);\n        m_prev_x = x;\n   \
+    \     while (m_lines.size() >= 2) {\n            const auto& l0 = m_lines[0];\n\
+    \            const auto& l1 = m_lines[1];\n            if (comp(l0, l1, x)) {\
+    \ break; }\n            m_lines.pop_front();\n        }\n        return m_lines.front();\n\
+    \    }\n\nprivate:\n    T m_prev_x;\n    Deq<L> m_lines;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -296,9 +270,10 @@ data:
   isVerificationFile: false
   path: src/data_structure/monotonic_cht.hpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-05-27 14:04:14+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verifications/data_structure/monotonic_cht.test.cpp
 documentation_of: src/data_structure/monotonic_cht.hpp
 layout: document
 title: "\u5358\u8ABF\u6027\u306E\u3042\u308B Convex Hull Trick"

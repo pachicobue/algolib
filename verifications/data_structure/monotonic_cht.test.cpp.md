@@ -2,23 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/math/divisors_moebius.hpp
-    title: src/math/divisors_moebius.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/math/divisors_zeta.hpp
-    title: src/math/divisors_zeta.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/math/factor_table.hpp
-    title: src/math/factor_table.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/math/gcd_convolution.hpp
-    title: src/math/gcd_convolution.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/math/modint.hpp
-    title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/math/prime_enumerate.hpp
-    title: src/math/prime_enumerate.hpp
+    path: src/data_structure/monotonic_cht.hpp
+    title: "\u5358\u8ABF\u6027\u306E\u3042\u308B Convex Hull Trick"
   - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -74,29 +59,29 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/886
+    PROBLEM: https://yukicoder.me/problems/no/409
     links:
-    - https://yukicoder.me/problems/no/886
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
-    #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
-    \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
-    \ double;\nusing f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64 v)\n\
-    {\n    return v;\n}\nconstexpr i32 operator\"\" _u32(u64 v)\n{\n    return v;\n\
-    }\nconstexpr i64 operator\"\" _i64(u64 v)\n{\n    return v;\n}\nconstexpr u64\
-    \ operator\"\" _u64(u64 v)\n{\n    return v;\n}\nconstexpr f64 operator\"\" _f64(f80\
-    \ v)\n{\n    return v;\n}\nconstexpr f80 operator\"\" _f80(f80 v)\n{\n    return\
-    \ v;\n}\nusing Istream = std::istream;\nusing Ostream = std::ostream;\nusing Str\
-    \ = std::string;\ntemplate<typename T>\nusing Lt = std::less<T>;\ntemplate<typename\
-    \ T>\nusing Gt = std::greater<T>;\ntemplate<typename T>\nusing IList = std::initializer_list<T>;\n\
-    template<int n>\nusing BSet = std::bitset<n>;\ntemplate<typename T1, typename\
-    \ T2>\nusing Pair = std::pair<T1, T2>;\ntemplate<typename... Ts>\nusing Tup =\
-    \ std::tuple<Ts...>;\ntemplate<typename T, int N>\nusing Arr = std::array<T, N>;\n\
-    template<typename... Ts>\nusing Deq = std::deque<Ts...>;\ntemplate<typename...\
-    \ Ts>\nusing Set = std::set<Ts...>;\ntemplate<typename... Ts>\nusing MSet = std::multiset<Ts...>;\n\
-    template<typename... Ts>\nusing USet = std::unordered_set<Ts...>;\ntemplate<typename...\
-    \ Ts>\nusing UMSet = std::unordered_multiset<Ts...>;\ntemplate<typename... Ts>\n\
-    using Map = std::map<Ts...>;\ntemplate<typename... Ts>\nusing MMap = std::multimap<Ts...>;\n\
+    - https://yukicoder.me/problems/no/409
+  bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
+    #pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned int;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing f128\
+    \ = __float128;\nconstexpr i32 operator\"\" _i32(u64 v)\n{\n    return v;\n}\n\
+    constexpr i32 operator\"\" _u32(u64 v)\n{\n    return v;\n}\nconstexpr i64 operator\"\
+    \" _i64(u64 v)\n{\n    return v;\n}\nconstexpr u64 operator\"\" _u64(u64 v)\n\
+    {\n    return v;\n}\nconstexpr f64 operator\"\" _f64(f80 v)\n{\n    return v;\n\
+    }\nconstexpr f80 operator\"\" _f80(f80 v)\n{\n    return v;\n}\nusing Istream\
+    \ = std::istream;\nusing Ostream = std::ostream;\nusing Str = std::string;\ntemplate<typename\
+    \ T>\nusing Lt = std::less<T>;\ntemplate<typename T>\nusing Gt = std::greater<T>;\n\
+    template<typename T>\nusing IList = std::initializer_list<T>;\ntemplate<int n>\n\
+    using BSet = std::bitset<n>;\ntemplate<typename T1, typename T2>\nusing Pair =\
+    \ std::pair<T1, T2>;\ntemplate<typename... Ts>\nusing Tup = std::tuple<Ts...>;\n\
+    template<typename T, int N>\nusing Arr = std::array<T, N>;\ntemplate<typename...\
+    \ Ts>\nusing Deq = std::deque<Ts...>;\ntemplate<typename... Ts>\nusing Set = std::set<Ts...>;\n\
+    template<typename... Ts>\nusing MSet = std::multiset<Ts...>;\ntemplate<typename...\
+    \ Ts>\nusing USet = std::unordered_set<Ts...>;\ntemplate<typename... Ts>\nusing\
+    \ UMSet = std::unordered_multiset<Ts...>;\ntemplate<typename... Ts>\nusing Map\
+    \ = std::map<Ts...>;\ntemplate<typename... Ts>\nusing MMap = std::multimap<Ts...>;\n\
     template<typename... Ts>\nusing UMap = std::unordered_map<Ts...>;\ntemplate<typename...\
     \ Ts>\nusing UMMap = std::unordered_multimap<Ts...>;\ntemplate<typename... Ts>\n\
     using Vec = std::vector<Ts...>;\ntemplate<typename... Ts>\nusing Stack = std::stack<Ts...>;\n\
@@ -226,90 +211,33 @@ data:
     \ vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]()\
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
-    #pragma endregion\nVec<int> factorTable(const int sup)\n{\n    Vec<int> fact =\
-    \ iotaVec(sup);\n    for (int i = 2; i < sup; i++) {\n        if (fact[i] != i)\
-    \ { continue; }\n        for (int j = i + i; j < sup; j += i) {\n            fact[j]\
-    \ = i;\n        }\n    }\n    return fact;\n}\nVec<u32> primeVec(u32 sup)\n{\n\
-    \    const auto ftable = factorTable(sup);\n    Vec<u32> ps;\n    for (u32 p =\
-    \ 2; p < sup; p++) {\n        if (ftable[p] == p) { ps.push_back(p); }\n    }\n\
-    \    return ps;\n}\ntemplate<typename T>\nVec<T> divisorsMoebius(const Vec<T>&\
-    \ xs, bool subset)\n{\n    const int N = (int)xs.size();\n    auto ys = xs;\n\
-    \    for (const int p : primeVec(N)) {\n        if (subset) {\n            for\
-    \ (int i = (N - 1) / p; i >= 1; i--) {\n                ys[i * p] -= ys[i];\n\
-    \            }\n        } else {\n            for (int i = 1; i * p < N; i++)\
-    \ {\n                ys[i] -= ys[i * p];\n            }\n        }\n    }\n  \
-    \  return ys;\n}\ntemplate<typename T>\nVec<T> divisorsZeta(const Vec<T>& xs,\
-    \ bool subset)\n{\n    const int N = (int)xs.size();\n    auto ys = xs;\n    for\
-    \ (const int p : primeVec(N)) {\n        if (subset) {\n            for (int i\
-    \ = 1; i * p < N; i++) {\n                ys[i * p] += ys[i];\n            }\n\
-    \        } else {\n            for (int i = (N - 1) / p; i >= 1; i--) {\n    \
-    \            ys[i] += ys[i * p];\n            }\n        }\n    }\n    return\
-    \ ys;\n}\ntemplate<typename T>\nVec<T> gcdConvolute(const Vec<T>& f, const Vec<T>&\
-    \ g)\n{\n    const int N = (int)std::min(f.size(), g.size());\n    auto F = divisorsZeta(f,\
-    \ false), G = divisorsZeta(g, false);\n    F.resize(N), G.resize(N);\n    for\
-    \ (int i : rep(N)) {\n        F[i] *= G[i];\n    }\n    return divisorsMoebius(F,\
-    \ false);\n}\ntemplate<u32 mod_, u32 root_, u32 max2p_>\nclass modint\n{\n   \
-    \ template<typename U = u32&>\n    static U modRef()\n    {\n        static u32\
-    \ s_mod = 0;\n        return s_mod;\n    }\n    template<typename U = u32&>\n\
-    \    static U rootRef()\n    {\n        static u32 s_root = 0;\n        return\
-    \ s_root;\n    }\n    template<typename U = u32&>\n    static U max2pRef()\n \
-    \   {\n        static u32 s_max2p = 0;\n        return s_max2p;\n    }\npublic:\n\
-    \    template<typename U = const u32>\n    static constexpr std::enable_if_t<mod_\
-    \ != 0, U> mod()\n    {\n        return mod_;\n    }\n    template<typename U\
-    \ = const u32>\n    static std::enable_if_t<mod_ == 0, U> mod()\n    {\n     \
-    \   return modRef();\n    }\n    template<typename U = const u32>\n    static\
-    \ constexpr std::enable_if_t<mod_ != 0, U> root()\n    {\n        return root_;\n\
-    \    }\n    template<typename U = const u32>\n    static std::enable_if_t<mod_\
-    \ == 0, U> root()\n    {\n        return rootRef();\n    }\n    template<typename\
-    \ U = const u32>\n    static constexpr std::enable_if_t<mod_ != 0, U> max2p()\n\
-    \    {\n        return max2p_;\n    }\n    template<typename U = const u32>\n\
-    \    static std::enable_if_t<mod_ == 0, U> max2p()\n    {\n        return max2pRef();\n\
-    \    }\n    template<typename U = u32>\n    static void setMod(std::enable_if_t<mod_\
-    \ == 0, U> m)\n    {\n        modRef() = m;\n    }\n    template<typename U =\
-    \ u32>\n    static void setRoot(std::enable_if_t<mod_ == 0, U> r)\n    {\n   \
-    \     rootRef() = r;\n    }\n    template<typename U = u32>\n    static void setMax2p(std::enable_if_t<mod_\
-    \ == 0, U> m)\n    {\n        max2pRef() = m;\n    }\n    constexpr modint() :\
-    \ m_val{0} {}\n    constexpr modint(i64 v) : m_val{normll(v)} {}\n    constexpr\
-    \ void setRaw(u32 v)\n    {\n        m_val = v;\n    }\n    constexpr modint operator-()\
-    \ const\n    {\n        return modint{0} - (*this);\n    }\n    constexpr modint&\
-    \ operator+=(const modint& m)\n    {\n        m_val = norm(m_val + m.val());\n\
-    \        return *this;\n    }\n    constexpr modint& operator-=(const modint&\
-    \ m)\n    {\n        m_val = norm(m_val + mod() - m.val());\n        return *this;\n\
-    \    }\n    constexpr modint& operator*=(const modint& m)\n    {\n        m_val\
-    \ = normll((i64)m_val * (i64)m.val() % (i64)mod());\n        return *this;\n \
-    \   }\n    constexpr modint& operator/=(const modint& m)\n    {\n        return\
-    \ *this *= m.inv();\n    }\n    constexpr modint operator+(const modint& m) const\n\
-    \    {\n        return modint{*this} += m;\n    }\n    constexpr modint operator-(const\
-    \ modint& m) const\n    {\n        return modint{*this} -= m;\n    }\n    constexpr\
-    \ modint operator*(const modint& m) const\n    {\n        return modint{*this}\
-    \ *= m;\n    }\n    constexpr modint operator/(const modint& m) const\n    {\n\
-    \        return modint{*this} /= m;\n    }\n    constexpr bool operator==(const\
-    \ modint& m) const\n    {\n        return m_val == m.val();\n    }\n    constexpr\
-    \ bool operator!=(const modint& m) const\n    {\n        return not(*this == m);\n\
-    \    }\n    friend Istream& operator>>(Istream& is, modint& m)\n    {\n      \
-    \  i64 v;\n        return is >> v, m = v, is;\n    }\n    friend Ostream& operator<<(Ostream&\
-    \ os, const modint& m)\n    {\n        return os << m.val();\n    }\n    constexpr\
-    \ u32 val() const\n    {\n        return m_val;\n    }\n    template<typename\
-    \ I>\n    constexpr modint pow(I n) const\n    {\n        return power(*this,\
-    \ n);\n    }\n    constexpr modint inv() const\n    {\n        return pow(mod()\
-    \ - 2);\n    }\n    static modint sinv(u32 n)\n    {\n        static Vec<modint>\
-    \ is{1, 1};\n        for (u32 i = (u32)is.size(); i <= n; i++) {\n           \
-    \ is.push_back(-is[mod() % i] * (mod() / i));\n        }\n        return is[n];\n\
-    \    }\n    static modint fact(u32 n)\n    {\n        static Vec<modint> fs{1,\
-    \ 1};\n        for (u32 i = (u32)fs.size(); i <= n; i++) {\n            fs.push_back(fs.back()\
-    \ * i);\n        }\n        return fs[n];\n    }\n    static modint ifact(u32\
-    \ n)\n    {\n        static Vec<modint> ifs{1, 1};\n        for (u32 i = (u32)ifs.size();\
-    \ i <= n; i++) {\n            ifs.push_back(ifs.back() * sinv(i));\n        }\n\
-    \        return ifs[n];\n    }\n    static modint comb(int n, int k)\n    {\n\
-    \        return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k) * ifact(k);\n\
-    \    }\nprivate:\n    static constexpr u32 norm(u32 x)\n    {\n        return\
-    \ x < mod() ? x : x - mod();\n    }\n    static constexpr u32 normll(i64 x)\n\
-    \    {\n        return norm(u32(x % (i64)mod() + (i64)mod()));\n    }\n    u32\
-    \ m_val;\n};\nusing modint_1000000007 = modint<1000000007, 5, 1>;\nusing modint_998244353\
-    \ = modint<998244353, 3, 23>;\ntemplate<int id>\nusing modint_dynamic = modint<0,\
-    \ 0, id>;\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer()\
-    \ {}\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
-    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    #pragma endregion\ntemplate<typename T>\nclass MonotonicCHT\n{\n    using L =\
+    \ Pair<T, T>;\n    static constexpr L NIL = {0, INF<T>};\n    static bool needLess(const\
+    \ L& l1, const L& l2, const L& l3)\n    {\n        const auto [a1, b1] = l1;\n\
+    \        const auto [a2, b2] = l2;\n        const auto [a3, b3] = l3;\n      \
+    \  const T x12 = fdiv(b2 - b1, a1 - a2), x23 = fdiv(b3 - b2, a2 - a3);\n     \
+    \   return x12 >= x23;\n    }\n    static bool comp(const L& l1, const L& l2,\
+    \ T x)\n    {\n        const auto [a1, b1] = l1;\n        const auto [a2, b2]\
+    \ = l2;\n        if (a1 == a2) {\n            return b1 <= b2;\n        } else\
+    \ if (a1 > a2) {\n            return x <= fdiv(b2 - b1, a1 - a2);\n        } else\
+    \ {\n            return fdiv(b1 - b2, a2 - a1) < x;\n        }\n    }\npublic:\n\
+    \    MonotonicCHT() : m_prev_x{-INF<T>} {}\n    void addLine(T a, T b)\n    {\n\
+    \        const L l{a, b};\n        if (m_lines.empty()) {\n            m_lines.push_back(l);\n\
+    \            return;\n        }\n        auto& [ma, mb] = m_lines.back();\n  \
+    \      assert(ma >= a);\n        if (a == ma) {\n            chmin(mb, b);\n \
+    \       } else {\n            while (m_lines.size() >= 2) {\n                const\
+    \ int n = m_lines.size();\n                const auto& l0 = m_lines[n - 2];\n\
+    \                const auto& l1 = m_lines[n - 1];\n                if (not needLess(l0,\
+    \ l1, l)) { break; }\n                m_lines.pop_back();\n            }\n   \
+    \         m_lines.push_back(l);\n        }\n    }\n    L minLine(const T x)\n\
+    \    {\n        if (m_lines.empty()) { return NIL; }\n        assert(m_prev_x\
+    \ <= x);\n        m_prev_x = x;\n        while (m_lines.size() >= 2) {\n     \
+    \       const auto& l0 = m_lines[0];\n            const auto& l1 = m_lines[1];\n\
+    \            if (comp(l0, l1, x)) { break; }\n            m_lines.pop_front();\n\
+    \        }\n        return m_lines.front();\n    }\nprivate:\n    T m_prev_x;\n\
+    \    Deq<L> m_lines;\n};\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n\
+    \    Printer() {}\n    template<typename... Args>\n    int operator()(const Args&...\
+    \ args)\n    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
     \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
     n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
     \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
@@ -350,23 +278,26 @@ data:
     }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
     \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
     \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
-    int main()\n{\n    using mint = modint_1000000007;\n    const auto [H, W] = in.tup<int,\
-    \ int>();\n    mint ans = mint(H) * (W - 1) + mint(H - 1) * W;\n    Vec<mint>\
-    \ as(H), bs(W);\n    for (int i : irange(1, H)) {\n        as[i] = H - i;\n  \
-    \  }\n    for (int i : irange(1, W)) {\n        bs[i] = W - i;\n    }\n    const\
-    \ auto cs = gcdConvolute(as, bs);\n    ans += (cs.size() < 2 ? mint{0} : cs[1])\
-    \ * 2;\n    out.ln(ans.val());\n    return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/886\"\n#include \"../../src/math/gcd_convolution.hpp\"\
-    \n#include \"../../src/math/modint.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
-    \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    using mint\
-    \ = modint_1000000007;\n    const auto [H, W] = in.tup<int, int>();\n    mint\
-    \ ans = mint(H) * (W - 1) + mint(H - 1) * W;\n    Vec<mint> as(H), bs(W);\n  \
-    \  for (int i : irange(1, H)) {\n        as[i] = H - i;\n    }\n    for (int i\
-    \ : irange(1, W)) {\n        bs[i] = W - i;\n    }\n    const auto cs = gcdConvolute(as,\
-    \ bs);\n    ans += (cs.size() < 2 ? mint{0} : cs[1]) * 2;\n    out.ln(ans.val());\n\
-    \    return 0;\n}\n"
+    int main()\n{\n    const auto [N, A, B, W] = in.tup<int, i64, i64, i64>();\n \
+    \   auto ds = in.vec<i64>(N);\n    ds.push_back(0);\n    ds = Vec<i64>{0} + ds;\n\
+    \    Vec<i64> dp(N + 2, INF<i64>);\n    dp[0] = 0;\n    MonotonicCHT<i64> cht;\n\
+    \    for (int i : rep(N + 2)) {\n        if (i != 0) {\n            const auto\
+    \ [a, b] = cht.minLine(i);\n            dp[i] = ds[i] * 2 - A * (i - 1) * 2 +\
+    \ B * i * i + (a * i + b);\n        }\n        cht.addLine(-B * (2 * i + 1), dp[i]\
+    \ + A * 2 * i + B * (i + 1) * i);\n    }\n    out.ln(W + dp.back() / 2);\n   \
+    \ return 0;\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/409\"\n#include \"../../src/data_structure/monotonic_cht.hpp\"\
+    \n#include \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
+    \nint main()\n{\n    const auto [N, A, B, W] = in.tup<int, i64, i64, i64>();\n\
+    \    auto ds = in.vec<i64>(N);\n    ds.push_back(0);\n    ds = Vec<i64>{0} + ds;\n\
+    \    Vec<i64> dp(N + 2, INF<i64>);\n    dp[0] = 0;\n    MonotonicCHT<i64> cht;\n\
+    \    for (int i : rep(N + 2)) {\n        if (i != 0) {\n            const auto\
+    \ [a, b] = cht.minLine(i);\n            dp[i] = ds[i] * 2 - A * (i - 1) * 2 +\
+    \ B * i * i + (a * i + b);\n        }\n        cht.addLine(-B * (2 * i + 1), dp[i]\
+    \ + A * 2 * i + B * (i + 1) * i);\n    }\n    out.ln(W + dp.back() / 2);\n\n \
+    \   return 0;\n}\n"
   dependsOn:
-  - src/math/gcd_convolution.hpp
+  - src/data_structure/monotonic_cht.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -381,23 +312,18 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/math/divisors_moebius.hpp
-  - src/math/prime_enumerate.hpp
-  - src/math/factor_table.hpp
-  - src/math/divisors_zeta.hpp
-  - src/math/modint.hpp
   - src/misc/fastio/printer.hpp
   - src/misc/fastio/scanner.hpp
   isVerificationFile: true
-  path: verifications/math/gcd_convolution.test.cpp
+  path: verifications/data_structure/monotonic_cht.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-27 14:04:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verifications/math/gcd_convolution.test.cpp
+documentation_of: verifications/data_structure/monotonic_cht.test.cpp
 layout: document
 redirect_from:
-- /verify/verifications/math/gcd_convolution.test.cpp
-- /verify/verifications/math/gcd_convolution.test.cpp.html
-title: verifications/math/gcd_convolution.test.cpp
+- /verify/verifications/data_structure/monotonic_cht.test.cpp
+- /verify/verifications/data_structure/monotonic_cht.test.cpp.html
+title: verifications/data_structure/monotonic_cht.test.cpp
 ---
