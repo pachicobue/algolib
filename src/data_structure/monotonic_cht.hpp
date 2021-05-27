@@ -27,9 +27,7 @@ class MonotonicCHT
     }
 
 public:
-    MonotonicCHT(bool query_inc = true)
-        : m_query_inc{query_inc}, m_prev_x{m_query_inc ? -INF<T> : INF<T>}
-    {}
+    MonotonicCHT() : m_prev_x{-INF<T>} {}
     void addLine(T a, T b)
     {
         const L l{a, b};
@@ -37,65 +35,36 @@ public:
             m_lines.push_back(l);
             return;
         }
-        auto& [Ma, Mb] = m_lines.front();
         auto& [ma, mb] = m_lines.back();
-        assert(a <= ma or Ma <= a);
-        if (a <= ma) {
-            if (a == ma) {
-                chmin(mb, b);
-            } else {
-                while (m_lines.size() >= 2) {
-                    const int n = m_lines.size();
-                    const auto& l0 = m_lines[n - 2];
-                    const auto& l1 = m_lines[n - 1];
-                    if (not needLess(l0, l1, l)) { break; }
-                    m_lines.pop_back();
-                }
-                m_lines.push_back(l);
-            }
+        assert(ma >= a);
+        if (a == ma) {
+            chmin(mb, b);
         } else {
-            if (Ma == a) {
-                chmin(Mb, b);
-            } else {
-                while (m_lines.size() >= 2) {
-                    const auto& l1 = m_lines[0];
-                    const auto& l2 = m_lines[1];
-                    if (not needLess(l, l1, l2)) { break; }
-                    m_lines.pop_front();
-                }
-                m_lines.push_front(l);
+            while (m_lines.size() >= 2) {
+                const int n = m_lines.size();
+                const auto& l0 = m_lines[n - 2];
+                const auto& l1 = m_lines[n - 1];
+                if (not needLess(l0, l1, l)) { break; }
+                m_lines.pop_back();
             }
+            m_lines.push_back(l);
         }
     }
     L minLine(const T x)
     {
         if (m_lines.empty()) { return NIL; }
-        if (m_query_inc) {
-            assert(m_prev_x <= x);
-            m_prev_x = x;
-            while (m_lines.size() >= 2) {
-                const auto& l0 = m_lines[0];
-                const auto& l1 = m_lines[1];
-                if (comp(l0, l1, x)) { break; }
-                m_lines.pop_front();
-            }
-            return m_lines.front();
-        } else {
-            assert(x <= m_prev_x);
-            m_prev_x = x;
-            while (m_lines.size() >= 2) {
-                const int n = m_lines.size();
-                const auto& l0 = m_lines[n - 2];
-                const auto& l1 = m_lines[n - 1];
-                if (not comp(l0, l1, x)) { break; }
-                m_lines.pop_back();
-            }
-            return m_lines.back();
+        assert(m_prev_x <= x);
+        m_prev_x = x;
+        while (m_lines.size() >= 2) {
+            const auto& l0 = m_lines[0];
+            const auto& l1 = m_lines[1];
+            if (comp(l0, l1, x)) { break; }
+            m_lines.pop_front();
         }
+        return m_lines.front();
     }
 
 private:
-    bool m_query_inc;
     T m_prev_x;
     Deq<L> m_lines;
 };
