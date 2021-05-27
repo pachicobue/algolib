@@ -1,6 +1,6 @@
 ---
-title: DSU
-documentation_of: //src/data_structure/dualseg.hpp
+title: Disjoint Set Union
+documentation_of: //src/data_structure/dsu.hpp
 ---
 
 ## 概要
