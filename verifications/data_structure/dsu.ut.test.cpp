@@ -18,13 +18,13 @@ void Test()
     assert(dsu.size(5) == 3);
     assert(dsu.size(6) == 3);
 
-    assert(dsu.root(0) == 1);
-    assert(dsu.root(1) == 1);
-    assert(dsu.root(2) == 3);
-    assert(dsu.root(3) == 3);
-    assert(dsu.root(4) == 5);
-    assert(dsu.root(5) == 5);
-    assert(dsu.root(6) == 5);
+    assert(dsu.leader(0) == 1);
+    assert(dsu.leader(1) == 1);
+    assert(dsu.leader(2) == 3);
+    assert(dsu.leader(3) == 3);
+    assert(dsu.leader(4) == 5);
+    assert(dsu.leader(5) == 5);
+    assert(dsu.leader(6) == 5);
 
     assert(dsu.groups()
            == Vec<Vec<int>>({{}, {0, 1}, {}, {2, 3}, {}, {4, 5, 6}, {}}));

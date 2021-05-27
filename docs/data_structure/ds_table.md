@@ -5,17 +5,17 @@ documentation_of: //src/data_structure/ds_table.hpp
 
 ## 概要
 
-半群 $(T, \ast)$ 上の要素数 $N$ の 数列 $A = \lbrack A_0, A_1, \dots , A_{N-1}\rbrack$ について、  
+半群 $(T, \ast)$ 上の要素数 $N$ の 数列 $A = \lbrack A _ 0, A _ 1, \dots , A _ {N-1}\rbrack$ について、  
 以下の操作が $\mathrm{O}(1)$ でできる。
 
-- 範囲総積取得: $A_l \ast \dots \ast A_{r-1}$
+- 範囲総積取得: $A _ l \ast \dots \ast A _ {r-1}$
 
 ## I/F
 
 ### コンストラクタ
 
 ```cpp
-ds_table<SemiGroup> ds(const Vec<T>& A)
+DSTable<SemiGroup> dst(const Vec<T>& A)
 ```
 
 数列 $A$ で初期化する
@@ -23,6 +23,7 @@ ds_table<SemiGroup> ds(const Vec<T>& A)
 #### 制約
 
 テンプレート引数`SemiGroup`は以下のようなフィールドを持つクラス
+
 - `T`:型
 - `operator()(T x1, T x2)`: $x_1 \ast x_2$
   
@@ -38,28 +39,28 @@ struct SemiGroup
 
 #### 計算量
 
-- $\mathrm{O}(N\log N)$
+$\mathrm{O}(N\log N)$
 
 ### add
 
 ```cpp
-void bit.add(int i, const T& x)
+void dst.add(int i, const T& x)
 ```
 
 $A_i$ に $x$ を加算
 
 #### 計算量
 
-- $\mathrm{O}(\log N)$
+$\mathrm{O}(\log N)$
 
 ### fold
 
 ```cpp
-T ds.fold(int l, int r)
+T dst.fold(int l, int r)
 ```
 
 $A_l \ast \dots \ast A_{r-1}$ を取得
 
 #### 計算量
 
-- $\mathrm{O}(1)$
+$\mathrm{O}(1)$

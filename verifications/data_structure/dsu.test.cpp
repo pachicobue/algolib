@@ -12,7 +12,7 @@ int main()
         if (t == 0) {
             uf.merge(u, v);
         } else {
-            out.ln(uf.root(u) == uf.root(v));
+            out.ln(uf.leader(u) == uf.leader(v));
         }
     }
 }
