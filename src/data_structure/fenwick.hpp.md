@@ -289,10 +289,10 @@ title: Fenwick Tree
 ### コンストラクタ
 
 ```cpp
-Fenwick<T> fenwick(const Vec<T>& A)
+Fenwick<T> fenwick(const Vec<T>& vs)
 ```
 
-数列 $A$ で初期化する
+数列 $A$ を `vs` の内容で初期化する
 
 #### 計算量
 

@@ -240,54 +240,55 @@ data:
     \ Vec<int>& xs, const Vec<int>& ys)\n        : m_xs{xs}, m_ys{ys}, m_is{iotaVec(m_xs.size())}\n\
     \    {\n        sortAll(m_is, [&](int i, int j) {\n            const int ib =\
     \ m_xs[i] / block_size;\n            const int jb = m_xs[j] / block_size;\n  \
-    \          return ib != jb ? ib < jb : m_ys[i] < m_ys[j];\n        });\n    }\n\
-    \    template<typename R, typename L, typename D, typename U>\n    int next(R\
-    \ right, L left, D down, U up)\n    {\n        assert(m_ii < (int)m_is.size());\n\
-    \        const int i = m_is[m_ii++];\n        const int nx = m_xs[i], ny = m_ys[i];\n\
-    \        for (; m_x < nx; m_x++) {\n            right(m_x, m_y);\n        }\n\
-    \        for (; m_x > nx; m_x--) {\n            left(m_x, m_y);\n        }\n \
-    \       for (; m_y < ny; m_y++) {\n            down(m_x, m_y);\n        }\n  \
-    \      for (; m_y > ny; m_y--) {\n            up(m_x, m_y);\n        }\n     \
-    \   return i;\n    }\nprivate:\n    int m_ii = 0;\n    int m_x = 0, m_y = 0;\n\
-    \    Vec<int> m_xs, m_ys;\n    Vec<int> m_is;\n};\n#pragma region FastIO Printer\n\
-    class Printer\n{\npublic:\n    Printer() {}\n    template<typename... Args>\n\
-    \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
-    \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
-    \ args)\n    {\n        dump(args...), putchar('\\n');\n        return 0;\n  \
-    \  }\nprivate:\n    template<typename T>\n    void dump(T v)\n    {\n        static\
-    \ char tmp[30];\n        if (v < 0) {\n            putchar('-');\n           \
-    \ v = -v;\n        }\n        int i = 0;\n        do {\n            tmp[i++] =\
-    \ v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n        while\
-    \ (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void dump(bool\
-    \ b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n    {\n    \
-    \    putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n        for (char\
-    \ c : cs) {\n            dump(c);\n        }\n    }\n    template<typename T>\n\
-    \    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
-    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
-    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
-    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
-    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
-    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
-    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
-    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
-    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
-    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
-    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
-    \        }\n        while (true) {\n            c = getchar();\n            if\
-    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
-    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
-    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
-    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
-    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
-    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
-    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
-    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
-    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
-    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
-    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
-    \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
-    \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
+    \          return ib != jb ? ib < jb\n                            : (ib % 2 ?\
+    \ m_ys[j] < m_ys[i] : m_ys[i] < m_ys[j]);\n        });\n    }\n    template<typename\
+    \ R, typename L, typename D, typename U>\n    int next(R right, L left, D down,\
+    \ U up)\n    {\n        assert(m_ii < (int)m_is.size());\n        const int i\
+    \ = m_is[m_ii++];\n        const int nx = m_xs[i], ny = m_ys[i];\n        for\
+    \ (; m_x < nx; m_x++) {\n            right(m_x, m_y);\n        }\n        for\
+    \ (; m_x > nx; m_x--) {\n            left(m_x, m_y);\n        }\n        for (;\
+    \ m_y < ny; m_y++) {\n            down(m_x, m_y);\n        }\n        for (; m_y\
+    \ > ny; m_y--) {\n            up(m_x, m_y);\n        }\n        return i;\n  \
+    \  }\nprivate:\n    int m_ii = 0;\n    int m_x = 0, m_y = 0;\n    Vec<int> m_xs,\
+    \ m_ys;\n    Vec<int> m_is;\n};\n#pragma region FastIO Printer\nclass Printer\n\
+    {\npublic:\n    Printer() {}\n    template<typename... Args>\n    int operator()(const\
+    \ Args&... args)\n    {\n        dump(args...);\n        return 0;\n    }\n  \
+    \  template<typename... Args>\n    int ln(const Args&... args)\n    {\n      \
+    \  dump(args...), putchar('\\n');\n        return 0;\n    }\nprivate:\n    template<typename\
+    \ T>\n    void dump(T v)\n    {\n        static char tmp[30];\n        if (v <\
+    \ 0) {\n            putchar('-');\n            v = -v;\n        }\n        int\
+    \ i = 0;\n        do {\n            tmp[i++] = v % T{10} + '0';\n            v\
+    \ /= T{10};\n        } while (v);\n        while (i) {\n            putchar(tmp[--i]);\n\
+    \        }\n    }\n    void dump(bool b)\n    {\n        dump<int>(b);\n    }\n\
+    \    void dump(char c)\n    {\n        putchar(c);\n    }\n    void dump(const\
+    \ Str& cs)\n    {\n        for (char c : cs) {\n            dump(c);\n       \
+    \ }\n    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n\
+    \        for (const int i : rep(vs.size())) {\n            if (i) { putchar('\
+    \ '); }\n            dump(vs[i]);\n        }\n    }\n    template<typename T>\n\
+    \    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size()))\
+    \ {\n            if (i) { putchar('\\n'); }\n            dump(vss[i]);\n     \
+    \   }\n    }\n    template<typename T, typename... Ts>\n    int dump(const T&\
+    \ v, const Ts&... args)\n    {\n        dump(v), putchar(' '), dump(args...);\n\
+    \        return 0;\n    }\n    static inline void putchar(char c)\n    {\n   \
+    \     putchar_unlocked(c);\n    }\n} out;\n#pragma endregion\n#pragma region FastIO\
+    \ Scanner\nclass Scanner\n{\npublic:\n    Scanner() {}\n    template<typename\
+    \ T>\n    T val()\n    {\n        T ans = 0;\n        bool neg = false;\n    \
+    \    char c = getchar();\n        if (c < '0') {\n            neg = true;\n  \
+    \      } else {\n            ans = c - '0';\n        }\n        while (true) {\n\
+    \            c = getchar();\n            if (c < '0') { break; }\n           \
+    \ ans = ans * T{10} + (c - '0');\n        }\n        if (neg) { ans = -ans; }\n\
+    \        return ans;\n    }\n    template<typename T>\n    T val(T offset)\n \
+    \   {\n        return val<T>() - offset;\n    }\n    template<typename T>\n  \
+    \  Vec<T> vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>();\
+    \ });\n    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n\
+    \        return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, T offset)\n    {\n        return genVec<Vec<T>>(n, [&]()\
+    \ { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n   \
+    \ auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n   \
+    \ }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n  \
+    \  {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
     \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
     }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
@@ -360,7 +361,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/mo.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 04:26:42+09:00'
+  timestamp: '2021-05-28 17:50:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/mo.test.cpp

@@ -46,7 +46,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/static_rmq.hpp
-    title: src/data_structure/static_rmq.hpp
+    title: "\u7DDA\u5F62RMQ"
   - icon: ':heavy_check_mark:'
     path: src/graph/lca.hpp
     title: src/graph/lca.hpp
@@ -282,15 +282,17 @@ title: Disjoint Sparse Table
 
 - 範囲総積取得: $A _ l \ast \dots \ast A _ {r-1}$
 
+前計算は $\mathrm{O}(N\log N)$ 必要
+
 ## I/F
 
 ### コンストラクタ
 
 ```cpp
-DSTable<SemiGroup> dst(const Vec<T>& A)
+DSTable<SemiGroup> dst(const Vec<T>& vs)
 ```
 
-数列 $A$ で初期化する
+数列 $A$ を `vs` の内容で初期化する
 
 #### 制約
 

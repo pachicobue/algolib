@@ -6,7 +6,7 @@ data:
     title: Disjoint Sparse Table
   - icon: ':heavy_check_mark:'
     path: src/data_structure/static_rmq.hpp
-    title: src/data_structure/static_rmq.hpp
+    title: "\u7DDA\u5F62RMQ"
   - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
@@ -234,24 +234,23 @@ data:
     \ 1) { return m_vss.back()[l]; }\n        const int d = m_depth - log2p1(l ^ (r\
     \ - 1));\n        return merge(m_vss[d][l], m_vss[d][r - 1]);\n    }\nprivate:\n\
     \    int m_size, m_depth;\n    Vec<Vec<T>> m_vss;\n    static inline SemiGroup\
-    \ merge;\n};\ntemplate<typename TotalOrd, typename B = u64>\nclass StaticRMQ\n\
-    {\n    using T = typename TotalOrd::T;\npublic:\n    StaticRMQ(const Vec<T>& vs)\n\
-    \        : m_size(vs.size()),\n          m_bn(wind(m_size + bs - 1)),\n      \
-    \    m_vals{vs},\n          m_bucket_vals([&]() {\n              Vec<T> ans(m_bn);\n\
-    \              for (int i : rep(m_size)) {\n                  ans[wind(i)]\n \
-    \                     = (i % bs == 0 ? m_vals[i]\n                           \
-    \          : std::min(ans[wind(i)], m_vals[i], comp));\n              }\n    \
-    \          return ans;\n          }()),\n          m_masks(m_size, 0),\n     \
-    \     m_st(m_bucket_vals)\n    {\n        for (int i : rep(m_bn)) {\n        \
-    \    Vec<int> g(bs, m_size), stack;\n            for (const int j : rep(bs)) {\n\
-    \                if (ind(i, j) >= m_size) { break; }\n                for (; not\
-    \ stack.empty()\n                       and not comp(m_vals[stack.back()], m_vals[ind(i,\
-    \ j)]);\n                     stack.pop_back()) {}\n                g[j] = stack.empty()\
-    \ ? m_size : stack.back(),\n                stack.push_back(ind(i, j));\n    \
-    \        }\n            for (int j : rep(bs)) {\n                if (ind(i, j)\
-    \ >= m_size) { break; }\n                m_masks[ind(i, j)]\n                \
-    \    = g[j] == m_size ? static_cast<B>(0)\n                                  \
-    \   : (m_masks[g[j]]\n                                        | static_cast<B>(1)\
+    \ merge;\n};\ntemplate<typename TotalOrd>\nclass StaticRMQ\n{\n    using T = typename\
+    \ TotalOrd::T;\npublic:\n    StaticRMQ(const Vec<T>& vs)\n        : m_size(vs.size()),\n\
+    \          m_bn(wind(m_size + bs - 1)),\n          m_vals{vs},\n          m_bucket_vals([&]()\
+    \ {\n              Vec<T> ans(m_bn);\n              for (int i : rep(m_size))\
+    \ {\n                  ans[wind(i)]\n                      = (i % bs == 0 ? m_vals[i]\n\
+    \                                     : std::min(ans[wind(i)], m_vals[i], comp));\n\
+    \              }\n              return ans;\n          }()),\n          m_masks(m_size,\
+    \ 0),\n          m_st(m_bucket_vals)\n    {\n        for (int i : rep(m_bn)) {\n\
+    \            Vec<int> g(bs, m_size), stack;\n            for (const int j : rep(bs))\
+    \ {\n                if (ind(i, j) >= m_size) { break; }\n                for\
+    \ (; not stack.empty()\n                       and not comp(m_vals[stack.back()],\
+    \ m_vals[ind(i, j)]);\n                     stack.pop_back()) {}\n           \
+    \     g[j] = stack.empty() ? m_size : stack.back(),\n                stack.push_back(ind(i,\
+    \ j));\n            }\n            for (int j : rep(bs)) {\n                if\
+    \ (ind(i, j) >= m_size) { break; }\n                m_masks[ind(i, j)]\n     \
+    \               = g[j] == m_size ? static_cast<B>(0)\n                       \
+    \              : (m_masks[g[j]]\n                                        | static_cast<B>(1)\
     \ << (g[j] - i * bs));\n            }\n        }\n    }\n    T fold(int l, int\
     \ r) const\n    {\n        assert(0 <= l and l < r and r <= m_size);\n       \
     \ const int lb = (l + bs - 1) / bs, rb = r / bs;\n        if (lb > rb) {\n   \
@@ -270,56 +269,56 @@ data:
     \                        brmq(l, bs * lb), brmq(bs * rb, r), comp)\n         \
     \                                    : brmq(l, bs * lb))\n                   \
     \           : (bs * rb < r ? brmq(bs * rb, r) : T{}));\n        }\n    }\nprivate:\n\
-    \    static constexpr int bs = sizeof(B) * 8;\n    static constexpr int bslog\
-    \ = log2p1(bs) - 1;\n    static constexpr int wind(int n)\n    {\n        return\
-    \ n >> (bslog);\n    }\n    static constexpr int bind(int n)\n    {\n        return\
-    \ n ^ (wind(n) << bslog);\n    }\n    static constexpr int ind(int w, int b)\n\
-    \    {\n        return (w << bslog) | b;\n    }\n    T brmq(int l, int r) const\n\
-    \    {\n        const B w = m_masks[r - 1] >> (l % bs);\n        return w == 0\
-    \ ? m_vals[r - 1] : m_vals[l + lsbp1(w) - 1];\n    }\n    struct SemiGroup\n \
-    \   {\n        using T = typename TotalOrd::T;\n        T operator()(const T&\
-    \ x1, const T& x2) const\n        {\n            return std::min(x1, x2, comp);\n\
-    \        }\n    };\n    static inline TotalOrd comp;\n    int m_size, m_bn;\n\
-    \    Vec<T> m_vals, m_bucket_vals;\n    Vec<B> m_masks;\n    DSTable<SemiGroup>\
-    \ m_st;\n};\ntemplate<typename T = int>\nclass Graph\n{\n    struct Edge\n   \
-    \ {\n        Edge() = default;\n        Edge(int i, int t, T c) : id{i}, to{t},\
-    \ cost{c} {}\n        int id;\n        int to;\n        T cost;\n        operator\
-    \ int() const\n        {\n            return to;\n        }\n    };\npublic:\n\
-    \    Graph(int n) : m_v{n}, m_edges(n) {}\n    void addEdge(int u, int v, bool\
-    \ bi = false)\n    {\n        assert(0 <= u and u < m_v);\n        assert(0 <=\
-    \ v and v < m_v);\n        m_edges[u].emplace_back(m_e, v, 1);\n        if (bi)\
-    \ { m_edges[v].emplace_back(m_e, u, 1); }\n        m_e++;\n    }\n    void addEdge(int\
-    \ u, int v, const T& c, bool bi = false)\n    {\n        assert(0 <= u and u <\
-    \ m_v);\n        assert(0 <= v and v < m_v);\n        m_edges[u].emplace_back(m_e,\
-    \ v, c);\n        if (bi) { m_edges[v].emplace_back(m_e, u, c); }\n        m_e++;\n\
-    \    }\n    const Vec<Edge>& operator[](const int u) const\n    {\n        assert(0\
-    \ <= u and u < m_v);\n        return m_edges[u];\n    }\n    Vec<Edge>& operator[](const\
-    \ int u)\n    {\n        assert(0 <= u and u < m_v);\n        return m_edges[u];\n\
-    \    }\n    int v() const\n    {\n        return m_v;\n    }\n    int e() const\n\
-    \    {\n        return m_e;\n    }\n    friend Ostream& operator<<(Ostream& os,\
-    \ const Graph& g)\n    {\n        for (int u : rep(g.v())) {\n            for\
-    \ (const auto& [id, v, c] : g[u]) {\n                os << \"[\" << id << \"]:\
-    \ \";\n                os << u << \"->\" << v << \"(\" << c << \")\\n\";\n   \
-    \         }\n        }\n        return os;\n    }\n    Vec<T> sizes(int root =\
-    \ 0) const\n    {\n        const int N = v();\n        assert(0 <= root and root\
-    \ < N);\n        Vec<T> ss(N, 1);\n        Fix([&](auto dfs, int u, int p) ->\
-    \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
-    \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
-    \             dfs(v, u);\n                ss[v] += ss[u];\n            }\n   \
-    \     })(root, -1);\n        return ss;\n    }\n    Vec<T> depths(int root = 0)\
-    \ const\n    {\n        const int N = v();\n        assert(0 <= root and root\
-    \ < N);\n        Vec<T> ds(N, 0);\n        Fix([&](auto dfs, int u, int p) ->\
-    \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
-    \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
-    \             ds[v] = ds[u] + c;\n                dfs(v, u);\n            }\n\
-    \        })(root, -1);\n        return ds;\n    }\n    Vec<int> parents(int root\
-    \ = 0) const\n    {\n        const int N = v();\n        assert(0 <= root and\
-    \ root < N);\n        Vec<int> ps(N, -1);\n        Fix([&](auto dfs, int u, int\
-    \ p) -> void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n    \
-    \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
-    \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
-    \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
-    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename C>\nclass LCA\n\
+    \    using B = u64;\n    static constexpr int bs = sizeof(B) * 8;\n    static\
+    \ constexpr int bslog = log2p1(bs) - 1;\n    static constexpr int wind(int n)\n\
+    \    {\n        return n >> (bslog);\n    }\n    static constexpr int bind(int\
+    \ n)\n    {\n        return n ^ (wind(n) << bslog);\n    }\n    static constexpr\
+    \ int ind(int w, int b)\n    {\n        return (w << bslog) | b;\n    }\n    T\
+    \ brmq(int l, int r) const\n    {\n        const B w = m_masks[r - 1] >> (l %\
+    \ bs);\n        return w == 0 ? m_vals[r - 1] : m_vals[l + lsbp1(w) - 1];\n  \
+    \  }\n    struct SemiGroup\n    {\n        using T = typename TotalOrd::T;\n \
+    \       T operator()(const T& x1, const T& x2) const\n        {\n            return\
+    \ std::min(x1, x2, comp);\n        }\n    };\n    static inline TotalOrd comp;\n\
+    \    int m_size, m_bn;\n    Vec<T> m_vals, m_bucket_vals;\n    Vec<B> m_masks;\n\
+    \    DSTable<SemiGroup> m_st;\n};\ntemplate<typename T = int>\nclass Graph\n{\n\
+    \    struct Edge\n    {\n        Edge() = default;\n        Edge(int i, int t,\
+    \ T c) : id{i}, to{t}, cost{c} {}\n        int id;\n        int to;\n        T\
+    \ cost;\n        operator int() const\n        {\n            return to;\n   \
+    \     }\n    };\npublic:\n    Graph(int n) : m_v{n}, m_edges(n) {}\n    void addEdge(int\
+    \ u, int v, bool bi = false)\n    {\n        assert(0 <= u and u < m_v);\n   \
+    \     assert(0 <= v and v < m_v);\n        m_edges[u].emplace_back(m_e, v, 1);\n\
+    \        if (bi) { m_edges[v].emplace_back(m_e, u, 1); }\n        m_e++;\n   \
+    \ }\n    void addEdge(int u, int v, const T& c, bool bi = false)\n    {\n    \
+    \    assert(0 <= u and u < m_v);\n        assert(0 <= v and v < m_v);\n      \
+    \  m_edges[u].emplace_back(m_e, v, c);\n        if (bi) { m_edges[v].emplace_back(m_e,\
+    \ u, c); }\n        m_e++;\n    }\n    const Vec<Edge>& operator[](const int u)\
+    \ const\n    {\n        assert(0 <= u and u < m_v);\n        return m_edges[u];\n\
+    \    }\n    Vec<Edge>& operator[](const int u)\n    {\n        assert(0 <= u and\
+    \ u < m_v);\n        return m_edges[u];\n    }\n    int v() const\n    {\n   \
+    \     return m_v;\n    }\n    int e() const\n    {\n        return m_e;\n    }\n\
+    \    friend Ostream& operator<<(Ostream& os, const Graph& g)\n    {\n        for\
+    \ (int u : rep(g.v())) {\n            for (const auto& [id, v, c] : g[u]) {\n\
+    \                os << \"[\" << id << \"]: \";\n                os << u << \"\
+    ->\" << v << \"(\" << c << \")\\n\";\n            }\n        }\n        return\
+    \ os;\n    }\n    Vec<T> sizes(int root = 0) const\n    {\n        const int N\
+    \ = v();\n        assert(0 <= root and root < N);\n        Vec<T> ss(N, 1);\n\
+    \        Fix([&](auto dfs, int u, int p) -> void {\n            for (const auto&\
+    \ [id, v, c] : m_edges[u]) {\n                static_cast<void>(id);\n       \
+    \         if (v == p) { continue; }\n                dfs(v, u);\n            \
+    \    ss[v] += ss[u];\n            }\n        })(root, -1);\n        return ss;\n\
+    \    }\n    Vec<T> depths(int root = 0) const\n    {\n        const int N = v();\n\
+    \        assert(0 <= root and root < N);\n        Vec<T> ds(N, 0);\n        Fix([&](auto\
+    \ dfs, int u, int p) -> void {\n            for (const auto& [id, v, c] : m_edges[u])\
+    \ {\n                static_cast<void>(id);\n                if (v == p) { continue;\
+    \ }\n                ds[v] = ds[u] + c;\n                dfs(v, u);\n        \
+    \    }\n        })(root, -1);\n        return ds;\n    }\n    Vec<int> parents(int\
+    \ root = 0) const\n    {\n        const int N = v();\n        assert(0 <= root\
+    \ and root < N);\n        Vec<int> ps(N, -1);\n        Fix([&](auto dfs, int u,\
+    \ int p) -> void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n\
+    \                static_cast<void>(id);\n                if (v == p) { continue;\
+    \ }\n                ps[v] = u;\n                dfs(v, u);\n            }\n \
+    \       })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n   \
+    \ int m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename C>\nclass LCA\n\
     {\n    using P = Pair<int, int>;\npublic:\n    LCA(const Graph<C>& g, int r =\
     \ 0)\n        : m_v(g.v()),\n          m_ins(g.v(), 0),\n          m_ds([&]()\
     \ {\n              Vec<P> ans;\n              Vec<bool> used(g.v(), false);\n\
@@ -414,7 +413,7 @@ data:
   isVerificationFile: true
   path: verifications/graph/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-28 17:50:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/graph/lca.test.cpp
