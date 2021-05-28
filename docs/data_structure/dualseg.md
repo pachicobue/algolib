@@ -9,17 +9,19 @@ documentation_of: //src/data_structure/dualseg.hpp
 要素数 $N$ の 作用素列 $G = \lbrack G _ 0, G _ 1, \dots, G _ {N-1}\rbrack$ について、以下の操作が $\mathrm{O}(\log N)$ でできる。
 
 - 範囲作用: $G _ i \leftarrow f \circ G _ i \quad (i \in \lbrack l, r) )$
-- 範囲一点取得: $G _ i$
+- 一点取得: $G _ i$
+- 一点更新: $G _ i \leftarrow f$
+
 
 ## I/F
 
 ### コンストラクタ
 
 ```cpp
-dualseg<OpMonoid> seg(const Vec<F>& G)
+dualseg<OpMonoid> seg(const Vec<F>& vs)
 ```
 
-作用素列 $G$ で初期化する
+作用素列 $G$ を `vs` の内容で初期化する
 
 #### 制約
 

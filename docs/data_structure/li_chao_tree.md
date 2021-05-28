@@ -3,86 +3,65 @@ title: Li Chao Tree
 documentation_of: //src/data_structure/li_chao_tree.hpp
 ---
 
-## Li Chao Tree
+## 概要
 
-### 概要
+線分 $s _ i(x): y = a _ i x + b _ i (l _ i \le x \lt r _ i)$ の集合 $\mathcal{S}$ について以下の操作を $\mathrm{O}(\log N)$ で行う。
 
-直線 $l_i(x): y = a _ i x + b _ i$ の集合 $\mathcal{L}$ について以下の操作が $\mathrm{O}(\log N)$ で行う。
+- 線分追加: $\mathcal{S} \leftarrow \mathcal{S} \cup \lbrace s:y=ax+b (l \le x \le r) \rbrace$
+- 最小値取得: $\mathrm{argmin}_{l \in \mathcal{S}}\ l(x)$
 
-- 直線追加: $\mathcal{L} \leftarrow \mathcal{L} \cup \lbrace l:y=ax+b \rbrace$
-- 最小値取得: $\mathrm{argmin}_{l \in \mathcal{L}}\ l(x)$
+## I/F
 
-### I/F
+### コンストラクタ
 
-#### コンストラクタ
-
+```cpp
+LiChaoTree<T, V> cht(T xmin, T xsup)
 ```
-li_chao_tree<T, V> cht(const T xmin, const T xsup)
-```
-
-CHTを初期化する。
-以下 $X = x _ {sup}-x _ {min}$
-
-##### テンプレート引数
 
 - `T`: $x$ 座標, 傾き, $y$ 切片の型
-- `V`: $l(x)$ の型(デフォルトでは`T`と同じ)
+- `xmin`,`xsup`: クエリ $x$ 座標の上限下限($x _ {min} \le x \lt x _ {sup}$ を満たす)
 
-##### 引数
+以下 $X = x _ {sup} - x _ {min}$
 
-- `xmin`: クエリされる $x$ 座標の最小値
-- `xsup`: クエリされる $x$ 座標の最大値 + 1
+#### 計算量
 
-##### 計算量
+$\mathrm{O}(1)$
 
-- $\mathrm{O}(1)$
+### addLine
 
-#### add_line
-
-```
-void cht.add_line(const T a, const T b)
+```cpp
+void cht.addLine(T a, T b)
 ```
 
-$\mathcal{L}$ に直線 $l: y=ax+b$ を追加
+$\mathcal{S}$ に直線 $l: y=ax+b$ を追加
 
-##### 計算量
+#### 計算量
 
-- $\mathrm{O}(\log X)$
+$\mathrm{O}(\log X)$
 
-#### add_seg
+### addSeg
 
-```
-void cht.add_line(const T a, const T b, const T xl, const T xr)
-```
-
-$\mathcal{L}$ に線分 $l: y=ax+b\quad (x _ l \le x \lt x _ r)$ を追加
-
-##### 計算量
-
-- $\mathrm{O}(\log^2 X)$
-
-
-#### min_line
-
-```
-L cht.min_line(const T x)
+```cpp
+void cht.addSeg(T a, T b, T xl, T xr)
 ```
 
-返り値型 `L`: `std::pair<T, T>` 
-$\mathrm{argmin}_{l \in \mathcal{L}}\ l(x)$ を取得
+$\mathcal{S}$ に線分 $s: y=ax+b (x _ l \le x \lt x _ r)$ を追加
 
-##### 計算量
+#### 計算量
 
-- $\mathrm{O}(\log X)$
+$\mathrm{O}(\log^2 X)$
 
-#### exist
+### minLine
 
+```cpp
+Pair<bool,L> cht.minLine(T x)
 ```
-bool cht.exist(const T x)
-```
 
-$x$ 上に線分が存在するかどうか
+$\mathrm{argmin}_{s \in \mathcal{S}}\ s(x)$ を取得  
 
-##### 計算量
+- 返り値の`first`は $x$ 上に線分があるかどうか
+- 返り値の`second`は (線分の傾き, 線分の$y$切片) のペア
 
-- $\mathrm{O}(\log X)$
+#### 計算量
+
+$\mathrm{O}(\log X)$

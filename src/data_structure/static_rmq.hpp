@@ -1,7 +1,7 @@
 #pragma once
 #include "../misc/common.hpp"
 #include "ds_table.hpp"
-template<typename TotalOrd, typename B = u64>
+template<typename TotalOrd>
 class StaticRMQ
 {
     using T = typename TotalOrd::T;
@@ -70,6 +70,7 @@ public:
     }
 
 private:
+    using B = u64;
     static constexpr int bs = sizeof(B) * 8;
     static constexpr int bslog = log2p1(bs) - 1;
     static constexpr int wind(int n)

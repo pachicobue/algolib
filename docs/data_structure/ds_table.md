@@ -10,15 +10,17 @@ documentation_of: //src/data_structure/ds_table.hpp
 
 - 範囲総積取得: $A _ l \ast \dots \ast A _ {r-1}$
 
+前計算は $\mathrm{O}(N\log N)$ 必要
+
 ## I/F
 
 ### コンストラクタ
 
 ```cpp
-DSTable<SemiGroup> dst(const Vec<T>& A)
+DSTable<SemiGroup> dst(const Vec<T>& vs)
 ```
 
-数列 $A$ で初期化する
+数列 $A$ を `vs` の内容で初期化する
 
 #### 制約
 

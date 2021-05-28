@@ -10,7 +10,8 @@ public:
         sortAll(m_is, [&](int i, int j) {
             const int ib = m_xs[i] / block_size;
             const int jb = m_xs[j] / block_size;
-            return ib != jb ? ib < jb : m_ys[i] < m_ys[j];
+            return ib != jb ? ib < jb
+                            : (ib % 2 ? m_ys[j] < m_ys[i] : m_ys[i] < m_ys[j]);
         });
     }
     template<typename R, typename L, typename D, typename U>
