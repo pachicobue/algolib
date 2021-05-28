@@ -55,7 +55,7 @@ data:
     title: Fenwick Tree
   - icon: ':heavy_check_mark:'
     path: src/data_structure/intdict.hpp
-    title: src/data_structure/intdict.hpp
+    title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
   - icon: ':heavy_check_mark:'
     path: src/data_structure/intset.hpp
     title: src/data_structure/intset.hpp

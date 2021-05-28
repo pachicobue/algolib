@@ -202,28 +202,29 @@ data:
     \ vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]()\
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
-    #pragma endregion\ntemplate<typename K, int LG = 20> class IntSet\n{\npublic:\n\
+    #pragma endregion\ntemplate<typename K, int LG = 20>\nclass IntSet\n{\npublic:\n\
     \    IntSet() = default;\n    void insert(const K& k)\n    {\n        const auto\
     \ i = index(k);\n        m_used.set(i), m_keys[i] = k;\n    }\n    void erase(const\
     \ K& k)\n    {\n        m_used.reset(index(k));\n    }\n    bool contains(const\
     \ K& k) const\n    {\n        const auto i = index(k);\n        return m_used.test(i)\
     \ and m_keys[i] == k;\n    }\nprivate:\n    u32 index(const K& k) const\n    {\n\
-    \        u32 i = 0;\n        for (i = hash(k); m_used.test(i) and m_keys[i] !=\
-    \ k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static\
-    \ constexpr int N = 1 << LG;\n    static constexpr u64 r = 3970217309729031_u64;\n\
-    \    static constexpr u32 hash(const u64 a)\n    {\n        return (a * r) >>\
+    \        u32 i = 0;\n        for (i = fibHash(k); m_used.test(i) and m_keys[i]\
+    \ != k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static\
+    \ constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64 k)\n    {\n\
+    \        constexpr u64 a = 11400714819323198485_u64;\n        return (a * k) >>\
     \ (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n};\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename K, int LG\
-    \ = 20> class IntSet\n{\npublic:\n    IntSet() = default;\n    void insert(const\
+    \ = 20>\nclass IntSet\n{\npublic:\n    IntSet() = default;\n    void insert(const\
     \ K& k)\n    {\n        const auto i = index(k);\n        m_used.set(i), m_keys[i]\
     \ = k;\n    }\n    void erase(const K& k)\n    {\n        m_used.reset(index(k));\n\
     \    }\n    bool contains(const K& k) const\n    {\n        const auto i = index(k);\n\
-    \        return m_used.test(i) and m_keys[i] == k;\n    }\nprivate:\n    u32 index(const\
-    \ K& k) const\n    {\n        u32 i = 0;\n        for (i = hash(k); m_used.test(i)\
-    \ and m_keys[i] != k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n\
-    \    }\n    static constexpr int N = 1 << LG;\n    static constexpr u64 r = 3970217309729031_u64;\n\
-    \    static constexpr u32 hash(const u64 a)\n    {\n        return (a * r) >>\
-    \ (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n};\n"
+    \        return m_used.test(i) and m_keys[i] == k;\n    }\n\nprivate:\n    u32\
+    \ index(const K& k) const\n    {\n        u32 i = 0;\n        for (i = fibHash(k);\
+    \ m_used.test(i) and m_keys[i] != k;\n             (i += 1) &= (N - 1)) {}\n \
+    \       return i;\n    }\n    static constexpr int N = 1 << LG;\n    static constexpr\
+    \ u32 fibHash(u64 k)\n    {\n        constexpr u64 a = 11400714819323198485_u64;\n\
+    \        return (a * k) >> (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K,\
+    \ N> m_keys;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -242,7 +243,7 @@ data:
   isVerificationFile: false
   path: src/data_structure/intset.hpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-28 14:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/data_structure/intset.ut.test.cpp

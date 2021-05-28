@@ -17,7 +17,7 @@ data:
       title: Fenwick Tree
     - icon: ':heavy_check_mark:'
       path: src/data_structure/intdict.hpp
-      title: src/data_structure/intdict.hpp
+      title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
     - icon: ':heavy_check_mark:'
       path: src/data_structure/intset.hpp
       title: src/data_structure/intset.hpp
@@ -563,16 +563,12 @@ data:
       title: verifications/misc/zipper.test.cpp
 layout: toppage
 ---
-# AlgoLib
+競プロライブラリ
 
-競プロライブラリ  
-C++17を前提にしています。
+C++17を前提にしています。  
+ドキュメントでも以下のエイリアスを使います。
 
-## 型エイリアス
-
-ドキュメントでも以下のエイリアスを使う
-
-### 値型
+## 値型
 
 ```cpp
 using i32 = int;
@@ -591,7 +587,7 @@ using Pair = std::pair;
 using Tup = std::tuple;
 ```
 
-### コンテナ型
+## コンテナ型
 
 ```cpp
 using Set = std::set;
@@ -599,7 +595,7 @@ using Map = std::map;
 using Vec = std::vector;
 ```
 
-### その他
+## その他
 
 ```cpp
 using NSec = std::chrono::nanoseconds;

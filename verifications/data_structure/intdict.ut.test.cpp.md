@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/intdict.hpp
-    title: src/data_structure/intdict.hpp
+    title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
   - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -205,22 +205,21 @@ data:
     \ vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]()\
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
-    #pragma endregion\ntemplate<typename K, typename V, int LG = 20> class IntDict\n\
-    {\npublic:\n    IntDict() = default;\n    V& operator[](const K& k)\n    {\n \
-    \       const auto i = index(k);\n        if (not m_used.test(i)) {\n        \
-    \    m_used.set(i), m_keys[i] = k;\n            return m_vals[i] = V{};\n    \
-    \    }\n        return m_vals[i];\n    }\n    const V& operator[](const K& k)\
-    \ const\n    {\n        return m_vals[index(k)];\n    }\n    void erase(const\
-    \ K& k)\n    {\n        m_used.reset(index(k));\n    }\n    bool contains(const\
-    \ K& k) const\n    {\n        const auto i = index(k);\n        return m_used.test(i)\
-    \ and m_keys[i] == k;\n    }\nprivate:\n    u32 index(const K& k) const\n    {\n\
-    \        u32 i = 0;\n        for (i = hash(k); m_used.test(i) and m_keys[i] !=\
-    \ k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static\
-    \ constexpr int N = 1 << LG;\n    static constexpr u64 r = 3178472817482774821_u64;\n\
-    \    static constexpr u32 hash(const u64 a)\n    {\n        return (a * r) >>\
-    \ (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n    Arr<V, N>\
-    \ m_vals;\n};\nvoid Test()\n{\n    IntDict<int, Str> dict;\n    dict[-2] = \"\
-    -2\";\n    dict[0] = \"0\";\n    dict[2] = \"2\";\n    assert(dict.contains(-2));\n\
+    #pragma endregion\ntemplate<typename K, typename V, int LG = 20>\nclass IntDict\n\
+    {\npublic:\n    IntDict() = default;\n    V& operator[](K k)\n    {\n        const\
+    \ auto i = index(k);\n        if (not m_used.test(i)) {\n            m_used.set(i),\
+    \ m_keys[i] = k;\n            return m_vals[i] = V{};\n        }\n        return\
+    \ m_vals[i];\n    }\n    const V& operator[](K k) const\n    {\n        return\
+    \ m_vals[index(k)];\n    }\n    void erase(K k)\n    {\n        m_used.reset(index(k));\n\
+    \    }\n    bool contains(K k) const\n    {\n        const auto i = index(k);\n\
+    \        return m_used.test(i) and m_keys[i] == k;\n    }\nprivate:\n    u32 index(K\
+    \ k) const\n    {\n        u32 i = 0;\n        for (i = fibHash(k); m_used.test(i)\
+    \ and m_keys[i] != k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n\
+    \    }\n    static constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64\
+    \ k)\n    {\n        constexpr u64 a = 11400714819323198485_u64;\n        return\
+    \ (a * k) >> (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n \
+    \   Arr<V, N> m_vals;\n};\nvoid Test()\n{\n    IntDict<int, Str> dict;\n    dict[-2]\
+    \ = \"-2\";\n    dict[0] = \"0\";\n    dict[2] = \"2\";\n    assert(dict.contains(-2));\n\
     \    assert(dict.contains(0));\n    assert(dict.contains(2));\n    assert(not\
     \ dict.contains(-3));\n    assert(not dict.contains(3));\n    dict.erase(0);\n\
     \    assert(dict.contains(-2));\n    assert(not dict.contains(0));\n    assert(dict.contains(2));\n\
@@ -255,7 +254,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/intdict.ut.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 04:14:23+09:00'
+  timestamp: '2021-05-28 14:11:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/intdict.ut.test.cpp

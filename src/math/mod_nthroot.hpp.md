@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/intdict.hpp
-    title: src/data_structure/intdict.hpp
+    title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
   - icon: ':heavy_check_mark:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
@@ -223,29 +223,28 @@ data:
     \ vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]()\
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
-    #pragma endregion\ntemplate<typename K, typename V, int LG = 20> class IntDict\n\
-    {\npublic:\n    IntDict() = default;\n    V& operator[](const K& k)\n    {\n \
-    \       const auto i = index(k);\n        if (not m_used.test(i)) {\n        \
-    \    m_used.set(i), m_keys[i] = k;\n            return m_vals[i] = V{};\n    \
-    \    }\n        return m_vals[i];\n    }\n    const V& operator[](const K& k)\
-    \ const\n    {\n        return m_vals[index(k)];\n    }\n    void erase(const\
-    \ K& k)\n    {\n        m_used.reset(index(k));\n    }\n    bool contains(const\
-    \ K& k) const\n    {\n        const auto i = index(k);\n        return m_used.test(i)\
-    \ and m_keys[i] == k;\n    }\nprivate:\n    u32 index(const K& k) const\n    {\n\
-    \        u32 i = 0;\n        for (i = hash(k); m_used.test(i) and m_keys[i] !=\
-    \ k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static\
-    \ constexpr int N = 1 << LG;\n    static constexpr u64 r = 3178472817482774821_u64;\n\
-    \    static constexpr u32 hash(const u64 a)\n    {\n        return (a * r) >>\
-    \ (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n    Arr<V, N>\
-    \ m_vals;\n};\ntemplate<typename T>\nconstexpr T inverse(const T a, const T mod)\n\
-    {\n    return a == 1 ? T{1} : ((a - inverse(mod % a, a)) * mod + 1) / a;\n}\n\
-    template<typename T>\nconstexpr Pair<T, T> extgcd(const T a, const T b)\n{\n \
-    \   if (a == 0) { return -1 / b; }\n    if (b == 0) { return 1 / a; }\n    const\
-    \ T x = inverse(a, b), y = (a * x - 1) / b;\n    return {x, y};\n}\ntemplate<u32\
-    \ mod_, u32 root_, u32 max2p_>\nclass modint\n{\n    template<typename U = u32&>\n\
-    \    static U modRef()\n    {\n        static u32 s_mod = 0;\n        return s_mod;\n\
-    \    }\n    template<typename U = u32&>\n    static U rootRef()\n    {\n     \
-    \   static u32 s_root = 0;\n        return s_root;\n    }\n    template<typename\
+    #pragma endregion\ntemplate<typename K, typename V, int LG = 20>\nclass IntDict\n\
+    {\npublic:\n    IntDict() = default;\n    V& operator[](K k)\n    {\n        const\
+    \ auto i = index(k);\n        if (not m_used.test(i)) {\n            m_used.set(i),\
+    \ m_keys[i] = k;\n            return m_vals[i] = V{};\n        }\n        return\
+    \ m_vals[i];\n    }\n    const V& operator[](K k) const\n    {\n        return\
+    \ m_vals[index(k)];\n    }\n    void erase(K k)\n    {\n        m_used.reset(index(k));\n\
+    \    }\n    bool contains(K k) const\n    {\n        const auto i = index(k);\n\
+    \        return m_used.test(i) and m_keys[i] == k;\n    }\nprivate:\n    u32 index(K\
+    \ k) const\n    {\n        u32 i = 0;\n        for (i = fibHash(k); m_used.test(i)\
+    \ and m_keys[i] != k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n\
+    \    }\n    static constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64\
+    \ k)\n    {\n        constexpr u64 a = 11400714819323198485_u64;\n        return\
+    \ (a * k) >> (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n \
+    \   Arr<V, N> m_vals;\n};\ntemplate<typename T>\nconstexpr T inverse(const T a,\
+    \ const T mod)\n{\n    return a == 1 ? T{1} : ((a - inverse(mod % a, a)) * mod\
+    \ + 1) / a;\n}\ntemplate<typename T>\nconstexpr Pair<T, T> extgcd(const T a, const\
+    \ T b)\n{\n    if (a == 0) { return -1 / b; }\n    if (b == 0) { return 1 / a;\
+    \ }\n    const T x = inverse(a, b), y = (a * x - 1) / b;\n    return {x, y};\n\
+    }\ntemplate<u32 mod_, u32 root_, u32 max2p_>\nclass modint\n{\n    template<typename\
+    \ U = u32&>\n    static U modRef()\n    {\n        static u32 s_mod = 0;\n   \
+    \     return s_mod;\n    }\n    template<typename U = u32&>\n    static U rootRef()\n\
+    \    {\n        static u32 s_root = 0;\n        return s_root;\n    }\n    template<typename\
     \ U = u32&>\n    static U max2pRef()\n    {\n        static u32 s_max2p = 0;\n\
     \        return s_max2p;\n    }\npublic:\n    template<typename U = const u32>\n\
     \    static constexpr std::enable_if_t<mod_ != 0, U> mod()\n    {\n        return\
@@ -496,7 +495,7 @@ data:
   path: src/math/mod_nthroot.hpp
   requiredBy:
   - verifications/math/mod_nthroot.yuki981.cpp
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-28 14:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/math/mod_nthroot.test.cpp
