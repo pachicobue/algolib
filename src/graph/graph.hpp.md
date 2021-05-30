@@ -277,7 +277,7 @@ data:
     \ < N);\n        Vec<T> ss(N, 1);\n        Fix([&](auto dfs, int u, int p) ->\
     \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
     \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
-    \             dfs(v, u);\n                ss[v] += ss[u];\n            }\n   \
+    \             dfs(v, u);\n                ss[u] += ss[v];\n            }\n   \
     \     })(root, -1);\n        return ss;\n    }\n    Vec<T> depths(int root = 0)\
     \ const\n    {\n        const int N = v();\n        assert(0 <= root and root\
     \ < N);\n        Vec<T> ds(N, 0);\n        Fix([&](auto dfs, int u, int p) ->\
@@ -316,7 +316,7 @@ data:
     \ = v();\n        assert(0 <= root and root < N);\n        Vec<T> ss(N, 1);\n\
     \        Fix([&](auto dfs, int u, int p) -> void {\n            for (const auto&\
     \ [id, v, c] : m_edges[u]) {\n                USE(id);\n                if (v\
-    \ == p) { continue; }\n                dfs(v, u);\n                ss[v] += ss[u];\n\
+    \ == p) { continue; }\n                dfs(v, u);\n                ss[u] += ss[v];\n\
     \            }\n        })(root, -1);\n        return ss;\n    }\n    Vec<T> depths(int\
     \ root = 0) const\n    {\n        const int N = v();\n        assert(0 <= root\
     \ and root < N);\n        Vec<T> ds(N, 0);\n        Fix([&](auto dfs, int u, int\
@@ -361,7 +361,7 @@ data:
   - src/graph/hld.hpp
   - src/graph/lca.hpp
   - src/graph/lowlink.hpp
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-30 21:12:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/graph/diameter.test.cpp

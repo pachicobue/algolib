@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/swag.hpp
-    title: src/data_structure/swag.hpp
+    title: Sliding Window Aggregation
   - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
@@ -65,7 +65,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/queue_operate_all_composite
     links:
     - https://judge.yosupo.jp/problem/queue_operate_all_composite
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -233,9 +233,9 @@ data:
     \      }\n            for (int i : irange(f, (int)as.size())) {\n            \
     \    m_backs.push_back(as[i]);\n            }\n            calc();\n        }\
     \ else {\n            m_fronts.pop_back(), m_Fronts.pop_back();\n        }\n \
-    \   }\n    T fold() const\n    {\n        return m_fronts.empty()\n          \
-    \         ? m_Backs.back()\n                   : (m_backs.empty()\n          \
-    \                ? m_Fronts.back()\n                          : m_merge(m_Fronts.back(),\
+    \   }\n    T foldAll() const\n    {\n        return m_fronts.empty()\n       \
+    \            ? m_Backs.back()\n                   : (m_backs.empty()\n       \
+    \                   ? m_Fronts.back()\n                          : m_merge(m_Fronts.back(),\
     \ m_Backs.back()));\n    }\n    friend Ostream& operator<<(Ostream& os, const\
     \ SWAG& sw)\n    {\n        Vec<T> as = sw.fs;\n        reverseAll(as);\n    \
     \    as += sw.bs;\n        os << \"vs = [\";\n        for (const T& a : as) {\n\
@@ -362,8 +362,8 @@ data:
     \            deque.pushBack(Func{a, b});\n        } else if (t == 1) {\n     \
     \       deque.popFront();\n        } else {\n            const auto x = in.val<mint>();\n\
     \            if (deque.empty()) {\n                out.ln(x.val());\n        \
-    \    } else {\n                const auto [a, b] = deque.fold();\n           \
-    \     out.ln((a * x + b).val());\n            }\n        }\n    }\n    return\
+    \    } else {\n                const auto [a, b] = deque.foldAll();\n        \
+    \        out.ln((a * x + b).val());\n            }\n        }\n    }\n    return\
     \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
     \n#include \"../../src/data_structure/swag.hpp\"\n#include \"../../src/math/modint.hpp\"\
@@ -378,8 +378,8 @@ data:
     \ b});\n        } else if (t == 1) {\n            deque.popFront();\n        }\
     \ else {\n            const auto x = in.val<mint>();\n            if (deque.empty())\
     \ {\n                out.ln(x.val());\n            } else {\n                const\
-    \ auto [a, b] = deque.fold();\n                out.ln((a * x + b).val());\n  \
-    \          }\n        }\n    }\n    return 0;\n}\n"
+    \ auto [a, b] = deque.foldAll();\n                out.ln((a * x + b).val());\n\
+    \            }\n        }\n    }\n    return 0;\n}\n"
   dependsOn:
   - src/data_structure/swag.hpp
   - src/misc/common.hpp
@@ -402,7 +402,7 @@ data:
   isVerificationFile: true
   path: verifications/data_structure/swag.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-30 21:12:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/swag.test.cpp

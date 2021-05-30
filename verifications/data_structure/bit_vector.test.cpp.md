@@ -2,11 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/math/mod_sqrt.hpp
-    title: src/math/mod_sqrt.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/math/modint.hpp
-    title: src/math/modint.hpp
+    path: src/data_structure/bit_vector.hpp
+    title: src/data_structure/bit_vector.hpp
   - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -49,12 +46,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/misc/fastio/printer.hpp
-    title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/misc/fastio/scanner.hpp
-    title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -62,29 +53,29 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/sqrt_mod
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
     links:
-    - https://judge.yosupo.jp/problem/sqrt_mod
-  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
-    #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
-    \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
-    \ double;\nusing f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64 v)\n\
-    {\n    return v;\n}\nconstexpr i32 operator\"\" _u32(u64 v)\n{\n    return v;\n\
-    }\nconstexpr i64 operator\"\" _i64(u64 v)\n{\n    return v;\n}\nconstexpr u64\
-    \ operator\"\" _u64(u64 v)\n{\n    return v;\n}\nconstexpr f64 operator\"\" _f64(f80\
-    \ v)\n{\n    return v;\n}\nconstexpr f80 operator\"\" _f80(f80 v)\n{\n    return\
-    \ v;\n}\nusing Istream = std::istream;\nusing Ostream = std::ostream;\nusing Str\
-    \ = std::string;\ntemplate<typename T>\nusing Lt = std::less<T>;\ntemplate<typename\
-    \ T>\nusing Gt = std::greater<T>;\ntemplate<typename T>\nusing IList = std::initializer_list<T>;\n\
-    template<int n>\nusing BSet = std::bitset<n>;\ntemplate<typename T1, typename\
-    \ T2>\nusing Pair = std::pair<T1, T2>;\ntemplate<typename... Ts>\nusing Tup =\
-    \ std::tuple<Ts...>;\ntemplate<typename T, int N>\nusing Arr = std::array<T, N>;\n\
-    template<typename... Ts>\nusing Deq = std::deque<Ts...>;\ntemplate<typename...\
-    \ Ts>\nusing Set = std::set<Ts...>;\ntemplate<typename... Ts>\nusing MSet = std::multiset<Ts...>;\n\
-    template<typename... Ts>\nusing USet = std::unordered_set<Ts...>;\ntemplate<typename...\
-    \ Ts>\nusing UMSet = std::unordered_multiset<Ts...>;\ntemplate<typename... Ts>\n\
-    using Map = std::map<Ts...>;\ntemplate<typename... Ts>\nusing MMap = std::multimap<Ts...>;\n\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
+  bundledCode: "#include <bits/stdc++.h>\n#pragma region Macros\n#pragma endregion\n\
+    #pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned int;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing f128\
+    \ = __float128;\nconstexpr i32 operator\"\" _i32(u64 v)\n{\n    return v;\n}\n\
+    constexpr i32 operator\"\" _u32(u64 v)\n{\n    return v;\n}\nconstexpr i64 operator\"\
+    \" _i64(u64 v)\n{\n    return v;\n}\nconstexpr u64 operator\"\" _u64(u64 v)\n\
+    {\n    return v;\n}\nconstexpr f64 operator\"\" _f64(f80 v)\n{\n    return v;\n\
+    }\nconstexpr f80 operator\"\" _f80(f80 v)\n{\n    return v;\n}\nusing Istream\
+    \ = std::istream;\nusing Ostream = std::ostream;\nusing Str = std::string;\ntemplate<typename\
+    \ T>\nusing Lt = std::less<T>;\ntemplate<typename T>\nusing Gt = std::greater<T>;\n\
+    template<typename T>\nusing IList = std::initializer_list<T>;\ntemplate<int n>\n\
+    using BSet = std::bitset<n>;\ntemplate<typename T1, typename T2>\nusing Pair =\
+    \ std::pair<T1, T2>;\ntemplate<typename... Ts>\nusing Tup = std::tuple<Ts...>;\n\
+    template<typename T, int N>\nusing Arr = std::array<T, N>;\ntemplate<typename...\
+    \ Ts>\nusing Deq = std::deque<Ts...>;\ntemplate<typename... Ts>\nusing Set = std::set<Ts...>;\n\
+    template<typename... Ts>\nusing MSet = std::multiset<Ts...>;\ntemplate<typename...\
+    \ Ts>\nusing USet = std::unordered_set<Ts...>;\ntemplate<typename... Ts>\nusing\
+    \ UMSet = std::unordered_multiset<Ts...>;\ntemplate<typename... Ts>\nusing Map\
+    \ = std::map<Ts...>;\ntemplate<typename... Ts>\nusing MMap = std::multimap<Ts...>;\n\
     template<typename... Ts>\nusing UMap = std::unordered_map<Ts...>;\ntemplate<typename...\
     \ Ts>\nusing UMMap = std::unordered_multimap<Ts...>;\ntemplate<typename... Ts>\n\
     using Vec = std::vector<Ts...>;\ntemplate<typename... Ts>\nusing Stack = std::stack<Ts...>;\n\
@@ -214,135 +205,97 @@ data:
     \ vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]()\
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
-    #pragma endregion\ntemplate<typename mint>\nmint modsqrt(const mint& A)\n{\n \
-    \   const u64 P = mint::mod();\n    if (A == 0) { return 0; }\n    if (P == 2)\
-    \ { return 1; }\n    const u64 h = (P - 1) >> 1;\n    if (A.pow(h).val() != 1)\
-    \ { return 0; }\n    u64 q = P - 1, Q = 0;\n    while ((q & 1) == 0) {\n     \
-    \   q >>= 1, Q++;\n    }\n    mint Eraser = 1;\n    for (mint Z = 2;; Z += 1)\
-    \ {\n        if (Z.pow(h) != 1) {\n            Eraser = Z.pow(q);\n          \
-    \  break;\n        }\n    }\n    mint Error = A.pow(q), X = A.pow((q + 1) / 2);\n\
-    \    while (Error.val() != 1) {\n        u64 l = 0;\n        mint pError = Error;\n\
-    \        for (u64 i = 0; i < Q; i++, pError *= pError) {\n            if (pError.val()\
-    \ == 1) {\n                l = Q - i;\n                break;\n            }\n\
-    \        }\n        mint pEraser = Eraser;\n        for (u64 i = 0; i < l - 1;\
-    \ i++, pEraser *= pEraser) {}\n        X *= pEraser, Error *= (pEraser * pEraser);\n\
-    \    }\n    return X;\n}\ntemplate<u32 mod_, u32 root_, u32 max2p_>\nclass modint\n\
-    {\n    template<typename U = u32&>\n    static U modRef()\n    {\n        static\
-    \ u32 s_mod = 0;\n        return s_mod;\n    }\n    template<typename U = u32&>\n\
-    \    static U rootRef()\n    {\n        static u32 s_root = 0;\n        return\
-    \ s_root;\n    }\n    template<typename U = u32&>\n    static U max2pRef()\n \
-    \   {\n        static u32 s_max2p = 0;\n        return s_max2p;\n    }\npublic:\n\
-    \    template<typename U = const u32>\n    static constexpr std::enable_if_t<mod_\
-    \ != 0, U> mod()\n    {\n        return mod_;\n    }\n    template<typename U\
-    \ = const u32>\n    static std::enable_if_t<mod_ == 0, U> mod()\n    {\n     \
-    \   return modRef();\n    }\n    template<typename U = const u32>\n    static\
-    \ constexpr std::enable_if_t<mod_ != 0, U> root()\n    {\n        return root_;\n\
-    \    }\n    template<typename U = const u32>\n    static std::enable_if_t<mod_\
-    \ == 0, U> root()\n    {\n        return rootRef();\n    }\n    template<typename\
-    \ U = const u32>\n    static constexpr std::enable_if_t<mod_ != 0, U> max2p()\n\
-    \    {\n        return max2p_;\n    }\n    template<typename U = const u32>\n\
-    \    static std::enable_if_t<mod_ == 0, U> max2p()\n    {\n        return max2pRef();\n\
-    \    }\n    template<typename U = u32>\n    static void setMod(std::enable_if_t<mod_\
-    \ == 0, U> m)\n    {\n        modRef() = m;\n    }\n    template<typename U =\
-    \ u32>\n    static void setRoot(std::enable_if_t<mod_ == 0, U> r)\n    {\n   \
-    \     rootRef() = r;\n    }\n    template<typename U = u32>\n    static void setMax2p(std::enable_if_t<mod_\
-    \ == 0, U> m)\n    {\n        max2pRef() = m;\n    }\n    constexpr modint() :\
-    \ m_val{0} {}\n    constexpr modint(i64 v) : m_val{normll(v)} {}\n    constexpr\
-    \ void setRaw(u32 v)\n    {\n        m_val = v;\n    }\n    constexpr modint operator-()\
-    \ const\n    {\n        return modint{0} - (*this);\n    }\n    constexpr modint&\
-    \ operator+=(const modint& m)\n    {\n        m_val = norm(m_val + m.val());\n\
-    \        return *this;\n    }\n    constexpr modint& operator-=(const modint&\
-    \ m)\n    {\n        m_val = norm(m_val + mod() - m.val());\n        return *this;\n\
-    \    }\n    constexpr modint& operator*=(const modint& m)\n    {\n        m_val\
-    \ = normll((i64)m_val * (i64)m.val() % (i64)mod());\n        return *this;\n \
-    \   }\n    constexpr modint& operator/=(const modint& m)\n    {\n        return\
-    \ *this *= m.inv();\n    }\n    constexpr modint operator+(const modint& m) const\n\
-    \    {\n        return modint{*this} += m;\n    }\n    constexpr modint operator-(const\
-    \ modint& m) const\n    {\n        return modint{*this} -= m;\n    }\n    constexpr\
-    \ modint operator*(const modint& m) const\n    {\n        return modint{*this}\
-    \ *= m;\n    }\n    constexpr modint operator/(const modint& m) const\n    {\n\
-    \        return modint{*this} /= m;\n    }\n    constexpr bool operator==(const\
-    \ modint& m) const\n    {\n        return m_val == m.val();\n    }\n    constexpr\
-    \ bool operator!=(const modint& m) const\n    {\n        return not(*this == m);\n\
-    \    }\n    friend Istream& operator>>(Istream& is, modint& m)\n    {\n      \
-    \  i64 v;\n        return is >> v, m = v, is;\n    }\n    friend Ostream& operator<<(Ostream&\
-    \ os, const modint& m)\n    {\n        return os << m.val();\n    }\n    constexpr\
-    \ u32 val() const\n    {\n        return m_val;\n    }\n    template<typename\
-    \ I>\n    constexpr modint pow(I n) const\n    {\n        return power(*this,\
-    \ n);\n    }\n    constexpr modint inv() const\n    {\n        return pow(mod()\
-    \ - 2);\n    }\n    static modint sinv(u32 n)\n    {\n        static Vec<modint>\
-    \ is{1, 1};\n        for (u32 i = (u32)is.size(); i <= n; i++) {\n           \
-    \ is.push_back(-is[mod() % i] * (mod() / i));\n        }\n        return is[n];\n\
-    \    }\n    static modint fact(u32 n)\n    {\n        static Vec<modint> fs{1,\
-    \ 1};\n        for (u32 i = (u32)fs.size(); i <= n; i++) {\n            fs.push_back(fs.back()\
-    \ * i);\n        }\n        return fs[n];\n    }\n    static modint ifact(u32\
-    \ n)\n    {\n        static Vec<modint> ifs{1, 1};\n        for (u32 i = (u32)ifs.size();\
-    \ i <= n; i++) {\n            ifs.push_back(ifs.back() * sinv(i));\n        }\n\
-    \        return ifs[n];\n    }\n    static modint comb(int n, int k)\n    {\n\
-    \        return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k) * ifact(k);\n\
-    \    }\nprivate:\n    static constexpr u32 norm(u32 x)\n    {\n        return\
-    \ x < mod() ? x : x - mod();\n    }\n    static constexpr u32 normll(i64 x)\n\
-    \    {\n        return norm(u32(x % (i64)mod() + (i64)mod()));\n    }\n    u32\
-    \ m_val;\n};\nusing modint_1000000007 = modint<1000000007, 5, 1>;\nusing modint_998244353\
-    \ = modint<998244353, 3, 23>;\ntemplate<int id>\nusing modint_dynamic = modint<0,\
-    \ 0, id>;\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer()\
-    \ {}\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
-    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
-    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
-    n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
-    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
-    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
-    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
-    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
-    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
-    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
-    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
-    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
-    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
-    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
-    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
-    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
-    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
-    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
-    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
-    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
-    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
-    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
-    \        }\n        while (true) {\n            c = getchar();\n            if\
-    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
-    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
-    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
-    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
-    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
-    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
-    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
-    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
-    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
-    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
-    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
-    \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
-    \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
-    \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
-    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
-    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
-    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
-    using mint = modint_dynamic<0>;\nint main()\n{\n    const int T = in.val<int>();\n\
-    \    for (int t : rep(T)) {\n        const auto [Y, P] = in.tup<uint, uint>();\n\
-    \        mint::setMod(P);\n        const mint ans = modsqrt(mint{Y});\n      \
-    \  if (ans * ans == Y) {\n            out.ln(ans.val());\n        } else {\n \
-    \           out.ln(-1);\n        }\n    }\n    return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include \"\
-    ../../src/math/mod_sqrt.hpp\"\n#include \"../../src/math/modint.hpp\"\n#include\
-    \ \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
-    \nusing mint = modint_dynamic<0>;\nint main()\n{\n    const int T = in.val<int>();\n\
-    \    for (int t : rep(T)) {\n        const auto [Y, P] = in.tup<uint, uint>();\n\
-    \        mint::setMod(P);\n        const mint ans = modsqrt(mint{Y});\n      \
-    \  if (ans * ans == Y) {\n            out.ln(ans.val());\n        } else {\n \
-    \           out.ln(-1);\n        }\n    }\n    return 0;\n}\n"
+    #pragma endregion\nclass BitVector\n{\n    static constexpr int B = 64;\n    static\
+    \ int rank(u64 v, int i)\n    {\n        if (i == 0) { return 0; }\n        return\
+    \ popcount((v << (B - i)) >> (B - i));\n    }\n    struct Block\n    {\n     \
+    \   u64 bits = 0;\n        i32 rank = 0;\n    };\npublic:\n    BitVector(int n)\
+    \ : m_size{n}, m_bn{n / B + 1}, m_blocks(m_bn) {}\n    void set(int i)\n    {\n\
+    \        assert(0 <= i and i < m_size);\n        m_blocks[i / B].bits |= (1_u64\
+    \ << (i % B));\n        m_calced = false;\n    }\n    void reset(int i)\n    {\n\
+    \        assert(0 <= i and i < m_size);\n        m_blocks[i / B].bits &= ~(1_u64\
+    \ << (i % B));\n        m_calced = false;\n    }\n    int rank0(int i)\n    {\n\
+    \        return i - rank1(i);\n    }\n    int rank1(int i)\n    {\n        assert(0\
+    \ <= i and i <= m_size);\n        calc();\n        return m_blocks[i / B].rank\
+    \ + rank(m_blocks[i / B].bits, i % B);\n    }\n    int select0(int k)\n    {\n\
+    \        assert(0 <= k and k < m_size);\n        int inf = -1, sup = m_size;\n\
+    \        while (sup - inf > 1) {\n            const int mid = (inf + sup) / 2;\n\
+    \            const int z = rank0(mid);\n            (z < k ? inf : sup) = mid;\n\
+    \        }\n        return sup;\n    }\n    int select1(int k)\n    {\n      \
+    \  assert(0 <= k and k < m_size);\n        int inf = -1, sup = m_size;\n     \
+    \   while (sup - inf > 1) {\n            const int mid = (inf + sup) / 2;\n  \
+    \          const int o = rank1(mid);\n            (o < k ? inf : sup) = mid;\n\
+    \        }\n        return sup;\n    }\n    int zero()\n    {\n        calc();\n\
+    \        return m_zero;\n    }\n    int one()\n    {\n        return m_size -\
+    \ zero();\n    }\nprivate:\n    void calc()\n    {\n        if (not m_calced)\
+    \ {\n            m_zero = m_size;\n            for (int i : irange(1, m_bn)) {\n\
+    \                const int p = popcount(m_blocks[i - 1].bits);\n             \
+    \   m_blocks[i].rank += m_blocks[i - 1].rank + p;\n                m_zero -= p;\n\
+    \            }\n            m_zero -= popcount(m_blocks[m_bn - 1].bits);\n   \
+    \         m_calced = true;\n        }\n    }\n    int m_size;\n    int m_bn;\n\
+    \    Vec<Block> m_blocks;\n    bool m_calced = false;\n    int m_zero = 0;\n};\n\
+    void Test()\n{\n    const int N = 1000;\n    std::mt19937 mt{std::random_device{}()};\n\
+    \    std::uniform_int_distribution<int> dist(0, N - 1);\n    BitVector bvec(N);\n\
+    \    for (int t : rep(200)) {\n        static_cast<void>(t);\n        const int\
+    \ i = dist(mt);\n        bvec.set(i);\n    }\n    for (int t : rep(50)) {\n  \
+    \      static_cast<void>(t);\n        const int i = dist(mt);\n        bvec.reset(i);\n\
+    \    }\n}\nvoid rankTest()\n{\n    const int N = 1000;\n    std::mt19937 mt{std::random_device{}()};\n\
+    \    std::uniform_int_distribution<int> dist(0, N - 1);\n    BitVector bvec(N);\n\
+    \    Vec<int> bs(N, 0);\n    for (int t : rep(200)) {\n        static_cast<void>(t);\n\
+    \        const int i = dist(mt);\n        bvec.set(i);\n        bs[i] = 1;\n \
+    \   }\n    auto rank0 = [&](int i) {\n        int ans = 0;\n        for (int j\
+    \ : rep(i)) {\n            if (bs[j] == 0) { ans++; }\n        }\n        return\
+    \ ans;\n    };\n    auto rank1 = [&](int i) {\n        int ans = 0;\n        for\
+    \ (int j : rep(i)) {\n            if (bs[j] == 1) { ans++; }\n        }\n    \
+    \    return ans;\n    };\n    for (int t : rep(200)) {\n        static_cast<void>(t);\n\
+    \        const int i = dist(mt);\n        assert(rank0(i) == bvec.rank0(i));\n\
+    \    }\n    for (int t : rep(200)) {\n        static_cast<void>(t);\n        const\
+    \ int i = dist(mt);\n        assert(rank1(i) == bvec.rank1(i));\n    }\n    assert(rank0(N)\
+    \ == bvec.zero());\n    assert(rank1(N) == bvec.one());\n}\nvoid selectTest()\n\
+    {\n    const int N = 1000;\n    std::mt19937 mt{std::random_device{}()};\n   \
+    \ std::uniform_int_distribution<int> dist(0, N - 1);\n    BitVector bvec(N);\n\
+    \    for (int t : rep(200)) {\n        static_cast<void>(t);\n        const int\
+    \ i = dist(mt);\n        bvec.set(i);\n    }\n    for (int t : rep(200)) {\n \
+    \       static_cast<void>(t);\n        const int k = dist(mt);\n        const\
+    \ int i = bvec.select0(k);\n        if (i == N) {\n            assert(bvec.zero()\
+    \ <= k);\n        } else {\n            assert(bvec.rank0(i) == k);\n        }\n\
+    \    }\n    for (int t : rep(200)) {\n        static_cast<void>(t);\n        const\
+    \ int k = dist(mt);\n        const int i = bvec.select1(k);\n        if (i ==\
+    \ N) {\n            assert(bvec.one() <= k);\n        } else {\n            assert(bvec.rank1(i)\
+    \ == k);\n        }\n    }\n}\nint main()\n{\n    Test();\n    rankTest();\n \
+    \   selectTest();\n    std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
+    \n#include \"../../src/data_structure/bit_vector.hpp\"\n\nvoid Test()\n{\n   \
+    \ const int N = 1000;\n    std::mt19937 mt{std::random_device{}()};\n    std::uniform_int_distribution<int>\
+    \ dist(0, N - 1);\n\n    BitVector bvec(N);\n    for (int t : rep(200)) {\n  \
+    \      USE(t);\n        const int i = dist(mt);\n        bvec.set(i);\n    }\n\
+    \    for (int t : rep(50)) {\n        USE(t);\n        const int i = dist(mt);\n\
+    \        bvec.reset(i);\n    }\n}\n\nvoid rankTest()\n{\n    const int N = 1000;\n\
+    \    std::mt19937 mt{std::random_device{}()};\n    std::uniform_int_distribution<int>\
+    \ dist(0, N - 1);\n\n    BitVector bvec(N);\n    Vec<int> bs(N, 0);\n    for (int\
+    \ t : rep(200)) {\n        USE(t);\n        const int i = dist(mt);\n        bvec.set(i);\n\
+    \        bs[i] = 1;\n    }\n\n    auto rank0 = [&](int i) {\n        int ans =\
+    \ 0;\n        for (int j : rep(i)) {\n            if (bs[j] == 0) { ans++; }\n\
+    \        }\n        return ans;\n    };\n    auto rank1 = [&](int i) {\n     \
+    \   int ans = 0;\n        for (int j : rep(i)) {\n            if (bs[j] == 1)\
+    \ { ans++; }\n        }\n        return ans;\n    };\n    for (int t : rep(200))\
+    \ {\n        USE(t);\n        const int i = dist(mt);\n        assert(rank0(i)\
+    \ == bvec.rank0(i));\n    }\n    for (int t : rep(200)) {\n        USE(t);\n \
+    \       const int i = dist(mt);\n        assert(rank1(i) == bvec.rank1(i));\n\
+    \    }\n    assert(rank0(N) == bvec.zero());\n    assert(rank1(N) == bvec.one());\n\
+    }\n\nvoid selectTest()\n{\n    const int N = 1000;\n    std::mt19937 mt{std::random_device{}()};\n\
+    \    std::uniform_int_distribution<int> dist(0, N - 1);\n\n    BitVector bvec(N);\n\
+    \    for (int t : rep(200)) {\n        USE(t);\n        const int i = dist(mt);\n\
+    \        bvec.set(i);\n    }\n\n    for (int t : rep(200)) {\n        USE(t);\n\
+    \        const int k = dist(mt);\n        const int i = bvec.select0(k);\n   \
+    \     if (i == N) {\n            assert(bvec.zero() <= k);\n        } else {\n\
+    \            assert(bvec.rank0(i) == k);\n        }\n    }\n    for (int t : rep(200))\
+    \ {\n        USE(t);\n        const int k = dist(mt);\n        const int i = bvec.select1(k);\n\
+    \        if (i == N) {\n            assert(bvec.one() <= k);\n        } else {\n\
+    \            assert(bvec.rank1(i) == k);\n        }\n    }\n}\n\nint main()\n\
+    {\n    Test();\n    rankTest();\n    selectTest();\n    std::cout << \"Hello World\\\
+    n\";\n    return 0;\n}\n"
   dependsOn:
-  - src/math/mod_sqrt.hpp
+  - src/data_structure/bit_vector.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -357,19 +310,16 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/math/modint.hpp
-  - src/misc/fastio/printer.hpp
-  - src/misc/fastio/scanner.hpp
   isVerificationFile: true
-  path: verifications/math/mod_sqrt.test.cpp
+  path: verifications/data_structure/bit_vector.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-30 21:12:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verifications/math/mod_sqrt.test.cpp
+documentation_of: verifications/data_structure/bit_vector.test.cpp
 layout: document
 redirect_from:
-- /verify/verifications/math/mod_sqrt.test.cpp
-- /verify/verifications/math/mod_sqrt.test.cpp.html
-title: verifications/math/mod_sqrt.test.cpp
+- /verify/verifications/data_structure/bit_vector.test.cpp
+- /verify/verifications/data_structure/bit_vector.test.cpp.html
+title: verifications/data_structure/bit_vector.test.cpp
 ---

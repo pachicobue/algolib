@@ -4,6 +4,9 @@ data:
   - name: src/data_structure
     pages:
     - icon: ':heavy_check_mark:'
+      path: src/data_structure/bit_vector.hpp
+      title: src/data_structure/bit_vector.hpp
+    - icon: ':heavy_check_mark:'
       path: src/data_structure/ds_table.hpp
       title: Disjoint Sparse Table
     - icon: ':heavy_check_mark:'
@@ -50,10 +53,10 @@ data:
       title: src/data_structure/static_rsq.hpp
     - icon: ':heavy_check_mark:'
       path: src/data_structure/swag.hpp
-      title: src/data_structure/swag.hpp
+      title: Sliding Window Aggregation
     - icon: ':heavy_check_mark:'
       path: src/data_structure/wavelet.hpp
-      title: src/data_structure/wavelet.hpp
+      title: "Wavelet\u884C\u5217"
   - name: src/flow
     pages:
     - icon: ':warning:'
@@ -365,6 +368,9 @@ data:
   verificationCategories:
   - name: verifications/data_structure
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verifications/data_structure/bit_vector.test.cpp
+      title: verifications/data_structure/bit_vector.test.cpp
     - icon: ':heavy_check_mark:'
       path: verifications/data_structure/ds_table.test.cpp
       title: verifications/data_structure/ds_table.test.cpp

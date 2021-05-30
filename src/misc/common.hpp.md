@@ -42,6 +42,9 @@ data:
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: src/data_structure/bit_vector.hpp
+    title: src/data_structure/bit_vector.hpp
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/ds_table.hpp
     title: Disjoint Sparse Table
   - icon: ':heavy_check_mark:'
@@ -88,10 +91,10 @@ data:
     title: src/data_structure/static_rsq.hpp
   - icon: ':heavy_check_mark:'
     path: src/data_structure/swag.hpp
-    title: src/data_structure/swag.hpp
+    title: Sliding Window Aggregation
   - icon: ':heavy_check_mark:'
     path: src/data_structure/wavelet.hpp
-    title: src/data_structure/wavelet.hpp
+    title: "Wavelet\u884C\u5217"
   - icon: ':warning:'
     path: src/flow/max_flow.hpp
     title: src/flow/max_flow.hpp
@@ -291,6 +294,9 @@ data:
     path: verifications/math/mod_nthroot.yuki981.cpp
     title: verifications/math/mod_nthroot.yuki981.cpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/bit_vector.test.cpp
+    title: verifications/data_structure/bit_vector.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/ds_table.test.cpp
     title: verifications/data_structure/ds_table.test.cpp
@@ -704,6 +710,7 @@ data:
   - src/data_structure/swag.hpp
   - src/data_structure/mo.hpp
   - src/data_structure/rbstree.hpp
+  - src/data_structure/bit_vector.hpp
   - src/data_structure/segtree.hpp
   - src/data_structure/lazyseg.hpp
   - src/data_structure/dsu.hpp
@@ -772,6 +779,7 @@ data:
   - verifications/data_structure/static_rmq.test.cpp
   - verifications/data_structure/intdict.ut.test.cpp
   - verifications/data_structure/dsu.ut.test.cpp
+  - verifications/data_structure/bit_vector.test.cpp
   - verifications/data_structure/segtree.test.cpp
   - verifications/data_structure/fenwick.test.cpp
   - verifications/graph/diameter.test.cpp

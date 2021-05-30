@@ -2,8 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: src/data_structure/bit_vector.hpp
+    title: src/data_structure/bit_vector.hpp
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/wavelet.hpp
-    title: src/data_structure/wavelet.hpp
+    title: "Wavelet\u884C\u5217"
   - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -211,63 +214,70 @@ data:
     \ vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]()\
     \ { return vec(m, min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937>\
     \ rng;\nRNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
-    #pragma endregion\ntemplate<int lg>\nclass Wavelet\n{\npublic:\n    Wavelet(Vec<u64>\
-    \ vs) : m_size{(int)vs.size()}\n    {\n        for (int i : rep(lg)) {\n     \
-    \       m_zns[i] = 0;\n            m_tables[i] = FID(m_size);\n        }\n   \
-    \     Vec<u64> z(m_size), o(m_size);\n        int zn = 0, on = 0;\n        for\
-    \ (int d : rep(lg)) {\n            zn = 0, on = 0;\n            for (int i : rep(m_size))\
-    \ {\n                const bool b = btest(vs[i], lg - d - 1);\n              \
-    \  m_tables[d].set(i, b);\n                (b ? o[on++] : z[zn++]) = vs[i];\n\
-    \            }\n            m_tables[d].build();\n            m_zns[d] = zn;\n\
-    \            std::swap(vs, z);\n            for (int i : rep(on)) {\n        \
-    \        vs[zn + i] = o[i];\n            }\n        }\n    }\n    int lessThan(int\
-    \ l, int r, u64 v) const\n    {\n        assert(l <= r);\n        int ans = 0;\n\
-    \        for (int i : rep(lg)) {\n            const int zl = m_tables[i].zero(l),\
-    \ zr = m_tables[i].zero(r);\n            const int z = m_zns[i];\n           \
-    \ if (btest(v, lg - i - 1)) {\n                ans += zr - zl;\n             \
-    \   l += z - zl, r += z - zr;\n            } else {\n                l = zl, r\
-    \ = zr;\n            }\n        }\n        return ans;\n    }\n    int rangeFreq(int\
-    \ l, int r, u64 vmin, u64 vsup) const\n    {\n        return lessThan(l, r, vsup)\
-    \ - lessThan(l, r, vmin);\n    }\n    u64 quantile(int l, int r, int n) const\n\
-    \    {\n        assert(l <= r), assert(r - l > n);\n        u64 ans = 0;\n   \
-    \     for (int i : rep(lg)) {\n            const int zl = m_tables[i].zero(l),\
-    \ zr = m_tables[i].zero(r);\n            const int z = m_zns[i];\n           \
-    \ if (n >= zr - zl) {\n                ans += u64(1) << (lg - i - 1);\n      \
-    \          l += z - zl, r += z - zr, n -= (zr - zl);\n            } else {\n \
-    \               l = zl, r = zr;\n            }\n        }\n        return ans;\n\
-    \    }\nprivate:\n    static constexpr int bucket_size = sizeof(u64) * 8;\n  \
-    \  static constexpr int bslog = log2p1(bucket_size) - 1;\n    static constexpr\
-    \ u64 bcut(const u64 n, const int l)\n    {\n        return (l == 0 ? 0ULL : (n\
-    \ << (64 - l) >> (64 - l)));\n    }\n    static constexpr int wind(const int n)\n\
-    \    {\n        return n >> (bslog);\n    }\n    static constexpr int bind(const\
-    \ int n)\n    {\n        return bcut(n, bslog);\n    }\n    class FID\n    {\n\
-    \    private:\n        int m_size, m_bn;\n        Vec<u64> m_datas;\n        Vec<int>\
-    \ m_larges;\n    public:\n        FID() : m_size{0} {}\n        FID(const int\
-    \ b)\n            : m_size{b},\n              m_bn{wind(m_size) + 2},\n      \
-    \        m_datas(m_bn, 0),\n              m_larges(m_bn, 0)\n        {}\n    \
-    \    void build()\n        {\n            for (int i : irange(1, m_larges.size()))\
-    \ {\n                m_larges[i] = m_larges[i - 1] + popcount(m_datas[i - 1]);\n\
-    \            }\n        }\n        bool operator[](const int n) const\n      \
-    \  {\n            return btest(m_datas[wind(n)], bind(n));\n        }\n      \
-    \  void set(const int n, const bool b)\n        {\n            m_datas[wind(n)]\
-    \ |= u64{b} << bind(n);\n        }\n        int one(const int n) const\n     \
-    \   {\n            return m_larges[wind(n)]\n                   + popcount(bcut(m_datas[wind(n)],\
-    \ bind(n)));\n        }\n        int zero(const int n) const\n        {\n    \
-    \        return n - one(n);\n        }\n    };\n    int m_size;\n    Arr<int,\
-    \ lg> m_zns;\n    Arr<FID, lg> m_tables;\n};\n#pragma region FastIO Printer\n\
-    class Printer\n{\npublic:\n    Printer() {}\n    template<typename... Args>\n\
-    \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
-    \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
-    \ args)\n    {\n        dump(args...), putchar('\\n');\n        return 0;\n  \
-    \  }\nprivate:\n    template<typename T>\n    void dump(T v)\n    {\n        static\
-    \ char tmp[30];\n        if (v < 0) {\n            putchar('-');\n           \
-    \ v = -v;\n        }\n        int i = 0;\n        do {\n            tmp[i++] =\
-    \ v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n        while\
-    \ (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void dump(bool\
-    \ b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n    {\n    \
-    \    putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n        for (char\
-    \ c : cs) {\n            dump(c);\n        }\n    }\n    template<typename T>\n\
-    \    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    #pragma endregion\nclass BitVector\n{\n    static constexpr int B = 64;\n    static\
+    \ int rank(u64 v, int i)\n    {\n        if (i == 0) { return 0; }\n        return\
+    \ popcount((v << (B - i)) >> (B - i));\n    }\n    struct Block\n    {\n     \
+    \   u64 bits = 0;\n        i32 rank = 0;\n    };\npublic:\n    BitVector(int n)\
+    \ : m_size{n}, m_bn{n / B + 1}, m_blocks(m_bn) {}\n    void set(int i)\n    {\n\
+    \        assert(0 <= i and i < m_size);\n        m_blocks[i / B].bits |= (1_u64\
+    \ << (i % B));\n        m_calced = false;\n    }\n    void reset(int i)\n    {\n\
+    \        assert(0 <= i and i < m_size);\n        m_blocks[i / B].bits &= ~(1_u64\
+    \ << (i % B));\n        m_calced = false;\n    }\n    int rank0(int i)\n    {\n\
+    \        return i - rank1(i);\n    }\n    int rank1(int i)\n    {\n        assert(0\
+    \ <= i and i <= m_size);\n        calc();\n        return m_blocks[i / B].rank\
+    \ + rank(m_blocks[i / B].bits, i % B);\n    }\n    int select0(int k)\n    {\n\
+    \        assert(0 <= k and k < m_size);\n        int inf = -1, sup = m_size;\n\
+    \        while (sup - inf > 1) {\n            const int mid = (inf + sup) / 2;\n\
+    \            const int z = rank0(mid);\n            (z < k ? inf : sup) = mid;\n\
+    \        }\n        return sup;\n    }\n    int select1(int k)\n    {\n      \
+    \  assert(0 <= k and k < m_size);\n        int inf = -1, sup = m_size;\n     \
+    \   while (sup - inf > 1) {\n            const int mid = (inf + sup) / 2;\n  \
+    \          const int o = rank1(mid);\n            (o < k ? inf : sup) = mid;\n\
+    \        }\n        return sup;\n    }\n    int zero()\n    {\n        calc();\n\
+    \        return m_zero;\n    }\n    int one()\n    {\n        return m_size -\
+    \ zero();\n    }\nprivate:\n    void calc()\n    {\n        if (not m_calced)\
+    \ {\n            m_zero = m_size;\n            for (int i : irange(1, m_bn)) {\n\
+    \                const int p = popcount(m_blocks[i - 1].bits);\n             \
+    \   m_blocks[i].rank += m_blocks[i - 1].rank + p;\n                m_zero -= p;\n\
+    \            }\n            m_zero -= popcount(m_blocks[m_bn - 1].bits);\n   \
+    \         m_calced = true;\n        }\n    }\n    int m_size;\n    int m_bn;\n\
+    \    Vec<Block> m_blocks;\n    bool m_calced = false;\n    int m_zero = 0;\n};\n\
+    template<typename T>\nclass WaveletMatrix\n{\npublic:\n    WaveletMatrix(Vec<T>\
+    \ vs, int lg = sizeof(T) * 8)\n        : m_n(vs.size()), m_lg{lg}, m_bvs(lg, BitVector(m_n))\n\
+    \    {\n        Vec<T> nvs(m_n);\n        for (int bi : per(lg)) {\n         \
+    \   for (int i : rep(m_n)) {\n                if (btest(vs[i], bi)) { m_bvs[bi].set(i);\
+    \ }\n            }\n            int is[2] = {0, m_bvs[bi].zero()};\n         \
+    \   for (int i : rep(m_n)) {\n                nvs[is[btest(vs[i], bi)]++] = vs[i];\n\
+    \            }\n            std::swap(vs, nvs);\n        }\n    }\n    int rangeFreq(int\
+    \ l, int r, T vmin, T vsup)\n    {\n        assert(0 <= l and l <= r and r <=\
+    \ m_n);\n        return less(r, vsup) - less(r, vmin) - less(l, vsup) + less(l,\
+    \ vmin);\n    }\n    T quantile(int l, int r, int k)\n    {\n        assert(0\
+    \ <= l and l <= r and r <= m_n);\n        assert(0 <= k and k < r - l);\n    \
+    \    T ans = 0;\n        for (int bi : per(m_lg)) {\n            const int z =\
+    \ m_bvs[bi].zero();\n            const int zl = m_bvs[bi].rank0(l);\n        \
+    \    const int zr = m_bvs[bi].rank0(r);\n            if (zr - zl <= k) {\n   \
+    \             ans |= (T{1} << bi);\n                k -= (zr - zl);\n        \
+    \        l = z + m_bvs[bi].rank1(l), r = z + m_bvs[bi].rank1(r);\n           \
+    \ } else {\n                l = zl, r = zr;\n            }\n        }\n      \
+    \  return ans;\n    }\nprivate:\n    int less(int i, T v)\n    {\n        assert(0\
+    \ <= i and i <= m_n);\n        int ans = 0;\n        for (int bi : per(m_lg))\
+    \ {\n            if (btest(v, bi)) {\n                const int z = m_bvs[bi].zero();\n\
+    \                ans += z;\n                i = z + m_bvs[bi].rank1(i);\n    \
+    \        } else {\n                i = m_bvs[bi].rank1(0);\n            }\n  \
+    \      }\n        return ans;\n    }\n    int m_n;\n    int m_lg;\n    Vec<BitVector>\
+    \ m_bvs;\n};\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer()\
+    \ {}\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
+    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
+    n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
+    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
+    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
+    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
+    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
+    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
+    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
+    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
     \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
     \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
     \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
@@ -299,16 +309,17 @@ data:
     \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
     \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
     int main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    const auto as\
-    \ = in.vec<u64>(N);\n    const auto wm = Wavelet<30>(as);\n    for (int q : rep(Q))\
-    \ {\n        const auto [l, r, k] = in.tup<int, int, int>();\n        out.ln(wm.quantile(l,\
-    \ r, k));\n    }\n    return 0;\n}\n"
+    \ = in.vec<u32>(N);\n    auto wm = WaveletMatrix(as, 30);\n    for (int q : rep(Q))\
+    \ {\n        static_cast<void>(q);\n        const auto [l, r, k] = in.tup<int,\
+    \ int, int>();\n        out.ln(wm.quantile(l, r, k));\n    }\n    return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n\
     #include \"../../src/data_structure/wavelet.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
     \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const auto\
-    \ [N, Q] = in.tup<int, int>();\n    const auto as = in.vec<u64>(N);\n    const\
-    \ auto wm = Wavelet<30>(as);\n    for (int q : rep(Q)) {\n        const auto [l,\
-    \ r, k] = in.tup<int, int, int>();\n        out.ln(wm.quantile(l, r, k));\n  \
-    \  }\n    return 0;\n}\n"
+    \ [N, Q] = in.tup<int, int>();\n    const auto as = in.vec<u32>(N);\n    auto\
+    \ wm = WaveletMatrix(as, 30);\n    for (int q : rep(Q)) {\n        USE(q);\n \
+    \       const auto [l, r, k] = in.tup<int, int, int>();\n        out.ln(wm.quantile(l,\
+    \ r, k));\n    }\n    return 0;\n}\n"
   dependsOn:
   - src/data_structure/wavelet.hpp
   - src/misc/common.hpp
@@ -325,12 +336,13 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
+  - src/data_structure/bit_vector.hpp
   - src/misc/fastio/printer.hpp
   - src/misc/fastio/scanner.hpp
   isVerificationFile: true
   path: verifications/data_structure/wavelet.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-30 21:12:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/data_structure/wavelet.test.cpp

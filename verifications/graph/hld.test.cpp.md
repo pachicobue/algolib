@@ -71,7 +71,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
     links:
     - https://judge.yosupo.jp/problem/vertex_set_path_composite
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\n#pragma region Macros\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\n#pragma region Macros\n\
     #pragma endregion\n#pragma region TypeAlias\nusing i32 = int;\nusing u32 = unsigned\
     \ int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
     \ __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long\
@@ -265,7 +265,7 @@ data:
     \        Fix([&](auto dfs, int u, int p) -> void {\n            for (const auto&\
     \ [id, v, c] : m_edges[u]) {\n                static_cast<void>(id);\n       \
     \         if (v == p) { continue; }\n                dfs(v, u);\n            \
-    \    ss[v] += ss[u];\n            }\n        })(root, -1);\n        return ss;\n\
+    \    ss[u] += ss[v];\n            }\n        })(root, -1);\n        return ss;\n\
     \    }\n    Vec<T> depths(int root = 0) const\n    {\n        const int N = v();\n\
     \        assert(0 <= root and root < N);\n        Vec<T> ds(N, 0);\n        Fix([&](auto\
     \ dfs, int u, int p) -> void {\n            for (const auto& [id, v, c] : m_edges[u])\
@@ -486,7 +486,7 @@ data:
   isVerificationFile: true
   path: verifications/graph/hld.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
+  timestamp: '2021-05-30 21:12:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/graph/hld.test.cpp

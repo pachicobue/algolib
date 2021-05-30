@@ -305,7 +305,7 @@ data:
     \        Fix([&](auto dfs, int u, int p) -> void {\n            for (const auto&\
     \ [id, v, c] : m_edges[u]) {\n                static_cast<void>(id);\n       \
     \         if (v == p) { continue; }\n                dfs(v, u);\n            \
-    \    ss[v] += ss[u];\n            }\n        })(root, -1);\n        return ss;\n\
+    \    ss[u] += ss[v];\n            }\n        })(root, -1);\n        return ss;\n\
     \    }\n    Vec<T> depths(int root = 0) const\n    {\n        const int N = v();\n\
     \        assert(0 <= root and root < N);\n        Vec<T> ds(N, 0);\n        Fix([&](auto\
     \ dfs, int u, int p) -> void {\n            for (const auto& [id, v, c] : m_edges[u])\
@@ -413,7 +413,7 @@ data:
   isVerificationFile: true
   path: verifications/graph/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-05-28 17:50:09+09:00'
+  timestamp: '2021-05-30 21:12:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/graph/lca.test.cpp
