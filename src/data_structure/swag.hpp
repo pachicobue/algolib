@@ -52,7 +52,7 @@ public:
             m_fronts.pop_back(), m_Fronts.pop_back();
         }
     }
-    T fold() const
+    T foldAll() const
     {
         return m_fronts.empty()
                    ? m_Backs.back()

@@ -72,7 +72,7 @@ public:
                 USE(id);
                 if (v == p) { continue; }
                 dfs(v, u);
-                ss[v] += ss[u];
+                ss[u] += ss[v];
             }
         })(root, -1);
         return ss;

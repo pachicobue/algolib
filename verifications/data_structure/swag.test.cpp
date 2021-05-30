@@ -31,7 +31,7 @@ int main()
             if (deque.empty()) {
                 out.ln(x.val());
             } else {
-                const auto [a, b] = deque.fold();
+                const auto [a, b] = deque.foldAll();
                 out.ln((a * x + b).val());
             }
         }

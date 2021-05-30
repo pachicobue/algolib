@@ -55,7 +55,7 @@ $\mathrm{O}(N \log N)$
 ### next
 
 ```cpp
-int mo.next<R,L,D,U>(R right, L left, D down, U up)
+int mo.next(R right, L left, D down, U up)
 ```
 
 次のターミナルまで移動する。  
