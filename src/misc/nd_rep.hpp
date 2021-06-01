@@ -1,6 +1,5 @@
 #pragma once
 #include "common.hpp"
-#pragma region NdRange
 class ndRep
 {
 private:
@@ -44,4 +43,3 @@ public:
         return itr{m_ns};
     }
 };
-#pragma endregion

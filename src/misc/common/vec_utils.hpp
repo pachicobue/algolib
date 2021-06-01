@@ -1,6 +1,5 @@
 #pragma once
 #include "type_alias.hpp"
-#pragma region VecUtils
 template<typename T>
 void fillAll(Vec<T>& vs, const T& v)
 {
@@ -67,4 +66,3 @@ Vec<T> revVec(const Vec<T>& vs)
     reverseAll(ans);
     return ans;
 }
-#pragma endregion

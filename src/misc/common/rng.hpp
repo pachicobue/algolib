@@ -2,7 +2,6 @@
 #include "type_alias.hpp"
 #include "vec_utils.hpp"
 #include "xoshiro.hpp"
-#pragma region RNG
 template<typename Rng>
 class RNG
 {
@@ -51,4 +50,3 @@ RNG<std::mt19937> rng;
 RNG<std::mt19937_64> rng64;
 RNG<Xoshiro32> rng_xo;
 RNG<Xoshiro64> rng_xo64;
-#pragma endregion

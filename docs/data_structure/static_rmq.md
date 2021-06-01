@@ -1,5 +1,5 @@
 ---
-title: 線形RMQ
+title: 静的数列のRMQ
 documentation_of: //src/data_structure/static_rmq.hpp
 ---
 

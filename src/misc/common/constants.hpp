@@ -1,6 +1,5 @@
 #pragma once
 #include "type_alias.hpp"
-#pragma region Constants
 template<typename T>
 constexpr T INF = std::numeric_limits<T>::max() / 4;
 template<typename T>
@@ -10,4 +9,3 @@ constexpr T TEN(const int n)
 {
     return n == 0 ? T{1} : TEN<T>(n - 1) * T{10};
 }
-#pragma endregion

@@ -1,6 +1,5 @@
 #pragma once
 #include "type_alias.hpp"
-#pragma region BitOps
 constexpr int popcount(const u64 v)
 {
     return v ? __builtin_popcountll(v) : 0;
@@ -34,4 +33,3 @@ constexpr bool btest(const u64 mask, const int ind)
 {
     return (mask >> ind) & 1_u64;
 }
-#pragma endregion

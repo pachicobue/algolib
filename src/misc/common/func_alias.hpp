@@ -1,6 +1,5 @@
 #pragma once
 #include "type_alias.hpp"
-#pragma region FuncAlias
 template<typename T>
 bool chmin(T& a, const T& b)
 {
@@ -60,4 +59,3 @@ constexpr T power(T v, I n, const T& e)
     }
     return ans;
 }
-#pragma endregion

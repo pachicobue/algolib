@@ -1,6 +1,5 @@
 #pragma once
 #include "common.hpp"
-#pragma region Zipper
 template<typename T>
 class Zipper
 {
@@ -47,4 +46,3 @@ private:
     Vec<T> m_vs;
     bool m_calced = true;
 };
-#pragma endregion

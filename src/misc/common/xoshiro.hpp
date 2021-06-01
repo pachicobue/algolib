@@ -1,7 +1,6 @@
 #pragma once
 #include "type_alias.hpp"
 #pragma COMMENT("[REFS] Xoshiro: https://prng.di.unimi.it")
-#pragma region Xoshiro
 namespace xoshiro_impl {
 u64 x;
 u64 next()
@@ -102,4 +101,3 @@ private:
     }
     T s[4];
 };
-#pragma endregion

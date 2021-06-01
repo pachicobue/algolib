@@ -1,6 +1,5 @@
 #pragma once
 #include <bits/stdc++.h>
-#pragma region TypeAlias
 using i32 = int;
 using u32 = unsigned int;
 using i64 = long long;
@@ -84,4 +83,3 @@ using NSec = std::chrono::nanoseconds;
 using USec = std::chrono::microseconds;
 using MSec = std::chrono::milliseconds;
 using Sec = std::chrono::seconds;
-#pragma endregion

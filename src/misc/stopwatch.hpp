@@ -1,6 +1,5 @@
 #pragma once
 #include "common.hpp"
-#pragma region StopWatch
 class StopWatch
 {
     using SysClock = std::chrono::system_clock;
@@ -26,4 +25,3 @@ public:
 private:
     Tp m_start, m_rap;
 };
-#pragma endregion

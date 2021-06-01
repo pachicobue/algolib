@@ -1,6 +1,5 @@
 #pragma once
 #include "type_alias.hpp"
-#pragma region OperatorAlias
 template<typename T>
 Vec<T> operator+=(Vec<T>& vs1, const Vec<T>& vs2)
 {
@@ -14,4 +13,3 @@ Vec<T> operator+(const Vec<T>& vs1, const Vec<T>& vs2)
     vs += vs2;
     return vs;
 }
-#pragma endregion

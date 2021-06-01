@@ -1,6 +1,5 @@
 #pragma once
 #include "common.hpp"
-#pragma region Printer
 class Printer
 {
 public:
@@ -56,4 +55,3 @@ private:
     Ostream& m_os;
 };
 Printer out;
-#pragma endregion

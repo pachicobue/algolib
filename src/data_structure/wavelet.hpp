@@ -53,11 +53,12 @@ private:
         int ans = 0;
         for (int bi : per(m_lg)) {
             if (btest(v, bi)) {
-                const int z = m_bvs[bi].zero();
+                const int z = m_bvs[bi].rank0(i);
+                const int o = i - z;
                 ans += z;
-                i = z + m_bvs[bi].rank1(i);
+                i = m_bvs[bi].zero() + o;
             } else {
-                i = m_bvs[bi].rank1(0);
+                i = m_bvs[bi].rank0(i);
             }
         }
         return ans;

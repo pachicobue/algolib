@@ -1,6 +1,6 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/misc/nd_range.hpp"
+#include "../../src/misc/nd_rep.hpp"
 
 void Test()
 {

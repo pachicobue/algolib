@@ -1,6 +1,5 @@
 #pragma once
 #include "../misc/common.hpp"
-#pragma region Scanner
 class Scanner
 {
 public:
@@ -54,4 +53,3 @@ private:
     Istream& m_is;
 };
 Scanner in;
-#pragma endregion

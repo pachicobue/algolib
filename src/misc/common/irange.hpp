@@ -1,6 +1,5 @@
 #pragma once
 #include "type_alias.hpp"
-#pragma region Range
 class irange
 {
 private:
@@ -54,4 +53,3 @@ irange per(int rend)
 {
     return irange(rend - 1, -1, -1);
 }
-#pragma endregion

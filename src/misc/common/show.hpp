@@ -1,5 +1,4 @@
 #pragma once
-#pragma region Show
 #include "print/int128_t.hpp"
 #ifdef HOGEPACHI
 #    include "print/array.hpp"
@@ -37,4 +36,3 @@ void dump(T x, Args... args)
 #else
 #    define SHOW(...) void(0)
 #endif
-#pragma endregion

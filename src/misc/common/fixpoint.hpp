@@ -1,6 +1,5 @@
 #pragma once
 #include "type_alias.hpp"
-#pragma region FixPoint
 template<typename F>
 struct Fix : F
 {
@@ -11,4 +10,3 @@ struct Fix : F
         return F::operator()(*this, std::forward<Args>(args)...);
     }
 };
-#pragma endregion
