@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy:
@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/fenwick.hpp
     title: Fenwick Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/data_structure/intdict.hpp
     title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
   - icon: ':heavy_check_mark:'
@@ -44,6 +44,9 @@ data:
   - icon: ':warning:'
     path: src/data_structure/rbstree.hpp
     title: src/data_structure/rbstree.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/data_structure/rsq.hpp
+    title: "\u6570\u5217\u306E\u7D2F\u7A4D\u548C\u7BA1\u7406"
   - icon: ':warning:'
     path: src/data_structure/segments.hpp
     title: src/data_structure/segments.hpp
@@ -52,10 +55,7 @@ data:
     title: Segment Tree
   - icon: ':heavy_check_mark:'
     path: src/data_structure/static_rmq.hpp
-    title: "\u7DDA\u5F62RMQ"
-  - icon: ':warning:'
-    path: src/data_structure/static_rsq.hpp
-    title: src/data_structure/static_rsq.hpp
+    title: "\u9759\u7684\u6570\u5217\u306ERMQ"
   - icon: ':heavy_check_mark:'
     path: src/data_structure/swag.hpp
     title: Sliding Window Aggregation
@@ -122,7 +122,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/and_convolution.hpp
     title: src/math/and_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/berlekamp_massey.hpp
     title: src/math/berlekamp_massey.hpp
   - icon: ':warning:'
@@ -131,70 +131,70 @@ data:
   - icon: ':warning:'
     path: src/math/divisors.hpp
     title: src/math/divisors.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/divisors_moebius.hpp
     title: src/math/divisors_moebius.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/divisors_zeta.hpp
     title: src/math/divisors_zeta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/factor_table.hpp
     title: src/math/factor_table.hpp
   - icon: ':warning:'
     path: src/math/fft.hpp
     title: src/math/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
   - icon: ':warning:'
     path: src/math/garner.hpp
     title: src/math/garner.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/gcd_convolution.hpp
     title: src/math/gcd_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
   - icon: ':warning:'
     path: src/math/lagrange_interpolation.hpp
     title: src/math/lagrange_interpolation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/mod_sqrt.hpp
     title: src/math/mod_sqrt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
   - icon: ':warning:'
     path: src/math/moebius_table.hpp
     title: src/math/moebius_table.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/multiplicative_sum.hpp
     title: src/math/multiplicative_sum.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/nth_term.hpp
     title: src/math/nth_term.hpp
   - icon: ':warning:'
     path: src/math/or_convolution.hpp
     title: src/math/or_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_enumerate.hpp
     title: src/math/prime_enumerate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_powsum.hpp
     title: src/math/prime_powsum.hpp
   - icon: ':warning:'
@@ -206,7 +206,7 @@ data:
   - icon: ':warning:'
     path: src/math/seg_sieve.hpp
     title: src/math/seg_sieve.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/set_hadamard.hpp
     title: src/math/set_hadamard.hpp
   - icon: ':heavy_check_mark:'
@@ -215,34 +215,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/set_zeta.hpp
     title: src/math/set_zeta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/xor_convolution.hpp
     title: src/math/xor_convolution.hpp
   - icon: ':heavy_check_mark:'
+    path: src/misc/bin_search.hpp
+    title: src/misc/bin_search.hpp
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/misc/nd_range.hpp
-    title: src/misc/nd_range.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: src/misc/nd_rep.hpp
+    title: src/misc/nd_rep.hpp
+  - icon: ':x:'
     path: src/misc/nd_vec.hpp
     title: src/misc/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/misc/printer.hpp
     title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/misc/scanner.hpp
     title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/misc/stopwatch.hpp
     title: src/misc/stopwatch.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/zipper.hpp
     title: src/misc/zipper.hpp
   - icon: ':warning:'
@@ -313,6 +316,12 @@ data:
     path: verifications/data_structure/monotonic_cht.test.cpp
     title: verifications/data_structure/monotonic_cht.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/rsq.test.cpp
+    title: verifications/data_structure/rsq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/rsq.ut.test.cpp
+    title: verifications/data_structure/rsq.ut.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/data_structure/segtree.test.cpp
     title: verifications/data_structure/segtree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -321,6 +330,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/swag.test.cpp
     title: verifications/data_structure/swag.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/data_structure/wavelet.rangefreq.test.cpp
+    title: verifications/data_structure/wavelet.rangefreq.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/wavelet.test.cpp
     title: verifications/data_structure/wavelet.test.cpp
@@ -348,94 +360,93 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/berlekamp_massey.test.cpp
     title: verifications/math/berlekamp_massey.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.convolution.test.cpp
     title: verifications/math/fps.convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.convolution1000000007.test.cpp
     title: verifications/math/fps.convolution1000000007.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.div_nth.test.cpp
     title: verifications/math/fps.div_nth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.exp.test.cpp
     title: verifications/math/fps.exp.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.inv.test.cpp
     title: verifications/math/fps.inv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.log.test.cpp
     title: verifications/math/fps.log.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.nth.test.cpp
     title: verifications/math/fps.nth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.pow.test.cpp
     title: verifications/math/fps.pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.tshift.test.cpp
     title: verifications/math/fps.tshift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/mod_sqrt.test.cpp
     title: verifications/math/mod_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/prime_powsum.test.cpp
     title: verifications/math/prime_powsum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/fastio/fastio.test.cpp
     title: verifications/misc/fastio/fastio.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/io.test.cpp
     title: verifications/misc/io.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/misc/nd_range.test.cpp
-    title: verifications/misc/nd_range.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: verifications/misc/nd_rep.test.cpp
+    title: verifications/misc/nd_rep.test.cpp
+  - icon: ':x:'
     path: verifications/misc/nd_vec.test.cpp
     title: verifications/misc/nd_vec.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/printer.test.cpp
     title: verifications/misc/printer.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/scanner.test.cpp
     title: verifications/misc/scanner.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/stopwatch.test.cpp
     title: verifications/misc/stopwatch.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/zipper.test.cpp
     title: verifications/misc/zipper.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#include <bits/stdc++.h>\n#pragma region Show\n#pragma region TypeAlias\n\
-    using i32 = int;\nusing u32 = unsigned int;\nusing i64 = long long;\nusing u64\
-    \ = unsigned long long;\nusing i128 = __int128_t;\nusing u128 = __uint128_t;\n\
-    using f64 = double;\nusing f80 = long double;\nusing f128 = __float128;\nconstexpr\
-    \ i32 operator\"\" _i32(u64 v)\n{\n    return v;\n}\nconstexpr i32 operator\"\"\
-    \ _u32(u64 v)\n{\n    return v;\n}\nconstexpr i64 operator\"\" _i64(u64 v)\n{\n\
-    \    return v;\n}\nconstexpr u64 operator\"\" _u64(u64 v)\n{\n    return v;\n\
-    }\nconstexpr f64 operator\"\" _f64(f80 v)\n{\n    return v;\n}\nconstexpr f80\
-    \ operator\"\" _f80(f80 v)\n{\n    return v;\n}\nusing Istream = std::istream;\n\
-    using Ostream = std::ostream;\nusing Str = std::string;\ntemplate<typename T>\n\
-    using Lt = std::less<T>;\ntemplate<typename T>\nusing Gt = std::greater<T>;\n\
+  bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
+    using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
+    using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
+    \ f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64 v)\n{\n    return v;\n\
+    }\nconstexpr i32 operator\"\" _u32(u64 v)\n{\n    return v;\n}\nconstexpr i64\
+    \ operator\"\" _i64(u64 v)\n{\n    return v;\n}\nconstexpr u64 operator\"\" _u64(u64\
+    \ v)\n{\n    return v;\n}\nconstexpr f64 operator\"\" _f64(f80 v)\n{\n    return\
+    \ v;\n}\nconstexpr f80 operator\"\" _f80(f80 v)\n{\n    return v;\n}\nusing Istream\
+    \ = std::istream;\nusing Ostream = std::ostream;\nusing Str = std::string;\ntemplate<typename\
+    \ T>\nusing Lt = std::less<T>;\ntemplate<typename T>\nusing Gt = std::greater<T>;\n\
     template<typename T>\nusing IList = std::initializer_list<T>;\ntemplate<int n>\n\
     using BSet = std::bitset<n>;\ntemplate<typename T1, typename T2>\nusing Pair =\
     \ std::pair<T1, T2>;\ntemplate<typename... Ts>\nusing Tup = std::tuple<Ts...>;\n\
@@ -452,19 +463,19 @@ data:
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
     \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
     using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
-    using Sec = std::chrono::seconds;\n#pragma endregion\nOstream& operator<<(Ostream&\
-    \ os, i128 v)\n{\n    bool minus = false;\n    if (v < 0) { minus = true, v =\
-    \ -v; }\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) {\n   \
+    using Sec = std::chrono::seconds;\nOstream& operator<<(Ostream& os, i128 v)\n\
+    {\n    bool minus = false;\n    if (v < 0) { minus = true, v = -v; }\n    Str\
+    \ ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) {\n        ans.push_back('0'\
+    \ + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(), ans.end());\n    return\
+    \ os << (minus ? \"-\" : \"\") << ans;\n}\nOstream& operator<<(Ostream& os, u128\
+    \ v)\n{\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) {\n   \
     \     ans.push_back('0' + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(),\
-    \ ans.end());\n    return os << (minus ? \"-\" : \"\") << ans;\n}\nOstream& operator<<(Ostream&\
-    \ os, u128 v)\n{\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v)\
-    \ {\n        ans.push_back('0' + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(),\
-    \ ans.end());\n    return os << ans;\n}\n#pragma endregion\n"
-  code: "#pragma once\n#pragma region Show\n#include \"print/int128_t.hpp\"\n#ifdef\
-    \ HOGEPACHI\n#    include \"print/array.hpp\"\n#    include \"print/deque.hpp\"\
-    \n#    include \"print/map.hpp\"\n#    include \"print/multimap.hpp\"\n#    include\
-    \ \"print/multiset.hpp\"\n#    include \"print/pair.hpp\"\n#    include \"print/priority_queue.hpp\"\
-    \n#    include \"print/queue.hpp\"\n#    include \"print/set.hpp\"\n#    include\
+    \ ans.end());\n    return os << ans;\n}\n"
+  code: "#pragma once\n#include \"print/int128_t.hpp\"\n#ifdef HOGEPACHI\n#    include\
+    \ \"print/array.hpp\"\n#    include \"print/deque.hpp\"\n#    include \"print/map.hpp\"\
+    \n#    include \"print/multimap.hpp\"\n#    include \"print/multiset.hpp\"\n#\
+    \    include \"print/pair.hpp\"\n#    include \"print/priority_queue.hpp\"\n#\
+    \    include \"print/queue.hpp\"\n#    include \"print/set.hpp\"\n#    include\
     \ \"print/stack.hpp\"\n#    include \"print/tuple.hpp\"\n#    include \"print/unordered_map.hpp\"\
     \n#    include \"print/unordered_multimap.hpp\"\n#    include \"print/unordered_multiset.hpp\"\
     \n#    include \"print/unordered_set.hpp\"\n#    include \"print/vector.hpp\"\n\
@@ -474,7 +485,7 @@ data:
     #    define SHOW(...)                                  \\\n        (std::cerr\
     \ << \"LINE \" << __LINE__ << \": \"      \\\n                   << \"(\" << #__VA_ARGS__\
     \ << \") = (\"), \\\n            show_impl::dump(__VA_ARGS__), std::cerr << \"\
-    )\" << std::endl\n#else\n#    define SHOW(...) void(0)\n#endif\n#pragma endregion\n"
+    )\" << std::endl\n#else\n#    define SHOW(...) void(0)\n#endif\n"
   dependsOn:
   - src/misc/common/print/int128_t.hpp
   - src/misc/common/type_alias.hpp
@@ -490,10 +501,11 @@ data:
   - src/misc/stopwatch.hpp
   - src/misc/nd_vec.hpp
   - src/misc/zipper.hpp
-  - src/misc/nd_range.hpp
+  - src/misc/bin_search.hpp
   - src/misc/printer.hpp
   - src/misc/fastio/printer.hpp
   - src/misc/fastio/scanner.hpp
+  - src/misc/nd_rep.hpp
   - src/misc/scanner.hpp
   - src/flow/max_flow.hpp
   - src/math/prime_enumerate.hpp
@@ -549,7 +561,7 @@ data:
   - src/data_structure/dsu.hpp
   - src/data_structure/monotonic_cht.hpp
   - src/data_structure/fenwick.hpp
-  - src/data_structure/static_rsq.hpp
+  - src/data_structure/rsq.hpp
   - src/data_structure/ds_table.hpp
   - src/data_structure/segments.hpp
   - src/graph/graph.hpp
@@ -566,14 +578,14 @@ data:
   - src/graph/lca.hpp
   - src/graph/lowlink.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
-  timestamp: '2021-05-27 03:45:14+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-06-02 01:47:19+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verifications/misc/zipper.test.cpp
   - verifications/misc/scanner.test.cpp
-  - verifications/misc/nd_range.test.cpp
   - verifications/misc/printer.test.cpp
   - verifications/misc/stopwatch.test.cpp
+  - verifications/misc/nd_rep.test.cpp
   - verifications/misc/io.test.cpp
   - verifications/misc/nd_vec.test.cpp
   - verifications/misc/fastio/fastio.test.cpp
@@ -599,15 +611,18 @@ data:
   - verifications/data_structure/wavelet.test.cpp
   - verifications/data_structure/lazyseg.ut.test.cpp
   - verifications/data_structure/mo.test.cpp
+  - verifications/data_structure/rsq.test.cpp
   - verifications/data_structure/swag.test.cpp
   - verifications/data_structure/dualseg.test.cpp
   - verifications/data_structure/lazyseg.test.cpp
   - verifications/data_structure/li_chao_tree.line.test.cpp
   - verifications/data_structure/li_chao_tree.segment.test.cpp
+  - verifications/data_structure/wavelet.rangefreq.test.cpp
   - verifications/data_structure/intset.ut.test.cpp
   - verifications/data_structure/ds_table.test.cpp
   - verifications/data_structure/fenwick.max_right.test.cpp
   - verifications/data_structure/dsu.test.cpp
+  - verifications/data_structure/rsq.ut.test.cpp
   - verifications/data_structure/intdict.test.cpp
   - verifications/data_structure/static_rmq.test.cpp
   - verifications/data_structure/intdict.ut.test.cpp

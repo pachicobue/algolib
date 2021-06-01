@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
-  bundledCode: "#include <bits/stdc++.h>\n#pragma region TypeAlias\nusing i32 = int;\n\
-    using u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
-    using i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing\
-    \ f80 = long double;\nusing f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64\
-    \ v)\n{\n    return v;\n}\nconstexpr i32 operator\"\" _u32(u64 v)\n{\n    return\
-    \ v;\n}\nconstexpr i64 operator\"\" _i64(u64 v)\n{\n    return v;\n}\nconstexpr\
-    \ u64 operator\"\" _u64(u64 v)\n{\n    return v;\n}\nconstexpr f64 operator\"\"\
-    \ _f64(f80 v)\n{\n    return v;\n}\nconstexpr f80 operator\"\" _f80(f80 v)\n{\n\
-    \    return v;\n}\nusing Istream = std::istream;\nusing Ostream = std::ostream;\n\
-    using Str = std::string;\ntemplate<typename T>\nusing Lt = std::less<T>;\ntemplate<typename\
-    \ T>\nusing Gt = std::greater<T>;\ntemplate<typename T>\nusing IList = std::initializer_list<T>;\n\
-    template<int n>\nusing BSet = std::bitset<n>;\ntemplate<typename T1, typename\
-    \ T2>\nusing Pair = std::pair<T1, T2>;\ntemplate<typename... Ts>\nusing Tup =\
-    \ std::tuple<Ts...>;\ntemplate<typename T, int N>\nusing Arr = std::array<T, N>;\n\
-    template<typename... Ts>\nusing Deq = std::deque<Ts...>;\ntemplate<typename...\
-    \ Ts>\nusing Set = std::set<Ts...>;\ntemplate<typename... Ts>\nusing MSet = std::multiset<Ts...>;\n\
-    template<typename... Ts>\nusing USet = std::unordered_set<Ts...>;\ntemplate<typename...\
-    \ Ts>\nusing UMSet = std::unordered_multiset<Ts...>;\ntemplate<typename... Ts>\n\
-    using Map = std::map<Ts...>;\ntemplate<typename... Ts>\nusing MMap = std::multimap<Ts...>;\n\
+  bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
+    using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
+    using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
+    \ f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64 v)\n{\n    return v;\n\
+    }\nconstexpr i32 operator\"\" _u32(u64 v)\n{\n    return v;\n}\nconstexpr i64\
+    \ operator\"\" _i64(u64 v)\n{\n    return v;\n}\nconstexpr u64 operator\"\" _u64(u64\
+    \ v)\n{\n    return v;\n}\nconstexpr f64 operator\"\" _f64(f80 v)\n{\n    return\
+    \ v;\n}\nconstexpr f80 operator\"\" _f80(f80 v)\n{\n    return v;\n}\nusing Istream\
+    \ = std::istream;\nusing Ostream = std::ostream;\nusing Str = std::string;\ntemplate<typename\
+    \ T>\nusing Lt = std::less<T>;\ntemplate<typename T>\nusing Gt = std::greater<T>;\n\
+    template<typename T>\nusing IList = std::initializer_list<T>;\ntemplate<int n>\n\
+    using BSet = std::bitset<n>;\ntemplate<typename T1, typename T2>\nusing Pair =\
+    \ std::pair<T1, T2>;\ntemplate<typename... Ts>\nusing Tup = std::tuple<Ts...>;\n\
+    template<typename T, int N>\nusing Arr = std::array<T, N>;\ntemplate<typename...\
+    \ Ts>\nusing Deq = std::deque<Ts...>;\ntemplate<typename... Ts>\nusing Set = std::set<Ts...>;\n\
+    template<typename... Ts>\nusing MSet = std::multiset<Ts...>;\ntemplate<typename...\
+    \ Ts>\nusing USet = std::unordered_set<Ts...>;\ntemplate<typename... Ts>\nusing\
+    \ UMSet = std::unordered_multiset<Ts...>;\ntemplate<typename... Ts>\nusing Map\
+    \ = std::map<Ts...>;\ntemplate<typename... Ts>\nusing MMap = std::multimap<Ts...>;\n\
     template<typename... Ts>\nusing UMap = std::unordered_map<Ts...>;\ntemplate<typename...\
     \ Ts>\nusing UMMap = std::unordered_multimap<Ts...>;\ntemplate<typename... Ts>\n\
     using Vec = std::vector<Ts...>;\ntemplate<typename... Ts>\nusing Stack = std::stack<Ts...>;\n\
@@ -43,32 +43,32 @@ data:
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
     \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
     using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
-    using Sec = std::chrono::seconds;\n#pragma endregion\n#pragma region FuncAlias\n\
-    template<typename T>\nbool chmin(T& a, const T& b)\n{\n    if (a > b) {\n    \
-    \    a = b;\n        return true;\n    } else {\n        return false;\n    }\n\
-    }\ntemplate<typename T>\nbool chmax(T& a, const T& b)\n{\n    if (a < b) {\n \
-    \       a = b;\n        return true;\n    } else {\n        return false;\n  \
-    \  }\n}\ntemplate<typename T>\nconstexpr T fdiv(T x, T y)\n{\n    if (y < T{})\
-    \ { x = -x, y = -y; }\n    return x >= T{} ? x / y : (x - y + 1) / y;\n}\ntemplate<typename\
-    \ T>\nconstexpr T cdiv(T x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n  \
-    \  return x >= T{} ? (x + y - 1) / y : x / y;\n}\ntemplate<typename T, typename\
-    \ I>\nconstexpr T modPower(T v, I n, T mod)\n{\n    T ans = 1 % mod;\n    for\
-    \ (; n > 0; n >>= 1, (v *= v) %= mod) {\n        if (n % 2 == 1) { (ans *= v)\
-    \ %= mod; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\nconstexpr\
-    \ T power(T v, I n)\n{\n    T ans = 1;\n    for (; n > 0; n >>= 1, v *= v) {\n\
-    \        if (n % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename\
-    \ T, typename I>\nconstexpr T power(T v, I n, const T& e)\n{\n    T ans = e;\n\
-    \    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n\
-    \    }\n    return ans;\n}\n#pragma endregion\nconstexpr i64 mod = 1000000007;\n\
-    struct mint\n{\n    mint() = default;\n    mint(i64 v_) : v{v_} {}\n    friend\
-    \ mint operator+(const mint& m1, const mint& m2)\n    {\n        return mint(m1.v\
-    \ + m2.v);\n    }\n    friend mint operator*(const mint& m1, const mint& m2)\n\
-    \    {\n        return mint(m1.v * m2.v % mod);\n    }\n    friend mint& operator+=(mint&\
-    \ m1, const mint& m2)\n    {\n        m1 = m1 + m2;\n        return m1;\n    }\n\
-    \    friend mint& operator*=(mint& m1, const mint& m2)\n    {\n        m1 = m1\
-    \ * m2;\n        return m1;\n    }\n    i64 v = 0;\n};\nint main()\n{\n    i64\
-    \ m, n;\n    std::cin >> m >> n;\n    mint M{m};\n    const mint ans = power(M,\
-    \ n);\n    std::cout << ans.v << \"\\n\";\n    return 0;\n}\n"
+    using Sec = std::chrono::seconds;\ntemplate<typename T>\nbool chmin(T& a, const\
+    \ T& b)\n{\n    if (a > b) {\n        a = b;\n        return true;\n    } else\
+    \ {\n        return false;\n    }\n}\ntemplate<typename T>\nbool chmax(T& a, const\
+    \ T& b)\n{\n    if (a < b) {\n        a = b;\n        return true;\n    } else\
+    \ {\n        return false;\n    }\n}\ntemplate<typename T>\nconstexpr T fdiv(T\
+    \ x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? x /\
+    \ y : (x - y + 1) / y;\n}\ntemplate<typename T>\nconstexpr T cdiv(T x, T y)\n\
+    {\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? (x + y - 1) / y\
+    \ : x / y;\n}\ntemplate<typename T, typename I>\nconstexpr T modPower(T v, I n,\
+    \ T mod)\n{\n    T ans = 1 % mod;\n    for (; n > 0; n >>= 1, (v *= v) %= mod)\
+    \ {\n        if (n % 2 == 1) { (ans *= v) %= mod; }\n    }\n    return ans;\n\
+    }\ntemplate<typename T, typename I>\nconstexpr T power(T v, I n)\n{\n    T ans\
+    \ = 1;\n    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *=\
+    \ v; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\nconstexpr\
+    \ T power(T v, I n, const T& e)\n{\n    T ans = e;\n    for (; n > 0; n >>= 1,\
+    \ v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\n\
+    constexpr i64 mod = 1000000007;\nstruct mint\n{\n    mint() = default;\n    mint(i64\
+    \ v_) : v{v_} {}\n    friend mint operator+(const mint& m1, const mint& m2)\n\
+    \    {\n        return mint(m1.v + m2.v);\n    }\n    friend mint operator*(const\
+    \ mint& m1, const mint& m2)\n    {\n        return mint(m1.v * m2.v % mod);\n\
+    \    }\n    friend mint& operator+=(mint& m1, const mint& m2)\n    {\n       \
+    \ m1 = m1 + m2;\n        return m1;\n    }\n    friend mint& operator*=(mint&\
+    \ m1, const mint& m2)\n    {\n        m1 = m1 * m2;\n        return m1;\n    }\n\
+    \    i64 v = 0;\n};\nint main()\n{\n    i64 m, n;\n    std::cin >> m >> n;\n \
+    \   mint M{m};\n    const mint ans = power(M, n);\n    std::cout << ans.v << \"\
+    \\n\";\n    return 0;\n}\n"
   code: "#define PROBLEM \\\n    \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B\"\
     \n#include \"../../../src/misc/common/func_alias.hpp\"\n\nconstexpr i64 mod =\
     \ 1000000007;\nstruct mint\n{\n    mint() = default;\n    mint(i64 v_) : v{v_}\
@@ -87,8 +87,8 @@ data:
   isVerificationFile: true
   path: verifications/misc/common/func_alias.power.test.cpp
   requiredBy: []
-  timestamp: '2021-05-27 03:45:14+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-06-02 01:47:19+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/misc/common/func_alias.power.test.cpp
 layout: document
