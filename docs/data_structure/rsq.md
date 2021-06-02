@@ -40,8 +40,8 @@ RSQ<T> rsq(const Vec<T>& vs)
 
 テンプレート引数`T`は以下を満たす型
 
-- `T operator+(const T& x, const T& y)`: $x+y$ を返すオペレータが定義済み
-- `x + T{} == x` である(`T{}`が単位元である)
+- `T operator+(const T& x, const T& y)`: $x+y$ が定義済み
+- `T{}`が単位元である
 
 #### 計算量
 
@@ -53,7 +53,7 @@ $\mathrm{O}(N)$
 T rsq.prefixSum(int l, int r)
 ```
 
-$A _ l \ast \dots \ast A _ {r-1}$ の取得  
+$A _ l + \dots + A _ {r-1}$ の取得  
 計算には、先頭からの累積和 $\lbrace P _ i \rbrace$ を使う。
 
 
@@ -67,7 +67,7 @@ $\mathrm{O}(1)$
 T rsq.suffixSum(int l, int r)
 ```
 
-$A _ l \ast \dots \ast A _ {r-1}$ の取得  
+$A _ l + \dots + A _ {r-1}$ の取得  
 計算には、末尾からの累積和 $\lbrace S _ i \rbrace$ を使う。
 
 
