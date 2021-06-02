@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/segtree.hpp
     title: Segment Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
   - icon: ':question:'

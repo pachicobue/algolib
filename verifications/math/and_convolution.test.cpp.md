@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/and_convolution.hpp
     title: src/math/and_convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
   - icon: ':heavy_check_mark:'

@@ -44,19 +44,19 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
   - icon: ':warning:'
     path: verifications/math/mod_nthroot.yuki981.cpp
     title: verifications/math/mod_nthroot.yuki981.cpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -233,7 +233,7 @@ data:
   - src/math/mod_nthroot.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
   timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/math/mod_nthroot.test.cpp
 documentation_of: src/math/extgcd.hpp

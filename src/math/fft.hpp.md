@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: src/math/complex.hpp
     title: src/math/complex.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
   - icon: ':question:'

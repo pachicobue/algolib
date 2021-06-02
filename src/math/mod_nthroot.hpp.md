@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/intdict.hpp
     title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':question:'
@@ -66,12 +66,12 @@ data:
     path: verifications/math/mod_nthroot.yuki981.cpp
     title: verifications/math/mod_nthroot.yuki981.cpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\nusing i32 = int;\n\
@@ -489,7 +489,7 @@ data:
   requiredBy:
   - verifications/math/mod_nthroot.yuki981.cpp
   timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/math/mod_nthroot.test.cpp
 documentation_of: src/math/mod_nthroot.hpp

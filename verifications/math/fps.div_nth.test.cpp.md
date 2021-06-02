@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
   - icon: ':question:'
@@ -60,9 +60,9 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -559,7 +559,7 @@ data:
   path: verifications/math/fps.div_nth.test.cpp
   requiredBy: []
   timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/math/fps.div_nth.test.cpp
 layout: document

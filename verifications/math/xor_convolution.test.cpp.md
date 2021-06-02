@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/set_hadamard.hpp
     title: src/math/set_hadamard.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/xor_convolution.hpp
     title: src/math/xor_convolution.hpp
   - icon: ':question:'
@@ -60,9 +60,9 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bitwise_xor_convolution
@@ -361,7 +361,7 @@ data:
   path: verifications/math/xor_convolution.test.cpp
   requiredBy: []
   timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/math/xor_convolution.test.cpp
 layout: document

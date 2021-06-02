@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':question:'
@@ -63,9 +63,9 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -453,7 +453,7 @@ data:
   path: verifications/math/prime_factors.test.cpp
   requiredBy: []
   timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/math/prime_factors.test.cpp
 layout: document

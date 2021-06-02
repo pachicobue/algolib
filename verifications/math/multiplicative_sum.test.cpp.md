@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/multiplicative_sum.hpp
     title: src/math/multiplicative_sum.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/prime_powsum.hpp
     title: src/math/prime_powsum.hpp
   - icon: ':question:'
@@ -60,9 +60,9 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
@@ -386,7 +386,7 @@ data:
   path: verifications/math/multiplicative_sum.test.cpp
   requiredBy: []
   timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/math/multiplicative_sum.test.cpp
 layout: document
