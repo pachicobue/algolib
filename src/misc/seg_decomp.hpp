@@ -1,24 +1,24 @@
 #pragma once
-#include "../misc/common.hpp"
-class segments
+#include "common.hpp"
+class SegDecomp
 {
     using P = Pair<int, int>;
+
 public:
-    segments(int size)
-        : m_ceil(ceil2(size)), m_segs(m_ceil << 1, P{0, 0}), m_num{m_ceil << 1}
+    SegDecomp(int size) : m_half(ceil2(size)), m_segs(m_half << 1, P{0, 0})
     {
-        for (int sz = 1; sz <= m_ceil; sz <<= 1) {
-            const int len = m_ceil / sz;
-            for (int j : range(sz, sz * 2)) {
-                m_segs[j] = {len * (j - sz), len * (j - sz + 1)};
+        for (int i = 1; i <= m_half; i <<= 1) {
+            const int l = m_half / i;
+            for (int j : rep(i)) {
+                m_segs[i + j] = {l * j, l * (j + 1)};
             }
         }
     }
     Vec<int> under(int l, int r) const
     {
-        if (l >= r or r > m_ceil) { return Vec<int>{}; }
+        if (l >= r or r > m_half) { return Vec<int>{}; }
         Vec<int> lis, ris;
-        int li = l + m_ceil, ri = r + m_ceil;
+        int li = l + m_half, ri = r + m_half;
         for (; li < ri; li >>= 1, ri >>= 1) {
             if (li & 1) { lis.push_back(li++); }
             if (ri & 1) { ris.push_back(--ri); }
@@ -28,9 +28,9 @@ public:
     }
     Vec<int> over(int i) const
     {
-        if (i >= m_ceil) { return Vec<int>{}; }
+        if (i >= m_half) { return Vec<int>{}; }
         Vec<int> aboves;
-        i += m_ceil;
+        i += m_half;
         for (; i >= 1; i >>= 1) {
             aboves.push_back(i);
         }
@@ -39,14 +39,15 @@ public:
     }
     const P& operator[](int i) const
     {
+        assert(1 <= i and i < (m_half << 1));
         return m_segs[i];
     }
     int size() const
     {
-        return m_num;
+        return (m_half << 1);
     }
+
 private:
-    int m_ceil;
+    int m_half;
     Vec<P> m_segs;
-    int m_num;
 };
