@@ -1,5 +1,5 @@
 {
-"verifications/data_structure/bit_vector.test.cpp": "2021-06-02 01:47:19 +0900",
+"verifications/data_structure/bit_vector.test.cpp": "2021-06-04 19:17:10 +0900",
 "verifications/data_structure/ds_table.test.cpp": "2021-06-02 01:47:19 +0900",
 "verifications/data_structure/dsu.test.cpp": "2021-06-02 01:47:19 +0900",
 "verifications/data_structure/dsu.ut.test.cpp": "2021-06-02 01:47:19 +0900",
@@ -20,8 +20,8 @@
 "verifications/data_structure/segtree.test.cpp": "2021-06-02 01:47:19 +0900",
 "verifications/data_structure/static_rmq.test.cpp": "2021-06-02 01:47:19 +0900",
 "verifications/data_structure/swag.test.cpp": "2021-06-02 01:47:19 +0900",
-"verifications/data_structure/wavelet.rangefreq.test.cpp": "2021-06-02 01:47:19 +0900",
-"verifications/data_structure/wavelet.test.cpp": "2021-06-02 01:47:19 +0900",
+"verifications/data_structure/wavelet.rangefreq.test.cpp": "2021-06-04 19:17:10 +0900",
+"verifications/data_structure/wavelet.test.cpp": "2021-06-04 19:17:10 +0900",
 "verifications/graph/bcc.test.cpp": "2021-06-02 01:47:19 +0900",
 "verifications/graph/diameter.test.cpp": "2021-06-02 01:47:19 +0900",
 "verifications/graph/dijkstra.test.cpp": "2021-06-02 01:47:19 +0900",
