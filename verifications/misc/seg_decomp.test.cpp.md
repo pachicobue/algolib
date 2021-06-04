@@ -43,16 +43,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/linear/bit_gauss_jordan.hpp
-    title: src/linear/bit_gauss_jordan.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/seg_decomp.hpp
+    title: src/misc/seg_decomp.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
+    links:
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -194,55 +197,51 @@ data:
     \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
-    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<int column>\n\
-    class BitMat\n{\npublic:\n    BitMat(int row) : m_row{row},\n                \
-    \      m_vss(m_row) {}\n    const BSet<column>& operator[](const int r) const\n\
-    \    {\n        assert(0 <= r and r < m_row);\n        return m_vss[r];\n    }\n\
-    \    BSet<column>& operator[](const int r)\n    {\n        assert(0 <= r and r\
-    \ < m_row);\n        return m_vss[r];\n    }\n    friend BitMat operator^(const\
-    \ BitMat& m1, const BitMat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n\
-    \        BitMat ans(m1.m_row);\n        for (int i : rep(m1.row)) { ans[i] = m1[i]\
-    \ ^ m2[i]; }\n        return ans;\n    }\n    template<int col2>\n    friend BitMat\
-    \ operator*(const BitMat& m1, const BitMat<col2>& m2)\n    {\n        assert(column\
-    \ == m2.m_row);\n        BitMat<col2> ans(m1.m_row);\n        for (int i : rep(m1.m_row))\
-    \ {\n            for (int j : rep(column)) {\n                if (not m1[i][j])\
-    \ { continue; }\n                ans[i] ^= m2[j];\n            }\n        }\n\
-    \        return ans;\n    }\n    template<typename I>\n    BitMat pow(I n) { return\
-    \ power(*this, n, I(m_row)); }\n    friend BitMat& operator^=(BitMat& m1, const\
-    \ BitMat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n        for (int\
-    \ i : rep(m1.m_row)) { m1[i] ^= m2[i]; }\n        return m1;\n    }\n    friend\
-    \ BitMat& operator*=(BitMat& m1, const BitMat& m2) { return m1 = m1 * m2; }\n\
-    \    friend Ostream& operator<<(Ostream& os, const BitMat& m)\n    {\n       \
-    \ os << \"[\\n\";\n        for (int i : rep(m.m_row)) { os << \"[\" << m[i] <<\
-    \ \"]\\n\"; }\n        return (os << \"]\");\n    }\n    static BitMat I(const\
-    \ int n)\n    {\n        BitMat ans(n);\n        for (int i : rep(n)) { ans[i].set(i);\
-    \ }\n        return ans;\n    }\n    int row() const { return m_row; }\nprivate:\n\
-    \    int m_row;\n    Vec<BSet<column>> m_vss;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<int column>\nclass\
-    \ BitMat\n{\npublic:\n    BitMat(int row) : m_row{row},\n                    \
-    \  m_vss(m_row) {}\n    const BSet<column>& operator[](const int r) const\n  \
-    \  {\n        assert(0 <= r and r < m_row);\n        return m_vss[r];\n    }\n\
-    \    BSet<column>& operator[](const int r)\n    {\n        assert(0 <= r and r\
-    \ < m_row);\n        return m_vss[r];\n    }\n    friend BitMat operator^(const\
-    \ BitMat& m1, const BitMat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n\
-    \        BitMat ans(m1.m_row);\n        for (int i : rep(m1.row)) { ans[i] = m1[i]\
-    \ ^ m2[i]; }\n        return ans;\n    }\n    template<int col2>\n    friend BitMat\
-    \ operator*(const BitMat& m1, const BitMat<col2>& m2)\n    {\n        assert(column\
-    \ == m2.m_row);\n        BitMat<col2> ans(m1.m_row);\n        for (int i : rep(m1.m_row))\
-    \ {\n            for (int j : rep(column)) {\n                if (not m1[i][j])\
-    \ { continue; }\n                ans[i] ^= m2[j];\n            }\n        }\n\
-    \        return ans;\n    }\n    template<typename I>\n    BitMat pow(I n) { return\
-    \ power(*this, n, I(m_row)); }\n    friend BitMat& operator^=(BitMat& m1, const\
-    \ BitMat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n        for (int\
-    \ i : rep(m1.m_row)) { m1[i] ^= m2[i]; }\n        return m1;\n    }\n    friend\
-    \ BitMat& operator*=(BitMat& m1, const BitMat& m2) { return m1 = m1 * m2; }\n\
-    \    friend Ostream& operator<<(Ostream& os, const BitMat& m)\n    {\n       \
-    \ os << \"[\\n\";\n        for (int i : rep(m.m_row)) { os << \"[\" << m[i] <<\
-    \ \"]\\n\"; }\n        return (os << \"]\");\n    }\n    static BitMat I(const\
-    \ int n)\n    {\n        BitMat ans(n);\n        for (int i : rep(n)) { ans[i].set(i);\
-    \ }\n        return ans;\n    }\n\n    int row() const { return m_row; }\n\nprivate:\n\
-    \    int m_row;\n    Vec<BSet<column>> m_vss;\n};\n"
+    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass SegDecomp\n\
+    {\n    using P = Pair<int, int>;\npublic:\n    SegDecomp(int size) : m_half(ceil2(size)),\
+    \ m_segs(m_half << 1, P{0, 0})\n    {\n        for (int i = 1; i <= m_half; i\
+    \ <<= 1) {\n            const int l = m_half / i;\n            for (int j : rep(i))\
+    \ {\n                m_segs[i + j] = {l * j, l * (j + 1)};\n            }\n  \
+    \      }\n    }\n    Vec<int> under(int l, int r) const\n    {\n        if (l\
+    \ >= r or r > m_half) { return Vec<int>{}; }\n        Vec<int> lis, ris;\n   \
+    \     int li = l + m_half, ri = r + m_half;\n        for (; li < ri; li >>= 1,\
+    \ ri >>= 1) {\n            if (li & 1) { lis.push_back(li++); }\n            if\
+    \ (ri & 1) { ris.push_back(--ri); }\n        }\n        reverseAll(ris);\n   \
+    \     return lis + ris;\n    }\n    Vec<int> over(int i) const\n    {\n      \
+    \  if (i >= m_half) { return Vec<int>{}; }\n        Vec<int> aboves;\n       \
+    \ i += m_half;\n        for (; i >= 1; i >>= 1) {\n            aboves.push_back(i);\n\
+    \        }\n        reverseAll(aboves);\n        return aboves;\n    }\n    const\
+    \ P& operator[](int i) const\n    {\n        assert(1 <= i and i < (m_half <<\
+    \ 1));\n        return m_segs[i];\n    }\n    int size() const\n    {\n      \
+    \  return (m_half << 1);\n    }\nprivate:\n    int m_half;\n    Vec<P> m_segs;\n\
+    };\nvoid Test()\n{\n    const int N = 6;\n    SegDecomp segs(N);\n    assert(segs[1]\
+    \ == std::make_pair(0, 8));\n    assert(segs[2] == std::make_pair(0, 4));\n  \
+    \  assert(segs[3] == std::make_pair(4, 8));\n    assert(segs[4] == std::make_pair(0,\
+    \ 2));\n    assert(segs[5] == std::make_pair(2, 4));\n    assert(segs[6] == std::make_pair(4,\
+    \ 6));\n    assert(segs[7] == std::make_pair(6, 8));\n    assert(segs[8] == std::make_pair(0,\
+    \ 1));\n    assert(segs[9] == std::make_pair(1, 2));\n    assert(segs[10] == std::make_pair(2,\
+    \ 3));\n    assert(segs[11] == std::make_pair(3, 4));\n    assert(segs[12] ==\
+    \ std::make_pair(4, 5));\n    assert(segs[13] == std::make_pair(5, 6));\n    assert(segs[14]\
+    \ == std::make_pair(6, 7));\n    assert(segs[15] == std::make_pair(7, 8));\n \
+    \   assert(segs.under(1, 7) == Vec<int>({9, 5, 6, 14}));\n    assert(segs.over(3)\
+    \ == Vec<int>({1, 2, 5, 11}));\n    assert(segs.size() == 16);\n}\nint main()\n\
+    {\n    Test();\n    std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
+    \n#include \"../../src/misc/seg_decomp.hpp\"\nvoid Test()\n{\n    const int N\
+    \ = 6;\n    SegDecomp segs(N);\n    assert(segs[1] == std::make_pair(0, 8));\n\
+    \    assert(segs[2] == std::make_pair(0, 4));\n    assert(segs[3] == std::make_pair(4,\
+    \ 8));\n    assert(segs[4] == std::make_pair(0, 2));\n    assert(segs[5] == std::make_pair(2,\
+    \ 4));\n    assert(segs[6] == std::make_pair(4, 6));\n    assert(segs[7] == std::make_pair(6,\
+    \ 8));\n    assert(segs[8] == std::make_pair(0, 1));\n    assert(segs[9] == std::make_pair(1,\
+    \ 2));\n    assert(segs[10] == std::make_pair(2, 3));\n    assert(segs[11] ==\
+    \ std::make_pair(3, 4));\n    assert(segs[12] == std::make_pair(4, 5));\n    assert(segs[13]\
+    \ == std::make_pair(5, 6));\n    assert(segs[14] == std::make_pair(6, 7));\n \
+    \   assert(segs[15] == std::make_pair(7, 8));\n    assert(segs.under(1, 7) ==\
+    \ Vec<int>({9, 5, 6, 14}));\n    assert(segs.over(3) == Vec<int>({1, 2, 5, 11}));\n\
+    \    assert(segs.size() == 16);\n}\n\nint main()\n{\n    Test();\n    std::cout\
+    \ << \"Hello World\\n\";\n    return 0;\n}\n"
   dependsOn:
+  - src/misc/seg_decomp.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -257,17 +256,16 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/linear/bit_matrix.hpp
-  requiredBy:
-  - src/linear/bit_gauss_jordan.hpp
-  timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  isVerificationFile: true
+  path: verifications/misc/seg_decomp.test.cpp
+  requiredBy: []
+  timestamp: '2021-06-04 17:36:08+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: src/linear/bit_matrix.hpp
+documentation_of: verifications/misc/seg_decomp.test.cpp
 layout: document
 redirect_from:
-- /library/src/linear/bit_matrix.hpp
-- /library/src/linear/bit_matrix.hpp.html
-title: src/linear/bit_matrix.hpp
+- /verify/verifications/misc/seg_decomp.test.cpp
+- /verify/verifications/misc/seg_decomp.test.cpp.html
+title: verifications/misc/seg_decomp.test.cpp
 ---

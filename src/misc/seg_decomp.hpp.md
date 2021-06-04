@@ -1,53 +1,56 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/misc/seg_decomp.test.cpp
+    title: verifications/misc/seg_decomp.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -191,42 +194,41 @@ data:
     \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
-    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass segments\n{\n\
-    \    using P = Pair<int, int>;\npublic:\n    segments(int size)\n        : m_ceil(ceil2(size)),\
-    \ m_segs(m_ceil << 1, P{0, 0}), m_num{m_ceil << 1}\n    {\n        for (int sz\
-    \ = 1; sz <= m_ceil; sz <<= 1) {\n            const int len = m_ceil / sz;\n \
-    \           for (int j : range(sz, sz * 2)) {\n                m_segs[j] = {len\
-    \ * (j - sz), len * (j - sz + 1)};\n            }\n        }\n    }\n    Vec<int>\
-    \ under(int l, int r) const\n    {\n        if (l >= r or r > m_ceil) { return\
-    \ Vec<int>{}; }\n        Vec<int> lis, ris;\n        int li = l + m_ceil, ri =\
-    \ r + m_ceil;\n        for (; li < ri; li >>= 1, ri >>= 1) {\n            if (li\
-    \ & 1) { lis.push_back(li++); }\n            if (ri & 1) { ris.push_back(--ri);\
-    \ }\n        }\n        reverseAll(ris);\n        return lis + ris;\n    }\n \
-    \   Vec<int> over(int i) const\n    {\n        if (i >= m_ceil) { return Vec<int>{};\
-    \ }\n        Vec<int> aboves;\n        i += m_ceil;\n        for (; i >= 1; i\
-    \ >>= 1) {\n            aboves.push_back(i);\n        }\n        reverseAll(aboves);\n\
-    \        return aboves;\n    }\n    const P& operator[](int i) const\n    {\n\
-    \        return m_segs[i];\n    }\n    int size() const\n    {\n        return\
-    \ m_num;\n    }\nprivate:\n    int m_ceil;\n    Vec<P> m_segs;\n    int m_num;\n\
+    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass SegDecomp\n\
+    {\n    using P = Pair<int, int>;\npublic:\n    SegDecomp(int size) : m_half(ceil2(size)),\
+    \ m_segs(m_half << 1, P{0, 0})\n    {\n        for (int i = 1; i <= m_half; i\
+    \ <<= 1) {\n            const int l = m_half / i;\n            for (int j : rep(i))\
+    \ {\n                m_segs[i + j] = {l * j, l * (j + 1)};\n            }\n  \
+    \      }\n    }\n    Vec<int> under(int l, int r) const\n    {\n        if (l\
+    \ >= r or r > m_half) { return Vec<int>{}; }\n        Vec<int> lis, ris;\n   \
+    \     int li = l + m_half, ri = r + m_half;\n        for (; li < ri; li >>= 1,\
+    \ ri >>= 1) {\n            if (li & 1) { lis.push_back(li++); }\n            if\
+    \ (ri & 1) { ris.push_back(--ri); }\n        }\n        reverseAll(ris);\n   \
+    \     return lis + ris;\n    }\n    Vec<int> over(int i) const\n    {\n      \
+    \  if (i >= m_half) { return Vec<int>{}; }\n        Vec<int> aboves;\n       \
+    \ i += m_half;\n        for (; i >= 1; i >>= 1) {\n            aboves.push_back(i);\n\
+    \        }\n        reverseAll(aboves);\n        return aboves;\n    }\n    const\
+    \ P& operator[](int i) const\n    {\n        assert(1 <= i and i < (m_half <<\
+    \ 1));\n        return m_segs[i];\n    }\n    int size() const\n    {\n      \
+    \  return (m_half << 1);\n    }\nprivate:\n    int m_half;\n    Vec<P> m_segs;\n\
     };\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\nclass segments\n{\n    using\
-    \ P = Pair<int, int>;\npublic:\n    segments(int size)\n        : m_ceil(ceil2(size)),\
-    \ m_segs(m_ceil << 1, P{0, 0}), m_num{m_ceil << 1}\n    {\n        for (int sz\
-    \ = 1; sz <= m_ceil; sz <<= 1) {\n            const int len = m_ceil / sz;\n \
-    \           for (int j : range(sz, sz * 2)) {\n                m_segs[j] = {len\
-    \ * (j - sz), len * (j - sz + 1)};\n            }\n        }\n    }\n    Vec<int>\
-    \ under(int l, int r) const\n    {\n        if (l >= r or r > m_ceil) { return\
-    \ Vec<int>{}; }\n        Vec<int> lis, ris;\n        int li = l + m_ceil, ri =\
-    \ r + m_ceil;\n        for (; li < ri; li >>= 1, ri >>= 1) {\n            if (li\
-    \ & 1) { lis.push_back(li++); }\n            if (ri & 1) { ris.push_back(--ri);\
-    \ }\n        }\n        reverseAll(ris);\n        return lis + ris;\n    }\n \
-    \   Vec<int> over(int i) const\n    {\n        if (i >= m_ceil) { return Vec<int>{};\
-    \ }\n        Vec<int> aboves;\n        i += m_ceil;\n        for (; i >= 1; i\
-    \ >>= 1) {\n            aboves.push_back(i);\n        }\n        reverseAll(aboves);\n\
-    \        return aboves;\n    }\n    const P& operator[](int i) const\n    {\n\
-    \        return m_segs[i];\n    }\n    int size() const\n    {\n        return\
-    \ m_num;\n    }\nprivate:\n    int m_ceil;\n    Vec<P> m_segs;\n    int m_num;\n\
-    };\n"
+  code: "#pragma once\n#include \"common.hpp\"\nclass SegDecomp\n{\n    using P =\
+    \ Pair<int, int>;\n\npublic:\n    SegDecomp(int size) : m_half(ceil2(size)), m_segs(m_half\
+    \ << 1, P{0, 0})\n    {\n        for (int i = 1; i <= m_half; i <<= 1) {\n   \
+    \         const int l = m_half / i;\n            for (int j : rep(i)) {\n    \
+    \            m_segs[i + j] = {l * j, l * (j + 1)};\n            }\n        }\n\
+    \    }\n    Vec<int> under(int l, int r) const\n    {\n        if (l >= r or r\
+    \ > m_half) { return Vec<int>{}; }\n        Vec<int> lis, ris;\n        int li\
+    \ = l + m_half, ri = r + m_half;\n        for (; li < ri; li >>= 1, ri >>= 1)\
+    \ {\n            if (li & 1) { lis.push_back(li++); }\n            if (ri & 1)\
+    \ { ris.push_back(--ri); }\n        }\n        reverseAll(ris);\n        return\
+    \ lis + ris;\n    }\n    Vec<int> over(int i) const\n    {\n        if (i >= m_half)\
+    \ { return Vec<int>{}; }\n        Vec<int> aboves;\n        i += m_half;\n   \
+    \     for (; i >= 1; i >>= 1) {\n            aboves.push_back(i);\n        }\n\
+    \        reverseAll(aboves);\n        return aboves;\n    }\n    const P& operator[](int\
+    \ i) const\n    {\n        assert(1 <= i and i < (m_half << 1));\n        return\
+    \ m_segs[i];\n    }\n    int size() const\n    {\n        return (m_half << 1);\n\
+    \    }\n\nprivate:\n    int m_half;\n    Vec<P> m_segs;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -243,15 +245,16 @@ data:
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
   isVerificationFile: false
-  path: src/data_structure/segments.hpp
+  path: src/misc/seg_decomp.hpp
   requiredBy: []
-  timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
-documentation_of: src/data_structure/segments.hpp
+  timestamp: '2021-06-04 17:36:08+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verifications/misc/seg_decomp.test.cpp
+documentation_of: src/misc/seg_decomp.hpp
 layout: document
 redirect_from:
-- /library/src/data_structure/segments.hpp
-- /library/src/data_structure/segments.hpp.html
-title: src/data_structure/segments.hpp
+- /library/src/misc/seg_decomp.hpp
+- /library/src/misc/seg_decomp.hpp.html
+title: src/misc/seg_decomp.hpp
 ---

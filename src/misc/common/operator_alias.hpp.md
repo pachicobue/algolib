@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy:
@@ -44,9 +44,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/rsq.hpp
     title: "\u6570\u5217\u306E\u7D2F\u7A4D\u548C\u7BA1\u7406"
-  - icon: ':warning:'
-    path: src/data_structure/segments.hpp
-    title: src/data_structure/segments.hpp
   - icon: ':heavy_check_mark:'
     path: src/data_structure/segtree.hpp
     title: Segment Tree
@@ -218,31 +215,34 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/bin_search.hpp
     title: src/misc/bin_search.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/nd_rep.hpp
     title: src/misc/nd_rep.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/nd_vec.hpp
     title: src/misc/nd_vec.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/printer.hpp
     title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/scanner.hpp
     title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: src/misc/seg_decomp.hpp
+    title: src/misc/seg_decomp.hpp
+  - icon: ':heavy_check_mark:'
     path: src/misc/stopwatch.hpp
     title: src/misc/stopwatch.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/zipper.hpp
     title: src/misc/zipper.hpp
   - icon: ':warning:'
@@ -405,36 +405,39 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/common/operator_alias.test.cpp
     title: verifications/misc/common/operator_alias.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/fastio/fastio.test.cpp
     title: verifications/misc/fastio/fastio.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/io.test.cpp
     title: verifications/misc/io.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/nd_rep.test.cpp
     title: verifications/misc/nd_rep.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/nd_vec.test.cpp
     title: verifications/misc/nd_vec.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/printer.test.cpp
     title: verifications/misc/printer.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/scanner.test.cpp
     title: verifications/misc/scanner.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: verifications/misc/seg_decomp.test.cpp
+    title: verifications/misc/seg_decomp.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/stopwatch.test.cpp
     title: verifications/misc/stopwatch.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/zipper.test.cpp
     title: verifications/misc/zipper.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -487,6 +490,7 @@ data:
   - src/misc/stopwatch.hpp
   - src/misc/nd_vec.hpp
   - src/misc/zipper.hpp
+  - src/misc/seg_decomp.hpp
   - src/misc/bin_search.hpp
   - src/misc/printer.hpp
   - src/misc/fastio/printer.hpp
@@ -549,7 +553,6 @@ data:
   - src/data_structure/fenwick.hpp
   - src/data_structure/rsq.hpp
   - src/data_structure/ds_table.hpp
-  - src/data_structure/segments.hpp
   - src/graph/graph.hpp
   - src/graph/centroid_decomp.hpp
   - src/graph/top_sort.hpp
@@ -565,10 +568,11 @@ data:
   - src/graph/lowlink.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
   timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/misc/zipper.test.cpp
   - verifications/misc/scanner.test.cpp
+  - verifications/misc/seg_decomp.test.cpp
   - verifications/misc/printer.test.cpp
   - verifications/misc/stopwatch.test.cpp
   - verifications/misc/nd_rep.test.cpp

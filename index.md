@@ -42,9 +42,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/data_structure/rsq.hpp
       title: "\u6570\u5217\u306E\u7D2F\u7A4D\u548C\u7BA1\u7406"
-    - icon: ':warning:'
-      path: src/data_structure/segments.hpp
-      title: src/data_structure/segments.hpp
     - icon: ':heavy_check_mark:'
       path: src/data_structure/segtree.hpp
       title: Segment Tree
@@ -226,63 +223,66 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/misc/bin_search.hpp
       title: src/misc/bin_search.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common.hpp
       title: src/misc/common.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/nd_rep.hpp
       title: src/misc/nd_rep.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/nd_vec.hpp
       title: src/misc/nd_vec.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/printer.hpp
       title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/scanner.hpp
       title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
+      path: src/misc/seg_decomp.hpp
+      title: src/misc/seg_decomp.hpp
+    - icon: ':heavy_check_mark:'
       path: src/misc/stopwatch.hpp
       title: src/misc/stopwatch.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/zipper.hpp
       title: src/misc/zipper.hpp
   - name: src/misc/common
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/bit_ops.hpp
       title: src/misc/common/bit_ops.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/constants.hpp
       title: src/misc/common/constants.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/fixpoint.hpp
       title: src/misc/common/fixpoint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/func_alias.hpp
       title: src/misc/common/func_alias.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/irange.hpp
       title: src/misc/common/irange.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/macros.hpp
       title: src/misc/common/macros.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/operator_alias.hpp
       title: src/misc/common/operator_alias.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/rng.hpp
       title: src/misc/common/rng.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/show.hpp
       title: src/misc/common/show.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/type_alias.hpp
       title: src/misc/common/type_alias.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/vec_utils.hpp
       title: src/misc/common/vec_utils.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/xoshiro.hpp
       title: src/misc/common/xoshiro.hpp
   - name: src/misc/common/print
@@ -293,7 +293,7 @@ data:
     - icon: ':warning:'
       path: src/misc/common/print/deque.hpp
       title: src/misc/common/print/deque.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/print/int128_t.hpp
       title: src/misc/common/print/int128_t.hpp
     - icon: ':warning:'
@@ -340,10 +340,10 @@ data:
       title: src/misc/common/print/vector.hpp
   - name: src/misc/fastio
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/fastio/printer.hpp
       title: src/misc/fastio/printer.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/fastio/scanner.hpp
       title: src/misc/fastio/scanner.hpp
   - name: src/string
@@ -521,62 +521,65 @@ data:
     - icon: ':heavy_check_mark:'
       path: verifications/misc/common/bit_ops.test.cpp
       title: verifications/misc/common/bit_ops.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/func_alias.chminmax.test.cpp
       title: verifications/misc/common/func_alias.chminmax.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/func_alias.div.test.cpp
       title: verifications/misc/common/func_alias.div.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/func_alias.mod_power.test.cpp
       title: verifications/misc/common/func_alias.mod_power.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/func_alias.power.test.cpp
       title: verifications/misc/common/func_alias.power.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/func_alias.power_2.test.cpp
       title: verifications/misc/common/func_alias.power_2.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/irange.test.cpp
       title: verifications/misc/common/irange.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/operator_alias.test.cpp
       title: verifications/misc/common/operator_alias.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/rng.test.cpp
       title: verifications/misc/common/rng.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/vec_utils.test.cpp
       title: verifications/misc/common/vec_utils.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/xoshiro.test.cpp
       title: verifications/misc/common/xoshiro.test.cpp
   - name: verifications/misc/fastio
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/fastio/fastio.test.cpp
       title: verifications/misc/fastio/fastio.test.cpp
   - name: verifications/misc
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/io.test.cpp
       title: verifications/misc/io.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/nd_rep.test.cpp
       title: verifications/misc/nd_rep.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/nd_vec.test.cpp
       title: verifications/misc/nd_vec.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/printer.test.cpp
       title: verifications/misc/printer.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/scanner.test.cpp
       title: verifications/misc/scanner.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
+      path: verifications/misc/seg_decomp.test.cpp
+      title: verifications/misc/seg_decomp.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/stopwatch.test.cpp
       title: verifications/misc/stopwatch.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/zipper.test.cpp
       title: verifications/misc/zipper.test.cpp
 layout: toppage
