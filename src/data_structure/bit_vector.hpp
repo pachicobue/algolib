@@ -11,7 +11,7 @@ class BitVector
     struct Block
     {
         u64 bits = 0;
-        i32 rank = 0;  // ブロック先頭までに1が何個あるか
+        int rank = 0;  // ブロック先頭までに1が何個あるか
     };
 
 public:

@@ -27,7 +27,7 @@ DSTable<SemiGroup> dst(const Vec<T>& vs)
 テンプレート引数`SemiGroup`は以下のようなフィールドを持つクラス
 
 - `T`:型
-- `operator()(T x1, T x2)`: $x_1 \ast x_2$
+- `operator()(T x1, T x2)`: $x _ 1 \ast x _ 2$
   
 ```cpp
 struct SemiGroup
@@ -49,7 +49,7 @@ $\mathrm{O}(N\log N)$
 void dst.add(int i, const T& x)
 ```
 
-$A_i$ に $x$ を加算
+$A _ i$ に $x$ を加算
 
 #### 計算量
 
@@ -61,7 +61,7 @@ $\mathrm{O}(\log N)$
 T dst.fold(int l, int r)
 ```
 
-$A_l \ast \dots \ast A_{r-1}$ を取得
+$A _ l \ast \dots \ast A _ {r-1}$ を取得
 
 #### 計算量
 
