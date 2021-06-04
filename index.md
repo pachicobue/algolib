@@ -5,7 +5,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: src/data_structure/bit_vector.hpp
-      title: src/data_structure/bit_vector.hpp
+      title: Bit Vector
     - icon: ':heavy_check_mark:'
       path: src/data_structure/ds_table.hpp
       title: Disjoint Sparse Table

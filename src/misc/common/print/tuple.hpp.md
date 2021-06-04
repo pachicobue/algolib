@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#include <iostream>\n#include <tuple>\nnamespace print_tuple_impl\
+  bundledCode: "#include <tuple>\n#include <iostream>\nnamespace print_tuple_impl\
     \ {\ntemplate<int n = 0, typename... Ts>\nvoid dump(std::ostream& os, const std::tuple<Ts...>&\
     \ v)\n{\n    constexpr int N = std::tuple_size<std::tuple<Ts...>>::value;\n  \
     \  if constexpr (n < N) { os << std::get<n>(v) << (n == N - 1 ? \"\" : \",\"),\

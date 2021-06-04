@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/bit_vector.hpp
-    title: src/data_structure/bit_vector.hpp
+    title: Bit Vector
   - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -203,7 +203,7 @@ data:
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass BitVector\n\
     {\n    static constexpr int B = 64;\n    static int rank(u64 v, int i)\n    {\n\
     \        if (i == 0) { return 0; }\n        return popcount((v << (B - i)) >>\
-    \ (B - i));\n    }\n    struct Block\n    {\n        u64 bits = 0;\n        i32\
+    \ (B - i));\n    }\n    struct Block\n    {\n        u64 bits = 0;\n        int\
     \ rank = 0;\n    };\npublic:\n    BitVector(int n) : m_size{n}, m_bn{n / B + 1},\
     \ m_blocks(m_bn) {}\n    void set(int i)\n    {\n        assert(0 <= i and i <\
     \ m_size);\n        m_blocks[i / B].bits |= (1_u64 << (i % B));\n        m_calced\
@@ -297,7 +297,7 @@ data:
   isVerificationFile: false
   path: src/data_structure/wavelet.hpp
   requiredBy: []
-  timestamp: '2021-06-02 01:47:19+09:00'
+  timestamp: '2021-06-04 19:17:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/data_structure/wavelet.test.cpp

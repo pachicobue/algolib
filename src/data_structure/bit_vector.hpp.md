@@ -206,7 +206,7 @@ data:
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass BitVector\n\
     {\n    static constexpr int B = 64;\n    static int rank(u64 v, int i)\n    {\n\
     \        if (i == 0) { return 0; }\n        return popcount((v << (B - i)) >>\
-    \ (B - i));\n    }\n    struct Block\n    {\n        u64 bits = 0;\n        i32\
+    \ (B - i));\n    }\n    struct Block\n    {\n        u64 bits = 0;\n        int\
     \ rank = 0;\n    };\npublic:\n    BitVector(int n) : m_size{n}, m_bn{n / B + 1},\
     \ m_blocks(m_bn) {}\n    void set(int i)\n    {\n        assert(0 <= i and i <\
     \ m_size);\n        m_blocks[i / B].bits |= (1_u64 << (i % B));\n        m_calced\
@@ -235,7 +235,7 @@ data:
   code: "#pragma once\n#include \"../misc/common.hpp\"\nclass BitVector\n{\n    static\
     \ constexpr int B = 64;\n    static int rank(u64 v, int i)\n    {\n        if\
     \ (i == 0) { return 0; }\n        return popcount((v << (B - i)) >> (B - i));\n\
-    \    }\n    struct Block\n    {\n        u64 bits = 0;\n        i32 rank = 0;\
+    \    }\n    struct Block\n    {\n        u64 bits = 0;\n        int rank = 0;\
     \  // \u30D6\u30ED\u30C3\u30AF\u5148\u982D\u307E\u3067\u306B1\u304C\u4F55\u500B\
     \u3042\u308B\u304B\n    };\n\npublic:\n    BitVector(int n) : m_size{n}, m_bn{n\
     \ / B + 1}, m_blocks(m_bn) {}\n    void set(int i)\n    {\n        assert(0 <=\
@@ -281,7 +281,7 @@ data:
   path: src/data_structure/bit_vector.hpp
   requiredBy:
   - src/data_structure/wavelet.hpp
-  timestamp: '2021-06-02 01:47:19+09:00'
+  timestamp: '2021-06-04 19:17:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/data_structure/wavelet.test.cpp
@@ -289,8 +289,111 @@ data:
   - verifications/data_structure/bit_vector.test.cpp
 documentation_of: src/data_structure/bit_vector.hpp
 layout: document
-redirect_from:
-- /library/src/data_structure/bit_vector.hpp
-- /library/src/data_structure/bit_vector.hpp.html
-title: src/data_structure/bit_vector.hpp
+title: Bit Vector
 ---
+
+## 概要
+
+簡潔データ構造の基本となるデータ構造  
+長さ$N$ の $0/1$ 数列 $A = \lbrace A _ 0, A _ 1, \dots, A _ {N-1} \rbrace$ について、以下の操作を行う。
+
+- rank: 先頭から $i$ 項目までの $1$ の個数を返す
+- select: $i$ 番目の $1$ の場所を返す
+
+時間計算量は以下の通り（理論的にはselectも定数時間にできるらしいが、正直机上の空論だと思っているので妥協）
+- rank: $\mathrm{O}(1)$
+- select: $\mathrm{O}(\log N)$
+
+## I/F
+
+### コンストラクタ
+
+```cpp
+BitVector bs(int N)
+```
+
+数列 $A$ を 長さ $N$ の 数列 $\lbrace 0, 0, \dots, 0\rbrace$ で初期化する
+
+#### 計算量
+
+$\mathrm{O}(N)$
+
+### set
+
+```cpp
+void bs.set(int i)
+```
+
+$A _ i$ に $1$ を代入
+
+#### 計算量
+
+$\mathrm{O}(1)$
+
+### reset
+
+```cpp
+void bs.reset(int i)
+```
+
+$A _ i$ に $0$ を代入
+
+#### 計算量
+
+$\mathrm{O}(1)$
+
+### rank0
+
+```cpp
+int bs.rank0(int i)
+```
+
+$A _ 0, A _ 1, \dots, A _ {i-1}$ にある $0$ の個数
+
+#### 計算量
+
+$\mathrm{O}(1)$
+
+但し、`set`, `reset` の呼出し後初めての実行は $\mathrm{O}(N)$ かかる
+
+### rank1
+
+```cpp
+int bs.rank1(int i)
+```
+
+$A _ 0, A _ 1, \dots, A _ {i-1}$ にある $1$ の個数
+
+#### 計算量
+
+$\mathrm{O}(1)$
+
+但し、`set`, `reset` の呼出し後初めての実行は $\mathrm{O}(N)$ かかる
+
+### select0
+
+```cpp
+int bs.select0(int i)
+```
+
+$i$ 番目の $0$ の場所
+
+#### 計算量
+
+$\mathrm{O}(\log N)$
+
+但し、`set`, `reset` の呼出し後初めての実行は $\mathrm{O}(N)$ かかる
+
+### select1
+
+```cpp
+int bs.select1(int i)
+```
+
+$i$ 番目の $1$ の場所
+
+#### 計算量
+
+$\mathrm{O}(\log N)$
+
+但し、`set`, `reset` の呼出し後初めての実行は $\mathrm{O}(N)$ かかる

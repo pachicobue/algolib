@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#include <iostream>\n#include <queue>\ntemplate<typename... Ts>\n\
+  bundledCode: "#include <queue>\n#include <iostream>\ntemplate<typename... Ts>\n\
     std::ostream& operator<<(std::ostream& os, const std::queue<Ts...>& vs)\n{\n \
     \   auto q = vs;\n    os << \"[\";\n    while (not q.empty()) { os << q.front()\
     \ << \",\", q.pop(); }\n    return os << \"]\\n\";\n}\n"

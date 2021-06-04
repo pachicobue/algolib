@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#include <set>\n#include <iostream>\ntemplate<typename... Ts>\nstd::ostream&\
+  bundledCode: "#include <iostream>\n#include <set>\ntemplate<typename... Ts>\nstd::ostream&\
     \ operator<<(std::ostream& os, const std::multiset<Ts...>& vs)\n{\n    os << \"\
     [\";\n    for (const auto& v : vs) { os << v << \",\"; }\n    return (os << \"\
     ]\" << std::endl);\n}\n"
