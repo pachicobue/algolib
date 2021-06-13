@@ -1,46 +1,46 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
@@ -135,15 +135,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\nusing i32 = int;\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\nusing i32 = int;\n\
     using u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing\
     \ f80 = long double;\nusing f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64\
@@ -438,7 +438,7 @@ data:
   - src/math/mod_nthroot.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
   timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/math/fps.exp.test.cpp
   - verifications/math/fps.inv.test.cpp

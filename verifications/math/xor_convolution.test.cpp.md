@@ -1,74 +1,74 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/set_hadamard.hpp
     title: src/math/set_hadamard.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/xor_convolution.hpp
     title: src/math/xor_convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bitwise_xor_convolution
     links:
     - https://judge.yosupo.jp/problem/bitwise_xor_convolution
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\nusing i32 = int;\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\nusing i32 = int;\n\
     using u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing\
     \ f80 = long double;\nusing f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64\
@@ -363,7 +363,7 @@ data:
   path: verifications/math/xor_convolution.test.cpp
   requiredBy: []
   timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/math/xor_convolution.test.cpp
 layout: document

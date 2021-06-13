@@ -1,56 +1,56 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/linear/bit_bases.hpp
     title: src/linear/bit_bases.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -226,15 +226,15 @@ data:
     \    constexpr int D = 3;\n    Vec<BSet<D>> vs{3, 1, 2, 5};\n    BitBases<D> bases(vs);\n\
     \    assert(bases.rank() == 3);\n    assert(bases[0] == 3);\n    assert(bases[1]\
     \ == 1);\n    assert(bases[2] == 5);\n    assert(bases.decomp(2).first);\n   \
-    \ assert(bases.decomp(2).second == 3);\n}\nint main()\n{\n    Test();\n    return\
-    \ 0;\n}\n"
+    \ assert(bases.decomp(2).second == 3);\n}\nint main()\n{\n    Test();\n    std::cout\
+    \ << \"Hello World\\n\";\n    return 0;\n}\n"
   code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \n#include \"../../src/linear/bit_bases.hpp\"\n\nvoid Test()\n{\n    constexpr\
     \ int D = 3;\n    Vec<BSet<D>> vs{3, 1, 2, 5};\n    BitBases<D> bases(vs);\n \
     \   assert(bases.rank() == 3);  //011,101,001\n    assert(bases[0] == 3);\n  \
     \  assert(bases[1] == 1);\n    assert(bases[2] == 5);\n    assert(bases.decomp(2).first);\n\
     \    assert(bases.decomp(2).second == 3);\n}\n\nint main()\n{\n    Test();\n \
-    \   return 0;\n}\n"
+    \   std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
   dependsOn:
   - src/linear/bit_bases.hpp
   - src/misc/common.hpp
@@ -254,8 +254,8 @@ data:
   isVerificationFile: true
   path: verifications/linear/bit_bases.ut.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-06-13 23:59:23+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/linear/bit_bases.ut.test.cpp
 layout: document

@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#include <vector>\n#include <iostream>\ntemplate<typename... Ts>\n\
+  bundledCode: "#include <iostream>\n#include <vector>\ntemplate<typename... Ts>\n\
     std::ostream& operator<<(std::ostream& os, const std::vector<Ts...>& vs)\n{\n\
     \    os << \"[\";\n    for (const auto& v : vs) { os << v << \",\"; }\n    return\
     \ (os << \"]\" << std::endl);\n}\n"

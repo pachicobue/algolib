@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy:
@@ -101,7 +101,7 @@ data:
   - icon: ':warning:'
     path: src/linear/array_matrix.hpp
     title: src/linear/array_matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/linear/bit_bases.hpp
     title: src/linear/bit_bases.hpp
   - icon: ':warning:'
@@ -110,7 +110,7 @@ data:
   - icon: ':warning:'
     path: src/linear/gauss_jordan.hpp
     title: src/linear/gauss_jordan.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/linear/int_bases.hpp
     title: src/linear/int_bases.hpp
   - icon: ':warning:'
@@ -167,7 +167,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/mod_sqrt.hpp
     title: src/math/mod_sqrt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
   - icon: ':heavy_check_mark:'
@@ -203,7 +203,7 @@ data:
   - icon: ':warning:'
     path: src/math/seg_sieve.hpp
     title: src/math/seg_sieve.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/set_hadamard.hpp
     title: src/math/set_hadamard.hpp
   - icon: ':heavy_check_mark:'
@@ -212,40 +212,40 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/set_zeta.hpp
     title: src/math/set_zeta.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/xor_convolution.hpp
     title: src/math/xor_convolution.hpp
   - icon: ':heavy_check_mark:'
     path: src/misc/bin_search.hpp
     title: src/misc/bin_search.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/nd_rep.hpp
     title: src/misc/nd_rep.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/nd_vec.hpp
     title: src/misc/nd_vec.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/printer.hpp
     title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/scanner.hpp
     title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/seg_decomp.hpp
     title: src/misc/seg_decomp.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/stopwatch.hpp
     title: src/misc/stopwatch.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/zipper.hpp
     title: src/misc/zipper.hpp
   - icon: ':warning:'
@@ -357,13 +357,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/linear/bit_bases.test.cpp
     title: verifications/linear/bit_bases.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/linear/bit_bases.ut.test.cpp
     title: verifications/linear/bit_bases.ut.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/linear/int_bases.test.cpp
     title: verifications/linear/int_bases.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/linear/int_bases.ut.test.cpp
     title: verifications/linear/int_bases.ut.test.cpp
   - icon: ':heavy_check_mark:'
@@ -417,42 +417,42 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/prime_powsum.test.cpp
     title: verifications/math/prime_powsum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/common/irange.test.cpp
     title: verifications/misc/common/irange.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/fastio/fastio.test.cpp
     title: verifications/misc/fastio/fastio.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/io.test.cpp
     title: verifications/misc/io.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/nd_rep.test.cpp
     title: verifications/misc/nd_rep.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/nd_vec.test.cpp
     title: verifications/misc/nd_vec.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/printer.test.cpp
     title: verifications/misc/printer.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/scanner.test.cpp
     title: verifications/misc/scanner.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/seg_decomp.test.cpp
     title: verifications/misc/seg_decomp.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/stopwatch.test.cpp
     title: verifications/misc/stopwatch.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/zipper.test.cpp
     title: verifications/misc/zipper.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -606,7 +606,7 @@ data:
   - src/graph/lowlink.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
   timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/misc/zipper.test.cpp
   - verifications/misc/scanner.test.cpp
