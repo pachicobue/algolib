@@ -25,11 +25,11 @@ public:
     {
         return m_sizes[leader(i)];
     }
-    Vec<Vec<int>> groups() const
+    Vec<Vec<int>> groups()
     {
         Vec<Vec<int>> iss(m_v);
         for (const int i : rep(m_v)) {
-            iss[m_roots[i]].push_back(i);
+            iss[leader(i)].push_back(i);
         }
         return iss;
     }

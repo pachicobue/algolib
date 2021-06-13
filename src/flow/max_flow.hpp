@@ -32,8 +32,8 @@ public:
         assert(0 <= cap);
         int id = m_gs[0][from].size();
         int rid = m_gs[1][to].size();
-        m_gs[0][from].emplace_back(to, cap, 0);
-        m_gs[1][to].emplace_back(from, cap, cap);
+        m_gs[0][from].emplace_back(to, cap, 0, rid);
+        m_gs[1][to].emplace_back(from, cap, cap, id);
         m_es.emplace_back(from, id);
     }
     const Edge& edge(int i) const
@@ -60,7 +60,7 @@ public:
                 }
             }
         };
-        auto dfs = Fixpoint([&](auto dfs, int u, T fmax) -> T {
+        auto dfs = Fix([&](auto dfs, int u, T fmax) -> T {
             if (u == t) { return fmax; }
             for (int l : rep(2)) {
                 for (int& i = m_is[l][u]; i < (int)m_gs[l][u].size(); i++) {

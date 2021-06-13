@@ -1,7 +1,7 @@
 #pragma once
 #include "../misc/common.hpp"
 #include "factor_table.hpp"
-Vec<u32> primeVec(u32 sup)
+Vec<u32> primes(u32 sup)
 {
     const auto ftable = factorTable(sup);
     Vec<u32> ps;

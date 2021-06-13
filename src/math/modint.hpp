@@ -102,19 +102,23 @@ public:
     }
     constexpr modint operator+(const modint& m) const
     {
-        return modint{*this} += m;
+        auto v = *this;
+        return v += m;
     }
     constexpr modint operator-(const modint& m) const
     {
-        return modint{*this} -= m;
+        auto v = *this;
+        return v -= m;
     }
     constexpr modint operator*(const modint& m) const
     {
-        return modint{*this} *= m;
+        auto v = *this;
+        return v *= m;
     }
     constexpr modint operator/(const modint& m) const
     {
-        return modint{*this} /= m;
+        auto v = *this;
+        return v /= m;
     }
     constexpr bool operator==(const modint& m) const
     {

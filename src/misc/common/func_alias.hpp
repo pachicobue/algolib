@@ -1,5 +1,6 @@
 #pragma once
 #include "type_alias.hpp"
+#include "show.hpp"
 template<typename T>
 bool chmin(T& a, const T& b)
 {

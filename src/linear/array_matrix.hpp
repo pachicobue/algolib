@@ -6,7 +6,9 @@ class ArrMat
 public:
     ArrMat()
     {
-        for (auto& v : m_vss) { fillAll(v, T{}); }
+        for (auto& v : m_vss) {
+            fillAll(v, T{});
+        }
     }
     ArrMat(const IList<IList<T>>& vss)
     {
@@ -14,7 +16,7 @@ public:
         assert(column == vss.begin()->size());
         int i = 0;
         for (auto it = vss.begin(); it != vss.end(); it++) {
-            std::copy(it->begin(), it->end(), m_vss[i].begin());
+            std::copy(it->begin(), it->end(), m_vss[i++].begin());
         }
     }
     ArrMat(const ArrMat& m) : m_vss{m.m_table} {}
@@ -27,8 +29,14 @@ public:
         }
         return *this;
     }
-    const Arr<T, column>& operator[](const int r) const { return m_vss[r]; }
-    Arr<T, column>& operator[](const int r) { return m_vss[r]; }
+    const Arr<T, column>& operator[](const int r) const
+    {
+        return m_vss[r];
+    }
+    Arr<T, column>& operator[](const int r)
+    {
+        return m_vss[r];
+    }
     friend ArrMat operator-(const ArrMat& m)
     {
         ArrMat ans;
@@ -60,7 +68,8 @@ public:
         return ans;
     }
     template<int c>
-    friend ArrMat operator*(const ArrMat<T, row, c>& m1, const ArrMat<T, c, column>& m2)
+    friend ArrMat operator*(const ArrMat<T, row, c>& m1,
+                            const ArrMat<T, c, column>& m2)
     {
         ArrMat<T, row, column> ans;
         for (const int i : rep(row)) {
@@ -92,23 +101,46 @@ public:
         }
         return ans;
     }
-    friend ArrMat operator*(const T& t, const ArrMat& m) { return m * t; }
-    template<typename Int>
-    ArrMat pow(Int n) const { return power(*this, n, I()); }
-    friend ArrMat& operator+=(ArrMat& m1, const ArrMat& m2) { return m1 = m1 + m2; }
-    friend ArrMat& operator-=(ArrMat& m1, const ArrMat& m2) { return m1 = m1 - m2; }
-    friend ArrMat& operator*=(ArrMat& m1, const ArrMat& m2) { return m1 = m1 * m2; }
-    friend ArrMat& operator*=(ArrMat& m, const T& t) { return m = m * t; }
-    friend ArrMat& operator/=(ArrMat& m, const T& t) { return m = m / t; }
+    friend ArrMat operator*(const T& t, const ArrMat& m)
+    {
+        return m * t;
+    }
+    friend ArrMat& operator+=(ArrMat& m1, const ArrMat& m2)
+    {
+        return m1 = m1 + m2;
+    }
+    friend ArrMat& operator-=(ArrMat& m1, const ArrMat& m2)
+    {
+        return m1 = m1 - m2;
+    }
+    friend ArrMat& operator*=(ArrMat& m1, const ArrMat& m2)
+    {
+        return m1 = m1 * m2;
+    }
+    friend ArrMat& operator*=(ArrMat& m, const T& t)
+    {
+        return m = m * t;
+    }
+    friend ArrMat& operator/=(ArrMat& m, const T& t)
+    {
+        return m = m / t;
+    }
     friend std::ostream& operator<<(std::ostream& os, const ArrMat& m)
     {
         os << "[\n";
         for (const int i : rep(row)) {
             os << "[";
-            for (const int j : rep(column)) { os << m[i][j] << ","; }
+            for (const int j : rep(column)) {
+                os << m[i][j] << ",";
+            }
             os << "]\n";
         }
         return (os << "]");
+    }
+    template<typename Int>
+    ArrMat pow(Int n) const
+    {
+        return power(*this, n, I());
     }
     static ArrMat I()
     {

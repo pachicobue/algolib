@@ -10,7 +10,7 @@ public:
           m_hs(m_size + 1, 0),
           m_base{base_}
     {
-        for (int i : range(1, m_size + 1)) {
+        for (int i : irange(1, m_size + 1)) {
             m_ps[i] = mod(mul(m_ps[i - 1], m_base)),
             m_hs[i] = mod(mul(m_hs[i - 1], m_base) + *std::next(first, i - 1));
         }

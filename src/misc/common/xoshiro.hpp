@@ -1,5 +1,6 @@
 #pragma once
 #include "type_alias.hpp"
+#include "constants.hpp"
 #pragma COMMENT("[REFS] Xoshiro: https://prng.di.unimi.it")
 namespace xoshiro_impl {
 u64 x;
@@ -26,11 +27,11 @@ public:
     }
     static constexpr T min()
     {
-        return std::numeric_limits<T>::min();
+        return LIMMIN<T>;
     }
     static constexpr T max()
     {
-        return std::numeric_limits<T>::max();
+        return LIMMAX<T>;
     }
     T operator()()
     {
@@ -71,11 +72,11 @@ public:
     }
     static constexpr T min()
     {
-        return std::numeric_limits<T>::min();
+        return LIMMIN<T>;
     }
     static constexpr T max()
     {
-        return std::numeric_limits<T>::max();
+        return LIMMAX<T>;
     }
     T operator()()
     {

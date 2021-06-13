@@ -104,19 +104,23 @@ public:
     }
     constexpr modint64 operator+(const modint64& m) const
     {
-        return modint64{*this} += m;
+        auto v = *this;
+        return v += m;
     }
     constexpr modint64 operator-(const modint64& m) const
     {
-        return modint64{*this} -= m;
+        auto v = *this;
+        return v -= m;
     }
     constexpr modint64 operator*(const modint64& m) const
     {
-        return modint64{*this} *= m;
+        auto v = *this;
+        return v *= m;
     }
     constexpr modint64 operator/(const modint64& m) const
     {
-        return modint64{*this} /= m;
+        auto v = *this;
+        return v /= m;
     }
     constexpr bool operator==(const modint64& m) const
     {

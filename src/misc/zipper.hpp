@@ -34,6 +34,12 @@ public:
         calc();
         return m_vs.size();
     }
+    friend Ostream& operator<<(Ostream& os, const Zipper& zipper_)
+    {
+        auto zipper = zipper_;
+        zipper.calc();
+        return os << zipper.m_vs << "\n";
+    }
 
 private:
     void calc()
