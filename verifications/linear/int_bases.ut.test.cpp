@@ -17,5 +17,6 @@ void Test()
 int main()
 {
     Test();
+    std::cout << "Hello World\n";
     return 0;
 }
