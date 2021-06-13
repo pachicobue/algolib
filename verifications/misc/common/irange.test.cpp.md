@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -44,15 +44,15 @@ data:
     \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
     using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
     using Sec = std::chrono::seconds;\nclass irange\n{\nprivate:\n    struct itr\n\
-    \    {\n        itr(int start = 0, int step = 1) : m_cnt{start}, m_step{step}\
+    \    {\n        itr(i64 start = 0, i64 step = 1) : m_cnt{start}, m_step{step}\
     \ {}\n        bool operator!=(const itr& it) const\n        {\n            return\
     \ m_cnt != it.m_cnt;\n        }\n        int operator*()\n        {\n        \
     \    return m_cnt;\n        }\n        itr& operator++()\n        {\n        \
-    \    m_cnt += m_step;\n            return *this;\n        }\n        int m_cnt,\
-    \ m_step;\n    };\n    int m_start, m_end, m_step;\npublic:\n    irange(int start,\
-    \ int end, int step = 1)\n    {\n        assert(step != 0);\n        const int\
-    \ d = std::abs(step);\n        const int l = (step > 0 ? start : end);\n     \
-    \   const int r = (step > 0 ? end : start);\n        int n = (r - l) / d + ((r\
+    \    m_cnt += m_step;\n            return *this;\n        }\n        i64 m_cnt,\
+    \ m_step;\n    };\n    i64 m_start, m_end, m_step;\npublic:\n    irange(i64 start,\
+    \ i64 end, i64 step = 1)\n    {\n        assert(step != 0);\n        const i64\
+    \ d = std::abs(step);\n        const i64 l = (step > 0 ? start : end);\n     \
+    \   const i64 r = (step > 0 ? end : start);\n        int n = (r - l) / d + ((r\
     \ - l) % d ? 1 : 0);\n        if (l >= r) { n = 0; }\n        m_start = start;\n\
     \        m_end = start + step * n;\n        m_step = step;\n    }\n    itr begin()\
     \ const\n    {\n        return itr{m_start, m_step};\n    }\n    itr end() const\n\
@@ -104,8 +104,8 @@ data:
   isVerificationFile: true
   path: verifications/misc/common/irange.test.cpp
   requiredBy: []
-  timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-06-13 23:28:40+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/misc/common/irange.test.cpp
 layout: document

@@ -1,17 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/misc/common/print/int128_t.hpp
+    title: src/misc/common/print/int128_t.hpp
+  - icon: ':question:'
+    path: src/misc/common/show.hpp
+    title: src/misc/common/show.hpp
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
@@ -43,28 +49,35 @@ data:
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
     \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
     using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
-    using Sec = std::chrono::seconds;\ntemplate<typename T>\nbool chmin(T& a, const\
-    \ T& b)\n{\n    if (a > b) {\n        a = b;\n        return true;\n    } else\
-    \ {\n        return false;\n    }\n}\ntemplate<typename T>\nbool chmax(T& a, const\
-    \ T& b)\n{\n    if (a < b) {\n        a = b;\n        return true;\n    } else\
-    \ {\n        return false;\n    }\n}\ntemplate<typename T>\nconstexpr T fdiv(T\
-    \ x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? x /\
-    \ y : (x - y + 1) / y;\n}\ntemplate<typename T>\nconstexpr T cdiv(T x, T y)\n\
-    {\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? (x + y - 1) / y\
-    \ : x / y;\n}\ntemplate<typename T, typename I>\nconstexpr T modPower(T v, I n,\
-    \ T mod)\n{\n    T ans = 1 % mod;\n    for (; n > 0; n >>= 1, (v *= v) %= mod)\
-    \ {\n        if (n % 2 == 1) { (ans *= v) %= mod; }\n    }\n    return ans;\n\
-    }\ntemplate<typename T, typename I>\nconstexpr T power(T v, I n)\n{\n    T ans\
-    \ = 1;\n    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *=\
-    \ v; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\nconstexpr\
-    \ T power(T v, I n, const T& e)\n{\n    T ans = e;\n    for (; n > 0; n >>= 1,\
-    \ v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\n\
-    constexpr i64 mod = 1000000007;\nstruct mint\n{\n    mint() = default;\n    mint(i64\
-    \ v_) : v{v_} {}\n    friend mint operator+(const mint& m1, const mint& m2)\n\
-    \    {\n        return mint(m1.v + m2.v);\n    }\n    friend mint operator*(const\
-    \ mint& m1, const mint& m2)\n    {\n        return mint(m1.v * m2.v % mod);\n\
-    \    }\n    friend mint& operator+=(mint& m1, const mint& m2)\n    {\n       \
-    \ m1 = m1 + m2;\n        return m1;\n    }\n    friend mint& operator*=(mint&\
+    using Sec = std::chrono::seconds;\nOstream& operator<<(Ostream& os, i128 v)\n\
+    {\n    bool minus = false;\n    if (v < 0) { minus = true, v = -v; }\n    Str\
+    \ ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) {\n        ans.push_back('0'\
+    \ + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(), ans.end());\n    return\
+    \ os << (minus ? \"-\" : \"\") << ans;\n}\nOstream& operator<<(Ostream& os, u128\
+    \ v)\n{\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) {\n   \
+    \     ans.push_back('0' + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(),\
+    \ ans.end());\n    return os << ans;\n}\ntemplate<typename T>\nbool chmin(T& a,\
+    \ const T& b)\n{\n    if (a > b) {\n        a = b;\n        return true;\n   \
+    \ } else {\n        return false;\n    }\n}\ntemplate<typename T>\nbool chmax(T&\
+    \ a, const T& b)\n{\n    if (a < b) {\n        a = b;\n        return true;\n\
+    \    } else {\n        return false;\n    }\n}\ntemplate<typename T>\nconstexpr\
+    \ T fdiv(T x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{}\
+    \ ? x / y : (x - y + 1) / y;\n}\ntemplate<typename T>\nconstexpr T cdiv(T x, T\
+    \ y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? (x + y -\
+    \ 1) / y : x / y;\n}\ntemplate<typename T, typename I>\nconstexpr T modPower(T\
+    \ v, I n, T mod)\n{\n    T ans = 1 % mod;\n    for (; n > 0; n >>= 1, (v *= v)\
+    \ %= mod) {\n        if (n % 2 == 1) { (ans *= v) %= mod; }\n    }\n    return\
+    \ ans;\n}\ntemplate<typename T, typename I>\nconstexpr T power(T v, I n)\n{\n\
+    \    T ans = 1;\n    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1)\
+    \ { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\n\
+    constexpr T power(T v, I n, const T& e)\n{\n    T ans = e;\n    for (; n > 0;\
+    \ n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return\
+    \ ans;\n}\nconstexpr i64 mod = 1000000007;\nstruct mint\n{\n    mint() = default;\n\
+    \    mint(i64 v_) : v{v_} {}\n    friend mint operator+(const mint& m1, const\
+    \ mint& m2)\n    {\n        return mint(m1.v + m2.v);\n    }\n    friend mint\
+    \ operator*(const mint& m1, const mint& m2)\n    {\n        return mint(m1.v *\
+    \ m2.v % mod);\n    }\n    friend mint& operator+=(mint& m1, const mint& m2)\n\
+    \    {\n        m1 = m1 + m2;\n        return m1;\n    }\n    friend mint& operator*=(mint&\
     \ m1, const mint& m2)\n    {\n        m1 = m1 * m2;\n        return m1;\n    }\n\
     \    i64 v = 0;\n};\nint main()\n{\n    i64 m, n;\n    std::cin >> m >> n;\n \
     \   mint M{m};\n    const mint ans = power(M, n);\n    std::cout << ans.v << \"\
@@ -84,11 +97,13 @@ data:
   dependsOn:
   - src/misc/common/func_alias.hpp
   - src/misc/common/type_alias.hpp
+  - src/misc/common/show.hpp
+  - src/misc/common/print/int128_t.hpp
   isVerificationFile: true
   path: verifications/misc/common/func_alias.power.test.cpp
   requiredBy: []
-  timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-06-13 23:28:40+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/misc/common/func_alias.power.test.cpp
 layout: document

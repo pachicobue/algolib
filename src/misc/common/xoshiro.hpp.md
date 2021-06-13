@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/misc/common/constants.hpp
+    title: src/misc/common/constants.hpp
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy:
@@ -20,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/fenwick.hpp
     title: Fenwick Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/data_structure/intdict.hpp
     title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
   - icon: ':heavy_check_mark:'
@@ -101,22 +104,25 @@ data:
   - icon: ':warning:'
     path: src/linear/array_matrix.hpp
     title: src/linear/array_matrix.hpp
-  - icon: ':warning:'
-    path: src/linear/bit_gauss_jordan.hpp
-    title: src/linear/bit_gauss_jordan.hpp
+  - icon: ':x:'
+    path: src/linear/bit_bases.hpp
+    title: src/linear/bit_bases.hpp
   - icon: ':warning:'
     path: src/linear/bit_matrix.hpp
     title: src/linear/bit_matrix.hpp
   - icon: ':warning:'
     path: src/linear/gauss_jordan.hpp
     title: src/linear/gauss_jordan.hpp
+  - icon: ':question:'
+    path: src/linear/int_bases.hpp
+    title: src/linear/int_bases.hpp
   - icon: ':warning:'
     path: src/linear/matrix.hpp
     title: src/linear/matrix.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/and_convolution.hpp
     title: src/math/and_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/berlekamp_massey.hpp
     title: src/math/berlekamp_massey.hpp
   - icon: ':warning:'
@@ -125,72 +131,72 @@ data:
   - icon: ':warning:'
     path: src/math/divisors.hpp
     title: src/math/divisors.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/divisors_moebius.hpp
     title: src/math/divisors_moebius.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/divisors_zeta.hpp
     title: src/math/divisors_zeta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/factor_table.hpp
     title: src/math/factor_table.hpp
   - icon: ':warning:'
     path: src/math/fft.hpp
     title: src/math/fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
   - icon: ':warning:'
     path: src/math/garner.hpp
     title: src/math/garner.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/gcd_convolution.hpp
     title: src/math/gcd_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
   - icon: ':warning:'
     path: src/math/lagrange_interpolation.hpp
     title: src/math/lagrange_interpolation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/mod_sqrt.hpp
     title: src/math/mod_sqrt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
   - icon: ':warning:'
     path: src/math/moebius_table.hpp
     title: src/math/moebius_table.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/multiplicative_sum.hpp
     title: src/math/multiplicative_sum.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/nth_term.hpp
     title: src/math/nth_term.hpp
   - icon: ':warning:'
     path: src/math/or_convolution.hpp
     title: src/math/or_convolution.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/math/prime_enumerate.hpp
-    title: src/math/prime_enumerate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_powsum.hpp
     title: src/math/prime_powsum.hpp
+  - icon: ':x:'
+    path: src/math/primes.hpp
+    title: src/math/primes.hpp
   - icon: ':warning:'
     path: src/math/primitive_root.hpp
     title: src/math/primitive_root.hpp
@@ -200,7 +206,7 @@ data:
   - icon: ':warning:'
     path: src/math/seg_sieve.hpp
     title: src/math/seg_sieve.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/set_hadamard.hpp
     title: src/math/set_hadamard.hpp
   - icon: ':heavy_check_mark:'
@@ -209,43 +215,43 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/set_zeta.hpp
     title: src/math/set_zeta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/xor_convolution.hpp
     title: src/math/xor_convolution.hpp
   - icon: ':heavy_check_mark:'
     path: src/misc/bin_search.hpp
     title: src/misc/bin_search.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/misc/nd_rep.hpp
     title: src/misc/nd_rep.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/misc/nd_vec.hpp
     title: src/misc/nd_vec.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/printer.hpp
     title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/scanner.hpp
     title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/misc/seg_decomp.hpp
     title: src/misc/seg_decomp.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/misc/stopwatch.hpp
     title: src/misc/stopwatch.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/zipper.hpp
     title: src/misc/zipper.hpp
   - icon: ':warning:'
@@ -354,96 +360,108 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/scc.test.cpp
     title: verifications/graph/scc.test.cpp
+  - icon: ':x:'
+    path: verifications/linear/bit_bases.test.cpp
+    title: verifications/linear/bit_bases.test.cpp
+  - icon: ':x:'
+    path: verifications/linear/bit_bases.ut.test.cpp
+    title: verifications/linear/bit_bases.ut.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/linear/int_bases.test.cpp
+    title: verifications/linear/int_bases.test.cpp
+  - icon: ':x:'
+    path: verifications/linear/int_bases.ut.test.cpp
+    title: verifications/linear/int_bases.ut.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/math/and_convolution.test.cpp
     title: verifications/math/and_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/berlekamp_massey.test.cpp
     title: verifications/math/berlekamp_massey.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.convolution.test.cpp
     title: verifications/math/fps.convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.convolution1000000007.test.cpp
     title: verifications/math/fps.convolution1000000007.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.div_nth.test.cpp
     title: verifications/math/fps.div_nth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.exp.test.cpp
     title: verifications/math/fps.exp.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.inv.test.cpp
     title: verifications/math/fps.inv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.log.test.cpp
     title: verifications/math/fps.log.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.nth.test.cpp
     title: verifications/math/fps.nth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.pow.test.cpp
     title: verifications/math/fps.pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/fps.tshift.test.cpp
     title: verifications/math/fps.tshift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/gcd_convolution.test.cpp
     title: verifications/math/gcd_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/mod_sqrt.test.cpp
     title: verifications/math/mod_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/multiplicative_sum.test.cpp
     title: verifications/math/multiplicative_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/prime_powsum.test.cpp
     title: verifications/math/prime_powsum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/math/xor_convolution.test.cpp
     title: verifications/math/xor_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/common/rng.test.cpp
     title: verifications/misc/common/rng.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/common/xoshiro.test.cpp
     title: verifications/misc/common/xoshiro.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/fastio/fastio.test.cpp
     title: verifications/misc/fastio/fastio.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/io.test.cpp
     title: verifications/misc/io.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/nd_rep.test.cpp
     title: verifications/misc/nd_rep.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/nd_vec.test.cpp
     title: verifications/misc/nd_vec.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/printer.test.cpp
     title: verifications/misc/printer.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/scanner.test.cpp
     title: verifications/misc/scanner.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/seg_decomp.test.cpp
     title: verifications/misc/seg_decomp.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/stopwatch.test.cpp
     title: verifications/misc/stopwatch.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verifications/misc/zipper.test.cpp
     title: verifications/misc/zipper.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://prng.di.unimi.it")
@@ -473,7 +491,12 @@ data:
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
     \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
     using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
-    using Sec = std::chrono::seconds;\n#pragma COMMENT(\"[REFS] Xoshiro: https://prng.di.unimi.it\"\
+    using Sec = std::chrono::seconds;\ntemplate<typename T>\nconstexpr T LIMMIN =\
+    \ std::numeric_limits<T>::min();\ntemplate<typename T>\nconstexpr T LIMMAX = std::numeric_limits<T>::max();\n\
+    template<typename T>\nconstexpr T INF = (LIMMAX<T> - 1) / 2;\ntemplate<typename\
+    \ T>\nconstexpr T PI = T{3.141592653589793238462643383279502884};\ntemplate<typename\
+    \ T = u64>\nconstexpr T TEN(const int n)\n{\n    return n == 0 ? T{1} : TEN<T>(n\
+    \ - 1) * T{10};\n}\n#pragma COMMENT(\"[REFS] Xoshiro: https://prng.di.unimi.it\"\
     )\nnamespace xoshiro_impl {\nu64 x;\nu64 next()\n{\n    uint64_t z = (x += 0x9e3779b97f4a7c15);\n\
     \    z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;\n    z = (z ^ (z >> 27)) * 0x94d049bb133111eb;\n\
     \    return z ^ (z >> 31);\n}\n}\nclass Xoshiro32\n{\npublic:\n    using result_type\
@@ -481,57 +504,57 @@ data:
     \   xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n        s[1]\
     \ = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n        s[3]\
     \ = xoshiro_impl::next();\n    }\n    static constexpr T min()\n    {\n      \
-    \  return std::numeric_limits<T>::min();\n    }\n    static constexpr T max()\n\
-    \    {\n        return std::numeric_limits<T>::max();\n    }\n    T operator()()\n\
-    \    {\n        return next();\n    }\nprivate:\n    static constexpr T rotl(const\
-    \ T x, int k)\n    {\n        return (x << k) | (x >> (32 - k));\n    }\n    T\
-    \ next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n        const T\
-    \ t = s[1] << 9;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n        s[1] ^=\
-    \ s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3] = rotl(s[3],\
-    \ 11);\n        return ans;\n    }\n    T s[4];\n};\nclass Xoshiro64\n{\npublic:\n\
-    \    using result_type = u64;\n    using T = result_type;\n    Xoshiro64(T seed\
-    \ = 0)\n    {\n        xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n\
-    \        s[1] = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n\
-    \        s[3] = xoshiro_impl::next();\n    }\n    static constexpr T min()\n \
-    \   {\n        return std::numeric_limits<T>::min();\n    }\n    static constexpr\
-    \ T max()\n    {\n        return std::numeric_limits<T>::max();\n    }\n    T\
+    \  return LIMMIN<T>;\n    }\n    static constexpr T max()\n    {\n        return\
+    \ LIMMAX<T>;\n    }\n    T operator()()\n    {\n        return next();\n    }\n\
+    private:\n    static constexpr T rotl(const T x, int k)\n    {\n        return\
+    \ (x << k) | (x >> (32 - k));\n    }\n    T next()\n    {\n        const T ans\
+    \ = rotl(s[1] * 5, 7) * 9;\n        const T t = s[1] << 9;\n        s[2] ^= s[0];\n\
+    \        s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0] ^= s[3];\n       \
+    \ s[2] ^= t;\n        s[3] = rotl(s[3], 11);\n        return ans;\n    }\n   \
+    \ T s[4];\n};\nclass Xoshiro64\n{\npublic:\n    using result_type = u64;\n   \
+    \ using T = result_type;\n    Xoshiro64(T seed = 0)\n    {\n        xoshiro_impl::x\
+    \ = seed;\n        s[0] = xoshiro_impl::next();\n        s[1] = xoshiro_impl::next();\n\
+    \        s[2] = xoshiro_impl::next();\n        s[3] = xoshiro_impl::next();\n\
+    \    }\n    static constexpr T min()\n    {\n        return LIMMIN<T>;\n    }\n\
+    \    static constexpr T max()\n    {\n        return LIMMAX<T>;\n    }\n    T\
     \ operator()()\n    {\n        return next();\n    }\nprivate:\n    static constexpr\
     \ T rotl(const T x, int k)\n    {\n        return (x << k) | (x >> (64 - k));\n\
     \    }\n    T next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n  \
     \      const T t = s[1] << 17;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n\
     \        s[1] ^= s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3]\
     \ = rotl(s[3], 45);\n        return ans;\n    }\n    T s[4];\n};\n"
-  code: "#pragma once\n#include \"type_alias.hpp\"\n#pragma COMMENT(\"[REFS] Xoshiro:\
-    \ https://prng.di.unimi.it\")\nnamespace xoshiro_impl {\nu64 x;\nu64 next()\n\
-    {\n    uint64_t z = (x += 0x9e3779b97f4a7c15);\n    z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;\n\
-    \    z = (z ^ (z >> 27)) * 0x94d049bb133111eb;\n    return z ^ (z >> 31);\n}\n\
-    }  // namespace xoshiro_impl\nclass Xoshiro32\n{\npublic:\n    using result_type\
-    \ = u32;\n    using T = result_type;\n    Xoshiro32(T seed = 0)\n    {\n     \
+  code: "#pragma once\n#include \"type_alias.hpp\"\n#include \"constants.hpp\"\n#pragma\
+    \ COMMENT(\"[REFS] Xoshiro: https://prng.di.unimi.it\")\nnamespace xoshiro_impl\
+    \ {\nu64 x;\nu64 next()\n{\n    uint64_t z = (x += 0x9e3779b97f4a7c15);\n    z\
+    \ = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;\n    z = (z ^ (z >> 27)) * 0x94d049bb133111eb;\n\
+    \    return z ^ (z >> 31);\n}\n}  // namespace xoshiro_impl\nclass Xoshiro32\n\
+    {\npublic:\n    using result_type = u32;\n    using T = result_type;\n    Xoshiro32(T\
+    \ seed = 0)\n    {\n        xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n\
+    \        s[1] = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n\
+    \        s[3] = xoshiro_impl::next();\n    }\n    static constexpr T min()\n \
+    \   {\n        return LIMMIN<T>;\n    }\n    static constexpr T max()\n    {\n\
+    \        return LIMMAX<T>;\n    }\n    T operator()()\n    {\n        return next();\n\
+    \    }\n\nprivate:\n    static constexpr T rotl(const T x, int k)\n    {\n   \
+    \     return (x << k) | (x >> (32 - k));\n    }\n    T next()\n    {\n       \
+    \ const T ans = rotl(s[1] * 5, 7) * 9;\n        const T t = s[1] << 9;\n     \
+    \   s[2] ^= s[0];\n        s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0]\
+    \ ^= s[3];\n        s[2] ^= t;\n        s[3] = rotl(s[3], 11);\n        return\
+    \ ans;\n    }\n    T s[4];\n};\nclass Xoshiro64\n{\npublic:\n    using result_type\
+    \ = u64;\n    using T = result_type;\n    Xoshiro64(T seed = 0)\n    {\n     \
     \   xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n        s[1]\
     \ = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n        s[3]\
     \ = xoshiro_impl::next();\n    }\n    static constexpr T min()\n    {\n      \
-    \  return std::numeric_limits<T>::min();\n    }\n    static constexpr T max()\n\
-    \    {\n        return std::numeric_limits<T>::max();\n    }\n    T operator()()\n\
-    \    {\n        return next();\n    }\n\nprivate:\n    static constexpr T rotl(const\
-    \ T x, int k)\n    {\n        return (x << k) | (x >> (32 - k));\n    }\n    T\
-    \ next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n        const T\
-    \ t = s[1] << 9;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n        s[1] ^=\
-    \ s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3] = rotl(s[3],\
-    \ 11);\n        return ans;\n    }\n    T s[4];\n};\nclass Xoshiro64\n{\npublic:\n\
-    \    using result_type = u64;\n    using T = result_type;\n    Xoshiro64(T seed\
-    \ = 0)\n    {\n        xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n\
-    \        s[1] = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n\
-    \        s[3] = xoshiro_impl::next();\n    }\n    static constexpr T min()\n \
-    \   {\n        return std::numeric_limits<T>::min();\n    }\n    static constexpr\
-    \ T max()\n    {\n        return std::numeric_limits<T>::max();\n    }\n    T\
-    \ operator()()\n    {\n        return next();\n    }\n\nprivate:\n    static constexpr\
-    \ T rotl(const T x, int k)\n    {\n        return (x << k) | (x >> (64 - k));\n\
-    \    }\n    T next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n  \
-    \      const T t = s[1] << 17;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n\
-    \        s[1] ^= s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3]\
-    \ = rotl(s[3], 45);\n        return ans;\n    }\n    T s[4];\n};\n"
+    \  return LIMMIN<T>;\n    }\n    static constexpr T max()\n    {\n        return\
+    \ LIMMAX<T>;\n    }\n    T operator()()\n    {\n        return next();\n    }\n\
+    \nprivate:\n    static constexpr T rotl(const T x, int k)\n    {\n        return\
+    \ (x << k) | (x >> (64 - k));\n    }\n    T next()\n    {\n        const T ans\
+    \ = rotl(s[1] * 5, 7) * 9;\n        const T t = s[1] << 17;\n        s[2] ^= s[0];\n\
+    \        s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0] ^= s[3];\n       \
+    \ s[2] ^= t;\n        s[3] = rotl(s[3], 45);\n        return ans;\n    }\n   \
+    \ T s[4];\n};\n"
   dependsOn:
   - src/misc/common/type_alias.hpp
+  - src/misc/common/constants.hpp
   isVerificationFile: false
   path: src/misc/common/xoshiro.hpp
   requiredBy:
@@ -553,7 +576,6 @@ data:
   - src/misc/nd_rep.hpp
   - src/misc/scanner.hpp
   - src/flow/max_flow.hpp
-  - src/math/prime_enumerate.hpp
   - src/math/gcd_convolution.hpp
   - src/math/garner.hpp
   - src/math/seg_sieve.hpp
@@ -585,12 +607,14 @@ data:
   - src/math/mod_sqrt.hpp
   - src/math/fft.hpp
   - src/math/mod_nthroot.hpp
+  - src/math/primes.hpp
   - src/math/set_moebius.hpp
   - src/linear/gauss_jordan.hpp
-  - src/linear/bit_gauss_jordan.hpp
   - src/linear/bit_matrix.hpp
   - src/linear/matrix.hpp
   - src/linear/array_matrix.hpp
+  - src/linear/bit_bases.hpp
+  - src/linear/int_bases.hpp
   - src/data_structure/li_chao_tree.hpp
   - src/data_structure/intset.hpp
   - src/data_structure/intdict.hpp
@@ -622,8 +646,8 @@ data:
   - src/graph/lca.hpp
   - src/graph/lowlink.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
-  timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-06-13 23:28:40+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verifications/misc/zipper.test.cpp
   - verifications/misc/scanner.test.cpp
@@ -654,6 +678,10 @@ data:
   - verifications/math/fps.convolution.test.cpp
   - verifications/math/fps.pow.test.cpp
   - verifications/math/fps.nth.test.cpp
+  - verifications/linear/bit_bases.ut.test.cpp
+  - verifications/linear/int_bases.test.cpp
+  - verifications/linear/bit_bases.test.cpp
+  - verifications/linear/int_bases.ut.test.cpp
   - verifications/data_structure/monotonic_cht.test.cpp
   - verifications/data_structure/wavelet.test.cpp
   - verifications/data_structure/lazyseg.ut.test.cpp

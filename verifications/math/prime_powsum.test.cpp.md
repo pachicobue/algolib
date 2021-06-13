@@ -1,62 +1,62 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/prime_powsum.hpp
     title: src/math/prime_powsum.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/counting_primes
@@ -88,38 +88,47 @@ data:
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
     \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
     using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
-    using Sec = std::chrono::seconds;\ntemplate<typename T>\nconstexpr T INF = std::numeric_limits<T>::max()\
-    \ / 4;\ntemplate<typename T>\nconstexpr T PI = T{3.141592653589793238462643383279502884};\n\
-    template<typename T = u64>\nconstexpr T TEN(const int n)\n{\n    return n == 0\
-    \ ? T{1} : TEN<T>(n - 1) * T{10};\n}\ntemplate<typename T>\nbool chmin(T& a, const\
-    \ T& b)\n{\n    if (a > b) {\n        a = b;\n        return true;\n    } else\
-    \ {\n        return false;\n    }\n}\ntemplate<typename T>\nbool chmax(T& a, const\
-    \ T& b)\n{\n    if (a < b) {\n        a = b;\n        return true;\n    } else\
-    \ {\n        return false;\n    }\n}\ntemplate<typename T>\nconstexpr T fdiv(T\
-    \ x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? x /\
-    \ y : (x - y + 1) / y;\n}\ntemplate<typename T>\nconstexpr T cdiv(T x, T y)\n\
-    {\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? (x + y - 1) / y\
-    \ : x / y;\n}\ntemplate<typename T, typename I>\nconstexpr T modPower(T v, I n,\
-    \ T mod)\n{\n    T ans = 1 % mod;\n    for (; n > 0; n >>= 1, (v *= v) %= mod)\
-    \ {\n        if (n % 2 == 1) { (ans *= v) %= mod; }\n    }\n    return ans;\n\
-    }\ntemplate<typename T, typename I>\nconstexpr T power(T v, I n)\n{\n    T ans\
-    \ = 1;\n    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *=\
-    \ v; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\nconstexpr\
-    \ T power(T v, I n, const T& e)\n{\n    T ans = e;\n    for (; n > 0; n >>= 1,\
-    \ v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\n\
-    template<typename T>\nVec<T> operator+=(Vec<T>& vs1, const Vec<T>& vs2)\n{\n \
-    \   vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n    return vs1;\n}\ntemplate<typename\
-    \ T>\nVec<T> operator+(const Vec<T>& vs1, const Vec<T>& vs2)\n{\n    auto vs =\
-    \ vs1;\n    vs += vs2;\n    return vs;\n}\ntemplate<typename T>\nvoid fillAll(Vec<T>&\
-    \ vs, const T& v)\n{\n    std::fill(vs.begin(), vs.end(), v);\n}\ntemplate<typename\
-    \ T, typename C = Lt<T>>\nvoid sortAll(Vec<T>& vs, C comp = C{})\n{\n    std::sort(vs.begin(),\
-    \ vs.end(), comp);\n}\ntemplate<typename T>\nvoid reverseAll(Vec<T>& vs)\n{\n\
-    \    std::reverse(vs.begin(), vs.end());\n}\ntemplate<typename T>\nvoid uniqueAll(Vec<T>&\
-    \ vs)\n{\n    sortAll(vs);\n    vs.erase(std::unique(vs.begin(), vs.end()), vs.end());\n\
-    }\ntemplate<typename T, typename V = T>\nV sumAll(const Vec<T>& vs)\n{\n    return\
-    \ std::accumulate(vs.begin(), vs.end(), V{});\n}\ntemplate<typename T>\nint minInd(const\
-    \ Vec<T>& vs)\n{\n    return std::min_element(vs.begin(), vs.end()) - vs.begin();\n\
-    }\ntemplate<typename T>\nint maxInd(const Vec<T>& vs)\n{\n    return std::max_element(vs.begin(),\
+    using Sec = std::chrono::seconds;\ntemplate<typename T>\nconstexpr T LIMMIN =\
+    \ std::numeric_limits<T>::min();\ntemplate<typename T>\nconstexpr T LIMMAX = std::numeric_limits<T>::max();\n\
+    template<typename T>\nconstexpr T INF = (LIMMAX<T> - 1) / 2;\ntemplate<typename\
+    \ T>\nconstexpr T PI = T{3.141592653589793238462643383279502884};\ntemplate<typename\
+    \ T = u64>\nconstexpr T TEN(const int n)\n{\n    return n == 0 ? T{1} : TEN<T>(n\
+    \ - 1) * T{10};\n}\nOstream& operator<<(Ostream& os, i128 v)\n{\n    bool minus\
+    \ = false;\n    if (v < 0) { minus = true, v = -v; }\n    Str ans;\n    if (v\
+    \ == 0) { ans = \"0\"; }\n    while (v) {\n        ans.push_back('0' + v % 10),\
+    \ v /= 10;\n    }\n    std::reverse(ans.begin(), ans.end());\n    return os <<\
+    \ (minus ? \"-\" : \"\") << ans;\n}\nOstream& operator<<(Ostream& os, u128 v)\n\
+    {\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) {\n        ans.push_back('0'\
+    \ + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(), ans.end());\n    return\
+    \ os << ans;\n}\ntemplate<typename T>\nbool chmin(T& a, const T& b)\n{\n    if\
+    \ (a > b) {\n        a = b;\n        return true;\n    } else {\n        return\
+    \ false;\n    }\n}\ntemplate<typename T>\nbool chmax(T& a, const T& b)\n{\n  \
+    \  if (a < b) {\n        a = b;\n        return true;\n    } else {\n        return\
+    \ false;\n    }\n}\ntemplate<typename T>\nconstexpr T fdiv(T x, T y)\n{\n    if\
+    \ (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? x / y : (x - y + 1) / y;\n\
+    }\ntemplate<typename T>\nconstexpr T cdiv(T x, T y)\n{\n    if (y < T{}) { x =\
+    \ -x, y = -y; }\n    return x >= T{} ? (x + y - 1) / y : x / y;\n}\ntemplate<typename\
+    \ T, typename I>\nconstexpr T modPower(T v, I n, T mod)\n{\n    T ans = 1 % mod;\n\
+    \    for (; n > 0; n >>= 1, (v *= v) %= mod) {\n        if (n % 2 == 1) { (ans\
+    \ *= v) %= mod; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\n\
+    constexpr T power(T v, I n)\n{\n    T ans = 1;\n    for (; n > 0; n >>= 1, v *=\
+    \ v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename\
+    \ T, typename I>\nconstexpr T power(T v, I n, const T& e)\n{\n    T ans = e;\n\
+    \    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n\
+    \    }\n    return ans;\n}\ntemplate<typename T>\nVec<T> operator+=(Vec<T>& vs1,\
+    \ const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n\
+    \    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const Vec<T>& vs1,\
+    \ const Vec<T>& vs2)\n{\n    auto vs = vs1;\n    vs += vs2;\n    return vs;\n\
+    }\ntemplate<typename T>\nvoid fillAll(Vec<T>& vs, const T& v)\n{\n    std::fill(vs.begin(),\
+    \ vs.end(), v);\n}\ntemplate<typename T, typename C = Lt<T>>\nvoid sortAll(Vec<T>&\
+    \ vs, C comp = C{})\n{\n    std::sort(vs.begin(), vs.end(), comp);\n}\ntemplate<typename\
+    \ T>\nvoid reverseAll(Vec<T>& vs)\n{\n    std::reverse(vs.begin(), vs.end());\n\
+    }\ntemplate<typename T>\nvoid uniqueAll(Vec<T>& vs)\n{\n    sortAll(vs);\n   \
+    \ vs.erase(std::unique(vs.begin(), vs.end()), vs.end());\n}\ntemplate<typename\
+    \ T, typename V = T>\nV sumAll(const Vec<T>& vs)\n{\n    return std::accumulate(vs.begin(),\
+    \ vs.end(), V{});\n}\ntemplate<typename T>\nint minInd(const Vec<T>& vs)\n{\n\
+    \    return std::min_element(vs.begin(), vs.end()) - vs.begin();\n}\ntemplate<typename\
+    \ T>\nint maxInd(const Vec<T>& vs)\n{\n    return std::max_element(vs.begin(),\
     \ vs.end()) - vs.begin();\n}\ntemplate<typename T>\nint lbInd(const Vec<T>& vs,\
     \ const T& v)\n{\n    return std::lower_bound(vs.begin(), vs.end(), v) - vs.begin();\n\
     }\ntemplate<typename T>\nint ubInd(const Vec<T>& vs, const T& v)\n{\n    return\
@@ -128,15 +137,8 @@ data:
     \ n, gen);\n    return ans;\n}\nVec<int> iotaVec(int n, int offset = 0)\n{\n \
     \   Vec<int> ans(n);\n    std::iota(ans.begin(), ans.end(), offset);\n    return\
     \ ans;\n}\ntemplate<typename T>\nVec<T> revVec(const Vec<T>& vs)\n{\n    auto\
-    \ ans = vs;\n    reverseAll(ans);\n    return ans;\n}\nOstream& operator<<(Ostream&\
-    \ os, i128 v)\n{\n    bool minus = false;\n    if (v < 0) { minus = true, v =\
-    \ -v; }\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) {\n   \
-    \     ans.push_back('0' + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(),\
-    \ ans.end());\n    return os << (minus ? \"-\" : \"\") << ans;\n}\nOstream& operator<<(Ostream&\
-    \ os, u128 v)\n{\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v)\
-    \ {\n        ans.push_back('0' + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(),\
-    \ ans.end());\n    return os << ans;\n}\nconstexpr int popcount(const u64 v)\n\
-    {\n    return v ? __builtin_popcountll(v) : 0;\n}\nconstexpr int log2p1(const\
+    \ ans = vs;\n    reverseAll(ans);\n    return ans;\n}\nconstexpr int popcount(const\
+    \ u64 v)\n{\n    return v ? __builtin_popcountll(v) : 0;\n}\nconstexpr int log2p1(const\
     \ u64 v)\n{\n    return v ? 64 - __builtin_clzll(v) : 0;\n}\nconstexpr int lsbp1(const\
     \ u64 v)\n{\n    return __builtin_ffsll(v);\n}\nconstexpr int clog(const u64 v)\n\
     {\n    return v ? log2p1(v - 1) : 0;\n}\nconstexpr u64 ceil2(const u64 v)\n{\n\
@@ -148,15 +150,15 @@ data:
     {\n    Fix(F&& f) : F{std::forward<F>(f)} {}\n    template<typename... Args>\n\
     \    auto operator()(Args&&... args) const\n    {\n        return F::operator()(*this,\
     \ std::forward<Args>(args)...);\n    }\n};\nclass irange\n{\nprivate:\n    struct\
-    \ itr\n    {\n        itr(int start = 0, int step = 1) : m_cnt{start}, m_step{step}\
+    \ itr\n    {\n        itr(i64 start = 0, i64 step = 1) : m_cnt{start}, m_step{step}\
     \ {}\n        bool operator!=(const itr& it) const\n        {\n            return\
     \ m_cnt != it.m_cnt;\n        }\n        int operator*()\n        {\n        \
     \    return m_cnt;\n        }\n        itr& operator++()\n        {\n        \
-    \    m_cnt += m_step;\n            return *this;\n        }\n        int m_cnt,\
-    \ m_step;\n    };\n    int m_start, m_end, m_step;\npublic:\n    irange(int start,\
-    \ int end, int step = 1)\n    {\n        assert(step != 0);\n        const int\
-    \ d = std::abs(step);\n        const int l = (step > 0 ? start : end);\n     \
-    \   const int r = (step > 0 ? end : start);\n        int n = (r - l) / d + ((r\
+    \    m_cnt += m_step;\n            return *this;\n        }\n        i64 m_cnt,\
+    \ m_step;\n    };\n    i64 m_start, m_end, m_step;\npublic:\n    irange(i64 start,\
+    \ i64 end, i64 step = 1)\n    {\n        assert(step != 0);\n        const i64\
+    \ d = std::abs(step);\n        const i64 l = (step > 0 ? start : end);\n     \
+    \   const i64 r = (step > 0 ? end : start);\n        int n = (r - l) / d + ((r\
     \ - l) % d ? 1 : 0);\n        if (l >= r) { n = 0; }\n        m_start = start;\n\
     \        m_end = start + step * n;\n        m_step = step;\n    }\n    itr begin()\
     \ const\n    {\n        return itr{m_start, m_step};\n    }\n    itr end() const\n\
@@ -170,20 +172,19 @@ data:
     \   xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n        s[1]\
     \ = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n        s[3]\
     \ = xoshiro_impl::next();\n    }\n    static constexpr T min()\n    {\n      \
-    \  return std::numeric_limits<T>::min();\n    }\n    static constexpr T max()\n\
-    \    {\n        return std::numeric_limits<T>::max();\n    }\n    T operator()()\n\
-    \    {\n        return next();\n    }\nprivate:\n    static constexpr T rotl(const\
-    \ T x, int k)\n    {\n        return (x << k) | (x >> (32 - k));\n    }\n    T\
-    \ next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n        const T\
-    \ t = s[1] << 9;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n        s[1] ^=\
-    \ s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3] = rotl(s[3],\
-    \ 11);\n        return ans;\n    }\n    T s[4];\n};\nclass Xoshiro64\n{\npublic:\n\
-    \    using result_type = u64;\n    using T = result_type;\n    Xoshiro64(T seed\
-    \ = 0)\n    {\n        xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n\
-    \        s[1] = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n\
-    \        s[3] = xoshiro_impl::next();\n    }\n    static constexpr T min()\n \
-    \   {\n        return std::numeric_limits<T>::min();\n    }\n    static constexpr\
-    \ T max()\n    {\n        return std::numeric_limits<T>::max();\n    }\n    T\
+    \  return LIMMIN<T>;\n    }\n    static constexpr T max()\n    {\n        return\
+    \ LIMMAX<T>;\n    }\n    T operator()()\n    {\n        return next();\n    }\n\
+    private:\n    static constexpr T rotl(const T x, int k)\n    {\n        return\
+    \ (x << k) | (x >> (32 - k));\n    }\n    T next()\n    {\n        const T ans\
+    \ = rotl(s[1] * 5, 7) * 9;\n        const T t = s[1] << 9;\n        s[2] ^= s[0];\n\
+    \        s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0] ^= s[3];\n       \
+    \ s[2] ^= t;\n        s[3] = rotl(s[3], 11);\n        return ans;\n    }\n   \
+    \ T s[4];\n};\nclass Xoshiro64\n{\npublic:\n    using result_type = u64;\n   \
+    \ using T = result_type;\n    Xoshiro64(T seed = 0)\n    {\n        xoshiro_impl::x\
+    \ = seed;\n        s[0] = xoshiro_impl::next();\n        s[1] = xoshiro_impl::next();\n\
+    \        s[2] = xoshiro_impl::next();\n        s[3] = xoshiro_impl::next();\n\
+    \    }\n    static constexpr T min()\n    {\n        return LIMMIN<T>;\n    }\n\
+    \    static constexpr T max()\n    {\n        return LIMMAX<T>;\n    }\n    T\
     \ operator()()\n    {\n        return next();\n    }\nprivate:\n    static constexpr\
     \ T rotl(const T x, int k)\n    {\n        return (x << k) | (x >> (64 - k));\n\
     \    }\n    T next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n  \
@@ -283,10 +284,10 @@ data:
   - src/misc/common/type_alias.hpp
   - src/misc/common/constants.hpp
   - src/misc/common/func_alias.hpp
-  - src/misc/common/operator_alias.hpp
-  - src/misc/common/vec_utils.hpp
   - src/misc/common/show.hpp
   - src/misc/common/print/int128_t.hpp
+  - src/misc/common/operator_alias.hpp
+  - src/misc/common/vec_utils.hpp
   - src/misc/common/bit_ops.hpp
   - src/misc/common/fixpoint.hpp
   - src/misc/common/irange.hpp
@@ -297,8 +298,8 @@ data:
   isVerificationFile: true
   path: verifications/math/prime_powsum.test.cpp
   requiredBy: []
-  timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-06-13 23:28:40+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/math/prime_powsum.test.cpp
 layout: document

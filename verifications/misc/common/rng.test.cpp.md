@@ -1,23 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/misc/common/constants.hpp
+    title: src/misc/common/constants.hpp
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -67,85 +70,88 @@ data:
     \ n, gen);\n    return ans;\n}\nVec<int> iotaVec(int n, int offset = 0)\n{\n \
     \   Vec<int> ans(n);\n    std::iota(ans.begin(), ans.end(), offset);\n    return\
     \ ans;\n}\ntemplate<typename T>\nVec<T> revVec(const Vec<T>& vs)\n{\n    auto\
-    \ ans = vs;\n    reverseAll(ans);\n    return ans;\n}\n#pragma COMMENT(\"[REFS]\
-    \ Xoshiro: https://prng.di.unimi.it\")\nnamespace xoshiro_impl {\nu64 x;\nu64\
-    \ next()\n{\n    uint64_t z = (x += 0x9e3779b97f4a7c15);\n    z = (z ^ (z >> 30))\
-    \ * 0xbf58476d1ce4e5b9;\n    z = (z ^ (z >> 27)) * 0x94d049bb133111eb;\n    return\
-    \ z ^ (z >> 31);\n}\n}\nclass Xoshiro32\n{\npublic:\n    using result_type = u32;\n\
-    \    using T = result_type;\n    Xoshiro32(T seed = 0)\n    {\n        xoshiro_impl::x\
+    \ ans = vs;\n    reverseAll(ans);\n    return ans;\n}\ntemplate<typename T>\n\
+    constexpr T LIMMIN = std::numeric_limits<T>::min();\ntemplate<typename T>\nconstexpr\
+    \ T LIMMAX = std::numeric_limits<T>::max();\ntemplate<typename T>\nconstexpr T\
+    \ INF = (LIMMAX<T> - 1) / 2;\ntemplate<typename T>\nconstexpr T PI = T{3.141592653589793238462643383279502884};\n\
+    template<typename T = u64>\nconstexpr T TEN(const int n)\n{\n    return n == 0\
+    \ ? T{1} : TEN<T>(n - 1) * T{10};\n}\n#pragma COMMENT(\"[REFS] Xoshiro: https://prng.di.unimi.it\"\
+    )\nnamespace xoshiro_impl {\nu64 x;\nu64 next()\n{\n    uint64_t z = (x += 0x9e3779b97f4a7c15);\n\
+    \    z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;\n    z = (z ^ (z >> 27)) * 0x94d049bb133111eb;\n\
+    \    return z ^ (z >> 31);\n}\n}\nclass Xoshiro32\n{\npublic:\n    using result_type\
+    \ = u32;\n    using T = result_type;\n    Xoshiro32(T seed = 0)\n    {\n     \
+    \   xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n        s[1]\
+    \ = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n        s[3]\
+    \ = xoshiro_impl::next();\n    }\n    static constexpr T min()\n    {\n      \
+    \  return LIMMIN<T>;\n    }\n    static constexpr T max()\n    {\n        return\
+    \ LIMMAX<T>;\n    }\n    T operator()()\n    {\n        return next();\n    }\n\
+    private:\n    static constexpr T rotl(const T x, int k)\n    {\n        return\
+    \ (x << k) | (x >> (32 - k));\n    }\n    T next()\n    {\n        const T ans\
+    \ = rotl(s[1] * 5, 7) * 9;\n        const T t = s[1] << 9;\n        s[2] ^= s[0];\n\
+    \        s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0] ^= s[3];\n       \
+    \ s[2] ^= t;\n        s[3] = rotl(s[3], 11);\n        return ans;\n    }\n   \
+    \ T s[4];\n};\nclass Xoshiro64\n{\npublic:\n    using result_type = u64;\n   \
+    \ using T = result_type;\n    Xoshiro64(T seed = 0)\n    {\n        xoshiro_impl::x\
     \ = seed;\n        s[0] = xoshiro_impl::next();\n        s[1] = xoshiro_impl::next();\n\
     \        s[2] = xoshiro_impl::next();\n        s[3] = xoshiro_impl::next();\n\
-    \    }\n    static constexpr T min()\n    {\n        return std::numeric_limits<T>::min();\n\
-    \    }\n    static constexpr T max()\n    {\n        return std::numeric_limits<T>::max();\n\
-    \    }\n    T operator()()\n    {\n        return next();\n    }\nprivate:\n \
-    \   static constexpr T rotl(const T x, int k)\n    {\n        return (x << k)\
-    \ | (x >> (32 - k));\n    }\n    T next()\n    {\n        const T ans = rotl(s[1]\
-    \ * 5, 7) * 9;\n        const T t = s[1] << 9;\n        s[2] ^= s[0];\n      \
-    \  s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0] ^= s[3];\n        s[2] ^=\
-    \ t;\n        s[3] = rotl(s[3], 11);\n        return ans;\n    }\n    T s[4];\n\
-    };\nclass Xoshiro64\n{\npublic:\n    using result_type = u64;\n    using T = result_type;\n\
-    \    Xoshiro64(T seed = 0)\n    {\n        xoshiro_impl::x = seed;\n        s[0]\
-    \ = xoshiro_impl::next();\n        s[1] = xoshiro_impl::next();\n        s[2]\
-    \ = xoshiro_impl::next();\n        s[3] = xoshiro_impl::next();\n    }\n    static\
-    \ constexpr T min()\n    {\n        return std::numeric_limits<T>::min();\n  \
-    \  }\n    static constexpr T max()\n    {\n        return std::numeric_limits<T>::max();\n\
-    \    }\n    T operator()()\n    {\n        return next();\n    }\nprivate:\n \
-    \   static constexpr T rotl(const T x, int k)\n    {\n        return (x << k)\
-    \ | (x >> (64 - k));\n    }\n    T next()\n    {\n        const T ans = rotl(s[1]\
-    \ * 5, 7) * 9;\n        const T t = s[1] << 17;\n        s[2] ^= s[0];\n     \
-    \   s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0] ^= s[3];\n        s[2]\
-    \ ^= t;\n        s[3] = rotl(s[3], 45);\n        return ans;\n    }\n    T s[4];\n\
-    };\ntemplate<typename Rng>\nclass RNG\n{\npublic:\n    using result_type = typename\
-    \ Rng::result_type;\n    using T = result_type;\n    static constexpr T min()\n\
-    \    {\n        return Rng::min();\n    }\n    static constexpr T max()\n    {\n\
-    \        return Rng::max();\n    }\n    RNG() : RNG(std::random_device{}()) {}\n\
-    \    RNG(T seed) : m_rng(seed) {}\n    T operator()()\n    {\n        return m_rng();\n\
-    \    }\n    template<typename T>\n    T val(T min, T max)\n    {\n        return\
-    \ std::uniform_int_distribution<T>(min, max)(m_rng);\n    }\n    template<typename\
-    \ T>\n    Pair<T, T> pair(T min, T max)\n    {\n        return std::minmax({val<T>(min,\
-    \ max), val<T>(min, max)});\n    }\n    template<typename T>\n    Vec<T> vec(int\
-    \ n, T min, T max)\n    {\n        return genVec<T>(n, [&]() { return val<T>(min,\
-    \ max); });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int\
-    \ m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]() { return vec(m,\
-    \ min, max); });\n    }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\n\
-    RNG<std::mt19937_64> rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\n\
-    void Test()\n{\n    const u64 v32_1 = rng();\n    const u64 v32_2 = rng_xo();\n\
-    \    const u64 v64_1 = rng64();\n    const u64 v64_2 = rng_xo64();\n    assert(0_u64\
-    \ <= v32_1 and v32_1 <= 0xFFFFFFFF_u64);\n    assert(0_u64 <= v32_2 and v32_2\
-    \ <= 0xFFFFFFFF_u64);\n    assert(0_u64 <= v64_1 and v64_1 <= 0xFFFFFFFFFFFFFFFF_u64);\n\
-    \    assert(0_u64 <= v64_2 and v64_2 <= 0xFFFFFFFFFFFFFFFF_u64);\n}\nvoid valTest()\n\
-    {\n    int min = 10, max = 20;\n    const u64 v32_1 = rng.val(min, max);\n   \
-    \ const u64 v32_2 = rng_xo.val(min, max);\n    const u64 v64_1 = rng64.val(min,\
-    \ max);\n    const u64 v64_2 = rng_xo64.val(min, max);\n    assert(min <= v32_1\
-    \ and v32_1 <= max);\n    assert(min <= v32_2 and v32_2 <= max);\n    assert(min\
-    \ <= v64_1 and v64_1 <= max);\n    assert(min <= v64_2 and v64_2 <= max);\n}\n\
-    void pairTest()\n{\n    int min = 10, max = 20;\n    const auto [l32_1, r32_1]\
-    \ = rng.pair(min, max);\n    const auto [l32_2, r32_2] = rng_xo.pair(min, max);\n\
-    \    const auto [l64_1, r64_1] = rng64.pair(min, max);\n    const auto [l64_2,\
-    \ r64_2] = rng_xo64.pair(min, max);\n    assert(min <= l32_1 and l32_1 <= r32_1\
-    \ and r32_1 <= max);\n    assert(min <= l32_2 and l32_2 <= r32_2 and r32_2 <=\
-    \ max);\n    assert(min <= l64_1 and l64_1 <= r64_1 and r64_1 <= max);\n    assert(min\
-    \ <= l64_2 and l64_2 <= r64_2 and r64_2 <= max);\n}\nvoid vecTest()\n{\n    int\
-    \ n = 10;\n    int min = 10, max = 20;\n    const auto vs32_1 = rng.vec(n, min,\
-    \ max);\n    const auto vs32_2 = rng_xo.vec(n, min, max);\n    const auto vs64_1\
-    \ = rng64.vec(n, min, max);\n    const auto vs64_2 = rng_xo64.vec(n, min, max);\n\
-    \    for (const auto v : vs32_1) {\n        assert(min <= v and v <= max);\n \
-    \   }\n    for (const auto v : vs32_2) {\n        assert(min <= v and v <= max);\n\
-    \    }\n    for (const auto v : vs64_1) {\n        assert(min <= v and v <= max);\n\
-    \    }\n    for (const auto v : vs64_2) {\n        assert(min <= v and v <= max);\n\
-    \    }\n}\nvoid vvecTest()\n{\n    int m = 3, n = 4;\n    int min = 10, max =\
-    \ 20;\n    const auto vss32_1 = rng.vvec(m, n, min, max);\n    const auto vss32_2\
-    \ = rng_xo.vvec(m, n, min, max);\n    const auto vss64_1 = rng64.vvec(m, n, min,\
-    \ max);\n    const auto vss64_2 = rng_xo64.vvec(m, n, min, max);\n    for (const\
-    \ auto vs : vss32_1) {\n        for (auto v : vs) {\n            assert(min <=\
-    \ v and v <= max);\n        }\n    }\n    for (const auto vs : vss32_2) {\n  \
+    \    }\n    static constexpr T min()\n    {\n        return LIMMIN<T>;\n    }\n\
+    \    static constexpr T max()\n    {\n        return LIMMAX<T>;\n    }\n    T\
+    \ operator()()\n    {\n        return next();\n    }\nprivate:\n    static constexpr\
+    \ T rotl(const T x, int k)\n    {\n        return (x << k) | (x >> (64 - k));\n\
+    \    }\n    T next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n  \
+    \      const T t = s[1] << 17;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n\
+    \        s[1] ^= s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3]\
+    \ = rotl(s[3], 45);\n        return ans;\n    }\n    T s[4];\n};\ntemplate<typename\
+    \ Rng>\nclass RNG\n{\npublic:\n    using result_type = typename Rng::result_type;\n\
+    \    using T = result_type;\n    static constexpr T min()\n    {\n        return\
+    \ Rng::min();\n    }\n    static constexpr T max()\n    {\n        return Rng::max();\n\
+    \    }\n    RNG() : RNG(std::random_device{}()) {}\n    RNG(T seed) : m_rng(seed)\
+    \ {}\n    T operator()()\n    {\n        return m_rng();\n    }\n    template<typename\
+    \ T>\n    T val(T min, T max)\n    {\n        return std::uniform_int_distribution<T>(min,\
+    \ max)(m_rng);\n    }\n    template<typename T>\n    Pair<T, T> pair(T min, T\
+    \ max)\n    {\n        return std::minmax({val<T>(min, max), val<T>(min, max)});\n\
+    \    }\n    template<typename T>\n    Vec<T> vec(int n, T min, T max)\n    {\n\
+    \        return genVec<T>(n, [&]() { return val<T>(min, max); });\n    }\n   \
+    \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
+    \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
+    \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
+    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nvoid Test()\n{\n \
+    \   const u64 v32_1 = rng();\n    const u64 v32_2 = rng_xo();\n    const u64 v64_1\
+    \ = rng64();\n    const u64 v64_2 = rng_xo64();\n    assert(0_u64 <= v32_1 and\
+    \ v32_1 <= 0xFFFFFFFF_u64);\n    assert(0_u64 <= v32_2 and v32_2 <= 0xFFFFFFFF_u64);\n\
+    \    assert(0_u64 <= v64_1 and v64_1 <= 0xFFFFFFFFFFFFFFFF_u64);\n    assert(0_u64\
+    \ <= v64_2 and v64_2 <= 0xFFFFFFFFFFFFFFFF_u64);\n}\nvoid valTest()\n{\n    int\
+    \ min = 10, max = 20;\n    const u64 v32_1 = rng.val(min, max);\n    const u64\
+    \ v32_2 = rng_xo.val(min, max);\n    const u64 v64_1 = rng64.val(min, max);\n\
+    \    const u64 v64_2 = rng_xo64.val(min, max);\n    assert(min <= v32_1 and v32_1\
+    \ <= max);\n    assert(min <= v32_2 and v32_2 <= max);\n    assert(min <= v64_1\
+    \ and v64_1 <= max);\n    assert(min <= v64_2 and v64_2 <= max);\n}\nvoid pairTest()\n\
+    {\n    int min = 10, max = 20;\n    const auto [l32_1, r32_1] = rng.pair(min,\
+    \ max);\n    const auto [l32_2, r32_2] = rng_xo.pair(min, max);\n    const auto\
+    \ [l64_1, r64_1] = rng64.pair(min, max);\n    const auto [l64_2, r64_2] = rng_xo64.pair(min,\
+    \ max);\n    assert(min <= l32_1 and l32_1 <= r32_1 and r32_1 <= max);\n    assert(min\
+    \ <= l32_2 and l32_2 <= r32_2 and r32_2 <= max);\n    assert(min <= l64_1 and\
+    \ l64_1 <= r64_1 and r64_1 <= max);\n    assert(min <= l64_2 and l64_2 <= r64_2\
+    \ and r64_2 <= max);\n}\nvoid vecTest()\n{\n    int n = 10;\n    int min = 10,\
+    \ max = 20;\n    const auto vs32_1 = rng.vec(n, min, max);\n    const auto vs32_2\
+    \ = rng_xo.vec(n, min, max);\n    const auto vs64_1 = rng64.vec(n, min, max);\n\
+    \    const auto vs64_2 = rng_xo64.vec(n, min, max);\n    for (const auto v : vs32_1)\
+    \ {\n        assert(min <= v and v <= max);\n    }\n    for (const auto v : vs32_2)\
+    \ {\n        assert(min <= v and v <= max);\n    }\n    for (const auto v : vs64_1)\
+    \ {\n        assert(min <= v and v <= max);\n    }\n    for (const auto v : vs64_2)\
+    \ {\n        assert(min <= v and v <= max);\n    }\n}\nvoid vvecTest()\n{\n  \
+    \  int m = 3, n = 4;\n    int min = 10, max = 20;\n    const auto vss32_1 = rng.vvec(m,\
+    \ n, min, max);\n    const auto vss32_2 = rng_xo.vvec(m, n, min, max);\n    const\
+    \ auto vss64_1 = rng64.vvec(m, n, min, max);\n    const auto vss64_2 = rng_xo64.vvec(m,\
+    \ n, min, max);\n    for (const auto vs : vss32_1) {\n        for (auto v : vs)\
+    \ {\n            assert(min <= v and v <= max);\n        }\n    }\n    for (const\
+    \ auto vs : vss32_2) {\n        for (auto v : vs) {\n            assert(min <=\
+    \ v and v <= max);\n        }\n    }\n    for (const auto vs : vss64_1) {\n  \
     \      for (auto v : vs) {\n            assert(min <= v and v <= max);\n     \
-    \   }\n    }\n    for (const auto vs : vss64_1) {\n        for (auto v : vs) {\n\
-    \            assert(min <= v and v <= max);\n        }\n    }\n    for (const\
-    \ auto vs : vss64_2) {\n        for (auto v : vs) {\n            assert(min <=\
-    \ v and v <= max);\n        }\n    }\n}\nint main()\n{\n    Test();\n    valTest();\n\
-    \    pairTest();\n    vecTest();\n    vvecTest();\n    std::cout << \"Hello World\\\
-    n\";\n    return 0;\n}\n"
+    \   }\n    }\n    for (const auto vs : vss64_2) {\n        for (auto v : vs) {\n\
+    \            assert(min <= v and v <= max);\n        }\n    }\n}\nint main()\n\
+    {\n    Test();\n    valTest();\n    pairTest();\n    vecTest();\n    vvecTest();\n\
+    \    std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
   code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \n#include \"../../../src/misc/common/rng.hpp\"\n\nvoid Test()\n{\n    const u64\
     \ v32_1 = rng();\n    const u64 v32_2 = rng_xo();\n    const u64 v64_1 = rng64();\n\
@@ -190,11 +196,12 @@ data:
   - src/misc/common/type_alias.hpp
   - src/misc/common/vec_utils.hpp
   - src/misc/common/xoshiro.hpp
+  - src/misc/common/constants.hpp
   isVerificationFile: true
   path: verifications/misc/common/rng.test.cpp
   requiredBy: []
-  timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-06-13 23:28:40+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/misc/common/rng.test.cpp
 layout: document

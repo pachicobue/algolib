@@ -1,17 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/misc/common/constants.hpp
+    title: src/misc/common/constants.hpp
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -43,7 +46,12 @@ data:
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
     \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
     using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
-    using Sec = std::chrono::seconds;\n#pragma COMMENT(\"[REFS] Xoshiro: https://prng.di.unimi.it\"\
+    using Sec = std::chrono::seconds;\ntemplate<typename T>\nconstexpr T LIMMIN =\
+    \ std::numeric_limits<T>::min();\ntemplate<typename T>\nconstexpr T LIMMAX = std::numeric_limits<T>::max();\n\
+    template<typename T>\nconstexpr T INF = (LIMMAX<T> - 1) / 2;\ntemplate<typename\
+    \ T>\nconstexpr T PI = T{3.141592653589793238462643383279502884};\ntemplate<typename\
+    \ T = u64>\nconstexpr T TEN(const int n)\n{\n    return n == 0 ? T{1} : TEN<T>(n\
+    \ - 1) * T{10};\n}\n#pragma COMMENT(\"[REFS] Xoshiro: https://prng.di.unimi.it\"\
     )\nnamespace xoshiro_impl {\nu64 x;\nu64 next()\n{\n    uint64_t z = (x += 0x9e3779b97f4a7c15);\n\
     \    z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;\n    z = (z ^ (z >> 27)) * 0x94d049bb133111eb;\n\
     \    return z ^ (z >> 31);\n}\n}\nclass Xoshiro32\n{\npublic:\n    using result_type\
@@ -51,20 +59,19 @@ data:
     \   xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n        s[1]\
     \ = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n        s[3]\
     \ = xoshiro_impl::next();\n    }\n    static constexpr T min()\n    {\n      \
-    \  return std::numeric_limits<T>::min();\n    }\n    static constexpr T max()\n\
-    \    {\n        return std::numeric_limits<T>::max();\n    }\n    T operator()()\n\
-    \    {\n        return next();\n    }\nprivate:\n    static constexpr T rotl(const\
-    \ T x, int k)\n    {\n        return (x << k) | (x >> (32 - k));\n    }\n    T\
-    \ next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n        const T\
-    \ t = s[1] << 9;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n        s[1] ^=\
-    \ s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3] = rotl(s[3],\
-    \ 11);\n        return ans;\n    }\n    T s[4];\n};\nclass Xoshiro64\n{\npublic:\n\
-    \    using result_type = u64;\n    using T = result_type;\n    Xoshiro64(T seed\
-    \ = 0)\n    {\n        xoshiro_impl::x = seed;\n        s[0] = xoshiro_impl::next();\n\
-    \        s[1] = xoshiro_impl::next();\n        s[2] = xoshiro_impl::next();\n\
-    \        s[3] = xoshiro_impl::next();\n    }\n    static constexpr T min()\n \
-    \   {\n        return std::numeric_limits<T>::min();\n    }\n    static constexpr\
-    \ T max()\n    {\n        return std::numeric_limits<T>::max();\n    }\n    T\
+    \  return LIMMIN<T>;\n    }\n    static constexpr T max()\n    {\n        return\
+    \ LIMMAX<T>;\n    }\n    T operator()()\n    {\n        return next();\n    }\n\
+    private:\n    static constexpr T rotl(const T x, int k)\n    {\n        return\
+    \ (x << k) | (x >> (32 - k));\n    }\n    T next()\n    {\n        const T ans\
+    \ = rotl(s[1] * 5, 7) * 9;\n        const T t = s[1] << 9;\n        s[2] ^= s[0];\n\
+    \        s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0] ^= s[3];\n       \
+    \ s[2] ^= t;\n        s[3] = rotl(s[3], 11);\n        return ans;\n    }\n   \
+    \ T s[4];\n};\nclass Xoshiro64\n{\npublic:\n    using result_type = u64;\n   \
+    \ using T = result_type;\n    Xoshiro64(T seed = 0)\n    {\n        xoshiro_impl::x\
+    \ = seed;\n        s[0] = xoshiro_impl::next();\n        s[1] = xoshiro_impl::next();\n\
+    \        s[2] = xoshiro_impl::next();\n        s[3] = xoshiro_impl::next();\n\
+    \    }\n    static constexpr T min()\n    {\n        return LIMMIN<T>;\n    }\n\
+    \    static constexpr T max()\n    {\n        return LIMMAX<T>;\n    }\n    T\
     \ operator()()\n    {\n        return next();\n    }\nprivate:\n    static constexpr\
     \ T rotl(const T x, int k)\n    {\n        return (x << k) | (x >> (64 - k));\n\
     \    }\n    T next()\n    {\n        const T ans = rotl(s[1] * 5, 7) * 9;\n  \
@@ -88,11 +95,12 @@ data:
   dependsOn:
   - src/misc/common/xoshiro.hpp
   - src/misc/common/type_alias.hpp
+  - src/misc/common/constants.hpp
   isVerificationFile: true
   path: verifications/misc/common/xoshiro.test.cpp
   requiredBy: []
-  timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-06-13 23:28:40+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/misc/common/xoshiro.test.cpp
 layout: document

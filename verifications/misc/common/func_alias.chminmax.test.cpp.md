@@ -1,17 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/misc/common/print/int128_t.hpp
+    title: src/misc/common/print/int128_t.hpp
+  - icon: ':question:'
+    path: src/misc/common/show.hpp
+    title: src/misc/common/show.hpp
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -43,35 +49,42 @@ data:
     \ T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap\
     \ = std::priority_queue<T, Vec<T>, Gt<T>>;\nusing NSec = std::chrono::nanoseconds;\n\
     using USec = std::chrono::microseconds;\nusing MSec = std::chrono::milliseconds;\n\
-    using Sec = std::chrono::seconds;\ntemplate<typename T>\nbool chmin(T& a, const\
-    \ T& b)\n{\n    if (a > b) {\n        a = b;\n        return true;\n    } else\
-    \ {\n        return false;\n    }\n}\ntemplate<typename T>\nbool chmax(T& a, const\
-    \ T& b)\n{\n    if (a < b) {\n        a = b;\n        return true;\n    } else\
-    \ {\n        return false;\n    }\n}\ntemplate<typename T>\nconstexpr T fdiv(T\
-    \ x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? x /\
-    \ y : (x - y + 1) / y;\n}\ntemplate<typename T>\nconstexpr T cdiv(T x, T y)\n\
-    {\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? (x + y - 1) / y\
-    \ : x / y;\n}\ntemplate<typename T, typename I>\nconstexpr T modPower(T v, I n,\
-    \ T mod)\n{\n    T ans = 1 % mod;\n    for (; n > 0; n >>= 1, (v *= v) %= mod)\
-    \ {\n        if (n % 2 == 1) { (ans *= v) %= mod; }\n    }\n    return ans;\n\
-    }\ntemplate<typename T, typename I>\nconstexpr T power(T v, I n)\n{\n    T ans\
-    \ = 1;\n    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *=\
-    \ v; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\nconstexpr\
-    \ T power(T v, I n, const T& e)\n{\n    T ans = e;\n    for (; n > 0; n >>= 1,\
-    \ v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\n\
-    struct C\n{\n    C() = default;\n    C(int v_) : v{v_} {}\n    friend bool operator<(const\
-    \ C& c1, const C& c2)\n    {\n        return c1.v < c2.v;\n    }\n    friend bool\
-    \ operator>(const C& c1, const C& c2)\n    {\n        return c1.v > c2.v;\n  \
-    \  }\n    int v = 0;\n};\nvoid chminTest()\n{\n    int v = 10;\n    for (int i\
-    \ = 100; i >= 0; i--) {\n        assert(chmin(v, i) == (i < 10));\n        assert(v\
-    \ == std::min(i, 10));\n    }\n    C cls{10};\n    for (int i = 100; i >= 0; i--)\
-    \ {\n        assert(chmin(cls, C{i}) == (i < 10));\n        assert(cls.v == std::min(i,\
-    \ 10));\n    }\n}\nvoid chmaxTest()\n{\n    int v = 10;\n    for (int i = 0; i\
-    \ < 100; i++) {\n        assert(chmax(v, i) == (i > 10));\n        assert(v ==\
-    \ std::max(i, 10));\n    }\n    C cls{10};\n    for (int i = 0; i < 100; i++)\
-    \ {\n        assert(chmax(cls, C{i}) == (i > 10));\n        assert(cls.v == std::max(i,\
-    \ 10));\n    }\n}\nint main()\n{\n    chminTest();\n    chmaxTest();\n    std::cout\
-    \ << \"Hello World\\n\";\n    return 0;\n}\n"
+    using Sec = std::chrono::seconds;\nOstream& operator<<(Ostream& os, i128 v)\n\
+    {\n    bool minus = false;\n    if (v < 0) { minus = true, v = -v; }\n    Str\
+    \ ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) {\n        ans.push_back('0'\
+    \ + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(), ans.end());\n    return\
+    \ os << (minus ? \"-\" : \"\") << ans;\n}\nOstream& operator<<(Ostream& os, u128\
+    \ v)\n{\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) {\n   \
+    \     ans.push_back('0' + v % 10), v /= 10;\n    }\n    std::reverse(ans.begin(),\
+    \ ans.end());\n    return os << ans;\n}\ntemplate<typename T>\nbool chmin(T& a,\
+    \ const T& b)\n{\n    if (a > b) {\n        a = b;\n        return true;\n   \
+    \ } else {\n        return false;\n    }\n}\ntemplate<typename T>\nbool chmax(T&\
+    \ a, const T& b)\n{\n    if (a < b) {\n        a = b;\n        return true;\n\
+    \    } else {\n        return false;\n    }\n}\ntemplate<typename T>\nconstexpr\
+    \ T fdiv(T x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{}\
+    \ ? x / y : (x - y + 1) / y;\n}\ntemplate<typename T>\nconstexpr T cdiv(T x, T\
+    \ y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? (x + y -\
+    \ 1) / y : x / y;\n}\ntemplate<typename T, typename I>\nconstexpr T modPower(T\
+    \ v, I n, T mod)\n{\n    T ans = 1 % mod;\n    for (; n > 0; n >>= 1, (v *= v)\
+    \ %= mod) {\n        if (n % 2 == 1) { (ans *= v) %= mod; }\n    }\n    return\
+    \ ans;\n}\ntemplate<typename T, typename I>\nconstexpr T power(T v, I n)\n{\n\
+    \    T ans = 1;\n    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1)\
+    \ { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\n\
+    constexpr T power(T v, I n, const T& e)\n{\n    T ans = e;\n    for (; n > 0;\
+    \ n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return\
+    \ ans;\n}\nstruct C\n{\n    C() = default;\n    C(int v_) : v{v_} {}\n    friend\
+    \ bool operator<(const C& c1, const C& c2)\n    {\n        return c1.v < c2.v;\n\
+    \    }\n    friend bool operator>(const C& c1, const C& c2)\n    {\n        return\
+    \ c1.v > c2.v;\n    }\n    int v = 0;\n};\nvoid chminTest()\n{\n    int v = 10;\n\
+    \    for (int i = 100; i >= 0; i--) {\n        assert(chmin(v, i) == (i < 10));\n\
+    \        assert(v == std::min(i, 10));\n    }\n    C cls{10};\n    for (int i\
+    \ = 100; i >= 0; i--) {\n        assert(chmin(cls, C{i}) == (i < 10));\n     \
+    \   assert(cls.v == std::min(i, 10));\n    }\n}\nvoid chmaxTest()\n{\n    int\
+    \ v = 10;\n    for (int i = 0; i < 100; i++) {\n        assert(chmax(v, i) ==\
+    \ (i > 10));\n        assert(v == std::max(i, 10));\n    }\n    C cls{10};\n \
+    \   for (int i = 0; i < 100; i++) {\n        assert(chmax(cls, C{i}) == (i > 10));\n\
+    \        assert(cls.v == std::max(i, 10));\n    }\n}\nint main()\n{\n    chminTest();\n\
+    \    chmaxTest();\n    std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
   code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \n#include \"../../../src/misc/common/func_alias.hpp\"\n\nstruct C\n{\n    C()\
     \ = default;\n    C(int v_) : v{v_} {}\n    friend bool operator<(const C& c1,\
@@ -90,11 +103,13 @@ data:
   dependsOn:
   - src/misc/common/func_alias.hpp
   - src/misc/common/type_alias.hpp
+  - src/misc/common/show.hpp
+  - src/misc/common/print/int128_t.hpp
   isVerificationFile: true
   path: verifications/misc/common/func_alias.chminmax.test.cpp
   requiredBy: []
-  timestamp: '2021-06-02 01:47:19+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-06-13 23:28:40+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/misc/common/func_alias.chminmax.test.cpp
 layout: document
