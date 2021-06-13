@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/linear/bit_bases.hpp
     title: src/linear/bit_bases.hpp
   - icon: ':question:'

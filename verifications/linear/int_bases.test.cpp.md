@@ -59,9 +59,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/481
+    PROBLEM: https://yukicoder.me/problems/no/184
     links:
-    - https://yukicoder.me/problems/481
+    - https://yukicoder.me/problems/no/184
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -261,7 +261,7 @@ data:
     \ bases;\n    for (int i : rep(N)) {\n        static_cast<void>(i);\n        const\
     \ auto a = in.val<u64>();\n        bases.add(a);\n    }\n    out.ln(1_u64 << bases.rank());\n\
     \    return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/481\"\n#include \"../../src/misc/printer.hpp\"\
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/184\"\n#include \"../../src/misc/printer.hpp\"\
     \n#include \"../../src/misc/scanner.hpp\"\n#include \"../../src/linear/int_bases.hpp\"\
     \n\nint main()\n{\n    const auto N = in.val<int>();\n    IntBases bases;\n  \
     \  for (int i : rep(N)) {\n        USE(i);\n        const auto a = in.val<u64>();\n\
@@ -288,7 +288,7 @@ data:
   isVerificationFile: true
   path: verifications/linear/int_bases.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-06-13 23:44:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/linear/int_bases.test.cpp

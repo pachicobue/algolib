@@ -45,7 +45,7 @@ data:
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/linear/bit_bases.test.cpp
     title: verifications/linear/bit_bases.test.cpp
   - icon: ':x:'
@@ -53,7 +53,7 @@ data:
     title: verifications/linear/bit_bases.ut.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -269,7 +269,7 @@ data:
   path: src/linear/bit_bases.hpp
   requiredBy: []
   timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verifications/linear/bit_bases.ut.test.cpp
   - verifications/linear/bit_bases.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/linear/bit_bases.hpp
     title: src/linear/bit_bases.hpp
   - icon: ':question:'
@@ -54,14 +54,14 @@ data:
     title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/803
+    PROBLEM: https://yukicoder.me/problems/no/184
     links:
-    - https://yukicoder.me/problems/803
+    - https://yukicoder.me/problems/no/184
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -263,7 +263,7 @@ data:
     \ bases;\n    for (int i : rep(N)) {\n        static_cast<void>(i);\n        const\
     \ auto a = in.val<u64>();\n        bases.add(a);\n    }\n    out.ln(1_u64 << bases.rank());\n\
     \    return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/803\"\n#include \"../../src/misc/printer.hpp\"\
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/184\"\n#include \"../../src/misc/printer.hpp\"\
     \n#include \"../../src/misc/scanner.hpp\"\n#include \"../../src/linear/bit_bases.hpp\"\
     \n\nint main()\n{\n    const auto N = in.val<int>();\n    BitBases<64> bases;\n\
     \    for (int i : rep(N)) {\n        USE(i);\n        const auto a = in.val<u64>();\n\
@@ -290,8 +290,8 @@ data:
   isVerificationFile: true
   path: verifications/linear/bit_bases.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-06-13 23:44:15+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/linear/bit_bases.test.cpp
 layout: document
