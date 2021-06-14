@@ -60,7 +60,7 @@ data:
   - icon: ':x:'
     path: verifications/math/mod_nthroot.yuki981.test.cpp
     title: verifications/math/mod_nthroot.yuki981.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/prime_factors.test.cpp
     title: verifications/math/prime_factors.test.cpp
   _isVerificationFailed: true
