@@ -1,12 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
-    path: src/math/complex.hpp
-    title: src/math/complex.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/math/and_convolution.hpp
+    title: src/math/and_convolution.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
+  - icon: ':warning:'
+    path: src/math/or_convolution.hpp
+    title: src/math/or_convolution.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/math/set_moebius.hpp
+    title: src/math/set_moebius.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/math/set_zeta.hpp
+    title: src/math/set_zeta.hpp
   - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -49,13 +58,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/fastio/printer.hpp
+    title: src/misc/fastio/printer.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/fastio/scanner.hpp
+    title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    links: []
+    links:
+    - https://judge.yosupo.jp/problem/bitwise_and_convolution
   bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\nusing i32 = int;\n\
     using u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing\
@@ -199,45 +215,26 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ T>\nstruct complex\n{\n    constexpr complex() : real{T{0}}, imag{T{0}} {}\n\
-    \    constexpr complex(const T r, const T i) : real{r}, imag{i} {}\n    constexpr\
-    \ complex polar(const T r, const T s)\n    {\n        real = r * std::cos(s),\
-    \ imag = r * std::sin(s);\n    }\n    constexpr complex conj() const\n    {\n\
-    \        return complex{real, -imag};\n    }\n    constexpr T norm() const\n \
-    \   {\n        return real * real + imag * imag;\n    }\n    constexpr T abs()\
-    \ const\n    {\n        return std::sqrt(norm());\n    }\n    constexpr T arg()\
-    \ const\n    {\n        return std::atan2(imag, real);\n    }\n    complex operator-()\n\
-    \    {\n        return complex{-real, -imag};\n    }\n    complex operator+(const\
-    \ complex& c) const\n    {\n        return complex{*this} += c;\n    }\n    complex\
-    \ operator-(const complex& c) const\n    {\n        return complex{*this} -= c;\n\
-    \    }\n    complex operator*(const complex& c) const\n    {\n        return complex{real\
-    \ * c.real - imag * c.imag,\n                       real * c.imag + imag * c.real};\n\
-    \    }\n    complex operator/(const complex& c) const\n    {\n        return (*this)\
-    \ * c.conj() / c.norm();\n    }\n    complex operator+(const T v) const\n    {\n\
-    \        return complex{*this} += v;\n    }\n    complex operator-(const T v)\
-    \ const\n    {\n        return complex{*this} -= v;\n    }\n    complex operator*(const\
-    \ T v) const\n    {\n        return complex{*this} *= v;\n    }\n    complex operator/(const\
-    \ T v) const\n    {\n        return complex{*this} /= v;\n    }\n    friend complex\
-    \ operator+(const T v, const complex& c)\n    {\n        return complex{v + c.real,\
-    \ c.imag};\n    }\n    friend complex operator-(const T v, const complex& c)\n\
-    \    {\n        return complex{v - c.real, -c.imag};\n    }\n    friend complex\
-    \ operator*(const T v, const complex& c)\n    {\n        return complex{v * c.real,\
-    \ v * c.imag};\n    }\n    friend complex operator/(const T v, const complex&\
-    \ c)\n    {\n        return v * c.conj() / c.norm();\n    }\n    complex& operator+=(const\
-    \ complex& c)\n    {\n        return real += c.real, imag += c.imag, *this;\n\
-    \    }\n    complex& operator-=(const complex& c)\n    {\n        return real\
-    \ -= c.real, imag -= c.imag, *this;\n    }\n    complex& operator*=(const complex&\
-    \ c)\n    {\n        return (*this) = (*this) * c;\n    }\n    complex& operator/=(const\
-    \ complex& c)\n    {\n        return (*this) = (*this) / c;\n    }\n    complex&\
-    \ operator+=(const T v)\n    {\n        return real += v, *this;\n    }\n    complex&\
-    \ operator-=(const T v)\n    {\n        return real -= v, *this;\n    }\n    complex&\
-    \ operator*=(const T v)\n    {\n        return real *= v, imag *= v, *this;\n\
-    \    }\n    complex& operator/=(const T v)\n    {\n        return real /= v, imag\
-    \ /= v, *this;\n    }\n    bool operator==(const complex& c) const\n    {\n  \
-    \      return real == c.real and imag == c.imag;\n    }\n    bool operator!=(const\
-    \ complex& c) const\n    {\n        return not(*this == c);\n    }\n    friend\
-    \ Ostream& operator<<(Ostream& os, const complex& c)\n    {\n        return os\
-    \ << c.real << \"+\" << c.imag << \"I\";\n    }\n    T real, imag;\n};\ntemplate<u32\
+    \ T>\nVec<T> setMoebius(const Vec<T>& xs, bool subset)\n{\n    const int N = ceil2(xs.size());\n\
+    \    Vec<T> ys(N);\n    for (int i : rep(xs.size())) {\n        ys[i] = xs[i];\n\
+    \    }\n    for (int i = 1; i < N; i <<= 1) {\n        for (int j : rep(N)) {\n\
+    \            if ((j & i) == 0) {\n                if (subset) {\n            \
+    \        ys[j | i] -= ys[j];\n                } else {\n                    ys[j]\
+    \ -= ys[j | i];\n                }\n            }\n        }\n    }\n    return\
+    \ ys;\n}\ntemplate<typename T>\nVec<T> setZeta(const Vec<T>& xs, const bool subset)\n\
+    {\n    const int N = ceil2(xs.size());\n    Vec<T> ys(N);\n    for (int i : rep(xs.size()))\
+    \ {\n        ys[i] = xs[i];\n    }\n    for (int i = 1; i < N; i <<= 1) {\n  \
+    \      for (int j : rep(N)) {\n            if ((j & i) == 0) {\n             \
+    \   if (subset) {\n                    ys[j | i] += ys[j];\n                }\
+    \ else {\n                    ys[j] += ys[j | i];\n                }\n       \
+    \     }\n        }\n    }\n    return ys;\n}\ntemplate<typename T>\nVec<T> andConvolute(Vec<T>\
+    \ f, Vec<T> g)\n{\n    const int N = ceil2(std::max(f.size(), g.size()));\n  \
+    \  f.resize(N), g.resize(N);\n    auto F = setZeta(f, false), G = setZeta(g, false);\n\
+    \    for (int i : rep(N)) {\n        F[i] *= G[i];\n    }\n    return setMoebius(F,\
+    \ false);\n}\ntemplate<typename T>\nVec<T> orConvolute(Vec<T> f, Vec<T> g)\n{\n\
+    \    const int N = ceil2(std::max(f.size(), g.size()));\n    f.resize(N), g.resize(N);\n\
+    \    auto F = setZeta(f, true), G = setZeta(g, true);\n    for (int i : rep(N))\
+    \ {\n        F[i] *= G[i];\n    }\n    return setMoebius(F, true);\n}\ntemplate<u32\
     \ mod_, u32 root_, u32 max2p_>\nclass modint\n{\n    template<typename U = u32&>\n\
     \    static U modRef()\n    {\n        static u32 s_mod = 0;\n        return s_mod;\n\
     \    }\n    template<typename U = u32&>\n    static U rootRef()\n    {\n     \
@@ -298,57 +295,68 @@ data:
     \    {\n        return norm(u32(x % (i64)mod() + (i64)mod()));\n    }\n    u32\
     \ m_val;\n};\nusing modint_1000000007 = modint<1000000007, 5, 1>;\nusing modint_998244353\
     \ = modint<998244353, 3, 23>;\ntemplate<int id>\nusing modint_dynamic = modint<0,\
-    \ 0, id>;\ntemplate<typename R>\nclass FFT\n{\nprivate:\n    static constexpr\
-    \ R pi = PI<R>;\n    static constexpr int D = 30;\n    static constexpr int B\
-    \ = 14;\n    static void trans(Vec<complex<R>>& as, const int lg, const bool rev)\n\
-    \    {\n        const int N = as.size();\n        static Vec<complex<R>> root[D];\n\
-    \        if (root[lg].empty()) {\n            root[lg].resize(N);\n          \
-    \  for (int i = 0; i < N; i++) {\n                const R theta = pi * R(2 * i)\
-    \ / R(N);\n                root[lg][i] = complex<R>(std::cos(theta), std::sin(theta));\n\
-    \            }\n        }\n        Vec<complex<R>> tmp(N);\n        for (int w\
-    \ = (N >> 1); w > 0; w >>= 1) {\n            for (int y = 0; y < (N >> 1); y +=\
-    \ w) {\n                const complex<R> r = rev ? root[lg][y].conj() : root[lg][y];\n\
-    \                for (int x = 0; x < w; x++) {\n                    const auto\
-    \ u = as[y << 1 | x], v = as[y << 1 | x | w] * r;\n                    tmp[y |\
-    \ x] = u + v, tmp[y | x | (N >> 1)] = u - v;\n                }\n            }\n\
-    \            std::swap(tmp, as);\n        }\n    }\npublic:\n    FFT() = delete;\n\
-    \    template<typename T, typename V = T>\n    static Vec<V> convolute(const Vec<T>&\
-    \ as, const Vec<T>& bs)\n    {\n        const int need = as.size() + bs.size()\
-    \ - 1;\n        const int lg = clog(need);\n        const int sz = 1UL << lg;\n\
-    \        Vec<complex<R>> xs(sz), ys(sz);\n        for (int i : rep(as.size()))\
-    \ {\n            xs[i] = {(R)as[i], (R)0};\n        }\n        for (int i : rep(bs.size()))\
-    \ {\n            ys[i] = {(R)bs[i], (R)0};\n        }\n        trans(xs, lg, false),\
-    \ trans(ys, lg, false);\n        for (int i : rep(sz)) {\n            xs[i] *=\
-    \ ys[i];\n        }\n        trans(xs, lg, true);\n        Vec<T> ans(need);\n\
-    \        for (int i : rep(need)) {\n            ans[i] = (T)std::round(xs[i].real\
-    \ / (R)sz);\n        }\n        return ans;\n    }\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"complex.hpp\"\n\
-    #include \"modint.hpp\"\ntemplate<typename R>\nclass FFT\n{\nprivate:\n    static\
-    \ constexpr R pi = PI<R>;\n    static constexpr int D = 30;\n    static constexpr\
-    \ int B = 14;\n    static void trans(Vec<complex<R>>& as, const int lg, const\
-    \ bool rev)\n    {\n        const int N = as.size();\n        static Vec<complex<R>>\
-    \ root[D];\n        if (root[lg].empty()) {\n            root[lg].resize(N);\n\
-    \            for (int i = 0; i < N; i++) {\n                const R theta = pi\
-    \ * R(2 * i) / R(N);\n                root[lg][i] = complex<R>(std::cos(theta),\
-    \ std::sin(theta));\n            }\n        }\n        Vec<complex<R>> tmp(N);\n\
-    \        for (int w = (N >> 1); w > 0; w >>= 1) {\n            for (int y = 0;\
-    \ y < (N >> 1); y += w) {\n                const complex<R> r = rev ? root[lg][y].conj()\
-    \ : root[lg][y];\n                for (int x = 0; x < w; x++) {\n            \
-    \        const auto u = as[y << 1 | x], v = as[y << 1 | x | w] * r;\n        \
-    \            tmp[y | x] = u + v, tmp[y | x | (N >> 1)] = u - v;\n            \
-    \    }\n            }\n            std::swap(tmp, as);\n        }\n    }\n\npublic:\n\
-    \    FFT() = delete;\n    template<typename T, typename V = T>\n    static Vec<V>\
-    \ convolute(const Vec<T>& as, const Vec<T>& bs)\n    {\n        const int need\
-    \ = as.size() + bs.size() - 1;\n        const int lg = clog(need);\n        const\
-    \ int sz = 1UL << lg;\n        Vec<complex<R>> xs(sz), ys(sz);\n        for (int\
-    \ i : rep(as.size())) {\n            xs[i] = {(R)as[i], (R)0};\n        }\n  \
-    \      for (int i : rep(bs.size())) {\n            ys[i] = {(R)bs[i], (R)0};\n\
-    \        }\n        trans(xs, lg, false), trans(ys, lg, false);\n        for (int\
-    \ i : rep(sz)) {\n            xs[i] *= ys[i];\n        }\n        trans(xs, lg,\
-    \ true);\n        Vec<T> ans(need);\n        for (int i : rep(need)) {\n     \
-    \       ans[i] = (T)std::round(xs[i].real / (R)sz);\n        }\n        return\
-    \ ans;\n    }\n};\n"
+    \ 0, id>;\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer()\
+    \ {}\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
+    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
+    n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
+    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
+    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
+    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
+    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
+    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
+    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
+    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
+    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
+    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
+    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
+    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
+    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
+    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
+    \        }\n        while (true) {\n            c = getchar();\n            if\
+    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
+    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
+    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
+    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
+    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
+    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
+    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
+    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
+    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
+    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
+    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
+    \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
+    \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
+    \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    int main()\n{\n    using mint = modint_998244353;\n    const auto n = in.val<int>();\n\
+    \    const int N = 1 << n;\n    const auto as = in.vec<mint>(N);\n    const auto\
+    \ bs = in.vec<mint>(N);\n    Vec<mint> As(N, 0), Bs(N, 0);\n    for (int i : rep(N))\
+    \ {\n        As[i] = as[N - i - 1];\n        Bs[i] = bs[N - i - 1];\n    }\n \
+    \   const auto Cs = orConvolute(As, Bs);\n    Vec<int> ans(Cs.size());\n    for\
+    \ (int i : rep(N)) {\n        ans[i] = Cs[N - i - 1].val();\n    }\n    out.ln(ans);\n\
+    \    return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bitwise_and_convolution\"\
+    \n#include \"../../src/math/or_convolution.hpp\"\n#include \"../../src/math/modint.hpp\"\
+    \n#include \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
+    \nint main()\n{\n    using mint = modint_998244353;\n    const auto n = in.val<int>();\n\
+    \    const int N = 1 << n;\n    const auto as = in.vec<mint>(N);\n    const auto\
+    \ bs = in.vec<mint>(N);\n    Vec<mint> As(N, 0), Bs(N, 0);\n    for (int i : rep(N))\
+    \ {\n        As[i] = as[N - i - 1];\n        Bs[i] = bs[N - i - 1];\n    }\n \
+    \   const auto Cs = orConvolute(As, Bs);\n    Vec<int> ans(Cs.size());\n    for\
+    \ (int i : rep(N)) {\n        ans[i] = Cs[N - i - 1].val();\n    }\n    out.ln(ans);\n\
+    \    return 0;\n}\n"
   dependsOn:
+  - src/math/or_convolution.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -363,18 +371,22 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/math/complex.hpp
+  - src/math/and_convolution.hpp
+  - src/math/set_moebius.hpp
+  - src/math/set_zeta.hpp
   - src/math/modint.hpp
+  - src/misc/fastio/printer.hpp
+  - src/misc/fastio/scanner.hpp
   isVerificationFile: false
-  path: src/math/fft.hpp
+  path: verifications/math/or_convolution.tets.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-06-15 01:11:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/math/fft.hpp
+documentation_of: verifications/math/or_convolution.tets.cpp
 layout: document
 redirect_from:
-- /library/src/math/fft.hpp
-- /library/src/math/fft.hpp.html
-title: src/math/fft.hpp
+- /library/verifications/math/or_convolution.tets.cpp
+- /library/verifications/math/or_convolution.tets.cpp.html
+title: verifications/math/or_convolution.tets.cpp
 ---

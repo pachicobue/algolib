@@ -50,6 +50,9 @@ data:
   - icon: ':warning:'
     path: src/math/or_convolution.hpp
     title: src/math/or_convolution.hpp
+  - icon: ':warning:'
+    path: verifications/math/or_convolution.tets.cpp
+    title: verifications/math/or_convolution.tets.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verifications/math/and_convolution.test.cpp
@@ -237,6 +240,7 @@ data:
   requiredBy:
   - src/math/or_convolution.hpp
   - src/math/and_convolution.hpp
+  - verifications/math/or_convolution.tets.cpp
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

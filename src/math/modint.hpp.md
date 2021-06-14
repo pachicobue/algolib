@@ -44,9 +44,6 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/math/fft.hpp
-    title: src/math/fft.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
@@ -56,9 +53,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
-  - icon: ':warning:'
-    path: src/math/lagrange_interpolation.hpp
-    title: src/math/lagrange_interpolation.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
@@ -69,11 +63,11 @@ data:
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':warning:'
-    path: src/math/primitive_root.hpp
-    title: src/math/primitive_root.hpp
-  - icon: ':warning:'
     path: verifications/math/mod_nthroot.yuki981.cpp
     title: verifications/math/mod_nthroot.yuki981.cpp
+  - icon: ':warning:'
+    path: verifications/math/or_convolution.tets.cpp
+    title: verifications/math/or_convolution.tets.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/lazyseg.test.cpp
@@ -143,7 +137,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\nusing i32 = int;\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\nusing i32 = int;\n\
     using u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing\
     \ f80 = long double;\nusing f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64\
@@ -428,15 +422,13 @@ data:
   path: src/math/modint.hpp
   requiredBy:
   - src/math/nth_term.hpp
-  - src/math/lagrange_interpolation.hpp
-  - src/math/primitive_root.hpp
   - src/math/is_prime.hpp
   - src/math/prime_factors.hpp
   - src/math/fps.hpp
   - src/math/fps_div_nth.hpp
-  - src/math/fft.hpp
   - src/math/mod_nthroot.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
+  - verifications/math/or_convolution.tets.cpp
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

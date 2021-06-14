@@ -50,9 +50,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
-  - icon: ':warning:'
-    path: src/math/lagrange_interpolation.hpp
-    title: src/math/lagrange_interpolation.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/nth_term.hpp
     title: src/math/nth_term.hpp
@@ -653,7 +650,6 @@ data:
   path: src/math/fps.hpp
   requiredBy:
   - src/math/nth_term.hpp
-  - src/math/lagrange_interpolation.hpp
   - src/math/fps_div_nth.hpp
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC

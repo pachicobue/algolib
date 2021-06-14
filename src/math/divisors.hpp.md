@@ -44,10 +44,13 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/math/divisors.test.cpp
+    title: verifications/math/divisors.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -196,12 +199,12 @@ data:
     \ T>\nVec<T> divisors(const T n)\n{\n    Vec<T> head, tail;\n    for (T i = 1;\
     \ i * i <= n; i++) {\n        if (n % i == 0) {\n            head.push_back(i);\n\
     \            if (i * i != n) { tail.push_back(n / i); }\n        }\n    }\n  \
-    \  std::copy(tail.begin(), tail.end(), head.end());\n    return head;\n}\n"
+    \  reverseAll(tail);\n    return head + tail;\n}\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nVec<T>\
     \ divisors(const T n)\n{\n    Vec<T> head, tail;\n    for (T i = 1; i * i <= n;\
     \ i++) {\n        if (n % i == 0) {\n            head.push_back(i);\n        \
-    \    if (i * i != n) { tail.push_back(n / i); }\n        }\n    }\n    std::copy(tail.begin(),\
-    \ tail.end(), head.end());\n    return head;\n}\n"
+    \    if (i * i != n) { tail.push_back(n / i); }\n        }\n    }\n    reverseAll(tail);\n\
+    \    return head + tail;\n}\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -220,9 +223,10 @@ data:
   isVerificationFile: false
   path: src/math/divisors.hpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-06-15 01:11:36+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verifications/math/divisors.test.cpp
 documentation_of: src/math/divisors.hpp
 layout: document
 redirect_from:

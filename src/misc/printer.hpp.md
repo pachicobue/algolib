@@ -70,11 +70,20 @@ data:
     path: verifications/linear/int_bases.test.cpp
     title: verifications/linear/int_bases.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verifications/math/divisors.test.cpp
+    title: verifications/math/divisors.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/io.test.cpp
     title: verifications/misc/io.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/misc/printer.test.cpp
     title: verifications/misc/printer.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/string/manacher.test.cpp
+    title: verifications/string/manacher.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/string/z_algorithm.test.cpp
+    title: verifications/string/z_algorithm.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -276,10 +285,13 @@ data:
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verifications/string/z_algorithm.test.cpp
+  - verifications/string/manacher.test.cpp
   - verifications/misc/printer.test.cpp
   - verifications/misc/io.test.cpp
   - verifications/flow/max_flow.bipartite_matching.test.cpp
   - verifications/flow/max_flow.test.cpp
+  - verifications/math/divisors.test.cpp
   - verifications/linear/int_bases.test.cpp
   - verifications/linear/bit_bases.test.cpp
   - verifications/graph/centroid_decomp.test.cpp

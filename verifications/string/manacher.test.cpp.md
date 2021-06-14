@@ -43,13 +43,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/string/manacher.hpp
+    title: src/string/manacher.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/enumerate_palindromes
+    links:
+    - https://judge.yosupo.jp/problem/enumerate_palindromes
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -193,22 +205,58 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ T>\nVec<T> garner(const Vec<T>& xs, const Vec<T>& ms)\n{\n    const int N =\
-    \ (int)xs.size();\n    Vec<T> as(N);\n    for (int i : rep(N)) {\n        const\
-    \ T xi = xs[i], mod = ms[i];\n        T p = 1, sum = 0;\n        for (int j :\
-    \ rep(i)) {\n            const T xj = xs[j];\n            (sum += p * as[j] %\
-    \ mod) %= mod;\n            (p *= (xi + mod - xj)) %= mod;\n        }\n      \
-    \  const T res = (xi + mod - sum) % mod;\n        as[i] = res * modPower(p, mod\
-    \ - 2, mod) % mod;\n    }\n    return as;\n}\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nVec<T>\
-    \ garner(const Vec<T>& xs, const Vec<T>& ms)\n{\n    const int N = (int)xs.size();\n\
-    \    Vec<T> as(N);\n    for (int i : rep(N)) {\n        const T xi = xs[i], mod\
-    \ = ms[i];\n        T p = 1, sum = 0;\n        for (int j : rep(i)) {\n      \
-    \      const T xj = xs[j];\n            (sum += p * as[j] % mod) %= mod;\n   \
-    \         (p *= (xi + mod - xj)) %= mod;\n        }\n        const T res = (xi\
-    \ + mod - sum) % mod;\n        as[i] = res * modPower(p, mod - 2, mod) % mod;\n\
-    \    }\n    return as;\n}\n"
+    \ It>\nVec<int> manacher(It first, It last)\n{\n    auto get = [&](int i) { return\
+    \ *std::next(first, i); };\n    const int sz = std::distance(first, last);\n \
+    \   Vec<int> ans(sz);\n    for (int i = 0, k = 1, j = 0; i < sz; i += k, j -=\
+    \ k, k = 1) {\n        while (i >= j and i + j < sz and get(i - j) == get(i +\
+    \ j)) {\n            ++j;\n        }\n        ans[i] = j;\n        while (i >=\
+    \ k and i + k < sz and k + ans[i - k] < j) {\n            ans[i + k] = ans[i -\
+    \ k];\n            k++;\n        }\n    }\n    return ans;\n}\nclass Printer\n\
+    {\npublic:\n    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n        m_os\
+    \ << std::fixed << std::setprecision(15);\n    }\n    template<typename... Args>\n\
+    \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
+    \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
+    \ args)\n    {\n        dump(args...), m_os << '\\n';\n        return 0;\n   \
+    \ }\n    template<typename... Args>\n    int el(const Args&... args)\n    {\n\
+    \        dump(args...), m_os << std::endl;\n        return 0;\n    }\nprivate:\n\
+    \    template<typename T>\n    void dump(const T& v)\n    {\n        m_os << v;\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n   \
+    \     for (const int i : rep(vs.size())) {\n            m_os << (i ? \" \" : \"\
+    \"), dump(vs[i]);\n        }\n    }\n    template<typename T>\n    void dump(const\
+    \ Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size())) {\n  \
+    \          m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n        }\n    }\n   \
+    \ template<typename T, typename... Ts>\n    int dump(const T& v, const Ts&...\
+    \ args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n        return 0;\n\
+    \    }\n    Ostream& m_os;\n};\nPrinter out;\nclass Scanner\n{\npublic:\n    Scanner(Istream&\
+    \ is = std::cin) : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n\
+    \    }\n    template<typename T>\n    T val()\n    {\n        T v;\n        return\
+    \ m_is >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n\
+    \        return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T>\
+    \ vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>(); });\n\
+    \    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n   \
+    \     return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, const T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return Tup<Args...>{val<Args>()...};\n    }\n\
+    \    template<typename... Args>\n    auto tup(const Args&... offsets)\n    {\n\
+    \        return Tup<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n    Istream&\
+    \ m_is;\n};\nScanner in;\nint main()\n{\n    auto S = in.val<Str>();\n    const\
+    \ int N = S.size();\n    Str T;\n    for (int i : rep(N)) {\n        T.push_back('$');\n\
+    \        T.push_back(S[i]);\n    }\n    T.push_back('$');\n    auto rs = manacher(T.begin(),\
+    \ T.end());\n    Vec<int> ans;\n    for (int i : irange(1, 2 * N)) {\n       \
+    \ ans.push_back(rs[i] - 1);\n    }\n    out.ln(ans);\n    return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_palindromes\"\
+    \n#include \"../../src/string/manacher.hpp\"\n#include \"../../src/misc/printer.hpp\"\
+    \n#include \"../../src/misc/scanner.hpp\"\n\nint main()\n{\n    auto S = in.val<Str>();\n\
+    \    const int N = S.size();\n    Str T;\n    for (int i : rep(N)) {\n       \
+    \ T.push_back('$');\n        T.push_back(S[i]);\n    }\n    T.push_back('$');\n\
+    \    auto rs = manacher(T.begin(), T.end());\n    Vec<int> ans;\n    for (int\
+    \ i : irange(1, 2 * N)) {\n        ans.push_back(rs[i] - 1);\n    }\n    out.ln(ans);\n\
+    \    return 0;\n}\n"
   dependsOn:
+  - src/string/manacher.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -223,16 +271,18 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/math/garner.hpp
+  - src/misc/printer.hpp
+  - src/misc/scanner.hpp
+  isVerificationFile: true
+  path: verifications/string/manacher.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-06-15 01:11:36+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: src/math/garner.hpp
+documentation_of: verifications/string/manacher.test.cpp
 layout: document
 redirect_from:
-- /library/src/math/garner.hpp
-- /library/src/math/garner.hpp.html
-title: src/math/garner.hpp
+- /verify/verifications/string/manacher.test.cpp
+- /verify/verifications/string/manacher.test.cpp.html
+title: verifications/string/manacher.test.cpp
 ---

@@ -116,10 +116,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/berlekamp_massey.hpp
     title: src/math/berlekamp_massey.hpp
-  - icon: ':warning:'
-    path: src/math/complex.hpp
-    title: src/math/complex.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/math/divisors.hpp
     title: src/math/divisors.hpp
   - icon: ':heavy_check_mark:'
@@ -134,27 +131,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/factor_table.hpp
     title: src/math/factor_table.hpp
-  - icon: ':warning:'
-    path: src/math/fft.hpp
-    title: src/math/fft.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
-  - icon: ':warning:'
-    path: src/math/garner.hpp
-    title: src/math/garner.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/gcd_convolution.hpp
     title: src/math/gcd_convolution.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
-  - icon: ':warning:'
-    path: src/math/lagrange_interpolation.hpp
-    title: src/math/lagrange_interpolation.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
@@ -167,9 +155,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
-  - icon: ':warning:'
-    path: src/math/moebius_table.hpp
-    title: src/math/moebius_table.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/multiplicative_sum.hpp
     title: src/math/multiplicative_sum.hpp
@@ -188,15 +173,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/primes.hpp
     title: src/math/primes.hpp
-  - icon: ':warning:'
-    path: src/math/primitive_root.hpp
-    title: src/math/primitive_root.hpp
-  - icon: ':warning:'
-    path: src/math/rational.hpp
-    title: src/math/rational.hpp
-  - icon: ':warning:'
-    path: src/math/seg_sieve.hpp
-    title: src/math/seg_sieve.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/set_hadamard.hpp
     title: src/math/set_hadamard.hpp
@@ -242,10 +218,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/zipper.hpp
     title: src/misc/zipper.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/string/manacher.hpp
     title: src/string/manacher.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/string/mp.hpp
     title: src/string/mp.hpp
   - icon: ':warning:'
@@ -254,12 +230,15 @@ data:
   - icon: ':warning:'
     path: src/string/sa_is.hpp
     title: src/string/sa_is.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/string/z_algorithm.hpp
     title: src/string/z_algorithm.hpp
   - icon: ':warning:'
     path: verifications/math/mod_nthroot.yuki981.cpp
     title: verifications/math/mod_nthroot.yuki981.cpp
+  - icon: ':warning:'
+    path: verifications/math/or_convolution.tets.cpp
+    title: verifications/math/or_convolution.tets.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/bit_vector.test.cpp
@@ -388,6 +367,9 @@ data:
     path: verifications/math/berlekamp_massey.test.cpp
     title: verifications/math/berlekamp_massey.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verifications/math/divisors.test.cpp
+    title: verifications/math/divisors.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.convolution.test.cpp
     title: verifications/math/fps.convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -465,6 +447,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/misc/zipper.test.cpp
     title: verifications/misc/zipper.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/string/manacher.test.cpp
+    title: verifications/string/manacher.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/string/mp.ut.test.cpp
+    title: verifications/string/mp.ut.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/string/z_algorithm.test.cpp
+    title: verifications/string/z_algorithm.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -529,22 +520,15 @@ data:
   - src/misc/scanner.hpp
   - src/flow/max_flow.hpp
   - src/math/gcd_convolution.hpp
-  - src/math/garner.hpp
-  - src/math/seg_sieve.hpp
   - src/math/multiplicative_sum.hpp
   - src/math/nth_term.hpp
   - src/math/divisors.hpp
   - src/math/prime_powsum.hpp
-  - src/math/lagrange_interpolation.hpp
-  - src/math/primitive_root.hpp
   - src/math/modint64.hpp
-  - src/math/moebius_table.hpp
-  - src/math/rational.hpp
   - src/math/is_prime.hpp
   - src/math/xor_convolution.hpp
   - src/math/berlekamp_massey.hpp
   - src/math/factor_table.hpp
-  - src/math/complex.hpp
   - src/math/or_convolution.hpp
   - src/math/set_zeta.hpp
   - src/math/prime_factors.hpp
@@ -557,7 +541,6 @@ data:
   - src/math/extgcd.hpp
   - src/math/modint.hpp
   - src/math/mod_sqrt.hpp
-  - src/math/fft.hpp
   - src/math/mod_nthroot.hpp
   - src/math/primes.hpp
   - src/math/set_moebius.hpp
@@ -596,9 +579,13 @@ data:
   - src/graph/lca.hpp
   - src/graph/lowlink.hpp
   - verifications/math/mod_nthroot.yuki981.cpp
+  - verifications/math/or_convolution.tets.cpp
   timestamp: '2021-06-02 01:47:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verifications/string/mp.ut.test.cpp
+  - verifications/string/z_algorithm.test.cpp
+  - verifications/string/manacher.test.cpp
   - verifications/misc/zipper.test.cpp
   - verifications/misc/scanner.test.cpp
   - verifications/misc/seg_decomp.test.cpp
@@ -613,6 +600,7 @@ data:
   - verifications/flow/max_flow.test.cpp
   - verifications/math/fps.exp.test.cpp
   - verifications/math/fps.inv.test.cpp
+  - verifications/math/divisors.test.cpp
   - verifications/math/fps.convolution1000000007.test.cpp
   - verifications/math/prime_factors.test.cpp
   - verifications/math/fps.div_nth.test.cpp

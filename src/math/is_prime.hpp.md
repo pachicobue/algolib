@@ -57,9 +57,6 @@ data:
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':warning:'
-    path: src/math/primitive_root.hpp
-    title: src/math/primitive_root.hpp
-  - icon: ':warning:'
     path: verifications/math/mod_nthroot.yuki981.cpp
     title: verifications/math/mod_nthroot.yuki981.cpp
   _extendedVerifiedWith:
@@ -385,7 +382,6 @@ data:
   isVerificationFile: false
   path: src/math/is_prime.hpp
   requiredBy:
-  - src/math/primitive_root.hpp
   - src/math/prime_factors.hpp
   - src/math/mod_nthroot.hpp
   - verifications/math/mod_nthroot.yuki981.cpp

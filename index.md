@@ -122,10 +122,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/math/berlekamp_massey.hpp
       title: src/math/berlekamp_massey.hpp
-    - icon: ':warning:'
-      path: src/math/complex.hpp
-      title: src/math/complex.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/divisors.hpp
       title: src/math/divisors.hpp
     - icon: ':heavy_check_mark:'
@@ -140,27 +137,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/math/factor_table.hpp
       title: src/math/factor_table.hpp
-    - icon: ':warning:'
-      path: src/math/fft.hpp
-      title: src/math/fft.hpp
     - icon: ':heavy_check_mark:'
       path: src/math/fps.hpp
       title: src/math/fps.hpp
     - icon: ':heavy_check_mark:'
       path: src/math/fps_div_nth.hpp
       title: src/math/fps_div_nth.hpp
-    - icon: ':warning:'
-      path: src/math/garner.hpp
-      title: src/math/garner.hpp
     - icon: ':heavy_check_mark:'
       path: src/math/gcd_convolution.hpp
       title: src/math/gcd_convolution.hpp
     - icon: ':heavy_check_mark:'
       path: src/math/is_prime.hpp
       title: src/math/is_prime.hpp
-    - icon: ':warning:'
-      path: src/math/lagrange_interpolation.hpp
-      title: src/math/lagrange_interpolation.hpp
     - icon: ':heavy_check_mark:'
       path: src/math/mod_nthroot.hpp
       title: src/math/mod_nthroot.hpp
@@ -173,9 +161,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/math/modint64.hpp
       title: src/math/modint64.hpp
-    - icon: ':warning:'
-      path: src/math/moebius_table.hpp
-      title: src/math/moebius_table.hpp
     - icon: ':heavy_check_mark:'
       path: src/math/multiplicative_sum.hpp
       title: src/math/multiplicative_sum.hpp
@@ -194,15 +179,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/math/primes.hpp
       title: src/math/primes.hpp
-    - icon: ':warning:'
-      path: src/math/primitive_root.hpp
-      title: src/math/primitive_root.hpp
-    - icon: ':warning:'
-      path: src/math/rational.hpp
-      title: src/math/rational.hpp
-    - icon: ':warning:'
-      path: src/math/seg_sieve.hpp
-      title: src/math/seg_sieve.hpp
     - icon: ':heavy_check_mark:'
       path: src/math/set_hadamard.hpp
       title: src/math/set_hadamard.hpp
@@ -345,10 +321,10 @@ data:
       title: src/misc/fastio/scanner.hpp
   - name: src/string
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/string/manacher.hpp
       title: src/string/manacher.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/string/mp.hpp
       title: src/string/mp.hpp
     - icon: ':warning:'
@@ -357,7 +333,7 @@ data:
     - icon: ':warning:'
       path: src/string/sa_is.hpp
       title: src/string/sa_is.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/string/z_algorithm.hpp
       title: src/string/z_algorithm.hpp
   - name: verifications/math
@@ -365,6 +341,9 @@ data:
     - icon: ':warning:'
       path: verifications/math/mod_nthroot.yuki981.cpp
       title: verifications/math/mod_nthroot.yuki981.cpp
+    - icon: ':warning:'
+      path: verifications/math/or_convolution.tets.cpp
+      title: verifications/math/or_convolution.tets.cpp
   verificationCategories:
   - name: verifications/data_structure
     pages:
@@ -503,6 +482,9 @@ data:
       path: verifications/math/berlekamp_massey.test.cpp
       title: verifications/math/berlekamp_massey.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verifications/math/divisors.test.cpp
+      title: verifications/math/divisors.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verifications/math/fps.convolution.test.cpp
       title: verifications/math/fps.convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -616,6 +598,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: verifications/misc/zipper.test.cpp
       title: verifications/misc/zipper.test.cpp
+  - name: verifications/string
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verifications/string/manacher.test.cpp
+      title: verifications/string/manacher.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/string/mp.ut.test.cpp
+      title: verifications/string/mp.ut.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/string/z_algorithm.test.cpp
+      title: verifications/string/z_algorithm.test.cpp
 layout: toppage
 ---
 競プロライブラリ

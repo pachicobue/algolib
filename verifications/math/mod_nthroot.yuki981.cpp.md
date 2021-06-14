@@ -78,7 +78,7 @@ data:
   attributes:
     links:
     - https://yukicoder.me/problems/no/981
-  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\nusing i32 = int;\n\
+  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\nusing i32 = int;\n\
     using u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing\
     \ f80 = long double;\nusing f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64\

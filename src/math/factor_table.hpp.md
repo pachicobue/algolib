@@ -53,9 +53,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/gcd_convolution.hpp
     title: src/math/gcd_convolution.hpp
-  - icon: ':warning:'
-    path: src/math/moebius_table.hpp
-    title: src/math/moebius_table.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/primes.hpp
     title: src/math/primes.hpp
@@ -239,7 +236,6 @@ data:
   path: src/math/factor_table.hpp
   requiredBy:
   - src/math/gcd_convolution.hpp
-  - src/math/moebius_table.hpp
   - src/math/divisors_zeta.hpp
   - src/math/divisors_moebius.hpp
   - src/math/primes.hpp

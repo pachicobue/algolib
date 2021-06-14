@@ -211,19 +211,19 @@ data:
     \ - 1]]++] = i - 1;\n            } else {\n                sBucket[S[i - 1]][spos[S[i\
     \ - 1]]++] = i - 1;\n            }\n        };\n        for (int k : rep(bucket_size))\
     \ {\n            for (int i : rep(lpos[k])) {\n                insert(lBucket[k][i],\
-    \ true);\n            }\n            for (int i : range(1, spos[k] + 1)) {\n \
-    \               insert(sBucket[k][spos[k] - i], true);\n            }\n      \
-    \  }\n        fillAll(spos, 0);\n        for (int i : range(1, bucket_size + 1))\
-    \ {\n            const int k = bucket_size - i;\n            for (int i : rep(spos[k]))\
-    \ {\n                insert(sBucket[k][i], false);\n            }\n          \
-    \  for (int i : range(1, lpos[k] + 1)) {\n                insert(lBucket[k][lpos[k]\
+    \ true);\n            }\n            for (int i : irange(1, spos[k] + 1)) {\n\
+    \                insert(sBucket[k][spos[k] - i], true);\n            }\n     \
+    \   }\n        fillAll(spos, 0);\n        for (int i : irange(1, bucket_size +\
+    \ 1)) {\n            const int k = bucket_size - i;\n            for (int i :\
+    \ rep(spos[k])) {\n                insert(sBucket[k][i], false);\n           \
+    \ }\n            for (int i : irange(1, lpos[k] + 1)) {\n                insert(lBucket[k][lpos[k]\
     \ - i], false);\n            }\n        }\n    };\n    induce();\n    Vec<int>\
     \ lms;\n    for (int k : rep(bucket_size)) {\n        for (auto it = lBucket[k].begin();\
     \ it < lBucket[k].end(); it++) {\n            if (isLMS[*it]) { lms.push_back(*it);\
     \ }\n        }\n        for (auto it = sBucket[k].rbegin(); it < sBucket[k].rend();\
     \ it++) {\n            if (isLMS[*it]) { lms.push_back(*it); }\n        }\n  \
     \  }\n    bool distinct = true;\n    int number = 1;\n    Vec<int> ord((sz + 1)\
-    \ / 2 + 1, 0);\n    ord[(sz + 1) / 2] = 1;\n    for (int i : range(1, lms.size()))\
+    \ / 2 + 1, 0);\n    ord[(sz + 1) / 2] = 1;\n    for (int i : irange(1, lms.size()))\
     \ {\n        const int l1 = lms[i - 1], r1 = nextLMS[l1];\n        const int l2\
     \ = lms[i], r2 = nextLMS[l2];\n        if (r1 - l1 == r2 - l2\n            and\
     \ Vec<int>(S.begin() + l1, S.begin() + r1 + 1)\n                    == Vec<int>(S.begin()\
@@ -232,13 +232,13 @@ data:
     \    Vec<int> sub;\n    for (const auto o : ord) {\n        if (o > 0) { sub.push_back(o);\
     \ }\n    }\n    if (not distinct) {\n        const auto sorted = suffixArray(sub.begin(),\
     \ sub.end(), number + 1);\n        for (int k : rep(bucket_size)) {\n        \
-    \    spos[k] = lpos[k] = 0;\n        }\n        for (int j : range(1, lms.size()\
+    \    spos[k] = lpos[k] = 0;\n        }\n        for (int j : irange(1, lms.size()\
     \ + 1)) {\n            const int i = lms.size() - j;\n            const auto ind\
     \ = LMS[lms.size() - 1 - sorted[i]];\n            sBucket[S[ind]][spos[S[ind]]++]\
     \ = ind;\n        }\n    } else {\n        for (int k : rep(bucket_size)) {\n\
     \            spos[k] = lpos[k] = 0;\n        }\n        for (auto it = lms.rbegin();\
     \ it < lms.rend(); it++) {\n            sBucket[S[*it]][spos[S[*it]]++] = *it;\n\
-    \        }\n    }\n    induce();\n    Vec<int> ans;\n    for (int k : range(1,\
+    \        }\n    }\n    induce();\n    Vec<int> ans;\n    for (int k : irange(1,\
     \ bucket_size)) {\n        for (auto it = lBucket[k].begin(); it < lBucket[k].end();\
     \ it++) {\n            ans.push_back(*it);\n        }\n        for (auto it =\
     \ sBucket[k].rbegin(); it < sBucket[k].rend(); it++) {\n            ans.push_back(*it);\n\
@@ -262,19 +262,19 @@ data:
     \ - 1]]++] = i - 1;\n            } else {\n                sBucket[S[i - 1]][spos[S[i\
     \ - 1]]++] = i - 1;\n            }\n        };\n        for (int k : rep(bucket_size))\
     \ {\n            for (int i : rep(lpos[k])) {\n                insert(lBucket[k][i],\
-    \ true);\n            }\n            for (int i : range(1, spos[k] + 1)) {\n \
-    \               insert(sBucket[k][spos[k] - i], true);\n            }\n      \
-    \  }\n        fillAll(spos, 0);\n        for (int i : range(1, bucket_size + 1))\
-    \ {\n            const int k = bucket_size - i;\n            for (int i : rep(spos[k]))\
-    \ {\n                insert(sBucket[k][i], false);\n            }\n          \
-    \  for (int i : range(1, lpos[k] + 1)) {\n                insert(lBucket[k][lpos[k]\
+    \ true);\n            }\n            for (int i : irange(1, spos[k] + 1)) {\n\
+    \                insert(sBucket[k][spos[k] - i], true);\n            }\n     \
+    \   }\n        fillAll(spos, 0);\n        for (int i : irange(1, bucket_size +\
+    \ 1)) {\n            const int k = bucket_size - i;\n            for (int i :\
+    \ rep(spos[k])) {\n                insert(sBucket[k][i], false);\n           \
+    \ }\n            for (int i : irange(1, lpos[k] + 1)) {\n                insert(lBucket[k][lpos[k]\
     \ - i], false);\n            }\n        }\n    };\n    induce();\n    Vec<int>\
     \ lms;\n    for (int k : rep(bucket_size)) {\n        for (auto it = lBucket[k].begin();\
     \ it < lBucket[k].end(); it++) {\n            if (isLMS[*it]) { lms.push_back(*it);\
     \ }\n        }\n        for (auto it = sBucket[k].rbegin(); it < sBucket[k].rend();\
     \ it++) {\n            if (isLMS[*it]) { lms.push_back(*it); }\n        }\n  \
     \  }\n    bool distinct = true;\n    int number = 1;\n    Vec<int> ord((sz + 1)\
-    \ / 2 + 1, 0);\n    ord[(sz + 1) / 2] = 1;\n    for (int i : range(1, lms.size()))\
+    \ / 2 + 1, 0);\n    ord[(sz + 1) / 2] = 1;\n    for (int i : irange(1, lms.size()))\
     \ {\n        const int l1 = lms[i - 1], r1 = nextLMS[l1];\n        const int l2\
     \ = lms[i], r2 = nextLMS[l2];\n        if (r1 - l1 == r2 - l2\n            and\
     \ Vec<int>(S.begin() + l1, S.begin() + r1 + 1)\n                    == Vec<int>(S.begin()\
@@ -283,13 +283,13 @@ data:
     \    Vec<int> sub;\n    for (const auto o : ord) {\n        if (o > 0) { sub.push_back(o);\
     \ }\n    }\n    if (not distinct) {\n        const auto sorted = suffixArray(sub.begin(),\
     \ sub.end(), number + 1);\n        for (int k : rep(bucket_size)) {\n        \
-    \    spos[k] = lpos[k] = 0;\n        }\n        for (int j : range(1, lms.size()\
+    \    spos[k] = lpos[k] = 0;\n        }\n        for (int j : irange(1, lms.size()\
     \ + 1)) {\n            const int i = lms.size() - j;\n            const auto ind\
     \ = LMS[lms.size() - 1 - sorted[i]];\n            sBucket[S[ind]][spos[S[ind]]++]\
     \ = ind;\n        }\n    } else {\n        for (int k : rep(bucket_size)) {\n\
     \            spos[k] = lpos[k] = 0;\n        }\n        for (auto it = lms.rbegin();\
     \ it < lms.rend(); it++) {\n            sBucket[S[*it]][spos[S[*it]]++] = *it;\n\
-    \        }\n    }\n    induce();\n    Vec<int> ans;\n    for (int k : range(1,\
+    \        }\n    }\n    induce();\n    Vec<int> ans;\n    for (int k : irange(1,\
     \ bucket_size)) {\n        for (auto it = lBucket[k].begin(); it < lBucket[k].end();\
     \ it++) {\n            ans.push_back(*it);\n        }\n        for (auto it =\
     \ sBucket[k].rbegin(); it < sBucket[k].rend(); it++) {\n            ans.push_back(*it);\n\
@@ -312,7 +312,7 @@ data:
   isVerificationFile: false
   path: src/string/sa_is.hpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-06-15 01:11:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/string/sa_is.hpp

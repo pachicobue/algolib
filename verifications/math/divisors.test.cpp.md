@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: src/math/divisors.hpp
+    title: src/math/divisors.hpp
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
   - icon: ':heavy_check_mark:'
@@ -43,13 +46,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://yukicoder.me/problems/no/888
+    links:
+    - https://yukicoder.me/problems/no/888
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -193,34 +205,48 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ T>\nVec<bool> segSieve(T l, T r, const Vec<T>& ps)\n{\n    Vec<bool> ans = iotaVec(r\
-    \ - l, l);\n    if (l <= 0 and 0 < r) { ans[0 - l] = false; }\n    if (l <= 1\
-    \ and 1 < r) { ans[1 - l] = false; }\n    for (const T p : ps) {\n        const\
-    \ T mq = std::max((l + p - 1) / p * p, p + p);\n        for (T q = mq; q < r;\
-    \ q += p) {\n            ans[q - l] = false;\n        }\n    }\n    for (T p =\
-    \ l; p < r; p++) {\n        if (not ans[p - l]) { continue; }\n        for (T\
-    \ q = p + p; q < r; q += p) {\n            ans[q - l] = false;\n        }\n  \
-    \  }\n    return ans;\n}\ntemplate<typename T>\nVec<bool> segSieve(T l, T r)\n\
-    {\n    T sqrt = 1;\n    for (; (sqrt + 1) * (sqrt + 1) <= r; sqrt++) {}\n    Vec<bool>\
-    \ isp(sqrt + 1, true);\n    isp[0] = isp[1] = false;\n    Vec<T> ps;\n    for\
-    \ (T p = 2; p <= sqrt; p++) {\n        if (not isp[p]) { continue; }\n       \
-    \ ps.push_back(p);\n        for (T q = p + p; q <= sqrt; q += p) {\n         \
-    \   isp[q] = false;\n        }\n    }\n    return segSieve(l, r, ps);\n}\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nVec<bool>\
-    \ segSieve(T l, T r, const Vec<T>& ps)\n{\n    Vec<bool> ans = iotaVec(r - l,\
-    \ l);\n    if (l <= 0 and 0 < r) { ans[0 - l] = false; }\n    if (l <= 1 and 1\
-    \ < r) { ans[1 - l] = false; }\n    for (const T p : ps) {\n        const T mq\
-    \ = std::max((l + p - 1) / p * p, p + p);\n        for (T q = mq; q < r; q +=\
-    \ p) {\n            ans[q - l] = false;\n        }\n    }\n    for (T p = l; p\
-    \ < r; p++) {\n        if (not ans[p - l]) { continue; }\n        for (T q = p\
-    \ + p; q < r; q += p) {\n            ans[q - l] = false;\n        }\n    }\n \
-    \   return ans;\n}\ntemplate<typename T>\nVec<bool> segSieve(T l, T r)\n{\n  \
-    \  T sqrt = 1;\n    for (; (sqrt + 1) * (sqrt + 1) <= r; sqrt++) {}\n    Vec<bool>\
-    \ isp(sqrt + 1, true);\n    isp[0] = isp[1] = false;\n    Vec<T> ps;\n    for\
-    \ (T p = 2; p <= sqrt; p++) {\n        if (not isp[p]) { continue; }\n       \
-    \ ps.push_back(p);\n        for (T q = p + p; q <= sqrt; q += p) {\n         \
-    \   isp[q] = false;\n        }\n    }\n    return segSieve(l, r, ps);\n}\n"
+    \ T>\nVec<T> divisors(const T n)\n{\n    Vec<T> head, tail;\n    for (T i = 1;\
+    \ i * i <= n; i++) {\n        if (n % i == 0) {\n            head.push_back(i);\n\
+    \            if (i * i != n) { tail.push_back(n / i); }\n        }\n    }\n  \
+    \  reverseAll(tail);\n    return head + tail;\n}\nclass Printer\n{\npublic:\n\
+    \    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n        m_os << std::fixed\
+    \ << std::setprecision(15);\n    }\n    template<typename... Args>\n    int operator()(const\
+    \ Args&... args)\n    {\n        dump(args...);\n        return 0;\n    }\n  \
+    \  template<typename... Args>\n    int ln(const Args&... args)\n    {\n      \
+    \  dump(args...), m_os << '\\n';\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int el(const Args&... args)\n    {\n        dump(args...), m_os <<\
+    \ std::endl;\n        return 0;\n    }\nprivate:\n    template<typename T>\n \
+    \   void dump(const T& v)\n    {\n        m_os << v;\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            m_os << (i ? \" \" : \"\"), dump(vs[i]);\n        }\n    }\n\
+    \    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n    \
+    \    for (const int i : rep(vss.size())) {\n            m_os << (i ? \"\" : \"\
+    \\n\"), dump(vss[i]);\n        }\n    }\n    template<typename T, typename...\
+    \ Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n        dump(v), m_os\
+    \ << ' ', dump(args...);\n        return 0;\n    }\n    Ostream& m_os;\n};\nPrinter\
+    \ out;\nclass Scanner\n{\npublic:\n    Scanner(Istream& is = std::cin) : m_is{is}\n\
+    \    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n    }\n    template<typename\
+    \ T>\n    T val()\n    {\n        T v;\n        return m_is >> v, v;\n    }\n\
+    \    template<typename T>\n    T val(T offset)\n    {\n        return val<T>()\
+    \ - offset;\n    }\n    template<typename T>\n    Vec<T> vec(int n)\n    {\n \
+    \       return genVec<T>(n, [&]() { return val<T>(); });\n    }\n    template<typename\
+    \ T>\n    Vec<T> vec(int n, T offset)\n    {\n        return genVec<T>(n, [&]()\
+    \ { return val<T>(offset); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m);\
+    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, const\
+    \ T offset)\n    {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m,\
+    \ offset); });\n    }\n    template<typename... Args>\n    auto tup()\n    {\n\
+    \        return Tup<Args...>{val<Args>()...};\n    }\n    template<typename...\
+    \ Args>\n    auto tup(const Args&... offsets)\n    {\n        return Tup<Args...>{val<Args>(offsets)...};\n\
+    \    }\nprivate:\n    Istream& m_is;\n};\nScanner in;\nint main()\n{\n    const\
+    \ auto N = in.val<i64>();\n    const auto ds = divisors(N);\n    out.ln(sumAll(ds));\n\
+    \    return 0;\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/888\"\n#include \"../../src/math/divisors.hpp\"\
+    \n#include \"../../src/misc/printer.hpp\"\n#include \"../../src/misc/scanner.hpp\"\
+    \n\nint main()\n{\n    const auto N = in.val<i64>();\n    const auto ds = divisors(N);\n\
+    \    out.ln(sumAll(ds));\n    return 0;\n}\n"
   dependsOn:
+  - src/math/divisors.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -235,16 +261,18 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/math/seg_sieve.hpp
+  - src/misc/printer.hpp
+  - src/misc/scanner.hpp
+  isVerificationFile: true
+  path: verifications/math/divisors.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-06-15 01:11:36+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: src/math/seg_sieve.hpp
+documentation_of: verifications/math/divisors.test.cpp
 layout: document
 redirect_from:
-- /library/src/math/seg_sieve.hpp
-- /library/src/math/seg_sieve.hpp.html
-title: src/math/seg_sieve.hpp
+- /verify/verifications/math/divisors.test.cpp
+- /verify/verifications/math/divisors.test.cpp.html
+title: verifications/math/divisors.test.cpp
 ---

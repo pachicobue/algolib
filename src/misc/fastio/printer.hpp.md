@@ -47,6 +47,9 @@ data:
   - icon: ':warning:'
     path: verifications/math/mod_nthroot.yuki981.cpp
     title: verifications/math/mod_nthroot.yuki981.cpp
+  - icon: ':warning:'
+    path: verifications/math/or_convolution.tets.cpp
+    title: verifications/math/or_convolution.tets.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verifications/data_structure/ds_table.test.cpp
@@ -384,6 +387,7 @@ data:
   path: src/misc/fastio/printer.hpp
   requiredBy:
   - verifications/math/mod_nthroot.yuki981.cpp
+  - verifications/math/or_convolution.tets.cpp
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

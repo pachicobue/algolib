@@ -44,10 +44,13 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/string/mp.ut.test.cpp
+    title: verifications/string/mp.ut.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -223,8 +226,9 @@ data:
   path: src/string/mp.hpp
   requiredBy: []
   timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verifications/string/mp.ut.test.cpp
 documentation_of: src/string/mp.hpp
 layout: document
 redirect_from:

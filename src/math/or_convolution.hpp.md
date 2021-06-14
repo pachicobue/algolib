@@ -52,7 +52,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: verifications/math/or_convolution.tets.cpp
+    title: verifications/math/or_convolution.tets.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -247,7 +250,8 @@ data:
   - src/math/set_zeta.hpp
   isVerificationFile: false
   path: src/math/or_convolution.hpp
-  requiredBy: []
+  requiredBy:
+  - verifications/math/or_convolution.tets.cpp
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

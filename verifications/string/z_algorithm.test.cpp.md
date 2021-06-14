@@ -43,13 +43,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/string/z_algorithm.hpp
+    title: src/string/z_algorithm.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
+    links:
+    - https://judge.yosupo.jp/problem/zalgorithm
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -193,40 +205,52 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ T>\nstruct rational\n{\n    rational() : num{0}, den{1} {}\n    rational(T n)\
-    \ : num{n}, den{1} {}\n    rational(T n, T d) : num{n}, den{d}\n    {\n      \
-    \  if (den < 0) { num = -num, den = -den; }\n        const T g = std::gcd(den,\
-    \ num);\n        num /= g, den /= g;\n    }\n    rational operator-() const\n\
-    \    {\n        rational ans = *this;\n        ans.num = -ans.num;\n        return\
-    \ ans;\n    }\n    rational operator+(const rational& r) const\n    {\n      \
-    \  if (den == 0) { return (*this); }\n        if (r.den == 0) { return r; }\n\
-    \        const auto [n1, d1] = *this;\n        const auto [n2, d2] = r;\n    \
-    \    const T d = std::lcm(d1, d2);\n        const T n = n1 * (d / d1) + n2 * (d\
-    \ / d2);\n        return {n, d};\n    }\n    rational operator-(const rational&\
-    \ r) const\n    {\n        return (*this) + -r;\n    }\n    rational operator*(const\
-    \ rational& r) const\n    {\n        if (num == 0 or r.num == 0) { return 0; }\n\
-    \        if (den == 0 or r.den == 0) { return {(num > 0) * (r.num > 0), 0}; }\n\
-    \        const auto [n1, d1] = *this;\n        const auto [n2, d2] = r;\n    \
-    \    const T d = std::lcm(d1, d2);\n        const T n = n1 * (d / d1) + n2 * (d\
-    \ / d2);\n        return {n, d};\n    }\n    T num, den;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nstruct\
-    \ rational\n{\n    rational() : num{0}, den{1} {}\n    rational(T n) : num{n},\
-    \ den{1} {}\n    rational(T n, T d) : num{n}, den{d}\n    {\n        if (den <\
-    \ 0) { num = -num, den = -den; }\n        const T g = std::gcd(den, num);\n  \
-    \      num /= g, den /= g;\n    }\n    rational operator-() const\n    {\n   \
-    \     rational ans = *this;\n        ans.num = -ans.num;\n        return ans;\n\
-    \    }\n    rational operator+(const rational& r) const\n    {\n        if (den\
-    \ == 0) { return (*this); }\n        if (r.den == 0) { return r; }\n        const\
-    \ auto [n1, d1] = *this;\n        const auto [n2, d2] = r;\n        const T d\
-    \ = std::lcm(d1, d2);\n        const T n = n1 * (d / d1) + n2 * (d / d2);\n  \
-    \      return {n, d};\n    }\n    rational operator-(const rational& r) const\n\
-    \    {\n        return (*this) + -r;\n    }\n    rational operator*(const rational&\
-    \ r) const\n    {\n        if (num == 0 or r.num == 0) { return 0; }\n       \
-    \ if (den == 0 or r.den == 0) { return {(num > 0) * (r.num > 0), 0}; }\n     \
-    \   const auto [n1, d1] = *this;\n        const auto [n2, d2] = r;\n        const\
-    \ T d = std::lcm(d1, d2);\n        const T n = n1 * (d / d1) + n2 * (d / d2);\n\
-    \        return {n, d};\n    }\n    T num, den;\n};\n"
+    \ It>\nVec<int> z_algorithm(It first, It last)\n{\n    auto get = [&](int i) {\
+    \ return *std::next(first, i); };\n    const int sz = std::distance(first, last);\n\
+    \    Vec<int> ans(sz, -1);\n    for (int i = 1, j = 0; i < sz;) {\n        while\
+    \ (i + j < sz and get(j) == get(i + j)) {\n            j++;\n        }\n     \
+    \   ans[i] = j;\n        if (j == 0) {\n            ++i;\n            continue;\n\
+    \        }\n        int k = 1;\n        while (i + k < sz and k + ans[k] < j)\
+    \ {\n            ans[i + k] = ans[k];\n            k++;\n        }\n        i\
+    \ += k, j -= k;\n    }\n    ans[0] = sz;\n    return ans;\n}\nclass Printer\n\
+    {\npublic:\n    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n        m_os\
+    \ << std::fixed << std::setprecision(15);\n    }\n    template<typename... Args>\n\
+    \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
+    \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
+    \ args)\n    {\n        dump(args...), m_os << '\\n';\n        return 0;\n   \
+    \ }\n    template<typename... Args>\n    int el(const Args&... args)\n    {\n\
+    \        dump(args...), m_os << std::endl;\n        return 0;\n    }\nprivate:\n\
+    \    template<typename T>\n    void dump(const T& v)\n    {\n        m_os << v;\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n   \
+    \     for (const int i : rep(vs.size())) {\n            m_os << (i ? \" \" : \"\
+    \"), dump(vs[i]);\n        }\n    }\n    template<typename T>\n    void dump(const\
+    \ Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size())) {\n  \
+    \          m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n        }\n    }\n   \
+    \ template<typename T, typename... Ts>\n    int dump(const T& v, const Ts&...\
+    \ args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n        return 0;\n\
+    \    }\n    Ostream& m_os;\n};\nPrinter out;\nclass Scanner\n{\npublic:\n    Scanner(Istream&\
+    \ is = std::cin) : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n\
+    \    }\n    template<typename T>\n    T val()\n    {\n        T v;\n        return\
+    \ m_is >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n\
+    \        return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T>\
+    \ vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>(); });\n\
+    \    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n   \
+    \     return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, const T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return Tup<Args...>{val<Args>()...};\n    }\n\
+    \    template<typename... Args>\n    auto tup(const Args&... offsets)\n    {\n\
+    \        return Tup<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n    Istream&\
+    \ m_is;\n};\nScanner in;\nint main()\n{\n    auto S = in.val<Str>();\n    out.ln(z_algorithm(S.begin(),\
+    \ S.end()));\n    return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n#include\
+    \ \"../../src/string/z_algorithm.hpp\"\n#include \"../../src/misc/printer.hpp\"\
+    \n#include \"../../src/misc/scanner.hpp\"\n\nint main()\n{\n    auto S = in.val<Str>();\n\
+    \    out.ln(z_algorithm(S.begin(), S.end()));\n    return 0;\n}\n"
   dependsOn:
+  - src/string/z_algorithm.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -241,16 +265,18 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/math/rational.hpp
+  - src/misc/printer.hpp
+  - src/misc/scanner.hpp
+  isVerificationFile: true
+  path: verifications/string/z_algorithm.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-06-15 01:11:36+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: src/math/rational.hpp
+documentation_of: verifications/string/z_algorithm.test.cpp
 layout: document
 redirect_from:
-- /library/src/math/rational.hpp
-- /library/src/math/rational.hpp.html
-title: src/math/rational.hpp
+- /verify/verifications/string/z_algorithm.test.cpp
+- /verify/verifications/string/z_algorithm.test.cpp.html
+title: verifications/string/z_algorithm.test.cpp
 ---

@@ -43,16 +43,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/math/fft.hpp
-    title: src/math/fft.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/string/mp.hpp
+    title: src/string/mp.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
+    links:
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -196,86 +199,21 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ T>\nstruct complex\n{\n    constexpr complex() : real{T{0}}, imag{T{0}} {}\n\
-    \    constexpr complex(const T r, const T i) : real{r}, imag{i} {}\n    constexpr\
-    \ complex polar(const T r, const T s)\n    {\n        real = r * std::cos(s),\
-    \ imag = r * std::sin(s);\n    }\n    constexpr complex conj() const\n    {\n\
-    \        return complex{real, -imag};\n    }\n    constexpr T norm() const\n \
-    \   {\n        return real * real + imag * imag;\n    }\n    constexpr T abs()\
-    \ const\n    {\n        return std::sqrt(norm());\n    }\n    constexpr T arg()\
-    \ const\n    {\n        return std::atan2(imag, real);\n    }\n    complex operator-()\n\
-    \    {\n        return complex{-real, -imag};\n    }\n    complex operator+(const\
-    \ complex& c) const\n    {\n        return complex{*this} += c;\n    }\n    complex\
-    \ operator-(const complex& c) const\n    {\n        return complex{*this} -= c;\n\
-    \    }\n    complex operator*(const complex& c) const\n    {\n        return complex{real\
-    \ * c.real - imag * c.imag,\n                       real * c.imag + imag * c.real};\n\
-    \    }\n    complex operator/(const complex& c) const\n    {\n        return (*this)\
-    \ * c.conj() / c.norm();\n    }\n    complex operator+(const T v) const\n    {\n\
-    \        return complex{*this} += v;\n    }\n    complex operator-(const T v)\
-    \ const\n    {\n        return complex{*this} -= v;\n    }\n    complex operator*(const\
-    \ T v) const\n    {\n        return complex{*this} *= v;\n    }\n    complex operator/(const\
-    \ T v) const\n    {\n        return complex{*this} /= v;\n    }\n    friend complex\
-    \ operator+(const T v, const complex& c)\n    {\n        return complex{v + c.real,\
-    \ c.imag};\n    }\n    friend complex operator-(const T v, const complex& c)\n\
-    \    {\n        return complex{v - c.real, -c.imag};\n    }\n    friend complex\
-    \ operator*(const T v, const complex& c)\n    {\n        return complex{v * c.real,\
-    \ v * c.imag};\n    }\n    friend complex operator/(const T v, const complex&\
-    \ c)\n    {\n        return v * c.conj() / c.norm();\n    }\n    complex& operator+=(const\
-    \ complex& c)\n    {\n        return real += c.real, imag += c.imag, *this;\n\
-    \    }\n    complex& operator-=(const complex& c)\n    {\n        return real\
-    \ -= c.real, imag -= c.imag, *this;\n    }\n    complex& operator*=(const complex&\
-    \ c)\n    {\n        return (*this) = (*this) * c;\n    }\n    complex& operator/=(const\
-    \ complex& c)\n    {\n        return (*this) = (*this) / c;\n    }\n    complex&\
-    \ operator+=(const T v)\n    {\n        return real += v, *this;\n    }\n    complex&\
-    \ operator-=(const T v)\n    {\n        return real -= v, *this;\n    }\n    complex&\
-    \ operator*=(const T v)\n    {\n        return real *= v, imag *= v, *this;\n\
-    \    }\n    complex& operator/=(const T v)\n    {\n        return real /= v, imag\
-    \ /= v, *this;\n    }\n    bool operator==(const complex& c) const\n    {\n  \
-    \      return real == c.real and imag == c.imag;\n    }\n    bool operator!=(const\
-    \ complex& c) const\n    {\n        return not(*this == c);\n    }\n    friend\
-    \ Ostream& operator<<(Ostream& os, const complex& c)\n    {\n        return os\
-    \ << c.real << \"+\" << c.imag << \"I\";\n    }\n    T real, imag;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nstruct\
-    \ complex\n{\n    constexpr complex() : real{T{0}}, imag{T{0}} {}\n    constexpr\
-    \ complex(const T r, const T i) : real{r}, imag{i} {}\n    constexpr complex polar(const\
-    \ T r, const T s)\n    {\n        real = r * std::cos(s), imag = r * std::sin(s);\n\
-    \    }\n    constexpr complex conj() const\n    {\n        return complex{real,\
-    \ -imag};\n    }\n    constexpr T norm() const\n    {\n        return real * real\
-    \ + imag * imag;\n    }\n    constexpr T abs() const\n    {\n        return std::sqrt(norm());\n\
-    \    }\n    constexpr T arg() const\n    {\n        return std::atan2(imag, real);\n\
-    \    }\n    complex operator-()\n    {\n        return complex{-real, -imag};\n\
-    \    }\n    complex operator+(const complex& c) const\n    {\n        return complex{*this}\
-    \ += c;\n    }\n    complex operator-(const complex& c) const\n    {\n       \
-    \ return complex{*this} -= c;\n    }\n    complex operator*(const complex& c)\
-    \ const\n    {\n        return complex{real * c.real - imag * c.imag,\n      \
-    \                 real * c.imag + imag * c.real};\n    }\n    complex operator/(const\
-    \ complex& c) const\n    {\n        return (*this) * c.conj() / c.norm();\n  \
-    \  }\n    complex operator+(const T v) const\n    {\n        return complex{*this}\
-    \ += v;\n    }\n    complex operator-(const T v) const\n    {\n        return\
-    \ complex{*this} -= v;\n    }\n    complex operator*(const T v) const\n    {\n\
-    \        return complex{*this} *= v;\n    }\n    complex operator/(const T v)\
-    \ const\n    {\n        return complex{*this} /= v;\n    }\n    friend complex\
-    \ operator+(const T v, const complex& c)\n    {\n        return complex{v + c.real,\
-    \ c.imag};\n    }\n    friend complex operator-(const T v, const complex& c)\n\
-    \    {\n        return complex{v - c.real, -c.imag};\n    }\n    friend complex\
-    \ operator*(const T v, const complex& c)\n    {\n        return complex{v * c.real,\
-    \ v * c.imag};\n    }\n    friend complex operator/(const T v, const complex&\
-    \ c)\n    {\n        return v * c.conj() / c.norm();\n    }\n    complex& operator+=(const\
-    \ complex& c)\n    {\n        return real += c.real, imag += c.imag, *this;\n\
-    \    }\n    complex& operator-=(const complex& c)\n    {\n        return real\
-    \ -= c.real, imag -= c.imag, *this;\n    }\n    complex& operator*=(const complex&\
-    \ c)\n    {\n        return (*this) = (*this) * c;\n    }\n    complex& operator/=(const\
-    \ complex& c)\n    {\n        return (*this) = (*this) / c;\n    }\n    complex&\
-    \ operator+=(const T v)\n    {\n        return real += v, *this;\n    }\n    complex&\
-    \ operator-=(const T v)\n    {\n        return real -= v, *this;\n    }\n    complex&\
-    \ operator*=(const T v)\n    {\n        return real *= v, imag *= v, *this;\n\
-    \    }\n    complex& operator/=(const T v)\n    {\n        return real /= v, imag\
-    \ /= v, *this;\n    }\n    bool operator==(const complex& c) const\n    {\n  \
-    \      return real == c.real and imag == c.imag;\n    }\n    bool operator!=(const\
-    \ complex& c) const\n    {\n        return not(*this == c);\n    }\n    friend\
-    \ Ostream& operator<<(Ostream& os, const complex& c)\n    {\n        return os\
-    \ << c.real << \"+\" << c.imag << \"I\";\n    }\n    T real, imag;\n};\n"
+    \ It>\nVec<int> mp(It first, It last)\n{\n    auto get = [&](int i) { return *std::next(first,\
+    \ i); };\n    const int sz = std::distance(first, last);\n    Vec<int> A(sz +\
+    \ 1, -1);\n    for (int i = 0, j = -1; i < sz; i++) {\n        while (j != -1\
+    \ and get(i) != get(j)) {\n            j = A[j];\n        }\n        j = (j ==\
+    \ -1 ? 0 : j + 1);\n        A[i + 1] = j;\n    }\n    return A;\n}\nvoid Test()\n\
+    {\n    Str s = \"aabaabaaa\";\n    const auto rs = mp(s.begin(), s.end());\n \
+    \   assert(rs == (Vec<int>{-1, 0, 1, 0, 1, 2, 3, 4, 5, 2}));\n}\nint main()\n\
+    {\n    Test();\n    std::cout << \"Hello World\\n\";\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
+    \n#include \"../../src/string/mp.hpp\"\n\nvoid Test()\n{\n    Str s = \"aabaabaaa\"\
+    ;\n    const auto rs = mp(s.begin(), s.end());\n    assert(rs == (Vec<int>{-1,\
+    \ 0, 1, 0, 1, 2, 3, 4, 5, 2}));\n}\n\nint main()\n{\n    Test();\n    std::cout\
+    \ << \"Hello World\\n\";\n    return 0;\n}\n"
   dependsOn:
+  - src/string/mp.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -290,17 +228,16 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/math/complex.hpp
-  requiredBy:
-  - src/math/fft.hpp
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  isVerificationFile: true
+  path: verifications/string/mp.ut.test.cpp
+  requiredBy: []
+  timestamp: '2021-06-15 01:11:36+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: src/math/complex.hpp
+documentation_of: verifications/string/mp.ut.test.cpp
 layout: document
 redirect_from:
-- /library/src/math/complex.hpp
-- /library/src/math/complex.hpp.html
-title: src/math/complex.hpp
+- /verify/verifications/string/mp.ut.test.cpp
+- /verify/verifications/string/mp.ut.test.cpp.html
+title: verifications/string/mp.ut.test.cpp
 ---
