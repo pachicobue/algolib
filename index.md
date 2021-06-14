@@ -18,7 +18,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/data_structure/fenwick.hpp
       title: Fenwick Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/data_structure/intdict.hpp
       title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
     - icon: ':heavy_check_mark:'
@@ -128,7 +128,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/math/divisors_zeta.hpp
       title: src/math/divisors_zeta.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/math/extgcd.hpp
       title: src/math/extgcd.hpp
     - icon: ':heavy_check_mark:'
@@ -143,19 +143,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/math/gcd_convolution.hpp
       title: src/math/gcd_convolution.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/math/is_prime.hpp
       title: src/math/is_prime.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/math/mod_nthroot.hpp
       title: src/math/mod_nthroot.hpp
     - icon: ':heavy_check_mark:'
       path: src/math/mod_sqrt.hpp
       title: src/math/mod_sqrt.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/math/modint.hpp
       title: src/math/modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/math/modint64.hpp
       title: src/math/modint64.hpp
     - icon: ':heavy_check_mark:'
@@ -167,7 +167,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/math/or_convolution.hpp
       title: src/math/or_convolution.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/math/prime_factors.hpp
       title: src/math/prime_factors.hpp
     - icon: ':heavy_check_mark:'
@@ -193,7 +193,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/misc/bin_search.hpp
       title: src/misc/bin_search.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common.hpp
       title: src/misc/common.hpp
     - icon: ':heavy_check_mark:'
@@ -219,40 +219,40 @@ data:
       title: src/misc/zipper.hpp
   - name: src/misc/common
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/bit_ops.hpp
       title: src/misc/common/bit_ops.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/constants.hpp
       title: src/misc/common/constants.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/fixpoint.hpp
       title: src/misc/common/fixpoint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/func_alias.hpp
       title: src/misc/common/func_alias.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/irange.hpp
       title: src/misc/common/irange.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/macros.hpp
       title: src/misc/common/macros.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/operator_alias.hpp
       title: src/misc/common/operator_alias.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/rng.hpp
       title: src/misc/common/rng.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/show.hpp
       title: src/misc/common/show.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/type_alias.hpp
       title: src/misc/common/type_alias.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/vec_utils.hpp
       title: src/misc/common/vec_utils.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/xoshiro.hpp
       title: src/misc/common/xoshiro.hpp
   - name: src/misc/common/print
@@ -263,7 +263,7 @@ data:
     - icon: ':warning:'
       path: src/misc/common/print/deque.hpp
       title: src/misc/common/print/deque.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/print/int128_t.hpp
       title: src/misc/common/print/int128_t.hpp
     - icon: ':warning:'
@@ -310,10 +310,10 @@ data:
       title: src/misc/common/print/vector.hpp
   - name: src/misc/fastio
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/fastio/printer.hpp
       title: src/misc/fastio/printer.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/fastio/scanner.hpp
       title: src/misc/fastio/scanner.hpp
   - name: src/string
@@ -512,9 +512,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verifications/math/mod_nthroot.test.cpp
       title: verifications/math/mod_nthroot.test.cpp
-    - icon: ':x:'
-      path: verifications/math/mod_nthroot.yuki981.test.cpp
-      title: verifications/math/mod_nthroot.yuki981.test.cpp
     - icon: ':heavy_check_mark:'
       path: verifications/math/mod_sqrt.test.cpp
       title: verifications/math/mod_sqrt.test.cpp

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/data_structure/fenwick.hpp
     title: Fenwick Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/data_structure/intdict.hpp
     title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
   - icon: ':heavy_check_mark:'
@@ -131,7 +131,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/divisors_zeta.hpp
     title: src/math/divisors_zeta.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
   - icon: ':heavy_check_mark:'
@@ -146,19 +146,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/gcd_convolution.hpp
     title: src/math/gcd_convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
   - icon: ':heavy_check_mark:'
     path: src/math/mod_sqrt.hpp
     title: src/math/mod_sqrt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
   - icon: ':heavy_check_mark:'
@@ -170,7 +170,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/or_convolution.hpp
     title: src/math/or_convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':heavy_check_mark:'
@@ -194,13 +194,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/bin_search.hpp
     title: src/misc/bin_search.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/fastio/printer.hpp
     title: src/misc/fastio/printer.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/fastio/scanner.hpp
     title: src/misc/fastio/scanner.hpp
   - icon: ':heavy_check_mark:'
@@ -408,9 +408,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  - icon: ':x:'
-    path: verifications/math/mod_nthroot.yuki981.test.cpp
-    title: verifications/math/mod_nthroot.yuki981.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/math/mod_sqrt.test.cpp
     title: verifications/math/mod_sqrt.test.cpp
@@ -468,9 +465,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/string/z_algorithm.test.cpp
     title: verifications/string/z_algorithm.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -662,7 +659,7 @@ data:
   - src/graph/lca.hpp
   - src/graph/lowlink.hpp
   timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/string/mp.ut.test.cpp
   - verifications/string/z_algorithm.test.cpp
@@ -688,7 +685,6 @@ data:
   - verifications/math/fps.div_nth.test.cpp
   - verifications/math/multiplicative_sum.test.cpp
   - verifications/math/and_convolution.test.cpp
-  - verifications/math/mod_nthroot.yuki981.test.cpp
   - verifications/math/prime_powsum.test.cpp
   - verifications/math/gcd_convolution.test.cpp
   - verifications/math/mod_sqrt.test.cpp
