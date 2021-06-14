@@ -1,6 +1,4 @@
 #pragma once
-#include <iostream>
-
 #include "../misc/common.hpp"
 template<u32 mod_, u32 root_, u32 max2p_>
 class modint

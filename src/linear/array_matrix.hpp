@@ -7,7 +7,7 @@ public:
     ArrMat()
     {
         for (auto& v : m_vss) {
-            fillAll(v, T{});
+            std::fill(v.begin(), v.end(), T{});
         }
     }
     ArrMat(const IList<IList<T>>& vss)
@@ -19,7 +19,7 @@ public:
             std::copy(it->begin(), it->end(), m_vss[i++].begin());
         }
     }
-    ArrMat(const ArrMat& m) : m_vss{m.m_table} {}
+    ArrMat(const ArrMat& m) : m_vss{m.m_vss} {}
     ArrMat& operator=(const ArrMat& m)
     {
         for (const int i : rep(row)) {

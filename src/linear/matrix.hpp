@@ -5,8 +5,18 @@ class Mat
 {
 public:
     Mat(const int row, const int column)
-        : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, 0))
+        : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, T{}))
     {}
+    Mat(const IList<IList<T>>& vss)
+        : m_row{vss.size()},
+          m_column{vss.begin()->size()},
+          m_vss(m_row, Vec<T>(m_column, T{}))
+    {
+        int i = 0;
+        for (auto it = vss.begin(); it != vss.end(); it++) {
+            std::copy(it->begin(), it->end(), m_vss[i++].begin());
+        }
+    }
     const Vec<T>& operator[](const int r) const
     {
         assert(0 <= r and r < m_row);
