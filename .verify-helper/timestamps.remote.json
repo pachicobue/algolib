@@ -26,6 +26,7 @@
 "verifications/flow/max_flow.test.cpp": "2021-06-14 15:35:26 +0900",
 "verifications/graph/bcc.test.cpp": "2021-06-13 23:28:40 +0900",
 "verifications/graph/bellman_ford.test.cpp": "2021-06-14 15:35:26 +0900",
+"verifications/graph/centroid_decomp.test.cpp": "2021-06-14 23:24:12 +0900",
 "verifications/graph/diameter.test.cpp": "2021-06-13 23:28:40 +0900",
 "verifications/graph/dijkstra.test.cpp": "2021-06-14 15:35:26 +0900",
 "verifications/graph/hld.test.cpp": "2021-06-13 23:28:40 +0900",
