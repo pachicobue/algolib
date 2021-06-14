@@ -41,6 +41,7 @@
 "verifications/linear/int_bases.ut.test.cpp": "2021-06-13 23:59:23 +0900",
 "verifications/math/and_convolution.test.cpp": "2021-06-13 23:28:40 +0900",
 "verifications/math/berlekamp_massey.test.cpp": "2021-06-13 23:28:40 +0900",
+"verifications/math/divisors.test.cpp": "2021-06-15 01:11:36 +0900",
 "verifications/math/fps.convolution.test.cpp": "2021-06-13 23:28:40 +0900",
 "verifications/math/fps.convolution1000000007.test.cpp": "2021-06-13 23:28:40 +0900",
 "verifications/math/fps.div_nth.test.cpp": "2021-06-13 23:28:40 +0900",
@@ -76,5 +77,8 @@
 "verifications/misc/scanner.test.cpp": "2021-06-13 23:28:40 +0900",
 "verifications/misc/seg_decomp.test.cpp": "2021-06-13 23:28:40 +0900",
 "verifications/misc/stopwatch.test.cpp": "2021-06-13 23:28:40 +0900",
-"verifications/misc/zipper.test.cpp": "2021-06-13 23:28:40 +0900"
+"verifications/misc/zipper.test.cpp": "2021-06-13 23:28:40 +0900",
+"verifications/string/manacher.test.cpp": "2021-06-15 01:11:36 +0900",
+"verifications/string/mp.ut.test.cpp": "2021-06-15 01:11:36 +0900",
+"verifications/string/z_algorithm.test.cpp": "2021-06-15 01:11:36 +0900"
 }
