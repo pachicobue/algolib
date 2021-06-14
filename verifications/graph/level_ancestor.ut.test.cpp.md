@@ -5,6 +5,9 @@ data:
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
   - icon: ':heavy_check_mark:'
+    path: src/graph/level_ancestor.hpp
+    title: src/graph/level_ancestor.hpp
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
   - icon: ':heavy_check_mark:'
@@ -47,15 +50,15 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verifications/graph/warshall_floyd.test.cpp
-    title: verifications/graph/warshall_floyd.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
+    links:
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -237,27 +240,58 @@ data:
     \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
     \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
     \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
-    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nVec<Vec<T>>\
-    \ warshallFloyd(const Graph<T>& g)\n{\n    const int N = g.v();\n    Vec<Vec<T>>\
-    \ dss(N, Vec<T>(N));\n    for (int i : rep(N)) {\n        for (int j : rep(N))\
-    \ {\n            dss[i][j] = (i == j ? T{} : INF<T>);\n        }\n        for\
-    \ (const auto& [id, j, c] : g[i]) {\n            static_cast<void>(id);\n    \
-    \        chmin(dss[i][j], c);\n        }\n    }\n    for (int k : rep(N)) {\n\
-    \        for (int i : rep(N)) {\n            for (int j : rep(N)) {\n        \
-    \        if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {\n                \
-    \    chmin(dss[i][j], dss[i][k] + dss[k][j]);\n                }\n           \
-    \ }\n        }\n    }\n    return dss;\n}\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename\
-    \ T>\nVec<Vec<T>> warshallFloyd(const Graph<T>& g)\n{\n    const int N = g.v();\n\
-    \    Vec<Vec<T>> dss(N, Vec<T>(N));\n    for (int i : rep(N)) {\n        for (int\
-    \ j : rep(N)) {\n            dss[i][j] = (i == j ? T{} : INF<T>);\n        }\n\
-    \        for (const auto& [id, j, c] : g[i]) {\n            USE(id);\n       \
-    \     chmin(dss[i][j], c);\n        }\n    }\n    for (int k : rep(N)) {\n   \
-    \     for (int i : rep(N)) {\n            for (int j : rep(N)) {\n           \
-    \     if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {\n                   \
-    \ chmin(dss[i][j], dss[i][k] + dss[k][j]);\n                }\n            }\n\
-    \        }\n    }\n    return dss;\n}\n"
+    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\nclass LevelAncestor\n{\npublic:\n\
+    \    template<typename T>\n    LevelAncestor(const Graph<T>& g, int r = 0)\n \
+    \       : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)\n    {\n        Fix([&](auto dfs,\
+    \ int u, int p) -> void {\n            for (int k = 1; (1 << k) <= m_ds[u]; k++)\
+    \ {\n                m_ps[u].push_back(m_ps[m_ps[u][k - 1]][k - 1]);\n       \
+    \     }\n            for (int v : g[u]) {\n                if (v == p) { continue;\
+    \ }\n                m_ds[v] = m_ds[u] + 1;\n                m_ps[v].push_back(u);\n\
+    \                dfs(v, u);\n            }\n        })(r, -1);\n    };\n    int\
+    \ lca(int u, int v) const\n    {\n        assert(0 <= u and u < m_v);\n      \
+    \  assert(0 <= v and v < m_v);\n        if (m_ds[u] > m_ds[v]) { std::swap(u,\
+    \ v); }\n        v = (*this)(v, m_ds[v] - m_ds[u]);\n        if (u == v) { return\
+    \ u; }\n        while (true) {\n            if (m_ps[u][0] == m_ps[v][0]) { return\
+    \ m_ps[u][0]; }\n            for (int i = m_ps[u].size() - 1; i >= 0; i--) {\n\
+    \                const int nu = m_ps[u][i], nv = m_ps[v][i];\n               \
+    \ if (nu != nv) {\n                    u = nu, v = nv;\n                    break;\n\
+    \                }\n            }\n        }\n    }\n    int operator()(int v,\
+    \ int d) const\n    {\n        assert(0 <= v and v < m_v);\n        for (int k\
+    \ = (int)log2p1(d); k >= 0; k--) {\n            if (btest(d, k)) { v = m_ps[v][k];\
+    \ }\n        }\n        return v;\n    }\nprivate:\n    int m_v;\n    Vec<int>\
+    \ m_ds;\n    Vec<Vec<int>> m_ps;\n};\nvoid Test()\n{\n    Graph g(10);\n    g.addEdge(1,\
+    \ 2, true);\n    g.addEdge(2, 0, true);\n    g.addEdge(2, 3, true);\n    g.addEdge(1,\
+    \ 9, true);\n    g.addEdge(1, 4, true);\n    g.addEdge(4, 5, true);\n    g.addEdge(4,\
+    \ 8, true);\n    g.addEdge(5, 6, true);\n    g.addEdge(5, 7, true);\n    LevelAncestor\
+    \ la(g, 1);\n    assert(la(0, 0) == 0);\n    assert(la(0, 1) == 2);\n    assert(la(0,\
+    \ 2) == 1);\n    assert(la(1, 0) == 1);\n    assert(la(2, 0) == 2);\n    assert(la(2,\
+    \ 1) == 1);\n    assert(la(3, 0) == 3);\n    assert(la(3, 1) == 2);\n    assert(la(3,\
+    \ 2) == 1);\n    assert(la(4, 0) == 4);\n    assert(la(4, 1) == 1);\n    assert(la(5,\
+    \ 0) == 5);\n    assert(la(5, 1) == 4);\n    assert(la(5, 2) == 1);\n    assert(la(6,\
+    \ 0) == 6);\n    assert(la(6, 1) == 5);\n    assert(la(6, 2) == 4);\n    assert(la(6,\
+    \ 3) == 1);\n    assert(la(7, 0) == 7);\n    assert(la(7, 1) == 5);\n    assert(la(7,\
+    \ 2) == 4);\n    assert(la(7, 3) == 1);\n    assert(la(8, 0) == 8);\n    assert(la(8,\
+    \ 1) == 4);\n    assert(la(8, 2) == 1);\n    assert(la(9, 0) == 9);\n    assert(la(9,\
+    \ 1) == 1);\n}\nint main()\n{\n    Test();\n    std::cout << \"Hello World\\n\"\
+    ;\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
+    \n#include \"../../src/graph/level_ancestor.hpp\"\n\nvoid Test()\n{\n    Graph\
+    \ g(10);\n    g.addEdge(1, 2, true);\n    g.addEdge(2, 0, true);\n    g.addEdge(2,\
+    \ 3, true);\n    g.addEdge(1, 9, true);\n    g.addEdge(1, 4, true);\n    g.addEdge(4,\
+    \ 5, true);\n    g.addEdge(4, 8, true);\n    g.addEdge(5, 6, true);\n    g.addEdge(5,\
+    \ 7, true);\n    LevelAncestor la(g, 1);\n    assert(la(0, 0) == 0);\n    assert(la(0,\
+    \ 1) == 2);\n    assert(la(0, 2) == 1);\n\n    assert(la(1, 0) == 1);\n\n    assert(la(2,\
+    \ 0) == 2);\n    assert(la(2, 1) == 1);\n\n    assert(la(3, 0) == 3);\n    assert(la(3,\
+    \ 1) == 2);\n    assert(la(3, 2) == 1);\n\n    assert(la(4, 0) == 4);\n    assert(la(4,\
+    \ 1) == 1);\n\n    assert(la(5, 0) == 5);\n    assert(la(5, 1) == 4);\n    assert(la(5,\
+    \ 2) == 1);\n\n    assert(la(6, 0) == 6);\n    assert(la(6, 1) == 5);\n    assert(la(6,\
+    \ 2) == 4);\n    assert(la(6, 3) == 1);\n\n    assert(la(7, 0) == 7);\n    assert(la(7,\
+    \ 1) == 5);\n    assert(la(7, 2) == 4);\n    assert(la(7, 3) == 1);\n\n    assert(la(8,\
+    \ 0) == 8);\n    assert(la(8, 1) == 4);\n    assert(la(8, 2) == 1);\n\n    assert(la(9,\
+    \ 0) == 9);\n    assert(la(9, 1) == 1);\n}\nint main()\n{\n    Test();\n    std::cout\
+    \ << \"Hello World\\n\";\n    return 0;\n}\n"
   dependsOn:
+  - src/graph/level_ancestor.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -273,17 +307,16 @@ data:
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
   - src/graph/graph.hpp
-  isVerificationFile: false
-  path: src/graph/warshall_floyd.hpp
+  isVerificationFile: true
+  path: verifications/graph/level_ancestor.ut.test.cpp
   requiredBy: []
   timestamp: '2021-06-14 15:35:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verifications/graph/warshall_floyd.test.cpp
-documentation_of: src/graph/warshall_floyd.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verifications/graph/level_ancestor.ut.test.cpp
 layout: document
 redirect_from:
-- /library/src/graph/warshall_floyd.hpp
-- /library/src/graph/warshall_floyd.hpp.html
-title: src/graph/warshall_floyd.hpp
+- /verify/verifications/graph/level_ancestor.ut.test.cpp
+- /verify/verifications/graph/level_ancestor.ut.test.cpp.html
+title: verifications/graph/level_ancestor.ut.test.cpp
 ---

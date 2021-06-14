@@ -46,6 +46,21 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verifications/flow/max_flow.bipartite_matching.test.cpp
+    title: verifications/flow/max_flow.bipartite_matching.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/flow/max_flow.test.cpp
+    title: verifications/flow/max_flow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/bellman_ford.test.cpp
+    title: verifications/graph/bellman_ford.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/level_ancestor.lca.test.cpp
+    title: verifications/graph/level_ancestor.lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/warshall_floyd.test.cpp
+    title: verifications/graph/warshall_floyd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/linear/bit_bases.test.cpp
     title: verifications/linear/bit_bases.test.cpp
   - icon: ':heavy_check_mark:'
@@ -260,8 +275,13 @@ data:
   verifiedWith:
   - verifications/misc/printer.test.cpp
   - verifications/misc/io.test.cpp
+  - verifications/flow/max_flow.bipartite_matching.test.cpp
+  - verifications/flow/max_flow.test.cpp
   - verifications/linear/int_bases.test.cpp
   - verifications/linear/bit_bases.test.cpp
+  - verifications/graph/level_ancestor.lca.test.cpp
+  - verifications/graph/warshall_floyd.test.cpp
+  - verifications/graph/bellman_ford.test.cpp
 documentation_of: src/misc/printer.hpp
 layout: document
 title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"

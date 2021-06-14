@@ -1,9 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
-    path: src/linear/matrix.hpp
-    title: src/linear/matrix.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/graph/graph.hpp
+    title: src/graph/graph.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/graph/warshall_floyd.hpp
+    title: src/graph/warshall_floyd.hpp
   - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -46,13 +49,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C
+    links:
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -196,76 +208,105 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ T>\nclass Mat\n{\npublic:\n    Mat(const int row, const int column)\n      \
-    \  : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, 0))\n    {}\n   \
-    \ const Vec<T>& operator[](const int r) const\n    {\n        assert(0 <= r and\
-    \ r < m_row);\n        return m_vss[r];\n    }\n    Vec<T>& operator[](const int\
-    \ r)\n    {\n        assert(0 <= r and r < m_row);\n        return m_vss[r];\n\
-    \    }\n    friend Mat operator-(const Mat& m)\n    {\n        Mat ans(m.m_row,\
-    \ m.m_column);\n        for (int i : rep(m.m_row)) {\n            for (int j :\
-    \ rep(m.m_column)) {\n                ans[i][j] = -m[i][j];\n            }\n \
-    \       }\n        return ans;\n    }\n    friend Mat operator+(const Mat& m1,\
-    \ const Mat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n        assert(m1.m_column\
-    \ == m2.m_column);\n        Mat ans(m1.m_row, m1.m_column);\n        for (int\
-    \ i : rep(m1.m_row)) {\n            for (int j : rep(m1.m_column)) {\n       \
-    \         ans[i][j] = m1[i][j] + m2[i][j];\n            }\n        }\n       \
-    \ return ans;\n    }\n    friend Mat operator-(const Mat& m1, const Mat& m2)\n\
-    \    {\n        assert(m1.m_row == m2.m_row);\n        assert(m1.m_column == m2.m_column);\n\
-    \        Mat ans(m1.m_row, m1.m_column);\n        for (int i : rep(m1.m_row))\
-    \ {\n            for (int j : rep(m1.m_column)) {\n                ans[i][j] =\
-    \ m1[i][j] - m2[i][j];\n            }\n        }\n        return ans;\n    }\n\
-    \    friend Mat operator*(const Mat& m1, const Mat& m2)\n    {\n        assert(m1.m_column\
-    \ == m2.m_row);\n        Mat ans(m1.m_row, m2.m_column);\n        for (int i :\
-    \ rep(m1.m_row)) {\n            for (int j : rep(m2.m_column)) {\n           \
-    \     for (int k : rep(m1.m_column)) {\n                    ans[i][j] += m1[i][k]\
-    \ * m2[k][j];\n                }\n            }\n        }\n        return ans;\n\
-    \    }\n    friend Mat operator*(const Mat& m, const T& t)\n    {\n        Mat\
-    \ ans(m.m_row, m.m_column);\n        for (int i : rep(m.m_row)) {\n          \
-    \  for (int j : rep(m.m_column)) {\n                ans[i][j] = m[i][j] * t;\n\
-    \            }\n        }\n        return ans;\n    }\n    friend Mat operator/(const\
-    \ Mat& m, const T& t)\n    {\n        Mat ans(m.m_row, m.m_column);\n        for\
-    \ (int i : rep(m.m_row)) {\n            for (int j : rep(m.m_column)) {\n    \
-    \            ans[i][j] = m[i][j] / t;\n            }\n        }\n        return\
-    \ ans;\n    }\n    friend Mat operator*(const T& t, const Mat& m)\n    {\n   \
-    \     return m * t;\n    }\n    friend Mat& operator+=(Mat& m1, const Mat& m2)\n\
-    \    {\n        return m1 = m1 + m2;\n    }\n    friend Mat& operator-=(Mat& m1,\
-    \ const Mat& m2)\n    {\n        return m1 = m1 - m2;\n    }\n    friend Mat&\
-    \ operator*=(Mat& m1, const Mat& m2)\n    {\n        return m1 = m1 * m2;\n  \
-    \  }\n    friend Mat& operator*=(Mat& m, const T& t)\n    {\n        return m\
-    \ = m * t;\n    }\n    friend Mat& operator/=(Mat& m, const T& t)\n    {\n   \
-    \     return m = m / t;\n    }\n    friend Ostream& operator<<(Ostream& os, const\
-    \ Mat& m)\n    {\n        os << \"[\\n\";\n        for (int i : rep(m.m_row))\
-    \ {\n            os << \"[\";\n            for (int j : rep(m.m_column)) {\n \
-    \               os << m[i][j] << \",\";\n            }\n            os << \"]\\\
-    n\";\n        }\n        return (os << \"]\\n\");\n    }\n    template<typename\
-    \ N>\n    Mat pow(N n) const\n    {\n        assert(m_row == m_column);\n    \
-    \    return power(*this, n, Mat::I(m_row));\n    }\n    static Mat I(int N)\n\
-    \    {\n        Mat ans(N, N);\n        for (int i : rep(N)) {\n            ans[i][i]\
-    \ = 1;\n        }\n        return ans;\n    }\n    int row() const\n    {\n  \
-    \      return m_row;\n    }\n    int column() const\n    {\n        return m_column;\n\
-    \    }\nprivate:\n    int m_row, m_column;\n    Vec<Vec<T>> m_vss;\n};\ntemplate<typename\
-    \ T>\nMat<T> gaussJordan(Mat<T> mat)\n{\n    const int row = mat.row(), column\
-    \ = mat.column();\n    int r = 0;\n    for (int c : rep(column)) {\n        if\
-    \ (r == row) { break; }\n        int piv = r;\n        for (; piv < row and mat[piv][c]\
-    \ == T{}; piv++) {}\n        if (piv == row) { continue; }\n        for (int j\
-    \ : irange(c + 1, column)) {\n            mat[piv][j] /= mat[piv][c];\n      \
-    \  }\n        std::swap(mat[piv], mat[r]);\n        mat[r][c] = T{1};\n      \
-    \  for (int j : rep(row)) {\n            if (j == r) { continue; }\n         \
-    \   for (int k : irange(c + 1, column)) {\n                mat[j][k] -= mat[r][k]\
-    \ * mat[j][c];\n            }\n            mat[j][c] = 0;\n        }\n       \
-    \ r++;\n    }\n    return mat;\n}\n"
-  code: "#pragma once\n#include \"matrix.hpp\"\ntemplate<typename T>\nMat<T> gaussJordan(Mat<T>\
-    \ mat)\n{\n    const int row = mat.row(), column = mat.column();\n    int r =\
-    \ 0;\n    for (int c : rep(column)) {\n        if (r == row) { break; }\n    \
-    \    int piv = r;\n        for (; piv < row and mat[piv][c] == T{}; piv++) {}\n\
-    \        if (piv == row) { continue; }\n        for (int j : irange(c + 1, column))\
-    \ {\n            mat[piv][j] /= mat[piv][c];\n        }\n        std::swap(mat[piv],\
-    \ mat[r]);\n        mat[r][c] = T{1};\n        for (int j : rep(row)) {\n    \
-    \        if (j == r) { continue; }\n            for (int k : irange(c + 1, column))\
-    \ {\n                mat[j][k] -= mat[r][k] * mat[j][c];\n            }\n    \
-    \        mat[j][c] = 0;\n        }\n        r++;\n    }\n    return mat;\n}\n"
+    \ T = int>\nclass Graph\n{\n    struct Edge\n    {\n        Edge() = default;\n\
+    \        Edge(int i, int t, T c) : id{i}, to{t}, cost{c} {}\n        int id;\n\
+    \        int to;\n        T cost;\n        operator int() const\n        {\n \
+    \           return to;\n        }\n    };\npublic:\n    Graph(int n) : m_v{n},\
+    \ m_edges(n) {}\n    void addEdge(int u, int v, bool bi = false)\n    {\n    \
+    \    assert(0 <= u and u < m_v);\n        assert(0 <= v and v < m_v);\n      \
+    \  m_edges[u].emplace_back(m_e, v, 1);\n        if (bi) { m_edges[v].emplace_back(m_e,\
+    \ u, 1); }\n        m_e++;\n    }\n    void addEdge(int u, int v, const T& c,\
+    \ bool bi = false)\n    {\n        assert(0 <= u and u < m_v);\n        assert(0\
+    \ <= v and v < m_v);\n        m_edges[u].emplace_back(m_e, v, c);\n        if\
+    \ (bi) { m_edges[v].emplace_back(m_e, u, c); }\n        m_e++;\n    }\n    const\
+    \ Vec<Edge>& operator[](const int u) const\n    {\n        assert(0 <= u and u\
+    \ < m_v);\n        return m_edges[u];\n    }\n    Vec<Edge>& operator[](const\
+    \ int u)\n    {\n        assert(0 <= u and u < m_v);\n        return m_edges[u];\n\
+    \    }\n    int v() const\n    {\n        return m_v;\n    }\n    int e() const\n\
+    \    {\n        return m_e;\n    }\n    friend Ostream& operator<<(Ostream& os,\
+    \ const Graph& g)\n    {\n        for (int u : rep(g.v())) {\n            for\
+    \ (const auto& [id, v, c] : g[u]) {\n                os << \"[\" << id << \"]:\
+    \ \";\n                os << u << \"->\" << v << \"(\" << c << \")\\n\";\n   \
+    \         }\n        }\n        return os;\n    }\n    Vec<T> sizes(int root =\
+    \ 0) const\n    {\n        const int N = v();\n        assert(0 <= root and root\
+    \ < N);\n        Vec<T> ss(N, 1);\n        Fix([&](auto dfs, int u, int p) ->\
+    \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
+    \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
+    \             dfs(v, u);\n                ss[u] += ss[v];\n            }\n   \
+    \     })(root, -1);\n        return ss;\n    }\n    Vec<T> depths(int root = 0)\
+    \ const\n    {\n        const int N = v();\n        assert(0 <= root and root\
+    \ < N);\n        Vec<T> ds(N, 0);\n        Fix([&](auto dfs, int u, int p) ->\
+    \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
+    \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
+    \             ds[v] = ds[u] + c;\n                dfs(v, u);\n            }\n\
+    \        })(root, -1);\n        return ds;\n    }\n    Vec<int> parents(int root\
+    \ = 0) const\n    {\n        const int N = v();\n        assert(0 <= root and\
+    \ root < N);\n        Vec<int> ps(N, -1);\n        Fix([&](auto dfs, int u, int\
+    \ p) -> void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n    \
+    \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
+    \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
+    \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
+    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nVec<Vec<T>>\
+    \ warshallFloyd(const Graph<T>& g)\n{\n    const int N = g.v();\n    Vec<Vec<T>>\
+    \ dss(N, Vec<T>(N));\n    for (int i : rep(N)) {\n        for (int j : rep(N))\
+    \ {\n            dss[i][j] = (i == j ? T{} : INF<T>);\n        }\n        for\
+    \ (const auto& [id, j, c] : g[i]) {\n            static_cast<void>(id);\n    \
+    \        chmin(dss[i][j], c);\n        }\n    }\n    for (int k : rep(N)) {\n\
+    \        for (int i : rep(N)) {\n            for (int j : rep(N)) {\n        \
+    \        if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {\n                \
+    \    chmin(dss[i][j], dss[i][k] + dss[k][j]);\n                }\n           \
+    \ }\n        }\n    }\n    return dss;\n}\nclass Printer\n{\npublic:\n    Printer(Ostream&\
+    \ os = std::cout) : m_os{os}\n    {\n        m_os << std::fixed << std::setprecision(15);\n\
+    \    }\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
+    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), m_os <<\
+    \ '\\n';\n        return 0;\n    }\n    template<typename... Args>\n    int el(const\
+    \ Args&... args)\n    {\n        dump(args...), m_os << std::endl;\n        return\
+    \ 0;\n    }\nprivate:\n    template<typename T>\n    void dump(const T& v)\n \
+    \   {\n        m_os << v;\n    }\n    template<typename T>\n    void dump(const\
+    \ Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size())) {\n         \
+    \   m_os << (i ? \" \" : \"\"), dump(vs[i]);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i :\
+    \ rep(vss.size())) {\n            m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n\
+    \        }\n    }\n    template<typename T, typename... Ts>\n    int dump(const\
+    \ T& v, const Ts&... args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n\
+    \        return 0;\n    }\n    Ostream& m_os;\n};\nPrinter out;\nclass Scanner\n\
+    {\npublic:\n    Scanner(Istream& is = std::cin) : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n\
+    \    }\n    template<typename T>\n    T val()\n    {\n        T v;\n        return\
+    \ m_is >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n\
+    \        return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T>\
+    \ vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>(); });\n\
+    \    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n   \
+    \     return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, const T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return Tup<Args...>{val<Args>()...};\n    }\n\
+    \    template<typename... Args>\n    auto tup(const Args&... offsets)\n    {\n\
+    \        return Tup<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n    Istream&\
+    \ m_is;\n};\nScanner in;\nint main()\n{\n    const auto [V, E] = in.tup<int, int>();\n\
+    \    Graph<i64> g(V);\n    for (int i : rep(E)) {\n        static_cast<void>(i);\n\
+    \        const auto [u, v, c] = in.tup<int, int, i64>();\n        g.addEdge(u,\
+    \ v, c);\n    }\n    const auto dss = warshallFloyd(g);\n    for (int i : rep(V))\
+    \ {\n        if (dss[i][i] < 0) { return out.ln(\"NEGATIVE CYCLE\"); }\n    }\n\
+    \    for (int i : rep(V)) {\n        for (int j : rep(V)) {\n            out(j\
+    \ == 0 ? \"\" : \" \");\n            if (dss[i][j] >= INF<i64>) {\n          \
+    \      out(\"INF\");\n            } else {\n                out(dss[i][j]);\n\
+    \            }\n        }\n        out(\"\\n\");\n    }\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C\"\
+    \n#include \"../../src/graph/warshall_floyd.hpp\"\n#include \"../../src/misc/printer.hpp\"\
+    \n#include \"../../src/misc/scanner.hpp\"\n\nint main()\n{\n    const auto [V,\
+    \ E] = in.tup<int, int>();\n    Graph<i64> g(V);\n    for (int i : rep(E)) {\n\
+    \        USE(i);\n        const auto [u, v, c] = in.tup<int, int, i64>();\n  \
+    \      g.addEdge(u, v, c);\n    }\n    const auto dss = warshallFloyd(g);\n  \
+    \  for (int i : rep(V)) {\n        if (dss[i][i] < 0) { return out.ln(\"NEGATIVE\
+    \ CYCLE\"); }\n    }\n    for (int i : rep(V)) {\n        for (int j : rep(V))\
+    \ {\n            out(j == 0 ? \"\" : \" \");\n            if (dss[i][j] >= INF<i64>)\
+    \ {\n                out(\"INF\");\n            } else {\n                out(dss[i][j]);\n\
+    \            }\n        }\n        out(\"\\n\");\n    }\n\n    return 0;\n}\n"
   dependsOn:
-  - src/linear/matrix.hpp
+  - src/graph/warshall_floyd.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -280,16 +321,19 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/linear/gauss_jordan.hpp
+  - src/graph/graph.hpp
+  - src/misc/printer.hpp
+  - src/misc/scanner.hpp
+  isVerificationFile: true
+  path: verifications/graph/warshall_floyd.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-06-14 15:35:26+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: src/linear/gauss_jordan.hpp
+documentation_of: verifications/graph/warshall_floyd.test.cpp
 layout: document
 redirect_from:
-- /library/src/linear/gauss_jordan.hpp
-- /library/src/linear/gauss_jordan.hpp.html
-title: src/linear/gauss_jordan.hpp
+- /verify/verifications/graph/warshall_floyd.test.cpp
+- /verify/verifications/graph/warshall_floyd.test.cpp.html
+title: verifications/graph/warshall_floyd.test.cpp
 ---

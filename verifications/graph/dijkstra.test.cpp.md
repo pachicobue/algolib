@@ -298,30 +298,31 @@ data:
     \            if (ds[v] <= ds[u] + c) { continue; }\n            ds[v] = ds[u]\
     \ + c;\n            Q.push({ds[v], v});\n        }\n    }\n    return ds;\n}\n\
     int main()\n{\n    const auto [N, M, S, T] = in.tup<int, int, int, int>();\n \
-    \   Graph<i64> g(N), rg(N);\n    for (int i : rep(M)) {\n        const auto [u,\
-    \ v, c] = in.tup<int, int, i64>();\n        g.addEdge(u, v, c), rg.addEdge(v,\
-    \ u, c);\n    }\n    const auto ds = dijkstra(g, S);\n    if (ds[T] >= INF<i64>)\
-    \ { return out.ln(-1); }\n    using pii = Pair<int, int>;\n    Vec<bool> used(N,\
-    \ false);\n    Vec<pii> ans;\n    int p = T;\n    while (p != S) {\n        used[p]\
-    \ = true;\n        for (const auto& [id, pp, cost] : rg[p]) {\n            static_cast<void>(id);\n\
-    \            if (not used[pp] and ds[pp] + cost == ds[p]) {\n                ans.push_back({pp,\
-    \ p});\n                p = pp;\n                break;\n            }\n     \
-    \   }\n    }\n    reverseAll(ans);\n    out.ln(ds[T], ans.size());\n    for (const\
-    \ auto& [u, v] : ans) {\n        out.ln(u, v);\n    }\n    return 0;\n}\n"
+    \   Graph<i64> g(N), rg(N);\n    for (int i : rep(M)) {\n        static_cast<void>(i);\n\
+    \        const auto [u, v, c] = in.tup<int, int, i64>();\n        g.addEdge(u,\
+    \ v, c), rg.addEdge(v, u, c);\n    }\n    const auto ds = dijkstra(g, S);\n  \
+    \  if (ds[T] >= INF<i64>) { return out.ln(-1); }\n    using pii = Pair<int, int>;\n\
+    \    Vec<bool> used(N, false);\n    Vec<pii> ans;\n    int p = T;\n    while (p\
+    \ != S) {\n        used[p] = true;\n        for (const auto& [id, pp, cost] :\
+    \ rg[p]) {\n            static_cast<void>(id);\n            if (not used[pp] and\
+    \ ds[pp] + cost == ds[p]) {\n                ans.push_back({pp, p});\n       \
+    \         p = pp;\n                break;\n            }\n        }\n    }\n \
+    \   reverseAll(ans);\n    out.ln(ds[T], ans.size());\n    for (const auto& [u,\
+    \ v] : ans) {\n        out.ln(u, v);\n    }\n    return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n#include\
     \ \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
     \n#include \"../../src/graph/dijkstra.hpp\"\nint main()\n{\n    const auto [N,\
     \ M, S, T] = in.tup<int, int, int, int>();\n    Graph<i64> g(N), rg(N);\n    for\
-    \ (int i : rep(M)) {\n        const auto [u, v, c] = in.tup<int, int, i64>();\n\
-    \        g.addEdge(u, v, c), rg.addEdge(v, u, c);\n    }\n    const auto ds =\
-    \ dijkstra(g, S);\n    if (ds[T] >= INF<i64>) { return out.ln(-1); }\n    using\
-    \ pii = Pair<int, int>;\n    Vec<bool> used(N, false);\n    Vec<pii> ans;\n  \
-    \  int p = T;\n    while (p != S) {\n        used[p] = true;\n        for (const\
-    \ auto& [id, pp, cost] : rg[p]) {\n            USE(id);\n            if (not used[pp]\
-    \ and ds[pp] + cost == ds[p]) {\n                ans.push_back({pp, p});\n   \
-    \             p = pp;\n                break;\n            }\n        }\n    }\n\
-    \    reverseAll(ans);\n    out.ln(ds[T], ans.size());\n    for (const auto& [u,\
-    \ v] : ans) {\n        out.ln(u, v);\n    }\n    return 0;\n}\n"
+    \ (int i : rep(M)) {\n        USE(i);\n        const auto [u, v, c] = in.tup<int,\
+    \ int, i64>();\n        g.addEdge(u, v, c), rg.addEdge(v, u, c);\n    }\n    const\
+    \ auto ds = dijkstra(g, S);\n    if (ds[T] >= INF<i64>) { return out.ln(-1); }\n\
+    \    using pii = Pair<int, int>;\n    Vec<bool> used(N, false);\n    Vec<pii>\
+    \ ans;\n    int p = T;\n    while (p != S) {\n        used[p] = true;\n      \
+    \  for (const auto& [id, pp, cost] : rg[p]) {\n            USE(id);\n        \
+    \    if (not used[pp] and ds[pp] + cost == ds[p]) {\n                ans.push_back({pp,\
+    \ p});\n                p = pp;\n                break;\n            }\n     \
+    \   }\n    }\n    reverseAll(ans);\n    out.ln(ds[T], ans.size());\n    for (const\
+    \ auto& [u, v] : ans) {\n        out.ln(u, v);\n    }\n    return 0;\n}\n"
   dependsOn:
   - src/misc/fastio/printer.hpp
   - src/misc/common.hpp
@@ -344,7 +345,7 @@ data:
   isVerificationFile: true
   path: verifications/graph/dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-06-14 15:35:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/graph/dijkstra.test.cpp

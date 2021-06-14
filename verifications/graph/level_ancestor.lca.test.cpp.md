@@ -5,6 +5,9 @@ data:
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
   - icon: ':heavy_check_mark:'
+    path: src/graph/level_ancestor.hpp
+    title: src/graph/level_ancestor.hpp
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
   - icon: ':heavy_check_mark:'
@@ -46,16 +49,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verifications/graph/warshall_floyd.test.cpp
-    title: verifications/graph/warshall_floyd.test.cpp
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/lca
+    links:
+    - https://judge.yosupo.jp/problem/lca
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -237,27 +246,69 @@ data:
     \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
     \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
     \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
-    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nVec<Vec<T>>\
-    \ warshallFloyd(const Graph<T>& g)\n{\n    const int N = g.v();\n    Vec<Vec<T>>\
-    \ dss(N, Vec<T>(N));\n    for (int i : rep(N)) {\n        for (int j : rep(N))\
-    \ {\n            dss[i][j] = (i == j ? T{} : INF<T>);\n        }\n        for\
-    \ (const auto& [id, j, c] : g[i]) {\n            static_cast<void>(id);\n    \
-    \        chmin(dss[i][j], c);\n        }\n    }\n    for (int k : rep(N)) {\n\
-    \        for (int i : rep(N)) {\n            for (int j : rep(N)) {\n        \
-    \        if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {\n                \
-    \    chmin(dss[i][j], dss[i][k] + dss[k][j]);\n                }\n           \
-    \ }\n        }\n    }\n    return dss;\n}\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename\
-    \ T>\nVec<Vec<T>> warshallFloyd(const Graph<T>& g)\n{\n    const int N = g.v();\n\
-    \    Vec<Vec<T>> dss(N, Vec<T>(N));\n    for (int i : rep(N)) {\n        for (int\
-    \ j : rep(N)) {\n            dss[i][j] = (i == j ? T{} : INF<T>);\n        }\n\
-    \        for (const auto& [id, j, c] : g[i]) {\n            USE(id);\n       \
-    \     chmin(dss[i][j], c);\n        }\n    }\n    for (int k : rep(N)) {\n   \
-    \     for (int i : rep(N)) {\n            for (int j : rep(N)) {\n           \
-    \     if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {\n                   \
-    \ chmin(dss[i][j], dss[i][k] + dss[k][j]);\n                }\n            }\n\
-    \        }\n    }\n    return dss;\n}\n"
+    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\nclass LevelAncestor\n{\npublic:\n\
+    \    template<typename T>\n    LevelAncestor(const Graph<T>& g, int r = 0)\n \
+    \       : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)\n    {\n        Fix([&](auto dfs,\
+    \ int u, int p) -> void {\n            for (int k = 1; (1 << k) <= m_ds[u]; k++)\
+    \ {\n                m_ps[u].push_back(m_ps[m_ps[u][k - 1]][k - 1]);\n       \
+    \     }\n            for (int v : g[u]) {\n                if (v == p) { continue;\
+    \ }\n                m_ds[v] = m_ds[u] + 1;\n                m_ps[v].push_back(u);\n\
+    \                dfs(v, u);\n            }\n        })(r, -1);\n    };\n    int\
+    \ lca(int u, int v) const\n    {\n        assert(0 <= u and u < m_v);\n      \
+    \  assert(0 <= v and v < m_v);\n        if (m_ds[u] > m_ds[v]) { std::swap(u,\
+    \ v); }\n        v = (*this)(v, m_ds[v] - m_ds[u]);\n        if (u == v) { return\
+    \ u; }\n        while (true) {\n            if (m_ps[u][0] == m_ps[v][0]) { return\
+    \ m_ps[u][0]; }\n            for (int i = m_ps[u].size() - 1; i >= 0; i--) {\n\
+    \                const int nu = m_ps[u][i], nv = m_ps[v][i];\n               \
+    \ if (nu != nv) {\n                    u = nu, v = nv;\n                    break;\n\
+    \                }\n            }\n        }\n    }\n    int operator()(int v,\
+    \ int d) const\n    {\n        assert(0 <= v and v < m_v);\n        for (int k\
+    \ = (int)log2p1(d); k >= 0; k--) {\n            if (btest(d, k)) { v = m_ps[v][k];\
+    \ }\n        }\n        return v;\n    }\nprivate:\n    int m_v;\n    Vec<int>\
+    \ m_ds;\n    Vec<Vec<int>> m_ps;\n};\nclass Printer\n{\npublic:\n    Printer(Ostream&\
+    \ os = std::cout) : m_os{os}\n    {\n        m_os << std::fixed << std::setprecision(15);\n\
+    \    }\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
+    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), m_os <<\
+    \ '\\n';\n        return 0;\n    }\n    template<typename... Args>\n    int el(const\
+    \ Args&... args)\n    {\n        dump(args...), m_os << std::endl;\n        return\
+    \ 0;\n    }\nprivate:\n    template<typename T>\n    void dump(const T& v)\n \
+    \   {\n        m_os << v;\n    }\n    template<typename T>\n    void dump(const\
+    \ Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size())) {\n         \
+    \   m_os << (i ? \" \" : \"\"), dump(vs[i]);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i :\
+    \ rep(vss.size())) {\n            m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n\
+    \        }\n    }\n    template<typename T, typename... Ts>\n    int dump(const\
+    \ T& v, const Ts&... args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n\
+    \        return 0;\n    }\n    Ostream& m_os;\n};\nPrinter out;\nclass Scanner\n\
+    {\npublic:\n    Scanner(Istream& is = std::cin) : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n\
+    \    }\n    template<typename T>\n    T val()\n    {\n        T v;\n        return\
+    \ m_is >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n\
+    \        return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T>\
+    \ vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>(); });\n\
+    \    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n   \
+    \     return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, const T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return Tup<Args...>{val<Args>()...};\n    }\n\
+    \    template<typename... Args>\n    auto tup(const Args&... offsets)\n    {\n\
+    \        return Tup<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n    Istream&\
+    \ m_is;\n};\nScanner in;\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n\
+    \    Graph g(N);\n    for (int i : irange(1, N, 1)) {\n        const int p = in.val<int>();\n\
+    \        g.addEdge(p, i, true);\n    }\n    LevelAncestor la(g);\n    for (int\
+    \ q : rep(Q)) {\n        static_cast<void>(q);\n        const auto [u, v] = in.tup<int,\
+    \ int>();\n        out.ln(la.lca(u, v));\n    }\n    return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n#include \"../../src/graph/level_ancestor.hpp\"\
+    \n#include \"../../src/misc/printer.hpp\"\n#include \"../../src/misc/scanner.hpp\"\
+    \n\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    Graph g(N);\n\
+    \    for (int i : irange(1, N, 1)) {\n        const int p = in.val<int>();\n \
+    \       g.addEdge(p, i, true);\n    }\n    LevelAncestor la(g);\n    for (int\
+    \ q : rep(Q)) {\n        USE(q);\n        const auto [u, v] = in.tup<int, int>();\n\
+    \        out.ln(la.lca(u, v));\n    }\n\n    return 0;\n}\n"
   dependsOn:
+  - src/graph/level_ancestor.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -273,17 +324,18 @@ data:
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
   - src/graph/graph.hpp
-  isVerificationFile: false
-  path: src/graph/warshall_floyd.hpp
+  - src/misc/printer.hpp
+  - src/misc/scanner.hpp
+  isVerificationFile: true
+  path: verifications/graph/level_ancestor.lca.test.cpp
   requiredBy: []
   timestamp: '2021-06-14 15:35:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verifications/graph/warshall_floyd.test.cpp
-documentation_of: src/graph/warshall_floyd.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verifications/graph/level_ancestor.lca.test.cpp
 layout: document
 redirect_from:
-- /library/src/graph/warshall_floyd.hpp
-- /library/src/graph/warshall_floyd.hpp.html
-title: src/graph/warshall_floyd.hpp
+- /verify/verifications/graph/level_ancestor.lca.test.cpp
+- /verify/verifications/graph/level_ancestor.lca.test.cpp.html
+title: verifications/graph/level_ancestor.lca.test.cpp
 ---

@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: src/flow/max_flow.hpp
+    title: src/flow/max_flow.hpp
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
   - icon: ':heavy_check_mark:'
@@ -43,13 +46,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
+    links:
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -193,70 +205,96 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ T>\nclass RBST\n{\n    struct Node\n    {\n        Node(const T& v) : val{v},\
-    \ sz{1} {}\n        T val;\n        int sz = 0;\n        int pi = -1;\n      \
-    \  Arr<int, 2> sons = {-1, -1};\n    };\n    using P = Pair<int, int>;\npublic:\n\
-    \    RBST() {}\n    const Node& operator[](int r) const\n    {\n        return\
-    \ m_nodes[r];\n    }\n    Node& operator[](int r)\n    {\n        return m_nodes[r];\n\
-    \    }\n    int get(int r, int k)\n    {\n        const auto& [lr, R] = split(r,\
-    \ k);\n        const auto& [mr, rr] = split(R, 1);\n        return mr;\n    }\n\
-    \    int merge(int i, int j)\n    {\n        if (i == -1 or j == -1) { return\
-    \ i == -1 ? j : i; }\n        const auto& [li, ri] = m_nodes[i].sons;\n      \
-    \  if (rng_xo.val<int>(0, size(i) + size(j) - 1) < size(i)) {\n            const\
-    \ int rr = merge(m_nodes[i].ri, j);\n            return m_nodes[i].ri = rr, m_nodes[rr].pi\
-    \ = i, up(i);\n        } else {\n            const int lr = merge(m_nodes[j].li,\
-    \ i);\n            return m_nodes[j].li = lr, m_nodes[lr].pi = j, up(j);\n   \
-    \     }\n    }\n    P split(int i, int k)\n    {\n        auto& [li, ri] = m_nodes[i].sons;\n\
-    \        if (size(i) == 0) { return {-1, -1}; }\n        if (size(li) >= k) {\n\
-    \            const auto& [lli, lri] = split(li, k);\n            li = lri;\n \
-    \           m_nodes[lri].pi = i;\n            up(i);\n            return P{lli,\
-    \ i};\n        } else {\n            const auto& [rli, rri] = split(ri, k - size(li)\
-    \ - 1);\n            ri = rri;\n            m_nodes[rri].pi = i;\n           \
-    \ up(i);\n            return P{i, rri};\n        }\n    }\n    int size(int r)\
-    \ const\n    {\n        return r == -1 ? 0 : m_nodes[r].sz;\n    }\n    Vec<Node>\
-    \ subNodes(int i) const\n    {\n        if (i == -1) { return Vec<Node>{}; }\n\
-    \        const auto& [li, ri] = m_nodes[i].sons;\n        return subNodes(li)\
-    \ + Vec<Node>{m_nodes[i]} + subNodes(ri);\n    }\nprivate:\n    int isRight(int\
-    \ i)\n    {\n        return m_nodes[i].pi != -1 and m_nodes[m_nodes[i].pi].ri\
-    \ == i;\n    }\n    int isLeft(int i)\n    {\n        return m_nodes[i].pi !=\
-    \ -1 and m_nodes[m_nodes[i].pi].li == i;\n    }\n    int up(int i)\n    {\n  \
-    \      const auto& [li, ri] = m_nodes[i].sons;\n        m_nodes[i].sz = size(li)\
-    \ + size(ri) + 1;\n        return i;\n    }\n    int alloc(const T& v)\n    {\n\
-    \        m_nodes.push_back(Node(v));\n        return m_nodes.size() - 1;\n   \
-    \ }\n    Vec<Node> m_nodes;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nclass\
-    \ RBST\n{\n    struct Node\n    {\n        Node(const T& v) : val{v}, sz{1} {}\n\
-    \        T val;\n        int sz = 0;\n        int pi = -1;\n        Arr<int, 2>\
-    \ sons = {-1, -1};\n    };\n    using P = Pair<int, int>;\n\npublic:\n    RBST()\
-    \ {}\n    const Node& operator[](int r) const\n    {\n        return m_nodes[r];\n\
-    \    }\n    Node& operator[](int r)\n    {\n        return m_nodes[r];\n    }\n\
-    \    int get(int r, int k)\n    {\n        const auto& [lr, R] = split(r, k);\n\
-    \        const auto& [mr, rr] = split(R, 1);\n        return mr;\n    }\n    int\
-    \ merge(int i, int j)\n    {\n        if (i == -1 or j == -1) { return i == -1\
-    \ ? j : i; }\n        const auto& [li, ri] = m_nodes[i].sons;\n        if (rng_xo.val<int>(0,\
-    \ size(i) + size(j) - 1) < size(i)) {\n            const int rr = merge(m_nodes[i].ri,\
-    \ j);\n            return m_nodes[i].ri = rr, m_nodes[rr].pi = i, up(i);\n   \
-    \     } else {\n            const int lr = merge(m_nodes[j].li, i);\n        \
-    \    return m_nodes[j].li = lr, m_nodes[lr].pi = j, up(j);\n        }\n    }\n\
-    \    P split(int i, int k)\n    {\n        auto& [li, ri] = m_nodes[i].sons;\n\
-    \        if (size(i) == 0) { return {-1, -1}; }\n        if (size(li) >= k) {\n\
-    \            const auto& [lli, lri] = split(li, k);\n            li = lri;\n \
-    \           m_nodes[lri].pi = i;\n            up(i);\n            return P{lli,\
-    \ i};\n        } else {\n            const auto& [rli, rri] = split(ri, k - size(li)\
-    \ - 1);\n            ri = rri;\n            m_nodes[rri].pi = i;\n           \
-    \ up(i);\n            return P{i, rri};\n        }\n    }\n    int size(int r)\
-    \ const\n    {\n        return r == -1 ? 0 : m_nodes[r].sz;\n    }\n    Vec<Node>\
-    \ subNodes(int i) const\n    {\n        if (i == -1) { return Vec<Node>{}; }\n\
-    \        const auto& [li, ri] = m_nodes[i].sons;\n        return subNodes(li)\
-    \ + Vec<Node>{m_nodes[i]} + subNodes(ri);\n    }\n\nprivate:\n    int isRight(int\
-    \ i)\n    {\n        return m_nodes[i].pi != -1 and m_nodes[m_nodes[i].pi].ri\
-    \ == i;\n    }\n    int isLeft(int i)\n    {\n        return m_nodes[i].pi !=\
-    \ -1 and m_nodes[m_nodes[i].pi].li == i;\n    }\n    int up(int i)\n    {\n  \
-    \      const auto& [li, ri] = m_nodes[i].sons;\n        m_nodes[i].sz = size(li)\
-    \ + size(ri) + 1;\n        return i;\n    }\n    int alloc(const T& v)\n    {\n\
-    \        m_nodes.push_back(Node(v));\n        return m_nodes.size() - 1;\n   \
-    \ }\n    Vec<Node> m_nodes;\n};\n"
+    \ T>\nclass MaxFlow\n{\n    struct Edge\n    {\n        int to;\n        T cap;\n\
+    \        T flow;\n        int rid;\n        Edge() = default;\n        Edge(int\
+    \ t, T c, T f, int r) : to{t}, cap{c}, flow{f}, rid{r} {}\n        T resCap()\
+    \ const\n        {\n            return cap - flow;\n        }\n    };\npublic:\n\
+    \    MaxFlow(int n) : m_v(n), m_ds(n, -1)\n    {\n        m_is[0].resize(n);\n\
+    \        m_is[1].resize(n);\n        m_gs[0].resize(n);\n        m_gs[1].resize(n);\n\
+    \    }\n    void addEdge(int from, int to, T cap)\n    {\n        assert(0 <=\
+    \ from and from < m_v);\n        assert(0 <= to and to < m_v);\n        assert(0\
+    \ <= cap);\n        int id = m_gs[0][from].size();\n        int rid = m_gs[1][to].size();\n\
+    \        m_gs[0][from].emplace_back(to, cap, 0, rid);\n        m_gs[1][to].emplace_back(from,\
+    \ cap, cap, id);\n        m_es.emplace_back(from, id);\n    }\n    const Edge&\
+    \ edge(int i) const\n    {\n        const auto& [u, id] = m_es[i];\n        return\
+    \ m_gs[0][u][id];\n    }\n    T maxFlow(int s, int t, T max_flow = INF<T>)\n \
+    \   {\n        auto bfs = [&]() {\n            fillAll(m_ds, -1);\n          \
+    \  Queue<int> q;\n            m_ds[s] = 0, q.push(s);\n            while (not\
+    \ q.empty()) {\n                const int u = q.front();\n                q.pop();\n\
+    \                for (int l : rep(2)) {\n                    for (const auto&\
+    \ e : m_gs[l][u]) {\n                        if (e.resCap() > 0 and m_ds[e.to]\
+    \ == -1) {\n                            m_ds[e.to] = m_ds[u] + 1;\n          \
+    \                  q.push(e.to);\n                        }\n                \
+    \    }\n                }\n            }\n        };\n        auto dfs = Fix([&](auto\
+    \ dfs, int u, T fmax) -> T {\n            if (u == t) { return fmax; }\n     \
+    \       for (int l : rep(2)) {\n                for (int& i = m_is[l][u]; i <\
+    \ (int)m_gs[l][u].size(); i++) {\n                    auto& e = m_gs[l][u][i];\n\
+    \                    if (e.resCap() > 0 and m_ds[u] < m_ds[e.to]) {\n        \
+    \                const T d = dfs(e.to, std::min(fmax, e.resCap()));\n        \
+    \                if (d > 0) {\n                            e.flow += d;\n    \
+    \                        m_gs[1 - l][e.to][e.rid].flow -= d;\n               \
+    \             return d;\n                        }\n                    }\n  \
+    \              }\n            }\n            return 0;\n        });\n        T\
+    \ flow = 0;\n        while (flow < max_flow) {\n            bfs();\n         \
+    \   if (m_ds[t] == -1) { return flow; }\n            for (int l : rep(2)) {\n\
+    \                fillAll(m_is[l], 0);\n            }\n            while (true)\
+    \ {\n                T f = dfs(s, max_flow - flow);\n                if (f ==\
+    \ 0) { break; }\n                flow += f;\n            }\n        }\n      \
+    \  return flow;\n    }\n    Vec<Edge>& operator[](int i)\n    {\n        assert(0\
+    \ <= i and i < m_v);\n        return m_gs[0][i];\n    }\n    const Vec<Edge>&\
+    \ operator[](int i) const\n    {\n        assert(0 <= i and i < m_v);\n      \
+    \  return m_gs[0][i];\n    }\n    int v() const\n    {\n        return m_v;\n\
+    \    }\n    friend Ostream& operator<<(Ostream& os, const MaxFlow& mf)\n    {\n\
+    \        const int N = mf.v();\n        os << \"[\\n\";\n        for (int u :\
+    \ rep(N)) {\n            for (const auto& e : mf[u]) {\n                const\
+    \ int v = e.to;\n                const T cap = e.cap, flow = e.flow;\n       \
+    \         os << u << \"->\" << v << \" [\" << flow << \"/\" << cap << \"]\\n\"\
+    ;\n            }\n        }\n        return (os << \"]\\n\");\n    }\nprivate:\n\
+    \    int m_v;\n    Vec<int> m_ds;\n    Arr<Vec<int>, 2> m_is;\n    Vec<Pair<int,\
+    \ int>> m_es;\n    Arr<Vec<Vec<Edge>>, 2> m_gs;\n};\nclass Printer\n{\npublic:\n\
+    \    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n        m_os << std::fixed\
+    \ << std::setprecision(15);\n    }\n    template<typename... Args>\n    int operator()(const\
+    \ Args&... args)\n    {\n        dump(args...);\n        return 0;\n    }\n  \
+    \  template<typename... Args>\n    int ln(const Args&... args)\n    {\n      \
+    \  dump(args...), m_os << '\\n';\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int el(const Args&... args)\n    {\n        dump(args...), m_os <<\
+    \ std::endl;\n        return 0;\n    }\nprivate:\n    template<typename T>\n \
+    \   void dump(const T& v)\n    {\n        m_os << v;\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            m_os << (i ? \" \" : \"\"), dump(vs[i]);\n        }\n    }\n\
+    \    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n    \
+    \    for (const int i : rep(vss.size())) {\n            m_os << (i ? \"\" : \"\
+    \\n\"), dump(vss[i]);\n        }\n    }\n    template<typename T, typename...\
+    \ Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n        dump(v), m_os\
+    \ << ' ', dump(args...);\n        return 0;\n    }\n    Ostream& m_os;\n};\nPrinter\
+    \ out;\nclass Scanner\n{\npublic:\n    Scanner(Istream& is = std::cin) : m_is{is}\n\
+    \    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n    }\n    template<typename\
+    \ T>\n    T val()\n    {\n        T v;\n        return m_is >> v, v;\n    }\n\
+    \    template<typename T>\n    T val(T offset)\n    {\n        return val<T>()\
+    \ - offset;\n    }\n    template<typename T>\n    Vec<T> vec(int n)\n    {\n \
+    \       return genVec<T>(n, [&]() { return val<T>(); });\n    }\n    template<typename\
+    \ T>\n    Vec<T> vec(int n, T offset)\n    {\n        return genVec<T>(n, [&]()\
+    \ { return val<T>(offset); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m);\
+    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, const\
+    \ T offset)\n    {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m,\
+    \ offset); });\n    }\n    template<typename... Args>\n    auto tup()\n    {\n\
+    \        return Tup<Args...>{val<Args>()...};\n    }\n    template<typename...\
+    \ Args>\n    auto tup(const Args&... offsets)\n    {\n        return Tup<Args...>{val<Args>(offsets)...};\n\
+    \    }\nprivate:\n    Istream& m_is;\n};\nScanner in;\nint main()\n{\n    const\
+    \ auto [V, E] = in.tup<int, int>();\n    MaxFlow<int> flow(V);\n    for (int i\
+    \ : rep(E)) {\n        static_cast<void>(i);\n        const auto [u, v, c] = in.tup<int,\
+    \ int, int>();\n        flow.addEdge(u, v, c);\n    }\n    out.ln(flow.maxFlow(0,\
+    \ V - 1));\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
+    \n#include \"../../src/flow/max_flow.hpp\"\n#include \"../../src/misc/printer.hpp\"\
+    \n#include \"../../src/misc/scanner.hpp\"\nint main()\n{\n    const auto [V, E]\
+    \ = in.tup<int, int>();\n    MaxFlow<int> flow(V);\n    for (int i : rep(E)) {\n\
+    \        USE(i);\n        const auto [u, v, c] = in.tup<int, int, int>();\n  \
+    \      flow.addEdge(u, v, c);\n    }\n    out.ln(flow.maxFlow(0, V - 1));\n  \
+    \  return 0;\n}\n"
   dependsOn:
+  - src/flow/max_flow.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -271,16 +309,18 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/data_structure/rbstree.hpp
+  - src/misc/printer.hpp
+  - src/misc/scanner.hpp
+  isVerificationFile: true
+  path: verifications/flow/max_flow.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-06-14 15:35:26+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: src/data_structure/rbstree.hpp
+documentation_of: verifications/flow/max_flow.test.cpp
 layout: document
 redirect_from:
-- /library/src/data_structure/rbstree.hpp
-- /library/src/data_structure/rbstree.hpp.html
-title: src/data_structure/rbstree.hpp
+- /verify/verifications/flow/max_flow.test.cpp
+- /verify/verifications/flow/max_flow.test.cpp.html
+title: verifications/flow/max_flow.test.cpp
 ---

@@ -47,7 +47,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/bcc.hpp
     title: src/graph/bcc.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/bellman_ford.hpp
     title: src/graph/bellman_ford.hpp
   - icon: ':warning:'
@@ -65,7 +65,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/lca.hpp
     title: src/graph/lca.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/level_ancestor.hpp
     title: src/graph/level_ancestor.hpp
   - icon: ':heavy_check_mark:'
@@ -77,13 +77,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/top_sort.hpp
     title: src/graph/top_sort.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/warshall_floyd.hpp
     title: src/graph/warshall_floyd.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/bcc.test.cpp
     title: verifications/graph/bcc.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/bellman_ford.test.cpp
+    title: verifications/graph/bellman_ford.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/graph/diameter.test.cpp
     title: verifications/graph/diameter.test.cpp
@@ -97,8 +100,17 @@ data:
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verifications/graph/level_ancestor.lca.test.cpp
+    title: verifications/graph/level_ancestor.lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/level_ancestor.ut.test.cpp
+    title: verifications/graph/level_ancestor.ut.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/scc.test.cpp
     title: verifications/graph/scc.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/warshall_floyd.test.cpp
+    title: verifications/graph/warshall_floyd.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -360,9 +372,13 @@ data:
   verifiedWith:
   - verifications/graph/diameter.test.cpp
   - verifications/graph/dijkstra.test.cpp
+  - verifications/graph/level_ancestor.ut.test.cpp
+  - verifications/graph/level_ancestor.lca.test.cpp
   - verifications/graph/bcc.test.cpp
   - verifications/graph/hld.test.cpp
   - verifications/graph/scc.test.cpp
+  - verifications/graph/warshall_floyd.test.cpp
+  - verifications/graph/bellman_ford.test.cpp
   - verifications/graph/lca.test.cpp
 documentation_of: src/graph/graph.hpp
 layout: document

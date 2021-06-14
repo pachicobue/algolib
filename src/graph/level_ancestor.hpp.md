@@ -47,10 +47,16 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/level_ancestor.lca.test.cpp
+    title: verifications/graph/level_ancestor.lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/level_ancestor.ut.test.cpp
+    title: verifications/graph/level_ancestor.ut.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -234,45 +240,46 @@ data:
     \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
     \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
     \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
-    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\nclass LA\n{\npublic:\n    template<typename\
-    \ T>\n    LA(const Graph<T>& g, int r = 0) : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)\n\
-    \    {\n        Fixpoint([&](auto dfs, int u, int p) -> void {\n            for\
-    \ (int k = 1; (1 << k) <= m_ds[u]; k++) {\n                m_ps[u].push_back(m_ps[m_ps[u][k\
-    \ - 1]][k - 1]);\n            }\n            for (int v : g[u]) {\n          \
-    \      m_ds[v] = m_ds[u] + 1;\n                m_ps[v].push_back(u);\n       \
-    \         dfs(v, u);\n            }\n        })(r, -1);\n    };\n    int lca(int\
-    \ u, int v) const\n    {\n        assert(0 <= u and u < m_v);\n        assert(0\
-    \ <= v and v < m_v);\n        if (m_ds[u] > m_ds[v]) { std::swap(u, v); }\n  \
-    \      v = (*this)(v, m_ds[v] - m_ds[u]);\n        if (u == v) { return u; }\n\
-    \        while (true) {\n            if (m_ps[u][0] == m_ps[v][0]) { return m_ps[u][0];\
-    \ }\n            for (int i = m_ps[u].size() - 1; i >= 0; i--) {\n           \
-    \     const int nu = m_ps[u][i], nv = m_ps[v][i];\n                if (nu != nv)\
-    \ {\n                    u = nu, v = nv;\n                    break;\n       \
-    \         }\n            }\n        }\n    }\n    int operator()(int v, int d)\
-    \ const\n    {\n        assert(0 <= v and v < m_v);\n        for (int k = (int)log2p1(d);\
-    \ k >= 0; k--) {\n            if (btest(d, k)) { v = m_ps[v][k]; }\n        }\n\
-    \        return v;\n    }\nprivate:\n    int m_v;\n    Vec<int> m_ds;\n    Vec<Vec<int>>\
-    \ m_ps;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\nclass\
-    \ LA\n{\npublic:\n    template<typename T>\n    LA(const Graph<T>& g, int r =\
-    \ 0) : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)\n    {\n        Fixpoint([&](auto dfs,\
+    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\nclass LevelAncestor\n{\npublic:\n\
+    \    template<typename T>\n    LevelAncestor(const Graph<T>& g, int r = 0)\n \
+    \       : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)\n    {\n        Fix([&](auto dfs,\
     \ int u, int p) -> void {\n            for (int k = 1; (1 << k) <= m_ds[u]; k++)\
     \ {\n                m_ps[u].push_back(m_ps[m_ps[u][k - 1]][k - 1]);\n       \
-    \     }\n            for (int v : g[u]) {\n                m_ds[v] = m_ds[u] +\
-    \ 1;\n                m_ps[v].push_back(u);\n                dfs(v, u);\n    \
-    \        }\n        })(r, -1);\n    };\n    int lca(int u, int v) const\n    {\n\
-    \        assert(0 <= u and u < m_v);\n        assert(0 <= v and v < m_v);\n  \
-    \      if (m_ds[u] > m_ds[v]) { std::swap(u, v); }\n        v = (*this)(v, m_ds[v]\
-    \ - m_ds[u]);\n        if (u == v) { return u; }\n        while (true) {\n   \
-    \         if (m_ps[u][0] == m_ps[v][0]) { return m_ps[u][0]; }\n            for\
-    \ (int i = m_ps[u].size() - 1; i >= 0; i--) {\n                const int nu =\
-    \ m_ps[u][i], nv = m_ps[v][i];\n                if (nu != nv) {\n            \
-    \        u = nu, v = nv;\n                    break;\n                }\n    \
-    \        }\n        }\n    }\n    int operator()(int v, int d) const\n    {\n\
-    \        assert(0 <= v and v < m_v);\n        for (int k = (int)log2p1(d); k >=\
-    \ 0; k--) {\n            if (btest(d, k)) { v = m_ps[v][k]; }\n        }\n   \
-    \     return v;\n    }\n\nprivate:\n    int m_v;\n    Vec<int> m_ds;\n    Vec<Vec<int>>\
-    \ m_ps;\n};\n"
+    \     }\n            for (int v : g[u]) {\n                if (v == p) { continue;\
+    \ }\n                m_ds[v] = m_ds[u] + 1;\n                m_ps[v].push_back(u);\n\
+    \                dfs(v, u);\n            }\n        })(r, -1);\n    };\n    int\
+    \ lca(int u, int v) const\n    {\n        assert(0 <= u and u < m_v);\n      \
+    \  assert(0 <= v and v < m_v);\n        if (m_ds[u] > m_ds[v]) { std::swap(u,\
+    \ v); }\n        v = (*this)(v, m_ds[v] - m_ds[u]);\n        if (u == v) { return\
+    \ u; }\n        while (true) {\n            if (m_ps[u][0] == m_ps[v][0]) { return\
+    \ m_ps[u][0]; }\n            for (int i = m_ps[u].size() - 1; i >= 0; i--) {\n\
+    \                const int nu = m_ps[u][i], nv = m_ps[v][i];\n               \
+    \ if (nu != nv) {\n                    u = nu, v = nv;\n                    break;\n\
+    \                }\n            }\n        }\n    }\n    int operator()(int v,\
+    \ int d) const\n    {\n        assert(0 <= v and v < m_v);\n        for (int k\
+    \ = (int)log2p1(d); k >= 0; k--) {\n            if (btest(d, k)) { v = m_ps[v][k];\
+    \ }\n        }\n        return v;\n    }\nprivate:\n    int m_v;\n    Vec<int>\
+    \ m_ds;\n    Vec<Vec<int>> m_ps;\n};\n"
+  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\nclass\
+    \ LevelAncestor\n{\npublic:\n    template<typename T>\n    LevelAncestor(const\
+    \ Graph<T>& g, int r = 0)\n        : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)\n   \
+    \ {\n        Fix([&](auto dfs, int u, int p) -> void {\n            for (int k\
+    \ = 1; (1 << k) <= m_ds[u]; k++) {\n                m_ps[u].push_back(m_ps[m_ps[u][k\
+    \ - 1]][k - 1]);\n            }\n            for (int v : g[u]) {\n          \
+    \      if (v == p) { continue; }\n                m_ds[v] = m_ds[u] + 1;\n   \
+    \             m_ps[v].push_back(u);\n                dfs(v, u);\n            }\n\
+    \        })(r, -1);\n    };\n    int lca(int u, int v) const\n    {\n        assert(0\
+    \ <= u and u < m_v);\n        assert(0 <= v and v < m_v);\n        if (m_ds[u]\
+    \ > m_ds[v]) { std::swap(u, v); }\n        v = (*this)(v, m_ds[v] - m_ds[u]);\n\
+    \        if (u == v) { return u; }\n        while (true) {\n            if (m_ps[u][0]\
+    \ == m_ps[v][0]) { return m_ps[u][0]; }\n            for (int i = m_ps[u].size()\
+    \ - 1; i >= 0; i--) {\n                const int nu = m_ps[u][i], nv = m_ps[v][i];\n\
+    \                if (nu != nv) {\n                    u = nu, v = nv;\n      \
+    \              break;\n                }\n            }\n        }\n    }\n  \
+    \  int operator()(int v, int d) const\n    {\n        assert(0 <= v and v < m_v);\n\
+    \        for (int k = (int)log2p1(d); k >= 0; k--) {\n            if (btest(d,\
+    \ k)) { v = m_ps[v][k]; }\n        }\n        return v;\n    }\n\nprivate:\n \
+    \   int m_v;\n    Vec<int> m_ds;\n    Vec<Vec<int>> m_ps;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -292,9 +299,11 @@ data:
   isVerificationFile: false
   path: src/graph/level_ancestor.hpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-06-14 15:35:26+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verifications/graph/level_ancestor.ut.test.cpp
+  - verifications/graph/level_ancestor.lca.test.cpp
 documentation_of: src/graph/level_ancestor.hpp
 layout: document
 redirect_from:

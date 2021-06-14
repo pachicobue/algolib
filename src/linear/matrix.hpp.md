@@ -43,10 +43,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/linear/gauss_jordan.hpp
-    title: src/linear/gauss_jordan.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -309,8 +306,7 @@ data:
   - src/misc/common/xoshiro.hpp
   isVerificationFile: false
   path: src/linear/matrix.hpp
-  requiredBy:
-  - src/linear/gauss_jordan.hpp
+  requiredBy: []
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

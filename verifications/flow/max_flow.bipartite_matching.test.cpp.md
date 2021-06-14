@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/graph/graph.hpp
-    title: src/graph/graph.hpp
+    path: src/flow/max_flow.hpp
+    title: src/flow/max_flow.hpp
   - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -46,16 +46,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verifications/graph/warshall_floyd.test.cpp
-    title: verifications/graph/warshall_floyd.test.cpp
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/bipartitematching
+    links:
+    - https://judge.yosupo.jp/problem/bipartitematching
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -199,65 +205,104 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ T = int>\nclass Graph\n{\n    struct Edge\n    {\n        Edge() = default;\n\
-    \        Edge(int i, int t, T c) : id{i}, to{t}, cost{c} {}\n        int id;\n\
-    \        int to;\n        T cost;\n        operator int() const\n        {\n \
-    \           return to;\n        }\n    };\npublic:\n    Graph(int n) : m_v{n},\
-    \ m_edges(n) {}\n    void addEdge(int u, int v, bool bi = false)\n    {\n    \
-    \    assert(0 <= u and u < m_v);\n        assert(0 <= v and v < m_v);\n      \
-    \  m_edges[u].emplace_back(m_e, v, 1);\n        if (bi) { m_edges[v].emplace_back(m_e,\
-    \ u, 1); }\n        m_e++;\n    }\n    void addEdge(int u, int v, const T& c,\
-    \ bool bi = false)\n    {\n        assert(0 <= u and u < m_v);\n        assert(0\
-    \ <= v and v < m_v);\n        m_edges[u].emplace_back(m_e, v, c);\n        if\
-    \ (bi) { m_edges[v].emplace_back(m_e, u, c); }\n        m_e++;\n    }\n    const\
-    \ Vec<Edge>& operator[](const int u) const\n    {\n        assert(0 <= u and u\
-    \ < m_v);\n        return m_edges[u];\n    }\n    Vec<Edge>& operator[](const\
-    \ int u)\n    {\n        assert(0 <= u and u < m_v);\n        return m_edges[u];\n\
-    \    }\n    int v() const\n    {\n        return m_v;\n    }\n    int e() const\n\
-    \    {\n        return m_e;\n    }\n    friend Ostream& operator<<(Ostream& os,\
-    \ const Graph& g)\n    {\n        for (int u : rep(g.v())) {\n            for\
-    \ (const auto& [id, v, c] : g[u]) {\n                os << \"[\" << id << \"]:\
-    \ \";\n                os << u << \"->\" << v << \"(\" << c << \")\\n\";\n   \
-    \         }\n        }\n        return os;\n    }\n    Vec<T> sizes(int root =\
-    \ 0) const\n    {\n        const int N = v();\n        assert(0 <= root and root\
-    \ < N);\n        Vec<T> ss(N, 1);\n        Fix([&](auto dfs, int u, int p) ->\
-    \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
-    \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
-    \             dfs(v, u);\n                ss[u] += ss[v];\n            }\n   \
-    \     })(root, -1);\n        return ss;\n    }\n    Vec<T> depths(int root = 0)\
-    \ const\n    {\n        const int N = v();\n        assert(0 <= root and root\
-    \ < N);\n        Vec<T> ds(N, 0);\n        Fix([&](auto dfs, int u, int p) ->\
-    \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
-    \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
-    \             ds[v] = ds[u] + c;\n                dfs(v, u);\n            }\n\
-    \        })(root, -1);\n        return ds;\n    }\n    Vec<int> parents(int root\
-    \ = 0) const\n    {\n        const int N = v();\n        assert(0 <= root and\
-    \ root < N);\n        Vec<int> ps(N, -1);\n        Fix([&](auto dfs, int u, int\
-    \ p) -> void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n    \
-    \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
-    \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
-    \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
-    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nVec<Vec<T>>\
-    \ warshallFloyd(const Graph<T>& g)\n{\n    const int N = g.v();\n    Vec<Vec<T>>\
-    \ dss(N, Vec<T>(N));\n    for (int i : rep(N)) {\n        for (int j : rep(N))\
-    \ {\n            dss[i][j] = (i == j ? T{} : INF<T>);\n        }\n        for\
-    \ (const auto& [id, j, c] : g[i]) {\n            static_cast<void>(id);\n    \
-    \        chmin(dss[i][j], c);\n        }\n    }\n    for (int k : rep(N)) {\n\
-    \        for (int i : rep(N)) {\n            for (int j : rep(N)) {\n        \
-    \        if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {\n                \
-    \    chmin(dss[i][j], dss[i][k] + dss[k][j]);\n                }\n           \
-    \ }\n        }\n    }\n    return dss;\n}\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename\
-    \ T>\nVec<Vec<T>> warshallFloyd(const Graph<T>& g)\n{\n    const int N = g.v();\n\
-    \    Vec<Vec<T>> dss(N, Vec<T>(N));\n    for (int i : rep(N)) {\n        for (int\
-    \ j : rep(N)) {\n            dss[i][j] = (i == j ? T{} : INF<T>);\n        }\n\
-    \        for (const auto& [id, j, c] : g[i]) {\n            USE(id);\n       \
-    \     chmin(dss[i][j], c);\n        }\n    }\n    for (int k : rep(N)) {\n   \
-    \     for (int i : rep(N)) {\n            for (int j : rep(N)) {\n           \
-    \     if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {\n                   \
-    \ chmin(dss[i][j], dss[i][k] + dss[k][j]);\n                }\n            }\n\
-    \        }\n    }\n    return dss;\n}\n"
+    \ T>\nclass MaxFlow\n{\n    struct Edge\n    {\n        int to;\n        T cap;\n\
+    \        T flow;\n        int rid;\n        Edge() = default;\n        Edge(int\
+    \ t, T c, T f, int r) : to{t}, cap{c}, flow{f}, rid{r} {}\n        T resCap()\
+    \ const\n        {\n            return cap - flow;\n        }\n    };\npublic:\n\
+    \    MaxFlow(int n) : m_v(n), m_ds(n, -1)\n    {\n        m_is[0].resize(n);\n\
+    \        m_is[1].resize(n);\n        m_gs[0].resize(n);\n        m_gs[1].resize(n);\n\
+    \    }\n    void addEdge(int from, int to, T cap)\n    {\n        assert(0 <=\
+    \ from and from < m_v);\n        assert(0 <= to and to < m_v);\n        assert(0\
+    \ <= cap);\n        int id = m_gs[0][from].size();\n        int rid = m_gs[1][to].size();\n\
+    \        m_gs[0][from].emplace_back(to, cap, 0, rid);\n        m_gs[1][to].emplace_back(from,\
+    \ cap, cap, id);\n        m_es.emplace_back(from, id);\n    }\n    const Edge&\
+    \ edge(int i) const\n    {\n        const auto& [u, id] = m_es[i];\n        return\
+    \ m_gs[0][u][id];\n    }\n    T maxFlow(int s, int t, T max_flow = INF<T>)\n \
+    \   {\n        auto bfs = [&]() {\n            fillAll(m_ds, -1);\n          \
+    \  Queue<int> q;\n            m_ds[s] = 0, q.push(s);\n            while (not\
+    \ q.empty()) {\n                const int u = q.front();\n                q.pop();\n\
+    \                for (int l : rep(2)) {\n                    for (const auto&\
+    \ e : m_gs[l][u]) {\n                        if (e.resCap() > 0 and m_ds[e.to]\
+    \ == -1) {\n                            m_ds[e.to] = m_ds[u] + 1;\n          \
+    \                  q.push(e.to);\n                        }\n                \
+    \    }\n                }\n            }\n        };\n        auto dfs = Fix([&](auto\
+    \ dfs, int u, T fmax) -> T {\n            if (u == t) { return fmax; }\n     \
+    \       for (int l : rep(2)) {\n                for (int& i = m_is[l][u]; i <\
+    \ (int)m_gs[l][u].size(); i++) {\n                    auto& e = m_gs[l][u][i];\n\
+    \                    if (e.resCap() > 0 and m_ds[u] < m_ds[e.to]) {\n        \
+    \                const T d = dfs(e.to, std::min(fmax, e.resCap()));\n        \
+    \                if (d > 0) {\n                            e.flow += d;\n    \
+    \                        m_gs[1 - l][e.to][e.rid].flow -= d;\n               \
+    \             return d;\n                        }\n                    }\n  \
+    \              }\n            }\n            return 0;\n        });\n        T\
+    \ flow = 0;\n        while (flow < max_flow) {\n            bfs();\n         \
+    \   if (m_ds[t] == -1) { return flow; }\n            for (int l : rep(2)) {\n\
+    \                fillAll(m_is[l], 0);\n            }\n            while (true)\
+    \ {\n                T f = dfs(s, max_flow - flow);\n                if (f ==\
+    \ 0) { break; }\n                flow += f;\n            }\n        }\n      \
+    \  return flow;\n    }\n    Vec<Edge>& operator[](int i)\n    {\n        assert(0\
+    \ <= i and i < m_v);\n        return m_gs[0][i];\n    }\n    const Vec<Edge>&\
+    \ operator[](int i) const\n    {\n        assert(0 <= i and i < m_v);\n      \
+    \  return m_gs[0][i];\n    }\n    int v() const\n    {\n        return m_v;\n\
+    \    }\n    friend Ostream& operator<<(Ostream& os, const MaxFlow& mf)\n    {\n\
+    \        const int N = mf.v();\n        os << \"[\\n\";\n        for (int u :\
+    \ rep(N)) {\n            for (const auto& e : mf[u]) {\n                const\
+    \ int v = e.to;\n                const T cap = e.cap, flow = e.flow;\n       \
+    \         os << u << \"->\" << v << \" [\" << flow << \"/\" << cap << \"]\\n\"\
+    ;\n            }\n        }\n        return (os << \"]\\n\");\n    }\nprivate:\n\
+    \    int m_v;\n    Vec<int> m_ds;\n    Arr<Vec<int>, 2> m_is;\n    Vec<Pair<int,\
+    \ int>> m_es;\n    Arr<Vec<Vec<Edge>>, 2> m_gs;\n};\nclass Printer\n{\npublic:\n\
+    \    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n        m_os << std::fixed\
+    \ << std::setprecision(15);\n    }\n    template<typename... Args>\n    int operator()(const\
+    \ Args&... args)\n    {\n        dump(args...);\n        return 0;\n    }\n  \
+    \  template<typename... Args>\n    int ln(const Args&... args)\n    {\n      \
+    \  dump(args...), m_os << '\\n';\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int el(const Args&... args)\n    {\n        dump(args...), m_os <<\
+    \ std::endl;\n        return 0;\n    }\nprivate:\n    template<typename T>\n \
+    \   void dump(const T& v)\n    {\n        m_os << v;\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            m_os << (i ? \" \" : \"\"), dump(vs[i]);\n        }\n    }\n\
+    \    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n    \
+    \    for (const int i : rep(vss.size())) {\n            m_os << (i ? \"\" : \"\
+    \\n\"), dump(vss[i]);\n        }\n    }\n    template<typename T, typename...\
+    \ Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n        dump(v), m_os\
+    \ << ' ', dump(args...);\n        return 0;\n    }\n    Ostream& m_os;\n};\nPrinter\
+    \ out;\nclass Scanner\n{\npublic:\n    Scanner(Istream& is = std::cin) : m_is{is}\n\
+    \    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n    }\n    template<typename\
+    \ T>\n    T val()\n    {\n        T v;\n        return m_is >> v, v;\n    }\n\
+    \    template<typename T>\n    T val(T offset)\n    {\n        return val<T>()\
+    \ - offset;\n    }\n    template<typename T>\n    Vec<T> vec(int n)\n    {\n \
+    \       return genVec<T>(n, [&]() { return val<T>(); });\n    }\n    template<typename\
+    \ T>\n    Vec<T> vec(int n, T offset)\n    {\n        return genVec<T>(n, [&]()\
+    \ { return val<T>(offset); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m);\
+    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, const\
+    \ T offset)\n    {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m,\
+    \ offset); });\n    }\n    template<typename... Args>\n    auto tup()\n    {\n\
+    \        return Tup<Args...>{val<Args>()...};\n    }\n    template<typename...\
+    \ Args>\n    auto tup(const Args&... offsets)\n    {\n        return Tup<Args...>{val<Args>(offsets)...};\n\
+    \    }\nprivate:\n    Istream& m_is;\n};\nScanner in;\nint main()\n{\n    const\
+    \ auto [L, R, M] = in.tup<int, int, int>();\n    MaxFlow<int> flow(L + R + 2);\n\
+    \    const int S = L + R, T = L + R + 1;\n    for (int i : rep(M)) {\n       \
+    \ static_cast<void>(i);\n        const auto [u, v] = in.tup<int, int>();\n   \
+    \     flow.addEdge(u, v + L, 1);\n    }\n    for (int i : rep(L)) {\n        flow.addEdge(S,\
+    \ i, 1);\n    }\n    for (int i : rep(R)) {\n        flow.addEdge(i + L, T, 1);\n\
+    \    }\n    const int K = flow.maxFlow(S, T);\n    out.ln(K);\n    for (int i\
+    \ : rep(L)) {\n        for (const auto& e : flow[i]) {\n            if (e.flow\
+    \ == 1) { out.ln(i, e.to - L); }\n        }\n    }\n    return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include\
+    \ \"../../src/flow/max_flow.hpp\"\n#include \"../../src/misc/printer.hpp\"\n#include\
+    \ \"../../src/misc/scanner.hpp\"\nint main()\n{\n    const auto [L, R, M] = in.tup<int,\
+    \ int, int>();\n    MaxFlow<int> flow(L + R + 2);\n    const int S = L + R, T\
+    \ = L + R + 1;\n    for (int i : rep(M)) {\n        USE(i);\n        const auto\
+    \ [u, v] = in.tup<int, int>();\n        flow.addEdge(u, v + L, 1);\n    }\n  \
+    \  for (int i : rep(L)) {\n        flow.addEdge(S, i, 1);\n    }\n    for (int\
+    \ i : rep(R)) {\n        flow.addEdge(i + L, T, 1);\n    }\n    const int K =\
+    \ flow.maxFlow(S, T);\n    out.ln(K);\n    for (int i : rep(L)) {\n        for\
+    \ (const auto& e : flow[i]) {\n            if (e.flow == 1) { out.ln(i, e.to -\
+    \ L); }\n        }\n    }\n    return 0;\n}\n"
   dependsOn:
+  - src/flow/max_flow.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -272,18 +317,18 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/graph/graph.hpp
-  isVerificationFile: false
-  path: src/graph/warshall_floyd.hpp
+  - src/misc/printer.hpp
+  - src/misc/scanner.hpp
+  isVerificationFile: true
+  path: verifications/flow/max_flow.bipartite_matching.test.cpp
   requiredBy: []
   timestamp: '2021-06-14 15:35:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verifications/graph/warshall_floyd.test.cpp
-documentation_of: src/graph/warshall_floyd.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verifications/flow/max_flow.bipartite_matching.test.cpp
 layout: document
 redirect_from:
-- /library/src/graph/warshall_floyd.hpp
-- /library/src/graph/warshall_floyd.hpp.html
-title: src/graph/warshall_floyd.hpp
+- /verify/verifications/flow/max_flow.bipartite_matching.test.cpp
+- /verify/verifications/flow/max_flow.bipartite_matching.test.cpp.html
+title: verifications/flow/max_flow.bipartite_matching.test.cpp
 ---

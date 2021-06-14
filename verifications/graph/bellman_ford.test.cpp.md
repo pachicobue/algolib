@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: src/graph/bellman_ford.hpp
+    title: src/graph/bellman_ford.hpp
+  - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
   - icon: ':heavy_check_mark:'
@@ -46,16 +49,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verifications/graph/warshall_floyd.test.cpp
-    title: verifications/graph/warshall_floyd.test.cpp
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B
+    links:
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -237,27 +246,64 @@ data:
     \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
     \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
     \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
-    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nVec<Vec<T>>\
-    \ warshallFloyd(const Graph<T>& g)\n{\n    const int N = g.v();\n    Vec<Vec<T>>\
-    \ dss(N, Vec<T>(N));\n    for (int i : rep(N)) {\n        for (int j : rep(N))\
-    \ {\n            dss[i][j] = (i == j ? T{} : INF<T>);\n        }\n        for\
-    \ (const auto& [id, j, c] : g[i]) {\n            static_cast<void>(id);\n    \
-    \        chmin(dss[i][j], c);\n        }\n    }\n    for (int k : rep(N)) {\n\
-    \        for (int i : rep(N)) {\n            for (int j : rep(N)) {\n        \
-    \        if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {\n                \
-    \    chmin(dss[i][j], dss[i][k] + dss[k][j]);\n                }\n           \
-    \ }\n        }\n    }\n    return dss;\n}\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename\
-    \ T>\nVec<Vec<T>> warshallFloyd(const Graph<T>& g)\n{\n    const int N = g.v();\n\
-    \    Vec<Vec<T>> dss(N, Vec<T>(N));\n    for (int i : rep(N)) {\n        for (int\
-    \ j : rep(N)) {\n            dss[i][j] = (i == j ? T{} : INF<T>);\n        }\n\
-    \        for (const auto& [id, j, c] : g[i]) {\n            USE(id);\n       \
-    \     chmin(dss[i][j], c);\n        }\n    }\n    for (int k : rep(N)) {\n   \
-    \     for (int i : rep(N)) {\n            for (int j : rep(N)) {\n           \
-    \     if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {\n                   \
-    \ chmin(dss[i][j], dss[i][k] + dss[k][j]);\n                }\n            }\n\
-    \        }\n    }\n    return dss;\n}\n"
+    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nVec<T> bellmanFord(const\
+    \ Graph<T>& g, const int s)\n{\n    const int N = g.v();\n    assert(0 <= s and\
+    \ s < N);\n    Vec<T> ds(N, INF<T>);\n    ds[s] = 0;\n    for (int loop : rep(2\
+    \ * N)) {\n        for (int u : rep(N)) {\n            if (ds[u] == INF<T>) {\
+    \ continue; }\n            for (const auto& [id, v, c] : g[u]) {\n           \
+    \     static_cast<void>(id);\n                if (ds[v] <= ds[u] + c) { continue;\
+    \ }\n                ds[v] = ds[u] + c;\n                if (loop >= N - 1) {\
+    \ ds[v] = -INF<T>; }\n            }\n        }\n    }\n    return ds;\n}\nclass\
+    \ Printer\n{\npublic:\n    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n\
+    \        m_os << std::fixed << std::setprecision(15);\n    }\n    template<typename...\
+    \ Args>\n    int operator()(const Args&... args)\n    {\n        dump(args...);\n\
+    \        return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
+    \ args)\n    {\n        dump(args...), m_os << '\\n';\n        return 0;\n   \
+    \ }\n    template<typename... Args>\n    int el(const Args&... args)\n    {\n\
+    \        dump(args...), m_os << std::endl;\n        return 0;\n    }\nprivate:\n\
+    \    template<typename T>\n    void dump(const T& v)\n    {\n        m_os << v;\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n   \
+    \     for (const int i : rep(vs.size())) {\n            m_os << (i ? \" \" : \"\
+    \"), dump(vs[i]);\n        }\n    }\n    template<typename T>\n    void dump(const\
+    \ Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size())) {\n  \
+    \          m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n        }\n    }\n   \
+    \ template<typename T, typename... Ts>\n    int dump(const T& v, const Ts&...\
+    \ args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n        return 0;\n\
+    \    }\n    Ostream& m_os;\n};\nPrinter out;\nclass Scanner\n{\npublic:\n    Scanner(Istream&\
+    \ is = std::cin) : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n\
+    \    }\n    template<typename T>\n    T val()\n    {\n        T v;\n        return\
+    \ m_is >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n\
+    \        return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T>\
+    \ vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>(); });\n\
+    \    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n   \
+    \     return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, const T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return Tup<Args...>{val<Args>()...};\n    }\n\
+    \    template<typename... Args>\n    auto tup(const Args&... offsets)\n    {\n\
+    \        return Tup<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n    Istream&\
+    \ m_is;\n};\nScanner in;\nint main()\n{\n    const auto [V, E, r] = in.tup<int,\
+    \ int, int>();\n    Graph<int> g(V);\n    for (int i : rep(E)) {\n        static_cast<void>(i);\n\
+    \        const auto [u, v, c] = in.tup<int, int, int>();\n        g.addEdge(u,\
+    \ v, c);\n    }\n    const auto ds = bellmanFord(g, r);\n    for (int i : rep(V))\
+    \ {\n        if (ds[i] <= -INF<int>) { return out.ln(\"NEGATIVE CYCLE\"); }\n\
+    \    }\n    for (int i : rep(V)) {\n        if (ds[i] >= INF<int>) {\n       \
+    \     out.ln(\"INF\");\n        } else {\n            out.ln(ds[i]);\n       \
+    \ }\n    }\n    return 0;\n}\n"
+  code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B\"\
+    \n#include \"../../src/graph/bellman_ford.hpp\"\n#include \"../../src/misc/printer.hpp\"\
+    \n#include \"../../src/misc/scanner.hpp\"\n\nint main()\n{\n    const auto [V,\
+    \ E, r] = in.tup<int, int, int>();\n    Graph<int> g(V);\n    for (int i : rep(E))\
+    \ {\n        USE(i);\n        const auto [u, v, c] = in.tup<int, int, int>();\n\
+    \        g.addEdge(u, v, c);\n    }\n    const auto ds = bellmanFord(g, r);\n\
+    \    for (int i : rep(V)) {\n        if (ds[i] <= -INF<int>) { return out.ln(\"\
+    NEGATIVE CYCLE\"); }\n    }\n    for (int i : rep(V)) {\n        if (ds[i] >=\
+    \ INF<int>) {\n            out.ln(\"INF\");\n        } else {\n            out.ln(ds[i]);\n\
+    \        }\n    }\n    return 0;\n}\n"
   dependsOn:
+  - src/graph/bellman_ford.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -273,17 +319,18 @@ data:
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
   - src/graph/graph.hpp
-  isVerificationFile: false
-  path: src/graph/warshall_floyd.hpp
+  - src/misc/printer.hpp
+  - src/misc/scanner.hpp
+  isVerificationFile: true
+  path: verifications/graph/bellman_ford.test.cpp
   requiredBy: []
   timestamp: '2021-06-14 15:35:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verifications/graph/warshall_floyd.test.cpp
-documentation_of: src/graph/warshall_floyd.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verifications/graph/bellman_ford.test.cpp
 layout: document
 redirect_from:
-- /library/src/graph/warshall_floyd.hpp
-- /library/src/graph/warshall_floyd.hpp.html
-title: src/graph/warshall_floyd.hpp
+- /verify/verifications/graph/bellman_ford.test.cpp
+- /verify/verifications/graph/bellman_ford.test.cpp.html
+title: verifications/graph/bellman_ford.test.cpp
 ---
