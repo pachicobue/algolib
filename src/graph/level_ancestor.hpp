@@ -1,17 +1,19 @@
 #pragma once
 #include "../misc/common.hpp"
 #include "graph.hpp"
-class LA
+class LevelAncestor
 {
 public:
     template<typename T>
-    LA(const Graph<T>& g, int r = 0) : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)
+    LevelAncestor(const Graph<T>& g, int r = 0)
+        : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)
     {
-        Fixpoint([&](auto dfs, int u, int p) -> void {
+        Fix([&](auto dfs, int u, int p) -> void {
             for (int k = 1; (1 << k) <= m_ds[u]; k++) {
                 m_ps[u].push_back(m_ps[m_ps[u][k - 1]][k - 1]);
             }
             for (int v : g[u]) {
+                if (v == p) { continue; }
                 m_ds[v] = m_ds[u] + 1;
                 m_ps[v].push_back(u);
                 dfs(v, u);

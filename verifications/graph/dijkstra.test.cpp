@@ -7,6 +7,7 @@ int main()
     const auto [N, M, S, T] = in.tup<int, int, int, int>();
     Graph<i64> g(N), rg(N);
     for (int i : rep(M)) {
+        USE(i);
         const auto [u, v, c] = in.tup<int, int, i64>();
         g.addEdge(u, v, c), rg.addEdge(v, u, c);
     }

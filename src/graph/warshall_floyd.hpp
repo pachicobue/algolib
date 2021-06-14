@@ -18,7 +18,9 @@ Vec<Vec<T>> warshallFloyd(const Graph<T>& g)
     for (int k : rep(N)) {
         for (int i : rep(N)) {
             for (int j : rep(N)) {
-                chmin(dss[i][j], dss[i][k] + dss[k][j]);
+                if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {
+                    chmin(dss[i][j], dss[i][k] + dss[k][j]);
+                }
             }
         }
     }

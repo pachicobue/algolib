@@ -28,6 +28,8 @@ using Tup = std::tuple;
 using Set = std::set;
 using Map = std::map;
 using Vec = std::vector;
+using BSet = std::bitset;
+using Arr = std::array;
 ```
 
 ## その他
