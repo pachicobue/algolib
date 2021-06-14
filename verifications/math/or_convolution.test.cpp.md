@@ -1,55 +1,79 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/math/and_convolution.hpp
+    title: src/math/and_convolution.hpp
+  - icon: ':question:'
+    path: src/math/modint.hpp
+    title: src/math/modint.hpp
+  - icon: ':x:'
+    path: src/math/or_convolution.hpp
+    title: src/math/or_convolution.hpp
+  - icon: ':question:'
+    path: src/math/set_moebius.hpp
+    title: src/math/set_moebius.hpp
+  - icon: ':question:'
+    path: src/math/set_zeta.hpp
+    title: src/math/set_zeta.hpp
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
+  - icon: ':question:'
+    path: src/misc/fastio/printer.hpp
+    title: src/misc/fastio/printer.hpp
+  - icon: ':question:'
+    path: src/misc/fastio/scanner.hpp
+    title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _isVerificationFailed: true
+  _pathExtension: cpp
+  _verificationStatusIcon: ':x:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/bitwise_and_convolution
+    links:
+    - https://judge.yosupo.jp/problem/bitwise_and_convolution
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -192,55 +216,149 @@ data:
     \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
-    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<int column>\n\
-    class BitMat\n{\npublic:\n    BitMat(int row) : m_row{row},\n                \
-    \      m_vss(m_row) {}\n    const BSet<column>& operator[](const int r) const\n\
-    \    {\n        assert(0 <= r and r < m_row);\n        return m_vss[r];\n    }\n\
-    \    BSet<column>& operator[](const int r)\n    {\n        assert(0 <= r and r\
-    \ < m_row);\n        return m_vss[r];\n    }\n    friend BitMat operator^(const\
-    \ BitMat& m1, const BitMat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n\
-    \        BitMat ans(m1.m_row);\n        for (int i : rep(m1.row)) { ans[i] = m1[i]\
-    \ ^ m2[i]; }\n        return ans;\n    }\n    template<int col2>\n    friend BitMat\
-    \ operator*(const BitMat& m1, const BitMat<col2>& m2)\n    {\n        assert(column\
-    \ == m2.m_row);\n        BitMat<col2> ans(m1.m_row);\n        for (int i : rep(m1.m_row))\
-    \ {\n            for (int j : rep(column)) {\n                if (not m1[i][j])\
-    \ { continue; }\n                ans[i] ^= m2[j];\n            }\n        }\n\
-    \        return ans;\n    }\n    template<typename I>\n    BitMat pow(I n) { return\
-    \ power(*this, n, I(m_row)); }\n    friend BitMat& operator^=(BitMat& m1, const\
-    \ BitMat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n        for (int\
-    \ i : rep(m1.m_row)) { m1[i] ^= m2[i]; }\n        return m1;\n    }\n    friend\
-    \ BitMat& operator*=(BitMat& m1, const BitMat& m2) { return m1 = m1 * m2; }\n\
-    \    friend Ostream& operator<<(Ostream& os, const BitMat& m)\n    {\n       \
-    \ os << \"[\\n\";\n        for (int i : rep(m.m_row)) { os << \"[\" << m[i] <<\
-    \ \"]\\n\"; }\n        return (os << \"]\");\n    }\n    static BitMat I(const\
-    \ int n)\n    {\n        BitMat ans(n);\n        for (int i : rep(n)) { ans[i].set(i);\
-    \ }\n        return ans;\n    }\n    int row() const { return m_row; }\nprivate:\n\
-    \    int m_row;\n    Vec<BSet<column>> m_vss;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<int column>\nclass\
-    \ BitMat\n{\npublic:\n    BitMat(int row) : m_row{row},\n                    \
-    \  m_vss(m_row) {}\n    const BSet<column>& operator[](const int r) const\n  \
-    \  {\n        assert(0 <= r and r < m_row);\n        return m_vss[r];\n    }\n\
-    \    BSet<column>& operator[](const int r)\n    {\n        assert(0 <= r and r\
-    \ < m_row);\n        return m_vss[r];\n    }\n    friend BitMat operator^(const\
-    \ BitMat& m1, const BitMat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n\
-    \        BitMat ans(m1.m_row);\n        for (int i : rep(m1.row)) { ans[i] = m1[i]\
-    \ ^ m2[i]; }\n        return ans;\n    }\n    template<int col2>\n    friend BitMat\
-    \ operator*(const BitMat& m1, const BitMat<col2>& m2)\n    {\n        assert(column\
-    \ == m2.m_row);\n        BitMat<col2> ans(m1.m_row);\n        for (int i : rep(m1.m_row))\
-    \ {\n            for (int j : rep(column)) {\n                if (not m1[i][j])\
-    \ { continue; }\n                ans[i] ^= m2[j];\n            }\n        }\n\
-    \        return ans;\n    }\n    template<typename I>\n    BitMat pow(I n) { return\
-    \ power(*this, n, I(m_row)); }\n    friend BitMat& operator^=(BitMat& m1, const\
-    \ BitMat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n        for (int\
-    \ i : rep(m1.m_row)) { m1[i] ^= m2[i]; }\n        return m1;\n    }\n    friend\
-    \ BitMat& operator*=(BitMat& m1, const BitMat& m2) { return m1 = m1 * m2; }\n\
-    \    friend Ostream& operator<<(Ostream& os, const BitMat& m)\n    {\n       \
-    \ os << \"[\\n\";\n        for (int i : rep(m.m_row)) { os << \"[\" << m[i] <<\
-    \ \"]\\n\"; }\n        return (os << \"]\");\n    }\n    static BitMat I(const\
-    \ int n)\n    {\n        BitMat ans(n);\n        for (int i : rep(n)) { ans[i].set(i);\
-    \ }\n        return ans;\n    }\n\n    int row() const { return m_row; }\n\nprivate:\n\
-    \    int m_row;\n    Vec<BSet<column>> m_vss;\n};\n"
+    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
+    \ T>\nVec<T> setMoebius(const Vec<T>& xs, bool subset)\n{\n    const int N = ceil2(xs.size());\n\
+    \    Vec<T> ys(N);\n    for (int i : rep(xs.size())) {\n        ys[i] = xs[i];\n\
+    \    }\n    for (int i = 1; i < N; i <<= 1) {\n        for (int j : rep(N)) {\n\
+    \            if ((j & i) == 0) {\n                if (subset) {\n            \
+    \        ys[j | i] -= ys[j];\n                } else {\n                    ys[j]\
+    \ -= ys[j | i];\n                }\n            }\n        }\n    }\n    return\
+    \ ys;\n}\ntemplate<typename T>\nVec<T> setZeta(const Vec<T>& xs, const bool subset)\n\
+    {\n    const int N = ceil2(xs.size());\n    Vec<T> ys(N);\n    for (int i : rep(xs.size()))\
+    \ {\n        ys[i] = xs[i];\n    }\n    for (int i = 1; i < N; i <<= 1) {\n  \
+    \      for (int j : rep(N)) {\n            if ((j & i) == 0) {\n             \
+    \   if (subset) {\n                    ys[j | i] += ys[j];\n                }\
+    \ else {\n                    ys[j] += ys[j | i];\n                }\n       \
+    \     }\n        }\n    }\n    return ys;\n}\ntemplate<typename T>\nVec<T> andConvolute(Vec<T>\
+    \ f, Vec<T> g)\n{\n    const int N = ceil2(std::max(f.size(), g.size()));\n  \
+    \  f.resize(N), g.resize(N);\n    auto F = setZeta(f, false), G = setZeta(g, false);\n\
+    \    for (int i : rep(N)) {\n        F[i] *= G[i];\n    }\n    return setMoebius(F,\
+    \ false);\n}\ntemplate<typename T>\nVec<T> orConvolute(Vec<T> f, Vec<T> g)\n{\n\
+    \    const int N = ceil2(std::max(f.size(), g.size()));\n    f.resize(N), g.resize(N);\n\
+    \    auto F = setZeta(f, true), G = setZeta(g, true);\n    for (int i : rep(N))\
+    \ {\n        F[i] *= G[i];\n    }\n    return setMoebius(F, true);\n}\ntemplate<u32\
+    \ mod_, u32 root_, u32 max2p_>\nclass modint\n{\n    template<typename U = u32&>\n\
+    \    static U modRef()\n    {\n        static u32 s_mod = 0;\n        return s_mod;\n\
+    \    }\n    template<typename U = u32&>\n    static U rootRef()\n    {\n     \
+    \   static u32 s_root = 0;\n        return s_root;\n    }\n    template<typename\
+    \ U = u32&>\n    static U max2pRef()\n    {\n        static u32 s_max2p = 0;\n\
+    \        return s_max2p;\n    }\npublic:\n    template<typename U = const u32>\n\
+    \    static constexpr std::enable_if_t<mod_ != 0, U> mod()\n    {\n        return\
+    \ mod_;\n    }\n    template<typename U = const u32>\n    static std::enable_if_t<mod_\
+    \ == 0, U> mod()\n    {\n        return modRef();\n    }\n    template<typename\
+    \ U = const u32>\n    static constexpr std::enable_if_t<mod_ != 0, U> root()\n\
+    \    {\n        return root_;\n    }\n    template<typename U = const u32>\n \
+    \   static std::enable_if_t<mod_ == 0, U> root()\n    {\n        return rootRef();\n\
+    \    }\n    template<typename U = const u32>\n    static constexpr std::enable_if_t<mod_\
+    \ != 0, U> max2p()\n    {\n        return max2p_;\n    }\n    template<typename\
+    \ U = const u32>\n    static std::enable_if_t<mod_ == 0, U> max2p()\n    {\n \
+    \       return max2pRef();\n    }\n    template<typename U = u32>\n    static\
+    \ void setMod(std::enable_if_t<mod_ == 0, U> m)\n    {\n        modRef() = m;\n\
+    \    }\n    template<typename U = u32>\n    static void setRoot(std::enable_if_t<mod_\
+    \ == 0, U> r)\n    {\n        rootRef() = r;\n    }\n    template<typename U =\
+    \ u32>\n    static void setMax2p(std::enable_if_t<mod_ == 0, U> m)\n    {\n  \
+    \      max2pRef() = m;\n    }\n    constexpr modint() : m_val{0} {}\n    constexpr\
+    \ modint(i64 v) : m_val{normll(v)} {}\n    constexpr void setRaw(u32 v)\n    {\n\
+    \        m_val = v;\n    }\n    constexpr modint operator-() const\n    {\n  \
+    \      return modint{0} - (*this);\n    }\n    constexpr modint& operator+=(const\
+    \ modint& m)\n    {\n        m_val = norm(m_val + m.val());\n        return *this;\n\
+    \    }\n    constexpr modint& operator-=(const modint& m)\n    {\n        m_val\
+    \ = norm(m_val + mod() - m.val());\n        return *this;\n    }\n    constexpr\
+    \ modint& operator*=(const modint& m)\n    {\n        m_val = normll((i64)m_val\
+    \ * (i64)m.val() % (i64)mod());\n        return *this;\n    }\n    constexpr modint&\
+    \ operator/=(const modint& m)\n    {\n        return *this *= m.inv();\n    }\n\
+    \    constexpr modint operator+(const modint& m) const\n    {\n        auto v\
+    \ = *this;\n        return v += m;\n    }\n    constexpr modint operator-(const\
+    \ modint& m) const\n    {\n        auto v = *this;\n        return v -= m;\n \
+    \   }\n    constexpr modint operator*(const modint& m) const\n    {\n        auto\
+    \ v = *this;\n        return v *= m;\n    }\n    constexpr modint operator/(const\
+    \ modint& m) const\n    {\n        auto v = *this;\n        return v /= m;\n \
+    \   }\n    constexpr bool operator==(const modint& m) const\n    {\n        return\
+    \ m_val == m.val();\n    }\n    constexpr bool operator!=(const modint& m) const\n\
+    \    {\n        return not(*this == m);\n    }\n    friend Istream& operator>>(Istream&\
+    \ is, modint& m)\n    {\n        i64 v;\n        return is >> v, m = v, is;\n\
+    \    }\n    friend Ostream& operator<<(Ostream& os, const modint& m)\n    {\n\
+    \        return os << m.val();\n    }\n    constexpr u32 val() const\n    {\n\
+    \        return m_val;\n    }\n    template<typename I>\n    constexpr modint\
+    \ pow(I n) const\n    {\n        return power(*this, n);\n    }\n    constexpr\
+    \ modint inv() const\n    {\n        return pow(mod() - 2);\n    }\n    static\
+    \ modint sinv(u32 n)\n    {\n        static Vec<modint> is{1, 1};\n        for\
+    \ (u32 i = (u32)is.size(); i <= n; i++) {\n            is.push_back(-is[mod()\
+    \ % i] * (mod() / i));\n        }\n        return is[n];\n    }\n    static modint\
+    \ fact(u32 n)\n    {\n        static Vec<modint> fs{1, 1};\n        for (u32 i\
+    \ = (u32)fs.size(); i <= n; i++) {\n            fs.push_back(fs.back() * i);\n\
+    \        }\n        return fs[n];\n    }\n    static modint ifact(u32 n)\n   \
+    \ {\n        static Vec<modint> ifs{1, 1};\n        for (u32 i = (u32)ifs.size();\
+    \ i <= n; i++) {\n            ifs.push_back(ifs.back() * sinv(i));\n        }\n\
+    \        return ifs[n];\n    }\n    static modint comb(int n, int k)\n    {\n\
+    \        return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k) * ifact(k);\n\
+    \    }\nprivate:\n    static constexpr u32 norm(u32 x)\n    {\n        return\
+    \ x < mod() ? x : x - mod();\n    }\n    static constexpr u32 normll(i64 x)\n\
+    \    {\n        return norm(u32(x % (i64)mod() + (i64)mod()));\n    }\n    u32\
+    \ m_val;\n};\nusing modint_1000000007 = modint<1000000007, 5, 1>;\nusing modint_998244353\
+    \ = modint<998244353, 3, 23>;\ntemplate<int id>\nusing modint_dynamic = modint<0,\
+    \ 0, id>;\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer()\
+    \ {}\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
+    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
+    n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
+    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
+    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
+    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
+    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
+    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
+    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
+    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
+    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
+    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
+    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
+    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
+    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
+    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
+    \        }\n        while (true) {\n            c = getchar();\n            if\
+    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
+    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
+    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
+    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
+    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
+    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
+    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
+    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
+    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
+    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
+    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
+    \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
+    \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
+    \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
+    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
+    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
+    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
+    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
+    int main()\n{\n    using mint = modint_998244353;\n    const auto n = in.val<int>();\n\
+    \    const int N = 1 << n;\n    const auto as = in.vec<mint>(N);\n    const auto\
+    \ bs = in.vec<mint>(N);\n    Vec<mint> As(N, 0), Bs(N, 0);\n    for (int i : rep(N))\
+    \ {\n        As[i] = as[N - i - 1];\n        Bs[i] = bs[N - i - 1];\n    }\n \
+    \   const auto Cs = orConvolute(As, Bs);\n    Vec<int> ans(Cs.size());\n    for\
+    \ (int i : rep(N)) {\n        ans[i] = Cs[N - i - 1].val();\n    }\n    out.ln(ans);\n\
+    \    return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bitwise_and_convolution\"\
+    \n#include \"../../src/math/or_convolution.hpp\"\n#include \"../../src/math/modint.hpp\"\
+    \n#include \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
+    \nint main()\n{\n    using mint = modint_998244353;\n    const auto n = in.val<int>();\n\
+    \    const int N = 1 << n;\n    const auto as = in.vec<mint>(N);\n    const auto\
+    \ bs = in.vec<mint>(N);\n    Vec<mint> As(N, 0), Bs(N, 0);\n    for (int i : rep(N))\
+    \ {\n        As[i] = as[N - i - 1];\n        Bs[i] = bs[N - i - 1];\n    }\n \
+    \   const auto Cs = orConvolute(As, Bs);\n    Vec<int> ans(Cs.size());\n    for\
+    \ (int i : rep(N)) {\n        ans[i] = Cs[N - i - 1].val();\n    }\n    out.ln(ans);\n\
+    \    return 0;\n}\n"
   dependsOn:
+  - src/math/or_convolution.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -255,16 +373,22 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/linear/bit_matrix.hpp
+  - src/math/and_convolution.hpp
+  - src/math/set_moebius.hpp
+  - src/math/set_zeta.hpp
+  - src/math/modint.hpp
+  - src/misc/fastio/printer.hpp
+  - src/misc/fastio/scanner.hpp
+  isVerificationFile: true
+  path: verifications/math/or_convolution.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-06-15 01:34:24+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: src/linear/bit_matrix.hpp
+documentation_of: verifications/math/or_convolution.test.cpp
 layout: document
 redirect_from:
-- /library/src/linear/bit_matrix.hpp
-- /library/src/linear/bit_matrix.hpp.html
-title: src/linear/bit_matrix.hpp
+- /verify/verifications/math/or_convolution.test.cpp
+- /verify/verifications/math/or_convolution.test.cpp.html
+title: verifications/math/or_convolution.test.cpp
 ---

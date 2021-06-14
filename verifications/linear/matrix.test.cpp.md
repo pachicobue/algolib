@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/ds_table.hpp
-    title: Disjoint Sparse Table
-  - icon: ':heavy_check_mark:'
-    path: src/data_structure/static_rmq.hpp
-    title: "\u9759\u7684\u6570\u5217\u306ERMQ"
+    path: src/linear/matrix.hpp
+    title: src/linear/matrix.hpp
+  - icon: ':question:'
+    path: src/math/modint.hpp
+    title: src/math/modint.hpp
   - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
@@ -49,12 +49,12 @@ data:
   - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':question:'
-    path: src/misc/fastio/printer.hpp
-    title: src/misc/fastio/printer.hpp
-  - icon: ':question:'
-    path: src/misc/fastio/scanner.hpp
-    title: src/misc/fastio/scanner.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -62,9 +62,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/staticrmq
+    PROBLEM: https://yukicoder.me/problems/no/541
     links:
-    - https://judge.yosupo.jp/problem/staticrmq
+    - https://yukicoder.me/problems/no/541
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -207,128 +207,172 @@ data:
     \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
-    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ SemiGroup>\nclass DSTable\n{\n    using T = typename SemiGroup::T;\npublic:\n\
-    \    DSTable(const Vec<T>& vs)\n        : m_size(vs.size()), m_depth(log2p1(m_size)),\
-    \ m_vss(m_depth, vs)\n    {\n        for (int d : rep(m_depth)) {\n          \
-    \  const int w = 1 << (m_depth - d - 1);\n            for (int i = 1; i * w <\
-    \ m_size; i += 2) {\n                int l = i * w - 1, r = i * w;\n         \
-    \       for (int j : irange(1, w)) {\n                    m_vss[d][l - j] = merge(vs[l\
-    \ - j], m_vss[d][l - j + 1]);\n                    if (r + j < m_size) {\n   \
-    \                     m_vss[d][r + j] = merge(vs[r + j], m_vss[d][r + j - 1]);\n\
-    \                    }\n                }\n            }\n        }\n    }\n \
-    \   T fold(int l, int r) const\n    {\n        assert(0 <= l and l < r and r <=\
-    \ m_size);\n        if (r - l == 1) { return m_vss.back()[l]; }\n        const\
-    \ int d = m_depth - log2p1(l ^ (r - 1));\n        return merge(m_vss[d][l], m_vss[d][r\
-    \ - 1]);\n    }\nprivate:\n    int m_size, m_depth;\n    Vec<Vec<T>> m_vss;\n\
-    \    static inline SemiGroup merge;\n};\ntemplate<typename TotalOrd>\nclass StaticRMQ\n\
-    {\n    using T = typename TotalOrd::T;\npublic:\n    StaticRMQ(const Vec<T>& vs)\n\
-    \        : m_size(vs.size()),\n          m_bn(wind(m_size + bs - 1)),\n      \
-    \    m_vals{vs},\n          m_bucket_vals([&]() {\n              Vec<T> ans(m_bn);\n\
-    \              for (int i : rep(m_size)) {\n                  ans[wind(i)]\n \
-    \                     = (i % bs == 0 ? m_vals[i]\n                           \
-    \          : std::min(ans[wind(i)], m_vals[i], comp));\n              }\n    \
-    \          return ans;\n          }()),\n          m_masks(m_size, 0),\n     \
-    \     m_st(m_bucket_vals)\n    {\n        for (int i : rep(m_bn)) {\n        \
-    \    Vec<int> g(bs, m_size), stack;\n            for (const int j : rep(bs)) {\n\
-    \                if (ind(i, j) >= m_size) { break; }\n                for (; not\
-    \ stack.empty()\n                       and not comp(m_vals[stack.back()], m_vals[ind(i,\
-    \ j)]);\n                     stack.pop_back()) {}\n                g[j] = stack.empty()\
-    \ ? m_size : stack.back(),\n                stack.push_back(ind(i, j));\n    \
-    \        }\n            for (int j : rep(bs)) {\n                if (ind(i, j)\
-    \ >= m_size) { break; }\n                m_masks[ind(i, j)]\n                \
-    \    = g[j] == m_size ? static_cast<B>(0)\n                                  \
-    \   : (m_masks[g[j]]\n                                        | static_cast<B>(1)\
-    \ << (g[j] - i * bs));\n            }\n        }\n    }\n    T fold(int l, int\
-    \ r) const\n    {\n        assert(0 <= l and l < r and r <= m_size);\n       \
-    \ const int lb = (l + bs - 1) / bs, rb = r / bs;\n        if (lb > rb) {\n   \
-    \         return brmq(l, r);\n        } else {\n            return lb < rb\n \
-    \                      ? (l < bs * lb\n                              ? (bs * rb\
-    \ < r ? std::min({m_st.fold(lb, rb),\n                                       \
-    \                  brmq(l, bs * lb),\n                                       \
-    \                  brmq(bs * rb, r)},\n                                      \
-    \                  comp)\n                                             : std::min(m_st.fold(lb,\
-    \ rb),\n                                                        brmq(l, bs * lb),\n\
-    \                                                        comp))\n            \
-    \                  : (bs * rb < r ? std::min(\n                              \
-    \       m_st.fold(lb, rb), brmq(bs * rb, r), comp)\n                         \
-    \                    : m_st.fold(lb, rb)))\n                       : (l < bs *\
-    \ lb\n                              ? (bs * rb < r ? std::min(\n             \
-    \                        brmq(l, bs * lb), brmq(bs * rb, r), comp)\n         \
-    \                                    : brmq(l, bs * lb))\n                   \
-    \           : (bs * rb < r ? brmq(bs * rb, r) : T{}));\n        }\n    }\nprivate:\n\
-    \    using B = u64;\n    static constexpr int bs = sizeof(B) * 8;\n    static\
-    \ constexpr int bslog = log2p1(bs) - 1;\n    static constexpr int wind(int n)\n\
-    \    {\n        return n >> (bslog);\n    }\n    static constexpr int bind(int\
-    \ n)\n    {\n        return n ^ (wind(n) << bslog);\n    }\n    static constexpr\
-    \ int ind(int w, int b)\n    {\n        return (w << bslog) | b;\n    }\n    T\
-    \ brmq(int l, int r) const\n    {\n        const B w = m_masks[r - 1] >> (l %\
-    \ bs);\n        return w == 0 ? m_vals[r - 1] : m_vals[l + lsbp1(w) - 1];\n  \
-    \  }\n    struct SemiGroup\n    {\n        using T = typename TotalOrd::T;\n \
-    \       T operator()(const T& x1, const T& x2) const\n        {\n            return\
-    \ std::min(x1, x2, comp);\n        }\n    };\n    static inline TotalOrd comp;\n\
-    \    int m_size, m_bn;\n    Vec<T> m_vals, m_bucket_vals;\n    Vec<B> m_masks;\n\
-    \    DSTable<SemiGroup> m_st;\n};\n#pragma region FastIO Printer\nclass Printer\n\
-    {\npublic:\n    Printer() {}\n    template<typename... Args>\n    int operator()(const\
-    \ Args&... args)\n    {\n        dump(args...);\n        return 0;\n    }\n  \
-    \  template<typename... Args>\n    int ln(const Args&... args)\n    {\n      \
-    \  dump(args...), putchar('\\n');\n        return 0;\n    }\nprivate:\n    template<typename\
-    \ T>\n    void dump(T v)\n    {\n        static char tmp[30];\n        if (v <\
-    \ 0) {\n            putchar('-');\n            v = -v;\n        }\n        int\
-    \ i = 0;\n        do {\n            tmp[i++] = v % T{10} + '0';\n            v\
-    \ /= T{10};\n        } while (v);\n        while (i) {\n            putchar(tmp[--i]);\n\
-    \        }\n    }\n    void dump(bool b)\n    {\n        dump<int>(b);\n    }\n\
-    \    void dump(char c)\n    {\n        putchar(c);\n    }\n    void dump(const\
-    \ Str& cs)\n    {\n        for (char c : cs) {\n            dump(c);\n       \
-    \ }\n    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n\
-    \        for (const int i : rep(vs.size())) {\n            if (i) { putchar('\
-    \ '); }\n            dump(vs[i]);\n        }\n    }\n    template<typename T>\n\
-    \    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size()))\
-    \ {\n            if (i) { putchar('\\n'); }\n            dump(vss[i]);\n     \
-    \   }\n    }\n    template<typename T, typename... Ts>\n    int dump(const T&\
-    \ v, const Ts&... args)\n    {\n        dump(v), putchar(' '), dump(args...);\n\
-    \        return 0;\n    }\n    static inline void putchar(char c)\n    {\n   \
-    \     putchar_unlocked(c);\n    }\n} out;\n#pragma endregion\n#pragma region FastIO\
-    \ Scanner\nclass Scanner\n{\npublic:\n    Scanner() {}\n    template<typename\
-    \ T>\n    T val()\n    {\n        T ans = 0;\n        bool neg = false;\n    \
-    \    char c = getchar();\n        if (c < '0') {\n            neg = true;\n  \
-    \      } else {\n            ans = c - '0';\n        }\n        while (true) {\n\
-    \            c = getchar();\n            if (c < '0') { break; }\n           \
-    \ ans = ans * T{10} + (c - '0');\n        }\n        if (neg) { ans = -ans; }\n\
-    \        return ans;\n    }\n    template<typename T>\n    T val(T offset)\n \
-    \   {\n        return val<T>() - offset;\n    }\n    template<typename T>\n  \
-    \  Vec<T> vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>();\
-    \ });\n    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n\
-    \        return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass Printer\n{\n\
+    public:\n    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n        m_os\
+    \ << std::fixed << std::setprecision(15);\n    }\n    template<typename... Args>\n\
+    \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
+    \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
+    \ args)\n    {\n        dump(args...), m_os << '\\n';\n        return 0;\n   \
+    \ }\n    template<typename... Args>\n    int el(const Args&... args)\n    {\n\
+    \        dump(args...), m_os << std::endl;\n        return 0;\n    }\nprivate:\n\
+    \    template<typename T>\n    void dump(const T& v)\n    {\n        m_os << v;\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n   \
+    \     for (const int i : rep(vs.size())) {\n            m_os << (i ? \" \" : \"\
+    \"), dump(vs[i]);\n        }\n    }\n    template<typename T>\n    void dump(const\
+    \ Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size())) {\n  \
+    \          m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n        }\n    }\n   \
+    \ template<typename T, typename... Ts>\n    int dump(const T& v, const Ts&...\
+    \ args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n        return 0;\n\
+    \    }\n    Ostream& m_os;\n};\nPrinter out;\nclass Scanner\n{\npublic:\n    Scanner(Istream&\
+    \ is = std::cin) : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n\
+    \    }\n    template<typename T>\n    T val()\n    {\n        T v;\n        return\
+    \ m_is >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n\
+    \        return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T>\
+    \ vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>(); });\n\
+    \    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n   \
+    \     return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
     \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
     \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
-    \ vvec(int n, int m, T offset)\n    {\n        return genVec<Vec<T>>(n, [&]()\
-    \ { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n   \
-    \ auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n   \
-    \ }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n  \
-    \  {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
-    \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
-    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
-    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
-    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
-    int main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    const auto as\
-    \ = in.vec<u32>(N);\n    struct Ord\n    {\n        using T = u32;\n        bool\
-    \ operator()(const T& x1, const T& x2) const\n        {\n            return x1\
-    \ < x2;\n        }\n    };\n    const auto rmq = StaticRMQ<Ord>(as);\n    for\
-    \ (int q : rep(Q)) {\n        const auto [l, r] = in.tup<int, int>();\n      \
-    \  out.ln(rmq.fold(l, r));\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\n#include \"\
-    ../../src/data_structure/static_rmq.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
-    \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const auto\
-    \ [N, Q] = in.tup<int, int>();\n    const auto as = in.vec<u32>(N);\n    struct\
-    \ Ord\n    {\n        using T = u32;\n        bool operator()(const T& x1, const\
-    \ T& x2) const\n        {\n            return x1 < x2;\n        }\n    };\n  \
-    \  const auto rmq = StaticRMQ<Ord>(as);\n    for (int q : rep(Q)) {\n        const\
-    \ auto [l, r] = in.tup<int, int>();\n        out.ln(rmq.fold(l, r));\n    }\n\
-    }\n"
+    \ vvec(int n, int m, const T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return Tup<Args...>{val<Args>()...};\n    }\n\
+    \    template<typename... Args>\n    auto tup(const Args&... offsets)\n    {\n\
+    \        return Tup<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n    Istream&\
+    \ m_is;\n};\nScanner in;\ntemplate<u32 mod_, u32 root_, u32 max2p_>\nclass modint\n\
+    {\n    template<typename U = u32&>\n    static U modRef()\n    {\n        static\
+    \ u32 s_mod = 0;\n        return s_mod;\n    }\n    template<typename U = u32&>\n\
+    \    static U rootRef()\n    {\n        static u32 s_root = 0;\n        return\
+    \ s_root;\n    }\n    template<typename U = u32&>\n    static U max2pRef()\n \
+    \   {\n        static u32 s_max2p = 0;\n        return s_max2p;\n    }\npublic:\n\
+    \    template<typename U = const u32>\n    static constexpr std::enable_if_t<mod_\
+    \ != 0, U> mod()\n    {\n        return mod_;\n    }\n    template<typename U\
+    \ = const u32>\n    static std::enable_if_t<mod_ == 0, U> mod()\n    {\n     \
+    \   return modRef();\n    }\n    template<typename U = const u32>\n    static\
+    \ constexpr std::enable_if_t<mod_ != 0, U> root()\n    {\n        return root_;\n\
+    \    }\n    template<typename U = const u32>\n    static std::enable_if_t<mod_\
+    \ == 0, U> root()\n    {\n        return rootRef();\n    }\n    template<typename\
+    \ U = const u32>\n    static constexpr std::enable_if_t<mod_ != 0, U> max2p()\n\
+    \    {\n        return max2p_;\n    }\n    template<typename U = const u32>\n\
+    \    static std::enable_if_t<mod_ == 0, U> max2p()\n    {\n        return max2pRef();\n\
+    \    }\n    template<typename U = u32>\n    static void setMod(std::enable_if_t<mod_\
+    \ == 0, U> m)\n    {\n        modRef() = m;\n    }\n    template<typename U =\
+    \ u32>\n    static void setRoot(std::enable_if_t<mod_ == 0, U> r)\n    {\n   \
+    \     rootRef() = r;\n    }\n    template<typename U = u32>\n    static void setMax2p(std::enable_if_t<mod_\
+    \ == 0, U> m)\n    {\n        max2pRef() = m;\n    }\n    constexpr modint() :\
+    \ m_val{0} {}\n    constexpr modint(i64 v) : m_val{normll(v)} {}\n    constexpr\
+    \ void setRaw(u32 v)\n    {\n        m_val = v;\n    }\n    constexpr modint operator-()\
+    \ const\n    {\n        return modint{0} - (*this);\n    }\n    constexpr modint&\
+    \ operator+=(const modint& m)\n    {\n        m_val = norm(m_val + m.val());\n\
+    \        return *this;\n    }\n    constexpr modint& operator-=(const modint&\
+    \ m)\n    {\n        m_val = norm(m_val + mod() - m.val());\n        return *this;\n\
+    \    }\n    constexpr modint& operator*=(const modint& m)\n    {\n        m_val\
+    \ = normll((i64)m_val * (i64)m.val() % (i64)mod());\n        return *this;\n \
+    \   }\n    constexpr modint& operator/=(const modint& m)\n    {\n        return\
+    \ *this *= m.inv();\n    }\n    constexpr modint operator+(const modint& m) const\n\
+    \    {\n        auto v = *this;\n        return v += m;\n    }\n    constexpr\
+    \ modint operator-(const modint& m) const\n    {\n        auto v = *this;\n  \
+    \      return v -= m;\n    }\n    constexpr modint operator*(const modint& m)\
+    \ const\n    {\n        auto v = *this;\n        return v *= m;\n    }\n    constexpr\
+    \ modint operator/(const modint& m) const\n    {\n        auto v = *this;\n  \
+    \      return v /= m;\n    }\n    constexpr bool operator==(const modint& m) const\n\
+    \    {\n        return m_val == m.val();\n    }\n    constexpr bool operator!=(const\
+    \ modint& m) const\n    {\n        return not(*this == m);\n    }\n    friend\
+    \ Istream& operator>>(Istream& is, modint& m)\n    {\n        i64 v;\n       \
+    \ return is >> v, m = v, is;\n    }\n    friend Ostream& operator<<(Ostream& os,\
+    \ const modint& m)\n    {\n        return os << m.val();\n    }\n    constexpr\
+    \ u32 val() const\n    {\n        return m_val;\n    }\n    template<typename\
+    \ I>\n    constexpr modint pow(I n) const\n    {\n        return power(*this,\
+    \ n);\n    }\n    constexpr modint inv() const\n    {\n        return pow(mod()\
+    \ - 2);\n    }\n    static modint sinv(u32 n)\n    {\n        static Vec<modint>\
+    \ is{1, 1};\n        for (u32 i = (u32)is.size(); i <= n; i++) {\n           \
+    \ is.push_back(-is[mod() % i] * (mod() / i));\n        }\n        return is[n];\n\
+    \    }\n    static modint fact(u32 n)\n    {\n        static Vec<modint> fs{1,\
+    \ 1};\n        for (u32 i = (u32)fs.size(); i <= n; i++) {\n            fs.push_back(fs.back()\
+    \ * i);\n        }\n        return fs[n];\n    }\n    static modint ifact(u32\
+    \ n)\n    {\n        static Vec<modint> ifs{1, 1};\n        for (u32 i = (u32)ifs.size();\
+    \ i <= n; i++) {\n            ifs.push_back(ifs.back() * sinv(i));\n        }\n\
+    \        return ifs[n];\n    }\n    static modint comb(int n, int k)\n    {\n\
+    \        return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k) * ifact(k);\n\
+    \    }\nprivate:\n    static constexpr u32 norm(u32 x)\n    {\n        return\
+    \ x < mod() ? x : x - mod();\n    }\n    static constexpr u32 normll(i64 x)\n\
+    \    {\n        return norm(u32(x % (i64)mod() + (i64)mod()));\n    }\n    u32\
+    \ m_val;\n};\nusing modint_1000000007 = modint<1000000007, 5, 1>;\nusing modint_998244353\
+    \ = modint<998244353, 3, 23>;\ntemplate<int id>\nusing modint_dynamic = modint<0,\
+    \ 0, id>;\ntemplate<typename T>\nclass Mat\n{\npublic:\n    Mat(const int row,\
+    \ const int column)\n        : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column,\
+    \ T{}))\n    {}\n    Mat(const IList<IList<T>>& vss)\n        : m_row{vss.size()},\n\
+    \          m_column{vss.begin()->size()},\n          m_vss(m_row, Vec<T>(m_column,\
+    \ T{}))\n    {\n        int i = 0;\n        for (auto it = vss.begin(); it !=\
+    \ vss.end(); it++) {\n            std::copy(it->begin(), it->end(), m_vss[i++].begin());\n\
+    \        }\n    }\n    const Vec<T>& operator[](const int r) const\n    {\n  \
+    \      assert(0 <= r and r < m_row);\n        return m_vss[r];\n    }\n    Vec<T>&\
+    \ operator[](const int r)\n    {\n        assert(0 <= r and r < m_row);\n    \
+    \    return m_vss[r];\n    }\n    friend Mat operator-(const Mat& m)\n    {\n\
+    \        Mat ans(m.m_row, m.m_column);\n        for (int i : rep(m.m_row)) {\n\
+    \            for (int j : rep(m.m_column)) {\n                ans[i][j] = -m[i][j];\n\
+    \            }\n        }\n        return ans;\n    }\n    friend Mat operator+(const\
+    \ Mat& m1, const Mat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n    \
+    \    assert(m1.m_column == m2.m_column);\n        Mat ans(m1.m_row, m1.m_column);\n\
+    \        for (int i : rep(m1.m_row)) {\n            for (int j : rep(m1.m_column))\
+    \ {\n                ans[i][j] = m1[i][j] + m2[i][j];\n            }\n       \
+    \ }\n        return ans;\n    }\n    friend Mat operator-(const Mat& m1, const\
+    \ Mat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n        assert(m1.m_column\
+    \ == m2.m_column);\n        Mat ans(m1.m_row, m1.m_column);\n        for (int\
+    \ i : rep(m1.m_row)) {\n            for (int j : rep(m1.m_column)) {\n       \
+    \         ans[i][j] = m1[i][j] - m2[i][j];\n            }\n        }\n       \
+    \ return ans;\n    }\n    friend Mat operator*(const Mat& m1, const Mat& m2)\n\
+    \    {\n        assert(m1.m_column == m2.m_row);\n        Mat ans(m1.m_row, m2.m_column);\n\
+    \        for (int i : rep(m1.m_row)) {\n            for (int j : rep(m2.m_column))\
+    \ {\n                for (int k : rep(m1.m_column)) {\n                    ans[i][j]\
+    \ += m1[i][k] * m2[k][j];\n                }\n            }\n        }\n     \
+    \   return ans;\n    }\n    friend Mat operator*(const Mat& m, const T& t)\n \
+    \   {\n        Mat ans(m.m_row, m.m_column);\n        for (int i : rep(m.m_row))\
+    \ {\n            for (int j : rep(m.m_column)) {\n                ans[i][j] =\
+    \ m[i][j] * t;\n            }\n        }\n        return ans;\n    }\n    friend\
+    \ Mat operator/(const Mat& m, const T& t)\n    {\n        Mat ans(m.m_row, m.m_column);\n\
+    \        for (int i : rep(m.m_row)) {\n            for (int j : rep(m.m_column))\
+    \ {\n                ans[i][j] = m[i][j] / t;\n            }\n        }\n    \
+    \    return ans;\n    }\n    friend Mat operator*(const T& t, const Mat& m)\n\
+    \    {\n        return m * t;\n    }\n    friend Mat& operator+=(Mat& m1, const\
+    \ Mat& m2)\n    {\n        return m1 = m1 + m2;\n    }\n    friend Mat& operator-=(Mat&\
+    \ m1, const Mat& m2)\n    {\n        return m1 = m1 - m2;\n    }\n    friend Mat&\
+    \ operator*=(Mat& m1, const Mat& m2)\n    {\n        return m1 = m1 * m2;\n  \
+    \  }\n    friend Mat& operator*=(Mat& m, const T& t)\n    {\n        return m\
+    \ = m * t;\n    }\n    friend Mat& operator/=(Mat& m, const T& t)\n    {\n   \
+    \     return m = m / t;\n    }\n    friend Ostream& operator<<(Ostream& os, const\
+    \ Mat& m)\n    {\n        os << \"[\\n\";\n        for (int i : rep(m.m_row))\
+    \ {\n            os << \"[\";\n            for (int j : rep(m.m_column)) {\n \
+    \               os << m[i][j] << \",\";\n            }\n            os << \"]\\\
+    n\";\n        }\n        return (os << \"]\\n\");\n    }\n    template<typename\
+    \ N>\n    Mat pow(N n) const\n    {\n        assert(m_row == m_column);\n    \
+    \    return power(*this, n, Mat::I(m_row));\n    }\n    static Mat I(int N)\n\
+    \    {\n        Mat ans(N, N);\n        for (int i : rep(N)) {\n            ans[i][i]\
+    \ = 1;\n        }\n        return ans;\n    }\n    int row() const\n    {\n  \
+    \      return m_row;\n    }\n    int column() const\n    {\n        return m_column;\n\
+    \    }\nprivate:\n    int m_row, m_column;\n    Vec<Vec<T>> m_vss;\n};\nint main()\n\
+    {\n    using mint = modint_1000000007;\n    const auto N = in.val<i64>();\n  \
+    \  Mat<mint> mat{{{1, 0, 1, 1, 1, 1, 1, 1, 1, 0},\n                   {0, 1, 0,\
+    \ 1, 0, 1, 0, 0, 0, 1},\n                   {0, 0, 1, 0, 0, 0, 0, 0, 1, 0},\n\
+    \                   {0, 0, 1, 1, 0, 0, 1, 0, 1, 1},\n                   {0, 0,\
+    \ 0, 0, 1, 0, 1, 1, 1, 1},\n                   {0, 0, 1, 0, 0, 1, 0, 1, 1, 1},\n\
+    \                   {0, 0, 0, 1, 1, 0, 1, 1, 1, 1},\n                   {0, 0,\
+    \ 0, 0, 1, 1, 1, 1, 1, 1},\n                   {0, 1, 0, 1, 1, 1, 1, 1, 1, 1},\n\
+    \                   {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}}};\n    out.ln(mat.pow(N +\
+    \ 1)[0][9]);\n    return 0;\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/541\"\n#include \"../../src/misc/printer.hpp\"\
+    \n#include \"../../src/misc/scanner.hpp\"\n#include \"../../src/math/modint.hpp\"\
+    \n#include \"../../src/linear/matrix.hpp\"\n\nint main()\n{\n    using mint =\
+    \ modint_1000000007;\n    const auto N = in.val<i64>();\n    Mat<mint> mat{{{1,\
+    \ 0, 1, 1, 1, 1, 1, 1, 1, 0},\n                   {0, 1, 0, 1, 0, 1, 0, 0, 0,\
+    \ 1},\n                   {0, 0, 1, 0, 0, 0, 0, 0, 1, 0},\n                  \
+    \ {0, 0, 1, 1, 0, 0, 1, 0, 1, 1},\n                   {0, 0, 0, 0, 1, 0, 1, 1,\
+    \ 1, 1},\n                   {0, 0, 1, 0, 0, 1, 0, 1, 1, 1},\n               \
+    \    {0, 0, 0, 1, 1, 0, 1, 1, 1, 1},\n                   {0, 0, 0, 0, 1, 1, 1,\
+    \ 1, 1, 1},\n                   {0, 1, 0, 1, 1, 1, 1, 1, 1, 1},\n            \
+    \       {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}}};\n    out.ln(mat.pow(N + 1)[0][9]);\n\
+    \    return 0;\n}\n"
   dependsOn:
-  - src/data_structure/static_rmq.hpp
+  - src/misc/printer.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -343,19 +387,19 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/data_structure/ds_table.hpp
-  - src/misc/fastio/printer.hpp
-  - src/misc/fastio/scanner.hpp
+  - src/misc/scanner.hpp
+  - src/math/modint.hpp
+  - src/linear/matrix.hpp
   isVerificationFile: true
-  path: verifications/data_structure/static_rmq.test.cpp
+  path: verifications/linear/matrix.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-06-15 01:30:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verifications/data_structure/static_rmq.test.cpp
+documentation_of: verifications/linear/matrix.test.cpp
 layout: document
 redirect_from:
-- /verify/verifications/data_structure/static_rmq.test.cpp
-- /verify/verifications/data_structure/static_rmq.test.cpp.html
-title: verifications/data_structure/static_rmq.test.cpp
+- /verify/verifications/linear/matrix.test.cpp
+- /verify/verifications/linear/matrix.test.cpp.html
+title: verifications/linear/matrix.test.cpp
 ---

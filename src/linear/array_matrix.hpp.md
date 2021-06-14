@@ -1,53 +1,56 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/linear/array_matrix.test.cpp
+    title: verifications/linear/array_matrix.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -194,16 +197,16 @@ data:
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
     \ T, int row, int column>\nclass ArrMat\n{\npublic:\n    ArrMat()\n    {\n   \
-    \     for (auto& v : m_vss) {\n            fillAll(v, T{});\n        }\n    }\n\
-    \    ArrMat(const IList<IList<T>>& vss)\n    {\n        assert(row == vss.size());\n\
-    \        assert(column == vss.begin()->size());\n        int i = 0;\n        for\
-    \ (auto it = vss.begin(); it != vss.end(); it++) {\n            std::copy(it->begin(),\
-    \ it->end(), m_vss[i++].begin());\n        }\n    }\n    ArrMat(const ArrMat&\
-    \ m) : m_vss{m.m_table} {}\n    ArrMat& operator=(const ArrMat& m)\n    {\n  \
-    \      for (const int i : rep(row)) {\n            for (const int j : rep(column))\
-    \ {\n                m_vss[i][j] = m[i][j];\n            }\n        }\n      \
-    \  return *this;\n    }\n    const Arr<T, column>& operator[](const int r) const\n\
-    \    {\n        return m_vss[r];\n    }\n    Arr<T, column>& operator[](const\
+    \     for (auto& v : m_vss) {\n            std::fill(v.begin(), v.end(), T{});\n\
+    \        }\n    }\n    ArrMat(const IList<IList<T>>& vss)\n    {\n        assert(row\
+    \ == vss.size());\n        assert(column == vss.begin()->size());\n        int\
+    \ i = 0;\n        for (auto it = vss.begin(); it != vss.end(); it++) {\n     \
+    \       std::copy(it->begin(), it->end(), m_vss[i++].begin());\n        }\n  \
+    \  }\n    ArrMat(const ArrMat& m) : m_vss{m.m_vss} {}\n    ArrMat& operator=(const\
+    \ ArrMat& m)\n    {\n        for (const int i : rep(row)) {\n            for (const\
+    \ int j : rep(column)) {\n                m_vss[i][j] = m[i][j];\n           \
+    \ }\n        }\n        return *this;\n    }\n    const Arr<T, column>& operator[](const\
+    \ int r) const\n    {\n        return m_vss[r];\n    }\n    Arr<T, column>& operator[](const\
     \ int r)\n    {\n        return m_vss[r];\n    }\n    friend ArrMat operator-(const\
     \ ArrMat& m)\n    {\n        ArrMat ans;\n        for (const int r : rep(row))\
     \ {\n            for (const int c : rep(column)) {\n                ans[r][c]\
@@ -247,57 +250,57 @@ data:
     \    }\nprivate:\n    Arr<Arr<T, column>, row> m_vss;\n};\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T, int row,\
     \ int column>\nclass ArrMat\n{\npublic:\n    ArrMat()\n    {\n        for (auto&\
-    \ v : m_vss) {\n            fillAll(v, T{});\n        }\n    }\n    ArrMat(const\
-    \ IList<IList<T>>& vss)\n    {\n        assert(row == vss.size());\n        assert(column\
-    \ == vss.begin()->size());\n        int i = 0;\n        for (auto it = vss.begin();\
-    \ it != vss.end(); it++) {\n            std::copy(it->begin(), it->end(), m_vss[i++].begin());\n\
-    \        }\n    }\n    ArrMat(const ArrMat& m) : m_vss{m.m_table} {}\n    ArrMat&\
-    \ operator=(const ArrMat& m)\n    {\n        for (const int i : rep(row)) {\n\
-    \            for (const int j : rep(column)) {\n                m_vss[i][j] =\
-    \ m[i][j];\n            }\n        }\n        return *this;\n    }\n    const\
-    \ Arr<T, column>& operator[](const int r) const\n    {\n        return m_vss[r];\n\
-    \    }\n    Arr<T, column>& operator[](const int r)\n    {\n        return m_vss[r];\n\
-    \    }\n    friend ArrMat operator-(const ArrMat& m)\n    {\n        ArrMat ans;\n\
-    \        for (const int r : rep(row)) {\n            for (const int c : rep(column))\
-    \ {\n                ans[r][c] = -m[r][c];\n            }\n        }\n       \
-    \ return ans;\n    }\n    friend ArrMat operator+(const ArrMat& m1, const ArrMat&\
-    \ m2)\n    {\n        ArrMat ans;\n        for (const int r : rep(row)) {\n  \
-    \          for (const int c : rep(column)) {\n                ans[r][c] = m1[r][c]\
-    \ + m2[r][c];\n            }\n        }\n        return ans;\n    }\n    friend\
-    \ ArrMat operator-(const ArrMat& m1, const ArrMat& m2)\n    {\n        ArrMat\
-    \ ans;\n        for (const int r : rep(row)) {\n            for (const int c :\
-    \ rep(column)) {\n                ans[r][c] = m1[r][c] - m2[r][c];\n         \
-    \   }\n        }\n        return ans;\n    }\n    template<int c>\n    friend\
-    \ ArrMat operator*(const ArrMat<T, row, c>& m1,\n                            const\
-    \ ArrMat<T, c, column>& m2)\n    {\n        ArrMat<T, row, column> ans;\n    \
+    \ v : m_vss) {\n            std::fill(v.begin(), v.end(), T{});\n        }\n \
+    \   }\n    ArrMat(const IList<IList<T>>& vss)\n    {\n        assert(row == vss.size());\n\
+    \        assert(column == vss.begin()->size());\n        int i = 0;\n        for\
+    \ (auto it = vss.begin(); it != vss.end(); it++) {\n            std::copy(it->begin(),\
+    \ it->end(), m_vss[i++].begin());\n        }\n    }\n    ArrMat(const ArrMat&\
+    \ m) : m_vss{m.m_vss} {}\n    ArrMat& operator=(const ArrMat& m)\n    {\n    \
     \    for (const int i : rep(row)) {\n            for (const int j : rep(column))\
-    \ {\n                for (const int k : rep(c)) {\n                    ans[i][j]\
-    \ += m1[i][k] * m2[k][j];\n                }\n            }\n        }\n     \
-    \   return ans;\n    }\n    friend ArrMat operator*(const ArrMat& m, const T&\
+    \ {\n                m_vss[i][j] = m[i][j];\n            }\n        }\n      \
+    \  return *this;\n    }\n    const Arr<T, column>& operator[](const int r) const\n\
+    \    {\n        return m_vss[r];\n    }\n    Arr<T, column>& operator[](const\
+    \ int r)\n    {\n        return m_vss[r];\n    }\n    friend ArrMat operator-(const\
+    \ ArrMat& m)\n    {\n        ArrMat ans;\n        for (const int r : rep(row))\
+    \ {\n            for (const int c : rep(column)) {\n                ans[r][c]\
+    \ = -m[r][c];\n            }\n        }\n        return ans;\n    }\n    friend\
+    \ ArrMat operator+(const ArrMat& m1, const ArrMat& m2)\n    {\n        ArrMat\
+    \ ans;\n        for (const int r : rep(row)) {\n            for (const int c :\
+    \ rep(column)) {\n                ans[r][c] = m1[r][c] + m2[r][c];\n         \
+    \   }\n        }\n        return ans;\n    }\n    friend ArrMat operator-(const\
+    \ ArrMat& m1, const ArrMat& m2)\n    {\n        ArrMat ans;\n        for (const\
+    \ int r : rep(row)) {\n            for (const int c : rep(column)) {\n       \
+    \         ans[r][c] = m1[r][c] - m2[r][c];\n            }\n        }\n       \
+    \ return ans;\n    }\n    template<int c>\n    friend ArrMat operator*(const ArrMat<T,\
+    \ row, c>& m1,\n                            const ArrMat<T, c, column>& m2)\n\
+    \    {\n        ArrMat<T, row, column> ans;\n        for (const int i : rep(row))\
+    \ {\n            for (const int j : rep(column)) {\n                for (const\
+    \ int k : rep(c)) {\n                    ans[i][j] += m1[i][k] * m2[k][j];\n \
+    \               }\n            }\n        }\n        return ans;\n    }\n    friend\
+    \ ArrMat operator*(const ArrMat& m, const T& t)\n    {\n        ArrMat ans;\n\
+    \        for (const int r : rep(row)) {\n            for (const int c : rep(column))\
+    \ {\n                ans[r][c] = m[r][c] * t;\n            }\n        }\n    \
+    \    return ans;\n    }\n    friend ArrMat operator/(const ArrMat& m, const T&\
     \ t)\n    {\n        ArrMat ans;\n        for (const int r : rep(row)) {\n   \
     \         for (const int c : rep(column)) {\n                ans[r][c] = m[r][c]\
-    \ * t;\n            }\n        }\n        return ans;\n    }\n    friend ArrMat\
-    \ operator/(const ArrMat& m, const T& t)\n    {\n        ArrMat ans;\n       \
-    \ for (const int r : rep(row)) {\n            for (const int c : rep(column))\
-    \ {\n                ans[r][c] = m[r][c] / t;\n            }\n        }\n    \
-    \    return ans;\n    }\n    friend ArrMat operator*(const T& t, const ArrMat&\
-    \ m)\n    {\n        return m * t;\n    }\n    friend ArrMat& operator+=(ArrMat&\
-    \ m1, const ArrMat& m2)\n    {\n        return m1 = m1 + m2;\n    }\n    friend\
-    \ ArrMat& operator-=(ArrMat& m1, const ArrMat& m2)\n    {\n        return m1 =\
-    \ m1 - m2;\n    }\n    friend ArrMat& operator*=(ArrMat& m1, const ArrMat& m2)\n\
-    \    {\n        return m1 = m1 * m2;\n    }\n    friend ArrMat& operator*=(ArrMat&\
-    \ m, const T& t)\n    {\n        return m = m * t;\n    }\n    friend ArrMat&\
-    \ operator/=(ArrMat& m, const T& t)\n    {\n        return m = m / t;\n    }\n\
-    \    friend std::ostream& operator<<(std::ostream& os, const ArrMat& m)\n    {\n\
-    \        os << \"[\\n\";\n        for (const int i : rep(row)) {\n           \
-    \ os << \"[\";\n            for (const int j : rep(column)) {\n              \
-    \  os << m[i][j] << \",\";\n            }\n            os << \"]\\n\";\n     \
-    \   }\n        return (os << \"]\");\n    }\n    template<typename Int>\n    ArrMat\
-    \ pow(Int n) const\n    {\n        return power(*this, n, I());\n    }\n    static\
-    \ ArrMat I()\n    {\n        static_assert(row == column, \"I() should be rectangular!\"\
-    );\n        ArrMat ans;\n        for (const int i : rep(row)) {\n            ans[i][i]\
-    \ = 1;\n        }\n        return ans;\n    }\n\nprivate:\n    Arr<Arr<T, column>,\
-    \ row> m_vss;\n};\n"
+    \ / t;\n            }\n        }\n        return ans;\n    }\n    friend ArrMat\
+    \ operator*(const T& t, const ArrMat& m)\n    {\n        return m * t;\n    }\n\
+    \    friend ArrMat& operator+=(ArrMat& m1, const ArrMat& m2)\n    {\n        return\
+    \ m1 = m1 + m2;\n    }\n    friend ArrMat& operator-=(ArrMat& m1, const ArrMat&\
+    \ m2)\n    {\n        return m1 = m1 - m2;\n    }\n    friend ArrMat& operator*=(ArrMat&\
+    \ m1, const ArrMat& m2)\n    {\n        return m1 = m1 * m2;\n    }\n    friend\
+    \ ArrMat& operator*=(ArrMat& m, const T& t)\n    {\n        return m = m * t;\n\
+    \    }\n    friend ArrMat& operator/=(ArrMat& m, const T& t)\n    {\n        return\
+    \ m = m / t;\n    }\n    friend std::ostream& operator<<(std::ostream& os, const\
+    \ ArrMat& m)\n    {\n        os << \"[\\n\";\n        for (const int i : rep(row))\
+    \ {\n            os << \"[\";\n            for (const int j : rep(column)) {\n\
+    \                os << m[i][j] << \",\";\n            }\n            os << \"\
+    ]\\n\";\n        }\n        return (os << \"]\");\n    }\n    template<typename\
+    \ Int>\n    ArrMat pow(Int n) const\n    {\n        return power(*this, n, I());\n\
+    \    }\n    static ArrMat I()\n    {\n        static_assert(row == column, \"\
+    I() should be rectangular!\");\n        ArrMat ans;\n        for (const int i\
+    \ : rep(row)) {\n            ans[i][i] = 1;\n        }\n        return ans;\n\
+    \    }\n\nprivate:\n    Arr<Arr<T, column>, row> m_vss;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -316,9 +319,10 @@ data:
   isVerificationFile: false
   path: src/linear/array_matrix.hpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-06-15 01:30:20+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verifications/linear/array_matrix.test.cpp
 documentation_of: src/linear/array_matrix.hpp
 layout: document
 redirect_from:

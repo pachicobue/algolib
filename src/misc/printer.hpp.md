@@ -1,46 +1,46 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
@@ -64,11 +64,17 @@ data:
     path: verifications/graph/warshall_floyd.test.cpp
     title: verifications/graph/warshall_floyd.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verifications/linear/array_matrix.test.cpp
+    title: verifications/linear/array_matrix.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/linear/bit_bases.test.cpp
     title: verifications/linear/bit_bases.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/linear/int_bases.test.cpp
     title: verifications/linear/int_bases.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/linear/matrix.test.cpp
+    title: verifications/linear/matrix.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/math/divisors.test.cpp
     title: verifications/math/divisors.test.cpp
@@ -294,6 +300,8 @@ data:
   - verifications/math/divisors.test.cpp
   - verifications/linear/int_bases.test.cpp
   - verifications/linear/bit_bases.test.cpp
+  - verifications/linear/array_matrix.test.cpp
+  - verifications/linear/matrix.test.cpp
   - verifications/graph/centroid_decomp.test.cpp
   - verifications/graph/level_ancestor.lca.test.cpp
   - verifications/graph/warshall_floyd.test.cpp

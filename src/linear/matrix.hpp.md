@@ -1,53 +1,56 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/linear/matrix.test.cpp
+    title: verifications/linear/matrix.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -194,44 +197,47 @@ data:
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
     \ T>\nclass Mat\n{\npublic:\n    Mat(const int row, const int column)\n      \
-    \  : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, 0))\n    {}\n   \
-    \ const Vec<T>& operator[](const int r) const\n    {\n        assert(0 <= r and\
-    \ r < m_row);\n        return m_vss[r];\n    }\n    Vec<T>& operator[](const int\
-    \ r)\n    {\n        assert(0 <= r and r < m_row);\n        return m_vss[r];\n\
-    \    }\n    friend Mat operator-(const Mat& m)\n    {\n        Mat ans(m.m_row,\
-    \ m.m_column);\n        for (int i : rep(m.m_row)) {\n            for (int j :\
-    \ rep(m.m_column)) {\n                ans[i][j] = -m[i][j];\n            }\n \
-    \       }\n        return ans;\n    }\n    friend Mat operator+(const Mat& m1,\
-    \ const Mat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n        assert(m1.m_column\
-    \ == m2.m_column);\n        Mat ans(m1.m_row, m1.m_column);\n        for (int\
-    \ i : rep(m1.m_row)) {\n            for (int j : rep(m1.m_column)) {\n       \
-    \         ans[i][j] = m1[i][j] + m2[i][j];\n            }\n        }\n       \
-    \ return ans;\n    }\n    friend Mat operator-(const Mat& m1, const Mat& m2)\n\
-    \    {\n        assert(m1.m_row == m2.m_row);\n        assert(m1.m_column == m2.m_column);\n\
-    \        Mat ans(m1.m_row, m1.m_column);\n        for (int i : rep(m1.m_row))\
-    \ {\n            for (int j : rep(m1.m_column)) {\n                ans[i][j] =\
-    \ m1[i][j] - m2[i][j];\n            }\n        }\n        return ans;\n    }\n\
-    \    friend Mat operator*(const Mat& m1, const Mat& m2)\n    {\n        assert(m1.m_column\
-    \ == m2.m_row);\n        Mat ans(m1.m_row, m2.m_column);\n        for (int i :\
-    \ rep(m1.m_row)) {\n            for (int j : rep(m2.m_column)) {\n           \
-    \     for (int k : rep(m1.m_column)) {\n                    ans[i][j] += m1[i][k]\
-    \ * m2[k][j];\n                }\n            }\n        }\n        return ans;\n\
-    \    }\n    friend Mat operator*(const Mat& m, const T& t)\n    {\n        Mat\
-    \ ans(m.m_row, m.m_column);\n        for (int i : rep(m.m_row)) {\n          \
-    \  for (int j : rep(m.m_column)) {\n                ans[i][j] = m[i][j] * t;\n\
-    \            }\n        }\n        return ans;\n    }\n    friend Mat operator/(const\
+    \  : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, T{}))\n    {}\n \
+    \   Mat(const IList<IList<T>>& vss)\n        : m_row{vss.size()},\n          m_column{vss.begin()->size()},\n\
+    \          m_vss(m_row, Vec<T>(m_column, T{}))\n    {\n        int i = 0;\n  \
+    \      for (auto it = vss.begin(); it != vss.end(); it++) {\n            std::copy(it->begin(),\
+    \ it->end(), m_vss[i++].begin());\n        }\n    }\n    const Vec<T>& operator[](const\
+    \ int r) const\n    {\n        assert(0 <= r and r < m_row);\n        return m_vss[r];\n\
+    \    }\n    Vec<T>& operator[](const int r)\n    {\n        assert(0 <= r and\
+    \ r < m_row);\n        return m_vss[r];\n    }\n    friend Mat operator-(const\
+    \ Mat& m)\n    {\n        Mat ans(m.m_row, m.m_column);\n        for (int i :\
+    \ rep(m.m_row)) {\n            for (int j : rep(m.m_column)) {\n             \
+    \   ans[i][j] = -m[i][j];\n            }\n        }\n        return ans;\n   \
+    \ }\n    friend Mat operator+(const Mat& m1, const Mat& m2)\n    {\n        assert(m1.m_row\
+    \ == m2.m_row);\n        assert(m1.m_column == m2.m_column);\n        Mat ans(m1.m_row,\
+    \ m1.m_column);\n        for (int i : rep(m1.m_row)) {\n            for (int j\
+    \ : rep(m1.m_column)) {\n                ans[i][j] = m1[i][j] + m2[i][j];\n  \
+    \          }\n        }\n        return ans;\n    }\n    friend Mat operator-(const\
+    \ Mat& m1, const Mat& m2)\n    {\n        assert(m1.m_row == m2.m_row);\n    \
+    \    assert(m1.m_column == m2.m_column);\n        Mat ans(m1.m_row, m1.m_column);\n\
+    \        for (int i : rep(m1.m_row)) {\n            for (int j : rep(m1.m_column))\
+    \ {\n                ans[i][j] = m1[i][j] - m2[i][j];\n            }\n       \
+    \ }\n        return ans;\n    }\n    friend Mat operator*(const Mat& m1, const\
+    \ Mat& m2)\n    {\n        assert(m1.m_column == m2.m_row);\n        Mat ans(m1.m_row,\
+    \ m2.m_column);\n        for (int i : rep(m1.m_row)) {\n            for (int j\
+    \ : rep(m2.m_column)) {\n                for (int k : rep(m1.m_column)) {\n  \
+    \                  ans[i][j] += m1[i][k] * m2[k][j];\n                }\n    \
+    \        }\n        }\n        return ans;\n    }\n    friend Mat operator*(const\
     \ Mat& m, const T& t)\n    {\n        Mat ans(m.m_row, m.m_column);\n        for\
     \ (int i : rep(m.m_row)) {\n            for (int j : rep(m.m_column)) {\n    \
-    \            ans[i][j] = m[i][j] / t;\n            }\n        }\n        return\
-    \ ans;\n    }\n    friend Mat operator*(const T& t, const Mat& m)\n    {\n   \
-    \     return m * t;\n    }\n    friend Mat& operator+=(Mat& m1, const Mat& m2)\n\
-    \    {\n        return m1 = m1 + m2;\n    }\n    friend Mat& operator-=(Mat& m1,\
-    \ const Mat& m2)\n    {\n        return m1 = m1 - m2;\n    }\n    friend Mat&\
-    \ operator*=(Mat& m1, const Mat& m2)\n    {\n        return m1 = m1 * m2;\n  \
-    \  }\n    friend Mat& operator*=(Mat& m, const T& t)\n    {\n        return m\
-    \ = m * t;\n    }\n    friend Mat& operator/=(Mat& m, const T& t)\n    {\n   \
-    \     return m = m / t;\n    }\n    friend Ostream& operator<<(Ostream& os, const\
-    \ Mat& m)\n    {\n        os << \"[\\n\";\n        for (int i : rep(m.m_row))\
+    \            ans[i][j] = m[i][j] * t;\n            }\n        }\n        return\
+    \ ans;\n    }\n    friend Mat operator/(const Mat& m, const T& t)\n    {\n   \
+    \     Mat ans(m.m_row, m.m_column);\n        for (int i : rep(m.m_row)) {\n  \
+    \          for (int j : rep(m.m_column)) {\n                ans[i][j] = m[i][j]\
+    \ / t;\n            }\n        }\n        return ans;\n    }\n    friend Mat operator*(const\
+    \ T& t, const Mat& m)\n    {\n        return m * t;\n    }\n    friend Mat& operator+=(Mat&\
+    \ m1, const Mat& m2)\n    {\n        return m1 = m1 + m2;\n    }\n    friend Mat&\
+    \ operator-=(Mat& m1, const Mat& m2)\n    {\n        return m1 = m1 - m2;\n  \
+    \  }\n    friend Mat& operator*=(Mat& m1, const Mat& m2)\n    {\n        return\
+    \ m1 = m1 * m2;\n    }\n    friend Mat& operator*=(Mat& m, const T& t)\n    {\n\
+    \        return m = m * t;\n    }\n    friend Mat& operator/=(Mat& m, const T&\
+    \ t)\n    {\n        return m = m / t;\n    }\n    friend Ostream& operator<<(Ostream&\
+    \ os, const Mat& m)\n    {\n        os << \"[\\n\";\n        for (int i : rep(m.m_row))\
     \ {\n            os << \"[\";\n            for (int j : rep(m.m_column)) {\n \
     \               os << m[i][j] << \",\";\n            }\n            os << \"]\\\
     n\";\n        }\n        return (os << \"]\\n\");\n    }\n    template<typename\
@@ -243,7 +249,11 @@ data:
     \    }\nprivate:\n    int m_row, m_column;\n    Vec<Vec<T>> m_vss;\n};\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nclass\
     \ Mat\n{\npublic:\n    Mat(const int row, const int column)\n        : m_row{row},\
-    \ m_column{column}, m_vss(row, Vec<T>(column, 0))\n    {}\n    const Vec<T>& operator[](const\
+    \ m_column{column}, m_vss(row, Vec<T>(column, T{}))\n    {}\n    Mat(const IList<IList<T>>&\
+    \ vss)\n        : m_row{vss.size()},\n          m_column{vss.begin()->size()},\n\
+    \          m_vss(m_row, Vec<T>(m_column, T{}))\n    {\n        int i = 0;\n  \
+    \      for (auto it = vss.begin(); it != vss.end(); it++) {\n            std::copy(it->begin(),\
+    \ it->end(), m_vss[i++].begin());\n        }\n    }\n    const Vec<T>& operator[](const\
     \ int r) const\n    {\n        assert(0 <= r and r < m_row);\n        return m_vss[r];\n\
     \    }\n    Vec<T>& operator[](const int r)\n    {\n        assert(0 <= r and\
     \ r < m_row);\n        return m_vss[r];\n    }\n    friend Mat operator-(const\
@@ -307,9 +317,10 @@ data:
   isVerificationFile: false
   path: src/linear/matrix.hpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-06-15 01:30:20+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verifications/linear/matrix.test.cpp
 documentation_of: src/linear/matrix.hpp
 layout: document
 redirect_from:

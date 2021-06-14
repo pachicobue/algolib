@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#include <iostream>\n#include <map>\ntemplate<typename... Ts>\nstd::ostream&\
+  bundledCode: "#include <map>\n#include <iostream>\ntemplate<typename... Ts>\nstd::ostream&\
     \ operator<<(std::ostream& os, const std::multimap<Ts...>& v)\n{\n    os << \"\
     [\";\n    for (const auto& [k, v] : v) { os << \"(\" << k << \" -> \" << v <<\
     \ \"),\"; }\n    return (os << \"]\" << std::endl);\n}\n"

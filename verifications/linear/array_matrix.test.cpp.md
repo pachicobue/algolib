@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/math/berlekamp_massey.hpp
-    title: src/math/berlekamp_massey.hpp
+    path: src/linear/array_matrix.hpp
+    title: src/linear/array_matrix.hpp
   - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
@@ -49,12 +49,12 @@ data:
   - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':question:'
-    path: src/misc/fastio/printer.hpp
-    title: src/misc/fastio/printer.hpp
-  - icon: ':question:'
-    path: src/misc/fastio/scanner.hpp
-    title: src/misc/fastio/scanner.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -62,9 +62,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
+    PROBLEM: https://yukicoder.me/problems/no/541
     links:
-    - https://judge.yosupo.jp/problem/find_linear_recurrence
+    - https://yukicoder.me/problems/no/541
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -207,19 +207,39 @@ data:
     \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
-    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ T>\nVec<T> berlekampMassey(const Vec<T>& A)\n{\n    const int N = (int)A.size();\n\
-    \    Vec<T> B{1}, C{1};\n    T b = 1;\n    for (int j : irange(1, N + 1)) {\n\
-    \        int m = (int)B.size(), l = (int)C.size();\n        T d = 0;\n       \
-    \ for (int i : rep(l)) {\n            d += A[j - l + i] * C[i];\n        }\n \
-    \       B.push_back(0), m++;\n        if (d == 0) { continue; }\n        const\
-    \ T c = -d / b;\n        if (l < m) {\n            auto temp = C;\n          \
-    \  C.insert(C.begin(), m - l, 0);\n            for (int i : rep(m)) {\n      \
-    \          C[m - 1 - i] += c * B[m - 1 - i];\n            }\n            B = temp,\
-    \ b = d;\n        } else {\n            for (int i : rep(m)) {\n             \
-    \   C[l - 1 - i] += c * B[m - 1 - i];\n            }\n        }\n    }\n    reverseAll(C);\n\
-    \    return C;\n}\ntemplate<u32 mod_, u32 root_, u32 max2p_>\nclass modint\n{\n\
-    \    template<typename U = u32&>\n    static U modRef()\n    {\n        static\
+    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass Printer\n{\n\
+    public:\n    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n        m_os\
+    \ << std::fixed << std::setprecision(15);\n    }\n    template<typename... Args>\n\
+    \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
+    \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
+    \ args)\n    {\n        dump(args...), m_os << '\\n';\n        return 0;\n   \
+    \ }\n    template<typename... Args>\n    int el(const Args&... args)\n    {\n\
+    \        dump(args...), m_os << std::endl;\n        return 0;\n    }\nprivate:\n\
+    \    template<typename T>\n    void dump(const T& v)\n    {\n        m_os << v;\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n   \
+    \     for (const int i : rep(vs.size())) {\n            m_os << (i ? \" \" : \"\
+    \"), dump(vs[i]);\n        }\n    }\n    template<typename T>\n    void dump(const\
+    \ Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size())) {\n  \
+    \          m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n        }\n    }\n   \
+    \ template<typename T, typename... Ts>\n    int dump(const T& v, const Ts&...\
+    \ args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n        return 0;\n\
+    \    }\n    Ostream& m_os;\n};\nPrinter out;\nclass Scanner\n{\npublic:\n    Scanner(Istream&\
+    \ is = std::cin) : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n\
+    \    }\n    template<typename T>\n    T val()\n    {\n        T v;\n        return\
+    \ m_is >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n\
+    \        return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T>\
+    \ vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>(); });\n\
+    \    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n   \
+    \     return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, const T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return Tup<Args...>{val<Args>()...};\n    }\n\
+    \    template<typename... Args>\n    auto tup(const Args&... offsets)\n    {\n\
+    \        return Tup<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n    Istream&\
+    \ m_is;\n};\nScanner in;\ntemplate<u32 mod_, u32 root_, u32 max2p_>\nclass modint\n\
+    {\n    template<typename U = u32&>\n    static U modRef()\n    {\n        static\
     \ u32 s_mod = 0;\n        return s_mod;\n    }\n    template<typename U = u32&>\n\
     \    static U rootRef()\n    {\n        static u32 s_root = 0;\n        return\
     \ s_root;\n    }\n    template<typename U = u32&>\n    static U max2pRef()\n \
@@ -278,66 +298,83 @@ data:
     \    {\n        return norm(u32(x % (i64)mod() + (i64)mod()));\n    }\n    u32\
     \ m_val;\n};\nusing modint_1000000007 = modint<1000000007, 5, 1>;\nusing modint_998244353\
     \ = modint<998244353, 3, 23>;\ntemplate<int id>\nusing modint_dynamic = modint<0,\
-    \ 0, id>;\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer()\
-    \ {}\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
-    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
-    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
-    n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
-    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
-    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
-    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
-    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
-    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
-    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
-    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
-    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
-    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
-    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
-    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
-    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
-    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
-    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
-    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
-    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
-    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
-    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
-    \        }\n        while (true) {\n            c = getchar();\n            if\
-    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
-    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
-    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
-    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
-    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
-    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
-    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
-    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
-    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
-    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
-    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
-    \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
-    \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
-    \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
-    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
-    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
-    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
-    int main()\n{\n    using mint = modint_998244353;\n    const auto N = in.val<int>();\n\
-    \    Vec<mint> as(N);\n    for (auto& a : as) {\n        a = in.val<int>();\n\
-    \    }\n    const auto cs = berlekampMassey(as);\n    const int d = cs.size();\n\
-    \    Vec<int> ans(d - 1);\n    for (int i : irange(1, d)) {\n        ans[i - 1]\
-    \ = (-cs[i]).val();\n    }\n    out.ln(d - 1);\n    out.ln(ans);\n    return 0;\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\
-    \n#include \"../../src/math/berlekamp_massey.hpp\"\n#include \"../../src/math/modint.hpp\"\
-    \n#include \"../../src/misc/fastio/printer.hpp\"\n#include \"../../src/misc/fastio/scanner.hpp\"\
-    \nint main()\n{\n    using mint = modint_998244353;\n    const auto N = in.val<int>();\n\
-    \    Vec<mint> as(N);\n    for (auto& a : as) {\n        a = in.val<int>();\n\
-    \    }\n    const auto cs = berlekampMassey(as);\n    const int d = cs.size();\n\
-    \    Vec<int> ans(d - 1);\n    for (int i : irange(1, d)) {\n        ans[i - 1]\
-    \ = (-cs[i]).val();\n    }\n    out.ln(d - 1);\n    out.ln(ans);\n    return 0;\n\
-    }\n"
+    \ 0, id>;\ntemplate<typename T, int row, int column>\nclass ArrMat\n{\npublic:\n\
+    \    ArrMat()\n    {\n        for (auto& v : m_vss) {\n            std::fill(v.begin(),\
+    \ v.end(), T{});\n        }\n    }\n    ArrMat(const IList<IList<T>>& vss)\n \
+    \   {\n        assert(row == vss.size());\n        assert(column == vss.begin()->size());\n\
+    \        int i = 0;\n        for (auto it = vss.begin(); it != vss.end(); it++)\
+    \ {\n            std::copy(it->begin(), it->end(), m_vss[i++].begin());\n    \
+    \    }\n    }\n    ArrMat(const ArrMat& m) : m_vss{m.m_vss} {}\n    ArrMat& operator=(const\
+    \ ArrMat& m)\n    {\n        for (const int i : rep(row)) {\n            for (const\
+    \ int j : rep(column)) {\n                m_vss[i][j] = m[i][j];\n           \
+    \ }\n        }\n        return *this;\n    }\n    const Arr<T, column>& operator[](const\
+    \ int r) const\n    {\n        return m_vss[r];\n    }\n    Arr<T, column>& operator[](const\
+    \ int r)\n    {\n        return m_vss[r];\n    }\n    friend ArrMat operator-(const\
+    \ ArrMat& m)\n    {\n        ArrMat ans;\n        for (const int r : rep(row))\
+    \ {\n            for (const int c : rep(column)) {\n                ans[r][c]\
+    \ = -m[r][c];\n            }\n        }\n        return ans;\n    }\n    friend\
+    \ ArrMat operator+(const ArrMat& m1, const ArrMat& m2)\n    {\n        ArrMat\
+    \ ans;\n        for (const int r : rep(row)) {\n            for (const int c :\
+    \ rep(column)) {\n                ans[r][c] = m1[r][c] + m2[r][c];\n         \
+    \   }\n        }\n        return ans;\n    }\n    friend ArrMat operator-(const\
+    \ ArrMat& m1, const ArrMat& m2)\n    {\n        ArrMat ans;\n        for (const\
+    \ int r : rep(row)) {\n            for (const int c : rep(column)) {\n       \
+    \         ans[r][c] = m1[r][c] - m2[r][c];\n            }\n        }\n       \
+    \ return ans;\n    }\n    template<int c>\n    friend ArrMat operator*(const ArrMat<T,\
+    \ row, c>& m1,\n                            const ArrMat<T, c, column>& m2)\n\
+    \    {\n        ArrMat<T, row, column> ans;\n        for (const int i : rep(row))\
+    \ {\n            for (const int j : rep(column)) {\n                for (const\
+    \ int k : rep(c)) {\n                    ans[i][j] += m1[i][k] * m2[k][j];\n \
+    \               }\n            }\n        }\n        return ans;\n    }\n    friend\
+    \ ArrMat operator*(const ArrMat& m, const T& t)\n    {\n        ArrMat ans;\n\
+    \        for (const int r : rep(row)) {\n            for (const int c : rep(column))\
+    \ {\n                ans[r][c] = m[r][c] * t;\n            }\n        }\n    \
+    \    return ans;\n    }\n    friend ArrMat operator/(const ArrMat& m, const T&\
+    \ t)\n    {\n        ArrMat ans;\n        for (const int r : rep(row)) {\n   \
+    \         for (const int c : rep(column)) {\n                ans[r][c] = m[r][c]\
+    \ / t;\n            }\n        }\n        return ans;\n    }\n    friend ArrMat\
+    \ operator*(const T& t, const ArrMat& m)\n    {\n        return m * t;\n    }\n\
+    \    friend ArrMat& operator+=(ArrMat& m1, const ArrMat& m2)\n    {\n        return\
+    \ m1 = m1 + m2;\n    }\n    friend ArrMat& operator-=(ArrMat& m1, const ArrMat&\
+    \ m2)\n    {\n        return m1 = m1 - m2;\n    }\n    friend ArrMat& operator*=(ArrMat&\
+    \ m1, const ArrMat& m2)\n    {\n        return m1 = m1 * m2;\n    }\n    friend\
+    \ ArrMat& operator*=(ArrMat& m, const T& t)\n    {\n        return m = m * t;\n\
+    \    }\n    friend ArrMat& operator/=(ArrMat& m, const T& t)\n    {\n        return\
+    \ m = m / t;\n    }\n    friend std::ostream& operator<<(std::ostream& os, const\
+    \ ArrMat& m)\n    {\n        os << \"[\\n\";\n        for (const int i : rep(row))\
+    \ {\n            os << \"[\";\n            for (const int j : rep(column)) {\n\
+    \                os << m[i][j] << \",\";\n            }\n            os << \"\
+    ]\\n\";\n        }\n        return (os << \"]\");\n    }\n    template<typename\
+    \ Int>\n    ArrMat pow(Int n) const\n    {\n        return power(*this, n, I());\n\
+    \    }\n    static ArrMat I()\n    {\n        static_assert(row == column, \"\
+    I() should be rectangular!\");\n        ArrMat ans;\n        for (const int i\
+    \ : rep(row)) {\n            ans[i][i] = 1;\n        }\n        return ans;\n\
+    \    }\nprivate:\n    Arr<Arr<T, column>, row> m_vss;\n};\nint main()\n{\n   \
+    \ using mint = modint_1000000007;\n    const auto N = in.val<i64>();\n    ArrMat<mint,\
+    \ 10, 10> mat{{{1, 0, 1, 1, 1, 1, 1, 1, 1, 0},\n                             \
+    \ {0, 1, 0, 1, 0, 1, 0, 0, 0, 1},\n                              {0, 0, 1, 0,\
+    \ 0, 0, 0, 0, 1, 0},\n                              {0, 0, 1, 1, 0, 0, 1, 0, 1,\
+    \ 1},\n                              {0, 0, 0, 0, 1, 0, 1, 1, 1, 1},\n       \
+    \                       {0, 0, 1, 0, 0, 1, 0, 1, 1, 1},\n                    \
+    \          {0, 0, 0, 1, 1, 0, 1, 1, 1, 1},\n                              {0,\
+    \ 0, 0, 0, 1, 1, 1, 1, 1, 1},\n                              {0, 1, 0, 1, 1, 1,\
+    \ 1, 1, 1, 1},\n                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}}};\n\
+    \    out.ln(mat.pow(N + 1)[0][9]);\n    return 0;\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/541\"\n#include \"../../src/misc/printer.hpp\"\
+    \n#include \"../../src/misc/scanner.hpp\"\n#include \"../../src/math/modint.hpp\"\
+    \n#include \"../../src/linear/array_matrix.hpp\"\n\nint main()\n{\n    using mint\
+    \ = modint_1000000007;\n    const auto N = in.val<i64>();\n    ArrMat<mint, 10,\
+    \ 10> mat{{{1, 0, 1, 1, 1, 1, 1, 1, 1, 0},\n                              {0,\
+    \ 1, 0, 1, 0, 1, 0, 0, 0, 1},\n                              {0, 0, 1, 0, 0, 0,\
+    \ 0, 0, 1, 0},\n                              {0, 0, 1, 1, 0, 0, 1, 0, 1, 1},\n\
+    \                              {0, 0, 0, 0, 1, 0, 1, 1, 1, 1},\n             \
+    \                 {0, 0, 1, 0, 0, 1, 0, 1, 1, 1},\n                          \
+    \    {0, 0, 0, 1, 1, 0, 1, 1, 1, 1},\n                              {0, 0, 0,\
+    \ 0, 1, 1, 1, 1, 1, 1},\n                              {0, 1, 0, 1, 1, 1, 1, 1,\
+    \ 1, 1},\n                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}}};\n  \
+    \  out.ln(mat.pow(N + 1)[0][9]);\n    return 0;\n}\n"
   dependsOn:
-  - src/math/berlekamp_massey.hpp
+  - src/misc/printer.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -352,19 +389,19 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
+  - src/misc/scanner.hpp
   - src/math/modint.hpp
-  - src/misc/fastio/printer.hpp
-  - src/misc/fastio/scanner.hpp
+  - src/linear/array_matrix.hpp
   isVerificationFile: true
-  path: verifications/math/berlekamp_massey.test.cpp
+  path: verifications/linear/array_matrix.test.cpp
   requiredBy: []
   timestamp: '2021-06-15 01:30:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verifications/math/berlekamp_massey.test.cpp
+documentation_of: verifications/linear/array_matrix.test.cpp
 layout: document
 redirect_from:
-- /verify/verifications/math/berlekamp_massey.test.cpp
-- /verify/verifications/math/berlekamp_massey.test.cpp.html
-title: verifications/math/berlekamp_massey.test.cpp
+- /verify/verifications/linear/array_matrix.test.cpp
+- /verify/verifications/linear/array_matrix.test.cpp.html
+title: verifications/linear/array_matrix.test.cpp
 ---
