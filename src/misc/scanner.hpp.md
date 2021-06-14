@@ -55,6 +55,9 @@ data:
     path: verifications/graph/bellman_ford.test.cpp
     title: verifications/graph/bellman_ford.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verifications/graph/centroid_decomp.test.cpp
+    title: verifications/graph/centroid_decomp.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/level_ancestor.lca.test.cpp
     title: verifications/graph/level_ancestor.lca.test.cpp
   - icon: ':heavy_check_mark:'
@@ -278,6 +281,7 @@ data:
   - verifications/flow/max_flow.test.cpp
   - verifications/linear/int_bases.test.cpp
   - verifications/linear/bit_bases.test.cpp
+  - verifications/graph/centroid_decomp.test.cpp
   - verifications/graph/level_ancestor.lca.test.cpp
   - verifications/graph/warshall_floyd.test.cpp
   - verifications/graph/bellman_ford.test.cpp

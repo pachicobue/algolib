@@ -64,7 +64,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/graph/bellman_ford.hpp
       title: src/graph/bellman_ford.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/centroid_decomp.hpp
       title: src/graph/centroid_decomp.hpp
     - icon: ':heavy_check_mark:'
@@ -453,6 +453,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verifications/graph/bellman_ford.test.cpp
       title: verifications/graph/bellman_ford.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/graph/centroid_decomp.test.cpp
+      title: verifications/graph/centroid_decomp.test.cpp
     - icon: ':heavy_check_mark:'
       path: verifications/graph/diameter.test.cpp
       title: verifications/graph/diameter.test.cpp

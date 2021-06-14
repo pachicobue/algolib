@@ -65,7 +65,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/log_of_formal_power_series
     links:
     - https://judge.yosupo.jp/problem/log_of_formal_power_series
-  bundledCode: "#include <iostream>\n#include <bits/stdc++.h>\nusing i32 = int;\n\
+  bundledCode: "#include <bits/stdc++.h>\n#include <iostream>\nusing i32 = int;\n\
     using u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing\
     \ f80 = long double;\nusing f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64\

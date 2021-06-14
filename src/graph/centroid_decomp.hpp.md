@@ -47,10 +47,13 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/centroid_decomp.test.cpp
+    title: verifications/graph/centroid_decomp.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -235,82 +238,43 @@ data:
     \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
     \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
     \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nclass CentroidDecomp\n\
-    {\npublic:\n    CentroidDecomp(const Graph<T>& g)\n        : m_g{g},\n       \
-    \   m_cs(m_g.v()),\n          m_sub_calced{false},\n          m_subss(m_g.v()),\n\
-    \          m_subsss(m_g.v())\n    {\n        const int N = m_g.v();\n        Vec<int>\
-    \ szs(N, 1);\n        Vec<bool> used(N, false);\n        auto sizeDfs = Fixpoint([&](auto\
-    \ dfs, int s, int p) -> int {\n            szs[s] = 1;\n            for (int to\
-    \ : m_g[s]) {\n                if (to == p or used[to]) { continue; }\n      \
-    \          szs[s] += dfs(to, s);\n            }\n        });\n        auto getCentor\
-    \ = Fixpoint([&](auto dfs, int s, int p, int tot) -> int {\n            for (int\
-    \ to : m_g[s]) {\n                if (to == p or used[to]) { continue; }\n   \
-    \             if (szs[to] * 2 > tot) { return dfs(to, s, tot); }\n           \
-    \ }\n            if (tot == N) { m_center = s; }\n            return s;\n    \
-    \    });\n        Fixpoint([&](auto dfs, int s, int pc) -> int {\n           \
-    \ const int tot = sizeDfs(s, -1);\n            const int c = getCentor(s, -1,\
-    \ tot);\n            used[c] = true;\n            if (pc != -1) { m_cs.addEdge(pc,\
-    \ c); }\n            for (int to : m_g[s]) {\n                if (not used[to])\
-    \ { dfs(to, s, c); }\n            }\n        })(0, N);\n    }\n    const int center()\
-    \ const\n    {\n        return m_center;\n    }\n    const Graph<>& centers()\
-    \ const\n    {\n        return m_cs;\n    }\n    const Vec<int>& subs(int v)\n\
-    \    {\n        const int N = m_g.v();\n        assert(0 <= v and v < N);\n  \
-    \      calcSub();\n        return m_subss[v];\n    }\n    const Vec<Vec<int>>&\
-    \ subss(int v)\n    {\n        const int N = m_g.v();\n        assert(0 <= v and\
-    \ v < N);\n        calcSub();\n        return m_subsss[v];\n    }\nprivate:\n\
-    \    void calcSub()\n    {\n        if (not m_sub_calced) {\n            const\
-    \ int N = m_g.v();\n            Vec<bool> used(N, false);\n            Fixpoint([&](auto\
-    \ dfs, const int c) -> void {\n                used[c] = true;\n             \
-    \   m_subss[c].push_back(c);\n                for (int to : m_g[c]) {\n      \
-    \              if (used[to]) { continue; }\n                    m_subsss[c].push_back(Vec<int>{});\n\
-    \                    Fixpoint([&](auto dfs2, const int s, const int p) -> void\
-    \ {\n                        for (int to2 : m_g[s]) {\n                      \
-    \      if (p == to2 or used[to2]) { continue; }\n                            m_subss[c].push_back(to2);\n\
-    \                            m_subsss[c].back().push_back(to2);\n            \
-    \                dfs2(to2, s);\n                        }\n                  \
-    \  })(to, -1);\n                }\n                for (int to : m_g[c]) {\n \
-    \                   dfs(to);\n                }\n            })(m_center);\n \
-    \       }\n        m_sub_calced = true;\n    }\n    Graph<T> m_g;\n    int m_center;\n\
-    \    Graph<> m_cs;\n    bool m_sub_calced;\n    Vec<Vec<int>> m_subss;\n    Vec<Vec<Vec<int>>>\
-    \ m_subsss;\n};\n"
+    {\npublic:\n    CentroidDecomp(const Graph<T>& g) : m_cs(g.v())\n    {\n     \
+    \   const int N = g.v();\n        Vec<int> szs(N, 1);\n        Vec<bool> used(N,\
+    \ false);\n        auto sizeDfs = Fix([&](auto dfs, int u, int p) -> int {\n \
+    \           szs[u] = 1;\n            for (int v : g[u]) {\n                if\
+    \ (v == p or used[v]) { continue; }\n                szs[u] += dfs(v, u);\n  \
+    \          }\n            return szs[u];\n        });\n        auto getCentor\
+    \ = Fix([&](auto dfs, int u, int p, int tot) -> int {\n            for (int v\
+    \ : g[u]) {\n                if (v == p or used[v]) { continue; }\n          \
+    \      if (szs[v] * 2 > tot) { return dfs(v, u, tot); }\n            }\n     \
+    \       if (tot == N) { m_center = u; }\n            return u;\n        });\n\
+    \        Fix([&](auto dfs, int u, int pc) -> void {\n            const int tot\
+    \ = sizeDfs(u, -1);\n            const int c = getCentor(u, -1, tot);\n      \
+    \      used[c] = true;\n            if (pc != -1) { m_cs.addEdge(pc, c); }\n \
+    \           for (int v : g[c]) {\n                if (not used[v]) { dfs(v, c);\
+    \ }\n            }\n        })(0, -1);\n    }\n    int center() const\n    {\n\
+    \        return m_center;\n    }\n    const Graph<>& centers() const\n    {\n\
+    \        return m_cs;\n    }\nprivate:\n    int m_center;\n    Graph<> m_cs;\n\
+    };\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename\
-    \ T>\nclass CentroidDecomp\n{\npublic:\n    CentroidDecomp(const Graph<T>& g)\n\
-    \        : m_g{g},\n          m_cs(m_g.v()),\n          m_sub_calced{false},\n\
-    \          m_subss(m_g.v()),\n          m_subsss(m_g.v())\n    {\n        const\
-    \ int N = m_g.v();\n        Vec<int> szs(N, 1);\n        Vec<bool> used(N, false);\n\
-    \        auto sizeDfs = Fixpoint([&](auto dfs, int s, int p) -> int {\n      \
-    \      szs[s] = 1;\n            for (int to : m_g[s]) {\n                if (to\
-    \ == p or used[to]) { continue; }\n                szs[s] += dfs(to, s);\n   \
-    \         }\n        });\n        auto getCentor = Fixpoint([&](auto dfs, int\
-    \ s, int p, int tot) -> int {\n            for (int to : m_g[s]) {\n         \
-    \       if (to == p or used[to]) { continue; }\n                if (szs[to] *\
-    \ 2 > tot) { return dfs(to, s, tot); }\n            }\n            if (tot ==\
-    \ N) { m_center = s; }\n            return s;\n        });\n        Fixpoint([&](auto\
-    \ dfs, int s, int pc) -> int {\n            const int tot = sizeDfs(s, -1);\n\
-    \            const int c = getCentor(s, -1, tot);\n            used[c] = true;\n\
-    \            if (pc != -1) { m_cs.addEdge(pc, c); }\n            for (int to :\
-    \ m_g[s]) {\n                if (not used[to]) { dfs(to, s, c); }\n          \
-    \  }\n        })(0, N);\n    }\n    const int center() const\n    {\n        return\
-    \ m_center;\n    }\n    const Graph<>& centers() const\n    {\n        return\
-    \ m_cs;\n    }\n    const Vec<int>& subs(int v)\n    {\n        const int N =\
-    \ m_g.v();\n        assert(0 <= v and v < N);\n        calcSub();\n        return\
-    \ m_subss[v];\n    }\n    const Vec<Vec<int>>& subss(int v)\n    {\n        const\
-    \ int N = m_g.v();\n        assert(0 <= v and v < N);\n        calcSub();\n  \
-    \      return m_subsss[v];\n    }\nprivate:\n    void calcSub()\n    {\n     \
-    \   if (not m_sub_calced) {\n            const int N = m_g.v();\n            Vec<bool>\
-    \ used(N, false);\n            Fixpoint([&](auto dfs, const int c) -> void {\n\
-    \                used[c] = true;\n                m_subss[c].push_back(c);\n \
-    \               for (int to : m_g[c]) {\n                    if (used[to]) { continue;\
-    \ }\n                    m_subsss[c].push_back(Vec<int>{});\n                \
-    \    Fixpoint([&](auto dfs2, const int s, const int p) -> void {\n           \
-    \             for (int to2 : m_g[s]) {\n                            if (p == to2\
-    \ or used[to2]) { continue; }\n                            m_subss[c].push_back(to2);\n\
-    \                            m_subsss[c].back().push_back(to2);\n            \
-    \                dfs2(to2, s);\n                        }\n                  \
-    \  })(to, -1);\n                }\n                for (int to : m_g[c]) {\n \
-    \                   dfs(to);\n                }\n            })(m_center);\n \
-    \       }\n        m_sub_calced = true;\n    }\n    Graph<T> m_g;\n    int m_center;\n\
-    \    Graph<> m_cs;\n    bool m_sub_calced;\n    Vec<Vec<int>> m_subss;\n    Vec<Vec<Vec<int>>>\
-    \ m_subsss;\n};\n"
+    \ T>\nclass CentroidDecomp\n{\npublic:\n    CentroidDecomp(const Graph<T>& g)\
+    \ : m_cs(g.v())\n    {\n        const int N = g.v();\n        Vec<int> szs(N,\
+    \ 1);\n        Vec<bool> used(N, false);\n        auto sizeDfs = Fix([&](auto\
+    \ dfs, int u, int p) -> int {\n            szs[u] = 1;\n            for (int v\
+    \ : g[u]) {\n                if (v == p or used[v]) { continue; }\n          \
+    \      szs[u] += dfs(v, u);\n            }\n            return szs[u];\n     \
+    \   });\n        auto getCentor = Fix([&](auto dfs, int u, int p, int tot) ->\
+    \ int {\n            for (int v : g[u]) {\n                if (v == p or used[v])\
+    \ { continue; }\n                if (szs[v] * 2 > tot) { return dfs(v, u, tot);\
+    \ }\n            }\n            if (tot == N) { m_center = u; }\n            return\
+    \ u;\n        });\n        Fix([&](auto dfs, int u, int pc) -> void {\n      \
+    \      const int tot = sizeDfs(u, -1);\n            const int c = getCentor(u,\
+    \ -1, tot);\n            used[c] = true;\n            if (pc != -1) { m_cs.addEdge(pc,\
+    \ c); }\n            for (int v : g[c]) {\n                if (not used[v]) {\
+    \ dfs(v, c); }\n            }\n        })(0, -1);\n    }\n    int center() const\n\
+    \    {\n        return m_center;\n    }\n    const Graph<>& centers() const\n\
+    \    {\n        return m_cs;\n    }\n\nprivate:\n    int m_center;\n    Graph<>\
+    \ m_cs;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -330,9 +294,10 @@ data:
   isVerificationFile: false
   path: src/graph/centroid_decomp.hpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-06-14 23:24:12+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verifications/graph/centroid_decomp.test.cpp
 documentation_of: src/graph/centroid_decomp.hpp
 layout: document
 redirect_from:

@@ -46,6 +46,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verifications/graph/centroid_decomp.test.cpp
+    title: verifications/graph/centroid_decomp.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/nd_vec.test.cpp
     title: verifications/misc/nd_vec.test.cpp
   _isVerificationFailed: false
@@ -225,6 +228,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/misc/nd_vec.test.cpp
+  - verifications/graph/centroid_decomp.test.cpp
 documentation_of: src/misc/nd_vec.hpp
 layout: document
 redirect_from:

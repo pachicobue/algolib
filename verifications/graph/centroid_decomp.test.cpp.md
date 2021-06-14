@@ -2,6 +2,12 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: src/graph/centroid_decomp.hpp
+    title: src/graph/centroid_decomp.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/graph/graph.hpp
+    title: src/graph/graph.hpp
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
   - icon: ':heavy_check_mark:'
@@ -43,43 +49,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/nd_vec.hpp
+    title: src/misc/nd_vec.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/misc/printer.hpp
+    title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: src/misc/scanner.hpp
+    title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verifications/flow/max_flow.bipartite_matching.test.cpp
-    title: verifications/flow/max_flow.bipartite_matching.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/flow/max_flow.test.cpp
-    title: verifications/flow/max_flow.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/graph/bellman_ford.test.cpp
-    title: verifications/graph/bellman_ford.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/graph/centroid_decomp.test.cpp
-    title: verifications/graph/centroid_decomp.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/graph/level_ancestor.lca.test.cpp
-    title: verifications/graph/level_ancestor.lca.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/graph/warshall_floyd.test.cpp
-    title: verifications/graph/warshall_floyd.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/linear/bit_bases.test.cpp
-    title: verifications/linear/bit_bases.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/linear/int_bases.test.cpp
-    title: verifications/linear/int_bases.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/misc/io.test.cpp
-    title: verifications/misc/io.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/misc/printer.test.cpp
-    title: verifications/misc/printer.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://yukicoder.me/problems/no/1002
+    links:
+    - https://yukicoder.me/problems/no/1002
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -222,11 +210,67 @@ data:
     \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
-    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass Printer\n{\n\
-    public:\n    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n        m_os\
-    \ << std::fixed << std::setprecision(15);\n    }\n    template<typename... Args>\n\
-    \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
-    \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
+    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
+    \ T = int>\nclass Graph\n{\n    struct Edge\n    {\n        Edge() = default;\n\
+    \        Edge(int i, int t, T c) : id{i}, to{t}, cost{c} {}\n        int id;\n\
+    \        int to;\n        T cost;\n        operator int() const\n        {\n \
+    \           return to;\n        }\n    };\npublic:\n    Graph(int n) : m_v{n},\
+    \ m_edges(n) {}\n    void addEdge(int u, int v, bool bi = false)\n    {\n    \
+    \    assert(0 <= u and u < m_v);\n        assert(0 <= v and v < m_v);\n      \
+    \  m_edges[u].emplace_back(m_e, v, 1);\n        if (bi) { m_edges[v].emplace_back(m_e,\
+    \ u, 1); }\n        m_e++;\n    }\n    void addEdge(int u, int v, const T& c,\
+    \ bool bi = false)\n    {\n        assert(0 <= u and u < m_v);\n        assert(0\
+    \ <= v and v < m_v);\n        m_edges[u].emplace_back(m_e, v, c);\n        if\
+    \ (bi) { m_edges[v].emplace_back(m_e, u, c); }\n        m_e++;\n    }\n    const\
+    \ Vec<Edge>& operator[](const int u) const\n    {\n        assert(0 <= u and u\
+    \ < m_v);\n        return m_edges[u];\n    }\n    Vec<Edge>& operator[](const\
+    \ int u)\n    {\n        assert(0 <= u and u < m_v);\n        return m_edges[u];\n\
+    \    }\n    int v() const\n    {\n        return m_v;\n    }\n    int e() const\n\
+    \    {\n        return m_e;\n    }\n    friend Ostream& operator<<(Ostream& os,\
+    \ const Graph& g)\n    {\n        for (int u : rep(g.v())) {\n            for\
+    \ (const auto& [id, v, c] : g[u]) {\n                os << \"[\" << id << \"]:\
+    \ \";\n                os << u << \"->\" << v << \"(\" << c << \")\\n\";\n   \
+    \         }\n        }\n        return os;\n    }\n    Vec<T> sizes(int root =\
+    \ 0) const\n    {\n        const int N = v();\n        assert(0 <= root and root\
+    \ < N);\n        Vec<T> ss(N, 1);\n        Fix([&](auto dfs, int u, int p) ->\
+    \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
+    \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
+    \             dfs(v, u);\n                ss[u] += ss[v];\n            }\n   \
+    \     })(root, -1);\n        return ss;\n    }\n    Vec<T> depths(int root = 0)\
+    \ const\n    {\n        const int N = v();\n        assert(0 <= root and root\
+    \ < N);\n        Vec<T> ds(N, 0);\n        Fix([&](auto dfs, int u, int p) ->\
+    \ void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n          \
+    \      static_cast<void>(id);\n                if (v == p) { continue; }\n   \
+    \             ds[v] = ds[u] + c;\n                dfs(v, u);\n            }\n\
+    \        })(root, -1);\n        return ds;\n    }\n    Vec<int> parents(int root\
+    \ = 0) const\n    {\n        const int N = v();\n        assert(0 <= root and\
+    \ root < N);\n        Vec<int> ps(N, -1);\n        Fix([&](auto dfs, int u, int\
+    \ p) -> void {\n            for (const auto& [id, v, c] : m_edges[u]) {\n    \
+    \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
+    \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
+    \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
+    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nclass CentroidDecomp\n\
+    {\npublic:\n    CentroidDecomp(const Graph<T>& g) : m_cs(g.v())\n    {\n     \
+    \   const int N = g.v();\n        Vec<int> szs(N, 1);\n        Vec<bool> used(N,\
+    \ false);\n        auto sizeDfs = Fix([&](auto dfs, int u, int p) -> int {\n \
+    \           szs[u] = 1;\n            for (int v : g[u]) {\n                if\
+    \ (v == p or used[v]) { continue; }\n                szs[u] += dfs(v, u);\n  \
+    \          }\n            return szs[u];\n        });\n        auto getCentor\
+    \ = Fix([&](auto dfs, int u, int p, int tot) -> int {\n            for (int v\
+    \ : g[u]) {\n                if (v == p or used[v]) { continue; }\n          \
+    \      if (szs[v] * 2 > tot) { return dfs(v, u, tot); }\n            }\n     \
+    \       if (tot == N) { m_center = u; }\n            return u;\n        });\n\
+    \        Fix([&](auto dfs, int u, int pc) -> void {\n            const int tot\
+    \ = sizeDfs(u, -1);\n            const int c = getCentor(u, -1, tot);\n      \
+    \      used[c] = true;\n            if (pc != -1) { m_cs.addEdge(pc, c); }\n \
+    \           for (int v : g[c]) {\n                if (not used[v]) { dfs(v, c);\
+    \ }\n            }\n        })(0, -1);\n    }\n    int center() const\n    {\n\
+    \        return m_center;\n    }\n    const Graph<>& centers() const\n    {\n\
+    \        return m_cs;\n    }\nprivate:\n    int m_center;\n    Graph<> m_cs;\n\
+    };\nclass Printer\n{\npublic:\n    Printer(Ostream& os = std::cout) : m_os{os}\n\
+    \    {\n        m_os << std::fixed << std::setprecision(15);\n    }\n    template<typename...\
+    \ Args>\n    int operator()(const Args&... args)\n    {\n        dump(args...);\n\
+    \        return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
     \ args)\n    {\n        dump(args...), m_os << '\\n';\n        return 0;\n   \
     \ }\n    template<typename... Args>\n    int el(const Args&... args)\n    {\n\
     \        dump(args...), m_os << std::endl;\n        return 0;\n    }\nprivate:\n\
@@ -238,24 +282,103 @@ data:
     \          m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n        }\n    }\n   \
     \ template<typename T, typename... Ts>\n    int dump(const T& v, const Ts&...\
     \ args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n        return 0;\n\
-    \    }\n    Ostream& m_os;\n};\nPrinter out;\n"
-  code: "#pragma once\n#include \"common.hpp\"\nclass Printer\n{\npublic:\n    Printer(Ostream&\
-    \ os = std::cout) : m_os{os}\n    {\n        m_os << std::fixed << std::setprecision(15);\n\
-    \    }\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
-    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
-    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), m_os <<\
-    \ '\\n';\n        return 0;\n    }\n    template<typename... Args>\n    int el(const\
-    \ Args&... args)\n    {\n        dump(args...), m_os << std::endl;\n        return\
-    \ 0;\n    }\n\nprivate:\n    template<typename T>\n    void dump(const T& v)\n\
-    \    {\n        m_os << v;\n    }\n    template<typename T>\n    void dump(const\
-    \ Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size())) {\n         \
-    \   m_os << (i ? \" \" : \"\"), dump(vs[i]);\n        }\n    }\n    template<typename\
-    \ T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i :\
-    \ rep(vss.size())) {\n            m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n\
-    \        }\n    }\n    template<typename T, typename... Ts>\n    int dump(const\
-    \ T& v, const Ts&... args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n\
-    \        return 0;\n    }\n    Ostream& m_os;\n};\nPrinter out;\n"
+    \    }\n    Ostream& m_os;\n};\nPrinter out;\nclass Scanner\n{\npublic:\n    Scanner(Istream&\
+    \ is = std::cin) : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n\
+    \    }\n    template<typename T>\n    T val()\n    {\n        T v;\n        return\
+    \ m_is >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n\
+    \        return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T>\
+    \ vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>(); });\n\
+    \    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n   \
+    \     return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
+    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
+    \ vvec(int n, int m, const T offset)\n    {\n        return genVec<Vec<T>>(n,\
+    \ [&]() { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n\
+    \    auto tup()\n    {\n        return Tup<Args...>{val<Args>()...};\n    }\n\
+    \    template<typename... Args>\n    auto tup(const Args&... offsets)\n    {\n\
+    \        return Tup<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n    Istream&\
+    \ m_is;\n};\nScanner in;\ntemplate<typename T, int n, int i = 0>\nauto ndVec(int\
+    \ const (&szs)[n], const T x = T{})\n{\n    if constexpr (i == n) {\n        return\
+    \ x;\n    } else {\n        return std::vector(szs[i], ndVec<T, n, i + 1>(szs,\
+    \ x));\n    }\n}\nint main()\n{\n    const auto [N, K] = in.tup<int, int>();\n\
+    \    Graph<int> g(N);\n    for (int i : rep(N - 1)) {\n        static_cast<void>(i);\n\
+    \        const auto [u, v, c] = in.tup<int, int, int>(1, 1, 1);\n        g.addEdge(u,\
+    \ v, c, true);\n    }\n    CentroidDecomp centros(g);\n    const int cr = centros.center();\n\
+    \    const auto cg = centros.centers();\n    Vec<bool> used(N, false);\n    using\
+    \ P = Pair<int, int>;\n    i64 ans = 0;\n    auto f = [&](const Map<int, i64>&\
+    \ dp1,\n                 const Map<P, i64>& dp2,\n                 const Map<int,\
+    \ i64>& dp3,\n                 const i64 one) -> i64 {\n        i64 ans = 0;\n\
+    \        i64 dbl = 0;\n        for (const auto& [k, n] : dp1) {\n            ans\
+    \ += n * (dp3.at(k) - n);\n            dbl += n * (one - n);\n        }\n    \
+    \    for (const auto& [ks, n] : dp2) {\n            static_cast<void>(ks);\n \
+    \           ans += n * (n - 1) / 2;\n        }\n        return ans + dbl / 2;\n\
+    \    };\n    Fix([&](auto dfs, int c) -> void {\n        used[c] = true;\n   \
+    \     Map<int, i64> dp1;\n        Map<P, i64> dp2;\n        Map<int, i64> dp3;\n\
+    \        int one = 0;\n        for (const auto& e : g[c]) {\n            if (used[e.to])\
+    \ { continue; }\n            Map<int, i64> subdp1;\n            Map<P, i64> subdp2;\n\
+    \            Map<int, i64> subdp3;\n            i64 sone = 0;\n            Fix([&](auto\
+    \ dfs, int u, int p, const P& ks) -> void {\n                if (ks.second ==\
+    \ INF<int>) {\n                    dp1[ks.first]++;\n                    dp3[ks.first]++;\n\
+    \                    subdp1[ks.first]++;\n                    subdp3[ks.first]++;\n\
+    \                    sone++;\n                    one++;\n                } else\
+    \ {\n                    ans++;\n                    dp2[ks]++;\n            \
+    \        dp3[ks.first]++;\n                    dp3[ks.second]++;\n           \
+    \         subdp2[ks]++;\n                    subdp3[ks.first]++;\n           \
+    \         subdp3[ks.second]++;\n                }\n                for (const\
+    \ auto& e : g[u]) {\n                    const int v = e.to;\n               \
+    \     if (v == p or used[v]) { continue; }\n                    const int k =\
+    \ e.cost;\n                    auto nks = ks;\n                    if (ks.first\
+    \ == k or ks.second == k) {\n                        ;\n                    }\
+    \ else if (ks.second == INF<int>) {\n                        nks.second = k;\n\
+    \                    } else {\n                        continue;\n           \
+    \         }\n                    if (nks.first > nks.second) {\n             \
+    \           std::swap(nks.first, nks.second);\n                    }\n       \
+    \             dfs(v, u, nks);\n                }\n            })(e.to, c, P{e.cost,\
+    \ INF<int>});\n            ans -= f(subdp1, subdp2, subdp3, sone);\n        }\n\
+    \        ans += f(dp1, dp2, dp3, one);\n        for (int nc : cg[c]) {\n     \
+    \       dfs(nc);\n        }\n    })(cr);\n    out.ln(ans);\n    return 0;\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1002\"\n#include \"../../src/graph/centroid_decomp.hpp\"\
+    \n#include \"../../src/misc/printer.hpp\"\n#include \"../../src/misc/scanner.hpp\"\
+    \n#include \"../../src/misc/nd_vec.hpp\"\n\nint main()\n{\n    const auto [N,\
+    \ K] = in.tup<int, int>();\n    Graph<int> g(N);\n    for (int i : rep(N - 1))\
+    \ {\n        USE(i);\n        const auto [u, v, c] = in.tup<int, int, int>(1,\
+    \ 1, 1);\n        g.addEdge(u, v, c, true);\n    }\n    CentroidDecomp centros(g);\n\
+    \    const int cr = centros.center();\n    const auto cg = centros.centers();\n\
+    \    Vec<bool> used(N, false);\n    using P = Pair<int, int>;\n    i64 ans = 0;\n\
+    \n    auto f = [&](const Map<int, i64>& dp1,\n                 const Map<P, i64>&\
+    \ dp2,\n                 const Map<int, i64>& dp3,\n                 const i64\
+    \ one) -> i64 {\n        i64 ans = 0;\n        i64 dbl = 0;\n        for (const\
+    \ auto& [k, n] : dp1) {\n            ans += n * (dp3.at(k) - n);  // 1\u8272x2\u8272\
+    \n            dbl += n * (one - n);        // 1\u8272x1\u8272\n        }\n   \
+    \     for (const auto& [ks, n] : dp2) {\n            USE(ks);\n            ans\
+    \ += n * (n - 1) / 2;  // 2\u8272x2\u8272\n        }\n        return ans + dbl\
+    \ / 2;\n    };\n\n    Fix([&](auto dfs, int c) -> void {\n        used[c] = true;\n\
+    \        Map<int, i64> dp1;\n        Map<P, i64> dp2;\n        Map<int, i64> dp3;\n\
+    \        int one = 0;\n        for (const auto& e : g[c]) {\n            if (used[e.to])\
+    \ { continue; }\n            Map<int, i64> subdp1;\n            Map<P, i64> subdp2;\n\
+    \            Map<int, i64> subdp3;\n            i64 sone = 0;\n            Fix([&](auto\
+    \ dfs, int u, int p, const P& ks) -> void {\n                if (ks.second ==\
+    \ INF<int>) {\n                    dp1[ks.first]++;\n                    dp3[ks.first]++;\n\
+    \                    subdp1[ks.first]++;\n                    subdp3[ks.first]++;\n\
+    \                    sone++;\n                    one++;\n                } else\
+    \ {\n                    ans++;\n                    dp2[ks]++;\n            \
+    \        dp3[ks.first]++;\n                    dp3[ks.second]++;\n           \
+    \         subdp2[ks]++;\n                    subdp3[ks.first]++;\n           \
+    \         subdp3[ks.second]++;\n                }\n                for (const\
+    \ auto& e : g[u]) {\n                    const int v = e.to;\n               \
+    \     if (v == p or used[v]) { continue; }\n                    const int k =\
+    \ e.cost;\n                    auto nks = ks;\n                    if (ks.first\
+    \ == k or ks.second == k) {\n                        ;\n                    }\
+    \ else if (ks.second == INF<int>) {\n                        nks.second = k;\n\
+    \                    } else {\n                        continue;\n           \
+    \         }\n                    if (nks.first > nks.second) {\n             \
+    \           std::swap(nks.first, nks.second);\n                    }\n       \
+    \             dfs(v, u, nks);\n                }\n            })(e.to, c, P{e.cost,\
+    \ INF<int>});\n            ans -= f(subdp1, subdp2, subdp3, sone);\n        }\n\
+    \        ans += f(dp1, dp2, dp3, one);\n        for (int nc : cg[c]) {\n     \
+    \       dfs(nc);\n        }\n    })(cr);\n    out.ln(ans);\n    return 0;\n}\n"
   dependsOn:
+  - src/graph/centroid_decomp.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -270,109 +393,20 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  isVerificationFile: false
-  path: src/misc/printer.hpp
+  - src/graph/graph.hpp
+  - src/misc/printer.hpp
+  - src/misc/scanner.hpp
+  - src/misc/nd_vec.hpp
+  isVerificationFile: true
+  path: verifications/graph/centroid_decomp.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verifications/misc/printer.test.cpp
-  - verifications/misc/io.test.cpp
-  - verifications/flow/max_flow.bipartite_matching.test.cpp
-  - verifications/flow/max_flow.test.cpp
-  - verifications/linear/int_bases.test.cpp
-  - verifications/linear/bit_bases.test.cpp
-  - verifications/graph/centroid_decomp.test.cpp
-  - verifications/graph/level_ancestor.lca.test.cpp
-  - verifications/graph/warshall_floyd.test.cpp
-  - verifications/graph/bellman_ford.test.cpp
-documentation_of: src/misc/printer.hpp
+  timestamp: '2021-06-14 23:24:12+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verifications/graph/centroid_decomp.test.cpp
 layout: document
-title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
+redirect_from:
+- /verify/verifications/graph/centroid_decomp.test.cpp
+- /verify/verifications/graph/centroid_decomp.test.cpp.html
+title: verifications/graph/centroid_decomp.test.cpp
 ---
-
-## 概要
-
-出力を行うクラス  
-「複数の値を空白区切りで出力して末尾改行」みたいのをラップしている。
-
-## I/F
-
-### コンストラクタ
-
-```cpp
-Printer printer(Ostream& os = std::cout)
-```
-
-引数には出力先(デフォルトは標準出力)を与える。  
-内部で `std::fixed` と `std::setprecision(15)` を流す(これはやりすぎかも)。
-
-グローバルに標準出力を使う Printer を定義している。大体これを使えばよい。
-```cpp
-Printer out;
-```
-
-### operator()
-
-```cpp
-int printer(Args... args)
-```
-
-`args` を空白区切りで出力。 末尾の改行は **行わない**。  
-引数は任意個受け取れ、 `operator<<` をサポートする型なら何でも受け取れる。  
-
-返り値が `int` なので、標準出力してmain関数を終了したい場合に以下のように書ける。
-```cpp
-int main()
-{
-    if (~~~) {
-        return out("Yes"); // Yesと出力して終了(ただし改行はしない)
-    }
-    ...
-}
-```
-
-#### 制約
-
-出力する型について以下のどちらかを要求する(後述の関数も同様)
-- `operator<<` をサポートしている
-- または `Vec<T>`, `Vec<Vec<T>>` である(かつ `T` が上を満たす)
-
-### ln()
-
-```cpp
-int printer.ln(Args... args)
-```
-
-`args` を空白区切りで出力。 末尾の改行を行う。  
-引数は任意個受け取れ、 `operator<<` をサポートする型なら何でも受け取れる。  
-
-基本的にはこれを使う。
-
-### el()
-
-```cpp
-int printer.el(Args... args)
-```
-
-`args` を空白区切りで出力。 末尾の改行を行う。  
-改行に `std::endl` を使う点が `ln()` との違い。インタラクティブで使う。  
-引数は任意個受け取れ、 `operator<<` をサポートする型なら何でも受け取れる。  
-
-### vectorの出力
-
-vector配列について「要素を空白区切りで出力＋末尾改行」をするのは若干面倒。  
-`Printer` はvector配列を「空白区切りで出力」しているので、上記出力は以下のように書ける。
-
-```cpp
-Vec<int> vs{1,2,3,4};
-out.ln(vs); // "1 2 3 4" が末尾改行付きで出力される
-```
-
-使い道は多くないが、二次元vector配列は「長方形型に出力」する。
-
-```cpp
-Vec<Vec<int>> vss{ {1,2,3}, {4,5,6} };
-out.ln(vss); /* "1 2 3
-                 4 5 6" が末尾改行付きで出力される */
-```
