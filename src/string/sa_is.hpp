@@ -40,17 +40,17 @@ Vec<int> suffixArray(It first, It last, int bucket_size = (1UL << 8))
             for (int i : rep(lpos[k])) {
                 insert(lBucket[k][i], true);
             }
-            for (int i : range(1, spos[k] + 1)) {
+            for (int i : irange(1, spos[k] + 1)) {
                 insert(sBucket[k][spos[k] - i], true);
             }
         }
         fillAll(spos, 0);
-        for (int i : range(1, bucket_size + 1)) {
+        for (int i : irange(1, bucket_size + 1)) {
             const int k = bucket_size - i;
             for (int i : rep(spos[k])) {
                 insert(sBucket[k][i], false);
             }
-            for (int i : range(1, lpos[k] + 1)) {
+            for (int i : irange(1, lpos[k] + 1)) {
                 insert(lBucket[k][lpos[k] - i], false);
             }
         }
@@ -69,7 +69,7 @@ Vec<int> suffixArray(It first, It last, int bucket_size = (1UL << 8))
     int number = 1;
     Vec<int> ord((sz + 1) / 2 + 1, 0);
     ord[(sz + 1) / 2] = 1;
-    for (int i : range(1, lms.size())) {
+    for (int i : irange(1, lms.size())) {
         const int l1 = lms[i - 1], r1 = nextLMS[l1];
         const int l2 = lms[i], r2 = nextLMS[l2];
         if (r1 - l1 == r2 - l2
@@ -90,7 +90,7 @@ Vec<int> suffixArray(It first, It last, int bucket_size = (1UL << 8))
         for (int k : rep(bucket_size)) {
             spos[k] = lpos[k] = 0;
         }
-        for (int j : range(1, lms.size() + 1)) {
+        for (int j : irange(1, lms.size() + 1)) {
             const int i = lms.size() - j;
             const auto ind = LMS[lms.size() - 1 - sorted[i]];
             sBucket[S[ind]][spos[S[ind]]++] = ind;
@@ -105,7 +105,7 @@ Vec<int> suffixArray(It first, It last, int bucket_size = (1UL << 8))
     }
     induce();
     Vec<int> ans;
-    for (int k : range(1, bucket_size)) {
+    for (int k : irange(1, bucket_size)) {
         for (auto it = lBucket[k].begin(); it < lBucket[k].end(); it++) {
             ans.push_back(*it);
         }

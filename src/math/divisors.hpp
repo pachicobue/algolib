@@ -10,6 +10,6 @@ Vec<T> divisors(const T n)
             if (i * i != n) { tail.push_back(n / i); }
         }
     }
-    std::copy(tail.begin(), tail.end(), head.end());
-    return head;
+    reverseAll(tail);
+    return head + tail;
 }
