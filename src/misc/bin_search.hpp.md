@@ -46,8 +46,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/wavelet.rangefreq.test.cpp
-    title: verifications/data_structure/wavelet.rangefreq.test.cpp
+    path: verifications/ds/wavelet.rangefreq.test.cpp
+    title: verifications/ds/wavelet.rangefreq.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -224,7 +224,7 @@ data:
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/data_structure/wavelet.rangefreq.test.cpp
+  - verifications/ds/wavelet.rangefreq.test.cpp
 documentation_of: src/misc/bin_search.hpp
 layout: document
 redirect_from:

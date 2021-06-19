@@ -249,9 +249,9 @@ data:
     \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
     \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
     \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
-    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nclass sc_comp\n\
-    {\npublic:\n    sc_comp(const Graph<T>& g) : m_v(g.v()), m_cs(m_v, -1)\n    {\n\
-    \        const int N = g.v();\n        Graph<> rg(N);\n        for (int u : rep(N))\
+    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nclass SCC\n\
+    {\npublic:\n    SCC(const Graph<T>& g) : m_v(g.v()), m_cs(m_v, -1)\n    {\n  \
+    \      const int N = g.v();\n        Graph<> rg(N);\n        for (int u : rep(N))\
     \ {\n            for (int v : g[u]) {\n                rg.addEdge(v, u);\n   \
     \         }\n        }\n        Vec<int> st;\n        Vec<bool> used(N, false);\n\
     \        auto dfs = Fix([&](auto dfs, int u) -> void {\n            used[u] =\
@@ -322,10 +322,10 @@ data:
     \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
     int main()\n{\n    const auto [N, M] = in.tup<int, int>();\n    Graph g(N);\n\
     \    for (int i : rep(M)) {\n        const auto [a, b] = in.tup<int, int>();\n\
-    \        g.addEdge(a, b);\n    }\n    const auto scc = sc_comp(g);\n    const\
-    \ int C = scc.cnum();\n    Graph dag(C);\n    for (int u : rep(N)) {\n       \
-    \ const int uc = scc[u];\n        for (const int v : g[u]) {\n            const\
-    \ int vc = scc[v];\n            if (uc == vc) { continue; }\n            dag.addEdge(uc,\
+    \        g.addEdge(a, b);\n    }\n    const auto scc = SCC(g);\n    const int\
+    \ C = scc.cnum();\n    Graph dag(C);\n    for (int u : rep(N)) {\n        const\
+    \ int uc = scc[u];\n        for (const int v : g[u]) {\n            const int\
+    \ vc = scc[v];\n            if (uc == vc) { continue; }\n            dag.addEdge(uc,\
     \ vc);\n        }\n    }\n    Vec<Vec<int>> cvs(C);\n    for (int i : rep(N))\
     \ {\n        cvs[scc[i]].push_back(i);\n    }\n    const auto [flag, cs] = topSort(dag);\n\
     \    assert(flag);\n    out.ln(C);\n    for (int c : cs) {\n        out.ln(cvs[c].size(),\
@@ -335,7 +335,7 @@ data:
     \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const auto\
     \ [N, M] = in.tup<int, int>();\n    Graph g(N);\n    for (int i : rep(M)) {\n\
     \        const auto [a, b] = in.tup<int, int>();\n        g.addEdge(a, b);\n \
-    \   }\n    const auto scc = sc_comp(g);\n    const int C = scc.cnum();\n    Graph\
+    \   }\n    const auto scc = SCC(g);\n    const int C = scc.cnum();\n    Graph\
     \ dag(C);\n    for (int u : rep(N)) {\n        const int uc = scc[u];\n      \
     \  for (const int v : g[u]) {\n            const int vc = scc[v];\n          \
     \  if (uc == vc) { continue; }\n            dag.addEdge(uc, vc);\n        }\n\
@@ -366,7 +366,7 @@ data:
   isVerificationFile: true
   path: verifications/graph/scc.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/graph/scc.test.cpp

@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/intdict.hpp
+    path: src/ds/intdict.hpp
     title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
   - icon: ':heavy_check_mark:'
     path: src/math/extgcd.hpp
@@ -512,7 +512,7 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/data_structure/intdict.hpp
+  - src/ds/intdict.hpp
   - src/math/extgcd.hpp
   - src/math/prime_factors.hpp
   - src/math/is_prime.hpp
@@ -523,7 +523,7 @@ data:
   isVerificationFile: true
   path: verifications/math/mod_nthroot.test.cpp
   requiredBy: []
-  timestamp: '2021-06-15 01:30:20+09:00'
+  timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/math/mod_nthroot.test.cpp

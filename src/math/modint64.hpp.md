@@ -355,9 +355,9 @@ data:
   isVerificationFile: false
   path: src/math/modint64.hpp
   requiredBy:
+  - src/math/mod_nthroot.hpp
   - src/math/is_prime.hpp
   - src/math/prime_factors.hpp
-  - src/math/mod_nthroot.hpp
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

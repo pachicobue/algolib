@@ -227,8 +227,8 @@ data:
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/misc/nd_vec.test.cpp
   - verifications/graph/centroid_decomp.test.cpp
+  - verifications/misc/nd_vec.test.cpp
 documentation_of: src/misc/nd_vec.hpp
 layout: document
 redirect_from:

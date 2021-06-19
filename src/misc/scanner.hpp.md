@@ -290,21 +290,21 @@ data:
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verifications/graph/level_ancestor.lca.test.cpp
+  - verifications/graph/centroid_decomp.test.cpp
+  - verifications/graph/bellman_ford.test.cpp
+  - verifications/graph/warshall_floyd.test.cpp
+  - verifications/flow/max_flow.test.cpp
+  - verifications/flow/max_flow.bipartite_matching.test.cpp
+  - verifications/misc/io.test.cpp
+  - verifications/misc/scanner.test.cpp
   - verifications/string/z_algorithm.test.cpp
   - verifications/string/manacher.test.cpp
-  - verifications/misc/scanner.test.cpp
-  - verifications/misc/io.test.cpp
-  - verifications/flow/max_flow.bipartite_matching.test.cpp
-  - verifications/flow/max_flow.test.cpp
   - verifications/math/divisors.test.cpp
   - verifications/linear/int_bases.test.cpp
-  - verifications/linear/bit_bases.test.cpp
-  - verifications/linear/array_matrix.test.cpp
   - verifications/linear/matrix.test.cpp
-  - verifications/graph/centroid_decomp.test.cpp
-  - verifications/graph/level_ancestor.lca.test.cpp
-  - verifications/graph/warshall_floyd.test.cpp
-  - verifications/graph/bellman_ford.test.cpp
+  - verifications/linear/array_matrix.test.cpp
+  - verifications/linear/bit_bases.test.cpp
 documentation_of: src/misc/scanner.hpp
 layout: document
 title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"

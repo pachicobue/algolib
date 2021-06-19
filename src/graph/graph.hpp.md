@@ -59,7 +59,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/dijkstra.hpp
     title: src/graph/dijkstra.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/graph/hld.hpp
     title: src/graph/hld.hpp
   - icon: ':heavy_check_mark:'
@@ -96,9 +96,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/dijkstra.test.cpp
     title: verifications/graph/dijkstra.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/graph/hld.test.cpp
-    title: verifications/graph/hld.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
@@ -358,32 +355,31 @@ data:
   isVerificationFile: false
   path: src/graph/graph.hpp
   requiredBy:
-  - src/graph/centroid_decomp.hpp
-  - src/graph/top_sort.hpp
-  - src/graph/level_ancestor.hpp
-  - src/graph/warshall_floyd.hpp
+  - src/graph/lowlink.hpp
   - src/graph/bellman_ford.hpp
-  - src/graph/bcc.hpp
-  - src/graph/dijkstra.hpp
-  - src/graph/diameter.hpp
   - src/graph/scc.hpp
   - src/graph/hld.hpp
+  - src/graph/level_ancestor.hpp
   - src/graph/lca.hpp
-  - src/graph/lowlink.hpp
+  - src/graph/centroid_decomp.hpp
+  - src/graph/dijkstra.hpp
+  - src/graph/bcc.hpp
+  - src/graph/warshall_floyd.hpp
+  - src/graph/top_sort.hpp
+  - src/graph/diameter.hpp
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/graph/diameter.test.cpp
   - verifications/graph/dijkstra.test.cpp
-  - verifications/graph/level_ancestor.ut.test.cpp
-  - verifications/graph/centroid_decomp.test.cpp
+  - verifications/graph/lca.test.cpp
   - verifications/graph/level_ancestor.lca.test.cpp
-  - verifications/graph/bcc.test.cpp
-  - verifications/graph/hld.test.cpp
+  - verifications/graph/centroid_decomp.test.cpp
+  - verifications/graph/diameter.test.cpp
+  - verifications/graph/level_ancestor.ut.test.cpp
+  - verifications/graph/bellman_ford.test.cpp
   - verifications/graph/scc.test.cpp
   - verifications/graph/warshall_floyd.test.cpp
-  - verifications/graph/bellman_ford.test.cpp
-  - verifications/graph/lca.test.cpp
+  - verifications/graph/bcc.test.cpp
 documentation_of: src/graph/graph.hpp
 layout: document
 redirect_from:

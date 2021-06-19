@@ -6,52 +6,52 @@ data:
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/bit_vector.hpp
+    path: src/ds/bit_vector.hpp
     title: Bit Vector
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/ds_table.hpp
+    path: src/ds/ds_table.hpp
     title: Disjoint Sparse Table
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/dsu.hpp
+    path: src/ds/dsu.hpp
     title: Disjoint Set Union
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/dualseg.hpp
+    path: src/ds/dualseg.hpp
     title: Dual Segment Tree
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/fenwick.hpp
+    path: src/ds/fenwick.hpp
     title: Fenwick Tree
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/intdict.hpp
+    path: src/ds/intdict.hpp
     title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/intset.hpp
+    path: src/ds/intset.hpp
     title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8"
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/lazyseg.hpp
+    path: src/ds/lazyseg.hpp
     title: Lazy Segment Tree
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/li_chao_tree.hpp
+    path: src/ds/li_chao_tree.hpp
     title: Li Chao Tree
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/mo.hpp
+    path: src/ds/mo.hpp
     title: Mo's Algorithm
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/monotonic_cht.hpp
+    path: src/ds/monotonic_cht.hpp
     title: "\u5358\u8ABF\u6027\u306E\u3042\u308B Convex Hull Trick"
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/rsq.hpp
+    path: src/ds/rsq.hpp
     title: "\u6570\u5217\u306E\u7D2F\u7A4D\u548C\u7BA1\u7406"
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/segtree.hpp
+    path: src/ds/segtree.hpp
     title: Segment Tree
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/static_rmq.hpp
+    path: src/ds/static_rmq.hpp
     title: "\u9759\u7684\u6570\u5217\u306ERMQ"
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/swag.hpp
+    path: src/ds/swag.hpp
     title: Sliding Window Aggregation
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/wavelet.hpp
+    path: src/ds/wavelet.hpp
     title: "Wavelet\u884C\u5217"
   - icon: ':heavy_check_mark:'
     path: src/flow/max_flow.hpp
@@ -74,7 +74,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/graph/hld.hpp
     title: src/graph/hld.hpp
   - icon: ':heavy_check_mark:'
@@ -225,81 +225,81 @@ data:
     path: src/string/rolling_hash.hpp
     title: src/string/rolling_hash.hpp
   - icon: ':warning:'
-    path: src/string/sa_is.hpp
-    title: src/string/sa_is.hpp
+    path: src/string/suffix_array.hpp
+    title: src/string/suffix_array.hpp
   - icon: ':heavy_check_mark:'
     path: src/string/z_algorithm.hpp
     title: src/string/z_algorithm.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/bit_vector.test.cpp
-    title: verifications/data_structure/bit_vector.test.cpp
+    path: verifications/ds/bit_vector.test.cpp
+    title: verifications/ds/bit_vector.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/ds_table.test.cpp
-    title: verifications/data_structure/ds_table.test.cpp
+    path: verifications/ds/ds_table.test.cpp
+    title: verifications/ds/ds_table.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/dsu.test.cpp
-    title: verifications/data_structure/dsu.test.cpp
+    path: verifications/ds/dsu.test.cpp
+    title: verifications/ds/dsu.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/dsu.ut.test.cpp
-    title: verifications/data_structure/dsu.ut.test.cpp
+    path: verifications/ds/dsu.ut.test.cpp
+    title: verifications/ds/dsu.ut.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/dualseg.test.cpp
-    title: verifications/data_structure/dualseg.test.cpp
+    path: verifications/ds/dualseg.test.cpp
+    title: verifications/ds/dualseg.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/fenwick.max_right.test.cpp
-    title: verifications/data_structure/fenwick.max_right.test.cpp
+    path: verifications/ds/fenwick.max_right.test.cpp
+    title: verifications/ds/fenwick.max_right.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/fenwick.test.cpp
-    title: verifications/data_structure/fenwick.test.cpp
+    path: verifications/ds/fenwick.test.cpp
+    title: verifications/ds/fenwick.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/intdict.test.cpp
-    title: verifications/data_structure/intdict.test.cpp
+    path: verifications/ds/intdict.test.cpp
+    title: verifications/ds/intdict.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/intdict.ut.test.cpp
-    title: verifications/data_structure/intdict.ut.test.cpp
+    path: verifications/ds/intdict.ut.test.cpp
+    title: verifications/ds/intdict.ut.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/intset.ut.test.cpp
-    title: verifications/data_structure/intset.ut.test.cpp
+    path: verifications/ds/intset.ut.test.cpp
+    title: verifications/ds/intset.ut.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/lazyseg.test.cpp
-    title: verifications/data_structure/lazyseg.test.cpp
+    path: verifications/ds/lazyseg.test.cpp
+    title: verifications/ds/lazyseg.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/lazyseg.ut.test.cpp
-    title: verifications/data_structure/lazyseg.ut.test.cpp
+    path: verifications/ds/lazyseg.ut.test.cpp
+    title: verifications/ds/lazyseg.ut.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/li_chao_tree.line.test.cpp
-    title: verifications/data_structure/li_chao_tree.line.test.cpp
+    path: verifications/ds/li_chao_tree.line.test.cpp
+    title: verifications/ds/li_chao_tree.line.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/li_chao_tree.segment.test.cpp
-    title: verifications/data_structure/li_chao_tree.segment.test.cpp
+    path: verifications/ds/li_chao_tree.segment.test.cpp
+    title: verifications/ds/li_chao_tree.segment.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/mo.test.cpp
-    title: verifications/data_structure/mo.test.cpp
+    path: verifications/ds/mo.test.cpp
+    title: verifications/ds/mo.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/monotonic_cht.test.cpp
-    title: verifications/data_structure/monotonic_cht.test.cpp
+    path: verifications/ds/monotonic_cht.test.cpp
+    title: verifications/ds/monotonic_cht.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/rsq.test.cpp
-    title: verifications/data_structure/rsq.test.cpp
+    path: verifications/ds/rsq.test.cpp
+    title: verifications/ds/rsq.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/rsq.ut.test.cpp
-    title: verifications/data_structure/rsq.ut.test.cpp
+    path: verifications/ds/rsq.ut.test.cpp
+    title: verifications/ds/rsq.ut.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/segtree.test.cpp
-    title: verifications/data_structure/segtree.test.cpp
+    path: verifications/ds/segtree.test.cpp
+    title: verifications/ds/segtree.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/static_rmq.test.cpp
-    title: verifications/data_structure/static_rmq.test.cpp
+    path: verifications/ds/static_rmq.test.cpp
+    title: verifications/ds/static_rmq.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/swag.test.cpp
-    title: verifications/data_structure/swag.test.cpp
+    path: verifications/ds/swag.test.cpp
+    title: verifications/ds/swag.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/wavelet.rangefreq.test.cpp
-    title: verifications/data_structure/wavelet.rangefreq.test.cpp
+    path: verifications/ds/wavelet.rangefreq.test.cpp
+    title: verifications/ds/wavelet.rangefreq.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/wavelet.test.cpp
-    title: verifications/data_structure/wavelet.test.cpp
+    path: verifications/ds/wavelet.test.cpp
+    title: verifications/ds/wavelet.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/flow/max_flow.bipartite_matching.test.cpp
     title: verifications/flow/max_flow.bipartite_matching.test.cpp
@@ -321,9 +321,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/dijkstra.test.cpp
     title: verifications/graph/dijkstra.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verifications/graph/hld.test.cpp
-    title: verifications/graph/hld.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
@@ -502,159 +499,158 @@ data:
   isVerificationFile: false
   path: src/misc/common/operator_alias.hpp
   requiredBy:
-  - src/string/mp.hpp
-  - src/string/manacher.hpp
-  - src/string/sa_is.hpp
-  - src/string/z_algorithm.hpp
-  - src/string/rolling_hash.hpp
-  - src/misc/common.hpp
-  - src/misc/stopwatch.hpp
-  - src/misc/nd_vec.hpp
-  - src/misc/zipper.hpp
-  - src/misc/seg_decomp.hpp
-  - src/misc/bin_search.hpp
-  - src/misc/printer.hpp
-  - src/misc/fastio/printer.hpp
-  - src/misc/fastio/scanner.hpp
-  - src/misc/nd_rep.hpp
-  - src/misc/scanner.hpp
-  - src/flow/max_flow.hpp
-  - src/math/gcd_convolution.hpp
-  - src/math/multiplicative_sum.hpp
-  - src/math/nth_term.hpp
-  - src/math/divisors.hpp
-  - src/math/prime_powsum.hpp
-  - src/math/modint64.hpp
-  - src/math/is_prime.hpp
-  - src/math/xor_convolution.hpp
-  - src/math/berlekamp_massey.hpp
-  - src/math/factor_table.hpp
-  - src/math/or_convolution.hpp
-  - src/math/set_zeta.hpp
-  - src/math/prime_factors.hpp
-  - src/math/divisors_zeta.hpp
-  - src/math/fps.hpp
-  - src/math/fps_div_nth.hpp
-  - src/math/divisors_moebius.hpp
-  - src/math/set_hadamard.hpp
-  - src/math/and_convolution.hpp
-  - src/math/extgcd.hpp
-  - src/math/modint.hpp
-  - src/math/mod_sqrt.hpp
-  - src/math/mod_nthroot.hpp
-  - src/math/primes.hpp
-  - src/math/set_moebius.hpp
-  - src/linear/matrix.hpp
-  - src/linear/array_matrix.hpp
-  - src/linear/bit_bases.hpp
-  - src/linear/int_bases.hpp
-  - src/data_structure/li_chao_tree.hpp
-  - src/data_structure/intset.hpp
-  - src/data_structure/intdict.hpp
-  - src/data_structure/dualseg.hpp
-  - src/data_structure/wavelet.hpp
-  - src/data_structure/static_rmq.hpp
-  - src/data_structure/swag.hpp
-  - src/data_structure/mo.hpp
-  - src/data_structure/bit_vector.hpp
-  - src/data_structure/segtree.hpp
-  - src/data_structure/lazyseg.hpp
-  - src/data_structure/dsu.hpp
-  - src/data_structure/monotonic_cht.hpp
-  - src/data_structure/fenwick.hpp
-  - src/data_structure/rsq.hpp
-  - src/data_structure/ds_table.hpp
-  - src/graph/graph.hpp
-  - src/graph/centroid_decomp.hpp
-  - src/graph/top_sort.hpp
-  - src/graph/level_ancestor.hpp
-  - src/graph/warshall_floyd.hpp
+  - src/graph/lowlink.hpp
   - src/graph/bellman_ford.hpp
-  - src/graph/bcc.hpp
-  - src/graph/dijkstra.hpp
-  - src/graph/diameter.hpp
+  - src/graph/graph.hpp
   - src/graph/scc.hpp
   - src/graph/hld.hpp
+  - src/graph/level_ancestor.hpp
   - src/graph/lca.hpp
-  - src/graph/lowlink.hpp
+  - src/graph/centroid_decomp.hpp
+  - src/graph/dijkstra.hpp
+  - src/graph/bcc.hpp
+  - src/graph/warshall_floyd.hpp
+  - src/graph/top_sort.hpp
+  - src/graph/diameter.hpp
+  - src/ds/wavelet.hpp
+  - src/ds/intdict.hpp
+  - src/ds/mo.hpp
+  - src/ds/fenwick.hpp
+  - src/ds/rsq.hpp
+  - src/ds/dsu.hpp
+  - src/ds/swag.hpp
+  - src/ds/intset.hpp
+  - src/ds/ds_table.hpp
+  - src/ds/dualseg.hpp
+  - src/ds/monotonic_cht.hpp
+  - src/ds/segtree.hpp
+  - src/ds/bit_vector.hpp
+  - src/ds/lazyseg.hpp
+  - src/ds/static_rmq.hpp
+  - src/ds/li_chao_tree.hpp
+  - src/flow/max_flow.hpp
+  - src/misc/nd_rep.hpp
+  - src/misc/stopwatch.hpp
+  - src/misc/common.hpp
+  - src/misc/printer.hpp
+  - src/misc/seg_decomp.hpp
+  - src/misc/bin_search.hpp
+  - src/misc/zipper.hpp
+  - src/misc/scanner.hpp
+  - src/misc/fastio/printer.hpp
+  - src/misc/fastio/scanner.hpp
+  - src/misc/nd_vec.hpp
+  - src/string/rolling_hash.hpp
+  - src/string/mp.hpp
+  - src/string/z_algorithm.hpp
+  - src/string/suffix_array.hpp
+  - src/string/manacher.hpp
+  - src/math/or_convolution.hpp
+  - src/math/fps_div_nth.hpp
+  - src/math/divisors_moebius.hpp
+  - src/math/berlekamp_massey.hpp
+  - src/math/prime_powsum.hpp
+  - src/math/modint64.hpp
+  - src/math/xor_convolution.hpp
+  - src/math/factor_table.hpp
+  - src/math/divisors.hpp
+  - src/math/fps.hpp
+  - src/math/gcd_convolution.hpp
+  - src/math/mod_sqrt.hpp
+  - src/math/extgcd.hpp
+  - src/math/set_zeta.hpp
+  - src/math/nth_term.hpp
+  - src/math/mod_nthroot.hpp
+  - src/math/set_hadamard.hpp
+  - src/math/is_prime.hpp
+  - src/math/primes.hpp
+  - src/math/and_convolution.hpp
+  - src/math/prime_factors.hpp
+  - src/math/multiplicative_sum.hpp
+  - src/math/divisors_zeta.hpp
+  - src/math/modint.hpp
+  - src/math/set_moebius.hpp
+  - src/linear/bit_bases.hpp
+  - src/linear/array_matrix.hpp
+  - src/linear/int_bases.hpp
+  - src/linear/matrix.hpp
   timestamp: '2021-06-02 01:47:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/string/mp.ut.test.cpp
-  - verifications/string/z_algorithm.test.cpp
-  - verifications/string/manacher.test.cpp
-  - verifications/misc/zipper.test.cpp
-  - verifications/misc/scanner.test.cpp
-  - verifications/misc/seg_decomp.test.cpp
-  - verifications/misc/printer.test.cpp
-  - verifications/misc/stopwatch.test.cpp
-  - verifications/misc/nd_rep.test.cpp
-  - verifications/misc/io.test.cpp
-  - verifications/misc/common/operator_alias.test.cpp
-  - verifications/misc/nd_vec.test.cpp
-  - verifications/misc/fastio/fastio.test.cpp
-  - verifications/flow/max_flow.bipartite_matching.test.cpp
-  - verifications/flow/max_flow.test.cpp
-  - verifications/math/fps.exp.test.cpp
-  - verifications/math/fps.inv.test.cpp
-  - verifications/math/or_convolution.test.cpp
-  - verifications/math/divisors.test.cpp
-  - verifications/math/fps.convolution1000000007.test.cpp
-  - verifications/math/prime_factors.test.cpp
-  - verifications/math/fps.div_nth.test.cpp
-  - verifications/math/multiplicative_sum.test.cpp
-  - verifications/math/and_convolution.test.cpp
-  - verifications/math/prime_powsum.test.cpp
-  - verifications/math/gcd_convolution.test.cpp
-  - verifications/math/mod_sqrt.test.cpp
-  - verifications/math/mod_nthroot.test.cpp
-  - verifications/math/fps.tshift.test.cpp
-  - verifications/math/fps.log.test.cpp
-  - verifications/math/berlekamp_massey.test.cpp
-  - verifications/math/xor_convolution.test.cpp
-  - verifications/math/fps.convolution.test.cpp
-  - verifications/math/fps.pow.test.cpp
-  - verifications/math/fps.nth.test.cpp
-  - verifications/linear/bit_bases.ut.test.cpp
-  - verifications/linear/int_bases.test.cpp
-  - verifications/linear/bit_bases.test.cpp
-  - verifications/linear/array_matrix.test.cpp
-  - verifications/linear/matrix.test.cpp
-  - verifications/linear/int_bases.ut.test.cpp
-  - verifications/data_structure/monotonic_cht.test.cpp
-  - verifications/data_structure/wavelet.test.cpp
-  - verifications/data_structure/lazyseg.ut.test.cpp
-  - verifications/data_structure/mo.test.cpp
-  - verifications/data_structure/rsq.test.cpp
-  - verifications/data_structure/swag.test.cpp
-  - verifications/data_structure/dualseg.test.cpp
-  - verifications/data_structure/lazyseg.test.cpp
-  - verifications/data_structure/li_chao_tree.line.test.cpp
-  - verifications/data_structure/li_chao_tree.segment.test.cpp
-  - verifications/data_structure/wavelet.rangefreq.test.cpp
-  - verifications/data_structure/intset.ut.test.cpp
-  - verifications/data_structure/ds_table.test.cpp
-  - verifications/data_structure/fenwick.max_right.test.cpp
-  - verifications/data_structure/dsu.test.cpp
-  - verifications/data_structure/rsq.ut.test.cpp
-  - verifications/data_structure/intdict.test.cpp
-  - verifications/data_structure/static_rmq.test.cpp
-  - verifications/data_structure/intdict.ut.test.cpp
-  - verifications/data_structure/dsu.ut.test.cpp
-  - verifications/data_structure/bit_vector.test.cpp
-  - verifications/data_structure/segtree.test.cpp
-  - verifications/data_structure/fenwick.test.cpp
-  - verifications/graph/diameter.test.cpp
   - verifications/graph/dijkstra.test.cpp
-  - verifications/graph/level_ancestor.ut.test.cpp
-  - verifications/graph/centroid_decomp.test.cpp
+  - verifications/graph/lca.test.cpp
   - verifications/graph/level_ancestor.lca.test.cpp
-  - verifications/graph/bcc.test.cpp
-  - verifications/graph/hld.test.cpp
+  - verifications/graph/centroid_decomp.test.cpp
+  - verifications/graph/diameter.test.cpp
+  - verifications/graph/level_ancestor.ut.test.cpp
+  - verifications/graph/bellman_ford.test.cpp
   - verifications/graph/scc.test.cpp
   - verifications/graph/warshall_floyd.test.cpp
-  - verifications/graph/bellman_ford.test.cpp
-  - verifications/graph/lca.test.cpp
+  - verifications/graph/bcc.test.cpp
+  - verifications/ds/dualseg.test.cpp
+  - verifications/ds/lazyseg.ut.test.cpp
+  - verifications/ds/swag.test.cpp
+  - verifications/ds/li_chao_tree.segment.test.cpp
+  - verifications/ds/mo.test.cpp
+  - verifications/ds/wavelet.rangefreq.test.cpp
+  - verifications/ds/wavelet.test.cpp
+  - verifications/ds/fenwick.max_right.test.cpp
+  - verifications/ds/dsu.ut.test.cpp
+  - verifications/ds/segtree.test.cpp
+  - verifications/ds/li_chao_tree.line.test.cpp
+  - verifications/ds/intset.ut.test.cpp
+  - verifications/ds/rsq.test.cpp
+  - verifications/ds/fenwick.test.cpp
+  - verifications/ds/ds_table.test.cpp
+  - verifications/ds/monotonic_cht.test.cpp
+  - verifications/ds/rsq.ut.test.cpp
+  - verifications/ds/static_rmq.test.cpp
+  - verifications/ds/bit_vector.test.cpp
+  - verifications/ds/dsu.test.cpp
+  - verifications/ds/intdict.test.cpp
+  - verifications/ds/lazyseg.test.cpp
+  - verifications/ds/intdict.ut.test.cpp
+  - verifications/flow/max_flow.test.cpp
+  - verifications/flow/max_flow.bipartite_matching.test.cpp
+  - verifications/misc/printer.test.cpp
+  - verifications/misc/seg_decomp.test.cpp
+  - verifications/misc/nd_rep.test.cpp
+  - verifications/misc/nd_vec.test.cpp
+  - verifications/misc/stopwatch.test.cpp
+  - verifications/misc/io.test.cpp
+  - verifications/misc/scanner.test.cpp
+  - verifications/misc/zipper.test.cpp
+  - verifications/misc/common/operator_alias.test.cpp
+  - verifications/misc/fastio/fastio.test.cpp
+  - verifications/string/z_algorithm.test.cpp
+  - verifications/string/manacher.test.cpp
+  - verifications/string/mp.ut.test.cpp
+  - verifications/math/fps.nth.test.cpp
+  - verifications/math/divisors.test.cpp
+  - verifications/math/fps.inv.test.cpp
+  - verifications/math/multiplicative_sum.test.cpp
+  - verifications/math/prime_factors.test.cpp
+  - verifications/math/fps.div_nth.test.cpp
+  - verifications/math/fps.convolution1000000007.test.cpp
+  - verifications/math/xor_convolution.test.cpp
+  - verifications/math/mod_nthroot.test.cpp
+  - verifications/math/or_convolution.test.cpp
+  - verifications/math/fps.tshift.test.cpp
+  - verifications/math/fps.pow.test.cpp
+  - verifications/math/berlekamp_massey.test.cpp
+  - verifications/math/and_convolution.test.cpp
+  - verifications/math/gcd_convolution.test.cpp
+  - verifications/math/fps.convolution.test.cpp
+  - verifications/math/prime_powsum.test.cpp
+  - verifications/math/fps.log.test.cpp
+  - verifications/math/mod_sqrt.test.cpp
+  - verifications/math/fps.exp.test.cpp
+  - verifications/linear/int_bases.test.cpp
+  - verifications/linear/int_bases.ut.test.cpp
+  - verifications/linear/matrix.test.cpp
+  - verifications/linear/array_matrix.test.cpp
+  - verifications/linear/bit_bases.ut.test.cpp
+  - verifications/linear/bit_bases.test.cpp
 documentation_of: src/misc/common/operator_alias.hpp
 layout: document
 redirect_from:

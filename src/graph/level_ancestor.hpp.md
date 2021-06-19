@@ -302,8 +302,8 @@ data:
   timestamp: '2021-06-14 15:35:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/graph/level_ancestor.ut.test.cpp
   - verifications/graph/level_ancestor.lca.test.cpp
+  - verifications/graph/level_ancestor.ut.test.cpp
 documentation_of: src/graph/level_ancestor.hpp
 layout: document
 redirect_from:

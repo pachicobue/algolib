@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/ds_table.hpp
+    path: src/ds/ds_table.hpp
     title: Disjoint Sparse Table
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/static_rmq.hpp
+    path: src/ds/static_rmq.hpp
     title: "\u9759\u7684\u6570\u5217\u306ERMQ"
   - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
@@ -385,7 +385,7 @@ data:
     \ int l = lca(u, v);\n        out.ln(l);\n    }\n    return 0;\n}\n"
   dependsOn:
   - src/graph/lca.hpp
-  - src/data_structure/static_rmq.hpp
+  - src/ds/static_rmq.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -400,14 +400,14 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/data_structure/ds_table.hpp
+  - src/ds/ds_table.hpp
   - src/graph/graph.hpp
   - src/misc/fastio/printer.hpp
   - src/misc/fastio/scanner.hpp
   isVerificationFile: true
   path: verifications/graph/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/graph/lca.test.cpp

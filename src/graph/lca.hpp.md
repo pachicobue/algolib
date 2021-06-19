@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/ds_table.hpp
+    path: src/ds/ds_table.hpp
     title: Disjoint Sparse Table
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/static_rmq.hpp
+    path: src/ds/static_rmq.hpp
     title: "\u9759\u7684\u6570\u5217\u306ERMQ"
   - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
@@ -319,26 +319,25 @@ data:
     \    {\n        using T = P;\n        bool operator()(const T& p1, const T& p2)\
     \ const\n        {\n            return p1 < p2;\n        }\n    };\n    int m_v;\n\
     \    Vec<int> m_ins;\n    Vec<P> m_ds;\n    StaticRMQ<Ord> m_rmq;\n};\n"
-  code: "#pragma once\n#include \"../data_structure/static_rmq.hpp\"\n#include \"\
-    ../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename C>\nclass LCA\n\
-    {\n    using P = Pair<int, int>;\n\npublic:\n    LCA(const Graph<C>& g, int r\
-    \ = 0)\n        : m_v(g.v()),\n          m_ins(g.v(), 0),\n          m_ds([&]()\
-    \ {\n              Vec<P> ans;\n              Vec<bool> used(g.v(), false);\n\
-    \              Fix([&](auto dfs, const P& s) -> void {\n                  const\
-    \ int u = s.second;\n                  used[u] = true;\n                  m_ins[u]\
-    \ = ans.size();\n                  ans.push_back(s);\n                  for (int\
-    \ v : g[u]) {\n                      if (used[v]) { continue; }\n            \
-    \          dfs(P{s.first + 1, v});\n                      ans.push_back(s);\n\
-    \                  }\n              })(P{0, r});\n              return ans;\n\
-    \          }()),\n          m_rmq(m_ds)\n    {}\n    int operator()(int u, int\
-    \ v) const\n    {\n        const auto [ul, vl] = std::minmax({m_ins[u], m_ins[v]});\n\
-    \        return m_rmq.fold(ul, vl + 1).second;\n    }\n\nprivate:\n    struct\
-    \ Ord\n    {\n        using T = P;\n        bool operator()(const T& p1, const\
-    \ T& p2) const\n        {\n            return p1 < p2;\n        }\n    };\n  \
-    \  int m_v;\n    Vec<int> m_ins;\n    Vec<P> m_ds;\n    StaticRMQ<Ord> m_rmq;\n\
-    };\n"
+  code: "#pragma once\n#include \"../ds/static_rmq.hpp\"\n#include \"../misc/common.hpp\"\
+    \n#include \"graph.hpp\"\ntemplate<typename C>\nclass LCA\n{\n    using P = Pair<int,\
+    \ int>;\n\npublic:\n    LCA(const Graph<C>& g, int r = 0)\n        : m_v(g.v()),\n\
+    \          m_ins(g.v(), 0),\n          m_ds([&]() {\n              Vec<P> ans;\n\
+    \              Vec<bool> used(g.v(), false);\n              Fix([&](auto dfs,\
+    \ const P& s) -> void {\n                  const int u = s.second;\n         \
+    \         used[u] = true;\n                  m_ins[u] = ans.size();\n        \
+    \          ans.push_back(s);\n                  for (int v : g[u]) {\n       \
+    \               if (used[v]) { continue; }\n                      dfs(P{s.first\
+    \ + 1, v});\n                      ans.push_back(s);\n                  }\n  \
+    \            })(P{0, r});\n              return ans;\n          }()),\n      \
+    \    m_rmq(m_ds)\n    {}\n    int operator()(int u, int v) const\n    {\n    \
+    \    const auto [ul, vl] = std::minmax({m_ins[u], m_ins[v]});\n        return\
+    \ m_rmq.fold(ul, vl + 1).second;\n    }\n\nprivate:\n    struct Ord\n    {\n \
+    \       using T = P;\n        bool operator()(const T& p1, const T& p2) const\n\
+    \        {\n            return p1 < p2;\n        }\n    };\n    int m_v;\n   \
+    \ Vec<int> m_ins;\n    Vec<P> m_ds;\n    StaticRMQ<Ord> m_rmq;\n};\n"
   dependsOn:
-  - src/data_structure/static_rmq.hpp
+  - src/ds/static_rmq.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -353,12 +352,12 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/data_structure/ds_table.hpp
+  - src/ds/ds_table.hpp
   - src/graph/graph.hpp
   isVerificationFile: false
   path: src/graph/lca.hpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/graph/lca.test.cpp

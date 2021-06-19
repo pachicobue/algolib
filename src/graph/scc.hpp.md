@@ -237,9 +237,9 @@ data:
     \            static_cast<void>(id);\n                if (v == p) { continue; }\n\
     \                ps[v] = u;\n                dfs(v, u);\n            }\n     \
     \   })(root, -1);\n        return ps;\n    }\nprivate:\n    int m_v;\n    int\
-    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nclass sc_comp\n\
-    {\npublic:\n    sc_comp(const Graph<T>& g) : m_v(g.v()), m_cs(m_v, -1)\n    {\n\
-    \        const int N = g.v();\n        Graph<> rg(N);\n        for (int u : rep(N))\
+    \ m_e = 0;\n    Vec<Vec<Edge>> m_edges;\n};\ntemplate<typename T>\nclass SCC\n\
+    {\npublic:\n    SCC(const Graph<T>& g) : m_v(g.v()), m_cs(m_v, -1)\n    {\n  \
+    \      const int N = g.v();\n        Graph<> rg(N);\n        for (int u : rep(N))\
     \ {\n            for (int v : g[u]) {\n                rg.addEdge(v, u);\n   \
     \         }\n        }\n        Vec<int> st;\n        Vec<bool> used(N, false);\n\
     \        auto dfs = Fix([&](auto dfs, int u) -> void {\n            used[u] =\
@@ -258,25 +258,25 @@ data:
     \        }\n        return iss;\n    }\nprivate:\n    int m_v;\n    int m_cnum\
     \ = 0;\n    Vec<int> m_cs;\n};\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename\
-    \ T>\nclass sc_comp\n{\npublic:\n    sc_comp(const Graph<T>& g) : m_v(g.v()),\
-    \ m_cs(m_v, -1)\n    {\n        const int N = g.v();\n        Graph<> rg(N);\n\
-    \        for (int u : rep(N)) {\n            for (int v : g[u]) {\n          \
-    \      rg.addEdge(v, u);\n            }\n        }\n        Vec<int> st;\n   \
-    \     Vec<bool> used(N, false);\n        auto dfs = Fix([&](auto dfs, int u) ->\
-    \ void {\n            used[u] = true;\n            for (int v : g[u]) {\n    \
-    \            if (not used[v]) { dfs(v); }\n            }\n            st.push_back(u);\n\
-    \        });\n        auto rdfs = Fix([&](auto dfs, int v) -> void {\n       \
-    \     m_cs[v] = m_cnum;\n            for (int u : rg[v]) {\n                if\
-    \ (m_cs[u] != -1) { continue; }\n                dfs(u);\n            }\n    \
-    \    });\n        for (int i : rep(N)) {\n            if (used[i]) { continue;\
-    \ }\n            dfs(i);\n        }\n        reverseAll(st);\n        for (int\
-    \ i : st) {\n            if (m_cs[i] != -1) { continue; }\n            rdfs(i);\n\
-    \            m_cnum++;\n        }\n    }\n    int operator[](int v) const\n  \
-    \  {\n        assert(0 <= v and v < m_v);\n        return m_cs[v];\n    }\n  \
-    \  int cnum() const\n    {\n        return m_cnum;\n    }\n    Vec<Vec<int>> groups()\
-    \ const\n    {\n        Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v))\
-    \ {\n            iss[m_cs[i]].push_back(i);\n        }\n        return iss;\n\
-    \    }\n\nprivate:\n    int m_v;\n    int m_cnum = 0;\n    Vec<int> m_cs;\n};\n"
+    \ T>\nclass SCC\n{\npublic:\n    SCC(const Graph<T>& g) : m_v(g.v()), m_cs(m_v,\
+    \ -1)\n    {\n        const int N = g.v();\n        Graph<> rg(N);\n        for\
+    \ (int u : rep(N)) {\n            for (int v : g[u]) {\n                rg.addEdge(v,\
+    \ u);\n            }\n        }\n        Vec<int> st;\n        Vec<bool> used(N,\
+    \ false);\n        auto dfs = Fix([&](auto dfs, int u) -> void {\n           \
+    \ used[u] = true;\n            for (int v : g[u]) {\n                if (not used[v])\
+    \ { dfs(v); }\n            }\n            st.push_back(u);\n        });\n    \
+    \    auto rdfs = Fix([&](auto dfs, int v) -> void {\n            m_cs[v] = m_cnum;\n\
+    \            for (int u : rg[v]) {\n                if (m_cs[u] != -1) { continue;\
+    \ }\n                dfs(u);\n            }\n        });\n        for (int i :\
+    \ rep(N)) {\n            if (used[i]) { continue; }\n            dfs(i);\n   \
+    \     }\n        reverseAll(st);\n        for (int i : st) {\n            if (m_cs[i]\
+    \ != -1) { continue; }\n            rdfs(i);\n            m_cnum++;\n        }\n\
+    \    }\n    int operator[](int v) const\n    {\n        assert(0 <= v and v <\
+    \ m_v);\n        return m_cs[v];\n    }\n    int cnum() const\n    {\n       \
+    \ return m_cnum;\n    }\n    Vec<Vec<int>> groups() const\n    {\n        Vec<Vec<int>>\
+    \ iss(m_v);\n        for (const int i : rep(m_v)) {\n            iss[m_cs[i]].push_back(i);\n\
+    \        }\n        return iss;\n    }\n\nprivate:\n    int m_v;\n    int m_cnum\
+    \ = 0;\n    Vec<int> m_cs;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -296,7 +296,7 @@ data:
   isVerificationFile: false
   path: src/graph/scc.hpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/graph/scc.test.cpp

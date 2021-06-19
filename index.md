@@ -1,55 +1,55 @@
 ---
 data:
   libraryCategories:
-  - name: src/data_structure
+  - name: src/ds
     pages:
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/bit_vector.hpp
+      path: src/ds/bit_vector.hpp
       title: Bit Vector
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/ds_table.hpp
+      path: src/ds/ds_table.hpp
       title: Disjoint Sparse Table
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/dsu.hpp
+      path: src/ds/dsu.hpp
       title: Disjoint Set Union
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/dualseg.hpp
+      path: src/ds/dualseg.hpp
       title: Dual Segment Tree
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/fenwick.hpp
+      path: src/ds/fenwick.hpp
       title: Fenwick Tree
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/intdict.hpp
+      path: src/ds/intdict.hpp
       title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/intset.hpp
+      path: src/ds/intset.hpp
       title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8"
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/lazyseg.hpp
+      path: src/ds/lazyseg.hpp
       title: Lazy Segment Tree
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/li_chao_tree.hpp
+      path: src/ds/li_chao_tree.hpp
       title: Li Chao Tree
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/mo.hpp
+      path: src/ds/mo.hpp
       title: Mo's Algorithm
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/monotonic_cht.hpp
+      path: src/ds/monotonic_cht.hpp
       title: "\u5358\u8ABF\u6027\u306E\u3042\u308B Convex Hull Trick"
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/rsq.hpp
+      path: src/ds/rsq.hpp
       title: "\u6570\u5217\u306E\u7D2F\u7A4D\u548C\u7BA1\u7406"
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/segtree.hpp
+      path: src/ds/segtree.hpp
       title: Segment Tree
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/static_rmq.hpp
+      path: src/ds/static_rmq.hpp
       title: "\u9759\u7684\u6570\u5217\u306ERMQ"
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/swag.hpp
+      path: src/ds/swag.hpp
       title: Sliding Window Aggregation
     - icon: ':heavy_check_mark:'
-      path: src/data_structure/wavelet.hpp
+      path: src/ds/wavelet.hpp
       title: "Wavelet\u884C\u5217"
   - name: src/flow
     pages:
@@ -76,7 +76,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/graph/graph.hpp
       title: src/graph/graph.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/graph/hld.hpp
       title: src/graph/hld.hpp
     - icon: ':heavy_check_mark:'
@@ -328,83 +328,83 @@ data:
       path: src/string/rolling_hash.hpp
       title: src/string/rolling_hash.hpp
     - icon: ':warning:'
-      path: src/string/sa_is.hpp
-      title: src/string/sa_is.hpp
+      path: src/string/suffix_array.hpp
+      title: src/string/suffix_array.hpp
     - icon: ':heavy_check_mark:'
       path: src/string/z_algorithm.hpp
       title: src/string/z_algorithm.hpp
   verificationCategories:
-  - name: verifications/data_structure
+  - name: verifications/ds
     pages:
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/bit_vector.test.cpp
-      title: verifications/data_structure/bit_vector.test.cpp
+      path: verifications/ds/bit_vector.test.cpp
+      title: verifications/ds/bit_vector.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/ds_table.test.cpp
-      title: verifications/data_structure/ds_table.test.cpp
+      path: verifications/ds/ds_table.test.cpp
+      title: verifications/ds/ds_table.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/dsu.test.cpp
-      title: verifications/data_structure/dsu.test.cpp
+      path: verifications/ds/dsu.test.cpp
+      title: verifications/ds/dsu.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/dsu.ut.test.cpp
-      title: verifications/data_structure/dsu.ut.test.cpp
+      path: verifications/ds/dsu.ut.test.cpp
+      title: verifications/ds/dsu.ut.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/dualseg.test.cpp
-      title: verifications/data_structure/dualseg.test.cpp
+      path: verifications/ds/dualseg.test.cpp
+      title: verifications/ds/dualseg.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/fenwick.max_right.test.cpp
-      title: verifications/data_structure/fenwick.max_right.test.cpp
+      path: verifications/ds/fenwick.max_right.test.cpp
+      title: verifications/ds/fenwick.max_right.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/fenwick.test.cpp
-      title: verifications/data_structure/fenwick.test.cpp
+      path: verifications/ds/fenwick.test.cpp
+      title: verifications/ds/fenwick.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/intdict.test.cpp
-      title: verifications/data_structure/intdict.test.cpp
+      path: verifications/ds/intdict.test.cpp
+      title: verifications/ds/intdict.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/intdict.ut.test.cpp
-      title: verifications/data_structure/intdict.ut.test.cpp
+      path: verifications/ds/intdict.ut.test.cpp
+      title: verifications/ds/intdict.ut.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/intset.ut.test.cpp
-      title: verifications/data_structure/intset.ut.test.cpp
+      path: verifications/ds/intset.ut.test.cpp
+      title: verifications/ds/intset.ut.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/lazyseg.test.cpp
-      title: verifications/data_structure/lazyseg.test.cpp
+      path: verifications/ds/lazyseg.test.cpp
+      title: verifications/ds/lazyseg.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/lazyseg.ut.test.cpp
-      title: verifications/data_structure/lazyseg.ut.test.cpp
+      path: verifications/ds/lazyseg.ut.test.cpp
+      title: verifications/ds/lazyseg.ut.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/li_chao_tree.line.test.cpp
-      title: verifications/data_structure/li_chao_tree.line.test.cpp
+      path: verifications/ds/li_chao_tree.line.test.cpp
+      title: verifications/ds/li_chao_tree.line.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/li_chao_tree.segment.test.cpp
-      title: verifications/data_structure/li_chao_tree.segment.test.cpp
+      path: verifications/ds/li_chao_tree.segment.test.cpp
+      title: verifications/ds/li_chao_tree.segment.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/mo.test.cpp
-      title: verifications/data_structure/mo.test.cpp
+      path: verifications/ds/mo.test.cpp
+      title: verifications/ds/mo.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/monotonic_cht.test.cpp
-      title: verifications/data_structure/monotonic_cht.test.cpp
+      path: verifications/ds/monotonic_cht.test.cpp
+      title: verifications/ds/monotonic_cht.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/rsq.test.cpp
-      title: verifications/data_structure/rsq.test.cpp
+      path: verifications/ds/rsq.test.cpp
+      title: verifications/ds/rsq.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/rsq.ut.test.cpp
-      title: verifications/data_structure/rsq.ut.test.cpp
+      path: verifications/ds/rsq.ut.test.cpp
+      title: verifications/ds/rsq.ut.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/segtree.test.cpp
-      title: verifications/data_structure/segtree.test.cpp
+      path: verifications/ds/segtree.test.cpp
+      title: verifications/ds/segtree.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/static_rmq.test.cpp
-      title: verifications/data_structure/static_rmq.test.cpp
+      path: verifications/ds/static_rmq.test.cpp
+      title: verifications/ds/static_rmq.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/swag.test.cpp
-      title: verifications/data_structure/swag.test.cpp
+      path: verifications/ds/swag.test.cpp
+      title: verifications/ds/swag.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/wavelet.rangefreq.test.cpp
-      title: verifications/data_structure/wavelet.rangefreq.test.cpp
+      path: verifications/ds/wavelet.rangefreq.test.cpp
+      title: verifications/ds/wavelet.rangefreq.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verifications/data_structure/wavelet.test.cpp
-      title: verifications/data_structure/wavelet.test.cpp
+      path: verifications/ds/wavelet.test.cpp
+      title: verifications/ds/wavelet.test.cpp
   - name: verifications/flow
     pages:
     - icon: ':heavy_check_mark:'
@@ -430,7 +430,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verifications/graph/dijkstra.test.cpp
       title: verifications/graph/dijkstra.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verifications/graph/hld.test.cpp
       title: verifications/graph/hld.test.cpp
     - icon: ':heavy_check_mark:'

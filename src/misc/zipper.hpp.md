@@ -46,8 +46,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verifications/data_structure/mo.test.cpp
-    title: verifications/data_structure/mo.test.cpp
+    path: verifications/ds/mo.test.cpp
+    title: verifications/ds/mo.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/misc/zipper.test.cpp
     title: verifications/misc/zipper.test.cpp
@@ -247,8 +247,8 @@ data:
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verifications/ds/mo.test.cpp
   - verifications/misc/zipper.test.cpp
-  - verifications/data_structure/mo.test.cpp
 documentation_of: src/misc/zipper.hpp
 layout: document
 redirect_from:

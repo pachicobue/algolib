@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/data_structure/intdict.hpp
+    path: src/ds/intdict.hpp
     title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
   - icon: ':heavy_check_mark:'
     path: src/math/extgcd.hpp
@@ -427,7 +427,7 @@ data:
     \ = 0; i < l - e; i++) {\n                pEraser2 = pEraser2.pow(p);\n      \
     \      }\n            X *= pEraser2, Error *= pEraser2.pow(pe);\n        }\n \
     \       A = X;\n    }\n    return A;\n}\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"../data_structure/intdict.hpp\"\
+  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"../ds/intdict.hpp\"\
     \n#include \"extgcd.hpp\"\n#include \"prime_factors.hpp\"\n\ntemplate<typename\
     \ mint>\nmint modNthRoot(mint A, u64 k)\n{\n    const u64 P = mint::mod();\n \
     \   if (A == 0) { return 0; }\n    if (k == 0) { return A; }\n    const u64 g\
@@ -478,7 +478,7 @@ data:
   - src/misc/common/irange.hpp
   - src/misc/common/rng.hpp
   - src/misc/common/xoshiro.hpp
-  - src/data_structure/intdict.hpp
+  - src/ds/intdict.hpp
   - src/math/extgcd.hpp
   - src/math/prime_factors.hpp
   - src/math/is_prime.hpp
@@ -487,7 +487,7 @@ data:
   isVerificationFile: false
   path: src/math/mod_nthroot.hpp
   requiredBy: []
-  timestamp: '2021-06-15 01:30:20+09:00'
+  timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/math/mod_nthroot.test.cpp

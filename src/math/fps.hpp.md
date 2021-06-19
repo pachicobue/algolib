@@ -649,20 +649,20 @@ data:
   isVerificationFile: false
   path: src/math/fps.hpp
   requiredBy:
-  - src/math/nth_term.hpp
   - src/math/fps_div_nth.hpp
+  - src/math/nth_term.hpp
   timestamp: '2021-06-15 01:30:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/math/fps.exp.test.cpp
-  - verifications/math/fps.inv.test.cpp
-  - verifications/math/fps.convolution1000000007.test.cpp
-  - verifications/math/fps.div_nth.test.cpp
-  - verifications/math/fps.tshift.test.cpp
-  - verifications/math/fps.log.test.cpp
-  - verifications/math/fps.convolution.test.cpp
-  - verifications/math/fps.pow.test.cpp
   - verifications/math/fps.nth.test.cpp
+  - verifications/math/fps.inv.test.cpp
+  - verifications/math/fps.div_nth.test.cpp
+  - verifications/math/fps.convolution1000000007.test.cpp
+  - verifications/math/fps.tshift.test.cpp
+  - verifications/math/fps.pow.test.cpp
+  - verifications/math/fps.convolution.test.cpp
+  - verifications/math/fps.log.test.cpp
+  - verifications/math/fps.exp.test.cpp
 documentation_of: src/math/fps.hpp
 layout: document
 redirect_from:

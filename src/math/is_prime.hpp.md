@@ -379,8 +379,8 @@ data:
   isVerificationFile: false
   path: src/math/is_prime.hpp
   requiredBy:
-  - src/math/prime_factors.hpp
   - src/math/mod_nthroot.hpp
+  - src/math/prime_factors.hpp
   timestamp: '2021-06-15 01:30:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -47,13 +47,10 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verifications/graph/hld.test.cpp
-    title: verifications/graph/hld.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -319,9 +316,8 @@ data:
   path: src/graph/hld.hpp
   requiredBy: []
   timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verifications/graph/hld.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/graph/hld.hpp
 layout: document
 redirect_from:
