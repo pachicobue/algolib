@@ -1,5 +1,5 @@
 #pragma once
-#include "../data_structure/static_rmq.hpp"
+#include "../ds/static_rmq.hpp"
 #include "../misc/common.hpp"
 #include "graph.hpp"
 template<typename C>

@@ -2,10 +2,10 @@
 #include "../misc/common.hpp"
 #include "graph.hpp"
 template<typename T>
-class sc_comp
+class SCC
 {
 public:
-    sc_comp(const Graph<T>& g) : m_v(g.v()), m_cs(m_v, -1)
+    SCC(const Graph<T>& g) : m_v(g.v()), m_cs(m_v, -1)
     {
         const int N = g.v();
         Graph<> rg(N);

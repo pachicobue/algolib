@@ -1,6 +1,6 @@
 #pragma once
 #include "../misc/common.hpp"
-#include "../data_structure/intdict.hpp"
+#include "../ds/intdict.hpp"
 #include "extgcd.hpp"
 #include "prime_factors.hpp"
 
