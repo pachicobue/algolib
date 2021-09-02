@@ -43,7 +43,7 @@ private:
     void dump(const Vec<Vec<T>>& vss)
     {
         for (const int i : rep(vss.size())) {
-            m_os << (i ? "" : "\n"), dump(vss[i]);
+            m_os << (i ? "\n" : ""), dump(vss[i]);
         }
     }
     template<typename T, typename... Ts>

@@ -46,7 +46,8 @@ public:
     {
         return Vec<mint>::operator[](n);
     }
-    mint at(const int n) const
+    template<typename I>
+    mint at(const I n) const
     {
         return (n < size() ? (*this)[n] : mint{0});
     }
@@ -137,6 +138,16 @@ public:
     {
         if (sz == 0) { return FPS{}; }
         const int N = std::min(size(), sz) + std::min(f.size(), sz) - 1;
+        if (N < 10) {
+            FPS ans;
+            for (int i : rep(sz)) {
+                for (int j : rep(sz)) {
+                    if (i + j >= sz) { break; }
+                    ans[i + j] += this->at(i) * f.at(j);
+                }
+            }
+            return ans;
+        }
         if (N <= (1 << mint::max2p())) {
             auto ans = conv<mint>(*this, f, sz);
             return ans;
