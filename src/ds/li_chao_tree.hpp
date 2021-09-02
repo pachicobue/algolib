@@ -29,17 +29,17 @@ public:
     {
         assert(m_xmin < m_xsup);
     }
-    void addLine(T a, T b)
+    void addLine(const L& line)
     {
-        add(L{a, b}, 0, m_xmin, m_xsup);
+        add(line, 0, m_xmin, m_xsup);
     }
-    void addSeg(T a, T b, T x_left, T x_right)
+    void addSeg(const L& line, T x_left, T x_right)
     {
         if (x_left >= x_right) { return; }
         assert(m_xmin <= x_left and x_right <= m_xsup);
         Fix([&](auto dfs, int i, T lx, T rx) -> void {
             if (x_left <= lx and rx <= x_right) {
-                add(L{a, b}, i, lx, rx);
+                add(line, i, lx, rx);
             } else {
                 if (rx - lx == 1) { return; }
                 auto [li, ri] = m_nodes[i].sons;
@@ -58,14 +58,11 @@ public:
     Pair<bool, L> minLine(const T x) const
     {
         T lx = m_xmin, rx = m_xsup;
-        Pair<bool, L> ans = {false, NIL};
+        L ans = NIL;
         for (int i = 0; i != -1;) {
             const auto& pl = m_nodes[i].line;
             if (pl != NIL) {
-                if ((not ans.first) or comp(pl, ans.second, x)) {
-                    ans.first = true;
-                    ans.second = pl;
-                }
+                if (comp(pl, ans, x)) { ans = pl; }
             }
             const auto& [li, ri] = m_nodes[i].sons;
             const T mx = (lx + rx) / 2;
@@ -77,7 +74,7 @@ public:
                 lx = mx;
             }
         }
-        return ans;
+        return {ans != NIL, ans};
     }
 
 private:
@@ -87,7 +84,7 @@ private:
             const auto& pl = m_nodes[i].line;
             const T mx = (lx + rx) / 2;
             const bool lunder = comp(l, pl, lx);
-            const bool runder = comp(l, pl, rx);
+            const bool runder = comp(l, pl, rx - 1);
             const bool munder = comp(l, pl, mx);
             if (munder) { std::swap(l, m_nodes[i].line); }
             if (lunder == runder) { break; }
