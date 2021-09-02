@@ -247,8 +247,8 @@ data:
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/ds/mo.test.cpp
   - verifications/misc/zipper.test.cpp
+  - verifications/ds/mo.test.cpp
 documentation_of: src/misc/zipper.hpp
 layout: document
 redirect_from:

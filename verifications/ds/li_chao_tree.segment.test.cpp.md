@@ -214,12 +214,12 @@ data:
     \     return x <= fdiv(b2 - b1, a1 - a2);\n        } else {\n            return\
     \ fdiv(b1 - b2, a2 - a1) < x;\n        }\n    }\npublic:\n    LiChaoTree(T xmin,\
     \ T xsup) : m_xmin{xmin}, m_xsup{xsup}, m_nodes{Node{}}\n    {\n        assert(m_xmin\
-    \ < m_xsup);\n    }\n    void addLine(T a, T b)\n    {\n        add(L{a, b}, 0,\
-    \ m_xmin, m_xsup);\n    }\n    void addSeg(T a, T b, T x_left, T x_right)\n  \
-    \  {\n        if (x_left >= x_right) { return; }\n        assert(m_xmin <= x_left\
+    \ < m_xsup);\n    }\n    void addLine(const L& line)\n    {\n        add(line,\
+    \ 0, m_xmin, m_xsup);\n    }\n    void addSeg(const L& line, T x_left, T x_right)\n\
+    \    {\n        if (x_left >= x_right) { return; }\n        assert(m_xmin <= x_left\
     \ and x_right <= m_xsup);\n        Fix([&](auto dfs, int i, T lx, T rx) -> void\
-    \ {\n            if (x_left <= lx and rx <= x_right) {\n                add(L{a,\
-    \ b}, i, lx, rx);\n            } else {\n                if (rx - lx == 1) { return;\
+    \ {\n            if (x_left <= lx and rx <= x_right) {\n                add(line,\
+    \ i, lx, rx);\n            } else {\n                if (rx - lx == 1) { return;\
     \ }\n                auto [li, ri] = m_nodes[i].sons;\n                const T\
     \ mx = (lx + rx) / 2;\n                if (lx < x_right and x_left < mx) {\n \
     \                   if (li == -1) { li = m_nodes[i].sons[0] = alloc(); }\n   \
@@ -227,40 +227,39 @@ data:
     \ < x_right and x_left < rx) {\n                    if (ri == -1) { ri = m_nodes[i].sons[1]\
     \ = alloc(); }\n                    dfs(ri, mx, rx);\n                }\n    \
     \        }\n        })(0, m_xmin, m_xsup);\n    }\n    Pair<bool, L> minLine(const\
-    \ T x) const\n    {\n        T lx = m_xmin, rx = m_xsup;\n        Pair<bool, L>\
-    \ ans = {false, NIL};\n        for (int i = 0; i != -1;) {\n            const\
-    \ auto& pl = m_nodes[i].line;\n            if (pl != NIL) {\n                if\
-    \ ((not ans.first) or comp(pl, ans.second, x)) {\n                    ans.first\
-    \ = true;\n                    ans.second = pl;\n                }\n         \
-    \   }\n            const auto& [li, ri] = m_nodes[i].sons;\n            const\
-    \ T mx = (lx + rx) / 2;\n            if (x < mx) {\n                i = li;\n\
-    \                rx = mx;\n            } else {\n                i = ri;\n   \
-    \             lx = mx;\n            }\n        }\n        return ans;\n    }\n\
-    private:\n    void add(L l, int i, T lx, T rx)\n    {\n        for (;;) {\n  \
-    \          const auto& pl = m_nodes[i].line;\n            const T mx = (lx + rx)\
-    \ / 2;\n            const bool lunder = comp(l, pl, lx);\n            const bool\
-    \ runder = comp(l, pl, rx);\n            const bool munder = comp(l, pl, mx);\n\
-    \            if (munder) { std::swap(l, m_nodes[i].line); }\n            if (lunder\
-    \ == runder) { break; }\n            int dir = (lunder == munder ? 1 : 0);\n \
-    \           int nind = m_nodes[i].sons[dir];\n            if (nind == -1) { nind\
-    \ = m_nodes[i].sons[dir] = alloc(); }\n            i = nind;\n            if (rx\
-    \ - lx == 1) { break; }\n            if (lunder == munder) {\n               \
-    \ lx = mx;\n            } else {\n                rx = mx;\n            }\n  \
-    \      }\n    }\n    int alloc()\n    {\n        m_nodes.push_back(Node{});\n\
-    \        return (int)m_nodes.size() - 1;\n    }\n    T m_xmin, m_xsup;\n    Vec<Node>\
-    \ m_nodes;\n};\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n   \
-    \ Printer() {}\n    template<typename... Args>\n    int operator()(const Args&...\
-    \ args)\n    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
-    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
-    n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
-    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
-    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
-    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
-    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
-    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
-    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
-    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
-    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ T x) const\n    {\n        T lx = m_xmin, rx = m_xsup;\n        L ans = NIL;\n\
+    \        for (int i = 0; i != -1;) {\n            const auto& pl = m_nodes[i].line;\n\
+    \            if (pl != NIL) {\n                if (comp(pl, ans, x)) { ans = pl;\
+    \ }\n            }\n            const auto& [li, ri] = m_nodes[i].sons;\n    \
+    \        const T mx = (lx + rx) / 2;\n            if (x < mx) {\n            \
+    \    i = li;\n                rx = mx;\n            } else {\n               \
+    \ i = ri;\n                lx = mx;\n            }\n        }\n        return\
+    \ {ans != NIL, ans};\n    }\nprivate:\n    void add(L l, int i, T lx, T rx)\n\
+    \    {\n        for (;;) {\n            const auto& pl = m_nodes[i].line;\n  \
+    \          const T mx = (lx + rx) / 2;\n            const bool lunder = comp(l,\
+    \ pl, lx);\n            const bool runder = comp(l, pl, rx - 1);\n           \
+    \ const bool munder = comp(l, pl, mx);\n            if (munder) { std::swap(l,\
+    \ m_nodes[i].line); }\n            if (lunder == runder) { break; }\n        \
+    \    int dir = (lunder == munder ? 1 : 0);\n            int nind = m_nodes[i].sons[dir];\n\
+    \            if (nind == -1) { nind = m_nodes[i].sons[dir] = alloc(); }\n    \
+    \        i = nind;\n            if (rx - lx == 1) { break; }\n            if (lunder\
+    \ == munder) {\n                lx = mx;\n            } else {\n             \
+    \   rx = mx;\n            }\n        }\n    }\n    int alloc()\n    {\n      \
+    \  m_nodes.push_back(Node{});\n        return (int)m_nodes.size() - 1;\n    }\n\
+    \    T m_xmin, m_xsup;\n    Vec<Node> m_nodes;\n};\n#pragma region FastIO Printer\n\
+    class Printer\n{\npublic:\n    Printer() {}\n    template<typename... Args>\n\
+    \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
+    \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
+    \ args)\n    {\n        dump(args...), putchar('\\n');\n        return 0;\n  \
+    \  }\nprivate:\n    template<typename T>\n    void dump(T v)\n    {\n        static\
+    \ char tmp[30];\n        if (v < 0) {\n            putchar('-');\n           \
+    \ v = -v;\n        }\n        int i = 0;\n        do {\n            tmp[i++] =\
+    \ v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n        while\
+    \ (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void dump(bool\
+    \ b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n    {\n    \
+    \    putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n        for (char\
+    \ c : cs) {\n            dump(c);\n        }\n    }\n    template<typename T>\n\
+    \    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
     \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
     \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
     \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
@@ -293,24 +292,24 @@ data:
     \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
     int main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    auto cht = LiChaoTree<i64>(-TEN<i64>(9),\
     \ TEN<i64>(9));\n    for (int i : rep(N)) {\n        static_cast<void>(i);\n \
-    \       const auto [l, r, a, b] = in.tup<i64, i64, i64, i64>();\n        cht.addSeg(a,\
-    \ b, l, r);\n    }\n    for (int q : rep(Q)) {\n        static_cast<void>(q);\n\
+    \       const auto [l, r, a, b] = in.tup<i64, i64, i64, i64>();\n        cht.addSeg({a,\
+    \ b}, l, r);\n    }\n    for (int q : rep(Q)) {\n        static_cast<void>(q);\n\
     \        const auto t = in.val<int>();\n        if (t == 0) {\n            const\
-    \ auto [l, r, a, b] = in.tup<i64, i64, i64, i64>();\n            cht.addSeg(a,\
-    \ b, l, r);\n        } else {\n            const auto p = in.val<i64>();\n   \
-    \         const auto [ok, l] = cht.minLine(p);\n            if (ok) {\n      \
-    \          out.ln(l.first * p + l.second);\n            } else {\n           \
-    \     out.ln(Str(\"INFINITY\"));\n            }\n        }\n    }\n}\n"
+    \ auto [l, r, a, b] = in.tup<i64, i64, i64, i64>();\n            cht.addSeg({a,\
+    \ b}, l, r);\n        } else {\n            const auto p = in.val<i64>();\n  \
+    \          const auto [ok, l] = cht.minLine(p);\n            if (ok) {\n     \
+    \           out.ln(l.first * p + l.second);\n            } else {\n          \
+    \      out.ln(Str(\"INFINITY\"));\n            }\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/segment_add_get_min\"\n\
     #include \"../../src/ds/li_chao_tree.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
     \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const auto\
     \ [N, Q] = in.tup<int, int>();\n    auto cht = LiChaoTree<i64>(-TEN<i64>(9), TEN<i64>(9));\n\
     \    for (int i : rep(N)) {\n        USE(i);\n        const auto [l, r, a, b]\
-    \ = in.tup<i64, i64, i64, i64>();\n        cht.addSeg(a, b, l, r);\n    }\n  \
-    \  for (int q : rep(Q)) {\n        USE(q);\n        const auto t = in.val<int>();\n\
+    \ = in.tup<i64, i64, i64, i64>();\n        cht.addSeg({a, b}, l, r);\n    }\n\
+    \    for (int q : rep(Q)) {\n        USE(q);\n        const auto t = in.val<int>();\n\
     \        if (t == 0) {\n            const auto [l, r, a, b] = in.tup<i64, i64,\
-    \ i64, i64>();\n            cht.addSeg(a, b, l, r);\n        } else {\n      \
-    \      const auto p = in.val<i64>();\n            const auto [ok, l] = cht.minLine(p);\n\
+    \ i64, i64>();\n            cht.addSeg({a, b}, l, r);\n        } else {\n    \
+    \        const auto p = in.val<i64>();\n            const auto [ok, l] = cht.minLine(p);\n\
     \            if (ok) {\n                out.ln(l.first * p + l.second);\n    \
     \        } else {\n                out.ln(Str(\"INFINITY\"));\n            }\n\
     \        }\n    }\n}\n"
@@ -335,7 +334,7 @@ data:
   isVerificationFile: true
   path: verifications/ds/li_chao_tree.segment.test.cpp
   requiredBy: []
-  timestamp: '2021-06-19 16:58:58+09:00'
+  timestamp: '2021-09-03 04:54:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/ds/li_chao_tree.segment.test.cpp

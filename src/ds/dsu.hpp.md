@@ -243,8 +243,8 @@ data:
   timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/ds/dsu.ut.test.cpp
   - verifications/ds/dsu.test.cpp
+  - verifications/ds/dsu.ut.test.cpp
 documentation_of: src/ds/dsu.hpp
 layout: document
 title: Disjoint Set Union

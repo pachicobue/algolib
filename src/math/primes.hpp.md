@@ -237,9 +237,9 @@ data:
   isVerificationFile: false
   path: src/math/primes.hpp
   requiredBy:
-  - src/math/divisors_moebius.hpp
-  - src/math/divisors_zeta.hpp
   - src/math/gcd_convolution.hpp
+  - src/math/divisors_zeta.hpp
+  - src/math/divisors_moebius.hpp
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

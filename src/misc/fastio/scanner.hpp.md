@@ -387,48 +387,48 @@ data:
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/math/prime_powsum.test.cpp
-  - verifications/math/fps.tshift.test.cpp
-  - verifications/math/berlekamp_massey.test.cpp
-  - verifications/math/fps.convolution.test.cpp
-  - verifications/math/mod_nthroot.test.cpp
-  - verifications/math/mod_sqrt.test.cpp
-  - verifications/math/fps.exp.test.cpp
-  - verifications/math/fps.log.test.cpp
-  - verifications/math/or_convolution.test.cpp
-  - verifications/math/fps.pow.test.cpp
-  - verifications/math/gcd_convolution.test.cpp
-  - verifications/math/xor_convolution.test.cpp
-  - verifications/math/prime_factors.test.cpp
-  - verifications/math/fps.convolution1000000007.test.cpp
-  - verifications/math/multiplicative_sum.test.cpp
-  - verifications/math/fps.div_nth.test.cpp
-  - verifications/math/fps.inv.test.cpp
-  - verifications/math/fps.nth.test.cpp
-  - verifications/math/and_convolution.test.cpp
-  - verifications/ds/ds_table.test.cpp
-  - verifications/ds/li_chao_tree.line.test.cpp
-  - verifications/ds/rsq.test.cpp
-  - verifications/ds/intdict.test.cpp
-  - verifications/ds/li_chao_tree.segment.test.cpp
-  - verifications/ds/dualseg.test.cpp
-  - verifications/ds/dsu.test.cpp
-  - verifications/ds/mo.test.cpp
-  - verifications/ds/swag.test.cpp
-  - verifications/ds/wavelet.rangefreq.test.cpp
-  - verifications/ds/lazyseg.ut.test.cpp
-  - verifications/ds/wavelet.test.cpp
-  - verifications/ds/monotonic_cht.test.cpp
-  - verifications/ds/static_rmq.test.cpp
-  - verifications/ds/fenwick.test.cpp
-  - verifications/ds/lazyseg.test.cpp
-  - verifications/ds/segtree.test.cpp
-  - verifications/misc/fastio/fastio.test.cpp
-  - verifications/graph/bcc.test.cpp
   - verifications/graph/lca.test.cpp
   - verifications/graph/dijkstra.test.cpp
+  - verifications/graph/bcc.test.cpp
   - verifications/graph/scc.test.cpp
   - verifications/graph/diameter.test.cpp
+  - verifications/misc/fastio/fastio.test.cpp
+  - verifications/math/mod_nthroot.test.cpp
+  - verifications/math/multiplicative_sum.test.cpp
+  - verifications/math/berlekamp_massey.test.cpp
+  - verifications/math/gcd_convolution.test.cpp
+  - verifications/math/and_convolution.test.cpp
+  - verifications/math/fps.tshift.test.cpp
+  - verifications/math/fps.inv.test.cpp
+  - verifications/math/fps.log.test.cpp
+  - verifications/math/fps.exp.test.cpp
+  - verifications/math/fps.div_nth.test.cpp
+  - verifications/math/prime_factors.test.cpp
+  - verifications/math/fps.convolution1000000007.test.cpp
+  - verifications/math/prime_powsum.test.cpp
+  - verifications/math/mod_sqrt.test.cpp
+  - verifications/math/fps.convolution.test.cpp
+  - verifications/math/or_convolution.test.cpp
+  - verifications/math/fps.pow.test.cpp
+  - verifications/math/xor_convolution.test.cpp
+  - verifications/math/fps.nth.test.cpp
+  - verifications/ds/dualseg.test.cpp
+  - verifications/ds/intdict.test.cpp
+  - verifications/ds/monotonic_cht.test.cpp
+  - verifications/ds/swag.test.cpp
+  - verifications/ds/dsu.test.cpp
+  - verifications/ds/lazyseg.ut.test.cpp
+  - verifications/ds/static_rmq.test.cpp
+  - verifications/ds/mo.test.cpp
+  - verifications/ds/rsq.test.cpp
+  - verifications/ds/segtree.test.cpp
+  - verifications/ds/wavelet.rangefreq.test.cpp
+  - verifications/ds/lazyseg.test.cpp
+  - verifications/ds/fenwick.test.cpp
+  - verifications/ds/wavelet.test.cpp
+  - verifications/ds/li_chao_tree.line.test.cpp
+  - verifications/ds/li_chao_tree.segment.test.cpp
+  - verifications/ds/ds_table.test.cpp
 documentation_of: src/misc/fastio/scanner.hpp
 layout: document
 redirect_from:
