@@ -301,40 +301,44 @@ data:
     \ += power * (*this)[i];\n            power *= x;\n        }\n        return ans;\n\
     \    }\n    mint& operator[](const int n)\n    {\n        if (deg() < n) { resize(n\
     \ + 1); }\n        return Vec<mint>::operator[](n);\n    }\n    const mint& operator[](const\
-    \ int n) const\n    {\n        return Vec<mint>::operator[](n);\n    }\n    mint\
-    \ at(const int n) const\n    {\n        return (n < size() ? (*this)[n] : mint{0});\n\
-    \    }\n    FPS operator-() const\n    {\n        FPS ans = *this;\n        for\
-    \ (auto& v : ans) {\n            v = -v;\n        }\n        return ans;\n   \
-    \ }\n    FPS& operator+=(const FPS& f)\n    {\n        for (int i : rep(f.size()))\
-    \ {\n            (*this)[i] += f[i];\n        }\n        return *this;\n    }\n\
-    \    FPS& operator-=(const FPS& f)\n    {\n        for (int i : rep(f.size()))\
-    \ {\n            (*this)[i] -= f[i];\n        }\n        return *this;\n    }\n\
-    \    FPS& operator*=(const FPS& f)\n    {\n        return (*this) = (*this) *\
-    \ f;\n    }\n    FPS& operator<<=(const int s)\n    {\n        return *this =\
-    \ (*this << s);\n    }\n    FPS& operator>>=(const int s)\n    {\n        return\
-    \ *this = (*this >> s);\n    }\n    FPS operator+(const FPS& f) const\n    {\n\
-    \        return FPS(*this) += f;\n    }\n    FPS operator-(const FPS& f) const\n\
-    \    {\n        return FPS(*this) -= f;\n    }\n    FPS operator*(const FPS& f)\
-    \ const\n    {\n        return mult(f, size() + f.size() - 1);\n    }\n    FPS\
-    \ operator<<(const int s) const\n    {\n        FPS ans(size() + s);\n       \
-    \ for (int i : rep(size())) {\n            ans[i + s] = (*this)[i];\n        }\n\
-    \        return ans;\n    }\n    FPS operator>>(const int s) const\n    {\n  \
-    \      FPS ans;\n        for (int i : irange(s, size())) {\n            ans[i\
-    \ - s] = (*this)[i];\n        }\n        return ans;\n    }\n    friend Ostream&\
-    \ operator<<(Ostream& os, const FPS& f)\n    {\n        return os << static_cast<Vec<mint>>(f);\n\
-    \    }\n    FPS derivative() const\n    {\n        FPS ans;\n        for (int\
-    \ i : irange(1, size())) {\n            ans[i - 1] = (*this)[i] * i;\n       \
-    \ }\n        return ans;\n    }\n    FPS integral() const\n    {\n        FPS\
-    \ ans;\n        for (int i : irange(1, size() + 1)) {\n            ans[i] = (*this)[i\
-    \ - 1] * mint::sinv(i);\n        }\n        return ans;\n    }\n    FPS mult(const\
-    \ FPS& f, int sz) const\n    {\n        if (sz == 0) { return FPS{}; }\n     \
-    \   const int N = std::min(size(), sz) + std::min(f.size(), sz) - 1;\n       \
-    \ if (N <= (1 << mint::max2p())) {\n            auto ans = conv<mint>(*this, f,\
-    \ sz);\n            return ans;\n        } else {\n            const auto cs1\
-    \ = conv<submint1>(*this, f, sz);\n            const auto cs2 = conv<submint2>(*this,\
-    \ f, sz);\n            const auto cs3 = conv<submint3>(*this, f, sz);\n      \
-    \      FPS ans((int)cs1.size());\n            for (int i : rep(cs1.size())) {\n\
-    \                ans[i] = restore(cs1[i].val(), cs2[i].val(), cs3[i].val());\n\
+    \ int n) const\n    {\n        return Vec<mint>::operator[](n);\n    }\n    template<typename\
+    \ I>\n    mint at(const I n) const\n    {\n        return (n < size() ? (*this)[n]\
+    \ : mint{0});\n    }\n    FPS operator-() const\n    {\n        FPS ans = *this;\n\
+    \        for (auto& v : ans) {\n            v = -v;\n        }\n        return\
+    \ ans;\n    }\n    FPS& operator+=(const FPS& f)\n    {\n        for (int i :\
+    \ rep(f.size())) {\n            (*this)[i] += f[i];\n        }\n        return\
+    \ *this;\n    }\n    FPS& operator-=(const FPS& f)\n    {\n        for (int i\
+    \ : rep(f.size())) {\n            (*this)[i] -= f[i];\n        }\n        return\
+    \ *this;\n    }\n    FPS& operator*=(const FPS& f)\n    {\n        return (*this)\
+    \ = (*this) * f;\n    }\n    FPS& operator<<=(const int s)\n    {\n        return\
+    \ *this = (*this << s);\n    }\n    FPS& operator>>=(const int s)\n    {\n   \
+    \     return *this = (*this >> s);\n    }\n    FPS operator+(const FPS& f) const\n\
+    \    {\n        return FPS(*this) += f;\n    }\n    FPS operator-(const FPS& f)\
+    \ const\n    {\n        return FPS(*this) -= f;\n    }\n    FPS operator*(const\
+    \ FPS& f) const\n    {\n        return mult(f, size() + f.size() - 1);\n    }\n\
+    \    FPS operator<<(const int s) const\n    {\n        FPS ans(size() + s);\n\
+    \        for (int i : rep(size())) {\n            ans[i + s] = (*this)[i];\n \
+    \       }\n        return ans;\n    }\n    FPS operator>>(const int s) const\n\
+    \    {\n        FPS ans;\n        for (int i : irange(s, size())) {\n        \
+    \    ans[i - s] = (*this)[i];\n        }\n        return ans;\n    }\n    friend\
+    \ Ostream& operator<<(Ostream& os, const FPS& f)\n    {\n        return os <<\
+    \ static_cast<Vec<mint>>(f);\n    }\n    FPS derivative() const\n    {\n     \
+    \   FPS ans;\n        for (int i : irange(1, size())) {\n            ans[i - 1]\
+    \ = (*this)[i] * i;\n        }\n        return ans;\n    }\n    FPS integral()\
+    \ const\n    {\n        FPS ans;\n        for (int i : irange(1, size() + 1))\
+    \ {\n            ans[i] = (*this)[i - 1] * mint::sinv(i);\n        }\n       \
+    \ return ans;\n    }\n    FPS mult(const FPS& f, int sz) const\n    {\n      \
+    \  if (sz == 0) { return FPS{}; }\n        const int N = std::min(size(), sz)\
+    \ + std::min(f.size(), sz) - 1;\n        if (N < 10) {\n            FPS ans;\n\
+    \            for (int i : rep(sz)) {\n                for (int j : rep(sz)) {\n\
+    \                    if (i + j >= sz) { break; }\n                    ans[i +\
+    \ j] += this->at(i) * f.at(j);\n                }\n            }\n           \
+    \ return ans;\n        }\n        if (N <= (1 << mint::max2p())) {\n         \
+    \   auto ans = conv<mint>(*this, f, sz);\n            return ans;\n        } else\
+    \ {\n            const auto cs1 = conv<submint1>(*this, f, sz);\n            const\
+    \ auto cs2 = conv<submint2>(*this, f, sz);\n            const auto cs3 = conv<submint3>(*this,\
+    \ f, sz);\n            FPS ans((int)cs1.size());\n            for (int i : rep(cs1.size()))\
+    \ {\n                ans[i] = restore(cs1[i].val(), cs2[i].val(), cs3[i].val());\n\
     \            }\n            return ans;\n        }\n    }\n    FPS smult(int p,\
     \ const mint a, int sz)\n    {\n        FPS ans = low(sz);\n        for (int i\
     \ = 0; i + p < sz; i++) {\n            ans[i + p] += (*this)[i] * a;\n       \
@@ -472,19 +476,19 @@ data:
     \  power *= x;\n        }\n        return ans;\n    }\n    mint& operator[](const\
     \ int n)\n    {\n        if (deg() < n) { resize(n + 1); }\n        return Vec<mint>::operator[](n);\n\
     \    }\n    const mint& operator[](const int n) const\n    {\n        return Vec<mint>::operator[](n);\n\
-    \    }\n    mint at(const int n) const\n    {\n        return (n < size() ? (*this)[n]\
-    \ : mint{0});\n    }\n    FPS operator-() const\n    {\n        FPS ans = *this;\n\
-    \        for (auto& v : ans) {\n            v = -v;\n        }\n        return\
-    \ ans;\n    }\n    FPS& operator+=(const FPS& f)\n    {\n        for (int i :\
-    \ rep(f.size())) {\n            (*this)[i] += f[i];\n        }\n        return\
-    \ *this;\n    }\n    FPS& operator-=(const FPS& f)\n    {\n        for (int i\
-    \ : rep(f.size())) {\n            (*this)[i] -= f[i];\n        }\n        return\
-    \ *this;\n    }\n    FPS& operator*=(const FPS& f)\n    {\n        return (*this)\
-    \ = (*this) * f;\n    }\n    FPS& operator<<=(const int s)\n    {\n        return\
-    \ *this = (*this << s);\n    }\n    FPS& operator>>=(const int s)\n    {\n   \
-    \     return *this = (*this >> s);\n    }\n    FPS operator+(const FPS& f) const\n\
-    \    {\n        return FPS(*this) += f;\n    }\n    FPS operator-(const FPS& f)\
-    \ const\n    {\n        return FPS(*this) -= f;\n    }\n    FPS operator*(const\
+    \    }\n    template<typename I>\n    mint at(const I n) const\n    {\n      \
+    \  return (n < size() ? (*this)[n] : mint{0});\n    }\n    FPS operator-() const\n\
+    \    {\n        FPS ans = *this;\n        for (auto& v : ans) {\n            v\
+    \ = -v;\n        }\n        return ans;\n    }\n    FPS& operator+=(const FPS&\
+    \ f)\n    {\n        for (int i : rep(f.size())) {\n            (*this)[i] +=\
+    \ f[i];\n        }\n        return *this;\n    }\n    FPS& operator-=(const FPS&\
+    \ f)\n    {\n        for (int i : rep(f.size())) {\n            (*this)[i] -=\
+    \ f[i];\n        }\n        return *this;\n    }\n    FPS& operator*=(const FPS&\
+    \ f)\n    {\n        return (*this) = (*this) * f;\n    }\n    FPS& operator<<=(const\
+    \ int s)\n    {\n        return *this = (*this << s);\n    }\n    FPS& operator>>=(const\
+    \ int s)\n    {\n        return *this = (*this >> s);\n    }\n    FPS operator+(const\
+    \ FPS& f) const\n    {\n        return FPS(*this) += f;\n    }\n    FPS operator-(const\
+    \ FPS& f) const\n    {\n        return FPS(*this) -= f;\n    }\n    FPS operator*(const\
     \ FPS& f) const\n    {\n        return mult(f, size() + f.size() - 1);\n    }\n\
     \    FPS operator<<(const int s) const\n    {\n        FPS ans(size() + s);\n\
     \        for (int i : rep(size())) {\n            ans[i + s] = (*this)[i];\n \
@@ -499,61 +503,65 @@ data:
     \ {\n            ans[i] = (*this)[i - 1] * mint::sinv(i);\n        }\n       \
     \ return ans;\n    }\n    FPS mult(const FPS& f, int sz) const\n    {\n      \
     \  if (sz == 0) { return FPS{}; }\n        const int N = std::min(size(), sz)\
-    \ + std::min(f.size(), sz) - 1;\n        if (N <= (1 << mint::max2p())) {\n  \
-    \          auto ans = conv<mint>(*this, f, sz);\n            return ans;\n   \
-    \     } else {\n            const auto cs1 = conv<submint1>(*this, f, sz);\n \
-    \           const auto cs2 = conv<submint2>(*this, f, sz);\n            const\
-    \ auto cs3 = conv<submint3>(*this, f, sz);\n            FPS ans((int)cs1.size());\n\
-    \            for (int i : rep(cs1.size())) {\n                ans[i] = restore(cs1[i].val(),\
-    \ cs2[i].val(), cs3[i].val());\n            }\n            return ans;\n     \
-    \   }\n    }\n    FPS smult(int p, const mint a, int sz)  // *(1+ax^p) (mod x^sz)\n\
-    \    {\n        FPS ans = low(sz);\n        for (int i = 0; i + p < sz; i++) {\n\
-    \            ans[i + p] += (*this)[i] * a;\n        }\n        return ans;\n \
-    \   }\n    FPS sdiv(int p, const mint& a, int sz)  // *(1+ax^p)^(-1) (mod x^sz)\n\
-    \    {\n        FPS ans = low(sz);\n        for (int i = 0; i + p < sz; i++) {\n\
-    \            ans[i + p] -= ans[i] * a;\n        }\n        return ans;\n    }\n\
-    \    FPS inv(int sz) const\n    {\n        const int n = size();\n        assert((*this)[0].val()\
-    \ != 0);\n        const int N = n * 2 - 1;\n        if (N <= (1 << mint::max2p()))\
-    \ {\n            FPS r{(*this)[0].inv()};\n            for (int lg = 0, m = 1;\
-    \ m < sz; m <<= 1, lg++) {\n                FPS f{this->begin(), this->begin()\
-    \ + std::min(n, 2 * m)};\n                FPS g = r;\n                f.resize(2\
-    \ * m), g.resize(2 * m);\n                trans(f, lg + 1, false), trans(g, lg\
-    \ + 1, false);\n                for (int i : rep(2 * m)) {\n                 \
-    \   f[i] *= g[i];\n                }\n                trans(f, lg + 1, true);\n\
-    \                std::fill(f.begin(), f.begin() + m, 0);\n                trans(f,\
-    \ lg + 1, false);\n                for (int i : rep(2 * m)) {\n              \
-    \      f[i] *= g[i];\n                }\n                trans(f, lg + 1, true);\n\
-    \                for (int i = m; i < std::min(2 * m, sz); i++) {\n           \
-    \         r[i] = -f[i];\n                }\n            }\n            return\
-    \ r;\n        } else {\n            FPS g{(*this)[0].inv()};\n            for\
-    \ (int lg = 0, m = 1; m < sz; m <<= 1, lg++) {\n                g = FPS{2} * g\
-    \ - this->mult(g.mult(g, 2 * m), 2 * m);\n            }\n            return g.low(sz);\n\
-    \        }\n    }\n    FPS log(const int sz) const\n    {\n        assert((*this)[0].val()\
-    \ == 1);\n        auto ans = derivative().mult(inv(sz), sz).integral();\n    \
-    \    ans.resize(sz);\n        return ans;\n    }\n    FPS exp(const int sz) const\n\
-    \    {\n        const int l = lsb(sz);\n        if (l == -1) { return FPS{1}.low(sz);\
-    \ }\n        assert((*this)[0].val() == 0);\n\n        const int n = size();\n\
-    \        const int N = n * 2 - 1;\n        if (N <= (1 << mint::max2p())) {\n\
-    \            FPS f = {1, (*this)[1]}, g{1}, G{1, 1};\n            for (int m =\
-    \ 2, lg = 1; m < sz; m <<= 1, lg++) {\n                auto F = f;\n         \
-    \       F.resize(2 * m), trans(F, lg + 1, false);\n                FPS z(m);\n\
-    \                for (int i : rep(m)) {\n                    z[i] = F[i] * G[i];\n\
-    \                }\n                trans(z, lg, true);\n                std::fill(z.begin(),\
-    \ z.begin() + m / 2, 0);\n                trans(z, lg, false);\n             \
-    \   for (int i : rep(m)) {\n                    z[i] *= G[i];\n              \
-    \  }\n                trans(z, lg, true);\n                for (int i : irange(m\
-    \ / 2, m)) {\n                    g[i] = -z[i];\n                }\n         \
-    \       G = g, G.resize(m * 2), trans(G, lg + 1, false);\n                auto\
-    \ q = low(m).derivative();\n                q.resize(m), trans(q, lg, false);\n\
-    \                for (int i : rep(m)) {\n                    q[i] *= F[i];\n \
-    \               }\n                trans(q, lg, true);\n                const\
-    \ auto df = f.derivative();\n                for (int i : rep(m - 1)) {\n    \
-    \                q[i] -= df[i];\n                }\n                q.resize(m\
-    \ * 2);\n                for (int i : rep(m - 1)) {\n                    q[m +\
-    \ i] = q[i], q[i] = 0;\n                }\n                trans(q, lg + 1, false);\n\
-    \                for (int i : rep(m * 2)) {\n                    q[i] *= G[i];\n\
-    \                }\n                trans(q, lg + 1, true);\n                q.pop_back();\n\
-    \                q = q.integral();\n                for (int i = m; i < std::min(size(),\
+    \ + std::min(f.size(), sz) - 1;\n        if (N < 10) {\n            FPS ans;\n\
+    \            for (int i : rep(sz)) {\n                for (int j : rep(sz)) {\n\
+    \                    if (i + j >= sz) { break; }\n                    ans[i +\
+    \ j] += this->at(i) * f.at(j);\n                }\n            }\n           \
+    \ return ans;\n        }\n        if (N <= (1 << mint::max2p())) {\n         \
+    \   auto ans = conv<mint>(*this, f, sz);\n            return ans;\n        } else\
+    \ {\n            const auto cs1 = conv<submint1>(*this, f, sz);\n            const\
+    \ auto cs2 = conv<submint2>(*this, f, sz);\n            const auto cs3 = conv<submint3>(*this,\
+    \ f, sz);\n            FPS ans((int)cs1.size());\n            for (int i : rep(cs1.size()))\
+    \ {\n                ans[i] = restore(cs1[i].val(), cs2[i].val(), cs3[i].val());\n\
+    \            }\n            return ans;\n        }\n    }\n    FPS smult(int p,\
+    \ const mint a, int sz)  // *(1+ax^p) (mod x^sz)\n    {\n        FPS ans = low(sz);\n\
+    \        for (int i = 0; i + p < sz; i++) {\n            ans[i + p] += (*this)[i]\
+    \ * a;\n        }\n        return ans;\n    }\n    FPS sdiv(int p, const mint&\
+    \ a, int sz)  // *(1+ax^p)^(-1) (mod x^sz)\n    {\n        FPS ans = low(sz);\n\
+    \        for (int i = 0; i + p < sz; i++) {\n            ans[i + p] -= ans[i]\
+    \ * a;\n        }\n        return ans;\n    }\n    FPS inv(int sz) const\n   \
+    \ {\n        const int n = size();\n        assert((*this)[0].val() != 0);\n \
+    \       const int N = n * 2 - 1;\n        if (N <= (1 << mint::max2p())) {\n \
+    \           FPS r{(*this)[0].inv()};\n            for (int lg = 0, m = 1; m <\
+    \ sz; m <<= 1, lg++) {\n                FPS f{this->begin(), this->begin() + std::min(n,\
+    \ 2 * m)};\n                FPS g = r;\n                f.resize(2 * m), g.resize(2\
+    \ * m);\n                trans(f, lg + 1, false), trans(g, lg + 1, false);\n \
+    \               for (int i : rep(2 * m)) {\n                    f[i] *= g[i];\n\
+    \                }\n                trans(f, lg + 1, true);\n                std::fill(f.begin(),\
+    \ f.begin() + m, 0);\n                trans(f, lg + 1, false);\n             \
+    \   for (int i : rep(2 * m)) {\n                    f[i] *= g[i];\n          \
+    \      }\n                trans(f, lg + 1, true);\n                for (int i\
+    \ = m; i < std::min(2 * m, sz); i++) {\n                    r[i] = -f[i];\n  \
+    \              }\n            }\n            return r;\n        } else {\n   \
+    \         FPS g{(*this)[0].inv()};\n            for (int lg = 0, m = 1; m < sz;\
+    \ m <<= 1, lg++) {\n                g = FPS{2} * g - this->mult(g.mult(g, 2 *\
+    \ m), 2 * m);\n            }\n            return g.low(sz);\n        }\n    }\n\
+    \    FPS log(const int sz) const\n    {\n        assert((*this)[0].val() == 1);\n\
+    \        auto ans = derivative().mult(inv(sz), sz).integral();\n        ans.resize(sz);\n\
+    \        return ans;\n    }\n    FPS exp(const int sz) const\n    {\n        const\
+    \ int l = lsb(sz);\n        if (l == -1) { return FPS{1}.low(sz); }\n        assert((*this)[0].val()\
+    \ == 0);\n\n        const int n = size();\n        const int N = n * 2 - 1;\n\
+    \        if (N <= (1 << mint::max2p())) {\n            FPS f = {1, (*this)[1]},\
+    \ g{1}, G{1, 1};\n            for (int m = 2, lg = 1; m < sz; m <<= 1, lg++) {\n\
+    \                auto F = f;\n                F.resize(2 * m), trans(F, lg + 1,\
+    \ false);\n                FPS z(m);\n                for (int i : rep(m)) {\n\
+    \                    z[i] = F[i] * G[i];\n                }\n                trans(z,\
+    \ lg, true);\n                std::fill(z.begin(), z.begin() + m / 2, 0);\n  \
+    \              trans(z, lg, false);\n                for (int i : rep(m)) {\n\
+    \                    z[i] *= G[i];\n                }\n                trans(z,\
+    \ lg, true);\n                for (int i : irange(m / 2, m)) {\n             \
+    \       g[i] = -z[i];\n                }\n                G = g, G.resize(m *\
+    \ 2), trans(G, lg + 1, false);\n                auto q = low(m).derivative();\n\
+    \                q.resize(m), trans(q, lg, false);\n                for (int i\
+    \ : rep(m)) {\n                    q[i] *= F[i];\n                }\n        \
+    \        trans(q, lg, true);\n                const auto df = f.derivative();\n\
+    \                for (int i : rep(m - 1)) {\n                    q[i] -= df[i];\n\
+    \                }\n                q.resize(m * 2);\n                for (int\
+    \ i : rep(m - 1)) {\n                    q[m + i] = q[i], q[i] = 0;\n        \
+    \        }\n                trans(q, lg + 1, false);\n                for (int\
+    \ i : rep(m * 2)) {\n                    q[i] *= G[i];\n                }\n  \
+    \              trans(q, lg + 1, true);\n                q.pop_back();\n      \
+    \          q = q.integral();\n                for (int i = m; i < std::min(size(),\
     \ m * 2); i++) {\n                    q[i] += (*this)[i];\n                }\n\
     \                std::fill(q.begin(), q.begin() + m, 0);\n                trans(q,\
     \ lg + 1, false);\n                for (int i = 0; i < m * 2; i++) {\n       \
@@ -649,20 +657,20 @@ data:
   isVerificationFile: false
   path: src/math/fps.hpp
   requiredBy:
-  - src/math/fps_div_nth.hpp
   - src/math/nth_term.hpp
-  timestamp: '2021-06-15 01:30:20+09:00'
+  - src/math/fps_div_nth.hpp
+  timestamp: '2021-09-02 11:14:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/math/fps.nth.test.cpp
-  - verifications/math/fps.inv.test.cpp
-  - verifications/math/fps.div_nth.test.cpp
-  - verifications/math/fps.convolution1000000007.test.cpp
   - verifications/math/fps.tshift.test.cpp
-  - verifications/math/fps.pow.test.cpp
   - verifications/math/fps.convolution.test.cpp
-  - verifications/math/fps.log.test.cpp
   - verifications/math/fps.exp.test.cpp
+  - verifications/math/fps.log.test.cpp
+  - verifications/math/fps.pow.test.cpp
+  - verifications/math/fps.convolution1000000007.test.cpp
+  - verifications/math/fps.div_nth.test.cpp
+  - verifications/math/fps.inv.test.cpp
+  - verifications/math/fps.nth.test.cpp
 documentation_of: src/math/fps.hpp
 layout: document
 redirect_from:

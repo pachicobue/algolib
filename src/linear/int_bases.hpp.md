@@ -269,8 +269,8 @@ data:
   timestamp: '2021-06-13 23:28:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/linear/int_bases.test.cpp
   - verifications/linear/int_bases.ut.test.cpp
+  - verifications/linear/int_bases.test.cpp
 documentation_of: src/linear/int_bases.hpp
 layout: document
 redirect_from:

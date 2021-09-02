@@ -211,7 +211,7 @@ data:
     \     for (const int i : rep(vs.size())) {\n            m_os << (i ? \" \" : \"\
     \"), dump(vs[i]);\n        }\n    }\n    template<typename T>\n    void dump(const\
     \ Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size())) {\n  \
-    \          m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n        }\n    }\n   \
+    \          m_os << (i ? \"\\n\" : \"\"), dump(vss[i]);\n        }\n    }\n   \
     \ template<typename T, typename... Ts>\n    int dump(const T& v, const Ts&...\
     \ args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n        return 0;\n\
     \    }\n    Ostream& m_os;\n};\nPrinter out;\nstd::stringstream ss;\nPrinter printer{ss};\n\
@@ -287,7 +287,7 @@ data:
   isVerificationFile: true
   path: verifications/misc/printer.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-09-02 11:14:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/misc/printer.test.cpp

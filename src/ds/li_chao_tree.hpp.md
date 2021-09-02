@@ -309,8 +309,8 @@ data:
   timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/ds/li_chao_tree.segment.test.cpp
   - verifications/ds/li_chao_tree.line.test.cpp
+  - verifications/ds/li_chao_tree.segment.test.cpp
 documentation_of: src/ds/li_chao_tree.hpp
 layout: document
 title: Li Chao Tree

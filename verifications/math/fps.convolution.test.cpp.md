@@ -280,40 +280,44 @@ data:
     \ += power * (*this)[i];\n            power *= x;\n        }\n        return ans;\n\
     \    }\n    mint& operator[](const int n)\n    {\n        if (deg() < n) { resize(n\
     \ + 1); }\n        return Vec<mint>::operator[](n);\n    }\n    const mint& operator[](const\
-    \ int n) const\n    {\n        return Vec<mint>::operator[](n);\n    }\n    mint\
-    \ at(const int n) const\n    {\n        return (n < size() ? (*this)[n] : mint{0});\n\
-    \    }\n    FPS operator-() const\n    {\n        FPS ans = *this;\n        for\
-    \ (auto& v : ans) {\n            v = -v;\n        }\n        return ans;\n   \
-    \ }\n    FPS& operator+=(const FPS& f)\n    {\n        for (int i : rep(f.size()))\
-    \ {\n            (*this)[i] += f[i];\n        }\n        return *this;\n    }\n\
-    \    FPS& operator-=(const FPS& f)\n    {\n        for (int i : rep(f.size()))\
-    \ {\n            (*this)[i] -= f[i];\n        }\n        return *this;\n    }\n\
-    \    FPS& operator*=(const FPS& f)\n    {\n        return (*this) = (*this) *\
-    \ f;\n    }\n    FPS& operator<<=(const int s)\n    {\n        return *this =\
-    \ (*this << s);\n    }\n    FPS& operator>>=(const int s)\n    {\n        return\
-    \ *this = (*this >> s);\n    }\n    FPS operator+(const FPS& f) const\n    {\n\
-    \        return FPS(*this) += f;\n    }\n    FPS operator-(const FPS& f) const\n\
-    \    {\n        return FPS(*this) -= f;\n    }\n    FPS operator*(const FPS& f)\
-    \ const\n    {\n        return mult(f, size() + f.size() - 1);\n    }\n    FPS\
-    \ operator<<(const int s) const\n    {\n        FPS ans(size() + s);\n       \
-    \ for (int i : rep(size())) {\n            ans[i + s] = (*this)[i];\n        }\n\
-    \        return ans;\n    }\n    FPS operator>>(const int s) const\n    {\n  \
-    \      FPS ans;\n        for (int i : irange(s, size())) {\n            ans[i\
-    \ - s] = (*this)[i];\n        }\n        return ans;\n    }\n    friend Ostream&\
-    \ operator<<(Ostream& os, const FPS& f)\n    {\n        return os << static_cast<Vec<mint>>(f);\n\
-    \    }\n    FPS derivative() const\n    {\n        FPS ans;\n        for (int\
-    \ i : irange(1, size())) {\n            ans[i - 1] = (*this)[i] * i;\n       \
-    \ }\n        return ans;\n    }\n    FPS integral() const\n    {\n        FPS\
-    \ ans;\n        for (int i : irange(1, size() + 1)) {\n            ans[i] = (*this)[i\
-    \ - 1] * mint::sinv(i);\n        }\n        return ans;\n    }\n    FPS mult(const\
-    \ FPS& f, int sz) const\n    {\n        if (sz == 0) { return FPS{}; }\n     \
-    \   const int N = std::min(size(), sz) + std::min(f.size(), sz) - 1;\n       \
-    \ if (N <= (1 << mint::max2p())) {\n            auto ans = conv<mint>(*this, f,\
-    \ sz);\n            return ans;\n        } else {\n            const auto cs1\
-    \ = conv<submint1>(*this, f, sz);\n            const auto cs2 = conv<submint2>(*this,\
-    \ f, sz);\n            const auto cs3 = conv<submint3>(*this, f, sz);\n      \
-    \      FPS ans((int)cs1.size());\n            for (int i : rep(cs1.size())) {\n\
-    \                ans[i] = restore(cs1[i].val(), cs2[i].val(), cs3[i].val());\n\
+    \ int n) const\n    {\n        return Vec<mint>::operator[](n);\n    }\n    template<typename\
+    \ I>\n    mint at(const I n) const\n    {\n        return (n < size() ? (*this)[n]\
+    \ : mint{0});\n    }\n    FPS operator-() const\n    {\n        FPS ans = *this;\n\
+    \        for (auto& v : ans) {\n            v = -v;\n        }\n        return\
+    \ ans;\n    }\n    FPS& operator+=(const FPS& f)\n    {\n        for (int i :\
+    \ rep(f.size())) {\n            (*this)[i] += f[i];\n        }\n        return\
+    \ *this;\n    }\n    FPS& operator-=(const FPS& f)\n    {\n        for (int i\
+    \ : rep(f.size())) {\n            (*this)[i] -= f[i];\n        }\n        return\
+    \ *this;\n    }\n    FPS& operator*=(const FPS& f)\n    {\n        return (*this)\
+    \ = (*this) * f;\n    }\n    FPS& operator<<=(const int s)\n    {\n        return\
+    \ *this = (*this << s);\n    }\n    FPS& operator>>=(const int s)\n    {\n   \
+    \     return *this = (*this >> s);\n    }\n    FPS operator+(const FPS& f) const\n\
+    \    {\n        return FPS(*this) += f;\n    }\n    FPS operator-(const FPS& f)\
+    \ const\n    {\n        return FPS(*this) -= f;\n    }\n    FPS operator*(const\
+    \ FPS& f) const\n    {\n        return mult(f, size() + f.size() - 1);\n    }\n\
+    \    FPS operator<<(const int s) const\n    {\n        FPS ans(size() + s);\n\
+    \        for (int i : rep(size())) {\n            ans[i + s] = (*this)[i];\n \
+    \       }\n        return ans;\n    }\n    FPS operator>>(const int s) const\n\
+    \    {\n        FPS ans;\n        for (int i : irange(s, size())) {\n        \
+    \    ans[i - s] = (*this)[i];\n        }\n        return ans;\n    }\n    friend\
+    \ Ostream& operator<<(Ostream& os, const FPS& f)\n    {\n        return os <<\
+    \ static_cast<Vec<mint>>(f);\n    }\n    FPS derivative() const\n    {\n     \
+    \   FPS ans;\n        for (int i : irange(1, size())) {\n            ans[i - 1]\
+    \ = (*this)[i] * i;\n        }\n        return ans;\n    }\n    FPS integral()\
+    \ const\n    {\n        FPS ans;\n        for (int i : irange(1, size() + 1))\
+    \ {\n            ans[i] = (*this)[i - 1] * mint::sinv(i);\n        }\n       \
+    \ return ans;\n    }\n    FPS mult(const FPS& f, int sz) const\n    {\n      \
+    \  if (sz == 0) { return FPS{}; }\n        const int N = std::min(size(), sz)\
+    \ + std::min(f.size(), sz) - 1;\n        if (N < 10) {\n            FPS ans;\n\
+    \            for (int i : rep(sz)) {\n                for (int j : rep(sz)) {\n\
+    \                    if (i + j >= sz) { break; }\n                    ans[i +\
+    \ j] += this->at(i) * f.at(j);\n                }\n            }\n           \
+    \ return ans;\n        }\n        if (N <= (1 << mint::max2p())) {\n         \
+    \   auto ans = conv<mint>(*this, f, sz);\n            return ans;\n        } else\
+    \ {\n            const auto cs1 = conv<submint1>(*this, f, sz);\n            const\
+    \ auto cs2 = conv<submint2>(*this, f, sz);\n            const auto cs3 = conv<submint3>(*this,\
+    \ f, sz);\n            FPS ans((int)cs1.size());\n            for (int i : rep(cs1.size()))\
+    \ {\n                ans[i] = restore(cs1[i].val(), cs2[i].val(), cs3[i].val());\n\
     \            }\n            return ans;\n        }\n    }\n    FPS smult(int p,\
     \ const mint a, int sz)\n    {\n        FPS ans = low(sz);\n        for (int i\
     \ = 0; i + p < sz; i++) {\n            ans[i + p] += (*this)[i] * a;\n       \
@@ -515,7 +519,7 @@ data:
   isVerificationFile: true
   path: verifications/math/fps.convolution.test.cpp
   requiredBy: []
-  timestamp: '2021-06-15 01:30:20+09:00'
+  timestamp: '2021-09-02 11:14:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/math/fps.convolution.test.cpp

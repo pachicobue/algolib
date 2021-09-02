@@ -424,8 +424,8 @@ data:
   timestamp: '2021-06-15 01:30:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/math/prime_factors.test.cpp
   - verifications/math/mod_nthroot.test.cpp
+  - verifications/math/prime_factors.test.cpp
 documentation_of: src/math/prime_factors.hpp
 layout: document
 redirect_from:

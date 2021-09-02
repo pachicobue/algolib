@@ -340,9 +340,9 @@ data:
   timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/graph/lca.test.cpp
   - verifications/ds/ds_table.test.cpp
   - verifications/ds/static_rmq.test.cpp
+  - verifications/graph/lca.test.cpp
 documentation_of: src/ds/static_rmq.hpp
 layout: document
 title: "\u9759\u7684\u6570\u5217\u306ERMQ"

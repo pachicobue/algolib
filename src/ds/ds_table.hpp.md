@@ -255,14 +255,14 @@ data:
   isVerificationFile: false
   path: src/ds/ds_table.hpp
   requiredBy:
-  - src/graph/lca.hpp
   - src/ds/static_rmq.hpp
+  - src/graph/lca.hpp
   timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/graph/lca.test.cpp
   - verifications/ds/ds_table.test.cpp
   - verifications/ds/static_rmq.test.cpp
+  - verifications/graph/lca.test.cpp
 documentation_of: src/ds/ds_table.hpp
 layout: document
 title: Disjoint Sparse Table

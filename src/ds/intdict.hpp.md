@@ -255,9 +255,9 @@ data:
   timestamp: '2021-06-19 16:58:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verifications/math/mod_nthroot.test.cpp
   - verifications/ds/intdict.test.cpp
   - verifications/ds/intdict.ut.test.cpp
-  - verifications/math/mod_nthroot.test.cpp
 documentation_of: src/ds/intdict.hpp
 layout: document
 title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"

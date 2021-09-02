@@ -7,12 +7,12 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.6/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 72, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
-    , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
-    , line 478, in update\n    self._update2(path)\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
-    , line 457, in _update2\n    subprocess.check_call(commands)\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/subprocess.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.6/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
+    , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.9.6/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+    , line 478, in update\n    self._update2(path)\n  File \"/opt/hostedtoolcache/Python/3.9.6/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+    , line 457, in _update2\n    subprocess.check_call(commands)\n  File \"/opt/hostedtoolcache/Python/3.9.6/x64/lib/python3.9/subprocess.py\"\
     , line 373, in check_call\n    raise CalledProcessError(retcode, cmd)\nsubprocess.CalledProcessError:\
     \ Command '['g++', 'verifications/graph/hld.test.cpp', '-o', 'verifications/graph/hld.test.tmp',\
     \ '-E', '-P', '-I', '/home/runner/work/algolib/algolib/dummy_headers', '-I', '/home/runner/work/algolib/algolib']'\

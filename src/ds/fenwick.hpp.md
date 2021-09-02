@@ -263,8 +263,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/ds/mo.test.cpp
-  - verifications/ds/fenwick.max_right.test.cpp
   - verifications/ds/fenwick.test.cpp
+  - verifications/ds/fenwick.max_right.test.cpp
 documentation_of: src/ds/fenwick.hpp
 layout: document
 title: Fenwick Tree

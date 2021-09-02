@@ -250,7 +250,7 @@ data:
     \     for (const int i : rep(vs.size())) {\n            m_os << (i ? \" \" : \"\
     \"), dump(vs[i]);\n        }\n    }\n    template<typename T>\n    void dump(const\
     \ Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size())) {\n  \
-    \          m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n        }\n    }\n   \
+    \          m_os << (i ? \"\\n\" : \"\"), dump(vss[i]);\n        }\n    }\n   \
     \ template<typename T, typename... Ts>\n    int dump(const T& v, const Ts&...\
     \ args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n        return 0;\n\
     \    }\n    Ostream& m_os;\n};\nPrinter out;\n"
@@ -266,7 +266,7 @@ data:
     \ Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size())) {\n         \
     \   m_os << (i ? \" \" : \"\"), dump(vs[i]);\n        }\n    }\n    template<typename\
     \ T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i :\
-    \ rep(vss.size())) {\n            m_os << (i ? \"\" : \"\\n\"), dump(vss[i]);\n\
+    \ rep(vss.size())) {\n            m_os << (i ? \"\\n\" : \"\"), dump(vss[i]);\n\
     \        }\n    }\n    template<typename T, typename... Ts>\n    int dump(const\
     \ T& v, const Ts&... args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n\
     \        return 0;\n    }\n    Ostream& m_os;\n};\nPrinter out;\n"
@@ -288,24 +288,24 @@ data:
   isVerificationFile: false
   path: src/misc/printer.hpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
+  timestamp: '2021-09-02 11:14:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/graph/level_ancestor.lca.test.cpp
-  - verifications/graph/centroid_decomp.test.cpp
-  - verifications/graph/bellman_ford.test.cpp
-  - verifications/graph/warshall_floyd.test.cpp
+  - verifications/math/divisors.test.cpp
   - verifications/flow/max_flow.test.cpp
   - verifications/flow/max_flow.bipartite_matching.test.cpp
-  - verifications/misc/printer.test.cpp
-  - verifications/misc/io.test.cpp
-  - verifications/string/z_algorithm.test.cpp
-  - verifications/string/manacher.test.cpp
-  - verifications/math/divisors.test.cpp
-  - verifications/linear/int_bases.test.cpp
   - verifications/linear/matrix.test.cpp
   - verifications/linear/array_matrix.test.cpp
   - verifications/linear/bit_bases.test.cpp
+  - verifications/linear/int_bases.test.cpp
+  - verifications/string/manacher.test.cpp
+  - verifications/string/z_algorithm.test.cpp
+  - verifications/misc/io.test.cpp
+  - verifications/misc/printer.test.cpp
+  - verifications/graph/centroid_decomp.test.cpp
+  - verifications/graph/bellman_ford.test.cpp
+  - verifications/graph/warshall_floyd.test.cpp
+  - verifications/graph/level_ancestor.lca.test.cpp
 documentation_of: src/misc/printer.hpp
 layout: document
 title: "Printer (\u51FA\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
