@@ -1,46 +1,46 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
@@ -98,31 +98,31 @@ data:
     \ (a > b) {\n        a = b;\n        return true;\n    } else {\n        return\
     \ false;\n    }\n}\ntemplate<typename T>\nbool chmax(T& a, const T& b)\n{\n  \
     \  if (a < b) {\n        a = b;\n        return true;\n    } else {\n        return\
-    \ false;\n    }\n}\ntemplate<typename T>\nconstexpr T fdiv(T x, T y)\n{\n    if\
-    \ (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? x / y : (x - y + 1) / y;\n\
-    }\ntemplate<typename T>\nconstexpr T cdiv(T x, T y)\n{\n    if (y < T{}) { x =\
-    \ -x, y = -y; }\n    return x >= T{} ? (x + y - 1) / y : x / y;\n}\ntemplate<typename\
-    \ T, typename I>\nconstexpr T modPower(T v, I n, T mod)\n{\n    T ans = 1 % mod;\n\
-    \    for (; n > 0; n >>= 1, (v *= v) %= mod) {\n        if (n % 2 == 1) { (ans\
-    \ *= v) %= mod; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\n\
-    constexpr T power(T v, I n)\n{\n    T ans = 1;\n    for (; n > 0; n >>= 1, v *=\
-    \ v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename\
-    \ T, typename I>\nconstexpr T power(T v, I n, const T& e)\n{\n    T ans = e;\n\
-    \    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n\
-    \    }\n    return ans;\n}\ntemplate<typename T>\nVec<T> operator+=(Vec<T>& vs1,\
-    \ const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n\
-    \    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const Vec<T>& vs1,\
-    \ const Vec<T>& vs2)\n{\n    auto vs = vs1;\n    vs += vs2;\n    return vs;\n\
-    }\ntemplate<typename T>\nvoid fillAll(Vec<T>& vs, const T& v)\n{\n    std::fill(vs.begin(),\
-    \ vs.end(), v);\n}\ntemplate<typename T, typename C = Lt<T>>\nvoid sortAll(Vec<T>&\
-    \ vs, C comp = C{})\n{\n    std::sort(vs.begin(), vs.end(), comp);\n}\ntemplate<typename\
-    \ T>\nvoid reverseAll(Vec<T>& vs)\n{\n    std::reverse(vs.begin(), vs.end());\n\
-    }\ntemplate<typename T>\nvoid uniqueAll(Vec<T>& vs)\n{\n    sortAll(vs);\n   \
-    \ vs.erase(std::unique(vs.begin(), vs.end()), vs.end());\n}\ntemplate<typename\
-    \ T, typename V = T>\nV sumAll(const Vec<T>& vs)\n{\n    return std::accumulate(vs.begin(),\
-    \ vs.end(), V{});\n}\ntemplate<typename T>\nint minInd(const Vec<T>& vs)\n{\n\
-    \    return std::min_element(vs.begin(), vs.end()) - vs.begin();\n}\ntemplate<typename\
-    \ T>\nint maxInd(const Vec<T>& vs)\n{\n    return std::max_element(vs.begin(),\
+    \ false;\n    }\n}\ntemplate<typename T>\nconstexpr T floorDiv(T x, T y)\n{\n\
+    \    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? x / y : (x - y +\
+    \ 1) / y;\n}\ntemplate<typename T>\nconstexpr T ceilDiv(T x, T y)\n{\n    if (y\
+    \ < T{}) { x = -x, y = -y; }\n    return x >= T{} ? (x + y - 1) / y : x / y;\n\
+    }\ntemplate<typename T, typename I>\nconstexpr T modPower(T v, I n, T mod)\n{\n\
+    \    T ans = 1 % mod;\n    for (; n > 0; n >>= 1, (v *= v) %= mod) {\n       \
+    \ if (n % 2 == 1) { (ans *= v) %= mod; }\n    }\n    return ans;\n}\ntemplate<typename\
+    \ T, typename I>\nconstexpr T power(T v, I n)\n{\n    T ans = 1;\n    for (; n\
+    \ > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return\
+    \ ans;\n}\ntemplate<typename T, typename I>\nconstexpr T power(T v, I n, const\
+    \ T& e)\n{\n    T ans = e;\n    for (; n > 0; n >>= 1, v *= v) {\n        if (n\
+    \ % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename T>\nVec<T>\
+    \ operator+=(Vec<T>& vs1, const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(), vs2.begin(),\
+    \ vs2.end());\n    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const\
+    \ Vec<T>& vs1, const Vec<T>& vs2)\n{\n    auto vs = vs1;\n    vs += vs2;\n   \
+    \ return vs;\n}\ntemplate<typename T>\nvoid fillAll(Vec<T>& vs, const T& v)\n\
+    {\n    std::fill(vs.begin(), vs.end(), v);\n}\ntemplate<typename T, typename C\
+    \ = Lt<T>>\nvoid sortAll(Vec<T>& vs, C comp = C{})\n{\n    std::sort(vs.begin(),\
+    \ vs.end(), comp);\n}\ntemplate<typename T>\nvoid reverseAll(Vec<T>& vs)\n{\n\
+    \    std::reverse(vs.begin(), vs.end());\n}\ntemplate<typename T>\nvoid uniqueAll(Vec<T>&\
+    \ vs)\n{\n    sortAll(vs);\n    vs.erase(std::unique(vs.begin(), vs.end()), vs.end());\n\
+    }\ntemplate<typename T, typename V = T>\nV sumAll(const Vec<T>& vs)\n{\n    return\
+    \ std::accumulate(vs.begin(), vs.end(), V{});\n}\ntemplate<typename T>\nint minInd(const\
+    \ Vec<T>& vs)\n{\n    return std::min_element(vs.begin(), vs.end()) - vs.begin();\n\
+    }\ntemplate<typename T>\nint maxInd(const Vec<T>& vs)\n{\n    return std::max_element(vs.begin(),\
     \ vs.end()) - vs.begin();\n}\ntemplate<typename T>\nint lbInd(const Vec<T>& vs,\
     \ const T& v)\n{\n    return std::lower_bound(vs.begin(), vs.end(), v) - vs.begin();\n\
     }\ntemplate<typename T>\nint ubInd(const Vec<T>& vs, const T& v)\n{\n    return\
@@ -205,42 +205,43 @@ data:
     \    {\n        if (l1 == NIL or l2 == NIL) { return l2 == NIL; }\n        const\
     \ auto& [a1, b1] = l1;\n        const auto& [a2, b2] = l2;\n        if (a1 ==\
     \ a2) {\n            return b1 <= b2;\n        } else if (a1 > a2) {\n       \
-    \     return x <= fdiv(b2 - b1, a1 - a2);\n        } else {\n            return\
-    \ fdiv(b1 - b2, a2 - a1) < x;\n        }\n    }\npublic:\n    LiChaoTree(T xmin,\
-    \ T xsup) : m_xmin{xmin}, m_xsup{xsup}, m_nodes{Node{}}\n    {\n        assert(m_xmin\
-    \ < m_xsup);\n    }\n    void addLine(const L& line)\n    {\n        add(line,\
-    \ 0, m_xmin, m_xsup);\n    }\n    void addSeg(const L& line, T x_left, T x_right)\n\
-    \    {\n        if (x_left >= x_right) { return; }\n        assert(m_xmin <= x_left\
-    \ and x_right <= m_xsup);\n        Fix([&](auto dfs, int i, T lx, T rx) -> void\
-    \ {\n            if (x_left <= lx and rx <= x_right) {\n                add(line,\
-    \ i, lx, rx);\n            } else {\n                if (rx - lx == 1) { return;\
-    \ }\n                auto [li, ri] = m_nodes[i].sons;\n                const T\
-    \ mx = (lx + rx) / 2;\n                if (lx < x_right and x_left < mx) {\n \
-    \                   if (li == -1) { li = m_nodes[i].sons[0] = alloc(); }\n   \
-    \                 dfs(li, lx, mx);\n                }\n                if (mx\
-    \ < x_right and x_left < rx) {\n                    if (ri == -1) { ri = m_nodes[i].sons[1]\
-    \ = alloc(); }\n                    dfs(ri, mx, rx);\n                }\n    \
-    \        }\n        })(0, m_xmin, m_xsup);\n    }\n    Pair<bool, L> minLine(const\
-    \ T x) const\n    {\n        T lx = m_xmin, rx = m_xsup;\n        L ans = NIL;\n\
-    \        for (int i = 0; i != -1;) {\n            const auto& pl = m_nodes[i].line;\n\
-    \            if (pl != NIL) {\n                if (comp(pl, ans, x)) { ans = pl;\
-    \ }\n            }\n            const auto& [li, ri] = m_nodes[i].sons;\n    \
-    \        const T mx = (lx + rx) / 2;\n            if (x < mx) {\n            \
-    \    i = li;\n                rx = mx;\n            } else {\n               \
-    \ i = ri;\n                lx = mx;\n            }\n        }\n        return\
-    \ {ans != NIL, ans};\n    }\nprivate:\n    void add(L l, int i, T lx, T rx)\n\
-    \    {\n        for (;;) {\n            const auto& pl = m_nodes[i].line;\n  \
-    \          const T mx = (lx + rx) / 2;\n            const bool lunder = comp(l,\
-    \ pl, lx);\n            const bool runder = comp(l, pl, rx - 1);\n           \
-    \ const bool munder = comp(l, pl, mx);\n            if (munder) { std::swap(l,\
-    \ m_nodes[i].line); }\n            if (lunder == runder) { break; }\n        \
-    \    int dir = (lunder == munder ? 1 : 0);\n            int nind = m_nodes[i].sons[dir];\n\
-    \            if (nind == -1) { nind = m_nodes[i].sons[dir] = alloc(); }\n    \
-    \        i = nind;\n            if (rx - lx == 1) { break; }\n            if (lunder\
-    \ == munder) {\n                lx = mx;\n            } else {\n             \
-    \   rx = mx;\n            }\n        }\n    }\n    int alloc()\n    {\n      \
-    \  m_nodes.push_back(Node{});\n        return (int)m_nodes.size() - 1;\n    }\n\
-    \    T m_xmin, m_xsup;\n    Vec<Node> m_nodes;\n};\n"
+    \     return x <= floorDiv(b2 - b1, a1 - a2);\n        } else {\n            return\
+    \ floorDiv(b1 - b2, a2 - a1) < x;\n        }\n    }\npublic:\n    LiChaoTree(T\
+    \ xmin, T xsup) : m_xmin{xmin}, m_xsup{xsup}, m_nodes{Node{}}\n    {\n       \
+    \ assert(m_xmin < m_xsup);\n    }\n    void addLine(const L& line)\n    {\n  \
+    \      add(line, 0, m_xmin, m_xsup);\n    }\n    void addSeg(const L& line, T\
+    \ x_left, T x_right)\n    {\n        if (x_left >= x_right) { return; }\n    \
+    \    assert(m_xmin <= x_left and x_right <= m_xsup);\n        Fix([&](auto dfs,\
+    \ int i, T lx, T rx) -> void {\n            if (x_left <= lx and rx <= x_right)\
+    \ {\n                add(line, i, lx, rx);\n            } else {\n           \
+    \     if (rx - lx == 1) { return; }\n                auto [li, ri] = m_nodes[i].sons;\n\
+    \                const T mx = (lx + rx) / 2;\n                if (lx < x_right\
+    \ and x_left < mx) {\n                    if (li == -1) { li = m_nodes[i].sons[0]\
+    \ = alloc(); }\n                    dfs(li, lx, mx);\n                }\n    \
+    \            if (mx < x_right and x_left < rx) {\n                    if (ri ==\
+    \ -1) { ri = m_nodes[i].sons[1] = alloc(); }\n                    dfs(ri, mx,\
+    \ rx);\n                }\n            }\n        })(0, m_xmin, m_xsup);\n   \
+    \ }\n    Pair<bool, L> minLine(const T x) const\n    {\n        T lx = m_xmin,\
+    \ rx = m_xsup;\n        L ans = NIL;\n        for (int i = 0; i != -1;) {\n  \
+    \          const auto& pl = m_nodes[i].line;\n            if (pl != NIL) {\n \
+    \               if (comp(pl, ans, x)) { ans = pl; }\n            }\n         \
+    \   const auto& [li, ri] = m_nodes[i].sons;\n            const T mx = (lx + rx)\
+    \ / 2;\n            if (x < mx) {\n                i = li;\n                rx\
+    \ = mx;\n            } else {\n                i = ri;\n                lx = mx;\n\
+    \            }\n        }\n        return {ans != NIL, ans};\n    }\nprivate:\n\
+    \    void add(L l, int i, T lx, T rx)\n    {\n        for (;;) {\n           \
+    \ const auto& pl = m_nodes[i].line;\n            const T mx = (lx + rx) / 2;\n\
+    \            const bool lunder = comp(l, pl, lx);\n            const bool runder\
+    \ = comp(l, pl, rx - 1);\n            const bool munder = comp(l, pl, mx);\n \
+    \           if (munder) { std::swap(l, m_nodes[i].line); }\n            if (lunder\
+    \ == runder) { break; }\n            int dir = (lunder == munder ? 1 : 0);\n \
+    \           int nind = m_nodes[i].sons[dir];\n            if (nind == -1) { nind\
+    \ = m_nodes[i].sons[dir] = alloc(); }\n            i = nind;\n            if (rx\
+    \ - lx == 1) { break; }\n            if (lunder == munder) {\n               \
+    \ lx = mx;\n            } else {\n                rx = mx;\n            }\n  \
+    \      }\n    }\n    int alloc()\n    {\n        m_nodes.push_back(Node{});\n\
+    \        return (int)m_nodes.size() - 1;\n    }\n    T m_xmin, m_xsup;\n    Vec<Node>\
+    \ m_nodes;\n};\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nclass\
     \ LiChaoTree\n{\n    using L = Pair<T, T>;\n    static constexpr L NIL = {0, INF<T>};\n\
     \    struct Node\n    {\n        L line = NIL;\n        Arr<int, 2> sons{-1, -1};\n\
@@ -248,11 +249,11 @@ data:
     \ (l1 == NIL or l2 == NIL) { return l2 == NIL; }\n        const auto& [a1, b1]\
     \ = l1;\n        const auto& [a2, b2] = l2;\n        if (a1 == a2) {\n       \
     \     return b1 <= b2;\n        } else if (a1 > a2) {\n            return x <=\
-    \ fdiv(b2 - b1, a1 - a2);\n        } else {\n            return fdiv(b1 - b2,\
-    \ a2 - a1) < x;\n        }\n    }\n\npublic:\n    LiChaoTree(T xmin, T xsup) :\
-    \ m_xmin{xmin}, m_xsup{xsup}, m_nodes{Node{}}\n    {\n        assert(m_xmin <\
-    \ m_xsup);\n    }\n    void addLine(const L& line)\n    {\n        add(line, 0,\
-    \ m_xmin, m_xsup);\n    }\n    void addSeg(const L& line, T x_left, T x_right)\n\
+    \ floorDiv(b2 - b1, a1 - a2);\n        } else {\n            return floorDiv(b1\
+    \ - b2, a2 - a1) < x;\n        }\n    }\n\npublic:\n    LiChaoTree(T xmin, T xsup)\
+    \ : m_xmin{xmin}, m_xsup{xsup}, m_nodes{Node{}}\n    {\n        assert(m_xmin\
+    \ < m_xsup);\n    }\n    void addLine(const L& line)\n    {\n        add(line,\
+    \ 0, m_xmin, m_xsup);\n    }\n    void addSeg(const L& line, T x_left, T x_right)\n\
     \    {\n        if (x_left >= x_right) { return; }\n        assert(m_xmin <= x_left\
     \ and x_right <= m_xsup);\n        Fix([&](auto dfs, int i, T lx, T rx) -> void\
     \ {\n            if (x_left <= lx and rx <= x_right) {\n                add(line,\
@@ -302,7 +303,7 @@ data:
   isVerificationFile: false
   path: src/ds/li_chao_tree.hpp
   requiredBy: []
-  timestamp: '2021-09-03 04:54:55+09:00'
+  timestamp: '2021-09-03 16:07:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/ds/li_chao_tree.line.test.cpp

@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -61,10 +61,10 @@ data:
     \ } else {\n        return false;\n    }\n}\ntemplate<typename T>\nbool chmax(T&\
     \ a, const T& b)\n{\n    if (a < b) {\n        a = b;\n        return true;\n\
     \    } else {\n        return false;\n    }\n}\ntemplate<typename T>\nconstexpr\
-    \ T fdiv(T x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{}\
-    \ ? x / y : (x - y + 1) / y;\n}\ntemplate<typename T>\nconstexpr T cdiv(T x, T\
-    \ y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? (x + y -\
-    \ 1) / y : x / y;\n}\ntemplate<typename T, typename I>\nconstexpr T modPower(T\
+    \ T floorDiv(T x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x\
+    \ >= T{} ? x / y : (x - y + 1) / y;\n}\ntemplate<typename T>\nconstexpr T ceilDiv(T\
+    \ x, T y)\n{\n    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? (x +\
+    \ y - 1) / y : x / y;\n}\ntemplate<typename T, typename I>\nconstexpr T modPower(T\
     \ v, I n, T mod)\n{\n    T ans = 1 % mod;\n    for (; n > 0; n >>= 1, (v *= v)\
     \ %= mod) {\n        if (n % 2 == 1) { (ans *= v) %= mod; }\n    }\n    return\
     \ ans;\n}\ntemplate<typename T, typename I>\nconstexpr T power(T v, I n)\n{\n\
@@ -108,8 +108,8 @@ data:
   isVerificationFile: true
   path: verifications/misc/common/func_alias.chminmax.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 23:28:40+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-09-03 16:07:21+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/misc/common/func_alias.chminmax.test.cpp
 layout: document

@@ -1,46 +1,46 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
@@ -95,31 +95,31 @@ data:
     \ (a > b) {\n        a = b;\n        return true;\n    } else {\n        return\
     \ false;\n    }\n}\ntemplate<typename T>\nbool chmax(T& a, const T& b)\n{\n  \
     \  if (a < b) {\n        a = b;\n        return true;\n    } else {\n        return\
-    \ false;\n    }\n}\ntemplate<typename T>\nconstexpr T fdiv(T x, T y)\n{\n    if\
-    \ (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? x / y : (x - y + 1) / y;\n\
-    }\ntemplate<typename T>\nconstexpr T cdiv(T x, T y)\n{\n    if (y < T{}) { x =\
-    \ -x, y = -y; }\n    return x >= T{} ? (x + y - 1) / y : x / y;\n}\ntemplate<typename\
-    \ T, typename I>\nconstexpr T modPower(T v, I n, T mod)\n{\n    T ans = 1 % mod;\n\
-    \    for (; n > 0; n >>= 1, (v *= v) %= mod) {\n        if (n % 2 == 1) { (ans\
-    \ *= v) %= mod; }\n    }\n    return ans;\n}\ntemplate<typename T, typename I>\n\
-    constexpr T power(T v, I n)\n{\n    T ans = 1;\n    for (; n > 0; n >>= 1, v *=\
-    \ v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename\
-    \ T, typename I>\nconstexpr T power(T v, I n, const T& e)\n{\n    T ans = e;\n\
-    \    for (; n > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n\
-    \    }\n    return ans;\n}\ntemplate<typename T>\nVec<T> operator+=(Vec<T>& vs1,\
-    \ const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(), vs2.begin(), vs2.end());\n\
-    \    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const Vec<T>& vs1,\
-    \ const Vec<T>& vs2)\n{\n    auto vs = vs1;\n    vs += vs2;\n    return vs;\n\
-    }\ntemplate<typename T>\nvoid fillAll(Vec<T>& vs, const T& v)\n{\n    std::fill(vs.begin(),\
-    \ vs.end(), v);\n}\ntemplate<typename T, typename C = Lt<T>>\nvoid sortAll(Vec<T>&\
-    \ vs, C comp = C{})\n{\n    std::sort(vs.begin(), vs.end(), comp);\n}\ntemplate<typename\
-    \ T>\nvoid reverseAll(Vec<T>& vs)\n{\n    std::reverse(vs.begin(), vs.end());\n\
-    }\ntemplate<typename T>\nvoid uniqueAll(Vec<T>& vs)\n{\n    sortAll(vs);\n   \
-    \ vs.erase(std::unique(vs.begin(), vs.end()), vs.end());\n}\ntemplate<typename\
-    \ T, typename V = T>\nV sumAll(const Vec<T>& vs)\n{\n    return std::accumulate(vs.begin(),\
-    \ vs.end(), V{});\n}\ntemplate<typename T>\nint minInd(const Vec<T>& vs)\n{\n\
-    \    return std::min_element(vs.begin(), vs.end()) - vs.begin();\n}\ntemplate<typename\
-    \ T>\nint maxInd(const Vec<T>& vs)\n{\n    return std::max_element(vs.begin(),\
+    \ false;\n    }\n}\ntemplate<typename T>\nconstexpr T floorDiv(T x, T y)\n{\n\
+    \    if (y < T{}) { x = -x, y = -y; }\n    return x >= T{} ? x / y : (x - y +\
+    \ 1) / y;\n}\ntemplate<typename T>\nconstexpr T ceilDiv(T x, T y)\n{\n    if (y\
+    \ < T{}) { x = -x, y = -y; }\n    return x >= T{} ? (x + y - 1) / y : x / y;\n\
+    }\ntemplate<typename T, typename I>\nconstexpr T modPower(T v, I n, T mod)\n{\n\
+    \    T ans = 1 % mod;\n    for (; n > 0; n >>= 1, (v *= v) %= mod) {\n       \
+    \ if (n % 2 == 1) { (ans *= v) %= mod; }\n    }\n    return ans;\n}\ntemplate<typename\
+    \ T, typename I>\nconstexpr T power(T v, I n)\n{\n    T ans = 1;\n    for (; n\
+    \ > 0; n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return\
+    \ ans;\n}\ntemplate<typename T, typename I>\nconstexpr T power(T v, I n, const\
+    \ T& e)\n{\n    T ans = e;\n    for (; n > 0; n >>= 1, v *= v) {\n        if (n\
+    \ % 2 == 1) { ans *= v; }\n    }\n    return ans;\n}\ntemplate<typename T>\nVec<T>\
+    \ operator+=(Vec<T>& vs1, const Vec<T>& vs2)\n{\n    vs1.insert(vs1.end(), vs2.begin(),\
+    \ vs2.end());\n    return vs1;\n}\ntemplate<typename T>\nVec<T> operator+(const\
+    \ Vec<T>& vs1, const Vec<T>& vs2)\n{\n    auto vs = vs1;\n    vs += vs2;\n   \
+    \ return vs;\n}\ntemplate<typename T>\nvoid fillAll(Vec<T>& vs, const T& v)\n\
+    {\n    std::fill(vs.begin(), vs.end(), v);\n}\ntemplate<typename T, typename C\
+    \ = Lt<T>>\nvoid sortAll(Vec<T>& vs, C comp = C{})\n{\n    std::sort(vs.begin(),\
+    \ vs.end(), comp);\n}\ntemplate<typename T>\nvoid reverseAll(Vec<T>& vs)\n{\n\
+    \    std::reverse(vs.begin(), vs.end());\n}\ntemplate<typename T>\nvoid uniqueAll(Vec<T>&\
+    \ vs)\n{\n    sortAll(vs);\n    vs.erase(std::unique(vs.begin(), vs.end()), vs.end());\n\
+    }\ntemplate<typename T, typename V = T>\nV sumAll(const Vec<T>& vs)\n{\n    return\
+    \ std::accumulate(vs.begin(), vs.end(), V{});\n}\ntemplate<typename T>\nint minInd(const\
+    \ Vec<T>& vs)\n{\n    return std::min_element(vs.begin(), vs.end()) - vs.begin();\n\
+    }\ntemplate<typename T>\nint maxInd(const Vec<T>& vs)\n{\n    return std::max_element(vs.begin(),\
     \ vs.end()) - vs.begin();\n}\ntemplate<typename T>\nint lbInd(const Vec<T>& vs,\
     \ const T& v)\n{\n    return std::lower_bound(vs.begin(), vs.end(), v) - vs.begin();\n\
     }\ntemplate<typename T>\nint ubInd(const Vec<T>& vs, const T& v)\n{\n    return\
@@ -199,52 +199,54 @@ data:
     \ T>\nclass MonotonicCHT\n{\n    using L = Pair<T, T>;\n    static constexpr L\
     \ NIL = {0, INF<T>};\n    static bool needLess(const L& l1, const L& l2, const\
     \ L& l3)\n    {\n        const auto [a1, b1] = l1;\n        const auto [a2, b2]\
-    \ = l2;\n        const auto [a3, b3] = l3;\n        const T x12 = fdiv(b2 - b1,\
-    \ a1 - a2), x23 = fdiv(b3 - b2, a2 - a3);\n        return x12 >= x23;\n    }\n\
-    \    static bool comp(const L& l1, const L& l2, T x)\n    {\n        const auto\
-    \ [a1, b1] = l1;\n        const auto [a2, b2] = l2;\n        if (a1 == a2) {\n\
-    \            return b1 <= b2;\n        } else if (a1 > a2) {\n            return\
-    \ x <= fdiv(b2 - b1, a1 - a2);\n        } else {\n            return fdiv(b1 -\
-    \ b2, a2 - a1) < x;\n        }\n    }\npublic:\n    MonotonicCHT() : m_prev_x{-INF<T>}\
-    \ {}\n    void addLine(T a, T b)\n    {\n        const L l{a, b};\n        if\
-    \ (m_lines.empty()) {\n            m_lines.push_back(l);\n            return;\n\
-    \        }\n        auto& [ma, mb] = m_lines.back();\n        assert(ma >= a);\n\
-    \        if (a == ma) {\n            chmin(mb, b);\n        } else {\n       \
-    \     while (m_lines.size() >= 2) {\n                const int n = m_lines.size();\n\
-    \                const auto& l0 = m_lines[n - 2];\n                const auto&\
-    \ l1 = m_lines[n - 1];\n                if (not needLess(l0, l1, l)) { break;\
-    \ }\n                m_lines.pop_back();\n            }\n            m_lines.push_back(l);\n\
-    \        }\n    }\n    L minLine(const T x)\n    {\n        if (m_lines.empty())\
-    \ { return NIL; }\n        assert(m_prev_x <= x);\n        m_prev_x = x;\n   \
-    \     while (m_lines.size() >= 2) {\n            const auto& l0 = m_lines[0];\n\
-    \            const auto& l1 = m_lines[1];\n            if (comp(l0, l1, x)) {\
-    \ break; }\n            m_lines.pop_front();\n        }\n        return m_lines.front();\n\
-    \    }\nprivate:\n    T m_prev_x;\n    Deq<L> m_lines;\n};\n"
+    \ = l2;\n        const auto [a3, b3] = l3;\n        const T x12 = floorDiv(b2\
+    \ - b1, a1 - a2),\n                x23 = floorDiv(b3 - b2, a2 - a3);\n       \
+    \ return x12 >= x23;\n    }\n    static bool comp(const L& l1, const L& l2, T\
+    \ x)\n    {\n        const auto [a1, b1] = l1;\n        const auto [a2, b2] =\
+    \ l2;\n        if (a1 == a2) {\n            return b1 <= b2;\n        } else if\
+    \ (a1 > a2) {\n            return x <= floorDiv(b2 - b1, a1 - a2);\n        }\
+    \ else {\n            return floorDiv(b1 - b2, a2 - a1) < x;\n        }\n    }\n\
+    public:\n    MonotonicCHT() : m_prev_x{-INF<T>} {}\n    void addLine(T a, T b)\n\
+    \    {\n        const L l{a, b};\n        if (m_lines.empty()) {\n           \
+    \ m_lines.push_back(l);\n            return;\n        }\n        auto& [ma, mb]\
+    \ = m_lines.back();\n        assert(ma >= a);\n        if (a == ma) {\n      \
+    \      chmin(mb, b);\n        } else {\n            while (m_lines.size() >= 2)\
+    \ {\n                const int n = m_lines.size();\n                const auto&\
+    \ l0 = m_lines[n - 2];\n                const auto& l1 = m_lines[n - 1];\n   \
+    \             if (not needLess(l0, l1, l)) { break; }\n                m_lines.pop_back();\n\
+    \            }\n            m_lines.push_back(l);\n        }\n    }\n    L minLine(const\
+    \ T x)\n    {\n        if (m_lines.empty()) { return NIL; }\n        assert(m_prev_x\
+    \ <= x);\n        m_prev_x = x;\n        while (m_lines.size() >= 2) {\n     \
+    \       const auto& l0 = m_lines[0];\n            const auto& l1 = m_lines[1];\n\
+    \            if (comp(l0, l1, x)) { break; }\n            m_lines.pop_front();\n\
+    \        }\n        return m_lines.front();\n    }\nprivate:\n    T m_prev_x;\n\
+    \    Deq<L> m_lines;\n};\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename T>\nclass\
     \ MonotonicCHT\n{\n    using L = Pair<T, T>;\n    static constexpr L NIL = {0,\
     \ INF<T>};\n    static bool needLess(const L& l1, const L& l2, const L& l3)\n\
     \    {\n        const auto [a1, b1] = l1;\n        const auto [a2, b2] = l2;\n\
-    \        const auto [a3, b3] = l3;\n        const T x12 = fdiv(b2 - b1, a1 - a2),\
-    \ x23 = fdiv(b3 - b2, a2 - a3);\n        return x12 >= x23;\n    }\n    static\
-    \ bool comp(const L& l1, const L& l2, T x)\n    {\n        const auto [a1, b1]\
-    \ = l1;\n        const auto [a2, b2] = l2;\n        if (a1 == a2) {\n        \
-    \    return b1 <= b2;\n        } else if (a1 > a2) {\n            return x <=\
-    \ fdiv(b2 - b1, a1 - a2);\n        } else {\n            return fdiv(b1 - b2,\
-    \ a2 - a1) < x;\n        }\n    }\n\npublic:\n    MonotonicCHT() : m_prev_x{-INF<T>}\
-    \ {}\n    void addLine(T a, T b)\n    {\n        const L l{a, b};\n        if\
-    \ (m_lines.empty()) {\n            m_lines.push_back(l);\n            return;\n\
-    \        }\n        auto& [ma, mb] = m_lines.back();\n        assert(ma >= a);\n\
-    \        if (a == ma) {\n            chmin(mb, b);\n        } else {\n       \
-    \     while (m_lines.size() >= 2) {\n                const int n = m_lines.size();\n\
-    \                const auto& l0 = m_lines[n - 2];\n                const auto&\
-    \ l1 = m_lines[n - 1];\n                if (not needLess(l0, l1, l)) { break;\
-    \ }\n                m_lines.pop_back();\n            }\n            m_lines.push_back(l);\n\
-    \        }\n    }\n    L minLine(const T x)\n    {\n        if (m_lines.empty())\
-    \ { return NIL; }\n        assert(m_prev_x <= x);\n        m_prev_x = x;\n   \
-    \     while (m_lines.size() >= 2) {\n            const auto& l0 = m_lines[0];\n\
-    \            const auto& l1 = m_lines[1];\n            if (comp(l0, l1, x)) {\
-    \ break; }\n            m_lines.pop_front();\n        }\n        return m_lines.front();\n\
-    \    }\n\nprivate:\n    T m_prev_x;\n    Deq<L> m_lines;\n};\n"
+    \        const auto [a3, b3] = l3;\n        const T x12 = floorDiv(b2 - b1, a1\
+    \ - a2),\n                x23 = floorDiv(b3 - b2, a2 - a3);\n        return x12\
+    \ >= x23;\n    }\n    static bool comp(const L& l1, const L& l2, T x)\n    {\n\
+    \        const auto [a1, b1] = l1;\n        const auto [a2, b2] = l2;\n      \
+    \  if (a1 == a2) {\n            return b1 <= b2;\n        } else if (a1 > a2)\
+    \ {\n            return x <= floorDiv(b2 - b1, a1 - a2);\n        } else {\n \
+    \           return floorDiv(b1 - b2, a2 - a1) < x;\n        }\n    }\n\npublic:\n\
+    \    MonotonicCHT() : m_prev_x{-INF<T>} {}\n    void addLine(T a, T b)\n    {\n\
+    \        const L l{a, b};\n        if (m_lines.empty()) {\n            m_lines.push_back(l);\n\
+    \            return;\n        }\n        auto& [ma, mb] = m_lines.back();\n  \
+    \      assert(ma >= a);\n        if (a == ma) {\n            chmin(mb, b);\n \
+    \       } else {\n            while (m_lines.size() >= 2) {\n                const\
+    \ int n = m_lines.size();\n                const auto& l0 = m_lines[n - 2];\n\
+    \                const auto& l1 = m_lines[n - 1];\n                if (not needLess(l0,\
+    \ l1, l)) { break; }\n                m_lines.pop_back();\n            }\n   \
+    \         m_lines.push_back(l);\n        }\n    }\n    L minLine(const T x)\n\
+    \    {\n        if (m_lines.empty()) { return NIL; }\n        assert(m_prev_x\
+    \ <= x);\n        m_prev_x = x;\n        while (m_lines.size() >= 2) {\n     \
+    \       const auto& l0 = m_lines[0];\n            const auto& l1 = m_lines[1];\n\
+    \            if (comp(l0, l1, x)) { break; }\n            m_lines.pop_front();\n\
+    \        }\n        return m_lines.front();\n    }\n\nprivate:\n    T m_prev_x;\n\
+    \    Deq<L> m_lines;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -263,7 +265,7 @@ data:
   isVerificationFile: false
   path: src/ds/monotonic_cht.hpp
   requiredBy: []
-  timestamp: '2021-06-19 16:58:58+09:00'
+  timestamp: '2021-09-03 16:07:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/ds/monotonic_cht.test.cpp
