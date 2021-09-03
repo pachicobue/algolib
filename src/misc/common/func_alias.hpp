@@ -22,13 +22,13 @@ bool chmax(T& a, const T& b)
     }
 }
 template<typename T>
-constexpr T fdiv(T x, T y)
+constexpr T floorDiv(T x, T y)
 {
     if (y < T{}) { x = -x, y = -y; }
     return x >= T{} ? x / y : (x - y + 1) / y;
 }
 template<typename T>
-constexpr T cdiv(T x, T y)
+constexpr T ceilDiv(T x, T y)
 {
     if (y < T{}) { x = -x, y = -y; }
     return x >= T{} ? (x + y - 1) / y : x / y;

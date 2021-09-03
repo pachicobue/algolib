@@ -18,9 +18,9 @@ class LiChaoTree
         if (a1 == a2) {
             return b1 <= b2;
         } else if (a1 > a2) {
-            return x <= fdiv(b2 - b1, a1 - a2);
+            return x <= floorDiv(b2 - b1, a1 - a2);
         } else {
-            return fdiv(b1 - b2, a2 - a1) < x;
+            return floorDiv(b1 - b2, a2 - a1) < x;
         }
     }
 

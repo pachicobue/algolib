@@ -10,7 +10,8 @@ class MonotonicCHT
         const auto [a1, b1] = l1;
         const auto [a2, b2] = l2;
         const auto [a3, b3] = l3;
-        const T x12 = fdiv(b2 - b1, a1 - a2), x23 = fdiv(b3 - b2, a2 - a3);
+        const T x12 = floorDiv(b2 - b1, a1 - a2),
+                x23 = floorDiv(b3 - b2, a2 - a3);
         return x12 >= x23;
     }
     static bool comp(const L& l1, const L& l2, T x)
@@ -20,9 +21,9 @@ class MonotonicCHT
         if (a1 == a2) {
             return b1 <= b2;
         } else if (a1 > a2) {
-            return x <= fdiv(b2 - b1, a1 - a2);
+            return x <= floorDiv(b2 - b1, a1 - a2);
         } else {
-            return fdiv(b1 - b2, a2 - a1) < x;
+            return floorDiv(b1 - b2, a2 - a1) < x;
         }
     }
 
