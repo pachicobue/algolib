@@ -30,7 +30,7 @@ IntSet<Key, int w> set()
 ### insert
 
 ```cpp
-set.insert(Key key)
+void set.insert(Key key)
 ```
 
 集合に `key` を挿入

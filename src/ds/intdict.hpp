@@ -8,10 +8,13 @@ public:
     V& operator[](K k)
     {
         const auto i = index(k);
-        if (not m_used.test(i)) { m_used.set(i), m_keys[i] = k; }
+        if (not m_used.test(i)) {
+            m_used.set(i), m_keys[i] = k;
+            m_vals[i] = V{};
+        }
         return m_vals[i];
     }
-    const V& operator[](K k) const
+    const V& at(K k) const
     {
         return m_vals[index(k)];
     }

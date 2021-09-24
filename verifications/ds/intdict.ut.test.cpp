@@ -19,9 +19,9 @@ void Test()
     assert(not dict.contains(0));
     assert(dict.contains(2));
 
-    assert(dict[2] == "2");
+    assert(dict.at(2) == "2");
     dict[2] = "Two";
-    assert(dict[2] == "Two");
+    assert(dict.at(2) == "Two");
 }
 
 int main()
