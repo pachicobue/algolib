@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
   - icon: ':heavy_check_mark:'
@@ -25,16 +25,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
   - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   - icon: ':heavy_check_mark:'
@@ -72,6 +72,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/ds/swag.test.cpp
     title: verifications/ds/swag.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/hld.test.cpp
+    title: verifications/graph/hld.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/linear/array_matrix.test.cpp
     title: verifications/linear/array_matrix.test.cpp
@@ -430,6 +433,7 @@ data:
   timestamp: '2021-09-03 16:07:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verifications/graph/hld.test.cpp
   - verifications/ds/segtree.test.cpp
   - verifications/ds/swag.test.cpp
   - verifications/ds/lazyseg.test.cpp

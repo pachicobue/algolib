@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy:
@@ -80,7 +80,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/hld.hpp
     title: src/graph/hld.hpp
   - icon: ':heavy_check_mark:'
@@ -328,6 +328,9 @@ data:
     path: verifications/graph/dijkstra.test.cpp
     title: verifications/graph/dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verifications/graph/hld.test.cpp
+    title: verifications/graph/hld.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
   - icon: ':heavy_check_mark:'
@@ -423,7 +426,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/misc/common/func_alias.chminmax.test.cpp
     title: verifications/misc/common/func_alias.chminmax.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/misc/common/func_alias.div.test.cpp
     title: verifications/misc/common/func_alias.div.test.cpp
   - icon: ':heavy_check_mark:'
@@ -471,9 +474,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/string/z_algorithm.test.cpp
     title: verifications/string/z_algorithm.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -626,7 +629,7 @@ data:
   - src/math/divisors.hpp
   - src/math/or_convolution.hpp
   timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/string/manacher.test.cpp
   - verifications/string/mp.ut.test.cpp
@@ -638,6 +641,7 @@ data:
   - verifications/graph/diameter.test.cpp
   - verifications/graph/level_ancestor.lca.test.cpp
   - verifications/graph/scc.test.cpp
+  - verifications/graph/hld.test.cpp
   - verifications/graph/centroid_decomp.test.cpp
   - verifications/graph/lca.test.cpp
   - verifications/graph/dijkstra.test.cpp

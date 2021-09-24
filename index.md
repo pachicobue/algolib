@@ -76,7 +76,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/graph/graph.hpp
       title: src/graph/graph.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/hld.hpp
       title: src/graph/hld.hpp
     - icon: ':heavy_check_mark:'
@@ -228,7 +228,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/misc/common/fixpoint.hpp
       title: src/misc/common/fixpoint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/func_alias.hpp
       title: src/misc/common/func_alias.hpp
     - icon: ':heavy_check_mark:'
@@ -243,10 +243,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/misc/common/rng.hpp
       title: src/misc/common/rng.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/show.hpp
       title: src/misc/common/show.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/type_alias.hpp
       title: src/misc/common/type_alias.hpp
     - icon: ':heavy_check_mark:'
@@ -263,7 +263,7 @@ data:
     - icon: ':warning:'
       path: src/misc/common/print/deque.hpp
       title: src/misc/common/print/deque.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/misc/common/print/int128_t.hpp
       title: src/misc/common/print/int128_t.hpp
     - icon: ':warning:'
@@ -430,7 +430,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verifications/graph/dijkstra.test.cpp
       title: verifications/graph/dijkstra.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/graph/hld.test.cpp
       title: verifications/graph/hld.test.cpp
     - icon: ':heavy_check_mark:'
@@ -538,7 +538,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verifications/misc/common/func_alias.chminmax.test.cpp
       title: verifications/misc/common/func_alias.chminmax.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/misc/common/func_alias.div.test.cpp
       title: verifications/misc/common/func_alias.div.test.cpp
     - icon: ':heavy_check_mark:'

@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/show.hpp
     title: src/misc/common/show.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -73,11 +73,11 @@ data:
     constexpr T power(T v, I n, const T& e)\n{\n    T ans = e;\n    for (; n > 0;\
     \ n >>= 1, v *= v) {\n        if (n % 2 == 1) { ans *= v; }\n    }\n    return\
     \ ans;\n}\nvoid fdivTest()\n{\n    auto f = [&](auto x, auto y) {\n        auto\
-    \ a = (decltype(x))std::floor((f80)x / y);\n        assert(fdiv(x, y) == a);\n\
+    \ a = (decltype(x))std::floor((f80)x / y);\n        assert(floorDiv(x, y) == a);\n\
     \    };\n    for (int x = -100; x <= 100; x++) {\n        for (int y = -100; y\
     \ <= 100; y++) {\n            if (y == 0) { continue; }\n            f(x, y);\n\
     \        }\n    }\n}\nvoid cdivTest()\n{\n    auto c = [&](auto x, auto y) {\n\
-    \        auto a = (decltype(x))std::ceil((f80)x / y);\n        assert(cdiv(x,\
+    \        auto a = (decltype(x))std::ceil((f80)x / y);\n        assert(ceilDiv(x,\
     \ y) == a);\n    };\n    for (int x = -100; x <= 100; x++) {\n        for (int\
     \ y = -100; y <= 100; y++) {\n            if (y == 0) { continue; }\n        \
     \    c(x, y);\n        }\n    }\n}\nint main()\n{\n    fdivTest();\n    cdivTest();\n\
@@ -85,13 +85,13 @@ data:
   code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \n#include \"../../../src/misc/common/func_alias.hpp\"\nvoid fdivTest()\n{\n \
     \   auto f = [&](auto x, auto y) {\n        auto a = (decltype(x))std::floor((f80)x\
-    \ / y);\n        assert(fdiv(x, y) == a);\n    };\n    for (int x = -100; x <=\
-    \ 100; x++) {\n        for (int y = -100; y <= 100; y++) {\n            if (y\
-    \ == 0) { continue; }\n            f(x, y);\n        }\n    }\n}\n\nvoid cdivTest()\n\
+    \ / y);\n        assert(floorDiv(x, y) == a);\n    };\n    for (int x = -100;\
+    \ x <= 100; x++) {\n        for (int y = -100; y <= 100; y++) {\n            if\
+    \ (y == 0) { continue; }\n            f(x, y);\n        }\n    }\n}\n\nvoid cdivTest()\n\
     {\n    auto c = [&](auto x, auto y) {\n        auto a = (decltype(x))std::ceil((f80)x\
-    \ / y);\n        assert(cdiv(x, y) == a);\n    };\n    for (int x = -100; x <=\
-    \ 100; x++) {\n        for (int y = -100; y <= 100; y++) {\n            if (y\
-    \ == 0) { continue; }\n            c(x, y);\n        }\n    }\n}\n\nint main()\n\
+    \ / y);\n        assert(ceilDiv(x, y) == a);\n    };\n    for (int x = -100; x\
+    \ <= 100; x++) {\n        for (int y = -100; y <= 100; y++) {\n            if\
+    \ (y == 0) { continue; }\n            c(x, y);\n        }\n    }\n}\n\nint main()\n\
     {\n    fdivTest();\n    cdivTest();\n    std::cout << \"Hello World\\n\";\n  \
     \  return 0;\n}\n"
   dependsOn:
@@ -102,8 +102,8 @@ data:
   isVerificationFile: true
   path: verifications/misc/common/func_alias.div.test.cpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-09-24 17:16:51+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/misc/common/func_alias.div.test.cpp
 layout: document

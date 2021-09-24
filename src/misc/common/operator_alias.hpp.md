@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
   _extendedRequiredBy:
@@ -74,7 +74,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/hld.hpp
     title: src/graph/hld.hpp
   - icon: ':heavy_check_mark:'
@@ -321,6 +321,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/dijkstra.test.cpp
     title: verifications/graph/dijkstra.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/hld.test.cpp
+    title: verifications/graph/hld.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/graph/lca.test.cpp
     title: verifications/graph/lca.test.cpp
@@ -587,6 +590,7 @@ data:
   - verifications/graph/diameter.test.cpp
   - verifications/graph/level_ancestor.lca.test.cpp
   - verifications/graph/scc.test.cpp
+  - verifications/graph/hld.test.cpp
   - verifications/graph/centroid_decomp.test.cpp
   - verifications/graph/lca.test.cpp
   - verifications/graph/dijkstra.test.cpp
