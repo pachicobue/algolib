@@ -34,8 +34,7 @@ IntDict<Key, Value, int w> dict()
 dict[key] = "hoge"
 ```
 
-キーに対応する値を返す  
-キーが存在しないときは `Value{}` を返す
+キーに対応する値の参照を返す  
 
 #### 計算量
 

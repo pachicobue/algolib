@@ -30,11 +30,10 @@ IntSet<Key, int w> set()
 ### insert
 
 ```cpp
-set.insert(key)
+set.insert(Key key)
 ```
 
-キーに対応する値を返す  
-キーが存在しないときは `Value{}` を返す
+集合に `key` を挿入
 
 #### 計算量
 
@@ -46,7 +45,7 @@ set.insert(key)
 void set.erase(Key key)
 ```
 
-辞書から `key` を削除
+集合から `key` を削除
 
 #### 計算量
 
@@ -58,7 +57,7 @@ void set.erase(Key key)
 bool set.contains(Key key)
 ```
 
-辞書に `key` が含まれるかどうか
+集合に `key` が含まれるかどうか
 
 ##### 計算量
 
