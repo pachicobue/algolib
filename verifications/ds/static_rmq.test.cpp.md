@@ -208,37 +208,37 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ SemiGroup>\nclass DSTable\n{\n    using T = typename SemiGroup::T;\npublic:\n\
-    \    DSTable(const Vec<T>& vs)\n        : m_size(vs.size()), m_depth(log2p1(m_size)),\
-    \ m_vss(m_depth, vs)\n    {\n        for (int d : rep(m_depth)) {\n          \
-    \  const int w = 1 << (m_depth - d - 1);\n            for (int i = 1; i * w <\
-    \ m_size; i += 2) {\n                int l = i * w - 1, r = i * w;\n         \
-    \       for (int j : irange(1, w)) {\n                    m_vss[d][l - j] = merge(vs[l\
-    \ - j], m_vss[d][l - j + 1]);\n                    if (r + j < m_size) {\n   \
-    \                     m_vss[d][r + j] = merge(vs[r + j], m_vss[d][r + j - 1]);\n\
-    \                    }\n                }\n            }\n        }\n    }\n \
-    \   T fold(int l, int r) const\n    {\n        assert(0 <= l and l < r and r <=\
-    \ m_size);\n        if (r - l == 1) { return m_vss.back()[l]; }\n        const\
-    \ int d = m_depth - log2p1(l ^ (r - 1));\n        return merge(m_vss[d][l], m_vss[d][r\
-    \ - 1]);\n    }\nprivate:\n    int m_size, m_depth;\n    Vec<Vec<T>> m_vss;\n\
-    \    static inline SemiGroup merge;\n};\ntemplate<typename TotalOrd>\nclass StaticRMQ\n\
-    {\n    using T = typename TotalOrd::T;\npublic:\n    StaticRMQ(const Vec<T>& vs)\n\
-    \        : m_size(vs.size()),\n          m_bn(wind(m_size + bs - 1)),\n      \
-    \    m_vals{vs},\n          m_bucket_vals([&]() {\n              Vec<T> ans(m_bn);\n\
-    \              for (int i : rep(m_size)) {\n                  ans[wind(i)]\n \
-    \                     = (i % bs == 0 ? m_vals[i]\n                           \
-    \          : std::min(ans[wind(i)], m_vals[i], comp));\n              }\n    \
-    \          return ans;\n          }()),\n          m_masks(m_size, 0),\n     \
-    \     m_st(m_bucket_vals)\n    {\n        for (int i : rep(m_bn)) {\n        \
-    \    Vec<int> g(bs, m_size), stack;\n            for (const int j : rep(bs)) {\n\
-    \                if (ind(i, j) >= m_size) { break; }\n                for (; not\
-    \ stack.empty()\n                       and not comp(m_vals[stack.back()], m_vals[ind(i,\
-    \ j)]);\n                     stack.pop_back()) {}\n                g[j] = stack.empty()\
-    \ ? m_size : stack.back(),\n                stack.push_back(ind(i, j));\n    \
-    \        }\n            for (int j : rep(bs)) {\n                if (ind(i, j)\
-    \ >= m_size) { break; }\n                m_masks[ind(i, j)]\n                \
-    \    = g[j] == m_size ? static_cast<B>(0)\n                                  \
-    \   : (m_masks[g[j]]\n                                        | static_cast<B>(1)\
+    \ SemiGroup>\nclass DisjointSparseTable\n{\n    using T = typename SemiGroup::T;\n\
+    public:\n    DisjointSparseTable(const Vec<T>& vs)\n        : m_size(vs.size()),\
+    \ m_depth(log2p1(m_size)), m_vss(m_depth, vs)\n    {\n        for (int d : rep(m_depth))\
+    \ {\n            const int w = 1 << (m_depth - d - 1);\n            for (int i\
+    \ = 1; i * w < m_size; i += 2) {\n                int l = i * w - 1, r = i * w;\n\
+    \                for (int j : irange(1, w)) {\n                    m_vss[d][l\
+    \ - j] = merge(vs[l - j], m_vss[d][l - j + 1]);\n                    if (r + j\
+    \ < m_size) {\n                        m_vss[d][r + j] = merge(vs[r + j], m_vss[d][r\
+    \ + j - 1]);\n                    }\n                }\n            }\n      \
+    \  }\n    }\n    T fold(int l, int r) const\n    {\n        assert(0 <= l and\
+    \ l < r and r <= m_size);\n        if (r - l == 1) { return m_vss.back()[l]; }\n\
+    \        const int d = m_depth - log2p1(l ^ (r - 1));\n        return merge(m_vss[d][l],\
+    \ m_vss[d][r - 1]);\n    }\nprivate:\n    int m_size, m_depth;\n    Vec<Vec<T>>\
+    \ m_vss;\n    static inline SemiGroup merge;\n};\ntemplate<typename TotalOrd>\n\
+    class StaticRMQ\n{\n    using T = typename TotalOrd::T;\npublic:\n    StaticRMQ(const\
+    \ Vec<T>& vs)\n        : m_size(vs.size()),\n          m_bn(wind(m_size + bs -\
+    \ 1)),\n          m_vals{vs},\n          m_bucket_vals([&]() {\n             \
+    \ Vec<T> ans(m_bn);\n              for (int i : rep(m_size)) {\n             \
+    \     ans[wind(i)]\n                      = (i % bs == 0 ? m_vals[i]\n       \
+    \                              : std::min(ans[wind(i)], m_vals[i], comp));\n \
+    \             }\n              return ans;\n          }()),\n          m_masks(m_size,\
+    \ 0),\n          m_st(m_bucket_vals)\n    {\n        for (int i : rep(m_bn)) {\n\
+    \            Vec<int> g(bs, m_size), stack;\n            for (const int j : rep(bs))\
+    \ {\n                if (ind(i, j) >= m_size) { break; }\n                for\
+    \ (; not stack.empty()\n                       and not comp(m_vals[stack.back()],\
+    \ m_vals[ind(i, j)]);\n                     stack.pop_back()) {}\n           \
+    \     g[j] = stack.empty() ? m_size : stack.back(),\n                stack.push_back(ind(i,\
+    \ j));\n            }\n            for (int j : rep(bs)) {\n                if\
+    \ (ind(i, j) >= m_size) { break; }\n                m_masks[ind(i, j)]\n     \
+    \               = g[j] == m_size ? static_cast<B>(0)\n                       \
+    \              : (m_masks[g[j]]\n                                        | static_cast<B>(1)\
     \ << (g[j] - i * bs));\n            }\n        }\n    }\n    T fold(int l, int\
     \ r) const\n    {\n        assert(0 <= l and l < r and r <= m_size);\n       \
     \ const int lb = (l + bs - 1) / bs, rb = r / bs;\n        if (lb > rb) {\n   \
@@ -268,45 +268,45 @@ data:
     \       T operator()(const T& x1, const T& x2) const\n        {\n            return\
     \ std::min(x1, x2, comp);\n        }\n    };\n    static inline TotalOrd comp;\n\
     \    int m_size, m_bn;\n    Vec<T> m_vals, m_bucket_vals;\n    Vec<B> m_masks;\n\
-    \    DSTable<SemiGroup> m_st;\n};\n#pragma region FastIO Printer\nclass Printer\n\
-    {\npublic:\n    Printer() {}\n    template<typename... Args>\n    int operator()(const\
-    \ Args&... args)\n    {\n        dump(args...);\n        return 0;\n    }\n  \
-    \  template<typename... Args>\n    int ln(const Args&... args)\n    {\n      \
-    \  dump(args...), putchar('\\n');\n        return 0;\n    }\nprivate:\n    template<typename\
-    \ T>\n    void dump(T v)\n    {\n        static char tmp[30];\n        if (v <\
-    \ 0) {\n            putchar('-');\n            v = -v;\n        }\n        int\
-    \ i = 0;\n        do {\n            tmp[i++] = v % T{10} + '0';\n            v\
-    \ /= T{10};\n        } while (v);\n        while (i) {\n            putchar(tmp[--i]);\n\
-    \        }\n    }\n    void dump(bool b)\n    {\n        dump<int>(b);\n    }\n\
-    \    void dump(char c)\n    {\n        putchar(c);\n    }\n    void dump(const\
-    \ Str& cs)\n    {\n        for (char c : cs) {\n            dump(c);\n       \
-    \ }\n    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n\
-    \        for (const int i : rep(vs.size())) {\n            if (i) { putchar('\
-    \ '); }\n            dump(vs[i]);\n        }\n    }\n    template<typename T>\n\
-    \    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size()))\
-    \ {\n            if (i) { putchar('\\n'); }\n            dump(vss[i]);\n     \
-    \   }\n    }\n    template<typename T, typename... Ts>\n    int dump(const T&\
-    \ v, const Ts&... args)\n    {\n        dump(v), putchar(' '), dump(args...);\n\
-    \        return 0;\n    }\n    static inline void putchar(char c)\n    {\n   \
-    \     putchar_unlocked(c);\n    }\n} out;\n#pragma endregion\n#pragma region FastIO\
-    \ Scanner\nclass Scanner\n{\npublic:\n    Scanner() {}\n    template<typename\
-    \ T>\n    T val()\n    {\n        T ans = 0;\n        bool neg = false;\n    \
-    \    char c = getchar();\n        if (c < '0') {\n            neg = true;\n  \
-    \      } else {\n            ans = c - '0';\n        }\n        while (true) {\n\
-    \            c = getchar();\n            if (c < '0') { break; }\n           \
-    \ ans = ans * T{10} + (c - '0');\n        }\n        if (neg) { ans = -ans; }\n\
-    \        return ans;\n    }\n    template<typename T>\n    T val(T offset)\n \
-    \   {\n        return val<T>() - offset;\n    }\n    template<typename T>\n  \
-    \  Vec<T> vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>();\
-    \ });\n    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n\
-    \        return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
-    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
-    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
-    \ vvec(int n, int m, T offset)\n    {\n        return genVec<Vec<T>>(n, [&]()\
-    \ { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n   \
-    \ auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n   \
-    \ }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n  \
-    \  {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
+    \    DisjointSparseTable<SemiGroup> m_st;\n};\n#pragma region FastIO Printer\n\
+    class Printer\n{\npublic:\n    Printer() {}\n    template<typename... Args>\n\
+    \    int operator()(const Args&... args)\n    {\n        dump(args...);\n    \
+    \    return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
+    \ args)\n    {\n        dump(args...), putchar('\\n');\n        return 0;\n  \
+    \  }\nprivate:\n    template<typename T>\n    void dump(T v)\n    {\n        static\
+    \ char tmp[30];\n        if (v < 0) {\n            putchar('-');\n           \
+    \ v = -v;\n        }\n        int i = 0;\n        do {\n            tmp[i++] =\
+    \ v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n        while\
+    \ (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void dump(bool\
+    \ b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n    {\n    \
+    \    putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n        for (char\
+    \ c : cs) {\n            dump(c);\n        }\n    }\n    template<typename T>\n\
+    \    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
+    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
+    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
+    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
+    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
+    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
+    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
+    \        }\n        while (true) {\n            c = getchar();\n            if\
+    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
+    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
+    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
+    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
+    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
+    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
+    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
+    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
+    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
+    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
+    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
+    \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
+    \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
     \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
     }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
@@ -349,7 +349,7 @@ data:
   isVerificationFile: true
   path: verifications/ds/static_rmq.test.cpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
+  timestamp: '2021-09-25 02:07:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/ds/static_rmq.test.cpp

@@ -198,30 +198,30 @@ data:
     \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
-    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass DSU\n{\npublic:\n\
-    \    DSU(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}\n    int leader(int\
-    \ i)\n    {\n        if (m_roots[i] == i) {\n            return i;\n        }\
-    \ else {\n            return m_roots[i] = leader(m_roots[i]);\n        }\n   \
-    \ }\n    bool merge(int i, int j)\n    {\n        i = leader(i), j = leader(j);\n\
-    \        if (i == j) { return false; }\n        if (size(i) > size(j)) { std::swap(i,\
-    \ j); }\n        m_roots[i] = j;\n        m_sizes[j] += m_sizes[i];\n        return\
-    \ true;\n    }\n    int size(int i)\n    {\n        return m_sizes[leader(i)];\n\
-    \    }\n    Vec<Vec<int>> groups()\n    {\n        Vec<Vec<int>> iss(m_v);\n \
-    \       for (const int i : rep(m_v)) {\n            iss[leader(i)].push_back(i);\n\
-    \        }\n        return iss;\n    }\nprivate:\n    int m_v;\n    Vec<int> m_roots;\n\
-    \    Vec<int> m_sizes;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\nclass DSU\n{\npublic:\n  \
-    \  DSU(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}\n    int leader(int\
-    \ i)\n    {\n        if (m_roots[i] == i) {\n            return i;\n        }\
-    \ else {\n            return m_roots[i] = leader(m_roots[i]);\n        }\n   \
-    \ }\n    bool merge(int i, int j)\n    {\n        i = leader(i), j = leader(j);\n\
-    \        if (i == j) { return false; }\n        if (size(i) > size(j)) { std::swap(i,\
-    \ j); }\n        m_roots[i] = j;\n        m_sizes[j] += m_sizes[i];\n        return\
-    \ true;\n    }\n    int size(int i)\n    {\n        return m_sizes[leader(i)];\n\
-    \    }\n    Vec<Vec<int>> groups()\n    {\n        Vec<Vec<int>> iss(m_v);\n \
-    \       for (const int i : rep(m_v)) {\n            iss[leader(i)].push_back(i);\n\
-    \        }\n        return iss;\n    }\n\nprivate:\n    int m_v;\n    Vec<int>\
-    \ m_roots;\n    Vec<int> m_sizes;\n};\n"
+    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass DisjointSetUnion\n\
+    {\npublic:\n    DisjointSetUnion(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v,\
+    \ 1) {}\n    int leader(int i)\n    {\n        if (m_roots[i] == i) {\n      \
+    \      return i;\n        } else {\n            return m_roots[i] = leader(m_roots[i]);\n\
+    \        }\n    }\n    bool merge(int i, int j)\n    {\n        i = leader(i),\
+    \ j = leader(j);\n        if (i == j) { return false; }\n        if (size(i) >\
+    \ size(j)) { std::swap(i, j); }\n        m_roots[i] = j;\n        m_sizes[j] +=\
+    \ m_sizes[i];\n        return true;\n    }\n    int size(int i)\n    {\n     \
+    \   return m_sizes[leader(i)];\n    }\n    Vec<Vec<int>> groups()\n    {\n   \
+    \     Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v)) {\n      \
+    \      iss[leader(i)].push_back(i);\n        }\n        return iss;\n    }\nprivate:\n\
+    \    int m_v;\n    Vec<int> m_roots;\n    Vec<int> m_sizes;\n};\n"
+  code: "#pragma once\n#include \"../misc/common.hpp\"\nclass DisjointSetUnion\n{\n\
+    public:\n    DisjointSetUnion(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v,\
+    \ 1) {}\n    int leader(int i)\n    {\n        if (m_roots[i] == i) {\n      \
+    \      return i;\n        } else {\n            return m_roots[i] = leader(m_roots[i]);\n\
+    \        }\n    }\n    bool merge(int i, int j)\n    {\n        i = leader(i),\
+    \ j = leader(j);\n        if (i == j) { return false; }\n        if (size(i) >\
+    \ size(j)) { std::swap(i, j); }\n        m_roots[i] = j;\n        m_sizes[j] +=\
+    \ m_sizes[i];\n        return true;\n    }\n    int size(int i)\n    {\n     \
+    \   return m_sizes[leader(i)];\n    }\n    Vec<Vec<int>> groups()\n    {\n   \
+    \     Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v)) {\n      \
+    \      iss[leader(i)].push_back(i);\n        }\n        return iss;\n    }\n\n\
+    private:\n    int m_v;\n    Vec<int> m_roots;\n    Vec<int> m_sizes;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -240,7 +240,7 @@ data:
   isVerificationFile: false
   path: src/ds/dsu.hpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
+  timestamp: '2021-09-25 02:07:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/ds/dsu.test.cpp

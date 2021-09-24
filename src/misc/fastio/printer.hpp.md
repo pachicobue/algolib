@@ -97,9 +97,6 @@ data:
     path: verifications/ds/wavelet.test.cpp
     title: verifications/ds/wavelet.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verifications/graph/bcc.test.cpp
-    title: verifications/graph/bcc.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verifications/graph/diameter.test.cpp
     title: verifications/graph/diameter.test.cpp
   - icon: ':heavy_check_mark:'
@@ -114,6 +111,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/scc.test.cpp
     title: verifications/graph/scc.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/tecc.test.cpp
+    title: verifications/graph/tecc.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/math/and_convolution.test.cpp
     title: verifications/math/and_convolution.test.cpp
@@ -386,7 +386,7 @@ data:
   timestamp: '2021-09-03 16:07:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/graph/bcc.test.cpp
+  - verifications/graph/tecc.test.cpp
   - verifications/graph/diameter.test.cpp
   - verifications/graph/scc.test.cpp
   - verifications/graph/hld.test.cpp

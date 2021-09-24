@@ -198,20 +198,21 @@ data:
     \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
-    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass DSU\n{\npublic:\n\
-    \    DSU(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}\n    int leader(int\
-    \ i)\n    {\n        if (m_roots[i] == i) {\n            return i;\n        }\
-    \ else {\n            return m_roots[i] = leader(m_roots[i]);\n        }\n   \
-    \ }\n    bool merge(int i, int j)\n    {\n        i = leader(i), j = leader(j);\n\
-    \        if (i == j) { return false; }\n        if (size(i) > size(j)) { std::swap(i,\
-    \ j); }\n        m_roots[i] = j;\n        m_sizes[j] += m_sizes[i];\n        return\
-    \ true;\n    }\n    int size(int i)\n    {\n        return m_sizes[leader(i)];\n\
-    \    }\n    Vec<Vec<int>> groups()\n    {\n        Vec<Vec<int>> iss(m_v);\n \
-    \       for (const int i : rep(m_v)) {\n            iss[leader(i)].push_back(i);\n\
-    \        }\n        return iss;\n    }\nprivate:\n    int m_v;\n    Vec<int> m_roots;\n\
-    \    Vec<int> m_sizes;\n};\nvoid Test()\n{\n    DSU dsu(7);\n    dsu.merge(0,\
-    \ 1);\n    dsu.merge(2, 3);\n    dsu.merge(4, 5);\n    dsu.merge(5, 6);\n    assert(dsu.size(0)\
-    \ == 2);\n    assert(dsu.size(1) == 2);\n    assert(dsu.size(2) == 2);\n    assert(dsu.size(3)\
+    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass DisjointSetUnion\n\
+    {\npublic:\n    DisjointSetUnion(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v,\
+    \ 1) {}\n    int leader(int i)\n    {\n        if (m_roots[i] == i) {\n      \
+    \      return i;\n        } else {\n            return m_roots[i] = leader(m_roots[i]);\n\
+    \        }\n    }\n    bool merge(int i, int j)\n    {\n        i = leader(i),\
+    \ j = leader(j);\n        if (i == j) { return false; }\n        if (size(i) >\
+    \ size(j)) { std::swap(i, j); }\n        m_roots[i] = j;\n        m_sizes[j] +=\
+    \ m_sizes[i];\n        return true;\n    }\n    int size(int i)\n    {\n     \
+    \   return m_sizes[leader(i)];\n    }\n    Vec<Vec<int>> groups()\n    {\n   \
+    \     Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v)) {\n      \
+    \      iss[leader(i)].push_back(i);\n        }\n        return iss;\n    }\nprivate:\n\
+    \    int m_v;\n    Vec<int> m_roots;\n    Vec<int> m_sizes;\n};\nvoid Test()\n\
+    {\n    DisjointSetUnion dsu(7);\n    dsu.merge(0, 1);\n    dsu.merge(2, 3);\n\
+    \    dsu.merge(4, 5);\n    dsu.merge(5, 6);\n    assert(dsu.size(0) == 2);\n \
+    \   assert(dsu.size(1) == 2);\n    assert(dsu.size(2) == 2);\n    assert(dsu.size(3)\
     \ == 2);\n    assert(dsu.size(4) == 3);\n    assert(dsu.size(5) == 3);\n    assert(dsu.size(6)\
     \ == 3);\n    assert(dsu.leader(0) == 1);\n    assert(dsu.leader(1) == 1);\n \
     \   assert(dsu.leader(2) == 3);\n    assert(dsu.leader(3) == 3);\n    assert(dsu.leader(4)\
@@ -220,9 +221,9 @@ data:
     \ {}, {4, 5, 6}, {}}));\n}\nint main()\n{\n    Test();\n    std::cout << \"Hello\
     \ World\\n\";\n    return 0;\n}\n"
   code: "#define PROBLEM \\\n    \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
-    \n#include \"../../src/ds/dsu.hpp\"\n\nvoid Test()\n{\n    DSU dsu(7);\n    dsu.merge(0,\
-    \ 1);\n    dsu.merge(2, 3);\n    dsu.merge(4, 5);\n    dsu.merge(5, 6);\n\n  \
-    \  assert(dsu.size(0) == 2);\n    assert(dsu.size(1) == 2);\n    assert(dsu.size(2)\
+    \n#include \"../../src/ds/dsu.hpp\"\n\nvoid Test()\n{\n    DisjointSetUnion dsu(7);\n\
+    \    dsu.merge(0, 1);\n    dsu.merge(2, 3);\n    dsu.merge(4, 5);\n    dsu.merge(5,\
+    \ 6);\n\n    assert(dsu.size(0) == 2);\n    assert(dsu.size(1) == 2);\n    assert(dsu.size(2)\
     \ == 2);\n    assert(dsu.size(3) == 2);\n    assert(dsu.size(4) == 3);\n    assert(dsu.size(5)\
     \ == 3);\n    assert(dsu.size(6) == 3);\n\n    assert(dsu.leader(0) == 1);\n \
     \   assert(dsu.leader(1) == 1);\n    assert(dsu.leader(2) == 3);\n    assert(dsu.leader(3)\
@@ -249,7 +250,7 @@ data:
   isVerificationFile: true
   path: verifications/ds/dsu.ut.test.cpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
+  timestamp: '2021-09-25 02:07:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/ds/dsu.ut.test.cpp

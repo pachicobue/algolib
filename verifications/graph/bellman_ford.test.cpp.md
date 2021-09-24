@@ -250,27 +250,27 @@ data:
     \ Graph<T>& g, const int s)\n{\n    const int N = g.v();\n    assert(0 <= s and\
     \ s < N);\n    Vec<T> ds(N, INF<T>);\n    ds[s] = 0;\n    for (int loop : rep(2\
     \ * N)) {\n        for (int u : rep(N)) {\n            if (ds[u] == INF<T>) {\
-    \ continue; }\n            for (const auto& [id, v, c] : g[u]) {\n           \
-    \     static_cast<void>(id);\n                if (ds[v] <= ds[u] + c) { continue;\
-    \ }\n                ds[v] = ds[u] + c;\n                if (loop >= N - 1) {\
-    \ ds[v] = -INF<T>; }\n            }\n        }\n    }\n    return ds;\n}\nclass\
-    \ Printer\n{\npublic:\n    Printer(Ostream& os = std::cout) : m_os{os}\n    {\n\
-    \        m_os << std::fixed << std::setprecision(15);\n    }\n    template<typename...\
-    \ Args>\n    int operator()(const Args&... args)\n    {\n        dump(args...);\n\
-    \        return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
-    \ args)\n    {\n        dump(args...), m_os << '\\n';\n        return 0;\n   \
-    \ }\n    template<typename... Args>\n    int el(const Args&... args)\n    {\n\
-    \        dump(args...), m_os << std::endl;\n        return 0;\n    }\nprivate:\n\
-    \    template<typename T>\n    void dump(const T& v)\n    {\n        m_os << v;\n\
-    \    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n   \
-    \     for (const int i : rep(vs.size())) {\n            m_os << (i ? \" \" : \"\
-    \"), dump(vs[i]);\n        }\n    }\n    template<typename T>\n    void dump(const\
-    \ Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size())) {\n  \
-    \          m_os << (i ? \"\\n\" : \"\"), dump(vss[i]);\n        }\n    }\n   \
-    \ template<typename T, typename... Ts>\n    int dump(const T& v, const Ts&...\
-    \ args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n        return 0;\n\
-    \    }\n    Ostream& m_os;\n};\nPrinter out;\nclass Scanner\n{\npublic:\n    Scanner(Istream&\
-    \ is = std::cin) : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n\
+    \ continue; }\n            for (const auto& e : g[u]) {\n                const\
+    \ int v = e.to;\n                const auto c = e.cost;\n                if (ds[v]\
+    \ <= ds[u] + c) { continue; }\n                ds[v] = ds[u] + c;\n          \
+    \      if (loop >= N - 1) { ds[v] = -INF<T>; }\n            }\n        }\n   \
+    \ }\n    return ds;\n}\nclass Printer\n{\npublic:\n    Printer(Ostream& os = std::cout)\
+    \ : m_os{os}\n    {\n        m_os << std::fixed << std::setprecision(15);\n  \
+    \  }\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
+    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), m_os <<\
+    \ '\\n';\n        return 0;\n    }\n    template<typename... Args>\n    int el(const\
+    \ Args&... args)\n    {\n        dump(args...), m_os << std::endl;\n        return\
+    \ 0;\n    }\nprivate:\n    template<typename T>\n    void dump(const T& v)\n \
+    \   {\n        m_os << v;\n    }\n    template<typename T>\n    void dump(const\
+    \ Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size())) {\n         \
+    \   m_os << (i ? \" \" : \"\"), dump(vs[i]);\n        }\n    }\n    template<typename\
+    \ T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i :\
+    \ rep(vss.size())) {\n            m_os << (i ? \"\\n\" : \"\"), dump(vss[i]);\n\
+    \        }\n    }\n    template<typename T, typename... Ts>\n    int dump(const\
+    \ T& v, const Ts&... args)\n    {\n        dump(v), m_os << ' ', dump(args...);\n\
+    \        return 0;\n    }\n    Ostream& m_os;\n};\nPrinter out;\nclass Scanner\n\
+    {\npublic:\n    Scanner(Istream& is = std::cin) : m_is{is}\n    {\n        m_is.tie(nullptr)->sync_with_stdio(false);\n\
     \    }\n    template<typename T>\n    T val()\n    {\n        T v;\n        return\
     \ m_is >> v, v;\n    }\n    template<typename T>\n    T val(T offset)\n    {\n\
     \        return val<T>() - offset;\n    }\n    template<typename T>\n    Vec<T>\
@@ -324,7 +324,7 @@ data:
   isVerificationFile: true
   path: verifications/graph/bellman_ford.test.cpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
+  timestamp: '2021-09-25 02:07:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/graph/bellman_ford.test.cpp

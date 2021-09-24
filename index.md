@@ -59,9 +59,6 @@ data:
   - name: src/graph
     pages:
     - icon: ':heavy_check_mark:'
-      path: src/graph/bcc.hpp
-      title: src/graph/bcc.hpp
-    - icon: ':heavy_check_mark:'
       path: src/graph/bellman_ford.hpp
       title: src/graph/bellman_ford.hpp
     - icon: ':heavy_check_mark:'
@@ -91,6 +88,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/graph/scc.hpp
       title: src/graph/scc.hpp
+    - icon: ':heavy_check_mark:'
+      path: src/graph/tecc.hpp
+      title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
     - icon: ':heavy_check_mark:'
       path: src/graph/top_sort.hpp
       title: src/graph/top_sort.hpp
@@ -416,9 +416,6 @@ data:
   - name: verifications/graph
     pages:
     - icon: ':heavy_check_mark:'
-      path: verifications/graph/bcc.test.cpp
-      title: verifications/graph/bcc.test.cpp
-    - icon: ':heavy_check_mark:'
       path: verifications/graph/bellman_ford.test.cpp
       title: verifications/graph/bellman_ford.test.cpp
     - icon: ':heavy_check_mark:'
@@ -445,6 +442,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verifications/graph/scc.test.cpp
       title: verifications/graph/scc.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verifications/graph/tecc.test.cpp
+      title: verifications/graph/tecc.test.cpp
     - icon: ':heavy_check_mark:'
       path: verifications/graph/warshall_floyd.test.cpp
       title: verifications/graph/warshall_floyd.test.cpp

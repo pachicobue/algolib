@@ -208,8 +208,23 @@ data:
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
-    \ SemiGroup>\nclass DSTable\n{\n    using T = typename SemiGroup::T;\npublic:\n\
-    \    DSTable(const Vec<T>& vs)\n        : m_size(vs.size()), m_depth(log2p1(m_size)),\
+    \ SemiGroup>\nclass DisjointSparseTable\n{\n    using T = typename SemiGroup::T;\n\
+    public:\n    DisjointSparseTable(const Vec<T>& vs)\n        : m_size(vs.size()),\
+    \ m_depth(log2p1(m_size)), m_vss(m_depth, vs)\n    {\n        for (int d : rep(m_depth))\
+    \ {\n            const int w = 1 << (m_depth - d - 1);\n            for (int i\
+    \ = 1; i * w < m_size; i += 2) {\n                int l = i * w - 1, r = i * w;\n\
+    \                for (int j : irange(1, w)) {\n                    m_vss[d][l\
+    \ - j] = merge(vs[l - j], m_vss[d][l - j + 1]);\n                    if (r + j\
+    \ < m_size) {\n                        m_vss[d][r + j] = merge(vs[r + j], m_vss[d][r\
+    \ + j - 1]);\n                    }\n                }\n            }\n      \
+    \  }\n    }\n    T fold(int l, int r) const\n    {\n        assert(0 <= l and\
+    \ l < r and r <= m_size);\n        if (r - l == 1) { return m_vss.back()[l]; }\n\
+    \        const int d = m_depth - log2p1(l ^ (r - 1));\n        return merge(m_vss[d][l],\
+    \ m_vss[d][r - 1]);\n    }\nprivate:\n    int m_size, m_depth;\n    Vec<Vec<T>>\
+    \ m_vss;\n    static inline SemiGroup merge;\n};\n"
+  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename SemiGroup>\n\
+    class DisjointSparseTable\n{\n    using T = typename SemiGroup::T;\n\npublic:\n\
+    \    DisjointSparseTable(const Vec<T>& vs)\n        : m_size(vs.size()), m_depth(log2p1(m_size)),\
     \ m_vss(m_depth, vs)\n    {\n        for (int d : rep(m_depth)) {\n          \
     \  const int w = 1 << (m_depth - d - 1);\n            for (int i = 1; i * w <\
     \ m_size; i += 2) {\n                int l = i * w - 1, r = i * w;\n         \
@@ -220,23 +235,8 @@ data:
     \   T fold(int l, int r) const\n    {\n        assert(0 <= l and l < r and r <=\
     \ m_size);\n        if (r - l == 1) { return m_vss.back()[l]; }\n        const\
     \ int d = m_depth - log2p1(l ^ (r - 1));\n        return merge(m_vss[d][l], m_vss[d][r\
-    \ - 1]);\n    }\nprivate:\n    int m_size, m_depth;\n    Vec<Vec<T>> m_vss;\n\
+    \ - 1]);\n    }\n\nprivate:\n    int m_size, m_depth;\n    Vec<Vec<T>> m_vss;\n\
     \    static inline SemiGroup merge;\n};\n"
-  code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename SemiGroup>\n\
-    class DSTable\n{\n    using T = typename SemiGroup::T;\n\npublic:\n    DSTable(const\
-    \ Vec<T>& vs)\n        : m_size(vs.size()), m_depth(log2p1(m_size)), m_vss(m_depth,\
-    \ vs)\n    {\n        for (int d : rep(m_depth)) {\n            const int w =\
-    \ 1 << (m_depth - d - 1);\n            for (int i = 1; i * w < m_size; i += 2)\
-    \ {\n                int l = i * w - 1, r = i * w;\n                for (int j\
-    \ : irange(1, w)) {\n                    m_vss[d][l - j] = merge(vs[l - j], m_vss[d][l\
-    \ - j + 1]);\n                    if (r + j < m_size) {\n                    \
-    \    m_vss[d][r + j] = merge(vs[r + j], m_vss[d][r + j - 1]);\n              \
-    \      }\n                }\n            }\n        }\n    }\n    T fold(int l,\
-    \ int r) const\n    {\n        assert(0 <= l and l < r and r <= m_size);\n   \
-    \     if (r - l == 1) { return m_vss.back()[l]; }\n        const int d = m_depth\
-    \ - log2p1(l ^ (r - 1));\n        return merge(m_vss[d][l], m_vss[d][r - 1]);\n\
-    \    }\n\nprivate:\n    int m_size, m_depth;\n    Vec<Vec<T>> m_vss;\n    static\
-    \ inline SemiGroup merge;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -257,7 +257,7 @@ data:
   requiredBy:
   - src/graph/lca.hpp
   - src/ds/static_rmq.hpp
-  timestamp: '2021-09-03 16:07:21+09:00'
+  timestamp: '2021-09-25 02:07:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/graph/lca.test.cpp

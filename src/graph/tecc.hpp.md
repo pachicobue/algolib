@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/graph/bcc.hpp
-    title: src/graph/bcc.hpp
-  - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
   - icon: ':heavy_check_mark:'
@@ -52,22 +49,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/misc/fastio/printer.hpp
-    title: src/misc/fastio/printer.hpp
-  - icon: ':heavy_check_mark:'
-    path: src/misc/fastio/scanner.hpp
-    title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/tecc.test.cpp
+    title: verifications/graph/tecc.test.cpp
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/two_edge_connected_components
-    links:
-    - https://judge.yosupo.jp/problem/two_edge_connected_components
+    links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
     using i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
     using u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing\
@@ -274,77 +265,34 @@ data:
     \ m_bridges;\n    }\n    const Vec<int>& arts() const\n    {\n        return m_arts;\n\
     \    }\nprivate:\n    int m_v;\n    Vec<P> m_bridges;\n    Vec<int> m_arts;\n\
     \    Vec<int> m_ords;\n    Vec<int> m_lows;\n    Vec<bool> m_is_art;\n};\ntemplate<typename\
-    \ T>\nclass BCC\n{\npublic:\n    BCC(const Graph<T>& g) : m_v(g.v()), m_cs(g.v(),\
-    \ -1), m_lowlink{g}\n    {\n        auto dfs = Fix([&](auto dfs, int u) -> void\
-    \ {\n            m_cs[u] = m_cnum;\n            for (int v : g[u]) {\n       \
-    \         if (m_cs[v] == -1 and not m_lowlink.isBridge(u, v)) { dfs(v); }\n  \
-    \          }\n        });\n        for (int i : rep(g.v())) {\n            if\
-    \ (m_cs[i] != -1) { continue; }\n            dfs(i);\n            m_cnum++;\n\
-    \        }\n    }\n    int operator[](int v) const\n    {\n        assert(0 <=\
-    \ v and v < m_v);\n        return m_cs[v];\n    }\n    int cnum() const\n    {\n\
-    \        return m_cnum;\n    }\n    Vec<Vec<int>> groups() const\n    {\n    \
-    \    Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v)) {\n       \
-    \     iss[m_cs[i]].push_back(i);\n        }\n        return iss;\n    }\nprivate:\n\
-    \    int m_v;\n    int m_cnum = 0;\n    Vec<int> m_cs;\n    LowLink<T> m_lowlink;\n\
-    };\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer() {}\n\
-    \    template<typename... Args>\n    int operator()(const Args&... args)\n   \
-    \ {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
-    \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
-    n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
-    \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
-    \            v = -v;\n        }\n        int i = 0;\n        do {\n          \
-    \  tmp[i++] = v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n\
-    \        while (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void\
-    \ dump(bool b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n \
-    \   {\n        putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n     \
-    \   for (char c : cs) {\n            dump(c);\n        }\n    }\n    template<typename\
-    \ T>\n    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
-    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
-    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
-    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
-    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
-    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
-    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
-    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
-    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
-    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
-    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
-    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
-    \        }\n        while (true) {\n            c = getchar();\n            if\
-    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
-    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
-    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
-    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
-    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
-    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
-    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
-    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
-    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
-    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
-    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
-    \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
-    \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
-    \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
-    \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
-    }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
-    \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
-    \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
-    int main()\n{\n    const auto [N, M] = in.tup<int, int>();\n    Graph g(N);\n\
-    \    for (int i : rep(M)) {\n        static_cast<void>(i);\n        const auto\
-    \ [a, b] = in.tup<int, int>();\n        g.addEdge(a, b, true);\n    }\n    const\
-    \ auto bcc = BCC(g);\n    const int C = bcc.cnum();\n    const auto cvs = bcc.groups();\n\
-    \    out.ln(C);\n    for (int c : rep(C)) {\n        out.ln(cvs[c].size(), cvs[c]);\n\
-    \    }\n    return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_edge_connected_components\"\
-    \n#include \"../../src/graph/bcc.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\
-    \n#include \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const auto\
-    \ [N, M] = in.tup<int, int>();\n    Graph g(N);\n    for (int i : rep(M)) {\n\
-    \        USE(i);\n        const auto [a, b] = in.tup<int, int>();\n        g.addEdge(a,\
-    \ b, true);\n    }\n    const auto bcc = BCC(g);\n    const int C = bcc.cnum();\n\
-    \    const auto cvs = bcc.groups();\n    out.ln(C);\n    for (int c : rep(C))\
-    \ {\n        out.ln(cvs[c].size(), cvs[c]);\n    }\n    return 0;\n}\n"
+    \ T>\nclass TwoEdgeConnectedComponent\n{\npublic:\n    TwoEdgeConnectedComponent(const\
+    \ Graph<T>& g)\n        : m_v(g.v()), m_cs(g.v(), -1), m_lowlink{g}\n    {\n \
+    \       auto dfs = Fix([&](auto dfs, int u) -> void {\n            m_cs[u] = m_cnum;\n\
+    \            for (int v : g[u]) {\n                if (m_cs[v] == -1 and not m_lowlink.isBridge(u,\
+    \ v)) { dfs(v); }\n            }\n        });\n        for (int i : rep(g.v()))\
+    \ {\n            if (m_cs[i] != -1) { continue; }\n            dfs(i);\n     \
+    \       m_cnum++;\n        }\n    }\n    int operator[](int v) const\n    {\n\
+    \        assert(0 <= v and v < m_v);\n        return m_cs[v];\n    }\n    int\
+    \ cnum() const\n    {\n        return m_cnum;\n    }\n    Vec<Vec<int>> groups()\
+    \ const\n    {\n        Vec<Vec<int>> iss(m_v);\n        for (int i : rep(m_v))\
+    \ {\n            iss[m_cs[i]].push_back(i);\n        }\n        return iss;\n\
+    \    }\nprivate:\n    int m_v;\n    int m_cnum = 0;\n    Vec<int> m_cs;\n    LowLink<T>\
+    \ m_lowlink;\n};\n"
+  code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"lowlink.hpp\"\n\
+    template<typename T>\nclass TwoEdgeConnectedComponent\n{\npublic:\n    TwoEdgeConnectedComponent(const\
+    \ Graph<T>& g)\n        : m_v(g.v()), m_cs(g.v(), -1), m_lowlink{g}\n    {\n \
+    \       auto dfs = Fix([&](auto dfs, int u) -> void {\n            m_cs[u] = m_cnum;\n\
+    \            for (int v : g[u]) {\n                if (m_cs[v] == -1 and not m_lowlink.isBridge(u,\
+    \ v)) { dfs(v); }\n            }\n        });\n        for (int i : rep(g.v()))\
+    \ {\n            if (m_cs[i] != -1) { continue; }\n            dfs(i);\n     \
+    \       m_cnum++;\n        }\n    }\n    int operator[](int v) const\n    {\n\
+    \        assert(0 <= v and v < m_v);\n        return m_cs[v];\n    }\n    int\
+    \ cnum() const\n    {\n        return m_cnum;\n    }\n    Vec<Vec<int>> groups()\
+    \ const\n    {\n        Vec<Vec<int>> iss(m_v);\n        for (int i : rep(m_v))\
+    \ {\n            iss[m_cs[i]].push_back(i);\n        }\n        return iss;\n\
+    \    }\n\nprivate:\n    int m_v;\n    int m_cnum = 0;\n    Vec<int> m_cs;\n  \
+    \  LowLink<T> m_lowlink;\n};\n"
   dependsOn:
-  - src/graph/bcc.hpp
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
   - src/misc/common/type_alias.hpp
@@ -361,18 +309,69 @@ data:
   - src/misc/common/xoshiro.hpp
   - src/graph/lowlink.hpp
   - src/graph/graph.hpp
-  - src/misc/fastio/printer.hpp
-  - src/misc/fastio/scanner.hpp
-  isVerificationFile: true
-  path: verifications/graph/bcc.test.cpp
+  isVerificationFile: false
+  path: src/graph/tecc.hpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: verifications/graph/bcc.test.cpp
+  timestamp: '2021-09-25 02:07:10+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verifications/graph/tecc.test.cpp
+documentation_of: src/graph/tecc.hpp
 layout: document
-redirect_from:
-- /verify/verifications/graph/bcc.test.cpp
-- /verify/verifications/graph/bcc.test.cpp.html
-title: verifications/graph/bcc.test.cpp
+title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
 ---
+
+## 概要
+
+$V$頂点$E$辺 の無向グラフを $\mathrm{O}(V+E)$ 時間で二重辺連結成分に分解する。
+
+## I/F
+
+### コンストラクタ
+
+```cpp
+TwoEdgeConnectedComponent tecc(Graph<T> g)
+```
+
+グラフ $g$ を二重辺連結成分分解する。
+
+#### 計算量
+
+$\mathrm{O}(V+E)$
+
+### operator[]
+
+```cpp
+int tecc[i]
+```
+
+頂点 $i$ の属する二重辺連結成分番号を返す。  
+頂点 $i,j$ が同じ二重辺連結成分に属する $\Leftrightarrow$ `bcc[i] == bcc[j]`
+
+#### 計算量
+
+$\mathrm{O}(1)$
+
+### cnum
+
+```cpp
+int tecc.cnum()
+```
+
+二重辺連結成分数
+
+#### 計算量
+
+$\mathrm{O}(1)$
+
+### groups
+
+```cpp
+Vec<Vec<int>> tecc.groups()
+```
+
+二重辺連結成分のリスト
+
+#### 計算量
+
+$\mathrm{O}(V)$

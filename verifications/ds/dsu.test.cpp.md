@@ -204,62 +204,62 @@ data:
     \ template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n   \
     \ {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n \
     \   }\nprivate:\n    Rng m_rng;\n};\nRNG<std::mt19937> rng;\nRNG<std::mt19937_64>\
-    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass DSU\n{\npublic:\n\
-    \    DSU(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}\n    int leader(int\
-    \ i)\n    {\n        if (m_roots[i] == i) {\n            return i;\n        }\
-    \ else {\n            return m_roots[i] = leader(m_roots[i]);\n        }\n   \
-    \ }\n    bool merge(int i, int j)\n    {\n        i = leader(i), j = leader(j);\n\
-    \        if (i == j) { return false; }\n        if (size(i) > size(j)) { std::swap(i,\
-    \ j); }\n        m_roots[i] = j;\n        m_sizes[j] += m_sizes[i];\n        return\
-    \ true;\n    }\n    int size(int i)\n    {\n        return m_sizes[leader(i)];\n\
-    \    }\n    Vec<Vec<int>> groups()\n    {\n        Vec<Vec<int>> iss(m_v);\n \
-    \       for (const int i : rep(m_v)) {\n            iss[leader(i)].push_back(i);\n\
-    \        }\n        return iss;\n    }\nprivate:\n    int m_v;\n    Vec<int> m_roots;\n\
-    \    Vec<int> m_sizes;\n};\n#pragma region FastIO Printer\nclass Printer\n{\n\
-    public:\n    Printer() {}\n    template<typename... Args>\n    int operator()(const\
-    \ Args&... args)\n    {\n        dump(args...);\n        return 0;\n    }\n  \
-    \  template<typename... Args>\n    int ln(const Args&... args)\n    {\n      \
-    \  dump(args...), putchar('\\n');\n        return 0;\n    }\nprivate:\n    template<typename\
-    \ T>\n    void dump(T v)\n    {\n        static char tmp[30];\n        if (v <\
-    \ 0) {\n            putchar('-');\n            v = -v;\n        }\n        int\
-    \ i = 0;\n        do {\n            tmp[i++] = v % T{10} + '0';\n            v\
-    \ /= T{10};\n        } while (v);\n        while (i) {\n            putchar(tmp[--i]);\n\
-    \        }\n    }\n    void dump(bool b)\n    {\n        dump<int>(b);\n    }\n\
-    \    void dump(char c)\n    {\n        putchar(c);\n    }\n    void dump(const\
-    \ Str& cs)\n    {\n        for (char c : cs) {\n            dump(c);\n       \
-    \ }\n    }\n    template<typename T>\n    void dump(const Vec<T>& vs)\n    {\n\
-    \        for (const int i : rep(vs.size())) {\n            if (i) { putchar('\
-    \ '); }\n            dump(vs[i]);\n        }\n    }\n    template<typename T>\n\
-    \    void dump(const Vec<Vec<T>>& vss)\n    {\n        for (const int i : rep(vss.size()))\
-    \ {\n            if (i) { putchar('\\n'); }\n            dump(vss[i]);\n     \
-    \   }\n    }\n    template<typename T, typename... Ts>\n    int dump(const T&\
-    \ v, const Ts&... args)\n    {\n        dump(v), putchar(' '), dump(args...);\n\
-    \        return 0;\n    }\n    static inline void putchar(char c)\n    {\n   \
-    \     putchar_unlocked(c);\n    }\n} out;\n#pragma endregion\n#pragma region FastIO\
-    \ Scanner\nclass Scanner\n{\npublic:\n    Scanner() {}\n    template<typename\
-    \ T>\n    T val()\n    {\n        T ans = 0;\n        bool neg = false;\n    \
-    \    char c = getchar();\n        if (c < '0') {\n            neg = true;\n  \
-    \      } else {\n            ans = c - '0';\n        }\n        while (true) {\n\
-    \            c = getchar();\n            if (c < '0') { break; }\n           \
-    \ ans = ans * T{10} + (c - '0');\n        }\n        if (neg) { ans = -ans; }\n\
-    \        return ans;\n    }\n    template<typename T>\n    T val(T offset)\n \
-    \   {\n        return val<T>() - offset;\n    }\n    template<typename T>\n  \
-    \  Vec<T> vec(int n)\n    {\n        return genVec<T>(n, [&]() { return val<T>();\
-    \ });\n    }\n    template<typename T>\n    Vec<T> vec(int n, T offset)\n    {\n\
-    \        return genVec<T>(n, [&]() { return val<T>(offset); });\n    }\n    template<typename\
-    \ T>\n    Vec<Vec<T>> vvec(int n, int m)\n    {\n        return genVec<Vec<T>>(n,\
-    \ [&]() { return vec<T>(m); });\n    }\n    template<typename T>\n    Vec<Vec<T>>\
-    \ vvec(int n, int m, T offset)\n    {\n        return genVec<Vec<T>>(n, [&]()\
-    \ { return vec<T>(m, offset); });\n    }\n    template<typename... Args>\n   \
-    \ auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n   \
-    \ }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n  \
-    \  {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
+    \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\nclass DisjointSetUnion\n\
+    {\npublic:\n    DisjointSetUnion(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v,\
+    \ 1) {}\n    int leader(int i)\n    {\n        if (m_roots[i] == i) {\n      \
+    \      return i;\n        } else {\n            return m_roots[i] = leader(m_roots[i]);\n\
+    \        }\n    }\n    bool merge(int i, int j)\n    {\n        i = leader(i),\
+    \ j = leader(j);\n        if (i == j) { return false; }\n        if (size(i) >\
+    \ size(j)) { std::swap(i, j); }\n        m_roots[i] = j;\n        m_sizes[j] +=\
+    \ m_sizes[i];\n        return true;\n    }\n    int size(int i)\n    {\n     \
+    \   return m_sizes[leader(i)];\n    }\n    Vec<Vec<int>> groups()\n    {\n   \
+    \     Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v)) {\n      \
+    \      iss[leader(i)].push_back(i);\n        }\n        return iss;\n    }\nprivate:\n\
+    \    int m_v;\n    Vec<int> m_roots;\n    Vec<int> m_sizes;\n};\n#pragma region\
+    \ FastIO Printer\nclass Printer\n{\npublic:\n    Printer() {}\n    template<typename...\
+    \ Args>\n    int operator()(const Args&... args)\n    {\n        dump(args...);\n\
+    \        return 0;\n    }\n    template<typename... Args>\n    int ln(const Args&...\
+    \ args)\n    {\n        dump(args...), putchar('\\n');\n        return 0;\n  \
+    \  }\nprivate:\n    template<typename T>\n    void dump(T v)\n    {\n        static\
+    \ char tmp[30];\n        if (v < 0) {\n            putchar('-');\n           \
+    \ v = -v;\n        }\n        int i = 0;\n        do {\n            tmp[i++] =\
+    \ v % T{10} + '0';\n            v /= T{10};\n        } while (v);\n        while\
+    \ (i) {\n            putchar(tmp[--i]);\n        }\n    }\n    void dump(bool\
+    \ b)\n    {\n        dump<int>(b);\n    }\n    void dump(char c)\n    {\n    \
+    \    putchar(c);\n    }\n    void dump(const Str& cs)\n    {\n        for (char\
+    \ c : cs) {\n            dump(c);\n        }\n    }\n    template<typename T>\n\
+    \    void dump(const Vec<T>& vs)\n    {\n        for (const int i : rep(vs.size()))\
+    \ {\n            if (i) { putchar(' '); }\n            dump(vs[i]);\n        }\n\
+    \    }\n    template<typename T>\n    void dump(const Vec<Vec<T>>& vss)\n    {\n\
+    \        for (const int i : rep(vss.size())) {\n            if (i) { putchar('\\\
+    n'); }\n            dump(vss[i]);\n        }\n    }\n    template<typename T,\
+    \ typename... Ts>\n    int dump(const T& v, const Ts&... args)\n    {\n      \
+    \  dump(v), putchar(' '), dump(args...);\n        return 0;\n    }\n    static\
+    \ inline void putchar(char c)\n    {\n        putchar_unlocked(c);\n    }\n} out;\n\
+    #pragma endregion\n#pragma region FastIO Scanner\nclass Scanner\n{\npublic:\n\
+    \    Scanner() {}\n    template<typename T>\n    T val()\n    {\n        T ans\
+    \ = 0;\n        bool neg = false;\n        char c = getchar();\n        if (c\
+    \ < '0') {\n            neg = true;\n        } else {\n            ans = c - '0';\n\
+    \        }\n        while (true) {\n            c = getchar();\n            if\
+    \ (c < '0') { break; }\n            ans = ans * T{10} + (c - '0');\n        }\n\
+    \        if (neg) { ans = -ans; }\n        return ans;\n    }\n    template<typename\
+    \ T>\n    T val(T offset)\n    {\n        return val<T>() - offset;\n    }\n \
+    \   template<typename T>\n    Vec<T> vec(int n)\n    {\n        return genVec<T>(n,\
+    \ [&]() { return val<T>(); });\n    }\n    template<typename T>\n    Vec<T> vec(int\
+    \ n, T offset)\n    {\n        return genVec<T>(n, [&]() { return val<T>(offset);\
+    \ });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m)\n \
+    \   {\n        return genVec<Vec<T>>(n, [&]() { return vec<T>(m); });\n    }\n\
+    \    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T offset)\n    {\n\
+    \        return genVec<Vec<T>>(n, [&]() { return vec<T>(m, offset); });\n    }\n\
+    \    template<typename... Args>\n    auto tup()\n    {\n        return std::tuple<Args...>{val<Args>()...};\n\
+    \    }\n    template<typename... Args>\n    auto tup(const Args&... offsets)\n\
+    \    {\n        return std::tuple<Args...>{val<Args>(offsets)...};\n    }\nprivate:\n\
     \    static inline char getchar()\n    {\n        return getchar_unlocked();\n\
     \    }\n} in;\ntemplate<>\nchar Scanner::val()\n{\n    return Scanner::getchar();\n\
     }\ntemplate<>\nStr Scanner::val()\n{\n    Str ans;\n    while (true) {\n     \
     \   const char c = Scanner::getchar();\n        if (c == ' ' or c == '\\n' or\
     \ c == EOF) { break; }\n        ans.push_back(c);\n    }\n    return ans;\n}\n\
-    int main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    auto uf = DSU(N);\n\
+    int main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    auto uf = DisjointSetUnion(N);\n\
     \    for (int q : rep(Q)) {\n        static_cast<void>(q);\n        const auto\
     \ [t, u, v] = in.tup<int, int, int>();\n        if (t == 0) {\n            uf.merge(u,\
     \ v);\n        } else {\n            out.ln(uf.leader(u) == uf.leader(v));\n \
@@ -267,10 +267,10 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include \"\
     ../../src/ds/dsu.hpp\"\n#include \"../../src/misc/fastio/printer.hpp\"\n#include\
     \ \"../../src/misc/fastio/scanner.hpp\"\nint main()\n{\n    const auto [N, Q]\
-    \ = in.tup<int, int>();\n    auto uf = DSU(N);\n    for (int q : rep(Q)) {\n \
-    \       USE(q);\n        const auto [t, u, v] = in.tup<int, int, int>();\n   \
-    \     if (t == 0) {\n            uf.merge(u, v);\n        } else {\n         \
-    \   out.ln(uf.leader(u) == uf.leader(v));\n        }\n    }\n}\n"
+    \ = in.tup<int, int>();\n    auto uf = DisjointSetUnion(N);\n    for (int q :\
+    \ rep(Q)) {\n        USE(q);\n        const auto [t, u, v] = in.tup<int, int,\
+    \ int>();\n        if (t == 0) {\n            uf.merge(u, v);\n        } else\
+    \ {\n            out.ln(uf.leader(u) == uf.leader(v));\n        }\n    }\n}\n"
   dependsOn:
   - src/ds/dsu.hpp
   - src/misc/common.hpp
@@ -292,7 +292,7 @@ data:
   isVerificationFile: true
   path: verifications/ds/dsu.test.cpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
+  timestamp: '2021-09-25 02:07:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/ds/dsu.test.cpp

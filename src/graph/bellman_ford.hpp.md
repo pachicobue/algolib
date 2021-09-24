@@ -241,19 +241,20 @@ data:
     \ Graph<T>& g, const int s)\n{\n    const int N = g.v();\n    assert(0 <= s and\
     \ s < N);\n    Vec<T> ds(N, INF<T>);\n    ds[s] = 0;\n    for (int loop : rep(2\
     \ * N)) {\n        for (int u : rep(N)) {\n            if (ds[u] == INF<T>) {\
-    \ continue; }\n            for (const auto& [id, v, c] : g[u]) {\n           \
-    \     static_cast<void>(id);\n                if (ds[v] <= ds[u] + c) { continue;\
-    \ }\n                ds[v] = ds[u] + c;\n                if (loop >= N - 1) {\
-    \ ds[v] = -INF<T>; }\n            }\n        }\n    }\n    return ds;\n}\n"
+    \ continue; }\n            for (const auto& e : g[u]) {\n                const\
+    \ int v = e.to;\n                const auto c = e.cost;\n                if (ds[v]\
+    \ <= ds[u] + c) { continue; }\n                ds[v] = ds[u] + c;\n          \
+    \      if (loop >= N - 1) { ds[v] = -INF<T>; }\n            }\n        }\n   \
+    \ }\n    return ds;\n}\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename\
     \ T>\nVec<T> bellmanFord(const Graph<T>& g, const int s)\n{\n    const int N =\
     \ g.v();\n    assert(0 <= s and s < N);\n    Vec<T> ds(N, INF<T>);\n    ds[s]\
     \ = 0;\n    for (int loop : rep(2 * N)) {\n        for (int u : rep(N)) {\n  \
-    \          if (ds[u] == INF<T>) { continue; }\n            for (const auto& [id,\
-    \ v, c] : g[u]) {\n                USE(id);\n                if (ds[v] <= ds[u]\
-    \ + c) { continue; }\n                ds[v] = ds[u] + c;\n                if (loop\
-    \ >= N - 1) { ds[v] = -INF<T>; }\n            }\n        }\n    }\n    return\
-    \ ds;\n}\n"
+    \          if (ds[u] == INF<T>) { continue; }\n            for (const auto& e\
+    \ : g[u]) {\n                const int v = e.to;\n                const auto c\
+    \ = e.cost;\n                if (ds[v] <= ds[u] + c) { continue; }\n         \
+    \       ds[v] = ds[u] + c;\n                if (loop >= N - 1) { ds[v] = -INF<T>;\
+    \ }\n            }\n        }\n    }\n    return ds;\n}\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -273,7 +274,7 @@ data:
   isVerificationFile: false
   path: src/graph/bellman_ford.hpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
+  timestamp: '2021-09-25 02:07:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/graph/bellman_ford.test.cpp

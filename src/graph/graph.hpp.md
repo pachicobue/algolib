@@ -45,9 +45,6 @@ data:
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: src/graph/bcc.hpp
-    title: src/graph/bcc.hpp
-  - icon: ':heavy_check_mark:'
     path: src/graph/bellman_ford.hpp
     title: src/graph/bellman_ford.hpp
   - icon: ':heavy_check_mark:'
@@ -75,15 +72,15 @@ data:
     path: src/graph/scc.hpp
     title: src/graph/scc.hpp
   - icon: ':heavy_check_mark:'
+    path: src/graph/tecc.hpp
+    title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
     path: src/graph/top_sort.hpp
     title: src/graph/top_sort.hpp
   - icon: ':heavy_check_mark:'
     path: src/graph/warshall_floyd.hpp
     title: src/graph/warshall_floyd.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verifications/graph/bcc.test.cpp
-    title: verifications/graph/bcc.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/graph/bellman_ford.test.cpp
     title: verifications/graph/bellman_ford.test.cpp
@@ -111,6 +108,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/scc.test.cpp
     title: verifications/graph/scc.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verifications/graph/tecc.test.cpp
+    title: verifications/graph/tecc.test.cpp
   - icon: ':heavy_check_mark:'
     path: verifications/graph/warshall_floyd.test.cpp
     title: verifications/graph/warshall_floyd.test.cpp
@@ -358,7 +358,6 @@ data:
   isVerificationFile: false
   path: src/graph/graph.hpp
   requiredBy:
-  - src/graph/bcc.hpp
   - src/graph/bellman_ford.hpp
   - src/graph/level_ancestor.hpp
   - src/graph/dijkstra.hpp
@@ -367,6 +366,7 @@ data:
   - src/graph/scc.hpp
   - src/graph/warshall_floyd.hpp
   - src/graph/lowlink.hpp
+  - src/graph/tecc.hpp
   - src/graph/top_sort.hpp
   - src/graph/centroid_decomp.hpp
   - src/graph/diameter.hpp
@@ -374,7 +374,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/graph/warshall_floyd.test.cpp
-  - verifications/graph/bcc.test.cpp
+  - verifications/graph/tecc.test.cpp
   - verifications/graph/level_ancestor.ut.test.cpp
   - verifications/graph/bellman_ford.test.cpp
   - verifications/graph/diameter.test.cpp

@@ -48,12 +48,12 @@ data:
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: src/graph/bcc.hpp
-    title: src/graph/bcc.hpp
+    path: src/graph/tecc.hpp
+    title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verifications/graph/bcc.test.cpp
-    title: verifications/graph/bcc.test.cpp
+    path: verifications/graph/tecc.test.cpp
+    title: verifications/graph/tecc.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -310,11 +310,11 @@ data:
   isVerificationFile: false
   path: src/graph/lowlink.hpp
   requiredBy:
-  - src/graph/bcc.hpp
+  - src/graph/tecc.hpp
   timestamp: '2021-09-03 16:07:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/graph/bcc.test.cpp
+  - verifications/graph/tecc.test.cpp
 documentation_of: src/graph/lowlink.hpp
 layout: document
 redirect_from:
