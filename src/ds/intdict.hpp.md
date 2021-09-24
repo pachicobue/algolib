@@ -1,34 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common.hpp
     title: src/misc/common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/bit_ops.hpp
     title: src/misc/common/bit_ops.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/constants.hpp
     title: src/misc/common/constants.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/fixpoint.hpp
     title: src/misc/common/fixpoint.hpp
   - icon: ':question:'
     path: src/misc/common/func_alias.hpp
     title: src/misc/common/func_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/irange.hpp
     title: src/misc/common/irange.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/macros.hpp
     title: src/misc/common/macros.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/operator_alias.hpp
     title: src/misc/common/operator_alias.hpp
   - icon: ':question:'
     path: src/misc/common/print/int128_t.hpp
     title: src/misc/common/print/int128_t.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/rng.hpp
     title: src/misc/common/rng.hpp
   - icon: ':question:'
@@ -37,10 +37,10 @@ data:
   - icon: ':question:'
     path: src/misc/common/type_alias.hpp
     title: src/misc/common/type_alias.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/vec_utils.hpp
     title: src/misc/common/vec_utils.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
@@ -48,7 +48,7 @@ data:
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/ds/intdict.test.cpp
     title: verifications/ds/intdict.test.cpp
   - icon: ':heavy_check_mark:'
@@ -57,9 +57,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -207,31 +207,31 @@ data:
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
     \ K, typename V, int LG = 20>\nclass IntDict\n{\npublic:\n    IntDict() = default;\n\
     \    V& operator[](K k)\n    {\n        const auto i = index(k);\n        if (not\
-    \ m_used.test(i)) { m_used.set(i), m_keys[i] = k; }\n        return m_vals[i];\n\
-    \    }\n    const V& operator[](K k) const\n    {\n        return m_vals[index(k)];\n\
-    \    }\n    void erase(K k)\n    {\n        m_used.reset(index(k));\n    }\n \
-    \   bool contains(K k) const\n    {\n        const auto i = index(k);\n      \
-    \  return m_used.test(i) and m_keys[i] == k;\n    }\nprivate:\n    u32 index(K\
-    \ k) const\n    {\n        u32 i = 0;\n        for (i = fibHash(k); m_used.test(i)\
-    \ and m_keys[i] != k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n\
-    \    }\n    static constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64\
-    \ k)\n    {\n        constexpr u64 a = 11400714819323198485_u64;\n        return\
-    \ (a * k) >> (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n \
-    \   Arr<V, N> m_vals;\n};\n"
+    \ m_used.test(i)) {\n            m_used.set(i), m_keys[i] = k;\n            m_vals[i]\
+    \ = V{};\n        }\n        return m_vals[i];\n    }\n    const V& at(K k) const\n\
+    \    {\n        return m_vals[index(k)];\n    }\n    void erase(K k)\n    {\n\
+    \        m_used.reset(index(k));\n    }\n    bool contains(K k) const\n    {\n\
+    \        const auto i = index(k);\n        return m_used.test(i) and m_keys[i]\
+    \ == k;\n    }\nprivate:\n    u32 index(K k) const\n    {\n        u32 i = 0;\n\
+    \        for (i = fibHash(k); m_used.test(i) and m_keys[i] != k;\n           \
+    \  (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static constexpr int\
+    \ N = 1 << LG;\n    static constexpr u32 fibHash(u64 k)\n    {\n        constexpr\
+    \ u64 a = 11400714819323198485_u64;\n        return (a * k) >> (64 - LG);\n  \
+    \  }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n    Arr<V, N> m_vals;\n};\n"
   code: "#pragma once\n#include \"../misc/common.hpp\"\ntemplate<typename K, typename\
     \ V, int LG = 20>\nclass IntDict\n{\npublic:\n    IntDict() = default;\n    V&\
     \ operator[](K k)\n    {\n        const auto i = index(k);\n        if (not m_used.test(i))\
-    \ { m_used.set(i), m_keys[i] = k; }\n        return m_vals[i];\n    }\n    const\
-    \ V& operator[](K k) const\n    {\n        return m_vals[index(k)];\n    }\n \
-    \   void erase(K k)\n    {\n        m_used.reset(index(k));\n    }\n    bool contains(K\
-    \ k) const\n    {\n        const auto i = index(k);\n        return m_used.test(i)\
-    \ and m_keys[i] == k;\n    }\n\nprivate:\n    u32 index(K k) const\n    {\n  \
-    \      u32 i = 0;\n        for (i = fibHash(k); m_used.test(i) and m_keys[i] !=\
-    \ k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static\
-    \ constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64 k)\n    {\n\
-    \        constexpr u64 a = 11400714819323198485_u64;\n        return (a * k) >>\
-    \ (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n    Arr<V, N>\
-    \ m_vals;\n};\n"
+    \ {\n            m_used.set(i), m_keys[i] = k;\n            m_vals[i] = V{};\n\
+    \        }\n        return m_vals[i];\n    }\n    const V& at(K k) const\n   \
+    \ {\n        return m_vals[index(k)];\n    }\n    void erase(K k)\n    {\n   \
+    \     m_used.reset(index(k));\n    }\n    bool contains(K k) const\n    {\n  \
+    \      const auto i = index(k);\n        return m_used.test(i) and m_keys[i] ==\
+    \ k;\n    }\n\nprivate:\n    u32 index(K k) const\n    {\n        u32 i = 0;\n\
+    \        for (i = fibHash(k); m_used.test(i) and m_keys[i] != k;\n           \
+    \  (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static constexpr int\
+    \ N = 1 << LG;\n    static constexpr u32 fibHash(u64 k)\n    {\n        constexpr\
+    \ u64 a = 11400714819323198485_u64;\n        return (a * k) >> (64 - LG);\n  \
+    \  }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n    Arr<V, N> m_vals;\n};\n"
   dependsOn:
   - src/misc/common.hpp
   - src/misc/common/macros.hpp
@@ -251,8 +251,8 @@ data:
   path: src/ds/intdict.hpp
   requiredBy:
   - src/math/mod_nthroot.hpp
-  timestamp: '2021-09-24 14:13:34+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-09-24 16:52:13+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/ds/intdict.test.cpp
   - verifications/ds/intdict.ut.test.cpp
@@ -293,7 +293,16 @@ IntDict<Key, Value, int w> dict()
 dict[key] = "hoge"
 ```
 
-キーに対応する値の参照を返す  
+`key` に対応する値の参照を返す  
+存在しないキー `key` が与えられた場合、`Value{}` が挿入される
+
+### at
+
+```cpp
+Value dict.at(Key key)
+```
+
+`key` に対応する値の参照を返す  
 
 #### 計算量
 
