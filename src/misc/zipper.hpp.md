@@ -247,8 +247,8 @@ data:
   timestamp: '2021-09-03 16:07:21+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verifications/misc/zipper.test.cpp
   - verifications/ds/mo.test.cpp
+  - verifications/misc/zipper.test.cpp
 documentation_of: src/misc/zipper.hpp
 layout: document
 redirect_from:

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/linear/matrix.hpp
     title: src/linear/matrix.hpp
   - icon: ':question:'
@@ -57,9 +57,9 @@ data:
     title: "Scanner (\u5165\u529B\u88DC\u52A9\u30AF\u30E9\u30B9)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/541
@@ -394,7 +394,7 @@ data:
   path: verifications/linear/matrix.test.cpp
   requiredBy: []
   timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/linear/matrix.test.cpp
 layout: document

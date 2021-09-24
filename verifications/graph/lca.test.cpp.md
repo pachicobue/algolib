@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/static_rmq.hpp
     title: "\u9759\u7684\u6570\u5217\u306ERMQ"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
   - icon: ':heavy_check_mark:'

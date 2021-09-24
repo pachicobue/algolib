@@ -286,8 +286,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/ds/bit_vector.test.cpp
-  - verifications/ds/wavelet.rangefreq.test.cpp
   - verifications/ds/wavelet.test.cpp
+  - verifications/ds/wavelet.rangefreq.test.cpp
 documentation_of: src/ds/bit_vector.hpp
 layout: document
 title: Bit Vector

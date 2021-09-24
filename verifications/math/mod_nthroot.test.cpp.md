@@ -4,22 +4,22 @@ data:
   - icon: ':question:'
     path: src/ds/intdict.hpp
     title: "\u6574\u6570\u30AD\u30FC\u306E\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/extgcd.hpp
     title: src/math/extgcd.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
   - icon: ':question:'
     path: src/math/modint.hpp
     title: src/math/modint.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/modint64.hpp
     title: src/math/modint64.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   - icon: ':question:'
@@ -72,9 +72,9 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_root_mod
@@ -225,26 +225,25 @@ data:
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
     \ K, typename V, int LG = 20>\nclass IntDict\n{\npublic:\n    IntDict() = default;\n\
     \    V& operator[](K k)\n    {\n        const auto i = index(k);\n        if (not\
-    \ m_used.test(i)) {\n            m_used.set(i), m_keys[i] = k;\n            return\
-    \ m_vals[i] = V{};\n        }\n        return m_vals[i];\n    }\n    const V&\
-    \ operator[](K k) const\n    {\n        return m_vals[index(k)];\n    }\n    void\
-    \ erase(K k)\n    {\n        m_used.reset(index(k));\n    }\n    bool contains(K\
-    \ k) const\n    {\n        const auto i = index(k);\n        return m_used.test(i)\
-    \ and m_keys[i] == k;\n    }\nprivate:\n    u32 index(K k) const\n    {\n    \
-    \    u32 i = 0;\n        for (i = fibHash(k); m_used.test(i) and m_keys[i] !=\
-    \ k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static\
-    \ constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64 k)\n    {\n\
-    \        constexpr u64 a = 11400714819323198485_u64;\n        return (a * k) >>\
-    \ (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n    Arr<V, N>\
-    \ m_vals;\n};\ntemplate<typename T>\nconstexpr T inverse(const T a, const T mod)\n\
-    {\n    return a == 1 ? T{1} : ((a - inverse(mod % a, a)) * mod + 1) / a;\n}\n\
-    template<typename T>\nconstexpr Pair<T, T> extgcd(const T a, const T b)\n{\n \
-    \   if (a == 0) { return -1 / b; }\n    if (b == 0) { return 1 / a; }\n    const\
-    \ T x = inverse(a, b), y = (a * x - 1) / b;\n    return {x, y};\n}\ntemplate<u32\
-    \ mod_, u32 root_, u32 max2p_>\nclass modint\n{\n    template<typename U = u32&>\n\
-    \    static U modRef()\n    {\n        static u32 s_mod = 0;\n        return s_mod;\n\
-    \    }\n    template<typename U = u32&>\n    static U rootRef()\n    {\n     \
-    \   static u32 s_root = 0;\n        return s_root;\n    }\n    template<typename\
+    \ m_used.test(i)) { m_used.set(i), m_keys[i] = k; }\n        return m_vals[i];\n\
+    \    }\n    const V& operator[](K k) const\n    {\n        return m_vals[index(k)];\n\
+    \    }\n    void erase(K k)\n    {\n        m_used.reset(index(k));\n    }\n \
+    \   bool contains(K k) const\n    {\n        const auto i = index(k);\n      \
+    \  return m_used.test(i) and m_keys[i] == k;\n    }\nprivate:\n    u32 index(K\
+    \ k) const\n    {\n        u32 i = 0;\n        for (i = fibHash(k); m_used.test(i)\
+    \ and m_keys[i] != k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n\
+    \    }\n    static constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64\
+    \ k)\n    {\n        constexpr u64 a = 11400714819323198485_u64;\n        return\
+    \ (a * k) >> (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n \
+    \   Arr<V, N> m_vals;\n};\ntemplate<typename T>\nconstexpr T inverse(const T a,\
+    \ const T mod)\n{\n    return a == 1 ? T{1} : ((a - inverse(mod % a, a)) * mod\
+    \ + 1) / a;\n}\ntemplate<typename T>\nconstexpr Pair<T, T> extgcd(const T a, const\
+    \ T b)\n{\n    if (a == 0) { return -1 / b; }\n    if (b == 0) { return 1 / a;\
+    \ }\n    const T x = inverse(a, b), y = (a * x - 1) / b;\n    return {x, y};\n\
+    }\ntemplate<u32 mod_, u32 root_, u32 max2p_>\nclass modint\n{\n    template<typename\
+    \ U = u32&>\n    static U modRef()\n    {\n        static u32 s_mod = 0;\n   \
+    \     return s_mod;\n    }\n    template<typename U = u32&>\n    static U rootRef()\n\
+    \    {\n        static u32 s_root = 0;\n        return s_root;\n    }\n    template<typename\
     \ U = u32&>\n    static U max2pRef()\n    {\n        static u32 s_max2p = 0;\n\
     \        return s_max2p;\n    }\npublic:\n    template<typename U = const u32>\n\
     \    static constexpr std::enable_if_t<mod_ != 0, U> mod()\n    {\n        return\
@@ -523,8 +522,8 @@ data:
   isVerificationFile: true
   path: verifications/math/mod_nthroot.test.cpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-09-24 14:13:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/math/mod_nthroot.test.cpp
 layout: document

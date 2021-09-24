@@ -44,14 +44,14 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/and_convolution.hpp
     title: src/math/and_convolution.hpp
   - icon: ':x:'
     path: src/math/or_convolution.hpp
     title: src/math/or_convolution.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/and_convolution.test.cpp
     title: verifications/math/and_convolution.test.cpp
   - icon: ':x:'
@@ -59,7 +59,7 @@ data:
     title: verifications/math/or_convolution.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -238,13 +238,13 @@ data:
   isVerificationFile: false
   path: src/math/set_moebius.hpp
   requiredBy:
-  - src/math/or_convolution.hpp
   - src/math/and_convolution.hpp
+  - src/math/or_convolution.hpp
   timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verifications/math/and_convolution.test.cpp
   - verifications/math/or_convolution.test.cpp
+  - verifications/math/and_convolution.test.cpp
 documentation_of: src/math/set_moebius.hpp
 layout: document
 redirect_from:

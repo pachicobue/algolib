@@ -301,8 +301,8 @@ data:
   timestamp: '2021-09-03 16:07:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/ds/wavelet.rangefreq.test.cpp
   - verifications/ds/wavelet.test.cpp
+  - verifications/ds/wavelet.rangefreq.test.cpp
 documentation_of: src/ds/wavelet.hpp
 layout: document
 title: "Wavelet\u884C\u5217"

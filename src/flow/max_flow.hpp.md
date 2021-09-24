@@ -316,8 +316,8 @@ data:
   timestamp: '2021-09-03 16:07:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/flow/max_flow.test.cpp
   - verifications/flow/max_flow.bipartite_matching.test.cpp
+  - verifications/flow/max_flow.test.cpp
 documentation_of: src/flow/max_flow.hpp
 layout: document
 redirect_from:

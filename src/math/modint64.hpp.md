@@ -44,17 +44,17 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/is_prime.hpp
     title: src/math/is_prime.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/mod_nthroot.hpp
     title: src/math/mod_nthroot.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/prime_factors.hpp
     title: src/math/prime_factors.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/mod_nthroot.test.cpp
     title: verifications/math/mod_nthroot.test.cpp
   - icon: ':x:'
@@ -62,7 +62,7 @@ data:
     title: verifications/math/prime_factors.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -355,11 +355,11 @@ data:
   isVerificationFile: false
   path: src/math/modint64.hpp
   requiredBy:
-  - src/math/mod_nthroot.hpp
-  - src/math/is_prime.hpp
   - src/math/prime_factors.hpp
+  - src/math/is_prime.hpp
+  - src/math/mod_nthroot.hpp
   timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verifications/math/mod_nthroot.test.cpp
   - verifications/math/prime_factors.test.cpp

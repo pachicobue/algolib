@@ -60,22 +60,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/level_ancestor.lca.test.cpp
     title: verifications/graph/level_ancestor.lca.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/warshall_floyd.test.cpp
     title: verifications/graph/warshall_floyd.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/linear/array_matrix.test.cpp
     title: verifications/linear/array_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/linear/bit_bases.test.cpp
     title: verifications/linear/bit_bases.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/linear/int_bases.test.cpp
     title: verifications/linear/int_bases.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/linear/matrix.test.cpp
     title: verifications/linear/matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/divisors.test.cpp
     title: verifications/math/divisors.test.cpp
   - icon: ':x:'
@@ -292,18 +292,18 @@ data:
   verifiedWith:
   - verifications/string/manacher.test.cpp
   - verifications/string/z_algorithm.test.cpp
-  - verifications/linear/bit_bases.test.cpp
-  - verifications/linear/matrix.test.cpp
-  - verifications/linear/int_bases.test.cpp
-  - verifications/linear/array_matrix.test.cpp
-  - verifications/graph/bellman_ford.test.cpp
-  - verifications/graph/centroid_decomp.test.cpp
   - verifications/graph/warshall_floyd.test.cpp
+  - verifications/graph/bellman_ford.test.cpp
   - verifications/graph/level_ancestor.lca.test.cpp
-  - verifications/flow/max_flow.test.cpp
+  - verifications/graph/centroid_decomp.test.cpp
   - verifications/flow/max_flow.bipartite_matching.test.cpp
-  - verifications/misc/io.test.cpp
+  - verifications/flow/max_flow.test.cpp
+  - verifications/linear/matrix.test.cpp
+  - verifications/linear/bit_bases.test.cpp
+  - verifications/linear/array_matrix.test.cpp
+  - verifications/linear/int_bases.test.cpp
   - verifications/misc/scanner.test.cpp
+  - verifications/misc/io.test.cpp
   - verifications/math/divisors.test.cpp
 documentation_of: src/misc/scanner.hpp
 layout: document

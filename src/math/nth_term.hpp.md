@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/berlekamp_massey.hpp
     title: src/math/berlekamp_massey.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/fps.hpp
     title: src/math/fps.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
   - icon: ':question:'
@@ -57,12 +57,12 @@ data:
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.nth.test.cpp
     title: verifications/math/fps.nth.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -498,7 +498,7 @@ data:
   path: src/math/nth_term.hpp
   requiredBy: []
   timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/math/fps.nth.test.cpp
 documentation_of: src/math/nth_term.hpp

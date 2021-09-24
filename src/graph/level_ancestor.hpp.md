@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
   - icon: ':question:'
@@ -51,12 +51,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verifications/graph/level_ancestor.lca.test.cpp
     title: verifications/graph/level_ancestor.lca.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/graph/level_ancestor.ut.test.cpp
     title: verifications/graph/level_ancestor.ut.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -300,7 +300,7 @@ data:
   path: src/graph/level_ancestor.hpp
   requiredBy: []
   timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/graph/level_ancestor.ut.test.cpp
   - verifications/graph/level_ancestor.lca.test.cpp

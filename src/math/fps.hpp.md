@@ -47,43 +47,43 @@ data:
     path: src/misc/common/xoshiro.hpp
     title: src/misc/common/xoshiro.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/fps_div_nth.hpp
     title: src/math/fps_div_nth.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/nth_term.hpp
     title: src/math/nth_term.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.convolution.test.cpp
     title: verifications/math/fps.convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.convolution1000000007.test.cpp
     title: verifications/math/fps.convolution1000000007.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.div_nth.test.cpp
     title: verifications/math/fps.div_nth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.exp.test.cpp
     title: verifications/math/fps.exp.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.inv.test.cpp
     title: verifications/math/fps.inv.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.log.test.cpp
     title: verifications/math/fps.log.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.nth.test.cpp
     title: verifications/math/fps.nth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.pow.test.cpp
     title: verifications/math/fps.pow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verifications/math/fps.tshift.test.cpp
     title: verifications/math/fps.tshift.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\n\
@@ -660,17 +660,17 @@ data:
   - src/math/fps_div_nth.hpp
   - src/math/nth_term.hpp
   timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/math/fps.tshift.test.cpp
-  - verifications/math/fps.inv.test.cpp
-  - verifications/math/fps.log.test.cpp
-  - verifications/math/fps.exp.test.cpp
+  - verifications/math/fps.nth.test.cpp
   - verifications/math/fps.div_nth.test.cpp
   - verifications/math/fps.convolution1000000007.test.cpp
-  - verifications/math/fps.convolution.test.cpp
+  - verifications/math/fps.inv.test.cpp
+  - verifications/math/fps.exp.test.cpp
   - verifications/math/fps.pow.test.cpp
-  - verifications/math/fps.nth.test.cpp
+  - verifications/math/fps.convolution.test.cpp
+  - verifications/math/fps.log.test.cpp
 documentation_of: src/math/fps.hpp
 layout: document
 redirect_from:

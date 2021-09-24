@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/level_ancestor.hpp
     title: src/graph/level_ancestor.hpp
   - icon: ':question:'

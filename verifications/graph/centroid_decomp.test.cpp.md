@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/centroid_decomp.hpp
     title: src/graph/centroid_decomp.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/graph.hpp
     title: src/graph/graph.hpp
   - icon: ':question:'

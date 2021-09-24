@@ -54,9 +54,9 @@ data:
     title: src/misc/fastio/scanner.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/associative_array
@@ -207,20 +207,19 @@ data:
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
     \ K, typename V, int LG = 20>\nclass IntDict\n{\npublic:\n    IntDict() = default;\n\
     \    V& operator[](K k)\n    {\n        const auto i = index(k);\n        if (not\
-    \ m_used.test(i)) {\n            m_used.set(i), m_keys[i] = k;\n            return\
-    \ m_vals[i] = V{};\n        }\n        return m_vals[i];\n    }\n    const V&\
-    \ operator[](K k) const\n    {\n        return m_vals[index(k)];\n    }\n    void\
-    \ erase(K k)\n    {\n        m_used.reset(index(k));\n    }\n    bool contains(K\
-    \ k) const\n    {\n        const auto i = index(k);\n        return m_used.test(i)\
-    \ and m_keys[i] == k;\n    }\nprivate:\n    u32 index(K k) const\n    {\n    \
-    \    u32 i = 0;\n        for (i = fibHash(k); m_used.test(i) and m_keys[i] !=\
-    \ k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static\
-    \ constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64 k)\n    {\n\
-    \        constexpr u64 a = 11400714819323198485_u64;\n        return (a * k) >>\
-    \ (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n    Arr<V, N>\
-    \ m_vals;\n};\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n    Printer()\
-    \ {}\n    template<typename... Args>\n    int operator()(const Args&... args)\n\
-    \    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
+    \ m_used.test(i)) { m_used.set(i), m_keys[i] = k; }\n        return m_vals[i];\n\
+    \    }\n    const V& operator[](K k) const\n    {\n        return m_vals[index(k)];\n\
+    \    }\n    void erase(K k)\n    {\n        m_used.reset(index(k));\n    }\n \
+    \   bool contains(K k) const\n    {\n        const auto i = index(k);\n      \
+    \  return m_used.test(i) and m_keys[i] == k;\n    }\nprivate:\n    u32 index(K\
+    \ k) const\n    {\n        u32 i = 0;\n        for (i = fibHash(k); m_used.test(i)\
+    \ and m_keys[i] != k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n\
+    \    }\n    static constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64\
+    \ k)\n    {\n        constexpr u64 a = 11400714819323198485_u64;\n        return\
+    \ (a * k) >> (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n \
+    \   Arr<V, N> m_vals;\n};\n#pragma region FastIO Printer\nclass Printer\n{\npublic:\n\
+    \    Printer() {}\n    template<typename... Args>\n    int operator()(const Args&...\
+    \ args)\n    {\n        dump(args...);\n        return 0;\n    }\n    template<typename...\
     \ Args>\n    int ln(const Args&... args)\n    {\n        dump(args...), putchar('\\\
     n');\n        return 0;\n    }\nprivate:\n    template<typename T>\n    void dump(T\
     \ v)\n    {\n        static char tmp[30];\n        if (v < 0) {\n            putchar('-');\n\
@@ -296,8 +295,8 @@ data:
   isVerificationFile: true
   path: verifications/ds/intdict.test.cpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-09-24 14:13:34+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verifications/ds/intdict.test.cpp
 layout: document

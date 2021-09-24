@@ -261,8 +261,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verifications/graph/lca.test.cpp
-  - verifications/ds/static_rmq.test.cpp
   - verifications/ds/ds_table.test.cpp
+  - verifications/ds/static_rmq.test.cpp
 documentation_of: src/ds/ds_table.hpp
 layout: document
 title: Disjoint Sparse Table

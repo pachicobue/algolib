@@ -299,8 +299,8 @@ data:
   timestamp: '2021-09-03 16:07:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verifications/ds/lazyseg.ut.test.cpp
   - verifications/ds/lazyseg.test.cpp
+  - verifications/ds/lazyseg.ut.test.cpp
 documentation_of: src/ds/lazyseg.hpp
 layout: document
 title: Lazy Segment Tree

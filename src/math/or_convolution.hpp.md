@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/and_convolution.hpp
     title: src/math/and_convolution.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/set_moebius.hpp
     title: src/math/set_moebius.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/math/set_zeta.hpp
     title: src/math/set_zeta.hpp
   - icon: ':question:'

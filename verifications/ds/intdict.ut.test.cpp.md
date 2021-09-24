@@ -201,19 +201,18 @@ data:
     \ rng64;\nRNG<Xoshiro32> rng_xo;\nRNG<Xoshiro64> rng_xo64;\ntemplate<typename\
     \ K, typename V, int LG = 20>\nclass IntDict\n{\npublic:\n    IntDict() = default;\n\
     \    V& operator[](K k)\n    {\n        const auto i = index(k);\n        if (not\
-    \ m_used.test(i)) {\n            m_used.set(i), m_keys[i] = k;\n            return\
-    \ m_vals[i] = V{};\n        }\n        return m_vals[i];\n    }\n    const V&\
-    \ operator[](K k) const\n    {\n        return m_vals[index(k)];\n    }\n    void\
-    \ erase(K k)\n    {\n        m_used.reset(index(k));\n    }\n    bool contains(K\
-    \ k) const\n    {\n        const auto i = index(k);\n        return m_used.test(i)\
-    \ and m_keys[i] == k;\n    }\nprivate:\n    u32 index(K k) const\n    {\n    \
-    \    u32 i = 0;\n        for (i = fibHash(k); m_used.test(i) and m_keys[i] !=\
-    \ k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n    }\n    static\
-    \ constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64 k)\n    {\n\
-    \        constexpr u64 a = 11400714819323198485_u64;\n        return (a * k) >>\
-    \ (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n    Arr<V, N>\
-    \ m_vals;\n};\nvoid Test()\n{\n    IntDict<int, Str> dict;\n    dict[-2] = \"\
-    -2\";\n    dict[0] = \"0\";\n    dict[2] = \"2\";\n    assert(dict.contains(-2));\n\
+    \ m_used.test(i)) { m_used.set(i), m_keys[i] = k; }\n        return m_vals[i];\n\
+    \    }\n    const V& operator[](K k) const\n    {\n        return m_vals[index(k)];\n\
+    \    }\n    void erase(K k)\n    {\n        m_used.reset(index(k));\n    }\n \
+    \   bool contains(K k) const\n    {\n        const auto i = index(k);\n      \
+    \  return m_used.test(i) and m_keys[i] == k;\n    }\nprivate:\n    u32 index(K\
+    \ k) const\n    {\n        u32 i = 0;\n        for (i = fibHash(k); m_used.test(i)\
+    \ and m_keys[i] != k;\n             (i += 1) &= (N - 1)) {}\n        return i;\n\
+    \    }\n    static constexpr int N = 1 << LG;\n    static constexpr u32 fibHash(u64\
+    \ k)\n    {\n        constexpr u64 a = 11400714819323198485_u64;\n        return\
+    \ (a * k) >> (64 - LG);\n    }\n    BSet<N> m_used;\n    Arr<K, N> m_keys;\n \
+    \   Arr<V, N> m_vals;\n};\nvoid Test()\n{\n    IntDict<int, Str> dict;\n    dict[-2]\
+    \ = \"-2\";\n    dict[0] = \"0\";\n    dict[2] = \"2\";\n    assert(dict.contains(-2));\n\
     \    assert(dict.contains(0));\n    assert(dict.contains(2));\n    assert(not\
     \ dict.contains(-3));\n    assert(not dict.contains(3));\n    dict.erase(0);\n\
     \    assert(dict.contains(-2));\n    assert(not dict.contains(0));\n    assert(dict.contains(2));\n\
@@ -248,7 +247,7 @@ data:
   isVerificationFile: true
   path: verifications/ds/intdict.ut.test.cpp
   requiredBy: []
-  timestamp: '2021-09-03 16:07:21+09:00'
+  timestamp: '2021-09-24 14:13:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verifications/ds/intdict.ut.test.cpp

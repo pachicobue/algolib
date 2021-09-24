@@ -73,7 +73,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/graph/dijkstra.hpp
       title: src/graph/dijkstra.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/graph.hpp
       title: src/graph/graph.hpp
     - icon: ':warning:'
@@ -82,71 +82,71 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/graph/lca.hpp
       title: src/graph/lca.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/level_ancestor.hpp
       title: src/graph/level_ancestor.hpp
     - icon: ':heavy_check_mark:'
       path: src/graph/lowlink.hpp
       title: src/graph/lowlink.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/scc.hpp
       title: src/graph/scc.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/top_sort.hpp
       title: src/graph/top_sort.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/warshall_floyd.hpp
       title: src/graph/warshall_floyd.hpp
   - name: src/linear
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/linear/array_matrix.hpp
       title: src/linear/array_matrix.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/linear/bit_bases.hpp
       title: src/linear/bit_bases.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/linear/int_bases.hpp
       title: src/linear/int_bases.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/linear/matrix.hpp
       title: src/linear/matrix.hpp
   - name: src/math
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/math/and_convolution.hpp
       title: src/math/and_convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/berlekamp_massey.hpp
       title: src/math/berlekamp_massey.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/divisors.hpp
       title: src/math/divisors.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/divisors_moebius.hpp
       title: src/math/divisors_moebius.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/divisors_zeta.hpp
       title: src/math/divisors_zeta.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/extgcd.hpp
       title: src/math/extgcd.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/factor_table.hpp
       title: src/math/factor_table.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/fps.hpp
       title: src/math/fps.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/fps_div_nth.hpp
       title: src/math/fps_div_nth.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/gcd_convolution.hpp
       title: src/math/gcd_convolution.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/math/is_prime.hpp
       title: src/math/is_prime.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/mod_nthroot.hpp
       title: src/math/mod_nthroot.hpp
     - icon: ':x:'
@@ -155,34 +155,34 @@ data:
     - icon: ':question:'
       path: src/math/modint.hpp
       title: src/math/modint.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/math/modint64.hpp
       title: src/math/modint64.hpp
     - icon: ':x:'
       path: src/math/multiplicative_sum.hpp
       title: src/math/multiplicative_sum.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/nth_term.hpp
       title: src/math/nth_term.hpp
     - icon: ':x:'
       path: src/math/or_convolution.hpp
       title: src/math/or_convolution.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/math/prime_factors.hpp
       title: src/math/prime_factors.hpp
     - icon: ':x:'
       path: src/math/prime_powsum.hpp
       title: src/math/prime_powsum.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/primes.hpp
       title: src/math/primes.hpp
     - icon: ':x:'
       path: src/math/set_hadamard.hpp
       title: src/math/set_hadamard.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/math/set_moebius.hpp
       title: src/math/set_moebius.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/math/set_zeta.hpp
       title: src/math/set_zeta.hpp
     - icon: ':x:'
@@ -357,7 +357,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verifications/ds/fenwick.test.cpp
       title: verifications/ds/fenwick.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verifications/ds/intdict.test.cpp
       title: verifications/ds/intdict.test.cpp
     - icon: ':heavy_check_mark:'
@@ -439,77 +439,77 @@ data:
     - icon: ':heavy_check_mark:'
       path: verifications/graph/level_ancestor.lca.test.cpp
       title: verifications/graph/level_ancestor.lca.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/graph/level_ancestor.ut.test.cpp
       title: verifications/graph/level_ancestor.ut.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/graph/scc.test.cpp
       title: verifications/graph/scc.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/graph/warshall_floyd.test.cpp
       title: verifications/graph/warshall_floyd.test.cpp
   - name: verifications/linear
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/linear/array_matrix.test.cpp
       title: verifications/linear/array_matrix.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/linear/bit_bases.test.cpp
       title: verifications/linear/bit_bases.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/linear/bit_bases.ut.test.cpp
       title: verifications/linear/bit_bases.ut.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/linear/int_bases.test.cpp
       title: verifications/linear/int_bases.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/linear/int_bases.ut.test.cpp
       title: verifications/linear/int_bases.ut.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/linear/matrix.test.cpp
       title: verifications/linear/matrix.test.cpp
   - name: verifications/math
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/and_convolution.test.cpp
       title: verifications/math/and_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/berlekamp_massey.test.cpp
       title: verifications/math/berlekamp_massey.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/divisors.test.cpp
       title: verifications/math/divisors.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/fps.convolution.test.cpp
       title: verifications/math/fps.convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/fps.convolution1000000007.test.cpp
       title: verifications/math/fps.convolution1000000007.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/fps.div_nth.test.cpp
       title: verifications/math/fps.div_nth.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/fps.exp.test.cpp
       title: verifications/math/fps.exp.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/fps.inv.test.cpp
       title: verifications/math/fps.inv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/fps.log.test.cpp
       title: verifications/math/fps.log.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/fps.nth.test.cpp
       title: verifications/math/fps.nth.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/fps.pow.test.cpp
       title: verifications/math/fps.pow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/fps.tshift.test.cpp
       title: verifications/math/fps.tshift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/gcd_convolution.test.cpp
       title: verifications/math/gcd_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verifications/math/mod_nthroot.test.cpp
       title: verifications/math/mod_nthroot.test.cpp
     - icon: ':x:'
