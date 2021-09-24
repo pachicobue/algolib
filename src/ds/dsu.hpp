@@ -1,9 +1,9 @@
 #pragma once
 #include "../misc/common.hpp"
-class DSU
+class DisjointSetUnion
 {
 public:
-    DSU(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}
+    DisjointSetUnion(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}
     int leader(int i)
     {
         if (m_roots[i] == i) {

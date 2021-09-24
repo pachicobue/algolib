@@ -5,7 +5,7 @@
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();
-    auto uf = DSU(N);
+    auto uf = DisjointSetUnion(N);
     for (int q : rep(Q)) {
         USE(q);
         const auto [t, u, v] = in.tup<int, int, int>();

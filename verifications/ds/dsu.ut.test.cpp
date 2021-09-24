@@ -4,7 +4,7 @@
 
 void Test()
 {
-    DSU dsu(7);
+    DisjointSetUnion dsu(7);
     dsu.merge(0, 1);
     dsu.merge(2, 3);
     dsu.merge(4, 5);

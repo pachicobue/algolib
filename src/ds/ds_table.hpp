@@ -1,12 +1,12 @@
 #pragma once
 #include "../misc/common.hpp"
 template<typename SemiGroup>
-class DSTable
+class DisjointSparseTable
 {
     using T = typename SemiGroup::T;
 
 public:
-    DSTable(const Vec<T>& vs)
+    DisjointSparseTable(const Vec<T>& vs)
         : m_size(vs.size()), m_depth(log2p1(m_size)), m_vss(m_depth, vs)
     {
         for (int d : rep(m_depth)) {

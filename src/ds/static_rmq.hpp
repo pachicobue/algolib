@@ -102,5 +102,5 @@ private:
     int m_size, m_bn;
     Vec<T> m_vals, m_bucket_vals;
     Vec<B> m_masks;
-    DSTable<SemiGroup> m_st;
+    DisjointSparseTable<SemiGroup> m_st;
 };

@@ -14,7 +14,7 @@ int main()
             return std::min(x1, x2);
         }
     };
-    const auto rmq = DSTable<SemiGroup>(as);
+    const auto rmq = DisjointSparseTable<SemiGroup>(as);
     for (int q : rep(Q)) {
         USE(q);
         const auto [l, r] = in.tup<int, int>();

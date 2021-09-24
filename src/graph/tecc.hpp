@@ -2,10 +2,11 @@
 #include "../misc/common.hpp"
 #include "lowlink.hpp"
 template<typename T>
-class BCC
+class TwoEdgeConnectedComponent
 {
 public:
-    BCC(const Graph<T>& g) : m_v(g.v()), m_cs(g.v(), -1), m_lowlink{g}
+    TwoEdgeConnectedComponent(const Graph<T>& g)
+        : m_v(g.v()), m_cs(g.v(), -1), m_lowlink{g}
     {
         auto dfs = Fix([&](auto dfs, int u) -> void {
             m_cs[u] = m_cnum;
@@ -31,7 +32,7 @@ public:
     Vec<Vec<int>> groups() const
     {
         Vec<Vec<int>> iss(m_v);
-        for (const int i : rep(m_v)) {
+        for (int i : rep(m_v)) {
             iss[m_cs[i]].push_back(i);
         }
         return iss;

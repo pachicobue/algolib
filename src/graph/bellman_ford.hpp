@@ -11,8 +11,9 @@ Vec<T> bellmanFord(const Graph<T>& g, const int s)
     for (int loop : rep(2 * N)) {
         for (int u : rep(N)) {
             if (ds[u] == INF<T>) { continue; }
-            for (const auto& [id, v, c] : g[u]) {
-                USE(id);
+            for (const auto& e : g[u]) {
+                const int v = e.to;
+                const auto c = e.cost;
                 if (ds[v] <= ds[u] + c) { continue; }
                 ds[v] = ds[u] + c;
                 if (loop >= N - 1) { ds[v] = -INF<T>; }
