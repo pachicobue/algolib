@@ -34,7 +34,16 @@ IntDict<Key, Value, int w> dict()
 dict[key] = "hoge"
 ```
 
-キーに対応する値の参照を返す  
+`key` に対応する値の参照を返す  
+存在しないキー `key` が与えられた場合、`Value{}` が挿入される
+
+### at
+
+```cpp
+Value dict.at(Key key)
+```
+
+`key` に対応する値の参照を返す  
 
 #### 計算量
 
