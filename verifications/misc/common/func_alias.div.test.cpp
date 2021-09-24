@@ -5,7 +5,7 @@ void fdivTest()
 {
     auto f = [&](auto x, auto y) {
         auto a = (decltype(x))std::floor((f80)x / y);
-        assert(fdiv(x, y) == a);
+        assert(floorDiv(x, y) == a);
     };
     for (int x = -100; x <= 100; x++) {
         for (int y = -100; y <= 100; y++) {
@@ -19,7 +19,7 @@ void cdivTest()
 {
     auto c = [&](auto x, auto y) {
         auto a = (decltype(x))std::ceil((f80)x / y);
-        assert(cdiv(x, y) == a);
+        assert(ceilDiv(x, y) == a);
     };
     for (int x = -100; x <= 100; x++) {
         for (int y = -100; y <= 100; y++) {
