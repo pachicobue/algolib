@@ -4,7 +4,7 @@
 #include "common/constants.hpp"
 #include "common/func_alias.hpp"
 #include "common/operator_alias.hpp"
-#include "common/vec_utils.hpp"
+#include "common/container_utils.hpp"
 #include "common/show.hpp"
 #include "common/bit_ops.hpp"
 #include "common/fixpoint.hpp"

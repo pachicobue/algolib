@@ -45,7 +45,8 @@ private:
     void calc()
     {
         if (not m_calced) {
-            uniqueAll(m_vs);
+            sortAll(m_vs);
+            m_vs.erase(std::unique(m_vs.begin(), m_vs.end()), m_vs.end());
             m_calced = true;
         }
     }

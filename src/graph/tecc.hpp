@@ -2,16 +2,20 @@
 #include "../misc/common.hpp"
 #include "lowlink.hpp"
 template<typename T>
-class TwoEdgeConnectedComponent
+class TwoEdgeConnectedComponent : public LowLink<T>
 {
 public:
+    using LowLink<T>::LowLink;
+    using LowLink<T>::isBridge;
+    using LowLink<T>::bridges;
     TwoEdgeConnectedComponent(const Graph<T>& g)
-        : m_v(g.v()), m_cs(g.v(), -1), m_lowlink{g}
+        : LowLink<T>(g), m_v(g.v()), m_cs(g.v(), -1)
     {
         auto dfs = Fix([&](auto dfs, int u) -> void {
             m_cs[u] = m_cnum;
             for (int v : g[u]) {
-                if (m_cs[v] == -1 and not m_lowlink.isBridge(u, v)) { dfs(v); }
+                if (isBridge(u, v) or m_cs[v] != -1) { continue; }
+                dfs(v);
             }
         });
         for (int i : rep(g.v())) {
@@ -42,5 +46,4 @@ private:
     int m_v;
     int m_cnum = 0;
     Vec<int> m_cs;
-    LowLink<T> m_lowlink;
 };

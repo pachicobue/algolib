@@ -1,6 +1,6 @@
 #pragma once
 #include "type_alias.hpp"
-#include "vec_utils.hpp"
+#include "container_utils.hpp"
 #include "xoshiro.hpp"
 template<typename Rng>
 class RNG

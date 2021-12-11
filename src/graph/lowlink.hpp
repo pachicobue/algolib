@@ -25,7 +25,7 @@ public:
                     dim++;
                     dfs(v, id);
                     chmin(m_lows[u], m_lows[v]);
-                    is_art |= m_ords[u] > m_lows[v];
+                    is_art |= (pe != -1 and m_ords[u] <= m_lows[v]);
                     if (isBridge(u, v)) {
                         m_bridges.push_back(std::minmax({u, v}));
                     }

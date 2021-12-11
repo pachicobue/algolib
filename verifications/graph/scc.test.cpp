@@ -11,7 +11,7 @@ int main()
         const auto [a, b] = in.tup<int, int>();
         g.addEdge(a, b);
     }
-    const auto scc = SCC(g);
+    const auto scc = StronglyConnectedComponents(g);
     const int C = scc.cnum();
     Graph dag(C);
     for (int u : rep(N)) {

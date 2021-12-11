@@ -1,40 +1,6 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../../src/misc/common/vec_utils.hpp"
-
-void fillAllTest()
-{
-    std::vector<int> vs{1, 3, 5, 2, 4};
-    fillAll(vs, 1);
-    assert(vs == std::vector<int>({1, 1, 1, 1, 1}));
-}
-
-void sortAllTest()
-{
-    std::vector<int> vs{1, 3, 5, 2, 4};
-    sortAll(vs);
-    assert(vs == std::vector<int>({1, 2, 3, 4, 5}));
-}
-
-void reverseAllTest()
-{
-    std::vector<int> vs{1, 3, 5, 2, 4};
-    reverseAll(vs);
-    assert(vs == std::vector<int>({4, 2, 5, 3, 1}));
-}
-
-void uniqueAllTest()
-{
-    std::vector<int> vs{1, 2, 1, 3, 3, 2};
-    uniqueAll(vs);
-    assert(vs == std::vector<int>({1, 2, 3}));
-}
-
-void sumAllTest()
-{
-    std::vector<int> vs{1, 2, 1, 3, 3, 2};
-    assert(sumAll(vs) == 12);
-}
+#include "../../../src/misc/common/container_utils.hpp"
 
 void minIndTest()
 {
@@ -84,26 +50,14 @@ void iotaVecTest()
     assert(vs == std::vector<int>({2, 3, 4, 5, 6}));
 }
 
-void revVecTest()
-{
-    std::vector<int> vs{1, 2, 1, 3, 3, 2};
-    assert(revVec(vs) == std::vector<int>({2, 3, 3, 1, 2, 1}));
-}
-
 int main()
 {
-    fillAllTest();
-    sortAllTest();
-    reverseAllTest();
-    uniqueAllTest();
-    sumAllTest();
     minIndTest();
     maxIndTest();
     lbIndTest();
     ubIndTest();
     genVecTest();
     iotaVecTest();
-    revVecTest();
 
     std::cout << "Hello World\n";
     return 0;
