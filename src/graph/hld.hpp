@@ -31,6 +31,7 @@ public:
         int index = 0;
         Fix([&](auto dfs, int u, int p) -> void {
             m_ins[u] = index++;
+            m_outs[u] = m_ins[u] + szs[u];
             m_ords[m_ins[u]] = u;
             for (int i : rep(g[u].size())) {
                 const int v = g[u][i];

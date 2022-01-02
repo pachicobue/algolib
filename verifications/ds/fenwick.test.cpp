@@ -6,7 +6,7 @@ int main()
 {
     const auto [N, Q] = in.tup<int, int>();
     const auto as = in.vec<u64>(N);
-    auto fenwick = Fenwick(as);
+    auto fenwick = FenwickTree(as);
     for (int q : rep(Q)) {
         USE(q);
         const auto t = in.val<int>();

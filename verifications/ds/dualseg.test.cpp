@@ -19,7 +19,7 @@ int main()
         }
     };
     const auto [N, Q] = in.tup<int, int>();
-    auto seg = DualSeg<OpMonoid>(Vec<i64>(N));
+    auto seg = DualSegTree<OpMonoid>(Vec<i64>(N));
     for (int i : rep(N)) {
         seg.set(i, (1_i64 << 31) - 1);
     }

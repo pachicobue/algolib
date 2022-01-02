@@ -124,7 +124,7 @@ public:
     }
     constexpr bool operator==(const modint64& m) const
     {
-        return m_val == m();
+        return m_val == m.val();
     }
     constexpr bool operator!=(const modint64& m) const
     {

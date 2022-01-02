@@ -1,12 +1,12 @@
 #pragma once
 #include "../misc/common.hpp"
 template<typename SemiGroup>
-class SWAG
+class SlidingWindowAggregation
 {
     using T = typename SemiGroup::T;
 
 public:
-    SWAG() : m_merge{} {}
+    SlidingWindowAggregation() : m_merge{} {}
     void pushBack(const T& x)
     {
         m_backs.push_back(x);
@@ -60,7 +60,7 @@ public:
                           ? m_Fronts.back()
                           : m_merge(m_Fronts.back(), m_Backs.back()));
     }
-    friend Ostream& operator<<(Ostream& os, const SWAG& sw)
+    friend Ostream& operator<<(Ostream& os, const SlidingWindowAggregation& sw)
     {
         Vec<T> as = sw.fs;
         reverseAll(as);

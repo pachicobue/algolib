@@ -4,7 +4,7 @@
 
 void Test()
 {
-    Fenwick<int> fenwick({1, 2, 3, 4, 5, 6, 7});
+    FenwickTree<int> fenwick({1, 2, 3, 4, 5, 6, 7});
     assert(fenwick.maxRight([](int s) { return s <= 0; }) == 0);
     assert(fenwick.maxRight([](int s) { return s <= 1; }) == 1);
     assert(fenwick.maxRight([](int s) { return s <= 3; }) == 2);

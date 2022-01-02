@@ -1,10 +1,10 @@
 #pragma once
 #include "../misc/common.hpp"
 template<typename T>
-class Fenwick
+class FenwickTree
 {
 public:
-    Fenwick(const Vec<T>& vs)
+    FenwickTree(const Vec<T>& vs)
         : m_size(vs.size()), m_cap(ceil2(m_size)), m_vs(m_cap + 1, 0)
     {
         std::copy(vs.begin(), vs.end(), m_vs.begin() + 1);
@@ -46,7 +46,7 @@ public:
         }
         return x;
     }
-    friend Ostream& operator<<(Ostream& os, const Fenwick& fw)
+    friend Ostream& operator<<(Ostream& os, const FenwickTree& fw)
     {
         os << "[";
         for (int i : rep(fw.m_size)) {

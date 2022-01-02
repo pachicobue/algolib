@@ -13,7 +13,7 @@ int main()
         a = zipper.zip(a);
     }
     const int L = zipper.size();
-    Fenwick<int> bit(Vec<int>(L, 0));
+    FenwickTree<int> bit(Vec<int>(L, 0));
     u64 inv = 0;
     auto left = [&](int x, int) {  // (x,y)->(x-1,y)
         const int a = as[x - 1];

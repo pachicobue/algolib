@@ -1,7 +1,7 @@
 #pragma once
 #include "../misc/common.hpp"
 template<typename OpMonoid>
-class DualSeg
+class DualSegTree
 {
     using F = typename OpMonoid::F;
     static constexpr F id()
@@ -10,7 +10,7 @@ class DualSeg
     }
 
 public:
-    DualSeg(const Vec<F>& vs)
+    DualSegTree(const Vec<F>& vs)
         : m_size(vs.size()),
           m_depth(clog(m_size) + 1),
           m_half(1 << m_depth),
@@ -46,7 +46,7 @@ public:
             if (ri & 1) { update(--ri, f); }
         }
     }
-    friend Ostream& operator<<(Ostream& os, const DualSeg& seg)
+    friend Ostream& operator<<(Ostream& os, const DualSegTree& seg)
     {
         os << "[";
         for (int i : rep(seg.m_size)) {

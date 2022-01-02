@@ -17,7 +17,7 @@ int main()
         }
     };
 
-    auto deque = SWAG<SemiGroup>{};
+    auto deque = SlidingWindowAggregation<SemiGroup>{};
     for (int q : rep(Q)) {
         USE(q);
         const auto t = in.val<int>();
