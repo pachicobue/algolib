@@ -1,7 +1,9 @@
 #pragma once
 #include "type_alias.hpp"
 #include "constants.hpp"
-#pragma COMMENT("[REFS] Xoshiro: https://prng.di.unimi.it")
+/**
+ * @ref https://prng.di.unimi.it
+ */
 namespace xoshiro_impl {
 u64 x;
 u64 next()

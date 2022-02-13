@@ -6,8 +6,8 @@ class ArrMat
 public:
     ArrMat()
     {
-        for (auto& v : m_vss) {
-            std::fill(v.begin(), v.end(), T{});
+        for (auto& vs : m_vss) {
+            fillAll(vs, T{});
         }
     }
     ArrMat(const IList<IList<T>>& vss)
