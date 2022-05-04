@@ -49,7 +49,8 @@ Vec<mint> convolute_mod(const Vec<mint>& as, const Vec<mint>& bs)
     }
 }
 
-Vec<i64> convolute_i64(const Vec<i64>& as, const Vec<i64>& bs)
+template<typename I>
+Vec<i64> convolute_i64(const Vec<I>& as, const Vec<I>& bs)
 {
     const int AN = as.size();
     const int BN = bs.size();
@@ -59,7 +60,7 @@ Vec<i64> convolute_i64(const Vec<i64>& as, const Vec<i64>& bs)
         Vec<i64> cs(N, 0);
         for (int i : rep(AN)) {
             for (int j : rep(BN)) {
-                cs[i + j] += as[i] * bs[j];
+                cs[i + j] += (i64)as[i] * bs[j];
             }
         }
         return cs;
@@ -68,13 +69,14 @@ Vec<i64> convolute_i64(const Vec<i64>& as, const Vec<i64>& bs)
     using submint2 = modint<167772161, 3, 25>;
     using submint3 = modint<754974721, 11, 24>;
     // mod 3つでGarner復元
-    Vec<submint1> as1(N), bs1(N);
-    Vec<submint2> as2(N), bs2(N);
-    Vec<submint3> as3(N), bs3(N);
-    for (int i : rep(N)) {
-        as1[i] = as[i], bs1[i] = bs[i];
-        as2[i] = as[i], bs2[i] = bs[i];
-        as3[i] = as[i], bs3[i] = bs[i];
+    Vec<submint1> as1(AN), bs1(BN);
+    Vec<submint2> as2(AN), bs2(BN);
+    Vec<submint3> as3(AN), bs3(BN);
+    for (int i : rep(AN)) {
+        as1[i] = as[i], as2[i] = as[i], as3[i] = as[i];
+    }
+    for (int i : rep(BN)) {
+        bs1[i] = bs[i], bs2[i] = bs[i], bs3[i] = bs[i];
     }
     const auto cs1 = NTT<submint1>::convolute(as1, bs1);
     const auto cs2 = NTT<submint2>::convolute(as2, bs2);
