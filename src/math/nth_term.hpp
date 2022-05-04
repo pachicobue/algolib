@@ -1,7 +1,7 @@
 #pragma once
 #include "../misc/common.hpp"
 #include "berlekamp_massey.hpp"
-#include "fps_div_nth.hpp"
+#include "bostan_mori.hpp"
 template<typename mint, typename I>
 mint nthTerm(const Vec<mint>& as, I N)
 {
