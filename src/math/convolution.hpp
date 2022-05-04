@@ -43,7 +43,7 @@ Vec<mint> convolute_mod(const Vec<mint>& as, const Vec<mint>& bs)
         const auto cs3 = NTT<submint3>::convolute(as3, bs3);
         Vec<mint> cs(N);
         for (int i : rep(N)) {
-            cs[i] = restore_mod<mint>(cs1[i], cs2[i], cs3[i]);
+            cs[i] = Garner::restore_mod<mint>(cs1[i], cs2[i], cs3[i]);
         }
         return cs;
     }
@@ -83,7 +83,7 @@ Vec<i64> convolute_i64(const Vec<I>& as, const Vec<I>& bs)
     const auto cs3 = NTT<submint3>::convolute(as3, bs3);
     Vec<i64> cs(N);
     for (int i : rep(N)) {
-        cs[i] = restore_i64(cs1[i], cs2[i], cs3[i]);
+        cs[i] = Garner::restore_i64(cs1[i], cs2[i], cs3[i]);
     }
     return cs;
 }
