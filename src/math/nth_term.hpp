@@ -8,5 +8,5 @@ mint nthTerm(const Vec<mint>& as, I N)
     const FPS g{berlekampMassey(as)};
     const int L = g.size();
     const auto f = FPS<mint>{as}.mult(g, L - 1);
-    return divNth(f, g, N);
+    return bostanMori(f, g, N);
 }

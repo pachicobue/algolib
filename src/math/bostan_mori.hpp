@@ -1,7 +1,7 @@
 #pragma once
 #include "fps.hpp"
 template<typename mint, typename I>
-mint divNth(FPS<mint> f, FPS<mint> g, I N)
+mint bostanMori(FPS<mint> f, FPS<mint> g, I N)
 {
     if (f.size() == 0) { return 0; }
     const int n = g.size();
@@ -14,7 +14,7 @@ mint divNth(FPS<mint> f, FPS<mint> g, I N)
             break;
         }
     }
-    g >>= mi;
+    g <<= mi;
     const mint ia = a.inv();
     for (auto& c : f) {
         c *= ia;

@@ -1,6 +1,6 @@
 #pragma once
 #include "../misc/common.hpp"
-#include "modint.hpp"
+#include "convolution.hpp"
 
 template<typename mint>
 class FPS : public Vec<mint>
@@ -8,7 +8,13 @@ class FPS : public Vec<mint>
 public:
     using std::vector<mint>::vector;
     using std::vector<mint>::resize;
-    FPS(const Vec<mint>& vs) : Vec<mint>{vs} {}
+    using std::vector<mint>::begin;
+    using std::vector<mint>::end;
+    using std::vector<mint>::push_back;
+    FPS(const Vec<mint>& vs) : Vec<mint>{vs}
+    {
+        if (size() == 0) { push_back(0); }
+    }
     int size() const
     {
         return Vec<mint>::size();
@@ -20,12 +26,6 @@ public:
     FPS low(int n) const
     {
         return FPS{this->begin(), this->begin() + std::min(n, size())};
-    }
-    FPS rev() const
-    {
-        FPS ans = *this;
-        reverseAll(ans);
-        return ans;
     }
     mint eval(const mint& x) const
     {
@@ -39,7 +39,7 @@ public:
     }
     mint& operator[](const int n)
     {
-        if (deg() < n) { resize(n + 1); }
+        if (n >= size()) { resize(n + 1, 0); }
         return Vec<mint>::operator[](n);
     }
     const mint& operator[](const int n) const
@@ -97,7 +97,7 @@ public:
     {
         return mult(f, size() + f.size() - 1);
     }
-    FPS operator<<(const int s) const
+    FPS operator>>(const int s) const
     {
         FPS ans(size() + s);
         for (int i : rep(size())) {
@@ -105,7 +105,7 @@ public:
         }
         return ans;
     }
-    FPS operator>>(const int s) const
+    FPS operator<<(const int s) const
     {
         FPS ans;
         for (int i : irange(s, size())) {
@@ -137,166 +137,49 @@ public:
     FPS mult(const FPS& f, int sz) const
     {
         if (sz == 0) { return FPS{}; }
-        const int N = std::min(size(), sz) + std::min(f.size(), sz) - 1;
-        if (N < 10) {
-            FPS ans;
-            for (int i : rep(sz)) {
-                for (int j : rep(sz)) {
-                    if (i + j >= sz) { break; }
-                    ans[i + j] += this->at(i) * f.at(j);
-                }
-            }
-            return ans;
-        }
-        if (N <= (1 << mint::max2p())) {
-            auto ans = conv<mint>(*this, f, sz);
-            return ans;
-        } else {
-            const auto cs1 = conv<submint1>(*this, f, sz);
-            const auto cs2 = conv<submint2>(*this, f, sz);
-            const auto cs3 = conv<submint3>(*this, f, sz);
-            FPS ans((int)cs1.size());
-            for (int i : rep(cs1.size())) {
-                ans[i] = restore(cs1[i].val(), cs2[i].val(), cs3[i].val());
-            }
-            return ans;
-        }
-    }
-    FPS smult(int p, const mint a, int sz)  // *(1+ax^p) (mod x^sz)
-    {
-        FPS ans = low(sz);
-        for (int i = 0; i + p < sz; i++) {
-            ans[i + p] += (*this)[i] * a;
-        }
-        return ans;
-    }
-    FPS sdiv(int p, const mint& a, int sz)  // *(1+ax^p)^(-1) (mod x^sz)
-    {
-        FPS ans = low(sz);
-        for (int i = 0; i + p < sz; i++) {
-            ans[i + p] -= ans[i] * a;
-        }
-        return ans;
+        return FPS{convolute_mod(*this, f)}.low(sz);
     }
     FPS inv(int sz) const
     {
-        const int n = size();
         assert((*this)[0].val() != 0);
-        const int N = n * 2 - 1;
-        if (N <= (1 << mint::max2p())) {
-            FPS r{(*this)[0].inv()};
-            for (int lg = 0, m = 1; m < sz; m <<= 1, lg++) {
-                FPS f{this->begin(), this->begin() + std::min(n, 2 * m)};
-                FPS g = r;
-                f.resize(2 * m), g.resize(2 * m);
-                trans(f, lg + 1, false), trans(g, lg + 1, false);
-                for (int i : rep(2 * m)) {
-                    f[i] *= g[i];
-                }
-                trans(f, lg + 1, true);
-                std::fill(f.begin(), f.begin() + m, 0);
-                trans(f, lg + 1, false);
-                for (int i : rep(2 * m)) {
-                    f[i] *= g[i];
-                }
-                trans(f, lg + 1, true);
-                for (int i = m; i < std::min(2 * m, sz); i++) {
-                    r[i] = -f[i];
-                }
-            }
-            return r;
-        } else {
-            FPS g{(*this)[0].inv()};
-            for (int lg = 0, m = 1; m < sz; m <<= 1, lg++) {
-                g = FPS{2} * g - this->mult(g.mult(g, 2 * m), 2 * m);
-            }
-            return g.low(sz);
+        FPS g{(*this)[0].inv()};
+        for (int m = 1; m < sz; m *= 2) {
+            auto f = low(m * 2);
+            g = (FPS{2} - f.mult(g, m * 2)).mult(g, 2 * m);
         }
+        return g.low(sz);
     }
     FPS log(const int sz) const
     {
-        assert((*this)[0].val() == 1);
-        auto ans = derivative().mult(inv(sz), sz).integral();
-        ans.resize(sz);
-        return ans;
+        assert((*this)[0] == 1);
+        return derivative().mult(inv(sz), sz).integral().low(sz);
     }
     FPS exp(const int sz) const
     {
-        const int l = lsb(sz);
-        if (l == -1) { return FPS{1}.low(sz); }
-        assert((*this)[0].val() == 0);
-
-        const int n = size();
-        const int N = n * 2 - 1;
-        if (N <= (1 << mint::max2p())) {
-            FPS f = {1, (*this)[1]}, g{1}, G{1, 1};
-            for (int m = 2, lg = 1; m < sz; m <<= 1, lg++) {
-                auto F = f;
-                F.resize(2 * m), trans(F, lg + 1, false);
-                FPS z(m);
-                for (int i : rep(m)) {
-                    z[i] = F[i] * G[i];
-                }
-                trans(z, lg, true);
-                std::fill(z.begin(), z.begin() + m / 2, 0);
-                trans(z, lg, false);
-                for (int i : rep(m)) {
-                    z[i] *= G[i];
-                }
-                trans(z, lg, true);
-                for (int i : irange(m / 2, m)) {
-                    g[i] = -z[i];
-                }
-                G = g, G.resize(m * 2), trans(G, lg + 1, false);
-                auto q = low(m).derivative();
-                q.resize(m), trans(q, lg, false);
-                for (int i : rep(m)) {
-                    q[i] *= F[i];
-                }
-                trans(q, lg, true);
-                const auto df = f.derivative();
-                for (int i : rep(m - 1)) {
-                    q[i] -= df[i];
-                }
-                q.resize(m * 2);
-                for (int i : rep(m - 1)) {
-                    q[m + i] = q[i], q[i] = 0;
-                }
-                trans(q, lg + 1, false);
-                for (int i : rep(m * 2)) {
-                    q[i] *= G[i];
-                }
-                trans(q, lg + 1, true);
-                q.pop_back();
-                q = q.integral();
-                for (int i = m; i < std::min(size(), m * 2); i++) {
-                    q[i] += (*this)[i];
-                }
-                std::fill(q.begin(), q.begin() + m, 0);
-                trans(q, lg + 1, false);
-                for (int i = 0; i < m * 2; i++) {
-                    q[i] *= F[i];
-                }
-                trans(q, lg + 1, true);
-                for (int i = m; i < 2 * m; i++) {
-                    f[i] = q[i];
-                }
-            }
-            return f.low(sz);
-        } else {
-            FPS f{1};
-            for (int m = 1; m < sz; m <<= 1) {
-                auto g = low(2 * m);
-                g[0] += 1;
-                f.resize(2 * m);
-                g -= f.log(2 * m);
-                g = f.mult(g, 2 * m);
-                for (int i = m; i < std::min(2 * m, g.size()); i++) {
-                    f[i] = g[i];
-                }
-            }
-            return f.low(sz);
+        assert((*this)[0] == 0);
+        FPS g{1};
+        for (int m = 1; m < sz; m *= 2) {
+            auto f = low(m * 2);
+            g = g.mult(FPS{1} - g.log(m * 2) + f, 2 * m);
         }
+        return g.low(sz);
+    }
+    FPS tshift(const mint& c) const
+    {
+        const int N = size();
+        FPS f(N), d(N);
+        for (int i : rep(N)) {
+            d[i] = c.pow(N - 1 - i) * mint::ifact(N - 1 - i);
+        }
+        for (int i : rep(N)) {
+            f[i] = (*this)[i] * mint::fact(i);
+        }
+        f = f * d;
+        FPS g(N);
+        for (int i : rep(N)) {
+            g[i] = f[i + N - 1] * mint::ifact(i);
+        }
+        return g;
     }
     template<typename I>
     FPS pow(I n) const
@@ -306,42 +189,19 @@ public:
     template<typename I>
     FPS pow(I n, int sz) const
     {
-        if (n == 0) { return FPS{1}.low(sz); }
-        if (size() == 0) { return FPS{}; }
-        const int p = lsb(deg() / n);
-        if (p == -1) { return FPS{}; }
-        const mint a = (*this)[p];
-        FPS f = (*this) >> p;
-        for (auto& c : f) {
-            c /= a;
+        for (I i : rep(size())) {
+            if (i * n >= sz) { return FPS{}; }
+            if ((*this)[i] != 0) {
+                auto f = ((*this) << i).low(sz - i * n);
+                const mint c = f[0];
+                const mint ic = c.inv();
+                f *= FPS{ic};
+                return ((f.log(sz - i * n) * FPS{n}).exp(sz - i * n)
+                        * FPS{c.pow(n)})
+                       >> (i * n);
+            }
         }
-        f = f.log(sz - p * n);
-        for (auto& c : f) {
-            c *= n;
-        }
-        f = f.exp(sz - p * n);
-        FPS g;
-        for (int i : rep(f.size())) {
-            g[i + p * n] = f[i] * a.pow(n);
-        }
-        return g;
-    }
-    FPS tshift(const mint& c) const
-    {
-        const int N = size();
-        FPS f(N), d(N);
-        for (int i = 0; i < N; i++) {
-            d[i] = c.pow(N - 1 - i) * mint::ifact(N - 1 - i);
-        }
-        for (int i = 0; i < N; i++) {
-            f[i] = (*this)[i] * mint::fact(i);
-        }
-        f = f * d;
-        FPS g(N);
-        for (int i = 0; i < N; i++) {
-            g[i] = f[i + N - 1] * mint::ifact(i);
-        }
-        return g;
+        return FPS{};
     }
     FPS quot(const FPS& g) const
     {
@@ -356,101 +216,10 @@ public:
     }
 
 private:
-    int lsb() const
+    FPS rev() const
     {
-        return lsb(deg());
-    }
-    int lsb(int sz) const
-    {
-        for (int p : rep(sz + 1)) {
-            if ((*this)[p].val() != 0) { return p; }
-        }
-        return -1;
-    }
-
-    using submint1 = modint<469762049, 3, 26>;
-    using submint2 = modint<167772161, 3, 25>;
-    using submint3 = modint<754974721, 11, 24>;
-    template<typename submint>
-    static void trans(Vec<submint>& as, int lg, bool rev)
-    {
-        const int N = 1 << lg;
-        assert((int)as.size() == N);
-        Vec<submint> rs, irs;
-        if (rs.empty()) {
-            const submint r = submint(submint::root()), ir = r.inv();
-            rs.resize(submint::max2p() + 1), irs.resize(submint::max2p() + 1);
-            rs.back() = -r.pow((submint::mod() - 1) >> submint::max2p()),
-            irs.back() = -ir.pow((submint::mod() - 1) >> submint::max2p());
-            for (u32 i : irange(submint::max2p(), 0, -1)) {
-                rs[i - 1] = -(rs[i] * rs[i]);
-                irs[i - 1] = -(irs[i] * irs[i]);
-            }
-        }
-        const auto drange = (rev ? irange(0, lg, 1) : irange(lg - 1, -1, -1));
-        for (const int d : drange) {
-            const int width = 1 << d;
-            submint e = 1;
-            for (int i = 0, j = 1; i < N; i += width * 2, j++) {
-                for (int l = i, r = i + width; l < i + width; l++, r++) {
-                    if (rev) {
-                        const submint x = as[l], y = as[r];
-                        as[l] = x + y, as[r] = (x - y) * e;
-                    } else {
-                        const submint x = as[l], y = as[r] * e;
-                        as[l] = x + y, as[r] = x - y;
-                    }
-                }
-                e *= (rev ? irs : rs)[lsbp1(j) + 1];
-            }
-        }
-        if (rev) {
-            const submint iN = submint{N}.inv();
-            for (auto& a : as) {
-                a *= iN;
-            }
-        }
-    }
-    template<typename submint>
-    static Vec<submint> conv(const Vec<mint>& as, const Vec<mint>& bs, int sz)
-    {
-        const int an = std::min((int)as.size(), sz);
-        const int bn = std::min((int)bs.size(), sz);
-        const int M = an + bn - 1;
-        const int lg = clog(M);
-        const int L = 1 << lg;
-        Vec<submint> As(L), Bs(L);
-        for (int i : rep(an)) {
-            As[i] = as[i].val();
-        }
-        for (int i : rep(bn)) {
-            Bs[i] = bs[i].val();
-        }
-        trans(As, lg, false), trans(Bs, lg, false);
-        for (int i : rep(L)) {
-            As[i] *= Bs[i];
-        }
-        trans(As, lg, true);
-        const int N = std::min(sz, (int)as.size() + (int)bs.size() - 1);
-        As.resize(N);
-        return As;
-    }
-    static constexpr submint2 ip1 = submint2{submint1::mod()}.inv();
-    static constexpr submint3 ip2 = submint3{submint2::mod()}.inv();
-    static constexpr submint3 ip1p2 = submint3{submint1::mod()}.inv() * ip2;
-    static constexpr mint p1()
-    {
-        return mint{submint1::mod()};
-    }
-    static constexpr mint p1p2()
-    {
-        return p1() * mint{submint2::mod()};
-    }
-    static constexpr mint restore(int x1, int x2, int x3)
-    {
-        const int k0 = x1;
-        const int k1 = (ip1 * (x2 - k0)).val();
-        const int k2 = (ip1p2 * (x3 - k0) - ip2 * k1).val();
-        return p1p2() * k2 + p1() * k1 + k0;
+        FPS ans = *this;
+        reverseAll(ans);
+        return ans;
     }
 };

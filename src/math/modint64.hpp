@@ -23,6 +23,10 @@ class modint64
     }
 
 public:
+    static constexpr bool isDynamic()
+    {
+        return (mod_ == 0);
+    }
     template<typename U = const u64>
     static constexpr std::enable_if_t<mod_ != 0, U> mod()
     {

@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-#include "../../src/math/fps_div_nth.hpp"
+#include "../../src/math/bostan_mori.hpp"
 #include "../../src/misc/fastio/printer.hpp"
 #include "../../src/misc/fastio/scanner.hpp"
 int main()
@@ -49,7 +49,7 @@ int main()
     FPS<mint> g(K + 1, -1);
     g[0] = 1;
     f = f.mult(g, K);
-    const mint ans = divNth(f, g, N);
+    const mint ans = bostanMori(f, g, N);
     assert(actual == ans);
     out.ln(A + B);
     return 0;
