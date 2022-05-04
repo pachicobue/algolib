@@ -1,6 +1,5 @@
 #pragma once
 #include "../misc/common.hpp"
-#include "modint64.hpp"
 
 class Garner
 {
