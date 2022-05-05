@@ -17,23 +17,22 @@ public:
     {
         optimize();
     }
-    int size() const
-    {
-        return std::vector<mint>::size();
-    }
     int deg() const
     {
         return size() - 1;
     }
-    void shrink(int n)
+    template<typename I>
+    void shrink(I n)
     {
-        if (n >= size()) { return; }
+        if (n >= (I)size()) { return; }
         std::vector<mint>::resize(n);
         optimize();
     }
-    FPS low(int n) const
+    template<typename I>
+    FPS low(I n) const
     {
-        return FPS{this->begin(), this->begin() + std::min(n, size())};
+        const I sz = std::min(n, (I)size());
+        return FPS{this->begin(), this->begin() + (int)sz};
     }
     mint eval(const mint& x) const
     {
