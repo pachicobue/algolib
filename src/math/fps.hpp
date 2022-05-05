@@ -5,23 +5,31 @@
 template<typename mint>
 class FPS : public Vec<mint>
 {
+    using std::vector<mint>::resize;
+    using std::vector<mint>::push_back;
+    using std::vector<mint>::pop_back;
+    using std::vector<mint>::back;
+
 public:
     using std::vector<mint>::vector;
-    using std::vector<mint>::resize;
-    using std::vector<mint>::begin;
-    using std::vector<mint>::end;
-    using std::vector<mint>::push_back;
+    using std::vector<mint>::size;
     FPS(const Vec<mint>& vs) : Vec<mint>{vs}
     {
-        if (size() == 0) { push_back(0); }
+        optimize();
     }
     int size() const
     {
-        return Vec<mint>::size();
+        return std::vector<mint>::size();
     }
     int deg() const
     {
         return size() - 1;
+    }
+    void shrink(int n)
+    {
+        if (n >= size()) { return; }
+        std::vector<mint>::resize(n);
+        optimize();
     }
     FPS low(int n) const
     {
@@ -44,6 +52,7 @@ public:
     }
     const mint& operator[](const int n) const
     {
+        assert(n < size());
         return Vec<mint>::operator[](n);
     }
     template<typename I>
@@ -112,6 +121,17 @@ public:
             ans[i - s] = (*this)[i];
         }
         return ans;
+    }
+    int lsb() const
+    {
+        for (int i : rep(size())) {
+            if ((*this)[i] != 0) { return i; }
+        }
+        return size();
+    }
+    bool isZero() const
+    {
+        return (size() == 1) and ((*this)[0] == 0);
     }
     friend Ostream& operator<<(Ostream& os, const FPS& f)
     {
@@ -189,34 +209,40 @@ public:
     template<typename I>
     FPS pow(I n, int sz) const
     {
-        for (I i : rep(size())) {
-            if (i * n >= sz) { return FPS{}; }
-            if ((*this)[i] != 0) {
-                auto f = ((*this) << i).low(sz - i * n);
-                const mint c = f[0];
-                const mint ic = c.inv();
-                f *= FPS{ic};
-                return ((f.log(sz - i * n) * FPS{n}).exp(sz - i * n)
-                        * FPS{c.pow(n)})
-                       >> (i * n);
-            }
-        }
-        return FPS{};
+        if (n == 0) { return FPS{1}; }
+        if (isZero()) { return FPS{0}; }
+        const int k = lsb();
+        if (k >= ((I)sz + n - 1) / n) { return FPS{}; }
+        sz -= k * n;
+        auto f = ((*this) << k).low(sz);
+        const mint c = f[0];
+        f *= FPS{c.inv()};
+        return ((f.log(sz) * FPS{n}).exp(sz) * FPS{c.pow(n)}) >> (k * n);
     }
     FPS quot(const FPS& g) const
     {
+        assert(not g.isZero());
         const int N = size(), M = g.size();
         if (N < M) { return FPS{}; }
-        const auto fR = rev(), gR = g.rev();
+        const auto fR = reversed(), gR = g.rev();
         return fR.mult(gR.inv(N - M + 1), N - M + 1).rev();
     }
     FPS rem(const FPS& g) const
     {
+        assert(not g.isZero());
         return (*this) - g * quot(g);
     }
 
 private:
-    FPS rev() const
+    void optimize()
+    {
+        while (size() > 0) {
+            if (back() != 0) { return; }
+            pop_back();
+        }
+        if (size() == 0) { push_back(0); }
+    }
+    FPS reversed() const
     {
         FPS ans = *this;
         reverseAll(ans);

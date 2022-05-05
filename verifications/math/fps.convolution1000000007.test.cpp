@@ -14,9 +14,9 @@ int main()
         b.setRaw(in.val<int>());
     }
     const auto cs = as * bs;
-    Vec<int> ans(cs.size());
-    for (int i : rep(cs.size())) {
-        ans[i] = cs[i].val();
+    Vec<int> ans(N + M - 1);
+    for (int i : rep(N + M - 1)) {
+        ans[i] = cs.at(i).val();
     }
     out.ln(ans);
     return 0;
