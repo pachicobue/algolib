@@ -45,11 +45,11 @@ public:
         return itr{m_end, m_step};
     }
 };
-irange rep(int end)
+irange rep(i64 end)
 {
     return irange(0, end, 1);
 }
-irange per(int rend)
+irange per(i64 rend)
 {
     return irange(rend - 1, -1, -1);
 }
