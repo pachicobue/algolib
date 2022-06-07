@@ -59,6 +59,19 @@ int ubInd(const Vs& vs, const V& v)
 {
     return std::upper_bound(std::begin(vs), std::end(vs), v) - std::begin(vs);
 }
+template<typename Vs, typename V>
+bool contains(const Vs& vs, const V& v)
+{
+    const int li = lbInd(vs, v);
+    return (li < std::size(vs) and vs[li] == v);
+}
+template<typename Vs, typename V>
+void plusAll(Vs& vs, const V& v)
+{
+    for (auto& v_ : vs) {
+        v_ += v;
+    }
+}
 template<typename T, typename F>
 Vec<T> genVec(int n, F gen)
 {
@@ -66,9 +79,10 @@ Vec<T> genVec(int n, F gen)
     std::generate_n(std::back_insert_iterator(ans), n, gen);
     return ans;
 }
-Vec<int> iotaVec(int n, int offset = 0)
+template<typename T = int>
+Vec<T> iotaVec(int n, T offset = 0)
 {
-    Vec<int> ans(n);
+    Vec<T> ans(n);
     std::iota(ans.begin(), ans.end(), offset);
     return ans;
 }

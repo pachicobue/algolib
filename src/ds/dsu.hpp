@@ -21,6 +21,10 @@ public:
         m_sizes[j] += m_sizes[i];
         return true;
     }
+    bool same(int i, int j)
+    {
+        return leader(i) == leader(j);
+    }
     int size(int i)
     {
         return m_sizes[leader(i)];

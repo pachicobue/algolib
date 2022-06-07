@@ -16,6 +16,12 @@ public:
         return ans;
     }
     template<typename D = MSec>
+    typename D::rep get()
+    {
+        const auto now = SysClock::now();
+        return std::chrono::duration_cast<D>(now - m_rap).count();
+    }
+    template<typename D = MSec>
     typename D::rep total()
     {
         const auto now = SysClock::now();
