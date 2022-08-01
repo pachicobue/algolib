@@ -1,36 +1,39 @@
-#define PROBLEM \
-    "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D"
+#define PROBLEM "https://judge.yosupo.jp/problem/range_affine_point_get"
 #include "../../src/ds/dualseg.hpp"
+#include "../../src/math/modint.hpp"
 #include "../../src/misc/scanner.hpp"
 #include "../../src/misc/printer.hpp"
 
+using mint = modint_998244353;
+struct OpMonoid
+{
+    using F = Pair<mint, mint>;
+    static F id()
+    {
+        return {1, 0};
+    }
+    F operator()(const F& f1, const F& f2) const
+    {
+        const auto& [a1, b1] = f1;
+        const auto& [a2, b2] = f2;
+        return {a1 * a2, a1 * b2 + b1};
+    }
+};
+
 int main()
 {
-    struct OpMonoid
-    {
-        using F = i64;
-        static F id()
-        {
-            return INF<F>;
-        }
-        F operator()(const F& f1, const F& f2) const
-        {
-            return f1 != id() ? f1 : f2;
-        }
-    };
     const auto [N, Q] = in.tup<int, int>();
-    auto seg = DualSegTree<OpMonoid>(Vec<i64>(N));
-    for (int i : rep(N)) {
-        seg.set(i, (1_i64 << 31) - 1);
-    }
+    const auto as = in.vec<mint>(N);
+    DualSegTree<OpMonoid> seg(N);
     LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {
-            const auto [s, t, x] = in.tup<int, int, i64>();
-            seg.act(s, t + 1, x);
+            const auto [l, r, b, c] = in.tup<int, int, mint, mint>();
+            seg.act(l, r, {b, c});
         } else {
             const auto i = in.val<int>();
-            out.ln(seg.get(i));
+            const auto& [a, b] = seg.get(i);
+            out.ln(a * as[i] + b);
         }
     }
     return 0;

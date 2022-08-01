@@ -19,6 +19,8 @@ public:
             m_suffs[i] += m_suffs[i + 1];
         }
     }
+    RSQ(int N, const T& v = T{}) : RSQ{Vec<T>(N, v)} {}
+
     const T& operator[](int i) const
     {
         assert(0 <= i and i < m_size);

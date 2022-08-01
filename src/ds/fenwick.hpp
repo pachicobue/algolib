@@ -5,13 +5,15 @@ class FenwickTree
 {
 public:
     FenwickTree(const Vec<T>& vs)
-        : m_size(vs.size()), m_cap(ceil2(m_size)), m_vs(m_cap + 1, 0)
+        : m_size(vs.size()), m_cap(ceil2(m_size)), m_vs(m_cap + 1, T{})
     {
         std::copy(vs.begin(), vs.end(), m_vs.begin() + 1);
         for (int x : irange(1, m_cap)) {
             m_vs[x + (x & -x)] += m_vs[x];
         }
     }
+    FenwickTree(int N, const T& v = T{}) : FenwickTree{Vec<T>(N, v)} {}
+
     void add(int i, const T& v)
     {
         assert(0 <= i and i < m_size);

@@ -18,6 +18,9 @@ public:
     {
         std::copy(vs.begin(), vs.end(), m_ops.begin() + m_half);
     }
+    DualSegTree(int N, const F& f = OpMonoid::id()) : DualSegTree{Vec<F>(N, f)}
+    {}
+
     F get(int i) const
     {
         assert(0 <= i and i < m_size);

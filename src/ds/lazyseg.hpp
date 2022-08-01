@@ -27,6 +27,8 @@ public:
             up(i);
         }
     }
+    LazySeg(int N, const T& v = MergeMonoid::e()) : LazySeg{Vec<T>(N, v)} {}
+
     T get(const int a)
     {
         assert(a < m_size);
