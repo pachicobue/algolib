@@ -8,8 +8,7 @@ int main()
 {
     const auto [N, K] = in.tup<int, int>();
     Graph<int> g(N);
-    for (int i : rep(N - 1)) {
-        USE(i);
+    LOOP (N - 1) {
         const auto [u, v, c] = in.tup<int, int, int>(1, 1, 1);
         g.addEdge(u, v, c, true);
     }
@@ -30,8 +29,7 @@ int main()
             ans += n * (dp3.at(k) - n);  // 1色x2色
             dbl += n * (one - n);        // 1色x1色
         }
-        for (const auto& [ks, n] : dp2) {
-            USE(ks);
+        for (UNUSED const auto& [_, n] : dp2) {
             ans += n * (n - 1) / 2;  // 2色x2色
         }
         return ans + dbl / 2;

@@ -1,13 +1,12 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 #include "../../src/graph/two_ecc.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 int main()
 {
     const auto [N, M] = in.tup<int, int>();
     Graph g(N);
-    for (int i : rep(M)) {
-        USE(i);
+    LOOP (M) {
         const auto [a, b] = in.tup<int, int>();
         g.addEdge(a, b, true);
     }

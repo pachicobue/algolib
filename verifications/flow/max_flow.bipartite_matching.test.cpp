@@ -7,8 +7,7 @@ int main()
     const auto [L, R, M] = in.tup<int, int, int>();
     MaxFlow<int> flow(L + R + 2);
     const int S = L + R, T = L + R + 1;
-    for (int i : rep(M)) {
-        USE(i);
+    LOOP (M) {
         const auto [u, v] = in.tup<int, int>();
         flow.addEdge(u, v + L, 1);
     }

@@ -6,6 +6,8 @@ std::ostream& operator<<(std::ostream& os, const std::stack<Ts...>& vs)
 {
     auto q = vs;
     os << "[";
-    while (not q.empty()) { os << q.top() << ",", q.pop(); }
-    return os << "]\n";
+    while (not q.empty()) {
+        os << q.top() << ",", q.pop();
+    }
+    return os << "]";
 }

@@ -1,8 +1,8 @@
 #define PROBLEM \
     "https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence"
 #include "../../src/math/bostan_mori.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

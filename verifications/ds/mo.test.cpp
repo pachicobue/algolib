@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_inversions_query"
 #include "../../src/ds/fenwick.hpp"
 #include "../../src/ds/mo.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 #include "../../src/misc/zipper.hpp"
 int main()
 {

@@ -1,5 +1,7 @@
 #pragma once
 #include "type_alias.hpp"
+#include "temp_macro.hpp"
+
 class irange
 {
 private:
@@ -10,7 +12,7 @@ private:
         {
             return m_cnt != it.m_cnt;
         }
-        int operator*()
+        i64 operator*()
         {
             return m_cnt;
         }
@@ -30,7 +32,7 @@ public:
         const i64 d = std::abs(step);
         const i64 l = (step > 0 ? start : end);
         const i64 r = (step > 0 ? end : start);
-        int n = (r - l) / d + ((r - l) % d ? 1 : 0);
+        i64 n = (r - l) / d + ((r - l) % d ? 1 : 0);
         if (l >= r) { n = 0; }
         m_start = start;
         m_end = start + step * n;
@@ -53,3 +55,5 @@ irange per(i64 rend)
 {
     return irange(rend - 1, -1, -1);
 }
+
+#define LOOP(n) for (auto _ UNUSED : rep(n))

@@ -6,8 +6,7 @@
 int main()
 {
     const auto T = in.val<int>();
-    for (int t : rep(T)) {
-        USE(t);
+    LOOP (T) {
         const auto [A, B] = in.tup<i64, i64>();
         out.ln(A + B);
     }

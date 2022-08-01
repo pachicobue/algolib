@@ -8,8 +8,8 @@ public:
         : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, T{}))
     {}
     Mat(const IList<IList<T>>& vss)
-        : m_row{vss.size()},
-          m_column{vss.begin()->size()},
+        : m_row{(int)vss.size()},
+          m_column{(int)(vss.begin()->size())},
           m_vss(m_row, Vec<T>(m_column, T{}))
     {
         int i = 0;

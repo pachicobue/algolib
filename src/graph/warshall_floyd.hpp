@@ -10,8 +10,7 @@ Vec<Vec<T>> warshallFloyd(const Graph<T>& g)
         for (int j : rep(N)) {
             dss[i][j] = (i == j ? T{} : INF<T>);
         }
-        for (const auto& [id, j, c] : g[i]) {
-            USE(id);
+        for (UNUSED const auto& [_, j, c] : g[i]) {
             chmin(dss[i][j], c);
         }
     }

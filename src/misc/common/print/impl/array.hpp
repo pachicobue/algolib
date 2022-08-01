@@ -8,5 +8,5 @@ std::ostream& operator<<(std::ostream& os, const std::array<T, n>& vs)
     for (const auto& v : vs) {
         os << v << ",";
     }
-    return (os << "]" << std::endl);
+    return (os << "]");
 }

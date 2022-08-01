@@ -8,8 +8,7 @@ int main()
 {
     const auto [V, E, r] = in.tup<int, int, int>();
     Graph<int> g(V);
-    for (int i : rep(E)) {
-        USE(i);
+    LOOP (E) {
         const auto [u, v, c] = in.tup<int, int, int>();
         g.addEdge(u, v, c);
     }

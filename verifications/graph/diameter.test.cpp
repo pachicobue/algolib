@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 #include "../../src/graph/diameter.hpp"
 int main()
 {

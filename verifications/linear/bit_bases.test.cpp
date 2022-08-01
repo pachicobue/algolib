@@ -7,8 +7,7 @@ int main()
 {
     const auto N = in.val<int>();
     BitBases<64> bases;
-    for (int i : rep(N)) {
-        USE(i);
+    LOOP (N) {
         const auto a = in.val<u64>();
         bases.add(a);
     }

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 #include "../../src/ds/static_rmq.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();
@@ -15,8 +15,7 @@ int main()
         }
     };
     const auto rmq = DisjointSparseTable<SemiGroup>(as);
-    for (int q : rep(Q)) {
-        USE(q);
+    LOOP (Q) {
         const auto [l, r] = in.tup<int, int>();
         out.ln(rmq.fold(l, r));
     }

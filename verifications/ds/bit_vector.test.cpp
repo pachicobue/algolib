@@ -9,13 +9,11 @@ void Test()
     std::uniform_int_distribution<int> dist(0, N - 1);
 
     BitVector bvec(N);
-    for (int t : rep(200)) {
-        USE(t);
+    LOOP (200) {
         const int i = dist(mt);
         bvec.set(i);
     }
-    for (int t : rep(50)) {
-        USE(t);
+    LOOP (50) {
         const int i = dist(mt);
         bvec.reset(i);
     }
@@ -29,8 +27,7 @@ void rankTest()
 
     BitVector bvec(N);
     Vec<int> bs(N, 0);
-    for (int t : rep(200)) {
-        USE(t);
+    LOOP (200) {
         const int i = dist(mt);
         bvec.set(i);
         bs[i] = 1;
@@ -50,13 +47,11 @@ void rankTest()
         }
         return ans;
     };
-    for (int t : rep(200)) {
-        USE(t);
+    LOOP (200) {
         const int i = dist(mt);
         assert(rank0(i) == bvec.rank0(i));
     }
-    for (int t : rep(200)) {
-        USE(t);
+    LOOP (200) {
         const int i = dist(mt);
         assert(rank1(i) == bvec.rank1(i));
     }
@@ -71,14 +66,12 @@ void selectTest()
     std::uniform_int_distribution<int> dist(0, N - 1);
 
     BitVector bvec(N);
-    for (int t : rep(200)) {
-        USE(t);
+    LOOP (200) {
         const int i = dist(mt);
         bvec.set(i);
     }
 
-    for (int t : rep(200)) {
-        USE(t);
+    LOOP (200) {
         const int k = dist(mt);
         const int i = bvec.select0(k);
         if (i == N) {
@@ -87,8 +80,7 @@ void selectTest()
             assert(bvec.rank0(i) == k);
         }
     }
-    for (int t : rep(200)) {
-        USE(t);
+    LOOP (200) {
         const int k = dist(mt);
         const int i = bvec.select1(k);
         if (i == N) {

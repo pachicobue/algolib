@@ -15,8 +15,7 @@ Vec<T> dijkstra(const Graph<T>& g, int s)
         const auto [c, u] = Q.top();
         Q.pop();
         if (ds[u] < c) { continue; }
-        for (const auto& [id, v, c] : g[u]) {
-            USE(id);
+        for (UNUSED const auto& [_, v, c] : g[u]) {
             if (ds[v] <= ds[u] + c) { continue; }
             ds[v] = ds[u] + c;
             Q.push({ds[v], v});

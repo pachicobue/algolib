@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 #include "../../src/ds/swag.hpp"
 #include "../../src/math/modint.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;
@@ -18,8 +18,7 @@ int main()
     };
 
     auto deque = SlidingWindowAggregation<SemiGroup>{};
-    for (int q : rep(Q)) {
-        USE(q);
+    LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [a, b] = in.tup<mint, mint>();

@@ -18,7 +18,7 @@ mint modNthRoot(mint A, i64 k)
     const auto fs = primeFactors(g);
     for (const auto& [p, e] : fs) {
         i64 pe = 1;
-        for (UNUSED int i : rep(e)) {
+        LOOP (e) {
             pe *= p;
         }
         i64 q = P - 1, Q = 0;
@@ -44,7 +44,7 @@ mint modNthRoot(mint A, i64 k)
         mint Error = A.pow(y * q);
 
         mint pEraser = Eraser;
-        for (UNUSED i64 i : rep(Q - 1)) {
+        LOOP (Q - 1) {
             pEraser = pEraser.pow(p);
         }
         const mint ipEraser = pEraser.inv();
@@ -64,7 +64,7 @@ mint modNthRoot(mint A, i64 k)
         while (Error.val() != 1) {
             i64 l = 0;
             mint pError = Error;
-            for (UNUSED i64 i : rep(Q)) {
+            for (i64 i : rep(Q)) {
                 const auto npError = pError.pow(p);
                 if (npError == 1) {
                     l = Q - (i + 1);
@@ -85,7 +85,7 @@ mint modNthRoot(mint A, i64 k)
                 }
             }
             auto pEraser2 = Eraser.pow(c);
-            for (UNUSED i64 i : rep(l - e)) {
+            LOOP (l - e) {
                 pEraser2 = pEraser2.pow(p);
             }
             X *= pEraser2, Error *= pEraser2.pow(pe);

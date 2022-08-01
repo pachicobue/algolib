@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/counting_primes"
 #include "../../src/math/prime_powsum.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 int main()
 {
     const auto N = in.val<u64>();

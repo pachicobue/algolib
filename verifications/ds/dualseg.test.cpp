@@ -1,8 +1,8 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D"
 #include "../../src/ds/dualseg.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
-#include "../../src/misc/fastio/printer.hpp"
+#include "../../src/misc/scanner.hpp"
+#include "../../src/misc/printer.hpp"
 
 int main()
 {
@@ -23,8 +23,7 @@ int main()
     for (int i : rep(N)) {
         seg.set(i, (1_i64 << 31) - 1);
     }
-    for (int q : rep(Q)) {
-        USE(q);
+    LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [s, t, x] = in.tup<int, int, i64>();
@@ -34,6 +33,5 @@ int main()
             out.ln(seg.get(i));
         }
     }
-    if (N < 10) { std::cerr << seg << std::endl; }
     return 0;
 }

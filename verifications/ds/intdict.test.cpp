@@ -1,13 +1,12 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 #include "../../src/ds/intdict.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 int main()
 {
     IntDict<u64, u64> dict;
     const auto Q = in.val<int>();
-    for (int q : rep(Q)) {
-        USE(q);
+    LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [k, v] = in.tup<u64, u64>();

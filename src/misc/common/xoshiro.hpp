@@ -1,6 +1,6 @@
 #pragma once
 #include "type_alias.hpp"
-#include "constants.hpp"
+#include "constant.hpp"
 /**
  * @ref https://prng.di.unimi.it
  */

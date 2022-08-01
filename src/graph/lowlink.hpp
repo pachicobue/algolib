@@ -19,8 +19,7 @@ public:
             m_lows[u] = m_ords[u];
             bool is_art = false;
             int dim = 0;
-            for (const auto& [id, v, c] : g[u]) {
-                USE(c);
+            for (UNUSED const auto& [id, v, _] : g[u]) {
                 if (not used[v]) {
                     dim++;
                     dfs(v, id);

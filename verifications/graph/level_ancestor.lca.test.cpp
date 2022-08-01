@@ -12,8 +12,7 @@ int main()
         g.addEdge(p, i, true);
     }
     LevelAncestor la(g);
-    for (int q : rep(Q)) {
-        USE(q);
+    LOOP (Q) {
         const auto [u, v] = in.tup<int, int>();
         out.ln(la.lca(u, v));
     }

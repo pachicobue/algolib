@@ -1,7 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/1937"
 #include "../../src/ds/wavelet.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 #include "../../src/misc/bin_search.hpp"
 int main()
 {

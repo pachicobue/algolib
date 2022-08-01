@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/line_add_get_min"
 #include "../../src/ds/li_chao_tree.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();
@@ -10,8 +10,7 @@ int main()
         const auto [a, b] = in.tup<i64, i64>();
         cht.addLine({a, b});
     }
-    for (int q : rep(Q)) {
-        USE(q);
+    LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [a, b] = in.tup<i64, i64>();

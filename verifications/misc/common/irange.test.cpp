@@ -67,6 +67,25 @@ void irangeTest2()
     }
     assert(is4.empty());
 }
+void irangeTest3()
+{
+    long long min = 10000000000LL;
+    long long sup = 10000000000LL + 3;
+    std::vector<i64> is;
+    for (i64 i : irange(min, sup)) {
+        is.push_back(i);
+    }
+    assert(is == std::vector<long long>({min, min + 1, min + 2}));
+}
+
+void loopTest()
+{
+    int cnt = 0;
+    LOOP (100) {
+        cnt++;
+    };
+    assert(cnt == 100);
+}
 
 int main()
 {
@@ -74,6 +93,8 @@ int main()
     perTest();
     irangeTest1();
     irangeTest2();
+    irangeTest3();
+    loopTest();
     std::cout << "Hello World\n";
     return 0;
 }

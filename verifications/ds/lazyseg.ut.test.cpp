@@ -1,8 +1,8 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H"
 #include "../../src/ds/lazyseg.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 
 int main()
 {
@@ -45,8 +45,7 @@ int main()
     for (int i : rep(N)) {
         seg.set(i, 0);
     }
-    for (int q : rep(Q)) {
-        USE(q);
+    LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [s, t, x] = in.tup<int, int, i64>();

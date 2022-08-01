@@ -1,13 +1,12 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 #include "../../src/graph/dijkstra.hpp"
 int main()
 {
     const auto [N, M, S, T] = in.tup<int, int, int, int>();
     Graph<i64> g(N), rg(N);
-    for (int i : rep(M)) {
-        USE(i);
+    LOOP (M) {
         const auto [u, v, c] = in.tup<int, int, i64>();
         g.addEdge(u, v, c), rg.addEdge(v, u, c);
     }
@@ -19,8 +18,7 @@ int main()
     int p = T;
     while (p != S) {
         used[p] = true;
-        for (const auto& [id, pp, cost] : rg[p]) {
-            USE(id);
+        for (UNUSED const auto& [_, pp, cost] : rg[p]) {
             if (not used[pp] and ds[pp] + cost == ds[p]) {
                 ans.push_back({pp, p});
                 p = pp;

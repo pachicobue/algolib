@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/kth_root_mod"
 #include "../../src/math/mod_nthroot.hpp"
 #include "../../src/math/modint.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 using mint = modint_dynamic<0>;
 int main()
 {

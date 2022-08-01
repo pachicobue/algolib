@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 #include "../../src/ds/lazyseg.hpp"
 #include "../../src/math/modint.hpp"
-#include "../../src/misc/fastio/printer.hpp"
-#include "../../src/misc/fastio/scanner.hpp"
+#include "../../src/misc/printer.hpp"
+#include "../../src/misc/scanner.hpp"
 
 int main()
 {
@@ -48,8 +48,7 @@ int main()
         as[i].first = in.val<mint>();
     }
     auto seg = LazySeg<MergeMonoid, OpMonoid, Act>(as);
-    for (int q : rep(Q)) {
-        USE(q);
+    LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [l, r, b, c] = in.tup<int, int, mint, mint>();

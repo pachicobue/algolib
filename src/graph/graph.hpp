@@ -68,8 +68,7 @@ public:
         assert(0 <= root and root < N);
         Vec<T> ss(N, 1);
         Fix([&](auto dfs, int u, int p) -> void {
-            for (const auto& [id, v, c] : m_edges[u]) {
-                USE(id);
+            for (UNUSED const auto& [_, v, c] : m_edges[u]) {
                 if (v == p) { continue; }
                 dfs(v, u);
                 ss[u] += ss[v];
@@ -83,8 +82,7 @@ public:
         assert(0 <= root and root < N);
         Vec<T> ds(N, 0);
         Fix([&](auto dfs, int u, int p) -> void {
-            for (const auto& [id, v, c] : m_edges[u]) {
-                USE(id);
+            for (UNUSED const auto& [_, v, c] : m_edges[u]) {
                 if (v == p) { continue; }
                 ds[v] = ds[u] + c;
                 dfs(v, u);
@@ -98,8 +96,7 @@ public:
         assert(0 <= root and root < N);
         Vec<int> ps(N, -1);
         Fix([&](auto dfs, int u, int p) -> void {
-            for (const auto& [id, v, c] : m_edges[u]) {
-                USE(id);
+            for (UNUSED const auto& [_, v, c] : m_edges[u]) {
                 if (v == p) { continue; }
                 ps[v] = u;
                 dfs(v, u);

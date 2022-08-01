@@ -1,22 +1,7 @@
 #pragma once
 #include "print/int128_t.hpp"
 #ifdef HOGEPACHI
-#    include "print/array.hpp"
-#    include "print/deque.hpp"
-#    include "print/map.hpp"
-#    include "print/multimap.hpp"
-#    include "print/multiset.hpp"
-#    include "print/pair.hpp"
-#    include "print/priority_queue.hpp"
-#    include "print/queue.hpp"
-#    include "print/set.hpp"
-#    include "print/stack.hpp"
-#    include "print/tuple.hpp"
-#    include "print/unordered_map.hpp"
-#    include "print/unordered_multimap.hpp"
-#    include "print/unordered_multiset.hpp"
-#    include "print/unordered_set.hpp"
-#    include "print/vector.hpp"
+#    include "print/print_stl.hpp"
 namespace show_impl {
 template<typename T>
 void dump(T x)
