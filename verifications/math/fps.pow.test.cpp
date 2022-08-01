@@ -2,18 +2,16 @@
 #include "../../src/math/fps.hpp"
 #include "../../src/misc/printer.hpp"
 #include "../../src/misc/scanner.hpp"
+
 int main()
 {
     using mint = modint_998244353;
-    const auto [N, M] = in.tup<int, int>();
-    FPS<mint> as(N);
-    for (auto& a : as) {
-        a.setRaw(in.val<int>());
-    }
+    const auto [N, M] = in.tup<int, i64>();
+    FPS<mint> as = in.vec<mint>(N);
     const auto bs = as.pow(M, N);
-    Vec<int> ans(N);
+    Vec<mint> ans(N);
     for (int i : rep(N)) {
-        ans[i] = bs.at(i).val();
+        ans[i] = bs.at(i);
     }
     out.ln(ans);
     return 0;

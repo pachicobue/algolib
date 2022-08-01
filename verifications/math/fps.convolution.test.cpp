@@ -6,17 +6,12 @@ int main()
 {
     using mint = modint_998244353;
     const auto [N, M] = in.tup<int, int>();
-    FPS<mint> as(N), bs(M);
-    for (int i : rep(N)) {
-        as[i].setRaw(in.val<int>());
-    }
-    for (int j : rep(M)) {
-        bs[j].setRaw(in.val<int>());
-    }
+    FPS<mint> as = in.vec<mint>(N);
+    FPS<mint> bs = in.vec<mint>(M);
     auto cs = as * bs;
-    Vec<int> ans(N + M - 1);
+    Vec<mint> ans(N + M - 1);
     for (int i : rep(N + M - 1)) {
-        ans[i] = cs.at(i).val();
+        ans[i] = cs.at(i);
     }
     out.ln(ans);
     return 0;
