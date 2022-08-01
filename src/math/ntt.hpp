@@ -20,7 +20,7 @@ public:
         const int AN = as.size();
         const int BN = bs.size();
         const int CN = AN + BN - 1;
-        const int L = clog(CN);
+        const int L = ceillog(CN);
         const int N = (1 << L);
         as.resize(N, 0), bs.resize(N, 0);
         transform(as, L, false), transform(bs, L, false);

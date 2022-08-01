@@ -12,7 +12,7 @@ class DualSegTree
 public:
     DualSegTree(const Vec<F>& vs)
         : m_size(vs.size()),
-          m_depth(clog(m_size) + 1),
+          m_depth(ceillog(m_size) + 1),
           m_half(1 << m_depth),
           m_ops(m_half << 1, id())
     {

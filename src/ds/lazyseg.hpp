@@ -17,7 +17,7 @@ class LazySeg
 public:
     LazySeg(const Vec<T>& vs)
         : m_size(vs.size()),
-          m_depth(clog(m_size) + 1),
+          m_depth(ceillog(m_size) + 1),
           m_half(1 << m_depth),
           m_vs(m_half << 1, e()),
           m_ops(m_half << 1, id())

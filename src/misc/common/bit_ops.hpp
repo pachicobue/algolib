@@ -12,13 +12,13 @@ constexpr int lsbp1(const u64 v)
 {
     return __builtin_ffsll(v);
 }
-constexpr int clog(const u64 v)
+constexpr int ceillog(const u64 v)
 {
     return v ? log2p1(v - 1) : 0;
 }
 constexpr u64 ceil2(const u64 v)
 {
-    const int l = clog(v);
+    const int l = ceillog(v);
     return (l == 64) ? 0_u64 : (1_u64 << l);
 }
 constexpr u64 floor2(const u64 v)

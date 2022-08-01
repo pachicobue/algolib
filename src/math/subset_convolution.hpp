@@ -3,7 +3,7 @@
 template<typename T>
 Vec<T> subsetConvolute(const Vec<T>& f, const Vec<T>& g)
 {
-    const int l = clog(std::max(f.size(), g.size()));
+    const int l = ceillog(std::max(f.size(), g.size()));
     const int N = 1 << l;
     auto F = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));
     auto G = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));

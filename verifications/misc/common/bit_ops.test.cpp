@@ -26,9 +26,9 @@ void lsbp1Test()
 
 void clogTest()
 {
-    assert(clog(0x0123456789ABCDEF) == 57);
-    assert(clog(0x8000000000000000) == 63);
-    assert(clog(0x0) == 0);
+    assert(ceillog(0x0123456789ABCDEF) == 57);
+    assert(ceillog(0x8000000000000000) == 63);
+    assert(ceillog(0x0) == 0);
 }
 
 void ceil2Test()
