@@ -17,10 +17,10 @@ void Test()
 void valTest()
 {
     int min = 10, max = 20;
-    const u64 v32_1 = rng.val(min, max);
-    const u64 v32_2 = rng_xo.val(min, max);
-    const u64 v64_1 = rng64.val(min, max);
-    const u64 v64_2 = rng_xo64.val(min, max);
+    const int v32_1 = rng.val(min, max);
+    const int v32_2 = rng_xo.val(min, max);
+    const int v64_1 = rng64.val(min, max);
+    const int v64_2 = rng_xo64.val(min, max);
     assert(min <= v32_1 and v32_1 <= max);
     assert(min <= v32_2 and v32_2 <= max);
     assert(min <= v64_1 and v64_1 <= max);
@@ -71,22 +71,22 @@ void vvecTest()
     const auto vss32_2 = rng_xo.vvec(m, n, min, max);
     const auto vss64_1 = rng64.vvec(m, n, min, max);
     const auto vss64_2 = rng_xo64.vvec(m, n, min, max);
-    for (const auto vs : vss32_1) {
+    for (const auto& vs : vss32_1) {
         for (auto v : vs) {
             assert(min <= v and v <= max);
         }
     }
-    for (const auto vs : vss32_2) {
+    for (const auto& vs : vss32_2) {
         for (auto v : vs) {
             assert(min <= v and v <= max);
         }
     }
-    for (const auto vs : vss64_1) {
+    for (const auto& vs : vss64_1) {
         for (auto v : vs) {
             assert(min <= v and v <= max);
         }
     }
-    for (const auto vs : vss64_2) {
+    for (const auto& vs : vss64_2) {
         for (auto v : vs) {
             assert(min <= v and v <= max);
         }

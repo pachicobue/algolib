@@ -7,7 +7,7 @@ template<typename mint>
 Vec<mint> convolute_mod(const Vec<mint>& as, const Vec<mint>& bs)
 {
     constexpr u32 L_MAX = mint::max2p();
-    constexpr u32 N_MAX = (1 << L_MAX);
+    constexpr int N_MAX = (1 << L_MAX);
     const int AN = as.size();
     const int BN = bs.size();
     const int N = AN + BN - 1;

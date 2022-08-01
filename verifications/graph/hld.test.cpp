@@ -35,22 +35,22 @@ int main()
         }
     };
 
-    std::vector<mint> as(N), bs(N);
+    Vec<mint> as(N), bs(N);
     for (int i : rep(N)) {
         std::tie(as[i], bs[i]) = in.tup<mint, mint>();
     }
-    for (int i : rep(N - 1)) {
+    LOOP (N - 1) {
         const auto [u, v] = in.tup<int, int>();
         g.addEdge(u, v, true);
     }
     const HLD hld{g};
-    std::vector<Func> vs(N);
+    Vec<Func> vs(N);
     for (int i : rep(N)) {
         vs[hld.pos(i)] = Func{as[i], bs[i]};
     }
     auto seg = SegTree<Monoid>(vs);
     auto rseg = SegTree<RMonoid>(vs);
-    for (int q : rep(Q)) {
+    LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [p, c, d] = in.tup<int, mint, mint>();

@@ -42,7 +42,7 @@ int main()
     }
     Mo<300> mo(ls, rs);
     Vec<u64> ans(Q);
-    for (int q : rep(Q)) {
+    LOOP (Q) {
         const int it = mo.next(right, left, down, up);
         ans[it] = inv;
     }

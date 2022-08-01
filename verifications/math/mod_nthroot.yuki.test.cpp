@@ -8,7 +8,7 @@ using mint = modint64_dynamic<0>;
 int main()
 {
     const int T = in.val<int>();
-    for (int t : rep(T)) {
+    LOOP (T) {
         const auto [P, K, Y] = in.tup<u64, u64, u64>();
         if (P == 2) {
             out.ln(Y == 1 ? 1 : K == 0 ? -1 : 0);

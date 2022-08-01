@@ -6,7 +6,7 @@ int main()
 {
     const auto N = in.val<int>();
     Graph<i64> g(N);
-    for (int i : rep(N - 1)) {
+    LOOP (N - 1) {
         const auto [u, v, c] = in.tup<int, int, i64>();
         g.addEdge(u, v, c, true);
     }

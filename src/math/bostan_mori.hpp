@@ -6,7 +6,7 @@ mint bostanMori(FPS<mint> f, FPS<mint> g, I N)
     assert(not g.isZero());
     const int f_zero = f.lsb(), g_zero = g.lsb();
     assert(g_zero <= f_zero);
-    if (N < (f_zero - g_zero)) { return 0; }
+    if (N < I(f_zero - g_zero)) { return 0; }
     f <<= f_zero, g <<= g_zero;
     N -= (f_zero - g_zero);
 

@@ -12,7 +12,7 @@ private:
     static constexpr u32 MOD = mint::mod();
     static constexpr u32 ROOT = mint::root();
     static constexpr u32 L_MAX = mint::max2p();
-    static constexpr u32 N_MAX = (1 << L_MAX);
+    static constexpr int N_MAX = (1 << L_MAX);
 
 public:
     static Vec<mint> convolute(Vec<mint> as, Vec<mint> bs)

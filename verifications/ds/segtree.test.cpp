@@ -26,7 +26,7 @@ int main()
         std::tie(fs[i].first, fs[i].second) = in.tup<mint, mint>();
     }
     auto seg = SegTree<Monoid>(fs);
-    for (int q : rep(Q)) {
+    LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [p, c, d] = in.tup<int, mint, mint>();

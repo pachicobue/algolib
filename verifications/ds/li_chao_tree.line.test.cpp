@@ -6,7 +6,7 @@ int main()
 {
     const auto [N, Q] = in.tup<int, int>();
     auto cht = LiChaoTree<i64>(-TEN<i64>(9), TEN<i64>(9));
-    for (int i : rep(N)) {
+    LOOP (N) {
         const auto [a, b] = in.tup<i64, i64>();
         cht.addLine({a, b});
     }

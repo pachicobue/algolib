@@ -15,7 +15,7 @@ int main()
         }
     };
     const auto rmq = StaticRMQ<Ord>(as);
-    for (int q : rep(Q)) {
+    LOOP (Q) {
         const auto [l, r] = in.tup<int, int>();
         out.ln(rmq.fold(l, r));
     }

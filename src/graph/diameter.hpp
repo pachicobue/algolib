@@ -15,7 +15,6 @@ struct Edge
 template<typename T>
 Vec<diameter_impl::Edge<T>> diameter(const Graph<T>& g)
 {
-    const int N = g.v();
     auto ds = g.depths(0);
     auto ps = g.parents(0);
     const int s = maxInd(ds);

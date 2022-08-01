@@ -7,7 +7,7 @@ using mint = modint_dynamic<0>;
 int main()
 {
     const int T = in.val<int>();
-    for (int t : rep(T)) {
+    LOOP (T) {
         const auto [K, Y, P] = in.tup<uint, uint, uint>();
         if (P == 2) {
             out.ln(Y == 1 ? 1 : K == 0 ? -1 : 0);

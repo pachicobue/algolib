@@ -11,7 +11,7 @@ int main()
         g.addEdge(p, i, true);
     }
     const auto lca = LCA(g, 0);
-    for (int q : rep(Q)) {
+    LOOP (Q) {
         const auto [u, v] = in.tup<int, int>();
         const int l = lca(u, v);
         out.ln(l);

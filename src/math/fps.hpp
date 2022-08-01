@@ -12,10 +12,13 @@ class FPS : public Vec<mint>
 
 public:
     using std::vector<mint>::vector;
-    using std::vector<mint>::size;
     FPS(const Vec<mint>& vs) : Vec<mint>{vs}
     {
         optimize();
+    }
+    int size() const
+    {
+        return (int)std::vector<mint>::size();
     }
     int deg() const
     {

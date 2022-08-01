@@ -56,7 +56,7 @@ mint modNthRoot(mint A, i64 k)
             const i64 B = std::max(1_i64, ((i64)p - 1) / M);
             const mint ppEraser = pEraser.pow(B);
             mint prod = 1;
-            for (i64 i = 0; i < p; i += B, prod *= ppEraser) {
+            for (i64 i = 0; i < (i64)p; i += B, prod *= ppEraser) {
                 memo[prod.val()] = i;
             }
         }
