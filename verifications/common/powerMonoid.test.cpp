@@ -1,6 +1,6 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_10_A"
-#include "../../../src/common/func_alias.hpp"
+#include "../../src/common/power.hpp"
 
 struct M
 {

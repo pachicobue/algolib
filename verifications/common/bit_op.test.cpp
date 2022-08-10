@@ -1,6 +1,6 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../../src/common/bit_op.hpp"
+#include "../../src/common/bit_op.hpp"
 
 void popcountTest()
 {

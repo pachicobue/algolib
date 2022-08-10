@@ -1,5 +1,5 @@
 #pragma once
-#include "type_alias.hpp"
+#include "type.hpp"
 template<typename T>
 Vec<T>& operator+=(Vec<T>& vs1, const Vec<T>& vs2)
 {

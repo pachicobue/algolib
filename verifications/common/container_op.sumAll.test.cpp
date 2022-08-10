@@ -1,6 +1,6 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../../src/common/container_util.hpp"
+#include "../../src/common/container_op.hpp"
 
 void Primitive1DArrTest()
 {

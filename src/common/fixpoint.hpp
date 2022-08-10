@@ -1,5 +1,5 @@
 #pragma once
-#include "type_alias.hpp"
+#include "type.hpp"
 template<typename F>
 struct Fix : F
 {

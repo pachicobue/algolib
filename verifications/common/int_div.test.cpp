@@ -1,6 +1,6 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../../src/common/func_alias.hpp"
+#include "../../src/common/int_div.hpp"
 void fdivTest()
 {
     auto f = [&](auto x, auto y) {

@@ -1,5 +1,5 @@
 #pragma once
-#include "type_alias.hpp"
+#include "type.hpp"
 #include "macro.hpp"
 class irange
 {
@@ -32,7 +32,9 @@ public:
         const i64 r = (step > 0 ? end : start);
         i64 n = (r - l) / d + ((r - l) % d ? 1 : 0);
         if (l >= r) { n = 0; }
-        m_start = start, m_end = start + step * n, m_step = step;
+        m_start = start;
+        m_end = start + step * n;
+        m_step = step;
     }
     itr begin() const
     {

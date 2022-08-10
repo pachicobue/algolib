@@ -1,5 +1,5 @@
 #pragma once
-#include "type_alias.hpp"
+#include "type.hpp"
 constexpr int popcount(u64 v)
 {
     return v ? __builtin_popcountll(v) : 0;
