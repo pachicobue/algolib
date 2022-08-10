@@ -1,5 +1,5 @@
 #pragma once
-#include "common.hpp"
+#include "../common.hpp"
 template<typename T, int n, int i = 0>
 auto ndVec(int const (&szs)[n], const T x = T{})
 {

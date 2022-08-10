@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename It>
 Vec<int> z_algorithm(It first, It last)
 {

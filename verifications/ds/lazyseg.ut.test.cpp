@@ -1,8 +1,8 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H"
 #include "../../src/ds/lazyseg.hpp"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
 
 int main()
 {

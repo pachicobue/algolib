@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<int block_size>
 class Mo
 {

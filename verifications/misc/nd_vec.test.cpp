@@ -1,6 +1,6 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/misc/nd_vec.hpp"
+#include "../../src/utility/nd_vec.hpp"
 
 void Test()
 {

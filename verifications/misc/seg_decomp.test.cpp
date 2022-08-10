@@ -1,6 +1,6 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/misc/seg_decomp.hpp"
+#include "../../src/utility/seg_decomp.hpp"
 void Test()
 {
     const int N = 6;

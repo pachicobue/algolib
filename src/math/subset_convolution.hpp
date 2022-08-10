@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename T>
 Vec<T> subsetConvolute(const Vec<T>& f, const Vec<T>& g)
 {

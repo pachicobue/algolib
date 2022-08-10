@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_inversions_query"
 #include "../../src/ds/fenwick.hpp"
 #include "../../src/ds/mo.hpp"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
-#include "../../src/misc/zipper.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
+#include "../../src/utility/zipper.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();

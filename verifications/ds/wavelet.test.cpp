@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
 #include "../../src/ds/wavelet.hpp"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();

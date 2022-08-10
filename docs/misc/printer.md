@@ -1,6 +1,6 @@
 ---
 title: Printer (出力補助クラス)
-documentation_of: //src/misc/printer.hpp
+documentation_of: //src/utility/printer.hpp
 ---
 
 ## 概要

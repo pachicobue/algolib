@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/factorize"
 #include "../../src/math/prime_factors.hpp"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
 int main()
 {
     const auto Q = in.val<int>();

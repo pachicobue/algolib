@@ -1,6 +1,6 @@
 #define PROBLEM \
     "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B"
-#include "../../../src/misc/common/func_alias.hpp"
+#include "../../../src/common/func_alias.hpp"
 
 constexpr i64 mod = 1000000007;
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "graph.hpp"
 namespace diameter_impl {
 template<typename T>

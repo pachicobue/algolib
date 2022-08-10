@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename K, typename V, int LG = 20>
 class IntDict
 {

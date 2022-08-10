@@ -1,5 +1,6 @@
 #pragma once
 #include "type_alias.hpp"
+#include "macro.hpp"
 template<typename Vs, typename V>
 void fillAll(Vs& arr, const V& v)
 {
@@ -14,17 +15,17 @@ void fillAll(Vs& arr, const V& v)
 template<typename Vs>
 void sortAll(Vs& vs)
 {
-    std::sort(std::begin(vs), std::end(vs));
+    std::sort(ALL(vs));
 }
 template<typename Vs, typename C>
 void sortAll(Vs& vs, C comp)
 {
-    std::sort(std::begin(vs), std::end(vs), comp);
+    std::sort(ALL(vs), comp);
 }
 template<typename Vs>
 void reverseAll(Vs& vs)
 {
-    std::reverse(std::begin(vs), std::end(vs));
+    std::reverse(ALL(vs));
 }
 template<typename V, typename Vs>
 V sumAll(const Vs& vs)
@@ -42,28 +43,22 @@ V sumAll(const Vs& vs)
 template<typename Vs>
 int minInd(const Vs& vs)
 {
-    return std::min_element(std::begin(vs), std::end(vs)) - std::begin(vs);
+    return std::min_element(ALL(vs)) - std::begin(vs);
 }
 template<typename Vs>
 int maxInd(const Vs& vs)
 {
-    return std::max_element(std::begin(vs), std::end(vs)) - std::begin(vs);
+    return std::max_element(ALL(vs)) - std::begin(vs);
 }
 template<typename Vs, typename V>
 int lbInd(const Vs& vs, const V& v)
 {
-    return std::lower_bound(std::begin(vs), std::end(vs), v) - std::begin(vs);
+    return std::lower_bound(ALL(vs), v) - std::begin(vs);
 }
 template<typename Vs, typename V>
 int ubInd(const Vs& vs, const V& v)
 {
-    return std::upper_bound(std::begin(vs), std::end(vs), v) - std::begin(vs);
-}
-template<typename Vs, typename V>
-bool contains(const Vs& vs, const V& v)
-{
-    const int li = lbInd(vs, v);
-    return (li < std::size(vs) and vs[li] == v);
+    return std::upper_bound(ALL(vs), v) - std::begin(vs);
 }
 template<typename Vs, typename V>
 void plusAll(Vs& vs, const V& v)

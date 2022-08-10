@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename T>
 constexpr Pair<T, T> extgcd(const T a, const T b)  // [x,y] -> ax+by=gcd(a,b)
 {

@@ -1,7 +1,5 @@
 #pragma once
-#include "type_alias.hpp"
-#include "container_util.hpp"
-#include "xoshiro.hpp"
+#include "../common.hpp"
 template<typename Rng>
 class RNG
 {
@@ -48,5 +46,3 @@ private:
 };
 RNG<std::mt19937> rng;
 RNG<std::mt19937_64> rng64;
-RNG<Xoshiro32> rng_xo;
-RNG<Xoshiro64> rng_xo64;

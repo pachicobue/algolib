@@ -1,6 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
-
+#include "../common.hpp"
 template<typename mint>
 class NTT
 {
@@ -37,7 +36,6 @@ public:
         assert(N <= N_MAX);
         assert((1 << L) == N);
         if (N == 1) { return; }
-
         const auto l_range = (rev ? irange(1, L + 1, 1) : irange(L, 0, -1));
         for (int l : l_range) {
             const int H = 1 << l;

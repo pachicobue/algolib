@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename MergeMonoid, typename OpMonoid, typename Act>
 class LazySeg
 {
@@ -28,7 +28,6 @@ public:
         }
     }
     LazySeg(int N, const T& v = MergeMonoid::e()) : LazySeg{Vec<T>(N, v)} {}
-
     T get(const int a)
     {
         assert(a < m_size);

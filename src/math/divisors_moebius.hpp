@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "primes.hpp"
 template<typename T>
 Vec<T> divisorsMoebius(const Vec<T>& xs, bool subset)

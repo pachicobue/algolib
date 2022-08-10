@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "graph.hpp"
 template<typename T>
 Vec<T> dijkstra(const Graph<T>& g, int s)

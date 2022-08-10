@@ -2,8 +2,8 @@
 #include "../../src/ds/segtree.hpp"
 #include "../../src/graph/hld.hpp"
 #include "../../src/math/modint.hpp"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

@@ -1,7 +1,7 @@
 #define PROBLEM \
     "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/misc/common.hpp"
-#include "../../src/misc/printer.hpp"
+#include "../../src/common.hpp"
+#include "../../src/utility/printer.hpp"
 
 std::stringstream ss;
 Printer printer{ss};

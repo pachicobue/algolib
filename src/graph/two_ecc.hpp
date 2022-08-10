@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "lowlink.hpp"
 template<typename T>
 class TwoEdgeConnectedComponent : public LowLink<T>

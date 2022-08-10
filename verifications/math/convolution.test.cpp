@@ -1,7 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
+#include "../../src/utility/rng.hpp"
 #include "../../src/math/convolution.hpp"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
 int main()
 {
     const auto [A, B] = in.tup<int, int>();

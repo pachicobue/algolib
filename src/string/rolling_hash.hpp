@@ -1,14 +1,14 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 class RollingHash
 {
 public:
     template<typename It>
-    RollingHash(It first, It last, u64 base_ = rng64.val<u64>(2, mask61 - 1))
+    RollingHash(It first, It last, u64 base)
         : m_size(std::distance(first, last)),
           m_ps(m_size + 1, 1),
           m_hs(m_size + 1, 0),
-          m_base{base_}
+          m_base{base}
     {
         for (int i : irange(1, m_size + 1)) {
             m_ps[i] = mod(mul(m_ps[i - 1], m_base)),
@@ -20,7 +20,7 @@ public:
         return mod(m_hs[r] + offset - mul(m_hs[l], m_ps[r - l]));
     }
     template<typename C>
-    void push_back(C c)
+    void pushBack(C c)
     {
         m_size++;
         m_ps.push_back(mod(mul(m_ps.back(), m_base)));

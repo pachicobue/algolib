@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "prime_powsum.hpp"
 template<typename T, typename F>
 class MultiplicativeSum : public PrimePowSum<T>

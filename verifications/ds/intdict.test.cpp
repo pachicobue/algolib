@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 #include "../../src/ds/intdict.hpp"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
 int main()
 {
     IntDict<u64, u64> dict;

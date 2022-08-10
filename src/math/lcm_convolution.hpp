@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "divisors_moebius.hpp"
 #include "divisors_zeta.hpp"
 template<typename T>

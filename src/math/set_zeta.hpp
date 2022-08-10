@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename T>
 Vec<T> setZeta(const Vec<T>& xs, const bool subset)
 {

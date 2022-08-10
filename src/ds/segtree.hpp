@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename MergeMonoid>
 class SegTree
 {
@@ -21,7 +21,6 @@ public:
         }
     }
     SegTree(int N, const T& v = MergeMonoid::e()) : SegTree{Vec<T>(N, v)} {}
-
     T get(int i) const
     {
         assert(0 <= i and i < m_size);

@@ -1,7 +1,6 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "convolution.hpp"
-
 template<typename mint>
 class FPS : public Vec<mint>
 {
@@ -139,7 +138,6 @@ public:
     {
         return os << static_cast<Vec<mint>>(f);
     }
-
     FPS derivative() const
     {
         FPS ans;

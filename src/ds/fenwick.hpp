@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename T>
 class FenwickTree
 {
@@ -13,7 +13,6 @@ public:
         }
     }
     FenwickTree(int N, const T& v = T{}) : FenwickTree{Vec<T>(N, v)} {}
-
     void add(int i, const T& v)
     {
         assert(0 <= i and i < m_size);

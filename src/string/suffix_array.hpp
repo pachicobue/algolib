@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename It>
 Vec<int> suffixArray(It first, It last, int vsup = 256)
 {
@@ -14,7 +14,6 @@ Vec<int> suffixArray(It first, It last, int vsup = 256)
     Vec<bool> is_l(N + 1, false);
     Vec<bool> is_lms(N + 1, false);
 }
-
 // template<typename It>
 // Vec<int> suffixArray(It first, It last, int bucket_size = (1UL << 8))
 // {

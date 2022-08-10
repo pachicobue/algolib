@@ -1,7 +1,7 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
+#include "../utility/rng.hpp"
 #include "is_prime.hpp"
-
 template<typename mint>
 u64 pollardRho(u64 n)
 {
@@ -37,7 +37,6 @@ u64 pollardRho(u64 n)
     }
     return n;
 }
-
 Map<u64, int> primeFactors(u64 n)
 {
     using mint = modint_dynamic<287687412>;
@@ -64,7 +63,6 @@ Map<u64, int> primeFactors(u64 n)
     })(n);
     return ans;
 }
-
 Vec<u64> divisors(const u64 n)
 {
     const auto fs = primeFactors(n);

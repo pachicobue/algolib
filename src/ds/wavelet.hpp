@@ -1,7 +1,6 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "bit_vector.hpp"
-
 template<typename T>
 class WaveletMatrix
 {
@@ -63,7 +62,6 @@ private:
         }
         return ans;
     }
-
     int m_n;
     int m_lg;
     Vec<BitVector> m_bvs;

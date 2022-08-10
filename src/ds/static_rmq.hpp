@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "ds_table.hpp"
 template<typename TotalOrd>
 class StaticRMQ

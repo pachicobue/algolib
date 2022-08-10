@@ -9,7 +9,6 @@ mint bostanMori(FPS<mint> f, FPS<mint> g, I N)
     if (N < I(f_zero - g_zero)) { return 0; }
     f <<= f_zero, g <<= g_zero;
     N -= (f_zero - g_zero);
-
     while (N > 0) {
         f.shrink(N + 1), g.shrink(N + 1);
         FPS<mint> mg;

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_product"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
-#include "../../src/misc/nd_vec.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
+#include "../../src/utility/nd_vec.hpp"
 #include "../../src/math/modint.hpp"
 #include "../../src/linear/matrix.hpp"
 

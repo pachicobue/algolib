@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 class BitVector
 {
     static constexpr int B = 64;
@@ -60,7 +60,6 @@ public:
         }
         return sup;
     }
-
     int zero()
     {
         calc();
@@ -88,7 +87,6 @@ private:
     int m_size;
     int m_bn;
     Vec<Block> m_blocks;
-
     bool m_calced = false;
     int m_zero = 0;
 };

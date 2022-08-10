@@ -1,7 +1,6 @@
 #pragma once
 #include "type_alias.hpp"
-#include "temp_macro.hpp"
-
+#include "macro.hpp"
 class irange
 {
 private:
@@ -18,8 +17,7 @@ private:
         }
         itr& operator++()
         {
-            m_cnt += m_step;
-            return *this;
+            return m_cnt += m_step, *this;
         }
         i64 m_cnt, m_step;
     };
@@ -34,9 +32,7 @@ public:
         const i64 r = (step > 0 ? end : start);
         i64 n = (r - l) / d + ((r - l) % d ? 1 : 0);
         if (l >= r) { n = 0; }
-        m_start = start;
-        m_end = start + step * n;
-        m_step = step;
+        m_start = start, m_end = start + step * n, m_step = step;
     }
     itr begin() const
     {
@@ -55,5 +51,4 @@ irange per(i64 rend)
 {
     return irange(rend - 1, -1, -1);
 }
-
 #define LOOP(n) for (auto _ UNUSED : rep(n))

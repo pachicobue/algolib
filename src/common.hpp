@@ -1,6 +1,6 @@
 #pragma once
 #include "common/type_alias.hpp"
-#include "common/temp_macro.hpp"
+#include "common/macro.hpp"
 #include "common/constant.hpp"
 #include "common/func_alias.hpp"
 #include "common/operator_alias.hpp"
@@ -9,5 +9,3 @@
 #include "common/bit_op.hpp"
 #include "common/fixpoint.hpp"
 #include "common/irange.hpp"
-#include "common/rng.hpp"
-#include "common/xoshiro.hpp"

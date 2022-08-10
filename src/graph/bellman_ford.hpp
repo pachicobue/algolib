@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "graph.hpp"
 template<typename T>
 Vec<T> bellmanFord(const Graph<T>& g, const int s)

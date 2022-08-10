@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "set_moebius.hpp"
 #include "set_zeta.hpp"
 template<typename T>

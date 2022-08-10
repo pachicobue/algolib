@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename T>
 class PrimePowSum
 {
@@ -46,7 +46,6 @@ protected:
     {
         return x <= m_sqrt ? m_ns.size() - x : m_N / x;
     }
-
     u64 m_N;
     u32 m_sqrt;
     Vec<u64> m_ns, m_ps;

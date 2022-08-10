@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "set_hadamard.hpp"
 template<typename T>
 Vec<T> xorConvolute(Vec<T> f, Vec<T> g)

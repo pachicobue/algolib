@@ -2,7 +2,6 @@
 #include "ntt.hpp"
 #include "garner.hpp"
 #include "modint.hpp"
-
 template<typename mint>
 Vec<mint> convolute_mod(const Vec<mint>& as, const Vec<mint>& bs)
 {
@@ -48,7 +47,6 @@ Vec<mint> convolute_mod(const Vec<mint>& as, const Vec<mint>& bs)
         return cs;
     }
 }
-
 template<typename I>
 Vec<i64> convolute_i64(const Vec<I>& as, const Vec<I>& bs)
 {

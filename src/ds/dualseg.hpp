@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<typename OpMonoid>
 class DualSegTree
 {
@@ -20,7 +20,6 @@ public:
     }
     DualSegTree(int N, const F& f = OpMonoid::id()) : DualSegTree{Vec<F>(N, f)}
     {}
-
     F get(int i) const
     {
         assert(0 <= i and i < m_size);

@@ -1,8 +1,8 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1002"
 #include "../../src/graph/centroid_decomp.hpp"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
-#include "../../src/misc/nd_vec.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
+#include "../../src/utility/nd_vec.hpp"
 
 int main()
 {

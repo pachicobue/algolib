@@ -1,8 +1,8 @@
 #define PROBLEM "https://yukicoder.me/problems/1937"
 #include "../../src/ds/wavelet.hpp"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
-#include "../../src/misc/bin_search.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
+#include "../../src/utility/bin_search.hpp"
 int main()
 {
     const auto N = in.val<int>();

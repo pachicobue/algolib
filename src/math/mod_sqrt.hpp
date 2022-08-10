@@ -1,6 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
-
+#include "../common.hpp"
 template<typename mint>
 mint modsqrt(const mint& A)
 {
@@ -9,12 +8,10 @@ mint modsqrt(const mint& A)
     if (P == 2) { return 1; }
     const u64 h = (P - 1) >> 1;
     if (A.pow(h).val() != 1) { return 0; }
-
     u64 q = P - 1, Q = 0;
     while ((q & 1) == 0) {
         q >>= 1, Q++;
     }
-
     mint Eraser = 1;
     for (mint Z = 2;; Z += 1) {
         if (Z.pow(h) != 1) {

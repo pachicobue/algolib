@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "berlekamp_massey.hpp"
 #include "bostan_mori.hpp"
 template<typename mint, typename I>

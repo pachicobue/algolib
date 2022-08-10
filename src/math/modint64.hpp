@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<u64 mod_, u64 root_, u64 max2p_>
 class modint64
 {
@@ -72,7 +72,6 @@ public:
     {
         max2pRef() = m;
     }
-
     constexpr modint64() : m_val{0} {}
     constexpr modint64(const i64 v) : m_val{normLL(v)} {}
     constexpr void setRaw(const u64 v)

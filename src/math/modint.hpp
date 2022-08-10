@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 template<u32 mod_, u32 root_, u32 max2p_>
 class modint
 {
@@ -27,7 +27,6 @@ public:
     {
         return (mod_ == 0);
     }
-
     template<typename U = const u32>
     static constexpr std::enable_if_t<mod_ != 0, U> mod()
     {
@@ -73,7 +72,6 @@ public:
     {
         max2pRef() = m;
     }
-
     constexpr modint() : m_val{0} {}
     constexpr modint(i64 v) : m_val{normll(v)} {}
     constexpr void setRaw(u32 v)

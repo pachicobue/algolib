@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 Vec<int> factorTable(const int sup)
 {
     Vec<int> fact = iotaVec(sup);

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/line_add_get_min"
 #include "../../src/ds/li_chao_tree.hpp"
-#include "../../src/misc/printer.hpp"
-#include "../../src/misc/scanner.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();

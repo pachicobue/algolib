@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/common.hpp"
+#include "../common.hpp"
 #include "and_convolution.hpp"
 template<typename T>
 Vec<T> orConvolute(Vec<T> f, Vec<T> g)
