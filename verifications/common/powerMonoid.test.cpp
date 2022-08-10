@@ -38,7 +38,7 @@ int main()
     M mat;
     mat.vss[0][0] = mat.vss[0][1] = mat.vss[1][0] = 1;
     mat.vss[1][1] = 0;
-    const M ans = power(mat, N, M::I());
+    const M ans = powerMonoid(mat, N, M::I());
     std::cout << ans.vss[1][0] + ans.vss[1][1] << "\n";
     return 0;
 }

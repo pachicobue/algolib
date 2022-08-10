@@ -18,6 +18,7 @@ constexpr int ceillog(u64 v)
 }
 constexpr u64 ceil2(u64 v)
 {
+    assert(v <= (1_u64 << 63));
     return 1_u64 << ceillog(v);
 }
 constexpr u64 floor2(u64 v)

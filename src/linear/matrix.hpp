@@ -134,7 +134,7 @@ public:
     Mat pow(N n) const
     {
         assert(m_row == m_column);
-        return power(*this, n, Mat::I(m_row));
+        return powerMonoid(*this, n, Mat::I(m_row));
     }
     static Mat I(int N)
     {

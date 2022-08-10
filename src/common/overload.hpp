@@ -8,5 +8,7 @@ Vec<T>& operator+=(Vec<T>& vs1, const Vec<T>& vs2)
 template<typename T>
 Vec<T> operator+(const Vec<T>& vs1, const Vec<T>& vs2)
 {
-    return Vec<T>{vs1} += vs2;
+    auto vs = vs1;
+    vs += vs2;
+    return vs;
 }

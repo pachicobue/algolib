@@ -35,7 +35,6 @@ void ceil2Test()
 {
     assert(ceil2(0x0123456789ABCDEF) == 0x0200000000000000);
     assert(ceil2(0x8000000000000000) == 0x8000000000000000);
-    assert(ceil2(0x8000000000000001) == 0x0);
     assert(ceil2(0x0) == 1);
 }
 

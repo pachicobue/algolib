@@ -26,9 +26,7 @@ void pairTest()
     const auto [l32_1, r32_1] = rng.pair(min, max);
     const auto [l64_1, r64_1] = rng64.pair(min, max);
     assert(min <= l32_1 and l32_1 <= r32_1 and r32_1 <= max);
-    assert(min <= l32_2 and l32_2 <= r32_2 and r32_2 <= max);
     assert(min <= l64_1 and l64_1 <= r64_1 and r64_1 <= max);
-    assert(min <= l64_2 and l64_2 <= r64_2 and r64_2 <= max);
 }
 
 void vecTest()

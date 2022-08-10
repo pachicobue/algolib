@@ -13,5 +13,5 @@ constexpr T powerMonoid(T v, I n, const T& e)
 template<typename T, typename I>
 constexpr T powerInt(T v, I n)
 {
-    return powerMonoid(v, n, 1);
+    return powerMonoid(v, n, T{1});
 }

@@ -149,7 +149,7 @@ public:
     template<typename I>
     constexpr modint64 pow(I n) const
     {
-        return power(*this, n);
+        return powerInt(*this, n);
     }
     constexpr modint64 inv() const
     {

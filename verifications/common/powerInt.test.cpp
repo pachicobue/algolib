@@ -33,7 +33,7 @@ int main()
     i64 m, n;
     std::cin >> m >> n;
     mint M{m};
-    const mint ans = power(M, n);
+    const mint ans = powerInt(M, n);
     std::cout << ans.v << "\n";
     return 0;
 }

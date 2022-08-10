@@ -140,7 +140,7 @@ public:
     template<typename Int>
     ArrMat pow(Int n) const
     {
-        return power(*this, n, I());
+        return powerMonoid(*this, n, I());
     }
     static ArrMat I()
     {
