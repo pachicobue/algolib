@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bitwise_xor_convolution"
 #include "../../src/math/modint.hpp"
 #include "../../src/math/xor_convolution.hpp"
-#include "../../src/util/printer.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/util/fastio/printer.hpp"
+#include "../../src/util/fastio/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

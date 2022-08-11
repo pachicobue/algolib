@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-#include "../../src/util/printer.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/util/fastio/printer.hpp"
+#include "../../src/util/fastio/scanner.hpp"
 #include "../../src/util/rng.hpp"
 #include "../../src/math/convolution.hpp"
 int main()

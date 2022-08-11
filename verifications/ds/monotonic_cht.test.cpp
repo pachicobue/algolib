@@ -1,7 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/409"
 #include "../../src/ds/monotonic_cht.hpp"
-#include "../../src/util/printer.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/util/fastio/printer.hpp"
+#include "../../src/util/fastio/scanner.hpp"
 int main()
 {
     const auto [N, A, B, W] = in.tup<int, i64, i64, i64>();

@@ -1,6 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/541"
-#include "../../src/util/printer.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/util/fastio/printer.hpp"
+#include "../../src/util/fastio/scanner.hpp"
 #include "../../src/math/modint.hpp"
 #include "../../src/linear/array_matrix.hpp"
 

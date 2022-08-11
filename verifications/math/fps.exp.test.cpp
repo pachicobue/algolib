@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/exp_of_formal_power_series"
 #include "../../src/math/fps.hpp"
-#include "../../src/util/printer.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/util/fastio/printer.hpp"
+#include "../../src/util/fastio/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

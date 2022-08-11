@@ -1,8 +1,8 @@
 #pragma once
 #include "../common.hpp"
 #include "prime_powsum.hpp"
-template<typename T, typename F>
-class MultiplicativeSum : public PrimePowSum<T>
+template<typename T, typename F, u32 MAXD = 2>
+class MultiplicativeSum : public PrimePowSum<T, MAXD>
 {
     using PrimePowSum<T>::id;
     using PrimePowSum<T>::m_ps;
@@ -10,7 +10,6 @@ class MultiplicativeSum : public PrimePowSum<T>
     using PrimePowSum<T>::m_hss;
 
 public:
-    static constexpr u32 MAXD = PrimePowSum<T>::MAXD;
     MultiplicativeSum(u64 N, F f, const Arr<T, MAXD + 1>& coeffs)
         : PrimePowSum<T>{N}, m_buf(m_ns.size(), 0), m_f{f}
     {

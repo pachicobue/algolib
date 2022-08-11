@@ -8,7 +8,7 @@ public:
     T val()
     {
         if (m_tail - m_head < 40) { diskRead(); }
-        while (m_memory[m_head] < '0') { m_head++; }
+        while (m_memory[m_head] < '0' and m_memory[m_head] != '-') { m_head++; }
         T ans{};
         if constexpr (std::is_arithmetic_v<T>) {
             m_head = std::from_chars(m_memory + m_head, m_memory + m_tail, ans).ptr - m_memory;
@@ -53,6 +53,11 @@ public:
     auto tup(const Args&... offsets)
     {
         return Tup<Args...>{val<Args>(offsets)...};
+    }
+    void debug() const
+    {
+        SHOW(m_head, m_tail);
+        SHOW(std::string_view(m_memory, C));
     }
 
 private:

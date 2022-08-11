@@ -1,10 +1,9 @@
 #pragma once
 #include "../common.hpp"
-template<typename T>
+template<typename T, u32 MAXD = 2>
 class PrimePowSum
 {
 public:
-    static constexpr u32 MAXD = 2;
     PrimePowSum(u64 N) : m_N{N}, m_sqrt{(u32)std::sqrt(N)}, m_ns{0}
     {
         assert(N >= 2);

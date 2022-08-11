@@ -18,12 +18,14 @@ public:
 
 private:
     void flush() { fwrite(m_memory, 1, m_tail, stdout), m_tail = 0; }
-    void putChar(const char c) { m_memory[m_tail++] = c; }
+    void putChar(char c) { m_memory[m_tail++] = c; }
     template<typename T>
     void dump(T v)
     {
         if (C - m_tail < 40) { flush(); }
-        if constexpr (std::is_arithmetic_v<T>) {
+        if constexpr (std::is_same_v<T, bool>) {
+            m_tail = std::to_chars(m_memory + m_tail, m_memory + C, (int)v).ptr - m_memory;
+        } else if constexpr (std::is_arithmetic_v<T>) {
             m_tail = std::to_chars(m_memory + m_tail, m_memory + C, v).ptr - m_memory;
         } else {
             m_tail = std::to_chars(m_memory + m_tail, m_memory + C, v.val()).ptr - m_memory;

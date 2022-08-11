@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_product"
-#include "../../src/util/printer.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/util/fastio/printer.hpp"
+#include "../../src/util/fastio/scanner.hpp"
 #include "../../src/util/nd_vec.hpp"
 #include "../../src/math/modint.hpp"
 #include "../../src/linear/matrix.hpp"

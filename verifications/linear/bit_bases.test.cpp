@@ -1,6 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/184"
-#include "../../src/util/printer.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/util/fastio/printer.hpp"
+#include "../../src/util/fastio/scanner.hpp"
 #include "../../src/linear/bit_bases.hpp"
 
 int main()

@@ -1,7 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1002"
 #include "../../src/graph/centroid_decomp.hpp"
-#include "../../src/util/printer.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/util/fastio/printer.hpp"
+#include "../../src/util/fastio/scanner.hpp"
 #include "../../src/util/nd_vec.hpp"
 
 int main()
