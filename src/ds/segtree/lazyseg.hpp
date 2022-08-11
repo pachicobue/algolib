@@ -1,18 +1,12 @@
 #pragma once
-#include "../common.hpp"
+#include "../../common.hpp"
 template<typename MergeMonoid, typename OpMonoid, typename Act>
 class LazySeg
 {
     using T = typename MergeMonoid::T;
     using F = typename OpMonoid::F;
-    static constexpr T e()
-    {
-        return MergeMonoid::e();
-    }
-    static constexpr F id()
-    {
-        return OpMonoid::id();
-    }
+    static constexpr T e() { return MergeMonoid::e(); }
+    static constexpr F id() { return OpMonoid::id(); }
 
 public:
     LazySeg(const Vec<T>& vs)
@@ -23,9 +17,7 @@ public:
           m_ops(m_half << 1, id())
     {
         std::copy(vs.begin(), vs.end(), m_vs.begin() + m_half);
-        for (int i : irange(m_half - 1, 0, -1)) {
-            up(i);
-        }
+        for (int i : irange(m_half - 1, 0, -1)) { up(i); }
     }
     LazySeg(int N, const T& v = MergeMonoid::e()) : LazySeg{Vec<T>(N, v)} {}
     T get(const int a)
@@ -40,9 +32,7 @@ public:
         topDown(i), topDown(i + 1);
         m_ops[i] = id();
         m_vs[i] = v;
-        while (i >>= 1) {
-            up(i);
-        }
+        while (i >>= 1) { up(i); }
     }
     T fold(int l, int r)
     {
@@ -72,17 +62,12 @@ public:
     {
         auto lseg2 = lseg;
         os << "[";
-        for (int i : rep(lseg.m_size)) {
-            os << (i == 0 ? "" : ",") << lseg2.get(i);
-        }
+        for (int i : rep(lseg.m_size)) { os << (i == 0 ? "" : ",") << lseg2.get(i); }
         return (os << "]\n");
     }
 
 private:
-    void up(int i)
-    {
-        m_vs[i] = merge(m_vs[i << 1], m_vs[i << 1 | 1]);
-    }
+    void up(int i) { m_vs[i] = merge(m_vs[i << 1], m_vs[i << 1 | 1]); }
     void update(int i, const F& f)
     {
         m_ops[i] = compose(f, m_ops[i]);
@@ -105,9 +90,7 @@ private:
     void bottomUp(int i)
     {
         i = (i / (i & -i)) >> 1;
-        for (; i >= 1; i >>= 1) {
-            up(i);
-        }
+        for (; i >= 1; i >>= 1) { up(i); }
     }
     int m_size, m_depth, m_half;
     Vec<T> m_vs;

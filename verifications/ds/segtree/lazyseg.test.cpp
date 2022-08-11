@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
-#include "../../src/ds/lazyseg.hpp"
-#include "../../src/math/modint.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../../src/ds/segtree/lazyseg.hpp"
+#include "../../../src/math/modint.hpp"
+#include "../../../src/util/fastio/printer.hpp"
+#include "../../../src/util/fastio/scanner.hpp"
 
 int main()
 {
@@ -11,10 +11,7 @@ int main()
     struct MergeMonoid
     {
         using T = Pair<mint, int>;
-        static T e()
-        {
-            return {0, 0};
-        }
+        static T e() { return {0, 0}; }
         T operator()(const T& x1, const T& x2) const
         {
             return {x1.first + x2.first, x1.second + x2.second};
@@ -23,10 +20,7 @@ int main()
     struct OpMonoid
     {
         using F = Func;
-        static F id()
-        {
-            return F{1, 0};
-        }
+        static F id() { return F{1, 0}; }
         F operator()(const F& f1, const F& f2) const
         {
             return F{f1.first * f2.first, f1.first * f2.second + f1.second};
@@ -44,9 +38,7 @@ int main()
 
     const auto [N, Q] = in.tup<int, int>();
     Vec<Pair<mint, int>> as(N, {0, 1});
-    for (int i : rep(N)) {
-        as[i].first = in.val<mint>();
-    }
+    for (int i : rep(N)) { as[i].first = in.val<mint>(); }
     auto seg = LazySeg<MergeMonoid, OpMonoid, Act>(as);
     LOOP (Q) {
         const auto t = in.val<int>();

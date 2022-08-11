@@ -24,9 +24,7 @@ public:
     }
     void add(const Vec<T>& vs)
     {
-        for (const auto v : vs) {
-            m_vs.push_back(v);
-        }
+        for (const auto v : vs) { m_vs.push_back(v); }
         m_calced = false;
     }
     int size()

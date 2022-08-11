@@ -1,17 +1,14 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_point_get"
-#include "../../src/ds/dualseg.hpp"
-#include "../../src/math/modint.hpp"
-#include "../../src/utility/scanner.hpp"
-#include "../../src/utility/printer.hpp"
+#include "../../../src/ds/segtree/dualseg.hpp"
+#include "../../../src/math/modint.hpp"
+#include "../../../src/util/fastio/scanner.hpp"
+#include "../../../src/util/fastio/printer.hpp"
 
 using mint = modint_998244353;
 struct OpMonoid
 {
     using F = Pair<mint, mint>;
-    static F id()
-    {
-        return {1, 0};
-    }
+    static F id() { return {1, 0}; }
     F operator()(const F& f1, const F& f2) const
     {
         const auto& [a1, b1] = f1;

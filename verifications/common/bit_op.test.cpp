@@ -1,5 +1,4 @@
-#define PROBLEM \
-    "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../../src/common/bit_op.hpp"
 
 void popcountTest()
@@ -59,9 +58,7 @@ void ispow2Test()
 void btestTest()
 {
     const i64 v = 0x3333333333333333;
-    for (int i = 0; i < 64; i++) {
-        assert(btest(v, i) == ((i % 4) < 2));
-    }
+    for (int i = 0; i < 64; i++) { assert(btest(v, i) == ((i % 4) < 2)); }
 }
 
 int main()

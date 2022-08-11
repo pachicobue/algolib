@@ -1,7 +1,6 @@
-#define PROBLEM \
-    "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../../src/common.hpp"
-#include "../../src/utility/printer.hpp"
+#include "../../src/util/printer.hpp"
 
 std::stringstream ss;
 Printer printer{ss};
@@ -10,10 +9,7 @@ class C
 {
 public:
     C(int s_) : s{s_} {}
-    friend Ostream& operator<<(Ostream& os, const C& cls)
-    {
-        return os << "{" << cls.s << "}";
-    }
+    friend Ostream& operator<<(Ostream& os, const C& cls) { return os << "{" << cls.s << "}"; }
 
 private:
     int s;

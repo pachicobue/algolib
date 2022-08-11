@@ -39,10 +39,7 @@ private:
     struct Ord
     {
         using T = P;
-        bool operator()(const T& p1, const T& p2) const
-        {
-            return p1 < p2;
-        }
+        bool operator()(const T& p1, const T& p2) const { return p1 < p2; }
     };
     int m_v;
     Vec<int> m_ins;

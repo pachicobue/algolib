@@ -11,9 +11,7 @@ bool millerRabin(u64 n, const Vec<u64>& as)
         if (n <= a) { break; }
         auto s = d;
         mint x = mint(a).pow(s);
-        while (x.val() != 1 and x.val() != n - 1 and s != n - 1) {
-            x *= x, s <<= 1;
-        }
+        while (x.val() != 1 and x.val() != n - 1 and s != n - 1) { x *= x, s <<= 1; }
         if (x.val() != n - 1 and s % 2 == 0) { return false; }
     }
     return true;

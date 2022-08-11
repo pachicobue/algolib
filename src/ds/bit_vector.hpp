@@ -28,10 +28,7 @@ public:
         m_blocks[i / B].bits &= ~(1_u64 << (i % B));
         m_calced = false;
     }
-    int rank0(int i)
-    {
-        return i - rank1(i);
-    }
+    int rank0(int i) { return i - rank1(i); }
     int rank1(int i)
     {
         assert(0 <= i and i <= m_size);
@@ -65,10 +62,7 @@ public:
         calc();
         return m_zero;
     }
-    int one()
-    {
-        return m_size - zero();
-    }
+    int one() { return m_size - zero(); }
 
 private:
     void calc()

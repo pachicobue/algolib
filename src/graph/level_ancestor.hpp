@@ -5,8 +5,7 @@ class LevelAncestor
 {
 public:
     template<typename T>
-    LevelAncestor(const Graph<T>& g, int r = 0)
-        : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)
+    LevelAncestor(const Graph<T>& g, int r = 0) : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)
     {
         Fix([&](auto dfs, int u, int p) -> void {
             for (int k = 1; (1 << k) <= m_ds[u]; k++) {

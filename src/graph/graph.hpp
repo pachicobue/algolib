@@ -10,10 +10,7 @@ class Graph
         int id;
         int to;
         T cost;
-        operator int() const
-        {
-            return to;
-        }
+        operator int() const { return to; }
     };
 
 public:
@@ -44,14 +41,8 @@ public:
         assert(0 <= u and u < m_v);
         return m_edges[u];
     }
-    int v() const
-    {
-        return m_v;
-    }
-    int e() const
-    {
-        return m_e;
-    }
+    int v() const { return m_v; }
+    int e() const { return m_e; }
     friend Ostream& operator<<(Ostream& os, const Graph& g)
     {
         for (int u : rep(g.v())) {

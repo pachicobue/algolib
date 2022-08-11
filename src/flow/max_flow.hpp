@@ -11,10 +11,7 @@ class MaxFlow
         int rid;
         Edge() = default;
         Edge(int t, T c, T f, int r) : to{t}, cap{c}, flow{f}, rid{r} {}
-        T resCap() const
-        {
-            return cap - flow;
-        }
+        T resCap() const { return cap - flow; }
     };
 
 public:
@@ -81,9 +78,7 @@ public:
         while (flow < max_flow) {
             bfs();
             if (m_ds[t] == -1) { return flow; }
-            for (int l : rep(2)) {
-                fillAll(m_is[l], 0);
-            }
+            for (int l : rep(2)) { fillAll(m_is[l], 0); }
             while (true) {
                 T f = dfs(s, max_flow - flow);
                 if (f == 0) { break; }
@@ -102,10 +97,7 @@ public:
         assert(0 <= i and i < m_v);
         return m_gs[0][i];
     }
-    int v() const
-    {
-        return m_v;
-    }
+    int v() const { return m_v; }
     friend Ostream& operator<<(Ostream& os, const MaxFlow& mf)
     {
         const int N = mf.v();

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/factorize"
 #include "../../src/math/prime_factors.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
 int main()
 {
     const auto Q = in.val<int>();
@@ -10,9 +10,7 @@ int main()
         const auto fs = primeFactors(a);
         std::vector<u64> ans;
         for (const auto& [p, e] : fs) {
-            LOOP (e) {
-                ans.push_back(p);
-            }
+            LOOP (e) { ans.push_back(p); }
         }
         out.ln(ans.size(), ans);
     }

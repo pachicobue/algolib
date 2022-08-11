@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 #include "../../src/ds/swag.hpp"
 #include "../../src/math/modint.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

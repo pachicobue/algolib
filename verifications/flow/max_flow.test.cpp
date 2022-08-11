@@ -1,8 +1,7 @@
-#define PROBLEM \
-    "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A"
 #include "../../src/flow/max_flow.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
 int main()
 {
     const auto [V, E] = in.tup<int, int>();

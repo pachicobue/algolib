@@ -24,12 +24,8 @@ public:
             m_fronts.clear(), m_Fronts.clear();
             reverseAll(as);
             const int f = (int)as.size() / 2;
-            for (int i : per(f)) {
-                m_fronts.push_back(as[i]);
-            }
-            for (int i : irange(f, (int)as.size() - 1)) {
-                m_backs.push_back(as[i]);
-            }
+            for (int i : per(f)) { m_fronts.push_back(as[i]); }
+            for (int i : irange(f, (int)as.size() - 1)) { m_backs.push_back(as[i]); }
             calc();
         } else {
             m_backs.pop_back(), m_Backs.pop_back();
@@ -41,12 +37,8 @@ public:
             Vec<T> as = m_backs;
             m_backs.clear(), m_Backs.clear();
             const int f = ((int)as.size() + 1) / 2;
-            for (int i : irange(f - 1, 0, -1)) {
-                m_fronts.push_back(as[i]);
-            }
-            for (int i : irange(f, (int)as.size())) {
-                m_backs.push_back(as[i]);
-            }
+            for (int i : irange(f - 1, 0, -1)) { m_fronts.push_back(as[i]); }
+            for (int i : irange(f, (int)as.size())) { m_backs.push_back(as[i]); }
             calc();
         } else {
             m_fronts.pop_back(), m_Fronts.pop_back();
@@ -56,9 +48,7 @@ public:
     {
         return m_fronts.empty()
                    ? m_Backs.back()
-                   : (m_backs.empty()
-                          ? m_Fronts.back()
-                          : m_merge(m_Fronts.back(), m_Backs.back()));
+                   : (m_backs.empty() ? m_Fronts.back() : m_merge(m_Fronts.back(), m_Backs.back()));
     }
     friend Ostream& operator<<(Ostream& os, const SlidingWindowAggregation& sw)
     {
@@ -66,19 +56,11 @@ public:
         reverseAll(as);
         as += sw.bs;
         os << "vs = [";
-        for (const T& a : as) {
-            os << a << ",";
-        }
+        for (const T& a : as) { os << a << ","; }
         return os << "]";
     }
-    int size() const
-    {
-        return (int)m_fronts.size() + (int)m_backs.size();
-    }
-    bool empty() const
-    {
-        return m_fronts.empty() and m_backs.empty();
-    }
+    int size() const { return (int)m_fronts.size() + (int)m_backs.size(); }
+    bool empty() const { return m_fronts.empty() and m_backs.empty(); }
 
 private:
     void calc()

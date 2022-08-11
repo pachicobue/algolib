@@ -1,6 +1,5 @@
-#define PROBLEM \
-    "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/utility/rng.hpp"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
+#include "../../src/util/rng.hpp"
 
 void Test()
 {
@@ -35,12 +34,8 @@ void vecTest()
     int min = 10, max = 20;
     const auto vs32_1 = rng.vec(n, min, max);
     const auto vs64_1 = rng64.vec(n, min, max);
-    for (const auto v : vs32_1) {
-        assert(min <= v and v <= max);
-    }
-    for (const auto v : vs64_1) {
-        assert(min <= v and v <= max);
-    }
+    for (const auto v : vs32_1) { assert(min <= v and v <= max); }
+    for (const auto v : vs64_1) { assert(min <= v and v <= max); }
 }
 
 void vvecTest()
@@ -50,14 +45,10 @@ void vvecTest()
     const auto vss32_1 = rng.vvec(m, n, min, max);
     const auto vss64_1 = rng64.vvec(m, n, min, max);
     for (const auto& vs : vss32_1) {
-        for (auto v : vs) {
-            assert(min <= v and v <= max);
-        }
+        for (auto v : vs) { assert(min <= v and v <= max); }
     }
     for (const auto& vs : vss64_1) {
-        for (auto v : vs) {
-            assert(min <= v and v <= max);
-        }
+        for (auto v : vs) { assert(min <= v and v <= max); }
     }
 }
 

@@ -10,9 +10,7 @@ public:
         const int N = g.v();
         Graph<> rg(N);
         for (int u : rep(N)) {
-            for (int v : g[u]) {
-                rg.addEdge(v, u);
-            }
+            for (int v : g[u]) { rg.addEdge(v, u); }
         }
         Vec<int> st;
         Vec<bool> used(N, false);
@@ -46,16 +44,11 @@ public:
         assert(0 <= v and v < m_v);
         return m_cs[v];
     }
-    int cnum() const
-    {
-        return m_cnum;
-    }
+    int cnum() const { return m_cnum; }
     Vec<Vec<int>> groups() const
     {
         Vec<Vec<int>> iss(m_v);
-        for (const int i : rep(m_v)) {
-            iss[m_cs[i]].push_back(i);
-        }
+        for (const int i : rep(m_v)) { iss[m_cs[i]].push_back(i); }
         return iss;
     }
 

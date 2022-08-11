@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 #include "../../src/graph/scc.hpp"
 #include "../../src/graph/top_sort.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
 int main()
 {
     const auto [N, M] = in.tup<int, int>();
@@ -23,14 +23,10 @@ int main()
         }
     }
     Vec<Vec<int>> cvs(C);
-    for (int i : rep(N)) {
-        cvs[scc[i]].push_back(i);
-    }
+    for (int i : rep(N)) { cvs[scc[i]].push_back(i); }
     const auto [flag, cs] = topSort(dag);
     assert(flag);
     out.ln(C);
-    for (int c : cs) {
-        out.ln(cvs[c].size(), cvs[c]);
-    }
+    for (int c : cs) { out.ln(cvs[c].size(), cvs[c]); }
     return 0;
 }

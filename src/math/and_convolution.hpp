@@ -8,8 +8,6 @@ Vec<T> andConvolute(Vec<T> f, Vec<T> g)
     const int N = ceil2(std::max(f.size(), g.size()));
     f.resize(N), g.resize(N);
     auto F = setZeta(f, false), G = setZeta(g, false);
-    for (int i : rep(N)) {
-        F[i] *= G[i];
-    }
+    for (int i : rep(N)) { F[i] *= G[i]; }
     return setMoebius(F, false);
 }

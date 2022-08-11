@@ -31,9 +31,7 @@ public:
     {
         Mat ans(m.m_row, m.m_column);
         for (int i : rep(m.m_row)) {
-            for (int j : rep(m.m_column)) {
-                ans[i][j] = -m[i][j];
-            }
+            for (int j : rep(m.m_column)) { ans[i][j] = -m[i][j]; }
         }
         return ans;
     }
@@ -43,9 +41,7 @@ public:
         assert(m1.m_column == m2.m_column);
         Mat ans(m1.m_row, m1.m_column);
         for (int i : rep(m1.m_row)) {
-            for (int j : rep(m1.m_column)) {
-                ans[i][j] = m1[i][j] + m2[i][j];
-            }
+            for (int j : rep(m1.m_column)) { ans[i][j] = m1[i][j] + m2[i][j]; }
         }
         return ans;
     }
@@ -55,9 +51,7 @@ public:
         assert(m1.m_column == m2.m_column);
         Mat ans(m1.m_row, m1.m_column);
         for (int i : rep(m1.m_row)) {
-            for (int j : rep(m1.m_column)) {
-                ans[i][j] = m1[i][j] - m2[i][j];
-            }
+            for (int j : rep(m1.m_column)) { ans[i][j] = m1[i][j] - m2[i][j]; }
         }
         return ans;
     }
@@ -67,9 +61,7 @@ public:
         Mat ans(m1.m_row, m2.m_column);
         for (int i : rep(m1.m_row)) {
             for (int j : rep(m2.m_column)) {
-                for (int k : rep(m1.m_column)) {
-                    ans[i][j] += m1[i][k] * m2[k][j];
-                }
+                for (int k : rep(m1.m_column)) { ans[i][j] += m1[i][k] * m2[k][j]; }
             }
         }
         return ans;
@@ -78,9 +70,7 @@ public:
     {
         Mat ans(m.m_row, m.m_column);
         for (int i : rep(m.m_row)) {
-            for (int j : rep(m.m_column)) {
-                ans[i][j] = m[i][j] * t;
-            }
+            for (int j : rep(m.m_column)) { ans[i][j] = m[i][j] * t; }
         }
         return ans;
     }
@@ -88,44 +78,22 @@ public:
     {
         Mat ans(m.m_row, m.m_column);
         for (int i : rep(m.m_row)) {
-            for (int j : rep(m.m_column)) {
-                ans[i][j] = m[i][j] / t;
-            }
+            for (int j : rep(m.m_column)) { ans[i][j] = m[i][j] / t; }
         }
         return ans;
     }
-    friend Mat operator*(const T& t, const Mat& m)
-    {
-        return m * t;
-    }
-    friend Mat& operator+=(Mat& m1, const Mat& m2)
-    {
-        return m1 = m1 + m2;
-    }
-    friend Mat& operator-=(Mat& m1, const Mat& m2)
-    {
-        return m1 = m1 - m2;
-    }
-    friend Mat& operator*=(Mat& m1, const Mat& m2)
-    {
-        return m1 = m1 * m2;
-    }
-    friend Mat& operator*=(Mat& m, const T& t)
-    {
-        return m = m * t;
-    }
-    friend Mat& operator/=(Mat& m, const T& t)
-    {
-        return m = m / t;
-    }
+    friend Mat operator*(const T& t, const Mat& m) { return m * t; }
+    friend Mat& operator+=(Mat& m1, const Mat& m2) { return m1 = m1 + m2; }
+    friend Mat& operator-=(Mat& m1, const Mat& m2) { return m1 = m1 - m2; }
+    friend Mat& operator*=(Mat& m1, const Mat& m2) { return m1 = m1 * m2; }
+    friend Mat& operator*=(Mat& m, const T& t) { return m = m * t; }
+    friend Mat& operator/=(Mat& m, const T& t) { return m = m / t; }
     friend Ostream& operator<<(Ostream& os, const Mat& m)
     {
         os << "[\n";
         for (int i : rep(m.m_row)) {
             os << "[";
-            for (int j : rep(m.m_column)) {
-                os << m[i][j] << ",";
-            }
+            for (int j : rep(m.m_column)) { os << m[i][j] << ","; }
             os << "]\n";
         }
         return (os << "]\n");
@@ -139,19 +107,11 @@ public:
     static Mat I(int N)
     {
         Mat ans(N, N);
-        for (int i : rep(N)) {
-            ans[i][i] = 1;
-        }
+        for (int i : rep(N)) { ans[i][i] = 1; }
         return ans;
     }
-    int row() const
-    {
-        return m_row;
-    }
-    int column() const
-    {
-        return m_column;
-    }
+    int row() const { return m_row; }
+    int column() const { return m_column; }
 
 private:
     int m_row, m_column;

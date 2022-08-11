@@ -1,8 +1,7 @@
-#define PROBLEM \
-    "https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence"
+#define PROBLEM "https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence"
 #include "../../src/math/bostan_mori.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;
@@ -11,9 +10,7 @@ int main()
     const auto cs = Vec<mint>{1} + in.vec<mint>(D);
     FPS<mint> f(as);
     FPS<mint> g(cs);
-    for (int i : irange(1, D + 1)) {
-        g[i] *= (-1);
-    }
+    for (int i : irange(1, D + 1)) { g[i] *= (-1); }
     f = f.mult(g, D);
     const auto ans = bostanMori(f, g, K);
     out.ln(ans.val());

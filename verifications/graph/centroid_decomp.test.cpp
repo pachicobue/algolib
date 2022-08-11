@@ -1,8 +1,8 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1002"
 #include "../../src/graph/centroid_decomp.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
-#include "../../src/utility/nd_vec.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
+#include "../../src/util/nd_vec.hpp"
 
 int main()
 {
@@ -76,18 +76,14 @@ int main()
                     } else {
                         continue;
                     }
-                    if (nks.first > nks.second) {
-                        std::swap(nks.first, nks.second);
-                    }
+                    if (nks.first > nks.second) { std::swap(nks.first, nks.second); }
                     dfs(v, u, nks);
                 }
             })(e.to, c, P{e.cost, INF<int>});
             ans -= f(subdp1, subdp2, subdp3, sone);
         }
         ans += f(dp1, dp2, dp3, one);
-        for (int nc : cg[c]) {
-            dfs(nc);
-        }
+        for (int nc : cg[c]) { dfs(nc); }
     })(cr);
     out.ln(ans);
     return 0;

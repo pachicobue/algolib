@@ -1,7 +1,6 @@
-#define PROBLEM \
-    "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../../src/common.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/util/scanner.hpp"
 
 std::stringstream ss;
 Scanner scanner{ss};
@@ -21,10 +20,7 @@ public:
         assert(c == '}');
         return is;
     }
-    friend bool operator==(const C& c1, const C& c2)
-    {
-        return c1.s == c2.s;
-    }
+    friend bool operator==(const C& c1, const C& c2) { return c1.s == c2.s; }
 
 private:
     int s;
@@ -80,9 +76,7 @@ void vecTest()
     Vec<int> vs = {1, 2, 3, 4, 5};
     ss << "1 2 3 4 5";
     const auto rvs = scanner.vec<int>(n);
-    for (int i : rep(n)) {
-        assert(vs[i] == rvs[i]);
-    }
+    for (int i : rep(n)) { assert(vs[i] == rvs[i]); }
     ss.clear();
 }
 
@@ -93,9 +87,7 @@ void vecOffsetTest()
     Vec<int> vs = {1, 2, 3, 4, 5};
     ss << "1 2 3 4 5";
     const auto rvs = scanner.vec<int>(n, offset);
-    for (int i : rep(n)) {
-        assert(vs[i] - offset == rvs[i]);
-    }
+    for (int i : rep(n)) { assert(vs[i] - offset == rvs[i]); }
     ss.clear();
 }
 
@@ -108,9 +100,7 @@ void vvecTest()
           "4 5 6";
     const auto rvss = scanner.vvec<int>(m, n);
     for (int i : rep(m)) {
-        for (int j : rep(n)) {
-            assert(vss[i][j] == rvss[i][j]);
-        }
+        for (int j : rep(n)) { assert(vss[i][j] == rvss[i][j]); }
     }
     ss.clear();
 }
@@ -125,9 +115,7 @@ void vvecOffsetTest()
           "4 5 6";
     const auto rvss = scanner.vvec<int>(m, n, offset);
     for (int i : rep(m)) {
-        for (int j : rep(n)) {
-            assert(vss[i][j] - offset == rvss[i][j]);
-        }
+        for (int j : rep(n)) { assert(vss[i][j] - offset == rvss[i][j]); }
     }
     ss.clear();
 }

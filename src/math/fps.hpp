@@ -11,18 +11,9 @@ class FPS : public Vec<mint>
 
 public:
     using std::vector<mint>::vector;
-    FPS(const Vec<mint>& vs) : Vec<mint>{vs}
-    {
-        optimize();
-    }
-    int size() const
-    {
-        return (int)std::vector<mint>::size();
-    }
-    int deg() const
-    {
-        return size() - 1;
-    }
+    FPS(const Vec<mint>& vs) : Vec<mint>{vs} { optimize(); }
+    int size() const { return (int)std::vector<mint>::size(); }
+    int deg() const { return size() - 1; }
     template<typename I>
     void shrink(I n)
     {
@@ -64,63 +55,35 @@ public:
     FPS operator-() const
     {
         FPS ans = *this;
-        for (auto& v : ans) {
-            v = -v;
-        }
+        for (auto& v : ans) { v = -v; }
         return ans;
     }
     FPS& operator+=(const FPS& f)
     {
-        for (int i : rep(f.size())) {
-            (*this)[i] += f[i];
-        }
+        for (int i : rep(f.size())) { (*this)[i] += f[i]; }
         return *this;
     }
     FPS& operator-=(const FPS& f)
     {
-        for (int i : rep(f.size())) {
-            (*this)[i] -= f[i];
-        }
+        for (int i : rep(f.size())) { (*this)[i] -= f[i]; }
         return *this;
     }
-    FPS& operator*=(const FPS& f)
-    {
-        return (*this) = (*this) * f;
-    }
-    FPS& operator<<=(const int s)
-    {
-        return *this = (*this << s);
-    }
-    FPS& operator>>=(const int s)
-    {
-        return *this = (*this >> s);
-    }
-    FPS operator+(const FPS& f) const
-    {
-        return FPS(*this) += f;
-    }
-    FPS operator-(const FPS& f) const
-    {
-        return FPS(*this) -= f;
-    }
-    FPS operator*(const FPS& f) const
-    {
-        return mult(f, size() + f.size() - 1);
-    }
+    FPS& operator*=(const FPS& f) { return (*this) = (*this) * f; }
+    FPS& operator<<=(const int s) { return *this = (*this << s); }
+    FPS& operator>>=(const int s) { return *this = (*this >> s); }
+    FPS operator+(const FPS& f) const { return FPS(*this) += f; }
+    FPS operator-(const FPS& f) const { return FPS(*this) -= f; }
+    FPS operator*(const FPS& f) const { return mult(f, size() + f.size() - 1); }
     FPS operator>>(const int s) const
     {
         FPS ans(size() + s);
-        for (int i : rep(size())) {
-            ans[i + s] = (*this)[i];
-        }
+        for (int i : rep(size())) { ans[i + s] = (*this)[i]; }
         return ans;
     }
     FPS operator<<(const int s) const
     {
         FPS ans;
-        for (int i : irange(s, size())) {
-            ans[i - s] = (*this)[i];
-        }
+        for (int i : irange(s, size())) { ans[i - s] = (*this)[i]; }
         return ans;
     }
     int lsb() const
@@ -130,10 +93,7 @@ public:
         }
         return size();
     }
-    bool isZero() const
-    {
-        return (size() == 1) and ((*this)[0] == 0);
-    }
+    bool isZero() const { return (size() == 1) and ((*this)[0] == 0); }
     friend Ostream& operator<<(Ostream& os, const FPS& f)
     {
         return os << static_cast<Vec<mint>>(f);
@@ -141,17 +101,13 @@ public:
     FPS derivative() const
     {
         FPS ans;
-        for (int i : irange(1, size())) {
-            ans[i - 1] = (*this)[i] * i;
-        }
+        for (int i : irange(1, size())) { ans[i - 1] = (*this)[i] * i; }
         return ans;
     }
     FPS integral() const
     {
         FPS ans;
-        for (int i : irange(1, size() + 1)) {
-            ans[i] = (*this)[i - 1] * mint::sinv(i);
-        }
+        for (int i : irange(1, size() + 1)) { ans[i] = (*this)[i - 1] * mint::sinv(i); }
         return ans;
     }
     FPS mult(const FPS& f, int sz) const
@@ -188,17 +144,11 @@ public:
     {
         const int N = size();
         FPS f(N), d(N);
-        for (int i : rep(N)) {
-            d[i] = c.pow(N - 1 - i) * mint::ifact(N - 1 - i);
-        }
-        for (int i : rep(N)) {
-            f[i] = (*this)[i] * mint::fact(i);
-        }
+        for (int i : rep(N)) { d[i] = c.pow(N - 1 - i) * mint::ifact(N - 1 - i); }
+        for (int i : rep(N)) { f[i] = (*this)[i] * mint::fact(i); }
         f = f * d;
         FPS g(N);
-        for (int i : rep(N)) {
-            g[i] = f[i + N - 1] * mint::ifact(i);
-        }
+        for (int i : rep(N)) { g[i] = f[i + N - 1] * mint::ifact(i); }
         return g;
     }
     template<typename I>

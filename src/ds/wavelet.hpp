@@ -14,9 +14,7 @@ public:
                 if (btest(vs[i], bi)) { m_bvs[bi].set(i); }
             }
             int is[2] = {0, m_bvs[bi].zero()};
-            for (int i : rep(m_n)) {
-                nvs[is[btest(vs[i], bi)]++] = vs[i];
-            }
+            for (int i : rep(m_n)) { nvs[is[btest(vs[i], bi)]++] = vs[i]; }
             std::swap(vs, nvs);
         }
     }

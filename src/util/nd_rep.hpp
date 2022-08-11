@@ -6,14 +6,8 @@ private:
     struct itr
     {
         itr(const Vec<int>& ns) : m_ns{ns}, m_cs(ns.size(), 0), m_end{false} {}
-        bool operator!=(const itr&) const
-        {
-            return not m_end;
-        }
-        const Vec<int>& operator*()
-        {
-            return m_cs;
-        }
+        bool operator!=(const itr&) const { return not m_end; }
+        const Vec<int>& operator*() { return m_cs; }
         itr& operator++()
         {
             for (const int i : per(m_ns.size())) {
@@ -34,12 +28,6 @@ private:
 
 public:
     ndRep(const Vec<int>& ns) : m_ns{ns} {}
-    itr begin() const
-    {
-        return itr{m_ns};
-    }
-    itr end() const
-    {
-        return itr{m_ns};
-    }
+    itr begin() const { return itr{m_ns}; }
+    itr end() const { return itr{m_ns}; }
 };

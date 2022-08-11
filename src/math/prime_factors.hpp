@@ -1,6 +1,6 @@
 #pragma once
 #include "../common.hpp"
-#include "../utility/rng.hpp"
+#include "../util/rng.hpp"
 #include "is_prime.hpp"
 template<typename mint>
 u64 pollardRho(u64 n)
@@ -17,14 +17,10 @@ u64 pollardRho(u64 n)
         constexpr u32 dk = 128;
         for (u32 r = 1; d == 1; r <<= 1) {
             x = y;
-            for (u32 i = 0; i < r; i++) {
-                y = f(y);
-            }
+            for (u32 i = 0; i < r; i++) { y = f(y); }
             for (u32 k = 0; k < r and d == 1; k += dk) {
                 ys = y;
-                for (u32 i = 0; i < dk and i < r - k; i++) {
-                    q *= x - (y = f(y));
-                }
+                for (u32 i = 0; i < dk and i < r - k; i++) { q *= x - (y = f(y)); }
                 d = std::gcd((u64)q.val(), n);
             }
         }
@@ -43,9 +39,7 @@ Map<u64, int> primeFactors(u64 n)
     using mint64 = modint64_dynamic<4832432>;
     Map<u64, int> ans;
     Fix([&](auto dfs, u64 x) -> void {
-        while ((x & 1) == 0) {
-            x >>= 1, ans[2]++;
-        }
+        while ((x & 1) == 0) { x >>= 1, ans[2]++; }
         if (x == 1) { return; }
         u64 p;
         if (x < (1ULL << 30)) {
@@ -71,9 +65,7 @@ Vec<u64> divisors(const u64 n)
         u64 pe = p;
         const u32 dn = ds.size();
         for (i32 i = 0; i < e; i++, pe *= p) {
-            for (u32 j = 0; j < dn; j++) {
-                ds.push_back(ds[j] * pe);
-            }
+            for (u32 j = 0; j < dn; j++) { ds.push_back(ds[j] * pe); }
         }
     }
     return ds;

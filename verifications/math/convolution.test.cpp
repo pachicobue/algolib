@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
-#include "../../src/utility/rng.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
+#include "../../src/util/rng.hpp"
 #include "../../src/math/convolution.hpp"
 int main()
 {
@@ -16,9 +16,7 @@ int main()
     const auto cs = convolute_i64(as, bs);
     Vec<i64> ds(AN + BN - 1, 0);
     for (int i : rep(AN)) {
-        for (int j : rep(BN)) {
-            ds[i + j] += (i64)as[i] * bs[j];
-        }
+        for (int j : rep(BN)) { ds[i + j] += (i64)as[i] * bs[j]; }
     }
     assert(cs == ds);
     return 0;

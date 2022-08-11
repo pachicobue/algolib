@@ -36,14 +36,8 @@ public:
             }
         })(0, -1);
     }
-    int center() const
-    {
-        return m_center;
-    }
-    const Graph<>& centers() const
-    {
-        return m_cs;
-    }
+    int center() const { return m_center; }
+    const Graph<>& centers() const { return m_cs; }
 
 private:
     int m_center;

@@ -7,9 +7,7 @@ Vec<int> z_algorithm(It first, It last)
     const int sz = std::distance(first, last);
     Vec<int> ans(sz, -1);
     for (int i = 1, j = 0; i < sz;) {
-        while (i + j < sz and get(j) == get(i + j)) {
-            j++;
-        }
+        while (i + j < sz and get(j) == get(i + j)) { j++; }
         ans[i] = j;
         if (j == 0) {
             ++i;

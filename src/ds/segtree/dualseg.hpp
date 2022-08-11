@@ -1,13 +1,10 @@
 #pragma once
-#include "../common.hpp"
+#include "../../common.hpp"
 template<typename OpMonoid>
 class DualSegTree
 {
     using F = typename OpMonoid::F;
-    static constexpr F id()
-    {
-        return OpMonoid::id();
-    }
+    static constexpr F id() { return OpMonoid::id(); }
 
 public:
     DualSegTree(const Vec<F>& vs)
@@ -18,16 +15,13 @@ public:
     {
         std::copy(vs.begin(), vs.end(), m_ops.begin() + m_half);
     }
-    DualSegTree(int N, const F& f = OpMonoid::id()) : DualSegTree{Vec<F>(N, f)}
-    {}
+    DualSegTree(int N, const F& f = OpMonoid::id()) : DualSegTree{Vec<F>(N, f)} {}
     F get(int i) const
     {
         assert(0 <= i and i < m_size);
         F ans = id();
         i += m_half;
-        for (int h : per(m_depth)) {
-            ans = compose(ans, m_ops[i >> h]);
-        }
+        for (int h : per(m_depth)) { ans = compose(ans, m_ops[i >> h]); }
         return ans;
     }
     void set(int i, const F& f)
@@ -51,9 +45,7 @@ public:
     friend Ostream& operator<<(Ostream& os, const DualSegTree& seg)
     {
         os << "[";
-        for (int i : rep(seg.m_size)) {
-            os << (i == 0 ? "" : ",") << seg.get(i);
-        }
+        for (int i : rep(seg.m_size)) { os << (i == 0 ? "" : ",") << seg.get(i); }
         return (os << "]\n");
     }
 
@@ -72,10 +64,7 @@ private:
             down(v);
         }
     }
-    void update(int i, const F& f)
-    {
-        m_ops[i] = compose(f, m_ops[i]);
-    }
+    void update(int i, const F& f) { m_ops[i] = compose(f, m_ops[i]); }
     int m_size, m_depth, m_half;
     Vec<F> m_ops;
     static inline OpMonoid compose;

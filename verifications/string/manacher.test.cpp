@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
 #include "../../src/string/manacher.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
 
 int main()
 {
@@ -15,9 +15,7 @@ int main()
     T.push_back('$');
     auto rs = manacher(T.begin(), T.end());
     Vec<int> ans;
-    for (int i : irange(1, 2 * N)) {
-        ans.push_back(rs[i] - 1);
-    }
+    for (int i : irange(1, 2 * N)) { ans.push_back(rs[i] - 1); }
     out.ln(ans);
     return 0;
 }

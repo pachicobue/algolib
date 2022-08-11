@@ -7,8 +7,7 @@ class LowLink
     using P = Pair<int, int>;
 
 public:
-    LowLink(const Graph<T>& g)
-        : m_v(g.v()), m_ords(m_v), m_lows(m_v), m_is_art(m_v)
+    LowLink(const Graph<T>& g) : m_v(g.v()), m_ords(m_v), m_lows(m_v), m_is_art(m_v)
     {
         const int N = g.v();
         int ord = 0;
@@ -25,9 +24,7 @@ public:
                     dfs(v, id);
                     chmin(m_lows[u], m_lows[v]);
                     is_art |= (pe != -1 and m_ords[u] <= m_lows[v]);
-                    if (isBridge(u, v)) {
-                        m_bridges.push_back(std::minmax({u, v}));
-                    }
+                    if (isBridge(u, v)) { m_bridges.push_back(std::minmax({u, v})); }
                 } else if (id != pe) {
                     chmin(m_lows[u], m_ords[v]);
                 }
@@ -54,14 +51,8 @@ public:
         if (m_ords[i] > m_ords[j]) { std::swap(i, j); }
         return m_ords[i] < m_lows[j];
     }
-    const Vec<P>& bridges() const
-    {
-        return m_bridges;
-    }
-    const Vec<int>& arts() const
-    {
-        return m_arts;
-    }
+    const Vec<P>& bridges() const { return m_bridges; }
+    const Vec<int>& arts() const { return m_arts; }
 
 private:
     int m_v;

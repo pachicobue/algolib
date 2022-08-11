@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 #include "../../src/graph/two_ecc.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
 int main()
 {
     const auto [N, M] = in.tup<int, int>();
@@ -14,8 +14,6 @@ int main()
     const int C = two_ecc.cnum();
     const auto cvs = two_ecc.groups();
     out.ln(C);
-    for (int c : rep(C)) {
-        out.ln(cvs[c].size(), cvs[c]);
-    }
+    for (int c : rep(C)) { out.ln(cvs[c].size(), cvs[c]); }
     return 0;
 }

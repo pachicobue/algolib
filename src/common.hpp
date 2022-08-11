@@ -1,5 +1,6 @@
 #pragma once
 #include "common/type.hpp"
+#include "common/environment.hpp"
 #include "common/macro.hpp"
 #include "common/constant.hpp"
 #include "common/overload.hpp"

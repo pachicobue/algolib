@@ -1,11 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
-#include "../../src/ds/intdict.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/ds/hashmap.hpp"
+#include "../../src/util/fastio/printer.hpp"
+#include "../../src/util/fastio/scanner.hpp"
 int main()
 {
-    IntDict<u64, u64> dict;
     const auto Q = in.val<int>();
+    IntDict<u64, u64> dict(Q);
     LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {

@@ -78,9 +78,7 @@ public:
         }
         head.push_back({m_ins[u], m_ins[v]});
         reverseAll(tail);
-        for (const auto& p : tail) {
-            head.push_back(p);
-        }
+        for (const auto& p : tail) { head.push_back(p); }
         return head;
     }
 

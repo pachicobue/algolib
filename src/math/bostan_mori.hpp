@@ -12,17 +12,11 @@ mint bostanMori(FPS<mint> f, FPS<mint> g, I N)
     while (N > 0) {
         f.shrink(N + 1), g.shrink(N + 1);
         FPS<mint> mg;
-        for (int i : rep(g.size())) {
-            mg[i] = g[i] * (i % 2 == 0 ? 1 : -1);
-        }
+        for (int i : rep(g.size())) { mg[i] = g[i] * (i % 2 == 0 ? 1 : -1); }
         const auto G = g * mg;
         const auto F = f * mg;
-        for (int i : rep(f.size())) {
-            f[i] = F.at(2 * i + (N % 2));
-        }
-        for (int i : rep(g.size())) {
-            g[i] = G.at(2 * i);
-        }
+        for (int i : rep(f.size())) { f[i] = F.at(2 * i + (N % 2)); }
+        for (int i : rep(g.size())) { g[i] = G.at(2 * i); }
         N /= 2;
     }
     return f[0] / g[0];

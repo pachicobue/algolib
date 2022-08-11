@@ -1,6 +1,5 @@
-#define PROBLEM \
-    "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/utility/stopwatch.hpp"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
+#include "../../src/util/stopwatch.hpp"
 
 void Test()
 {
@@ -11,9 +10,7 @@ void Test()
         auto start = std::chrono::system_clock::now();
         while (true) {
             auto now = std::chrono::system_clock::now();
-            if (std::chrono::duration_cast<USec>(now - start).count() >= us) {
-                break;
-            }
+            if (std::chrono::duration_cast<USec>(now - start).count() >= us) { break; }
         }
         const int rap = sw.rap<USec>();
         assert(us <= rap and rap < us + 100);

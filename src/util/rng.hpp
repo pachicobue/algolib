@@ -6,20 +6,11 @@ class RNG
 public:
     using result_type = typename Rng::result_type;
     using T = result_type;
-    static constexpr T min()
-    {
-        return Rng::min();
-    }
-    static constexpr T max()
-    {
-        return Rng::max();
-    }
+    static constexpr T min() { return Rng::min(); }
+    static constexpr T max() { return Rng::max(); }
     RNG() : RNG(std::random_device{}()) {}
     RNG(T seed) : m_rng(seed) {}
-    T operator()()
-    {
-        return m_rng();
-    }
+    T operator()() { return m_rng(); }
     template<typename T>
     T val(T min, T max)
     {

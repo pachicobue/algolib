@@ -1,17 +1,15 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_inversions_query"
 #include "../../src/ds/fenwick.hpp"
 #include "../../src/ds/mo.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
-#include "../../src/utility/zipper.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
+#include "../../src/util/zipper.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();
     auto as = in.vec<u32>(N);
     Zipper<u32> zipper(as);
-    for (auto& a : as) {
-        a = zipper.zip(a);
-    }
+    for (auto& a : as) { a = zipper.zip(a); }
     const int L = zipper.size();
     FenwickTree<int> bit(Vec<int>(L, 0));
     u64 inv = 0;
@@ -37,15 +35,10 @@ int main()
     };
 
     Vec<int> ls(Q), rs(Q);
-    for (int q : rep(Q)) {
-        std::tie(ls[q], rs[q]) = in.tup<int, int>();
-    }
-    Mo<300> mo(ls, rs);
+    for (int q : rep(Q)) { std::tie(ls[q], rs[q]) = in.tup<int, int>(); }
+    Mo mo(ls, rs);
     Vec<u64> ans(Q);
-    LOOP (Q) {
-        const int it = mo.next(right, left, down, up);
-        ans[it] = inv;
-    }
+    mo.solve(right, left, down, up, [&](int q) { ans[q] = inv; });
     out.ln(ans);
 
     return 0;

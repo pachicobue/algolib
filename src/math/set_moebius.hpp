@@ -5,9 +5,7 @@ Vec<T> setMoebius(const Vec<T>& xs, bool subset)
 {
     const int N = ceil2(xs.size());
     Vec<T> ys(N);
-    for (int i : rep(xs.size())) {
-        ys[i] = xs[i];
-    }
+    for (int i : rep(xs.size())) { ys[i] = xs[i]; }
     for (int i = 1; i < N; i <<= 1) {
         for (int j : rep(N)) {
             if ((j & i) == 0) {

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bitwise_and_convolution"
 #include "../../src/math/and_convolution.hpp"
 #include "../../src/math/modint.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;
@@ -12,9 +12,7 @@ int main()
     const auto bs = in.vec<mint>(N);
     const auto cs = andConvolute(as, bs);
     Vec<int> ans(cs.size());
-    for (int i : rep(N)) {
-        ans[i] = cs[i].val();
-    }
+    for (int i : rep(N)) { ans[i] = cs[i].val(); }
     out.ln(ans);
     return 0;
 }

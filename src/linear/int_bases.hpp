@@ -6,16 +6,11 @@ class IntBases
     static constexpr int D = sizeof(T) * 8;
 
 public:
-    IntBases()
-    {
-        std::fill(m_d2vis.begin(), m_d2vis.end(), -1);
-    }
+    IntBases() { std::fill(m_d2vis.begin(), m_d2vis.end(), -1); }
     IntBases(const Vec<T>& vs)
     {
         std::fill(m_d2vis.begin(), m_d2vis.end(), -1);
-        for (const T& v : vs) {
-            add(v);
-        }
+        for (const T& v : vs) { add(v); }
     }
     bool add(const T& v_)
     {
@@ -40,18 +35,9 @@ public:
         }
         return false;
     }
-    const Vec<T>& bases() const
-    {
-        return m_bases;
-    }
-    int rank() const
-    {
-        return m_bases.size();
-    }
-    T operator[](int i) const
-    {
-        return m_spans[i];
-    }
+    const Vec<T>& bases() const { return m_bases; }
+    int rank() const { return m_bases.size(); }
+    T operator[](int i) const { return m_spans[i]; }
     Pair<bool, T> decomp(T v) const
     {
         T mask = 0;

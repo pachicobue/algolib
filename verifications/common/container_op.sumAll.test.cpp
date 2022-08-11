@@ -1,5 +1,4 @@
-#define PROBLEM \
-    "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../../src/common/container_op.hpp"
 
 void Primitive1DArrTest()
@@ -7,9 +6,7 @@ void Primitive1DArrTest()
     int vs[6] = {1, 3, 1, 2, 3, 2};
     const int sum1 = sumAll<int>(vs);
     int sum2 = 0;
-    for (int i = 0; i < 6; i++) {
-        sum2 += vs[i];
-    }
+    for (int i = 0; i < 6; i++) { sum2 += vs[i]; }
     assert(sum1 == sum2);
 }
 void Primitive2DArrTest()
@@ -18,9 +15,7 @@ void Primitive2DArrTest()
     const int sum1 = sumAll<int>(vss);
     int sum2 = 0;
     for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 6; j++) {
-            sum2 += vss[i][j];
-        }
+        for (int j = 0; j < 6; j++) { sum2 += vss[i][j]; }
     }
     assert(sum1 == sum2);
 }
@@ -29,9 +24,7 @@ void Vec1DArrTest()
     Vec<int> vs{1, 3, 1, 2, 3, 2};
     const int sum1 = sumAll<int>(vs);
     int sum2 = 0;
-    for (int i = 0; i < 6; i++) {
-        sum2 += vs[i];
-    }
+    for (int i = 0; i < 6; i++) { sum2 += vs[i]; }
     assert(sum1 == sum2);
 }
 void Vec2DArrTest()
@@ -40,9 +33,7 @@ void Vec2DArrTest()
     const int sum1 = sumAll<int>(vss);
     int sum2 = 0;
     for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 6; j++) {
-            sum2 += vss[i][j];
-        }
+        for (int j = 0; j < 6; j++) { sum2 += vss[i][j]; }
     }
     assert(sum1 == sum2);
 }
@@ -51,9 +42,7 @@ void Arr1DArrTest()
     Arr<int, 6> vs{1, 3, 1, 2, 3, 2};
     const int sum1 = sumAll<int>(vs);
     int sum2 = 0;
-    for (int i = 0; i < 6; i++) {
-        sum2 += vs[i];
-    }
+    for (int i = 0; i < 6; i++) { sum2 += vs[i]; }
     assert(sum1 == sum2);
 }
 void Arr2DArrTest()
@@ -62,9 +51,7 @@ void Arr2DArrTest()
     const int sum1 = sumAll<int>(vss);
     int sum2 = 0;
     for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 6; j++) {
-            sum2 += vss[i][j];
-        }
+        for (int j = 0; j < 6; j++) { sum2 += vss[i][j]; }
     }
     assert(sum1 == sum2);
 }
@@ -73,9 +60,7 @@ void Deq1DArrTest()
     Deq<int> vs{1, 3, 1, 2, 3, 2};
     const int sum1 = sumAll<int>(vs);
     int sum2 = 0;
-    for (int i = 0; i < 6; i++) {
-        sum2 += vs[i];
-    }
+    for (int i = 0; i < 6; i++) { sum2 += vs[i]; }
     assert(sum1 == sum2);
 }
 void Deq2DArrTest()
@@ -84,9 +69,7 @@ void Deq2DArrTest()
     const int sum1 = sumAll<int>(vss);
     int sum2 = 0;
     for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 6; j++) {
-            sum2 += vss[i][j];
-        }
+        for (int j = 0; j < 6; j++) { sum2 += vss[i][j]; }
     }
     assert(sum1 == sum2);
 }
@@ -96,9 +79,7 @@ void CastTest()
     const int sum1 = sumAll<int>(vs);
     const i64 sum2 = sumAll<i64>(vs);
     i64 sum3 = 0;
-    for (int i = 0; i < 6; i++) {
-        sum3 += vs[i];
-    }
+    for (int i = 0; i < 6; i++) { sum3 += vs[i]; }
     assert(sum1 != sum3);
     assert(sum2 == sum3);
 }

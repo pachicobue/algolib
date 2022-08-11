@@ -4,8 +4,7 @@ template<typename mint>
 class NTT
 {
     // DynamicModint 非対応
-    static_assert(not mint::isDynamic(),
-                  "class NTT: Not support dynamic modint.");
+    static_assert(not mint::isDynamic(), "class NTT: Not support dynamic modint.");
 
 private:
     static constexpr u32 MOD = mint::mod();
@@ -23,9 +22,7 @@ public:
         const int N = (1 << L);
         as.resize(N, 0), bs.resize(N, 0);
         transform(as, L, false), transform(bs, L, false);
-        for (int i : rep(N)) {
-            as[i] *= bs[i];
-        }
+        for (int i : rep(N)) { as[i] *= bs[i]; }
         transform(as, L, true);
         as.resize(CN);
         return as;
@@ -58,9 +55,7 @@ public:
         }
         if (rev) {
             const mint iN = mint::sinv(N);
-            for (auto& a : as) {
-                a *= iN;
-            }
+            for (auto& a : as) { a *= iN; }
         }
     }
 

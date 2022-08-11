@@ -29,10 +29,7 @@ public:
     {
         assert(m_xmin < m_xsup);
     }
-    void addLine(const L& line)
-    {
-        add(line, 0, m_xmin, m_xsup);
-    }
+    void addLine(const L& line) { add(line, 0, m_xmin, m_xsup); }
     void addSeg(const L& line, T x_left, T x_right)
     {
         if (x_left >= x_right) { return; }

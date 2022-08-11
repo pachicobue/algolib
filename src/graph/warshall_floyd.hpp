@@ -7,12 +7,8 @@ Vec<Vec<T>> warshallFloyd(const Graph<T>& g)
     const int N = g.v();
     Vec<Vec<T>> dss(N, Vec<T>(N));
     for (int i : rep(N)) {
-        for (int j : rep(N)) {
-            dss[i][j] = (i == j ? T{} : INF<T>);
-        }
-        for (UNUSED const auto& [_, j, c] : g[i]) {
-            chmin(dss[i][j], c);
-        }
+        for (int j : rep(N)) { dss[i][j] = (i == j ? T{} : INF<T>); }
+        for (UNUSED const auto& [_, j, c] : g[i]) { chmin(dss[i][j], c); }
     }
     for (int k : rep(N)) {
         for (int i : rep(N)) {

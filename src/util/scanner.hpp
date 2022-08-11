@@ -3,10 +3,7 @@
 class Scanner
 {
 public:
-    Scanner(Istream& is = std::cin) : m_is{is}
-    {
-        m_is.tie(nullptr)->sync_with_stdio(false);
-    }
+    Scanner(Istream& is = std::cin) : m_is{is} { m_is.tie(nullptr)->sync_with_stdio(false); }
     template<typename T>
     T val()
     {

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
-#include "../../src/ds/segtree.hpp"
-#include "../../src/math/modint.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../../src/ds/segtree/segtree.hpp"
+#include "../../../src/math/modint.hpp"
+#include "../../../src/util/printer.hpp"
+#include "../../../src/util/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;
@@ -10,10 +10,7 @@ int main()
     struct Monoid
     {
         using T = Func;
-        static const T e()
-        {
-            return T{1, 0};
-        }
+        static const T e() { return T{1, 0}; }
         T operator()(const T& f2, const T& f1) const
         {
             return T{f1.first * f2.first, f1.first * f2.second + f1.second};
@@ -22,9 +19,7 @@ int main()
 
     const auto [N, Q] = in.tup<int, int>();
     Vec<Func> fs(N);
-    for (int i : rep(N)) {
-        std::tie(fs[i].first, fs[i].second) = in.tup<mint, mint>();
-    }
+    for (int i : rep(N)) { std::tie(fs[i].first, fs[i].second) = in.tup<mint, mint>(); }
     auto seg = SegTree<Monoid>(fs);
     LOOP (Q) {
         const auto t = in.val<int>();

@@ -1,5 +1,4 @@
-#define PROBLEM \
-    "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../../src/ds/dsu.hpp"
 
 void Test()
@@ -26,8 +25,7 @@ void Test()
     assert(dsu.leader(5) == 5);
     assert(dsu.leader(6) == 5);
 
-    assert(dsu.groups()
-           == Vec<Vec<int>>({{}, {0, 1}, {}, {2, 3}, {}, {4, 5, 6}, {}}));
+    assert(dsu.groups() == Vec<Vec<int>>({{}, {0, 1}, {}, {2, 3}, {}, {4, 5, 6}, {}}));
 }
 
 int main()

@@ -21,20 +21,12 @@ public:
         m_sizes[j] += m_sizes[i];
         return true;
     }
-    bool same(int i, int j)
-    {
-        return leader(i) == leader(j);
-    }
-    int size(int i)
-    {
-        return m_sizes[leader(i)];
-    }
+    bool same(int i, int j) { return leader(i) == leader(j); }
+    int size(int i) { return m_sizes[leader(i)]; }
     Vec<Vec<int>> groups()
     {
         Vec<Vec<int>> iss(m_v);
-        for (const int i : rep(m_v)) {
-            iss[leader(i)].push_back(i);
-        }
+        for (const int i : rep(m_v)) { iss[leader(i)].push_back(i); }
         return iss;
     }
 

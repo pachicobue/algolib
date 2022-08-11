@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
 #include "../../src/graph/dijkstra.hpp"
 int main()
 {
@@ -28,8 +28,6 @@ int main()
     }
     reverseAll(ans);
     out.ln(ds[T], ans.size());
-    for (const auto& [u, v] : ans) {
-        out.ln(u, v);
-    }
+    for (const auto& [u, v] : ans) { out.ln(u, v); }
     return 0;
 }
