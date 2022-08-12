@@ -10,7 +10,7 @@ using f64 = double;
 using f80 = long double;
 using f128 = __float128;
 constexpr i32 operator"" _i32(u64 v) { return v; }
-constexpr i32 operator"" _u32(u64 v) { return v; }
+constexpr u32 operator"" _u32(u64 v) { return v; }
 constexpr i64 operator"" _i64(u64 v) { return v; }
 constexpr u64 operator"" _u64(u64 v) { return v; }
 constexpr f64 operator"" _f64(f80 v) { return v; }

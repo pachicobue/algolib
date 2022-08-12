@@ -1,5 +1,5 @@
 #define PROBLEM "https://yukicoder.me/problems/no/409"
-#include "../../src/ds/monotonic_cht.hpp"
+#include "../../src/cht/monotone.hpp"
 #include "../../src/util/fastio/printer.hpp"
 #include "../../src/util/fastio/scanner.hpp"
 int main()
@@ -10,7 +10,7 @@ int main()
     ds = Vec<i64>{0} + ds;
     Vec<i64> dp(N + 2, INF<i64>);
     dp[0] = 0;
-    MonotonicCHT<i64> cht;
+    MonotoneCHT<i64> cht;
     for (int i : rep(N + 2)) {
         if (i != 0) {
             const auto [a, b] = cht.minLine(i);

@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
-#include "../../src/ds/segtree/segtree.hpp"
+#include "../../src/ds/segtree/seg.hpp"
 #include "../../src/graph/hld.hpp"
 #include "../../src/math/modint.hpp"
 #include "../../src/util/fastio/printer.hpp"

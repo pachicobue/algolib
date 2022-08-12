@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
-#include "../../../src/ds/segtree/lazyseg.hpp"
+#include "../../../src/ds/segtree/lazy.hpp"
 #include "../../../src/math/modint.hpp"
 #include "../../../src/util/fastio/printer.hpp"
 #include "../../../src/util/fastio/scanner.hpp"

@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_point_get"
-#include "../../../src/ds/segtree/dualseg.hpp"
+#include "../../../src/ds/segtree/dual.hpp"
 #include "../../../src/math/modint.hpp"
 #include "../../../src/util/fastio/scanner.hpp"
 #include "../../../src/util/fastio/printer.hpp"

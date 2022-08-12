@@ -1,6 +1,6 @@
 ---
 title: Dual Segment Tree
-documentation_of: //src/ds/segtree/dualseg.hpp
+documentation_of: //src/ds/segtree/dual.hpp
 ---
 
 ## 概要
@@ -18,7 +18,7 @@ documentation_of: //src/ds/segtree/dualseg.hpp
 ### コンストラクタ
 
 ```cpp
-dualseg<OpMonoid> seg(const Vec<F>& vs)
+DualSeg<OpMonoid> seg(const Vec<F>& vs)
 ```
 
 作用素列 $G$ を `vs` の内容で初期化する

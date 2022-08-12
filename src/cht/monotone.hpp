@@ -1,7 +1,7 @@
 #pragma once
 #include "../common.hpp"
 template<typename T>
-class MonotonicCHT
+class MonotoneCHT
 {
     using L = Pair<T, T>;
     static constexpr L NIL = {0, INF<T>};
@@ -27,7 +27,7 @@ class MonotonicCHT
     }
 
 public:
-    MonotonicCHT() : m_prev_x{-INF<T>} {}
+    MonotoneCHT() : m_prev_x{-INF<T>} {}
     void addLine(T a, T b)
     {
         const L l{a, b};

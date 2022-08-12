@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/line_add_get_min"
-#include "../../src/ds/li_chao_tree.hpp"
+#include "../../src/cht/li_chao.hpp"
 #include "../../src/util/fastio/printer.hpp"
 #include "../../src/util/fastio/scanner.hpp"
 int main()
