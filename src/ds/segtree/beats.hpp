@@ -1,7 +1,7 @@
 #pragma once
 #include "../../common.hpp"
 template<typename MergeMonoid, typename OpMonoid, typename Act>
-class LazySeg
+class SegBeats
 {
     using T = typename MergeMonoid::T;
     using F = typename OpMonoid::F;
@@ -9,7 +9,7 @@ class LazySeg
     static constexpr F id() { return OpMonoid::id(); }
 
 public:
-    LazySeg(const Vec<T>& vs)
+    SegBeats(const Vec<T>& vs)
         : m_size(vs.size()),
           m_depth(ceillog(m_size) + 1),
           m_half(1 << (m_depth - 1)),
@@ -19,7 +19,7 @@ public:
         std::copy(vs.begin(), vs.end(), m_vs.begin() + m_half);
         for (int i : irange(m_half - 1, 0, -1)) { up(i); }
     }
-    LazySeg(int N, const T& v = MergeMonoid::e()) : LazySeg{Vec<T>(N, v)} {}
+    SegBeats(int N, const T& v = MergeMonoid::e()) : SegBeats{Vec<T>(N, v)} {}
     T get(const int a)
     {
         assert(a < m_size);
@@ -58,7 +58,7 @@ public:
         }
         bottomUp(l + m_half), bottomUp(r + m_half);
     }
-    friend Ostream& operator<<(Ostream& os, const LazySeg& lseg)
+    friend Ostream& operator<<(Ostream& os, const SegBeats& lseg)
     {
         auto lseg2 = lseg;
         os << "[";
@@ -70,8 +70,13 @@ private:
     void up(int i) { m_vs[i] = merge(m_vs[i << 1], m_vs[i << 1 | 1]); }
     void update(int i, const F& f)
     {
+        if (f == OpMonoid::id()) { return; }
         m_ops[i] = compose(f, m_ops[i]);
         m_vs[i] = apply(f, m_vs[i]);
+        if (apply.failed(m_vs[i])) {
+            down(i);
+            up(i);
+        }
     }
     void down(int i)
     {

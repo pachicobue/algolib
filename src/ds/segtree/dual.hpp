@@ -10,7 +10,7 @@ public:
     DualSegTree(const Vec<F>& vs)
         : m_size(vs.size()),
           m_depth(ceillog(m_size) + 1),
-          m_half(1 << m_depth),
+          m_half(1 << (m_depth - 1)),
           m_ops(m_half << 1, id())
     {
         std::copy(vs.begin(), vs.end(), m_ops.begin() + m_half);
