@@ -16,7 +16,7 @@ bool millerRabin(u64 n, const Vec<u64>& as)
     }
     return true;
 }
-bool isPrime(u64 n)
+inline bool isPrime(u64 n)
 {
     using mint = modint_dynamic<873293817>;
     using mint64 = modint64_dynamic<828271328>;
