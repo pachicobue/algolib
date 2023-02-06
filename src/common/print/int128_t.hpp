@@ -1,6 +1,6 @@
 #pragma once
 #include "../type.hpp"
-Ostream& operator<<(Ostream& os, i128 v)
+inline Ostream& operator<<(Ostream& os, i128 v)
 {
     bool minus = false;
     if (v < 0) { minus = true, v = -v; }
@@ -10,7 +10,7 @@ Ostream& operator<<(Ostream& os, i128 v)
     std::reverse(ans.begin(), ans.end());
     return os << (minus ? "-" : "") << ans;
 }
-Ostream& operator<<(Ostream& os, u128 v)
+inline Ostream& operator<<(Ostream& os, u128 v)
 {
     Str ans;
     if (v == 0) { ans = "0"; }

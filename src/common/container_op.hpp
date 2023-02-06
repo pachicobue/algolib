@@ -61,6 +61,11 @@ constexpr void plusAll(Vs& vs, const V& v)
 {
     for (auto& v_ : vs) { v_ += v; }
 }
+template<typename Vs>
+constexpr void concat(Vs& vs1, const Vs& vs2)
+{
+    for (const auto& v2 : vs2) { vs1.push_back(v2); }
+}
 template<typename T, typename F>
 constexpr Vec<T> genVec(int n, F gen)
 {

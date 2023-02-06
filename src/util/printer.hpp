@@ -47,4 +47,4 @@ private:
     }
     Ostream& m_os;
 };
-Printer out;
+inline Printer out;

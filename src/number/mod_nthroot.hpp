@@ -1,6 +1,6 @@
 #pragma once
 #include "../common.hpp"
-#include "../algo/extgcd.hpp"
+#include "../algorithm/ext_gcd.hpp"
 #include "prime_factors.hpp"
 template<typename mint>
 mint modNthRoot(mint A, i64 k)

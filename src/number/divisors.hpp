@@ -11,5 +11,6 @@ Vec<T> divisors(const T n)
         }
     }
     reverseAll(tail);
-    return head + tail;
+    concat(head, tail);
+    return head;
 }

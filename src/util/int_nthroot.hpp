@@ -2,7 +2,7 @@
 #include "../common.hpp"
 #include "bin_search.hpp"
 
-u64 intNthRoot(u64 a, u64 k)
+inline u64 intNthRoot(u64 a, u64 k)
 {
     if (a == 0) { return 0; }
     if (k == 1) { return a; }

@@ -1,5 +1,6 @@
 #pragma once
 #include "../common.hpp"
+
 template<typename T>
 Vec<T> berlekampMassey(const Vec<T>& A)
 {

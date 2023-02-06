@@ -5,7 +5,7 @@ class Zipper
 {
 public:
     Zipper() {}
-    Zipper(const Vec<T>& vs) : m_vs(vs), m_calced(false) {}
+    Zipper(const Vec<T>& vs) : m_vs{vs}, m_calced(false) {}
     T unzip(int n)
     {
         assert(0 <= n and n < (int)m_vs.size());
@@ -24,7 +24,7 @@ public:
     }
     void add(const Vec<T>& vs)
     {
-        for (const auto v : vs) { m_vs.push_back(v); }
+        for (const auto& v : vs) { m_vs.push_back(v); }
         m_calced = false;
     }
     int size()

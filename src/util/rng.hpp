@@ -35,5 +35,5 @@ public:
 private:
     Rng m_rng;
 };
-RNG<std::mt19937> rng;
-RNG<std::mt19937_64> rng64;
+inline RNG<std::mt19937> rng;
+inline RNG<std::mt19937_64> rng64;

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
 #include "../../src/formal_power_series/berlekamp_massey.hpp"
 #include "../../src/util/modint.hpp"
-#include "../../src/util/fastio/printer.hpp"
-#include "../../src/util/fastio/scanner.hpp"
+#include "../../src/util/printer.hpp"
+#include "../../src/util/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

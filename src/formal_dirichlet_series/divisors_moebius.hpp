@@ -1,12 +1,12 @@
 #pragma once
 #include "../common.hpp"
-#include "../number/primes.hpp"
+#include "../number/eratosthenes_sieve.hpp"
 template<typename T>
 Vec<T> divisorsMoebius(const Vec<T>& xs, bool subset)
 {
     const int N = (int)xs.size();
     auto ys = xs;
-    for (const int p : primes(N)) {
+    for (const int p : EratosthenesSieve{N}.primes()) {
         if (subset) {
             for (int i = (N - 1) / p; i >= 1; i--) { ys[i * p] -= ys[i]; }
         } else {

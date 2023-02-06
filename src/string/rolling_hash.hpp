@@ -3,13 +3,13 @@
 class RollingHash
 {
 public:
-    template<typename It>
-    RollingHash(It first, It last, u64 base)
-        : m_size(std::distance(first, last)), m_ps(m_size + 1, 1), m_hs(m_size + 1, 0), m_base{base}
+    template<typename V>
+    RollingHash(V vs, u64 base)
+        : m_size(std::size(vs)), m_ps(m_size + 1, 1), m_hs(m_size + 1, 0), m_base{base}
     {
         for (int i : irange(1, m_size + 1)) {
             m_ps[i] = mod(mul(m_ps[i - 1], m_base)),
-            m_hs[i] = mod(mul(m_hs[i - 1], m_base) + *std::next(first, i - 1));
+            m_hs[i] = mod(mul(m_hs[i - 1], m_base) + vs[i - 1]);
         }
     }
     u64 operator()(int l, int r) const { return mod(m_hs[r] + offset - mul(m_hs[l], m_ps[r - l])); }

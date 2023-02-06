@@ -49,4 +49,4 @@ public:
 private:
     Istream& m_is;
 };
-Scanner in;
+inline Scanner in;

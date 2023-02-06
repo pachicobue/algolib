@@ -1,5 +1,5 @@
 #pragma once
-#include "fps.hpp"
+#include "formal_power_series.hpp"
 template<typename mint, typename I>
 mint bostanMori(FormalPowerSeries<mint> f, FormalPowerSeries<mint> g, I N)
 {
@@ -15,9 +15,18 @@ mint bostanMori(FormalPowerSeries<mint> f, FormalPowerSeries<mint> g, I N)
         for (int i : rep(g.size())) { mg[i] = g[i] * (i % 2 == 0 ? 1 : -1); }
         const auto G = g * mg;
         const auto F = f * mg;
-        for (int i : rep(f.size())) { f[i] = F.at(2 * i + (N % 2)); }
-        for (int i : rep(g.size())) { g[i] = G.at(2 * i); }
+        for (int i : rep((F.size() + 1) / 2)) { f[i] = F.at(2 * i + (N % 2)); }
+        for (int i : rep((G.size() + 1) / 2)) { g[i] = G.at(2 * i); }
         N /= 2;
     }
     return f[0] / g[0];
+}
+
+template<typename mint, typename I>
+mint nthTermOfLinearRecurrentSequence(const Vec<mint>& as, I N)
+{
+    const FormalPowerSeries<mint> g{berlekampMassey(as)};
+    const int L = g.size();
+    const auto f = FormalPowerSeries<mint>{as}.mult(g, L - 1);
+    return bostanMori(f, g, N);
 }

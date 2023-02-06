@@ -1,5 +1,5 @@
 #pragma once
-#include "ntt.hpp"
+#include "number_theoritic_transform.hpp"
 #include "../number/garner.hpp"
 #include "../util/modint.hpp"
 template<typename mint>
@@ -19,7 +19,7 @@ Vec<mint> convolute_mod(const Vec<mint>& as, const Vec<mint>& bs)
     }
     if (N <= N_MAX) {
         // mintはNTT Friendlyなのでそのまま畳み込み
-        return NTT<mint>::convolute(as, bs);
+        return NumberTheoriticTransform<mint>::convolute(as, bs);
     } else {
         assert(N <= (1 << 24));
         using submint1 = modint<469762049, 3, 26>;
@@ -31,9 +31,9 @@ Vec<mint> convolute_mod(const Vec<mint>& as, const Vec<mint>& bs)
         Vec<submint3> as3(AN), bs3(BN);
         for (int i : rep(AN)) { as1[i] = as[i].val(), as2[i] = as[i].val(), as3[i] = as[i].val(); }
         for (int i : rep(BN)) { bs1[i] = bs[i].val(), bs2[i] = bs[i].val(), bs3[i] = bs[i].val(); }
-        const auto cs1 = NTT<submint1>::convolute(as1, bs1);
-        const auto cs2 = NTT<submint2>::convolute(as2, bs2);
-        const auto cs3 = NTT<submint3>::convolute(as3, bs3);
+        const auto cs1 = NumberTheoriticTransform<submint1>::convolute(as1, bs1);
+        const auto cs2 = NumberTheoriticTransform<submint2>::convolute(as2, bs2);
+        const auto cs3 = NumberTheoriticTransform<submint3>::convolute(as3, bs3);
         Vec<mint> cs(N);
         for (int i : rep(N)) { cs[i] = Garner::restore_mod<mint>(cs1[i], cs2[i], cs3[i]); }
         return cs;
@@ -62,9 +62,9 @@ Vec<i64> convolute_i64(const Vec<I>& as, const Vec<I>& bs)
     Vec<submint3> as3(AN), bs3(BN);
     for (int i : rep(AN)) { as1[i] = as[i], as2[i] = as[i], as3[i] = as[i]; }
     for (int i : rep(BN)) { bs1[i] = bs[i], bs2[i] = bs[i], bs3[i] = bs[i]; }
-    const auto cs1 = NTT<submint1>::convolute(as1, bs1);
-    const auto cs2 = NTT<submint2>::convolute(as2, bs2);
-    const auto cs3 = NTT<submint3>::convolute(as3, bs3);
+    const auto cs1 = NumberTheoriticTransform<submint1>::convolute(as1, bs1);
+    const auto cs2 = NumberTheoriticTransform<submint2>::convolute(as2, bs2);
+    const auto cs3 = NumberTheoriticTransform<submint3>::convolute(as3, bs3);
     Vec<i64> cs(N);
     for (int i : rep(N)) { cs[i] = Garner::restore_i64(cs1[i], cs2[i], cs3[i]); }
     return cs;

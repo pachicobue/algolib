@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B"
 #include "../../src/graph/bellman_ford.hpp"
 #include "../../src/util/printer.hpp"
-#include "../../src/util/fastio/scanner.hpp"
+#include "../../src/util/scanner.hpp"
 
 int main()
 {

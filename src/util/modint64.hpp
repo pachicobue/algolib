@@ -58,6 +58,9 @@ public:
     static void setMod(std::enable_if_t<mod_ == 0, U> m)
     {
         modRef() = m;
+        sinvRef() = {1, 1};
+        factRef() = {1, 1};
+        ifactRef() = {1, 1};
     }
     template<typename U = u64>
     static void setRoot(std::enable_if_t<mod_ == 0, U> r)
@@ -126,15 +129,21 @@ public:
     }
     constexpr modint64 inv() const { return pow(mod() - 2); }
     modint64 sinv() const { return sinv(m_val); }
+    static modint64 sinv(u32 n)
+    {
+        auto& is = sinvRef();
+        for (u32 i = (u32)is.size(); i <= n; i++) { is.push_back(-is[mod() % i] * (mod() / i)); }
+        return is[n];
+    }
     static modint64 fact(u32 n)
     {
-        static Vec<modint64> fs{1, 1};
+        auto& fs = factRef();
         for (u32 i = (u32)fs.size(); i <= n; i++) { fs.push_back(fs.back() * i); }
         return fs[n];
     }
     static modint64 ifact(u32 n)
     {
-        static Vec<modint64> ifs{1, 1};
+        auto& ifs = ifactRef();
         for (u32 i = (u32)ifs.size(); i <= n; i++) { ifs.push_back(ifs.back() * sinv(i)); }
         return ifs[n];
     }
@@ -148,16 +157,25 @@ public:
     }
 
 private:
+    static Vec<modint64>& sinvRef()
+    {
+        static Vec<modint64> is{1, 1};
+        return is;
+    }
+    static Vec<modint64>& factRef()
+    {
+        static Vec<modint64> fs{1, 1};
+        return fs;
+    }
+    static Vec<modint64>& ifactRef()
+    {
+        static Vec<modint64> ifs{1, 1};
+        return ifs;
+    }
     static constexpr u64 norm(const u64 x) { return x < mod() ? x : x - mod(); }
     static constexpr u64 normLL(const i64 x)
     {
         return norm(u64((i128)x % (i128)mod() + (i128)mod()));
-    }
-    static modint64 sinv(u32 n)
-    {
-        static Vec<modint64> is{1, 1};
-        for (u32 i = (u32)is.size(); i <= n; i++) { is.push_back(-is[mod() % i] * (mod() / i)); }
-        return is[n];
     }
     u64 m_val;
 };

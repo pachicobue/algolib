@@ -58,6 +58,9 @@ public:
     static void setMod(std::enable_if_t<mod_ == 0, U> m)
     {
         modRef() = m;
+        sinvRef() = {1, 1};
+        factRef() = {1, 1};
+        ifactRef() = {1, 1};
     }
     template<typename U = u32>
     static void setRoot(std::enable_if_t<mod_ == 0, U> r)
@@ -126,28 +129,44 @@ public:
     constexpr modint inv() const { return pow(mod() - 2); }
     static modint sinv(u32 n)
     {
-        static Vec<modint> is{1, 1};
+        auto& is = sinvRef();
         for (u32 i = (u32)is.size(); i <= n; i++) { is.push_back(-is[mod() % i] * (mod() / i)); }
         return is[n];
     }
     static modint fact(u32 n)
     {
-        static Vec<modint> fs{1, 1};
+        auto& fs = factRef();
         for (u32 i = (u32)fs.size(); i <= n; i++) { fs.push_back(fs.back() * i); }
         return fs[n];
     }
     static modint ifact(u32 n)
     {
-        static Vec<modint> ifs{1, 1};
+        auto& ifs = ifactRef();
         for (u32 i = (u32)ifs.size(); i <= n; i++) { ifs.push_back(ifs.back() * sinv(i)); }
         return ifs[n];
     }
+    static modint perm(int n, int k) { return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k); }
     static modint comb(int n, int k)
     {
         return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k) * ifact(k);
     }
 
 private:
+    static Vec<modint>& sinvRef()
+    {
+        static Vec<modint> is{1, 1};
+        return is;
+    }
+    static Vec<modint>& factRef()
+    {
+        static Vec<modint> fs{1, 1};
+        return fs;
+    }
+    static Vec<modint>& ifactRef()
+    {
+        static Vec<modint> ifs{1, 1};
+        return ifs;
+    }
     static constexpr u32 norm(u32 x) { return x < mod() ? x : x - mod(); }
     static constexpr u32 normll(i64 x) { return norm(u32(x % (i64)mod() + (i64)mod())); }
     u32 m_val;
