@@ -6,6 +6,6 @@
 int main()
 {
     auto S = in.val<Str>();
-    out.ln(z_algorithm(S.begin(), S.end()));
+    out.ln(z_algorithm(S));
     return 0;
 }

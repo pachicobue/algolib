@@ -4,7 +4,7 @@ class RollingHash
 {
 public:
     template<typename V>
-    RollingHash(V vs, u64 base)
+    RollingHash(const V& vs, u64 base)
         : m_size(std::size(vs)), m_ps(m_size + 1, 1), m_hs(m_size + 1, 0), m_base{base}
     {
         for (int i : irange(1, m_size + 1)) {

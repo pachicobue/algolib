@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/string/mp.hpp"
+#include "../../src/string/morris_pratt.hpp"
 
 void Test()
 {
     Str s = "aabaabaaa";
-    const auto rs = mp(s.begin(), s.end());
+    const auto rs = morrisPratt(s);
     assert(rs == (Vec<int>{-1, 0, 1, 0, 1, 2, 3, 4, 5, 2}));
 }
 
