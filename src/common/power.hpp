@@ -4,11 +4,8 @@ template<typename T, typename I>
 constexpr T powerMonoid(T v, I n, const T& e)
 {
     assert(n >= 0);
-    T ans = e;
-    for (; n > 0; n >>= 1, v *= v) {
-        if (n % 2 == 1) { ans *= v; }
-    }
-    return ans;
+    if (n == 0) { return e; }
+    return (n % 2 == 1 ? v * powerMonoid(v, n - 1, e) : powerMonoid(v * v, n / 2, e));
 }
 template<typename T, typename I>
 constexpr T powerInt(T v, I n)
