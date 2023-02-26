@@ -1,7 +1,7 @@
 #pragma once
-#include "common.hpp"
-#include "utility/int_nthroot.hpp"
-#include "algorithm/babystep_giantstep.hpp"
+#include "../common.hpp"
+#include "../utility/int_nthroot.hpp"
+#include "../algorithm/babystep_giantstep.hpp"
 
 template<typename mint>
 inline i64 discreteLog(mint X, mint Y)
