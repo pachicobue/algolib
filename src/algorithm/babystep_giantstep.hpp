@@ -4,13 +4,12 @@
 
 // f^n(x) = y となる最小のn
 template<typename T, typename FW, typename FINV>
-i64 babyStepGiantStep(FW f_wtimes, FINV f_inv, const T& x, const T& y, i64 N, i64 W = 0)
+i64 babyStepGiantStep(FW f_wtimes, FINV f_inv, const T& x, const T& y, i64 N, i64 W)
 {
-    if (W == 0) { W = intNthRoot(N, 2); }
     const i64 M = ceilDiv(N, W);
-    Map<T, i64> memo;
-    memo[x] = 0;
-    T gx = x;
+    UMap<T, i64> memo;
+    memo[x] = 1;
+    T gx = 1;
     for (i64 i : irange(1, M + 1)) {
         gx = f_wtimes(gx);
         if (memo.count(gx) == 0) { memo[gx] = i * W; }

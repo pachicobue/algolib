@@ -3,6 +3,7 @@
 template<typename T>
 constexpr Pair<T, T> extgcd(const T a, const T b)  // [x,y] -> ax+by=gcd(a,b)
 {
+    static_assert(std::is_signed_v<T>, "Signed integer is allowed.");
     assert(a != 0 or b != 0);
     if (a >= 0 and b >= 0) {
         if (a < b) {

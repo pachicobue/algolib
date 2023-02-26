@@ -1,5 +1,6 @@
 #pragma once
 #include "../common.hpp"
+#include "../algorithm/ext_gcd.hpp"
 template<u32 mod_, u32 root_, u32 max2p_>
 class modint
 {
@@ -23,6 +24,7 @@ class modint
     }
 
 public:
+    static_assert(mod_ <= LIMMAX<i32>, "mod(signed int size) only supported!");
     static constexpr bool isDynamic() { return (mod_ == 0); }
     template<typename U = const u32>
     static constexpr std::enable_if_t<mod_ != 0, U> mod()
@@ -57,6 +59,7 @@ public:
     template<typename U = u32>
     static void setMod(std::enable_if_t<mod_ == 0, U> m)
     {
+        assert(1 <= m and m <= LIMMAX<i32>);
         modRef() = m;
         sinvRef() = {1, 1};
         factRef() = {1, 1};
@@ -126,7 +129,7 @@ public:
     {
         return powerInt(*this, n);
     }
-    constexpr modint inv() const { return pow(mod() - 2); }
+    constexpr modint inv() const { return inverse<i32>(m_val, mod()); }
     static modint sinv(u32 n)
     {
         auto& is = sinvRef();
