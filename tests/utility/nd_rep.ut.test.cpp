@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/util/nd_rep.hpp"
+#include "../../src/utility/nd_rep.hpp"
 
 void Test()
 {

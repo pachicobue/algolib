@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_point_get"
 #include "../../../src/data_structure/segment_tree/dual_segtree.hpp"
-#include "../../../src/util/modint.hpp"
-#include "../../../src/util/scanner.hpp"
-#include "../../../src/util/printer.hpp"
+#include "../../../src/utility/modint.hpp"
+#include "../../../src/utility/scanner.hpp"
+#include "../../../src/utility/printer.hpp"
 
 using mint = modint_998244353;
 struct OpMonoid

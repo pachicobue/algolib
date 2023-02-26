@@ -20,7 +20,7 @@ public:
             m_orig_bases.push_back(v), m_reduced_bases.push_back(reduced_v);
             m_masks.push_back(mask);
             for (int j : per(D)) {
-                if (btest(reduced_v, j)) {
+                if (isBitOn(reduced_v, j)) {
                     m_vis[j] = vi;
                     break;
                 }
@@ -36,7 +36,7 @@ public:
     {
         T mask = 0;
         for (int j : irange(D - 1, -1, -1)) {
-            if (btest(v, j)) {
+            if (isBitOn(v, j)) {
                 if (m_vis[j] == -1) { return {false, 0}; }
                 const int vi = m_vis[j];
                 v ^= m_reduced_bases[vi];

@@ -3,7 +3,7 @@
 class SegSkeleton
 {
 public:
-    SegSkeleton(int size) : m_size(size), m_half(ceil2(m_size)), m_segs(m_half * 2, {0, 0})
+    SegSkeleton(int size) : m_size(size), m_half(bitCeil(m_size)), m_segs(m_half * 2, {0, 0})
     {
         for (int i = 1; i <= m_half; i <<= 1) {
             const int l = m_half / i;

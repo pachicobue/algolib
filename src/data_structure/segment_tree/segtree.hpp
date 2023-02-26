@@ -8,7 +8,7 @@ class SegTree
 
 public:
     SegTree(const Vec<T>& vs)
-        : m_size(vs.size()), m_half(ceil2(m_size)), m_vals(m_half << 1, MergeMonoid::e())
+        : m_size(vs.size()), m_half(bitCeil(m_size)), m_vals(m_half << 1, MergeMonoid::e())
     {
         std::copy(vs.begin(), vs.end(), m_vals.begin() + m_half);
         for (int i = m_half - 1; i >= 1; i--) { up(i); }

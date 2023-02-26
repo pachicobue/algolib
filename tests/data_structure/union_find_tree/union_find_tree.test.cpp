@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind"
 #include "../../../src/data_structure/union_find_tree/union_find_tree.hpp"
-#include "../../../src/util/printer.hpp"
-#include "../../../src/util/scanner.hpp"
+#include "../../../src/utility/printer.hpp"
+#include "../../../src/utility/scanner.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();

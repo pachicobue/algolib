@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum"
 #include "../../../src/data_structure/segment_tree/segtree_beats.hpp"
-#include "../../../src/util/printer.hpp"
-#include "../../../src/util/scanner.hpp"
+#include "../../../src/utility/printer.hpp"
+#include "../../../src/utility/scanner.hpp"
 
 auto secondMin(i64 a1, i64 a2, i64 b1, i64 b2) -> i64
 {

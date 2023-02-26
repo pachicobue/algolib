@@ -22,8 +22,6 @@ template<typename T>
 using Lt = std::less<T>;
 template<typename T>
 using Gt = std::greater<T>;
-template<typename T>
-using IList = std::initializer_list<T>;
 template<int n>
 using BSet = std::bitset<n>;
 template<typename T1, typename T2>
@@ -60,7 +58,3 @@ template<typename T>
 using MaxHeap = std::priority_queue<T>;
 template<typename T>
 using MinHeap = std::priority_queue<T, Vec<T>, Gt<T>>;
-using NSec = std::chrono::nanoseconds;
-using USec = std::chrono::microseconds;
-using MSec = std::chrono::milliseconds;
-using Sec = std::chrono::seconds;

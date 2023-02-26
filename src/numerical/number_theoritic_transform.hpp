@@ -18,21 +18,20 @@ public:
         const int AN = as.size();
         const int BN = bs.size();
         const int CN = AN + BN - 1;
-        const int L = ceillog(CN);
-        const int N = (1 << L);
+        const int N = bitCeil(CN);
         as.resize(N, 0), bs.resize(N, 0);
-        transform(as, L, false), transform(bs, L, false);
+        transform(as, false), transform(bs, false);
         for (int i : rep(N)) { as[i] *= bs[i]; }
-        transform(as, L, true);
+        transform(as, true);
         as.resize(CN);
         return as;
     }
-    static void transform(Vec<mint>& as, int L, bool rev)
+    static void transform(Vec<mint>& as, bool rev)
     {
         const int N = as.size();
-        assert(N <= N_MAX);
-        assert((1 << L) == N);
+        assert(hasSingleBit(N));
         if (N == 1) { return; }
+        const int L = topBit(N);
         const auto l_range = (rev ? irange(1, L + 1, 1) : irange(L, 0, -1));
         for (int l : l_range) {
             const int H = 1 << l;

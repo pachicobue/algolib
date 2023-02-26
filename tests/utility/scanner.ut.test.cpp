@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../../src/common.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/utility/scanner.hpp"
 
 std::stringstream ss;
 Scanner scanner{ss};

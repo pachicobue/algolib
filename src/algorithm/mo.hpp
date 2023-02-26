@@ -30,7 +30,7 @@ private:
         i64 ans = 0;
         constexpr i64 OFFs[] = {0, 3, 1, 2};
         for (int i : per(30)) {
-            const int S = (btest(x, i) << 1) | (btest(y, i));
+            const int S = (isBitOn(x, i) << 1) | (isBitOn(y, i));
             ans += OFFs[S] * (1_i64 << (2 * i));
             if (S <= 1) { std::swap(x, y); }
             if (S == 1) { x = ~x, y = ~y; }

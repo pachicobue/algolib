@@ -3,12 +3,12 @@
 template<typename T>
 Vec<T> subsetConvolute(const Vec<T>& f, const Vec<T>& g)
 {
-    const int l = ceillog(std::max(f.size(), g.size()));
+    const int l = topBit(bitCeil(std::max(f.size(), g.size())));
     const int N = 1 << l;
     auto F = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));
     auto G = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));
-    for (int i : rep(f.size())) { F[i][popcount(i)] += f[i]; }
-    for (int i : rep(g.size())) { G[i][popcount(i)] += g[i]; }
+    for (int i : rep(f.size())) { F[i][popCount(i)] += f[i]; }
+    for (int i : rep(g.size())) { G[i][popCount(i)] += g[i]; }
     for (int i = 1; i < N; i <<= 1) {
         for (int j : rep(N)) {
             if ((j & i) == 0) {
@@ -36,6 +36,6 @@ Vec<T> subsetConvolute(const Vec<T>& f, const Vec<T>& g)
         }
     }
     Vec<T> ans(N);
-    for (int i : rep(N)) { ans[i] = H[i][popcount(i)]; }
+    for (int i : rep(N)) { ans[i] = H[i][popCount(i)]; }
     return ans;
 }

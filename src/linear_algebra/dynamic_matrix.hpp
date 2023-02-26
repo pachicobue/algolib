@@ -3,6 +3,9 @@
 template<typename T>
 class DynamicMatrix
 {
+    template<typename V>
+    using IList = std::initializer_list<V>;
+
 public:
     DynamicMatrix(const int row, const int column)
         : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, T{}))

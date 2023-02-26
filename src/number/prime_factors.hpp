@@ -1,6 +1,6 @@
 #pragma once
 #include "../common.hpp"
-#include "../util/rng.hpp"
+#include "../utility/rng.hpp"
 #include "miller_rabin.hpp"
 template<typename mint>
 u64 pollardRho(u64 n)

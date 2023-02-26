@@ -11,8 +11,8 @@ class SegBeats
 public:
     SegBeats(const Vec<T>& vs)
         : m_size(vs.size()),
-          m_depth(ceillog(m_size) + 1),
-          m_half(1 << (m_depth - 1)),
+          m_half(bitCeil(m_size)),
+          m_depth(bitWidth(m_half)),
           m_vs(m_half << 1, e()),
           m_ops(m_half << 1, id())
     {
@@ -97,7 +97,7 @@ private:
         i = (i / (i & -i)) >> 1;
         for (; i >= 1; i >>= 1) { up(i); }
     }
-    int m_size, m_depth, m_half;
+    int m_size, m_half, m_depth;
     Vec<T> m_vs;
     Vec<F> m_ops;
     static inline MergeMonoid merge;

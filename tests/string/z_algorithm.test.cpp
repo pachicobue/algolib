@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
 #include "../../src/string/z_algorithm.hpp"
-#include "../../src/util/printer.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
 
 int main()
 {

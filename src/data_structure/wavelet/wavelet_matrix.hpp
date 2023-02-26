@@ -9,17 +9,17 @@ public:
         : m_n(vs.size()),
           m_min{vs[minInd(vs)]},
           m_max{vs[maxInd(vs)]},
-          m_lg{ceillog(m_max + 1)},
+          m_lg{bitWidth(m_max + 1)},
           m_bvs(m_lg, BitVector(m_n))
     {
         assert(m_min >= 0);
         Vec<T> nvs(m_n);
         for (int bi : per(m_lg)) {
             for (int i : rep(m_n)) {
-                if (btest(vs[i], bi)) { m_bvs[bi].set(i); }
+                if (isBitOn(vs[i], bi)) { m_bvs[bi].set(i); }
             }
             int is[2] = {0, m_bvs[bi].zero()};
-            for (int i : rep(m_n)) { nvs[is[btest(vs[i], bi)]++] = vs[i]; }
+            for (int i : rep(m_n)) { nvs[is[isBitOn(vs[i], bi)]++] = vs[i]; }
             std::swap(vs, nvs);
         }
     }
@@ -57,7 +57,7 @@ private:
         int ans = 0;
         for (int bi : per(m_lg)) {
             const int lz = m_bvs[bi].rank0(l), rz = m_bvs[bi].rank0(r);
-            if (btest(v, bi)) {
+            if (isBitOn(v, bi)) {
                 const int z = m_bvs[bi].zero();
                 ans += rz - lz;
                 l += z - lz, r += z - rz;

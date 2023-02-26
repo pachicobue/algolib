@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/util/rng.hpp"
+#include "../../src/utility/rng.hpp"
 
 void Test()
 {
@@ -16,16 +16,6 @@ void valTest()
     const int v64_1 = rng64.val(min, max);
     assert(min <= v32_1 and v32_1 <= max);
     assert(min <= v64_1 and v64_1 <= max);
-}
-
-void pairTest()
-{
-    int min = 10, max = 20;
-
-    const auto [l32_1, r32_1] = rng.pair(min, max);
-    const auto [l64_1, r64_1] = rng64.pair(min, max);
-    assert(min <= l32_1 and l32_1 <= r32_1 and r32_1 <= max);
-    assert(min <= l64_1 and l64_1 <= r64_1 and r64_1 <= max);
 }
 
 void vecTest()
@@ -56,7 +46,6 @@ int main()
 {
     Test();
     valTest();
-    pairTest();
     vecTest();
     vvecTest();
     std::cout << "Hello World\n";

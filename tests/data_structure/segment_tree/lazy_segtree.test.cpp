@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 #include "../../../src/data_structure/segment_tree/lazy_segtree.hpp"
-#include "../../../src/util/modint.hpp"
-#include "../../../src/util/printer.hpp"
-#include "../../../src/util/scanner.hpp"
+#include "../../../src/utility/modint.hpp"
+#include "../../../src/utility/printer.hpp"
+#include "../../../src/utility/scanner.hpp"
 
 int main()
 {

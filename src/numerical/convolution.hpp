@@ -1,7 +1,7 @@
 #pragma once
 #include "number_theoritic_transform.hpp"
 #include "../number/garner.hpp"
-#include "../util/modint.hpp"
+#include "../utility/modint.hpp"
 template<typename mint>
 Vec<mint> convolute_mod(const Vec<mint>& as, const Vec<mint>& bs)
 {
@@ -9,11 +9,16 @@ Vec<mint> convolute_mod(const Vec<mint>& as, const Vec<mint>& bs)
     constexpr int N_MAX = (1 << L_MAX);
     const int AN = as.size();
     const int BN = bs.size();
+    if (AN == 0 or BN == 0) { return {}; }
+    if (AN > BN) { return convolute_mod(bs, as); }
     const int N = AN + BN - 1;
-    if (N <= 10) {
+    if (AN * 2 <= BN) {
         Vec<mint> cs(N, 0);
-        for (int i : rep(AN)) {
-            for (int j : rep(BN)) { cs[i + j] += as[i] * bs[j]; }
+        for (int sj : irange(0, BN, AN)) {
+            const int tj = std::min(BN, sj + AN);
+            const auto bbs = Vec<mint>(std::begin(bs) + sj, std::begin(bs) + tj);
+            const auto bcs = convolute_mod(as, bbs);
+            for (int dj : rep(bcs.size())) { cs[sj + dj] += bcs[dj]; }
         }
         return cs;
     }
@@ -44,12 +49,17 @@ Vec<i64> convolute_i64(const Vec<I>& as, const Vec<I>& bs)
 {
     const int AN = as.size();
     const int BN = bs.size();
+    if (AN == 0 or BN == 0) { return {}; }
+    if (AN > BN) { return convolute_i64<I>(bs, as); }
     const int N = AN + BN - 1;
     assert(N <= (1 << 24));
-    if (N <= 10) {
+    if (AN * 2 <= BN) {
         Vec<i64> cs(N, 0);
-        for (int i : rep(AN)) {
-            for (int j : rep(BN)) { cs[i + j] += (i64)as[i] * bs[j]; }
+        for (int sj : irange(0, BN, AN)) {
+            const int tj = std::min(BN, sj + AN);
+            const auto bbs = Vec<I>(std::begin(bs) + sj, std::begin(bs) + tj);
+            const auto bcs = convolute_i64<I>(as, bbs);
+            for (int dj : rep(bcs.size())) { cs[sj + dj] += bcs[dj]; }
         }
         return cs;
     }

@@ -3,7 +3,7 @@
 template<typename T>
 Vec<T> setHadamard(const Vec<T>& xs, bool rev = false)
 {
-    const int N = ceil2(xs.size());
+    const int N = bitCeil(xs.size());
     Vec<T> ys(N);
     for (int i : rep(xs.size())) { ys[i] = xs[i]; }
     for (int i = 1; i < N; i <<= 1) {

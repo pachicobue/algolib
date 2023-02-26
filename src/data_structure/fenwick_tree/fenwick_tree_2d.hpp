@@ -7,8 +7,8 @@ public:
     FenwickTree2D(const Vec<Vec<T>>& vss)
         : m_hsize(vss.size()),
           m_wsize(vss.front().size()),
-          m_hcap(ceil2(m_hsize)),
-          m_wcap(ceil2(m_wsize)),
+          m_hcap(bitCeil(m_hsize)),
+          m_wcap(bitCeil(m_wsize)),
           m_vss(m_hcap + 1, Vec<T>(m_wcap + 1, T{}))
     {
         for (int i : rep(m_hsize)) {

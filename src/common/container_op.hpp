@@ -25,6 +25,13 @@ constexpr void reverseAll(Vs& vs)
 {
     std::reverse(ALL(vs));
 }
+template<typename Vs>
+constexpr Vs reversed(const Vs& vs)
+{
+    auto rvs = vs;
+    reverseAll(rvs);
+    return rvs;
+}
 template<typename V, typename Vs>
 constexpr V sumAll(const Vs& vs)
 {
@@ -64,19 +71,26 @@ constexpr void plusAll(Vs& vs, const V& v)
 template<typename Vs>
 constexpr void concat(Vs& vs1, const Vs& vs2)
 {
-    for (const auto& v2 : vs2) { vs1.push_back(v2); }
+    std::copy(ALL(vs2), std::back_inserter(vs1));
+}
+template<typename Vs>
+constexpr void concatted(const Vs& vs1, const Vs& vs2)
+{
+    auto vs = vs1;
+    concat(vs, vs2);
+    return vs;
 }
 template<typename T, typename F>
 constexpr Vec<T> genVec(int n, F gen)
 {
     Vec<T> ans;
-    std::generate_n(std::back_insert_iterator(ans), n, gen);
+    std::generate_n(std::back_inserter(ans), n, gen);
     return ans;
 }
 template<typename T = int>
 constexpr Vec<T> iotaVec(int n, T offset = 0)
 {
     Vec<T> ans(n);
-    std::iota(ans.begin(), ans.end(), offset);
+    std::iota(ALL(ans), offset);
     return ans;
 }

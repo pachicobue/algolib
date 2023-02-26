@@ -1,6 +1,6 @@
 ---
 title: Scanner (入力補助クラス)
-documentation_of: //src/util/scanner.hpp
+documentation_of: //src/utility/scanner.hpp
 ---
 
 ## 概要

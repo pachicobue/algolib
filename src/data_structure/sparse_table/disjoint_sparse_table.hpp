@@ -7,7 +7,7 @@ class DisjointSparseTable
 
 public:
     DisjointSparseTable(const Vec<T>& vs)
-        : m_size(vs.size()), m_depth(log2p1(m_size)), m_vss(m_depth, vs)
+        : m_size(vs.size()), m_depth(bitWidth(m_size)), m_vss(m_depth, vs)
     {
         for (int d : rep(m_depth)) {
             const int w = 1 << (m_depth - d - 1);
@@ -24,7 +24,7 @@ public:
     {
         assert(0 <= l and l < r and r <= m_size);
         if (r - l == 1) { return m_vss.back()[l]; }
-        const int d = m_depth - log2p1(l ^ (r - 1));
+        const int d = m_depth - bitWidth(l ^ (r - 1));
         return merge(m_vss[d][l], m_vss[d][r - 1]);
     }
 

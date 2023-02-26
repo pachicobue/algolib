@@ -1,8 +1,8 @@
 #pragma once
 #include "common.hpp"
-#include "util/scanner.hpp"
-#include "util/printer.hpp"
-#include "util/nd_vec.hpp"
-#include "util/bin_search.hpp"
-#include "util/modint.hpp"
+#include "utility/scanner.hpp"
+#include "utility/printer.hpp"
+#include "utility/nd_vec.hpp"
+#include "utility/bin_search.hpp"
+#include "utility/modint.hpp"
 #include "graph/graph.hpp"

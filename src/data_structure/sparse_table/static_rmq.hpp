@@ -7,7 +7,7 @@ class StaticRMQ
     using T = typename TotalOrd::T;
     using B = u64;
     static constexpr int bs = sizeof(B) * 8;
-    static constexpr int bslog = log2p1(bs) - 1;
+    static constexpr int bslog = bitWidth(bs) - 1;
     static constexpr int wind(int n) { return n >> (bslog); }
     static constexpr int bind(int n) { return n ^ (wind(n) << bslog); }
     static constexpr int ind(int w, int b) { return (w << bslog) | b; }
@@ -68,7 +68,7 @@ private:
     T brmq(int l, int r) const
     {
         const B w = m_masks[r - 1] >> (l % bs);
-        return w == 0 ? m_vals[r - 1] : m_vals[l + lsbp1(w) - 1];
+        return w == 0 ? m_vals[r - 1] : m_vals[l + lowBit(w)];
     }
     struct SemiGroup
     {

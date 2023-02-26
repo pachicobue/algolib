@@ -3,6 +3,9 @@
 template<typename T, int row, int column>
 class StaticMatrix
 {
+    template<typename V>
+    using IList = std::initializer_list<V>;
+
 public:
     StaticMatrix()
     {

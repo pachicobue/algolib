@@ -6,7 +6,7 @@ class BitVector
     static int rank(u64 v, int i)
     {
         if (i == 0) { return 0; }
-        return popcount(v << (B - i));
+        return popCount(v << (B - i));
     }
     struct Block
     {
@@ -42,11 +42,11 @@ private:
         if (not m_calced) {
             m_zero = m_size;
             for (int i : irange(1, m_bn)) {
-                const int p = popcount(m_blocks[i - 1].bits);
+                const int p = popCount(m_blocks[i - 1].bits);
                 m_blocks[i].rank += m_blocks[i - 1].rank + p;
                 m_zero -= p;
             }
-            m_zero -= popcount(m_blocks[m_bn - 1].bits);
+            m_zero -= popCount(m_blocks[m_bn - 1].bits);
             m_calced = true;
         }
     }

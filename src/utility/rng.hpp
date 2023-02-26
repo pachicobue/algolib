@@ -1,13 +1,13 @@
 #pragma once
 #include "../common.hpp"
-template<typename Rng>
+template<typename Engine>
 class RNG
 {
 public:
-    using result_type = typename Rng::result_type;
+    using result_type = typename Engine::result_type;
     using T = result_type;
-    static constexpr T min() { return Rng::min(); }
-    static constexpr T max() { return Rng::max(); }
+    static constexpr T min() { return Engine::min(); }
+    static constexpr T max() { return Engine::max(); }
     RNG() : RNG(std::random_device{}()) {}
     RNG(T seed) : m_rng(seed) {}
     T operator()() { return m_rng(); }
@@ -16,10 +16,10 @@ public:
     {
         return std::uniform_int_distribution<T>(min, max)(m_rng);
     }
-    template<typename T>
-    Pair<T, T> pair(T min, T max)
+    template<typename T, typename... Args>
+    auto tup(T min, T max, const Args&... offsets)
     {
-        return std::minmax({val<T>(min, max), val<T>(min, max)});
+        return Tup<T, Args...>{val<T>(min, max), val<Args>(offsets)...};
     }
     template<typename T>
     Vec<T> vec(int n, T min, T max)
@@ -33,7 +33,7 @@ public:
     }
 
 private:
-    Rng m_rng;
+    Engine m_rng;
 };
 inline RNG<std::mt19937> rng;
 inline RNG<std::mt19937_64> rng64;

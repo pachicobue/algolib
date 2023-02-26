@@ -1,6 +1,6 @@
 #pragma once
 #include "../common.hpp"
-#include "../util/int_nthroot.hpp"
+#include "../utility/int_nthroot.hpp"
 
 // f^n(x) = y となる最小のn
 template<typename T, typename FW, typename FINV>

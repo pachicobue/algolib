@@ -40,8 +40,8 @@ public:
     int operator()(int v, int d) const
     {
         assert(0 <= v and v < m_v);
-        for (int k = (int)log2p1(d); k >= 0; k--) {
-            if (btest(d, k)) { v = m_ps[v][k]; }
+        for (int k = (int)bitWidth(d); k >= 0; k--) {
+            if (isBitOn(d, k)) { v = m_ps[v][k]; }
         }
         return v;
     }

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
 #include "../../../src/data_structure/segment_tree/segtree.hpp"
-#include "../../../src/util/modint.hpp"
-#include "../../../src/util/printer.hpp"
-#include "../../../src/util/scanner.hpp"
+#include "../../../src/utility/modint.hpp"
+#include "../../../src/utility/printer.hpp"
+#include "../../../src/utility/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 #include "../../src/graph/two_edge_connected_components.hpp"
-#include "../../src/util/printer.hpp"
-#include "../../src/util/scanner.hpp"
+#include "../../src/utility/printer.hpp"
+#include "../../src/utility/scanner.hpp"
 int main()
 {
     const auto [N, M] = in.tup<int, int>();

@@ -1,7 +1,7 @@
 #pragma once
 #include "../common.hpp"
-#include "../util/modint.hpp"
-#include "../util/modint64.hpp"
+#include "../utility/modint.hpp"
+#include "../utility/modint64.hpp"
 template<typename mint>
 bool millerRabin(u64 n, const Vec<u64>& as)
 {
