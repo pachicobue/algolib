@@ -1,3 +1,9 @@
 # algolib
+競プロ用ライブラリ
 
-[![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)](https://pachicobue.github.io/algolib/)
+## 注意
+- C++17以上前提
+  - AtCoderの言語アップデートが来たらC++20前提になるかも
+- `using namespace std;` すると動かなくなる可能性あり
+  - 多分大丈夫だと思う...
+  - `namespace algolib` とかした方がいいのかな
