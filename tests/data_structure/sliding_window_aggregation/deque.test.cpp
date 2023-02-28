@@ -1,8 +1,8 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
-#include "../../../src/data_structure/sliding_window_aggregation/deque.hpp"
-#include "../../../src/utility/modint.hpp"
-#include "../../../src/utility/printer.hpp"
-#include "../../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/queue_operate_all_composite
+#include "data_structure/sliding_window_aggregation/deque.hpp"
+#include "utility/modint.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

@@ -1,8 +1,8 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
-#include "../../src/number/mod_sqrt.hpp"
-#include "../../src/utility/modint.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/sqrt_mod
+#include "number/mod_sqrt.hpp"
+#include "utility/modint.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 using mint = modint_dynamic<0>;
 int main()
 {

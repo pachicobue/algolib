@@ -1,8 +1,8 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/scc"
-#include "../../src/graph/strongly_connected_components.hpp"
-#include "../../src/graph/topological_sort.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/scc
+#include "graph/strongly_connected_components.hpp"
+#include "graph/topological_sort.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 int main()
 {
     const auto [N, M] = in.tup<int, int>();

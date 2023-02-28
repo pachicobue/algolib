@@ -1,8 +1,8 @@
-#define PROBLEM "https://yukicoder.me/problems/no/541"
-#include "../../src/linear_algebra/static_matrix.hpp"
-#include "../../src/utility/modint.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://yukicoder.me/problems/no/541
+#include "linear_algebra/static_matrix.hpp"
+#include "utility/modint.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 
 int main()
 {

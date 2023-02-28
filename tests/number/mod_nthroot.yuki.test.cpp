@@ -1,9 +1,9 @@
-#define IGNORE  // スペシャルジャッジなので...
-#define PROBLEM "https://yukicoder.me/problems/no/981"
-#include "../../src/number/mod_nthroot.hpp"
-#include "../../src/utility/modint64.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: IGNORE
+// verification-helper: PROBLEM https://yukicoder.me/problems/no/981
+#include "number/mod_nthroot.hpp"
+#include "utility/modint64.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 using mint = modint64_dynamic<0>;
 int main()
 {

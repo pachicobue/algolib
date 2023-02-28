@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/linear_algebra/int_bases.hpp"
+// verification-helper: UNITTEST
+#include "linear_algebra/int_bases.hpp"
 
 void Test()
 {
@@ -16,6 +16,5 @@ void Test()
 int main()
 {
     Test();
-    std::cout << "Hello World\n";
     return 0;
 }

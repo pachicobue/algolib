@@ -1,13 +1,10 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-#include "../../src/numerical/convolution.hpp"
-#include "../../src/utility/rng.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: UNITTEST
+#include "numerical/convolution.hpp"
+#include "utility/rng.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 int main()
 {
-    const auto [A, B] = in.tup<int, int>();
-    out.ln(A + B);
-
     const auto AN = rng.val<int>(1, 1000);
     const auto BN = rng.val<int>(1, 1000);
     const auto as = rng.vec<i64>(AN, -100000000, 100000000);

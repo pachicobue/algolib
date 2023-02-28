@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
+// verification-helper: UNITTEST
 #include "../../src/common/int_div.hpp"
 void fdivTest()
 {
@@ -32,6 +32,5 @@ int main()
 {
     fdivTest();
     cdivTest();
-    std::cout << "Hello World\n";
     return 0;
 }

@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/utility/nd_vec.hpp"
+// verification-helper: UNITTEST
+#include "utility/nd_vec.hpp"
 
 void Test()
 {
@@ -20,6 +20,5 @@ void Test()
 int main()
 {
     Test();
-    std::cout << "Hello World\n";
     return 0;
 }

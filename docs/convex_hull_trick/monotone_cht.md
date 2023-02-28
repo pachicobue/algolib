@@ -1,6 +1,6 @@
 ---
 title: 単調性のある Convex Hull Trick
-documentation_of: //src/convex_hull_trick/monotonic_cht.hpp
+documentation_of: //src/convex_hull_trick/monotone_cht.hpp
 ---
 
 ## 概要

@@ -1,7 +1,7 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/sum_of_floor_of_linear"
-#include "../../src/algorithm/linear_floor_sum.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/sum_of_floor_of_linear
+#include "algorithm/linear_floor_sum.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 int main()
 {
     const auto T = in.val<int>();

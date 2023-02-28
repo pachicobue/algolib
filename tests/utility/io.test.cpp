@@ -1,7 +1,7 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/many_aplusb"
-#include "../../src/common.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/many_aplusb
+#include "common.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 
 int main()
 {

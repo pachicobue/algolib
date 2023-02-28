@@ -1,9 +1,9 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/static_range_inversions_query"
-#include "../../src/data_structure/fenwick_tree/fenwick_tree.hpp"
-#include "../../src/algorithm/mo.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
-#include "../../src/utility/zipper.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/static_range_inversions_query
+#include "data_structure/fenwick_tree/fenwick_tree.hpp"
+#include "algorithm/mo.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
+#include "utility/zipper.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();

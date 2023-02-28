@@ -1,6 +1,6 @@
 ---
 title: Dual Segment Tree
-documentation_of: //src/datastructure/segment_tree/dual_segtree.hpp
+documentation_of: //src/data_structure/segment_tree/dual_segtree.hpp
 ---
 
 ## 概要

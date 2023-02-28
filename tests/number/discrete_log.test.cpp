@@ -1,8 +1,8 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/discrete_logarithm_mod"
-#include "../../src/number/discrete_log.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
-#include "../../src/utility/modint.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/discrete_logarithm_mod
+#include "number/discrete_log.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
+#include "utility/modint.hpp"
 
 int main()
 {

@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../../src/graph/tree/level_ancestor.hpp"
+// verification-helper: UNITTEST
+#include "graph/tree/level_ancestor.hpp"
 
 void Test()
 {

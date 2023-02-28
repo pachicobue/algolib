@@ -1,7 +1,7 @@
-#define PROBLEM "https://yukicoder.me/problems/no/409"
-#include "../../src/convex_hull_trick/monotone_cht.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://yukicoder.me/problems/no/409
+#include "convex_hull_trick/monotone_cht.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 int main()
 {
     const auto [N, A, B, W] = in.tup<int, i64, i64, i64>();

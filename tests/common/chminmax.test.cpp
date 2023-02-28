@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/common/chminmax.hpp"
+// verification-helper: UNITTEST
+#include "common/chminmax.hpp"
 
 struct C
 {
@@ -44,6 +44,5 @@ int main()
 {
     chminTest();
     chmaxTest();
-    std::cout << "Hello World\n";
     return 0;
 }

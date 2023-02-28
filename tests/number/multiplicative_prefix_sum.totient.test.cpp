@@ -1,8 +1,8 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/sum_of_totient_function"
-#include "../../src/number/multiplicative_prefix_sum.hpp"
-#include "../../src/utility/modint.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/sum_of_totient_function
+#include "number/multiplicative_prefix_sum.hpp"
+#include "utility/modint.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../../src/data_structure/fenwick_tree/fenwick_tree.hpp"
+// verification-helper: UNITTEST
+#include "data_structure/fenwick_tree/fenwick_tree.hpp"
 
 void Test()
 {
@@ -15,6 +15,5 @@ void Test()
 int main()
 {
     Test();
-    std::cout << "Hello World\n";
     return 0;
 }

@@ -1,8 +1,7 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
-#include "../../../src/data_structure/sparse_table/static_rmq.hpp"
-#include "../../../src/utility/printer.hpp"
-#include "../../../src/utility/scanner.hpp"
-
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/staticrmq
+#include "data_structure/sparse_table/static_rmq.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 struct Max
 {
     using T = i32;

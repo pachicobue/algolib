@@ -1,2 +1,2 @@
-exclude: ['tools', 'dummy_headers']
+exclude: []
 title: algolib

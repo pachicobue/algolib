@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/string/morris_pratt.hpp"
+// verification-helper: UNITTEST
+#include "string/morris_pratt.hpp"
 
 void Test()
 {
@@ -11,6 +11,5 @@ void Test()
 int main()
 {
     Test();
-    std::cout << "Hello World\n";
     return 0;
 }

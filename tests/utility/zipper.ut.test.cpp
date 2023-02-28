@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/utility/zipper.hpp"
+// verification-helper: UNITTEST
+#include "utility/zipper.hpp"
 
 void ConstructorTest()
 {
@@ -46,6 +46,5 @@ int main()
     ConstructorTest();
     AddTest1();
     AddTest2();
-    std::cout << "Hello World\n";
     return 0;
 }

@@ -1,7 +1,7 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/counting_primes"
-#include "../../src/number/prime_power_sum.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/counting_primes
+#include "number/prime_power_sum.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 int main()
 {
     const auto N = in.val<u64>();

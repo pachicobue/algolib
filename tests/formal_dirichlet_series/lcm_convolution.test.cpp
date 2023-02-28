@@ -1,8 +1,8 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/lcm_convolution"
-#include "../../src/formal_dirichlet_series/lcm_convolution.hpp"
-#include "../../src/utility/modint.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/lcm_convolution
+#include "formal_dirichlet_series/lcm_convolution.hpp"
+#include "utility/modint.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/common/irange.hpp"
+// verification-helper: UNITTEST
+#include "common/irange.hpp"
 
 void repTest()
 {
@@ -72,6 +72,5 @@ int main()
     irangeTest2();
     irangeTest3();
     loopTest();
-    std::cout << "Hello World\n";
     return 0;
 }

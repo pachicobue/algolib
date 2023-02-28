@@ -1,6 +1,6 @@
 ---
 title: 静的数列のRMQ
-documentation_of: //src/ds/static_rmq.hpp
+documentation_of: //src/data_structure/sparse_table/static_rmq.hpp
 ---
 
 ## 概要

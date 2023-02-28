@@ -1,8 +1,8 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
-#include "../../../src/data_structure/wavelet/wavelet_matrix.hpp"
-#include "../../../src/utility/printer.hpp"
-#include "../../../src/utility/scanner.hpp"
-#include "../../../src/utility/bin_search.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_kth_smallest
+#include "data_structure/wavelet/wavelet_matrix.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
+#include "utility/bin_search.hpp"
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();

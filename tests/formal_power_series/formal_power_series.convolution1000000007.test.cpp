@@ -1,8 +1,8 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
-#include "../../src/formal_power_series/formal_power_series.hpp"
-#include "../../src/utility/modint.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod_1000000007
+#include "formal_power_series/formal_power_series.hpp"
+#include "utility/modint.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 int main()
 {
     using mint = modint_1000000007;

@@ -1,7 +1,7 @@
-#define PROBLEM "https://yukicoder.me/problems/no/888"
-#include "../../src/number/divisors.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://yukicoder.me/problems/no/888
+#include "number/divisors.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 
 int main()
 {

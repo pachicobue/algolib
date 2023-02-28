@@ -1,7 +1,7 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/kth_root_integer"
-#include "../../src/utility/int_nthroot.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/kth_root_integer
+#include "utility/int_nthroot.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 
 int main()
 {

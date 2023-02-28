@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/common/bit_op.hpp"
+// verification-helper: UNITTEST
+#include "common/bit_op.hpp"
 
 void popCountTest()
 {
@@ -74,6 +74,5 @@ int main()
     bitFloorTest();
     hasSingleBitTest();
     isBitOnOffTest();
-    std::cout << "Hello World\n";
     return 0;
 }

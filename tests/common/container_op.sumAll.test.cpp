@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/common/container_op.hpp"
+// verification-helper: UNITTEST
+#include "common/container_op.hpp"
 
 void Primitive1DArrTest()
 {
@@ -94,6 +94,5 @@ int main()
     Deq1DArrTest();
     Deq2DArrTest();
     CastTest();
-    std::cout << "Hello World\n";
     return 0;
 }

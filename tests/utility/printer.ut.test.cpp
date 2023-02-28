@@ -1,6 +1,6 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/common.hpp"
-#include "../../src/utility/printer.hpp"
+// verification-helper: UNITTEST
+#include "common.hpp"
+#include "utility/printer.hpp"
 
 std::stringstream ss;
 Printer printer{ss};
@@ -102,6 +102,5 @@ int main()
 {
     valTest();
     valsTest();
-    out.ln("Hello World");
     return 0;
 }

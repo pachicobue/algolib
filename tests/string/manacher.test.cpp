@@ -1,7 +1,7 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
-#include "../../src/string/manacher.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/enumerate_palindromes
+#include "string/manacher.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 
 int main()
 {

@@ -1,7 +1,7 @@
-#define PROBLEM "https://yukicoder.me/problems/no/184"
-#include "../../src/linear_algebra/int_bases.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://yukicoder.me/problems/no/184
+#include "linear_algebra/int_bases.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 
 int main()
 {

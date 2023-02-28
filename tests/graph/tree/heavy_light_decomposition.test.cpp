@@ -1,9 +1,9 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
-#include "../../../src/graph/tree/heavy_light_decomposition.hpp"
-#include "../../../src/data_structure/segment_tree/segtree.hpp"
-#include "../../../src/utility/modint.hpp"
-#include "../../../src/utility/printer.hpp"
-#include "../../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_set_path_composite
+#include "graph/tree/heavy_light_decomposition.hpp"
+#include "data_structure/segment_tree/segtree.hpp"
+#include "utility/modint.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 int main()
 {
     using mint = modint_998244353;

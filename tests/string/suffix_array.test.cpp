@@ -1,7 +1,7 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
-#include "../../src/string/suffix_array.hpp"
-#include "../../src/utility/printer.hpp"
-#include "../../src/utility/scanner.hpp"
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/suffixarray
+#include "string/suffix_array.hpp"
+#include "utility/printer.hpp"
+#include "utility/scanner.hpp"
 
 int main()
 {

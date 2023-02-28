@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../src/utility/rng.hpp"
+// verification-helper: UNITTEST
+#include "utility/rng.hpp"
 
 void Test()
 {
@@ -48,6 +48,5 @@ int main()
     valTest();
     vecTest();
     vvecTest();
-    std::cout << "Hello World\n";
     return 0;
 }
