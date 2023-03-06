@@ -5,7 +5,6 @@ import hashlib
 import traceback
 import resource
 from logging import getLogger
-from datetime import datetime, timezone
 from pathlib import Path
 import onlinejudge
 import onlinejudge.dispatch
@@ -22,6 +21,7 @@ from common.verif_status_register import (
 from common.config import *
 from common.result import VerifResult
 from common.dependency import get_dependency
+from common.util import get_last_modified_time
 from attribute import get_atrribute
 
 _logger = getLogger(__name__)
@@ -149,16 +149,10 @@ def check_verify_register(verif_path: Path, tle: float) -> None:
     try:
         dependency = get_dependency(verif_path)
     except Exception:
-        last_modified_date = datetime.fromtimestamp(
-            verif_path.stat().st_mtime,
-            tz=datetime.now(timezone.utc).astimezone().tzinfo,
-        ).replace(microsecond=0)
+        last_modified_date = get_last_modified_time([verif_path])
         mark_status(verif_path, VerifStatus(last_modified_date, VerifResult.CE))
     else:
-        last_modified_date = datetime.fromtimestamp(
-            max([x.stat().st_mtime for x in dependency]),
-            tz=datetime.now(timezone.utc).astimezone().tzinfo,
-        ).replace(microsecond=0)
+        last_modified_date = get_last_modified_time(dependency)
         if last_modified_date > status.date:
             _logger.info("Verify start")
             result = _verify(verif_path, tle)

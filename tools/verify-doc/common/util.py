@@ -1,7 +1,9 @@
 import sys
 import os
+import subprocess
 from typing import *
 from pathlib import Path
+from datetime import datetime, timezone
 
 sys.path.append(str(Path(__file__).parent.resolve()))
 from config import *
@@ -30,3 +32,17 @@ def get_src_list() -> List[Path]:
             [(source_dir / f) for f in source_dir.glob("**/*.hpp")],
         )
     )
+
+
+def get_last_modified_time(paths: List[Path]) -> datetime:
+    if _is_local_execution():
+        return datetime.fromtimestamp(
+            max([x.stat().st_mtime for x in paths]),
+            tz=datetime.now(timezone.utc).astimezone().tzinfo,
+        ).replace(microsecond=0)
+    else:
+        command = ["git", "log", "-1", "--date=iso", "--pretty=%ad", "--"] + list(
+            map(str, paths)
+        )
+        timestamp = subprocess.check_output(command).decode().strip()
+        return datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S %z")

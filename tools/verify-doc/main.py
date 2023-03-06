@@ -32,6 +32,11 @@ def doc() -> None:
     generate_json_datas()
 
 
+def github():
+    _logger.info("$ main.py all --github")
+    doc_data_dir.rename(library_root_dir / "data")
+
+
 if __name__ == "__main__":
     basicConfig(level=INFO, format="[%(levelname)s] %(message)s")
     parser = ArgumentParser(description="Test/Documentation tool")
@@ -60,5 +65,7 @@ if __name__ == "__main__":
         _logger.info("$ main.py all")
         verify(True, args.tle)
         doc()
+        if args.github:
+            github()
     else:
         parser.print_help()
