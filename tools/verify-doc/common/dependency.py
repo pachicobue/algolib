@@ -6,7 +6,7 @@ from typing import *
 
 sys.path.append(str(Path(__file__).parent.resolve()))
 sys.path.append(str(Path(__file__).parent.parent.resolve()))
-from common.config import *
+from config import *
 
 
 def get_dependency(verif_path: Path) -> List[Path]:

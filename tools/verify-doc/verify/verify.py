@@ -3,7 +3,8 @@ import sys
 import os
 import hashlib
 import traceback
-from glob import glob
+import resource
+from logging import getLogger
 from datetime import datetime, timezone
 from pathlib import Path
 import onlinejudge
@@ -13,19 +14,21 @@ import onlinejudge.service.library_checker
 
 sys.path.append(str(Path(__file__).parent.resolve()))
 sys.path.append(str(Path(__file__).parent.parent.resolve()))
-from common.status_register import (
+from common.verif_status_register import (
     VerifStatus,
     mark_status,
     refer_status,
-    error_timestamp,
 )
 from common.config import *
 from common.result import VerifResult
-from attribute import get_atrribute, PROBLEM, UNITTEST, ERROR, IGNORE
-from dependency import get_dependency
+from common.dependency import get_dependency
+from attribute import get_atrribute
+
+_logger = getLogger(__name__)
 
 
 def _compile(verif_path: Path, directory: Path) -> bool:
+    directory.mkdir(parents=True, exist_ok=True)
     command = (
         [compile_command] + compile_flags + ["-o", directory / "a.out", str(verif_path)]
     )  # [str]
@@ -67,12 +70,15 @@ def _test(
     url: str,
     directory: Path,
 ) -> bool:
+    _, hard = resource.getrlimit(resource.RLIMIT_STACK)
+    resource.setrlimit(resource.RLIMIT_STACK, (hard, hard))
+
     problem = onlinejudge.dispatch.problem_from_url(url)
     command = [
         "oj",
         "test",
         "-c",
-        (directory / "a.out").resolve(),
+        directory / "a.out",
         "-d",
         str(directory / "test"),
         "--tle",
@@ -96,8 +102,11 @@ def _test_unittest(
     tle: float,
     directory: Path,
 ) -> bool:
+    _, hard = resource.getrlimit(resource.RLIMIT_STACK)
+    resource.setrlimit(resource.RLIMIT_STACK, (hard, hard))
+
     command = [
-        (directory / "a.out").resolve(),
+        directory / "a.out",
     ]
     try:
         subprocess.check_call(command, timeout=tle)
@@ -109,57 +118,50 @@ def _test_unittest(
 
 def _verify(verif_path: Path, tle: float) -> VerifResult:
     attributes = get_atrribute(verif_path)
-    if IGNORE in attributes:
+    if attributes.ignore:
         return VerifResult.SKIPPED
-    if UNITTEST in attributes:
-        directory = verif_workspace / "cache"
+    if attributes.unittest:
+        directory = verify_workspace_dir / "cache"
         if not _compile(verif_path, directory):
-            return VerifResult.WRONG_TEST
+            return VerifResult.CE
         if not _test_unittest(verif_path, tle, directory):
             return VerifResult.WA_TLE_RE
         return VerifResult.AC
     else:
-        url = attributes[PROBLEM]
-        directory = verif_workspace / "cache" / hashlib.md5(url.encode()).hexdigest()
+        url = attributes.problem
+        if url == None:
+            return VerifResult.CE
+        directory = (
+            verify_workspace_dir / "cache" / hashlib.md5(url.encode()).hexdigest()
+        )
         if not _download(url, directory):
-            return VerifResult.WRONG_TEST
+            return VerifResult.CE
         if not _compile(verif_path, directory):
-            return VerifResult.WRONG_TEST
-        if not _test(verif_path, tle, attributes.get("ERROR"), url, directory):
+            return VerifResult.CE
+        if not _test(verif_path, tle, attributes.error, url, directory):
             return VerifResult.WA_TLE_RE
         return VerifResult.AC
 
 
 def check_verify_register(verif_path: Path, tle: float) -> None:
+    _logger.info("check_verify_register: {}".format(verif_path))
     status = refer_status(verif_path)
     try:
         dependency = get_dependency(verif_path)
     except Exception:
-        mark_status(verif_path, VerifStatus(error_timestamp, VerifResult.WRONG_TEST))
+        last_modified_date = datetime.fromtimestamp(
+            verif_path.stat().st_mtime,
+            tz=datetime.now(timezone.utc).astimezone().tzinfo,
+        ).replace(microsecond=0)
+        mark_status(verif_path, VerifStatus(last_modified_date, VerifResult.CE))
     else:
-        last_modified_date = (
-            datetime.fromtimestamp(
-                max([x.stat().st_mtime for x in dependency]),
-                tz=datetime.now(timezone.utc).astimezone().tzinfo,
-            ).replace(microsecond=0)
-            if len(dependency) > 0
-            else error_timestamp
-        )
+        last_modified_date = datetime.fromtimestamp(
+            max([x.stat().st_mtime for x in dependency]),
+            tz=datetime.now(timezone.utc).astimezone().tzinfo,
+        ).replace(microsecond=0)
         if last_modified_date > status.date:
-            print(
-                "{}: Start verification".format(
-                    verif_path.relative_to(verification_dir)
-                )
-            )
+            _logger.info("Verify start")
             result = _verify(verif_path, tle)
             mark_status(verif_path, VerifStatus(last_modified_date, result))
         else:
-            print(
-                "{}: No need to verify".format(verif_path.relative_to(verification_dir))
-            )
-
-
-def get_verif_list() -> List[Path]:
-    return list(
-        map(Path, glob("**/*.test.cpp", recursive=True, root_dir=verification_dir))
-    )
+            _logger.info("No need to verify")

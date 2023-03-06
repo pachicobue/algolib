@@ -8,7 +8,7 @@ from config import *
 from util import get_json
 from result import VerifResult
 
-error_timestamp: datetime = datetime.fromtimestamp(0, tz=timezone(timedelta()))
+_error_timestamp: datetime = datetime.fromtimestamp(0, tz=timezone(timedelta()))
 
 
 class VerifStatus:
@@ -25,11 +25,10 @@ def clear_statuses() -> None:
 
 
 def refer_status(verif_path: Path) -> VerifStatus:
-    path = verif_path.relative_to(verification_dir)
-    if path in _verif_statuses:
-        return _verif_statuses[path]
+    if verif_path in _verif_statuses:
+        return _verif_statuses[verif_path]
     else:
-        return VerifStatus(error_timestamp, VerifResult.INVALID)
+        return VerifStatus(_error_timestamp, VerifResult.INVALID)
 
 
 def load_status() -> None:
@@ -39,12 +38,11 @@ def load_status() -> None:
         for path, status in dict.items():
             date: datetime = datetime.strptime(status["date"], "%Y-%m-%d %H:%M:%S %z")
             result: VerifResult = VerifResult(status["result"])
-            _verif_statuses[Path(path)] = VerifStatus(date, result)
+            _verif_statuses[verification_dir / path] = VerifStatus(date, result)
 
 
 def mark_status(verif_path: Path, verif_status: VerifStatus) -> None:
-    path = verif_path.relative_to(verification_dir)
-    _verif_statuses[path] = verif_status
+    _verif_statuses[verif_path] = verif_status
 
 
 def save_status() -> None:
@@ -53,6 +51,6 @@ def save_status() -> None:
         subdict = {}
         subdict["date"] = status.date.strftime("%Y-%m-%d %H:%M:%S %z")
         subdict["result"] = status.result.value
-        dict[str(path)] = subdict
+        dict[str(path.relative_to(verification_dir))] = subdict
     with open(get_json(), "w") as fp:
-        json.dump(dict, fp, sort_keys=True, indent=2)
+        json.dump(dict, fp, sort_keys=True, indent=4)

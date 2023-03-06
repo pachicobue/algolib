@@ -1,6 +1,7 @@
 # tools
-tools/.workspace/*
-!tools/.workspace/remote.json
+tools/verify-doc/.workspace/verify/*
+!tools/verify-doc/.workspace/verify/remote.json
+tools/verify-doc/.workspace/doc/*
 
 # ccls
 .ccls-cache
