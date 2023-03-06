@@ -9,7 +9,6 @@ from common.config import *
 from common.result import VerifResult, SrcResult
 from common.dependency import get_dependency
 from common.verif_status_register import refer_status
-from common.util import get_verif_list, get_src_list
 from code_info import SrcCodeInfo, VerifCodeInfo
 from json_data import save_src_json, save_verif_json
 
