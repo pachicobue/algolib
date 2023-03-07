@@ -6,6 +6,7 @@
 #include "utility/zipper.hpp"
 int main()
 {
+    //hoge
     const auto [N, Q] = in.tup<int, int>();
     auto as = in.vec<u32>(N);
     Zipper<u32> zipper(as);

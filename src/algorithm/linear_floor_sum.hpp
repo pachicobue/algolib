@@ -4,6 +4,7 @@
 template<typename T = i64>
 T linearFloorSum(i64 N, i64 A, i64 B, i64 C)
 {
+    // hogehoge
     assert(C != 0);
     if (C < 0) { return linearFloorSum<T>(N, -A, -B, -C); }
     if (A == 0) { return T{N} * floorDiv(B, C); }
