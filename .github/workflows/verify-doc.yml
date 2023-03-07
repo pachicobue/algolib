@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  verify:
+  verify-doc:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,3 +36,17 @@ jobs:
 
       - name: Push verification result
         uses: ad-m/github-push-action@master
+
+      - name: Run documentation
+        run: python3 tools/verify-doc/main.py doc --publish
+
+      - name: Push document to Blog repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.ALGOLIB_PAT }}
+        with:
+          source_directory: "data"
+          destination-github-username: 'pachicobue'
+          destination-repository-name: 'pachicobue.github.io'
+          target-branch: 'main'
+
