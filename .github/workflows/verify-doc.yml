@@ -29,7 +29,7 @@ jobs:
 
       - name: Check modified
         id: diff
-        run: echo "::set-output name=modified::$(git diff | wc -l)"
+        run: echo "modified=$(git diff | wc -l)" >> $GITHUB_OUTPUT
 
       - name: Commit verification result
         if: ${{ steps.diff.outputs.modified != '0' }}
