@@ -49,4 +49,6 @@ jobs:
           destination-github-username: 'pachicobue'
           destination-repository-name: 'pachicobue.github.io'
           target-branch: 'main'
+          target-directory: "data"
+          commit-message: "[algolib:verify-doc] save document data"
 
