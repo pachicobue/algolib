@@ -27,20 +27,29 @@ jobs:
           YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         run: python3 tools/verify-doc/main.py verify --all
 
+      - name: Check modified
+        id: diff
+        run: echo "::set-output name=modified::$(git diff | wc -l)"
+
       - name: Commit verification result
+        if: ${{ steps.diff.outputs.modified != '0' }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+
           git add -u
-          git commit -m "[verify-doc] save verification result" || true 
+          git commit -m "[verify-doc] save verification result" 
 
       - name: Push verification result
+        if: ${{ steps.diff.outputs.modified != '0' }}
         uses: ad-m/github-push-action@master
 
       - name: Run documentation
+        if: ${{ steps.diff.outputs.modified != '0' }}
         run: python3 tools/verify-doc/main.py doc --publish
 
       - name: Push document to Blog repository
+        if: ${{ steps.diff.outputs.modified != '0' }}
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.ALGOLIB_PAT }}
