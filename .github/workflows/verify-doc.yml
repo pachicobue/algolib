@@ -32,7 +32,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add -u
-          git commit --allow-empty -m "[verify-doc] save verification result"
+          git commit -m "[verify-doc] save verification result" || true 
 
       - name: Push verification result
         uses: ad-m/github-push-action@master
@@ -45,7 +45,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.ALGOLIB_PAT }}
         with:
-          source_directory: "data"
+          source-directory: "data"
           destination-github-username: 'pachicobue'
           destination-repository-name: 'pachicobue.github.io'
           target-branch: 'main'
