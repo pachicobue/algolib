@@ -9,6 +9,7 @@
   - `namespace algolib` とかした方がいいのかな
 
 ## 利用しているOSS
+主にtools以下で使用・参照している
 
 ### [online-judge-tools/oj](https://github.com/online-judge-tools/oj)
 ```
