@@ -1,0 +1,40 @@
+name: verify-doc
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.ALGOLIB_PAT }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install depending packages
+        run: pip3 install -U online-judge-tools
+      
+      - name: Run verification
+        env:
+          YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
+        run: python3 tools/verify-doc/main.py verify --all
+
+      - name: Commit verification result
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "[verify-doc] save verification result"
+
+      - name: Push verification result
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ALGOLIB_PAT }}
