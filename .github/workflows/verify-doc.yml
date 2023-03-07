@@ -32,7 +32,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -a -m "[verify-doc] save verification result"
+          git add -u
+          git commit --allow-empty -m "[verify-doc] save verification result"
 
       - name: Push verification result
         uses: ad-m/github-push-action@master
