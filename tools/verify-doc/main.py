@@ -33,7 +33,8 @@ def doc() -> None:
 
 
 def publish() -> None:
-    doc_data_dir.rename(library_root_dir / "data")
+    (library_root_dir / "data").mkdir(exist_ok=True)
+    doc_data_dir.rename(library_root_dir / "data/algolib")
 
 
 if __name__ == "__main__":
