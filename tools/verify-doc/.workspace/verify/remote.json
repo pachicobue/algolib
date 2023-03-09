@@ -1,8 +1,4 @@
 {
-    "algorithm/linear_floor_sum.test.cpp": {
-        "date": "2023-03-07 13:38:43 +0900",
-        "result": "AC"
-    },
     "algorithm/mo.test.cpp": {
         "date": "2023-03-07 13:38:43 +0900",
         "result": "AC"

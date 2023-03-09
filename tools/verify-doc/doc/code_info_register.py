@@ -1,4 +1,5 @@
 import sys
+from collections import defaultdict
 from logging import getLogger
 from typing import *
 from pathlib import Path
@@ -34,12 +35,12 @@ def refer_verif_code_info(verif_path: Path) -> VerifCodeInfo:
 def calc_src_code_info(src_path: Path) -> None:
     _logger.info("get_src_code_info: {}".format(src_path))
     src_info = _src_code_infos.setdefault(src_path, SrcCodeInfo())
-    dict: Dict[VerifResult, int] = {}
+    dict: DefaultDict[str, int] = defaultdict(int)
     for verif_path in src_info.verified_with:
         verif_result = _verif_code_infos[verif_path].result
-        dict.setdefault(verif_result, dict.get(verif_result, 0) + 1)
-    ac = dict.get(VerifResult.AC, 0)
-    wa_tle_re = dict.get(VerifResult.WA_TLE_RE, 0)
+        dict[verif_result.value] += 1
+    ac: int = dict["AC"]
+    wa_tle_re: int = dict["WA_TLE_RE"]
     if wa_tle_re > 0:
         src_info.result = SrcResult.SOME_WA_TLE_RE
     elif ac > 0:
