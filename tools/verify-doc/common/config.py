@@ -31,6 +31,8 @@ verify_local_json: Path = verify_workspace_dir / "local.json"
 
 doc_workspace_dir: Path = workspace_dir / "doc"
 doc_data_dir: Path = doc_workspace_dir / "data"
+src_data_json: Path = doc_data_dir / "src_stats.json"
+verif_data_json: Path = doc_data_dir / "verif_stats.json"
 
 ###################################################################
 

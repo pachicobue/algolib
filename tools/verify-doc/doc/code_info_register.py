@@ -10,7 +10,6 @@ from common.result import VerifResult, SrcResult
 from common.dependency import get_dependency
 from common.verif_status_register import refer_status
 from code_info import SrcCodeInfo, VerifCodeInfo
-from json_data import save_src_json, save_verif_json
 
 _logger = getLogger(__name__)
 
@@ -18,8 +17,7 @@ _verif_code_infos: Dict[Path, VerifCodeInfo] = {}
 _src_code_infos: Dict[Path, SrcCodeInfo] = {}
 
 
-def get_verif_code_info(verif_path: Path) -> None:
-    _logger.info("get_verif_code_info: {}".format(verif_path))
+def calc_verif_code_info(verif_path: Path) -> None:
     verif_info = _verif_code_infos.setdefault(verif_path, VerifCodeInfo())
     verif_info.result = refer_status(verif_path).result
     with open(verif_path) as f:
@@ -27,10 +25,13 @@ def get_verif_code_info(verif_path: Path) -> None:
     for src_path in get_dependency(verif_path):
         src_info = _src_code_infos.setdefault(src_path, SrcCodeInfo())
         src_info.verified_with.append(verif_path)
-    save_verif_json(verif_path, verif_info)
 
 
-def get_src_code_info(src_path: Path) -> None:
+def refer_verif_code_info(verif_path: Path) -> VerifCodeInfo:
+    return _verif_code_infos[verif_path]
+
+
+def calc_src_code_info(src_path: Path) -> None:
     _logger.info("get_src_code_info: {}".format(src_path))
     src_info = _src_code_infos.setdefault(src_path, SrcCodeInfo())
     dict: Dict[VerifResult, int] = {}
@@ -47,4 +48,7 @@ def get_src_code_info(src_path: Path) -> None:
         src_info.result = SrcResult.NOT_TESTED
     with open(src_path) as f:
         src_info.code = f.read()
-    save_src_json(src_path, src_info)
+
+
+def refer_src_code_info(src_path: Path) -> SrcCodeInfo:
+    return _src_code_infos[src_path]
