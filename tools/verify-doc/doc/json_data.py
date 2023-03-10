@@ -17,9 +17,9 @@ def _save_src_json():
         src_code_info = refer_src_code_info(src_path)
         dict: Dict[str, Any] = {}
         dict["result"] = src_code_info.result.name
-        dict["verified_with"] = [
-            str(f.relative_to(library_root_dir)) for f in src_code_info.verified_with
-        ]
+        # dict["verified_with"] = [
+        #     str(f.relative_to(library_root_dir)) for f in src_code_info.verified_with
+        # ]
         dict["code"] = src_code_info.code
         alldict[str(src_path.relative_to(source_dir))] = dict
     output_path = src_data_json
@@ -43,5 +43,5 @@ def _save_verif_json():
 
 
 def save_json():
-    _save_verif_json()
+    # _save_verif_json()
     _save_src_json()
