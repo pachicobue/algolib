@@ -98,5 +98,11 @@ template<typename Vs>
 constexpr void rearrange(Vs& vs, const Vec<int>& is)
 {
     auto vs_ = vs;
-    for (int i = 0; i < is.size(); i++) { vs[i] = vs_[is[i]]; }
+    for (int i = 0; i < (int)is.size(); i++) { vs[i] = vs_[is[i]]; }
+}
+inline Vec<int> reversePerm(const Vec<int>& is)
+{
+    auto ris = is;
+    for (int i = 0; i < (int)is.size(); i++) { ris[is[i]] = i; }
+    return ris;
 }
