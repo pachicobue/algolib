@@ -94,3 +94,9 @@ constexpr Vec<T> iotaVec(int n, T offset = 0)
     std::iota(ALL(ans), offset);
     return ans;
 }
+template<typename Vs>
+constexpr void rearrange(Vs& vs, const Vec<int>& is)
+{
+    auto vs_ = vs;
+    for (int i = 0; i < is.size(); i++) { vs[i] = vs_[is[i]]; }
+}
