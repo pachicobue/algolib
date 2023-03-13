@@ -1,5 +1,5 @@
 // verification-helper: UNITTEST
-#include "common/irange.hpp"
+#include "internal/irange.hpp"
 
 void repTest()
 {

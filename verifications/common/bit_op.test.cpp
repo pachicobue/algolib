@@ -1,5 +1,5 @@
 // verification-helper: UNITTEST
-#include "common/bit_op.hpp"
+#include "internal/bit_op.hpp"
 
 void popCountTest()
 {

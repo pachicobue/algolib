@@ -1,5 +1,5 @@
 // verification-helper: UNITTEST
-#include "common/container_op.hpp"
+#include "internal/container_op.hpp"
 
 void PrimitiveArrTest()
 {

@@ -37,7 +37,7 @@ verif_data_json: Path = doc_data_dir / "verif_stats.json"
 ###################################################################
 
 exclude_src_paths: List[Path] = [
-    source_dir / "common/print/impl/",
-    source_dir / "common/print/prototype/",
+    source_dir / "internal/print/impl/",
+    source_dir / "internal/print/prototype/",
     source_dir / "header.hpp.gch",
 ]

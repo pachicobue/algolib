@@ -7,47 +7,47 @@
         "date": "2023-03-13 03:22:43 +0900",
         "result": "AC"
     },
-    "common/bit_op.test.cpp": {
+    "internal/bit_op.test.cpp": {
         "date": "2023-03-06 00:37:53 +0900",
         "result": "AC"
     },
-    "common/chminmax.test.cpp": {
+    "internal/chminmax.test.cpp": {
         "date": "2023-03-06 00:37:53 +0900",
         "result": "AC"
     },
-    "common/container_op.fillAll.test.cpp": {
+    "internal/container_op.fillAll.test.cpp": {
         "date": "2023-03-13 03:22:43 +0900",
         "result": "AC"
     },
-    "common/container_op.reverseAll.test.cpp": {
+    "internal/container_op.reverseAll.test.cpp": {
         "date": "2023-03-13 03:22:43 +0900",
         "result": "AC"
     },
-    "common/container_op.sortAll.test.cpp": {
+    "internal/container_op.sortAll.test.cpp": {
         "date": "2023-03-13 03:22:43 +0900",
         "result": "AC"
     },
-    "common/container_op.sumAll.test.cpp": {
+    "internal/container_op.sumAll.test.cpp": {
         "date": "2023-03-13 03:22:43 +0900",
         "result": "AC"
     },
-    "common/container_op.test.cpp": {
+    "internal/container_op.test.cpp": {
         "date": "2023-03-13 03:22:43 +0900",
         "result": "AC"
     },
-    "common/int_div.test.cpp": {
+    "internal/int_div.test.cpp": {
         "date": "2023-03-06 00:37:53 +0900",
         "result": "AC"
     },
-    "common/irange.test.cpp": {
+    "internal/irange.test.cpp": {
         "date": "2023-03-06 00:37:53 +0900",
         "result": "AC"
     },
-    "common/powerInt.test.cpp": {
+    "internal/powerInt.test.cpp": {
         "date": "2023-03-06 00:37:53 +0900",
         "result": "AC"
     },
-    "common/powerMonoid.test.cpp": {
+    "internal/powerMonoid.test.cpp": {
         "date": "2023-03-06 00:37:53 +0900",
         "result": "AC"
     },

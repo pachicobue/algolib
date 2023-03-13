@@ -1,5 +1,5 @@
 // verification-helper: UNITTEST
-#include "../../src/common/int_div.hpp"
+#include "../../src/internal/int_div.hpp"
 void fdivTest()
 {
     auto f = [&](auto x, auto y) {

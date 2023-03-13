@@ -1,5 +1,5 @@
 // verification-helper: UNITTEST
-#include "common/chminmax.hpp"
+#include "internal/chminmax.hpp"
 
 struct C
 {
