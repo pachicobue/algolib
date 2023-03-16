@@ -1,4 +1,8 @@
 {
+    "algorithm/discrete_logarithm.test.cpp": {
+        "date": "2023-03-16 22:29:38 +0900",
+        "result": "AC"
+    },
     "algorithm/linear_floor_sum.test.cpp": {
         "date": "2023-03-13 19:11:55 +0900",
         "result": "AC"
