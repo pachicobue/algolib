@@ -41,7 +41,7 @@ public:
         return Tup<Args...>{val<Args>()...};
     }
     template<typename... Args>
-    auto tup(const Args&... offsets)
+    auto tup(Args... offsets)
     {
         return Tup<Args...>{val<Args>(offsets)...};
     }

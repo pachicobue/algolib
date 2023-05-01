@@ -4,9 +4,9 @@ template<typename T>
 constexpr T LIMMIN = std::numeric_limits<T>::min();
 template<typename T>
 constexpr T LIMMAX = std::numeric_limits<T>::max();
-template<typename T>
+template<typename T = i64>
 constexpr T INF = (LIMMAX<T> - 1) / 2;
-template<typename T>
+template<typename T = f80>
 constexpr T PI = T{3.141592653589793238462643383279502884};
 template<typename T = u64>
 constexpr T TEN(int n)
