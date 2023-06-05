@@ -3,6 +3,11 @@
 #include "../macro.hpp"
 
 template<typename Vs>
+constexpr auto maxAll(const Vs& vs)
+{
+    return *std::max_element(ALL(vs));
+}
+template<typename Vs>
 constexpr auto minAll(const Vs& vs)
 {
     return *std::min_element(ALL(vs));

@@ -12,7 +12,7 @@ public:
     }
     int maxPrimeFactor(int x) const
     {
-        assert(1 < x and x < m_N);
+        assert(1 <= x and x < m_N);
         return m_factors[x];
     }
     bool isPrime(int x) const

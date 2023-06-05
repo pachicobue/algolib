@@ -15,5 +15,5 @@ constexpr auto sumAll(const Vs& vs)
 template<typename Vs>
 constexpr auto gcdAll(const Vs& vs)
 {
-    return accumAll(vs, (decltype(vs[0])){}, [&](auto v1, auto v2) { return std::gcd(v1, v2); });
+    return accumAll(vs, decltype(vs[0]){}, [&](auto v1, auto v2) { return std::gcd(v1, v2); });
 }

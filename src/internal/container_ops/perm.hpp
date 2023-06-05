@@ -9,11 +9,11 @@ constexpr Vec<T> iotaVec(int n, T offset = 0)
     std::iota(ALL(ans), offset);
     return ans;
 }
-template<typename Vs, typename... Args>
-constexpr Vec<int> iotaSort(const Vs& vs, Args... args)
+template<typename Vs>
+constexpr Vec<int> iotaSort(const Vs& vs)
 {
     auto is = iotaVec(vs.size());
-    std::sort(ALL(is), args...);
+    std::sort(ALL(is), [&](int i, int j) { return vs[i] < vs[j]; });
     return is;
 }
 inline Vec<int> permInv(const Vec<int>& is)

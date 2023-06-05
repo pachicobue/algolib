@@ -12,7 +12,7 @@ Vec<mint> convolute_mod(const Vec<mint>& as, const Vec<mint>& bs)
     if (AN == 0 or BN == 0) { return {}; }
     if (AN > BN) { return convolute_mod(bs, as); }
     const int N = AN + BN - 1;
-    if (AN * 2 <= BN) {
+    if (AN * 10 <= BN) {
         Vec<mint> cs(N, 0);
         for (int sj : irange(0, BN, AN)) {
             const int tj = std::min(BN, sj + AN);
