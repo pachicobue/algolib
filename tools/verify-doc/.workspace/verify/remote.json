@@ -56,11 +56,11 @@
         "result": "AC"
     },
     "convex_hull_trick/li_chao_tree.line.test.cpp": {
-        "date": "2023-06-06 00:28:12 +0900",
+        "date": "2023-07-25 01:16:06 +0900",
         "result": "AC"
     },
     "convex_hull_trick/li_chao_tree.segment.test.cpp": {
-        "date": "2023-06-06 00:28:12 +0900",
+        "date": "2023-07-25 01:16:06 +0900",
         "result": "AC"
     },
     "convex_hull_trick/monotone_cht.test.cpp": {
@@ -112,7 +112,7 @@
         "result": "AC"
     },
     "data_structure/union_find_tree/union_find_tree.test.cpp": {
-        "date": "2023-06-06 00:28:12 +0900",
+        "date": "2023-07-25 01:16:06 +0900",
         "result": "AC"
     },
     "data_structure/wavelet/wavelet_matrix.quantile.test.cpp": {
