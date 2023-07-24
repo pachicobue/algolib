@@ -20,7 +20,7 @@ def verify(all: bool, tle: float) -> None:
                 check_verify_register(verif_path, tle)
         else:
             assert args.file != None
-            verif_path = Path(args.file)
+            verif_path = Path(args.file).resolve()
             _logger.info("$ main.py verify --file={}".format(verif_path))
             check_verify_register(verif_path, tle)
     finally:

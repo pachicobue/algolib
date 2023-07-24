@@ -1,10 +1,11 @@
 #pragma once
 #include "../common.hpp"
-template<typename T>
+template<typename T, typename F = T>
 class LiChaoTree
 {
-    using L = Pair<T, T>;
-    static constexpr L NIL = {0, INF<T>};
+    static_assert(std::is_integral_v<T>, "Query type imust be integral");
+    using L = Pair<F, F>;
+    static constexpr L NIL = {0, INF<F>};
     struct Node
     {
         L line = NIL;
@@ -15,12 +16,16 @@ class LiChaoTree
         if (l1 == NIL or l2 == NIL) { return l2 == NIL; }
         const auto& [a1, b1] = l1;
         const auto& [a2, b2] = l2;
-        if (a1 == a2) {
-            return b1 <= b2;
-        } else if (a1 > a2) {
-            return x <= floorDiv(b2 - b1, a1 - a2);
+        if constexpr (std::is_integral_v<F>) {
+            if (a1 == a2) {
+                return b1 <= b2;
+            } else if (a1 > a2) {
+                return x <= floorDiv(b2 - b1, a1 - a2);
+            } else {
+                return floorDiv(b1 - b2, a2 - a1) < x;
+            }
         } else {
-            return floorDiv(b1 - b2, a2 - a1) < x;
+            return a1 * F{x} + b1 < a2 * F{x} + b2;
         }
     }
 

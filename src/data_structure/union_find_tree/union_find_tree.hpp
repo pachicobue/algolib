@@ -1,15 +1,16 @@
 #pragma once
 #include "../../common.hpp"
+
 class UnionFindTree
 {
 public:
-    UnionFindTree(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}
+    UnionFindTree(int N) : m_v{N}, m_infos(m_v, -1) {}
     int find(int i)
     {
-        if (m_roots[i] == i) {
+        if (m_infos[i] < 0) {
             return i;
         } else {
-            return m_roots[i] = find(m_roots[i]);
+            return m_infos[i] = find(m_infos[i]);
         }
     }
     bool unite(int i, int j)
@@ -17,12 +18,12 @@ public:
         i = find(i), j = find(j);
         if (i == j) { return false; }
         if (size(i) > size(j)) { std::swap(i, j); }
-        m_roots[i] = j;
-        m_sizes[j] += m_sizes[i];
+        m_infos[j] += m_infos[i];
+        m_infos[i] = j;
         return true;
     }
     bool same(int i, int j) { return find(i) == find(j); }
-    int size(int i) { return m_sizes[find(i)]; }
+    int size(int i) { return -m_infos[find(i)]; }
     Vec<Vec<int>> groups()
     {
         Vec<Vec<int>> iss(m_v);
@@ -32,6 +33,5 @@ public:
 
 private:
     int m_v;
-    Vec<int> m_roots;
-    Vec<int> m_sizes;
+    Vec<int> m_infos;
 };
