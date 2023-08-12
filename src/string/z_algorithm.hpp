@@ -1,7 +1,6 @@
 #pragma once
 #include "../common.hpp"
-template<typename V>
-Vec<int> z_algorithm(const V& vs)
+template<typename V> Vec<int> z_algorithm(const V& vs)
 {
     const int N = std::size(vs);
     Vec<int> ans(N, -1);

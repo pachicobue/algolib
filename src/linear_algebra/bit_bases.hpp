@@ -1,16 +1,14 @@
 #pragma once
 #include "../common.hpp"
-template<int D>
-class BitBases
+template<int D> class BitBases
 {
     using T = BSet<D>;
-
 public:
     BitBases() { fillAll(m_vis, -1); }
     bool add(const T& v_)
     {
-        auto v = v_;
-        T mask = 0;
+        auto v    = v_;
+        T mask    = 0;
         auto less = [&](const T& v1, const T& v2) -> bool {
             const int i = (v1 ^ v2)._Find_first();
             return v2[i];
@@ -54,7 +52,6 @@ public:
         assert(v.count() == 0);
         return {true, mask};
     }
-
 private:
     Vec<T> m_orig_bases;     // 元の入力による基底
     Vec<T> m_reduced_bases;  // 縮約された基底

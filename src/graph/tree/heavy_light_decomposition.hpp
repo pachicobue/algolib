@@ -1,37 +1,40 @@
 #pragma once
 #include "../../common.hpp"
 #include "../graph.hpp"
-template<typename T>
-class HeavyLightDecomposition
+/**
+ * @brief HLD
+ */
+template<typename T> class HeavyLightDecomposition
 {
     using P = Pair<int, int>;
-
 public:
+    /**
+     * @brief コンストラクタ
+     * @attention グラフに対して破壊的変更をする (g[u][0] がHeavyEdgeになるように並び替える)
+     * 
+     * @param g 無向木
+     * @param r 根
+     */
     HeavyLightDecomposition(Graph<T>& g, int r = 0)
-        : m_v(g.v()),
-          m_ps(m_v, -1),
-          m_tops(m_v, -1),
-          m_ords(m_v, -1),
-          m_ins(m_v, -1),
-          m_outs(m_v, -1)
+        : m_V(g.V()), m_ps(m_V, -1), m_tops(m_V, -1), m_ords(m_V, -1), m_ins(m_V, -1), m_outs(m_V, -1)
     {
-        const int N = g.v();
+        const int N = g.V();
         Vec<int> szs(N, 1);
-        Fix([&](auto dfs, int u, int p) -> int {
+        Fix([&](auto self, int u, int p) -> int {
             m_ps[u] = p;
             for (int i : rep(g[u].size())) {
                 const int v = g[u][i];
                 if (p == v) { continue; }
-                szs[u] += dfs(v, u);
+                szs[u] += self(v, u);
                 if (szs[(int)g[u][0]] < szs[v]) { std::swap(g[u][0], g[u][i]); }
             }
             return szs[u];
         })(r, -1);
         m_tops[r] = r;
         int index = 0;
-        Fix([&](auto dfs, int u, int p) -> void {
-            m_ins[u] = index++;
-            m_outs[u] = m_ins[u] + szs[u];
+        Fix([&](auto self, int u, int p) -> void {
+            m_ins[u]         = index++;
+            m_outs[u]        = m_ins[u] + szs[u];
             m_ords[m_ins[u]] = u;
             for (int i : rep(g[u].size())) {
                 const int v = g[u][i];
@@ -41,38 +44,56 @@ public:
                 } else {
                     m_tops[v] = v;
                 }
-                dfs(v, u);
+                self(v, u);
             }
         })(r, -1);
     }
-    int pos(int v) const
-    {
-        assert(0 <= v and v < m_v);
-        return m_ins[v];
-    }
-    int at(int n) const
-    {
-        assert(0 <= n and n < m_v);
-        return m_ords[n];
-    }
+    /**
+     * @brief 頂点番号→ET順
+     * 
+     * @param v 頂点番号
+     * @return int 訪問順
+     */
+    int pos(int v) const { return assert(0 <= v and v < m_V), m_ins[v]; }
+    /**
+     * @brief ET順→頂点番号
+     * 
+     * @param n ET順
+     * @return int 頂点番号
+     */
+    int at(int i) const { return assert(0 <= i and i < m_V), m_ords[i]; }
+    /**
+     * @brief 部分木に属する頂点の ET順区間
+     * 
+     * @param v 頂点番号
+     * @return P {l,r} : l <= ET < r が部分木
+     */
     P sub(int v) const
     {
-        assert(0 <= v and v < m_v);
+        assert(0 <= v and v < m_V);
         return {m_ins[v], m_outs[v]};
     }
+    /**
+     * @brief パスに属する ET順区間集合
+     * @attention 閉区間 (向きを表現するため l>r もあり得る)
+     * 
+     * @param u 頂点番号
+     * @param v 頂点番号
+     * @return P {[l,r]} : ET が l~r
+     */
     Vec<P> path(int u, int v) const
     {
-        assert(0 <= u and u < m_v);
-        assert(0 <= v and v < m_v);
+        assert(0 <= u and u < m_V);
+        assert(0 <= v and v < m_V);
         Vec<P> head, tail;
         for (int pu = m_tops[u], pv = m_tops[v]; pu != pv;) {
             if (m_ins[pu] < m_ins[pv]) {
                 tail.push_back({m_ins[pv], m_ins[v]});
-                v = m_ps[pv];
+                v  = m_ps[pv];
                 pv = m_tops[v];
             } else {
                 head.push_back({m_ins[u], m_ins[pu]});
-                u = m_ps[pu];
+                u  = m_ps[pu];
                 pu = m_tops[u];
             }
         }
@@ -81,9 +102,8 @@ public:
         for (const auto& p : tail) { head.push_back(p); }
         return head;
     }
-
 private:
-    int m_v;
+    int m_V;
     Vec<int> m_ps;
     Vec<int> m_tops;
     Vec<int> m_ords;

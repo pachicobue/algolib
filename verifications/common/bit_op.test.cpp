@@ -1,10 +1,10 @@
 // verification-helper: UNITTEST
 #include "internal/bit_op.hpp"
 
-void popCountTest()
+void std::popcountTest()
 {
-    assert(popCount(0x0123456789ABCDEF) == 32);
-    assert(popCount(0x0) == 0);
+    assert(std::popcount(0x0123456789ABCDEF) == 32);
+    assert(std::popcount(0x0) == 0);
 }
 
 void topBitTest()
@@ -23,36 +23,36 @@ void lowBitTest()
     assert(lowBit(0x0) == 64);
 }
 
-void bitWidthTest()
+void std::bit_widthTest()
 {
-    assert(bitWidth(0x0123456789ABCDEF) == 57);
-    assert(bitWidth(0x8000000000000000) == 64);
-    assert(bitWidth(0x0) == 0);
+    assert(std::bit_width(0x0123456789ABCDEF) == 57);
+    assert(std::bit_width(0x8000000000000000) == 64);
+    assert(std::bit_width(0x0) == 0);
 }
 
-void bitCeilTest()
+void std::bit_ceilTest()
 {
-    assert(bitCeil(0x0123456789ABCDEF) == 0x0200000000000000);
-    assert(bitCeil(0x8000000000000000) == 0x8000000000000000);
-    assert(bitCeil(0x0) == 1);
+    assert(std::bit_ceil(0x0123456789ABCDEF) == 0x0200000000000000);
+    assert(std::bit_ceil(0x8000000000000000) == 0x8000000000000000);
+    assert(std::bit_ceil(0x0) == 1);
 }
 
-void bitFloorTest()
+void std::bit_floorTest()
 {
-    assert(bitFloor(0x0123456789ABCDEF) == 0x0100000000000000);
-    assert(bitFloor(0x8000000000000000) == 0x8000000000000000);
-    assert(bitFloor(0x8000000000000001) == 0x8000000000000000);
-    assert(bitFloor(0x1) == 1);
-    assert(bitFloor(0x0) == 0);
+    assert(std::bit_floor(0x0123456789ABCDEF) == 0x0100000000000000);
+    assert(std::bit_floor(0x8000000000000000) == 0x8000000000000000);
+    assert(std::bit_floor(0x8000000000000001) == 0x8000000000000000);
+    assert(std::bit_floor(0x1) == 1);
+    assert(std::bit_floor(0x0) == 0);
 }
 
-void hasSingleBitTest()
+void std::has_single_bitTest()
 {
-    assert(hasSingleBit(0x0123456789ABCDEF) == false);
-    assert(hasSingleBit(0x8000000000000000) == true);
-    assert(hasSingleBit(0x8000000000000001) == false);
-    assert(hasSingleBit(0x1) == true);
-    assert(hasSingleBit(0x0) == false);
+    assert(std::has_single_bit(0x0123456789ABCDEF) == false);
+    assert(std::has_single_bit(0x8000000000000000) == true);
+    assert(std::has_single_bit(0x8000000000000001) == false);
+    assert(std::has_single_bit(0x1) == true);
+    assert(std::has_single_bit(0x0) == false);
 }
 
 void isBitOnOffTest()
@@ -66,13 +66,13 @@ void isBitOnOffTest()
 
 int main()
 {
-    popCountTest();
+    std::popcountTest();
     topBitTest();
     lowBitTest();
-    bitWidthTest();
-    bitCeilTest();
-    bitFloorTest();
-    hasSingleBitTest();
+    std::bit_widthTest();
+    std::bit_ceilTest();
+    std::bit_floorTest();
+    std::has_single_bitTest();
     isBitOnOffTest();
     return 0;
 }

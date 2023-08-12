@@ -1,16 +1,14 @@
 #pragma once
 #include "../common.hpp"
-template<typename T = u64>
-class IntBases
+template<typename T = u64> class IntBases
 {
     static constexpr int D = sizeof(T) * 8;
-
 public:
     IntBases() { fillAll(m_vis, -1); }
     bool add(const T& v)
     {
         auto reduced_v = v;
-        T mask = 0;
+        T mask         = 0;
         for (int i : rep(m_reduced_bases.size())) {
             if (chmin(reduced_v, reduced_v ^ m_reduced_bases[i])) { mask ^= m_masks[i]; }
         }
@@ -46,7 +44,6 @@ public:
         assert(v == 0);
         return {true, mask};
     }
-
 private:
     Vec<T> m_orig_bases;     // 元の入力による基底
     Vec<T> m_reduced_bases;  // 縮約された基底

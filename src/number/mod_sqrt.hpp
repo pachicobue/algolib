@@ -1,7 +1,6 @@
 #pragma once
 #include "../common.hpp"
-template<typename mint>
-mint modsqrt(const mint& A)
+template<typename mint> mint modsqrt(const mint& A)
 {
     const u64 P = mint::mod();
     if (A == 0) { return 0; }
@@ -19,7 +18,7 @@ mint modsqrt(const mint& A)
     }
     mint Error = A.pow(q), X = A.pow((q + 1) / 2);
     while (Error.val() != 1) {
-        u64 l = 0;
+        u64 l       = 0;
         mint pError = Error;
         for (u64 i = 0; i < Q; i++, pError *= pError) {
             if (pError.val() == 1) {

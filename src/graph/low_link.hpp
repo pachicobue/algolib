@@ -1,64 +1,41 @@
 #pragma once
 #include "../common.hpp"
 #include "graph.hpp"
-template<typename T>
-class LowLink
+/**
+ * @brief LowLink
+ * @attention 以下に継承させるための基底クラス (直接利用しない)
+ *   - TwoEdgeConnectedComponents
+ *   - BiConnectedComponents
+ */
+template<typename T> class LowLink
 {
-    using P = Pair<int, int>;
-
-public:
-    LowLink(const Graph<T>& g) : m_v(g.v()), m_ords(m_v), m_lows(m_v), m_is_art(m_v)
+protected:
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param g 無向グラフ
+     */
+    LowLink(const Graph<T>& g) : m_degs(g.V(), 0), m_depths(g.V(), 0), m_lows(g.V(), -1)
     {
-        const int N = g.v();
-        int ord = 0;
-        Vec<bool> used(N, false);
-        auto dfs = Fix([&](auto dfs, int u, int pe) -> void {
-            used[u] = true;
-            m_ords[u] = ord++;
-            m_lows[u] = m_ords[u];
-            bool is_art = false;
-            int dim = 0;
-            for (UNUSED const auto& [id, v, _] : g[u]) {
-                if (not used[v]) {
-                    dim++;
-                    dfs(v, id);
+        auto dfs = Fix([&](auto self, int u, int pe) -> void {
+            for (const auto& [e, v] : g[u] | g.ETo) {
+                if (e == pe) { continue; }
+                if (m_depths[v] == 0) {
+                    m_degs[v]++;
+                    m_lows[v] = m_depths[v] = m_depths[u] + 1;
+                    self(v, e);
                     chmin(m_lows[u], m_lows[v]);
-                    is_art |= (pe != -1 and m_ords[u] <= m_lows[v]);
-                    if (isBridge(u, v)) { m_bridges.push_back(std::minmax({u, v})); }
-                } else if (id != pe) {
-                    chmin(m_lows[u], m_ords[v]);
+                } else {
+                    chmin(m_lows[u], m_depths[v]);
                 }
             }
-            if (pe == -1) {
-                m_is_art[u] = (dim >= 2);
-            } else {
-                m_is_art[u] = is_art;
-            }
         });
-        for (int i : rep(N)) {
-            if (not used[i]) { dfs(i, -1); }
+        for (int i : rep(g.size())) {
+            if (m_depths[i] == 0) { dfs(i, -1); }
         }
     }
-    bool isArt(int i) const
-    {
-        assert(0 <= i and i < m_v);
-        return m_is_art[i];
-    }
-    bool isBridge(int i, int j) const
-    {
-        assert(0 <= i and i < m_v);
-        assert(0 <= j and j < m_v);
-        if (m_ords[i] > m_ords[j]) { std::swap(i, j); }
-        return m_ords[i] < m_lows[j];
-    }
-    const Vec<P>& bridges() const { return m_bridges; }
-    const Vec<int>& arts() const { return m_arts; }
 
-private:
-    int m_v;
-    Vec<P> m_bridges;
-    Vec<int> m_arts;
-    Vec<int> m_ords;
-    Vec<int> m_lows;
-    Vec<bool> m_is_art;
+    Vec<int> m_degs;  // m_degs[u] = uにつながっている下る辺の本数
+    Vec<int> m_depths;
+    Vec<int> m_lows;  // m_lows[u] = uから始めて、下る辺と後退辺を使って到達可能な最小深さ
 };

@@ -1,72 +1,40 @@
 #pragma once
 #include "../common.hpp"
 #include "../utility/int_nthroot.hpp"
-#include "../number/prime_factors.hpp"
-
-template<typename F, typename FPOW>
-i64 discreteLogarithm(i64 N, F f, FPOW f_pow, i64 x, i64 y)
+#include "../internal/power.hpp"
+/**
+ * @brief f^n(x)=y となる最小の n
+ * @see https://maspypy.com/モノイド作用に関する離散対数問題
+ *
+ * @param N 答えの上限 (0 <= n < N)
+ * @param x スタート
+ * @param y ゴール
+ * @param f 作用素
+ * @param compose 作用素の合成(半群)
+ * @param act 作用
+ * @return i64 最小解(解なしの場合は N)
+ */
+template<typename T, typename F> i64 discreteLogarithm(i64 N, T x, T y, F f, auto compose, auto act)
 {
-    const i64 W = intNthRoot(N, 2);
+    assert(N >= 0);
+    if (N == 0) { return (x == y ? 0 : -1); }
+    const i64 W = (i64)intSqrt(N);
     const i64 M = ceilDiv(N, W);
 
-    UMap<i64, i64> gs;
-    i64 X = x;
-    gs[X] = 0;
-    for (i64 i : irange(1, M + 1)) {
-        X = f_pow(W, X);
-        gs[X] = i * W;
-    }
+    UMap<T, u64> Ys;
+    for (T Y = y; i64 i : rep(M + 1)) { Ys[Y] = i, Y = act(f, Y); }
 
-    i64 IW = -1, J = -1;
-    i64 Y = y;
-    for (i64 j : rep(W)) {
-        if (gs.count(Y)) {
-            const i64 iw = gs.at(Y);
-            IW = iw, J = j;
-            break;
+    const F fW = powerSemiGroup(f, W, compose);
+    for (auto [X, failed] = makePair(x, 0); i64 k : irange(1, M + 1)) {
+        T pX = X;
+        X    = act(fW, X);
+        if (not Ys.contains(X)) { continue; }
+        for (i64 n : irange((k - 1) * W, k * W)) {
+            if (pX == y) { return n; }
+            pX = act(f, pX);
         }
-        Y = f(Y);
+        failed++;
+        if (failed == 2) { return -1; }
     }
-    if (IW == -1 and J == -1) { return -1; }
-
-    i64 C = -1;
-    {
-        i64 Z = X;
-        for (i64 j : irange(1, W + 1)) {
-            Z = f(Z);
-            if (gs.count(Z)) {
-                const i64 iw = gs.at(Z);
-                C = (W * M + j) - iw;
-                break;
-            }
-        }
-        assert(C > 0);
-        const auto fs = primeFactors(C);
-        for (const auto& [p, e] : fs) {
-            Vec<i64> ps(e + 1, 1);
-            for (int i : rep(e)) { ps[i + 1] = ps[i] * p; }
-            const i64 Q = C / ps[e];
-            const int d = binSearch(-1, e, [&](int d) {
-                const i64 nC = Q * ps[d];
-                return (f_pow(nC, X) == X);
-            });
-            C = Q * ps[d];
-        }
-    }
-
-    const i64 maxM = floorDiv(IW, C);
-    const i64 m = binSearch(maxM + 1, 0_i64, [&](int m) {
-        const i64 iw = IW - C * m;
-        return f_pow(iw, x) == Y;
-    });
-    IW -= C * m;
-    const i64 K = IW - J;
-    i64 ans = INF<i64>;
-    if (K >= 0) {
-        if (f_pow(K, x) == y) { chmin(ans, K); }
-    }
-    if (K + C >= 0) {
-        if (f_pow(K + C, x) == y) { chmin(ans, K + C); }
-    }
-    return (ans == INF<i64> ? -1_i64 : ans);
+    return -1;
 }

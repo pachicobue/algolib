@@ -1,9 +1,8 @@
 #pragma once
 #include "../common.hpp"
-template<typename T>
-Vec<T> setZeta(const Vec<T>& xs, const bool subset)
+template<typename T> Vec<T> setZeta(const Vec<T>& xs, const bool subset)
 {
-    const int N = bitCeil(xs.size());
+    const int N = std::bit_ceil(xs.size());
     Vec<T> ys(N);
     for (int i : rep(xs.size())) { ys[i] = xs[i]; }
     for (int i = 1; i < N; i <<= 1) {

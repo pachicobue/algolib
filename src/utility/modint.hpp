@@ -1,180 +1,228 @@
 #pragma once
 #include "../common.hpp"
 #include "../algorithm/ext_gcd.hpp"
-template<u32 mod_, u32 root_, u32 max2p_>
+#include "../number/primitive_root.hpp"
+/**
+ * @brief Modint
+ * 
+ * @tparam Mod 剰余 (2^63 -1 以下)
+ * @tparam dynamic 動的にmodを変えたい場合
+ */
+template<u64 Mod, bool dynamic = false>
+    requires(dynamic or (0 < Mod and Mod <= (u64)LIMMAX<i64>))
 class modint
 {
-    template<typename U = u32&>
-    static U modRef()
-    {
-        static u32 s_mod = 0;
-        return s_mod;
-    }
-    template<typename U = u32&>
-    static U rootRef()
-    {
-        static u32 s_root = 0;
-        return s_root;
-    }
-    template<typename U = u32&>
-    static U max2pRef()
-    {
-        static u32 s_max2p = 0;
-        return s_max2p;
-    }
-
 public:
-    static_assert(mod_ <= LIMMAX<i32>, "mod(signed int size) only supported!");
-    static constexpr bool isDynamic() { return (mod_ == 0); }
-    template<typename U = const u32>
-    static constexpr std::enable_if_t<mod_ != 0, U> mod()
+    /**
+     * @brief 動的modintかどうか
+     * 
+     * @return true 動的
+     * @return false 静的
+     */
+    static constexpr bool isDynamic() { return dynamic; }
+    /**
+     * @brief Mod (静的Modint)
+     * 
+     * @return 剰余
+     */
+    static constexpr u64 mod()
+        requires(not dynamic)
     {
-        return mod_;
+        return Mod;
     }
-    template<typename U = const u32>
-    static std::enable_if_t<mod_ == 0, U> mod()
+    /**
+     * @brief Mod (動的Modint)
+     * 
+     * @return 剰余
+     */
+    static constexpr u64 mod()
+        requires dynamic
     {
         return modRef();
     }
-    template<typename U = const u32>
-    static constexpr std::enable_if_t<mod_ != 0, U> root()
+    /**
+     * @brief Mod更新 (動的Modintのみ)
+     * 
+     * @param m 剰余
+     */
+    static void setMod(u64 m)
+        requires dynamic
     {
-        return root_;
-    }
-    template<typename U = const u32>
-    static std::enable_if_t<mod_ == 0, U> root()
-    {
-        return rootRef();
-    }
-    template<typename U = const u32>
-    static constexpr std::enable_if_t<mod_ != 0, U> max2p()
-    {
-        return max2p_;
-    }
-    template<typename U = const u32>
-    static std::enable_if_t<mod_ == 0, U> max2p()
-    {
-        return max2pRef();
-    }
-    template<typename U = u32>
-    static void setMod(std::enable_if_t<mod_ == 0, U> m)
-    {
-        assert(1 <= m and m <= LIMMAX<i32>);
+        assert(0 < m and m < LIMMAX<u64> / 2);
         modRef() = m;
-        sinvRef() = {1, 1};
-        factRef() = {1, 1};
-        ifactRef() = {1, 1};
     }
-    template<typename U = u32>
-    static void setRoot(std::enable_if_t<mod_ == 0, U> r)
-    {
-        rootRef() = r;
-    }
-    template<typename U = u32>
-    static void setMax2p(std::enable_if_t<mod_ == 0, U> m)
-    {
-        max2pRef() = m;
-    }
+    /**
+     * @brief コンストラクタ
+     */
     constexpr modint() : m_val{0} {}
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param v 値
+     */
     constexpr modint(i64 v) : m_val{normll(v)} {}
-    constexpr void setRaw(u32 v) { m_val = v; }
-    constexpr modint operator-() const { return modint{0} - (*this); }
-    constexpr modint& operator+=(const modint& m)
+    /**
+     * @brief -1倍
+     * 
+     * @param m 
+     * @return modint -m
+     */
+    constexpr friend modint operator-(const modint& m) { return modint{0} - m; }
+    /**
+     * @brief modint同士の足し算
+     * 
+     * @param m1 
+     * @param m2 
+     * @return modint& self
+     */
+    constexpr friend modint& operator+=(modint& m1, const modint& m2) { return m1.m_val = norm(m1.m_val + m2.m_val), m1; }
+    /**
+     * @brief modint同士の引き算
+     * 
+     * @param m1 
+     * @param m2 
+     * @return modint& self
+     */
+    constexpr friend modint& operator-=(modint& m1, const modint& m2) { return m1.m_val = norm(m1.m_val + mod() - m2.m_val), m1; }
+    /**
+     * @brief modint同士の掛け算
+     * 
+     * @param m1 
+     * @param m2 
+     * @return modint& self
+     */
+    constexpr friend modint& operator*=(modint& m1, const modint& m2)
     {
-        m_val = norm(m_val + m.val());
-        return *this;
+        if constexpr (dynamic) {
+            if (mod() <= (u64)LIMMAX<u32>) {
+                return (m1.m_val *= m2.m_val) %= mod(), m1;
+            } else {
+                return m1.m_val = ((u128)m1.m_val * m2.m_val % mod()), m1;
+            }
+        } else {
+            if constexpr (mod() <= (u64)LIMMAX<u32>) {
+                return (m1.m_val *= m2.m_val()) %= mod(), m1;
+            } else {
+                return m1.m_val = ((u128)m1.m_val * m2.m_val % mod()), m1;
+            }
+        }
     }
-    constexpr modint& operator-=(const modint& m)
+    /**
+     * @brief modint同士の割り算
+     * 
+     * @param m1 
+     * @param m2 
+     * @return modint& self
+     */
+    constexpr friend modint& operator/=(modint& m1, const modint& m2) { return m1 *= m2.inv(); }
+    /**
+     * @brief modint同士の和
+     * 
+     * @param m1 
+     * @param m2 
+     * @return modint 和
+     */
+    constexpr friend modint operator+(const modint& m1, const modint& m2)
     {
-        m_val = norm(m_val + mod() - m.val());
-        return *this;
+        auto ans = m1;
+        return ans += m2;
     }
-    constexpr modint& operator*=(const modint& m)
+    /**
+     * @brief modint同士の差
+     * 
+     * @param m1 
+     * @param m2 
+     * @return modint 差
+     */
+    constexpr friend modint operator-(const modint& m1, const modint& m2)
     {
-        m_val = normll((i64)m_val * (i64)m.val() % (i64)mod());
-        return *this;
+        auto ans = m1;
+        return ans -= m2;
     }
-    constexpr modint& operator/=(const modint& m) { return *this *= m.inv(); }
-    constexpr modint operator+(const modint& m) const
+    /**
+     * @brief modint同士の積
+     * 
+     * @param m1 
+     * @param m2 
+     * @return modint 積
+     */
+    constexpr friend modint operator*(const modint& m1, const modint& m2)
     {
-        auto v = *this;
-        return v += m;
+        auto ans = m1;
+        return ans *= m2;
     }
-    constexpr modint operator-(const modint& m) const
+    /**
+     * @brief modint同士の商
+     * 
+     * @param m1 
+     * @param m2 
+     * @return modint 商
+     */
+    constexpr friend modint operator/(const modint& m1, const modint& m2)
     {
-        auto v = *this;
-        return v -= m;
+        auto ans = m1;
+        return ans /= m2;
     }
-    constexpr modint operator*(const modint& m) const
-    {
-        auto v = *this;
-        return v *= m;
-    }
-    constexpr modint operator/(const modint& m) const
-    {
-        auto v = *this;
-        return v /= m;
-    }
-    constexpr bool operator==(const modint& m) const { return m_val == m.val(); }
-    constexpr bool operator!=(const modint& m) const { return not(*this == m); }
+    /**
+     * @brief modint同士の比較
+     * 
+     * @param m1 
+     * @param m2 
+     * @return true 一致
+     * @return false 不一致
+     */
+    constexpr friend bool operator==(const modint& m1, const modint& m2) { return m1.m_val == m2.m_val; }
+    /**
+     * @brief modintの入力
+     * 
+     * @param is 入力stream
+     * @param m 
+     * @return Istream& istream
+     */
     friend Istream& operator>>(Istream& is, modint& m)
     {
         i64 v;
         return is >> v, m = v, is;
     }
-    friend Ostream& operator<<(Ostream& os, const modint& m) { return os << m.val(); }
-    constexpr u32 val() const { return m_val; }
-    template<typename I>
-    constexpr modint pow(I n) const
-    {
-        return powerInt(*this, n);
-    }
-    constexpr modint inv() const { return inverse<i32>(m_val, mod()); }
-    static modint sinv(u32 n)
-    {
-        auto& is = sinvRef();
-        for (u32 i = (u32)is.size(); i <= n; i++) { is.push_back(-is[mod() % i] * (mod() / i)); }
-        return is[n];
-    }
-    static modint fact(u32 n)
-    {
-        auto& fs = factRef();
-        for (u32 i = (u32)fs.size(); i <= n; i++) { fs.push_back(fs.back() * i); }
-        return fs[n];
-    }
-    static modint ifact(u32 n)
-    {
-        auto& ifs = ifactRef();
-        for (u32 i = (u32)ifs.size(); i <= n; i++) { ifs.push_back(ifs.back() * sinv(i)); }
-        return ifs[n];
-    }
-    static modint perm(int n, int k) { return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k); }
-    static modint comb(int n, int k)
-    {
-        return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k) * ifact(k);
-    }
-
+    /**
+     * @brief modintの出力
+     * 
+     * @param os 出力stream
+     * @param m 
+     * @return Ostream& ostream
+     */
+    friend Ostream& operator<<(Ostream& os, const modint& m) { return os << m.m_val; }
+    /**
+     * @brief modintの内部値
+     * 
+     * @return u64 値
+     */
+    constexpr u64 val() const { return m_val; }
+    /**
+     * @brief modintの累乗
+     * 
+     * @param n 指数
+     * @return modint 累乗
+     */
+    constexpr modint pow(i64 n) const { return powerInt(*this, n); }
+    /**
+     * @brief modintの逆数
+     * @attention 正確には xy=gcd(x,mod) となる y を返す
+     * 
+     * @return modint 逆数
+     */
+    constexpr modint inv() const { return inverseMod(m_val, mod()); }
 private:
-    static Vec<modint>& sinvRef()
+    static u64& modRef()
+        requires dynamic
     {
-        static Vec<modint> is{1, 1};
-        return is;
+        static u64 mod_ = 0;
+        return mod_;
     }
-    static Vec<modint>& factRef()
-    {
-        static Vec<modint> fs{1, 1};
-        return fs;
-    }
-    static Vec<modint>& ifactRef()
-    {
-        static Vec<modint> ifs{1, 1};
-        return ifs;
-    }
-    static constexpr u32 norm(u32 x) { return x < mod() ? x : x - mod(); }
-    static constexpr u32 normll(i64 x) { return norm(u32(x % (i64)mod() + (i64)mod())); }
-    u32 m_val;
+    static constexpr u64 norm(u64 x) { return x < mod() ? x : x - mod(); }  // 0 <= x < mod*2
+    static constexpr u64 normll(i64 x) { return norm(u64(x % (i64)mod() + (i64)mod())); }
+    u64 m_val;
 };
-using modint_1000000007 = modint<1000000007, 5, 1>;
-using modint_998244353 = modint<998244353, 3, 23>;
-template<int id>
-using modint_dynamic = modint<0, 0, id>;
+using modint_1000000007               = modint<1000000007, false>;
+using modint_998244353                = modint<998244353, false>;
+template<u64 id> using modint_dynamic = modint<id, true>;

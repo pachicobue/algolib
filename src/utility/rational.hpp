@@ -1,92 +1,184 @@
 #pragma once
 #include "../common.hpp"
-template<typename T>
+/**
+ * @brief 有理数型
+ * @note ∞,-∞ も含む
+ * @attention オーバーフロー対策はしていないので注意
+ */
 class Rational
 {
 public:
+    /**
+     * @brief コンストラクタ (0初期化)
+     */
     constexpr Rational() : m_num{0}, m_den{1} {}
-    constexpr Rational(const T& v) : m_num{v}, m_den{1} {}
-    constexpr Rational(const T& num, const T& den) { std::tie(m_num, m_den) = norm(num, den); }
-    constexpr Rational operator-() const
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param v 整数
+     */
+    constexpr Rational(const i64& v) : m_num{v}, m_den{1} {}
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param num 分子
+     * @param den 分母
+     */
+    constexpr Rational(const i64& num, const i64& den) { std::tie(m_num, m_den) = norm(num, den); }
+    /**
+     * @brief -1倍
+     * 
+     * @return Rational -x
+     */
+    constexpr friend Rational operator-(const Rational& x) { return {-x.m_num, x.m_den}; }
+    /**
+     * @brief 有理数同士の足し算
+     * 
+     * @param x1
+     * @param x2 
+     * @return Rational& self
+     */
+    constexpr friend Rational& operator+=(Rational& x1, const Rational& x2)
     {
-        auto ans = *this;
-        ans.m_num = -ans.m_num;
-        return ans;
+        return x1 = {x1.m_num * x2.m_den + x2.m_num * x1.m_den, x1.m_den * x2.m_den}, x1;
     }
-    constexpr Rational& operator+=(const Rational& x2)
+    /**
+     * @brief 有理数同士の足し算
+     * 
+     * @param x1 
+     * @param x2 
+     * @return Rational& self
+     */
+    constexpr friend Rational& operator-=(Rational& x1, const Rational& x2)
     {
-        const auto& [n, d] = norm(m_num * x2.m_den + x2.m_num * m_den, m_den * x2.m_den);
-        return setRaw(n, d), *this;
+        return x1 = {x1.m_num * x2.m_den - x2.m_num * x1.m_den, x1.m_den * x2.m_den}, x1;
     }
-    constexpr Rational& operator-=(const Rational& x2)
+    /**
+     * @brief 有理数同士の掛け算
+     * 
+     * @param x1 
+     * @param x2 
+     * @return Rational& self
+     */
+    constexpr friend Rational& operator*=(Rational& x1, const Rational& x2)
     {
-        const auto& [n, d] = norm(m_num * x2.m_den - x2.m_num * m_den, m_den * x2.m_den);
-        return setRaw(n, d), *this;
+        const i64 g12 = std::gcd(x1.m_num, x2.m_den), g21 = std::gcd(x2.m_num, x1.m_den);
+        return x1 = {(x1.m_num / g12) * (x2.m_num / g21), (x1.m_den / g21) * (x2.m_den / g12)}, x1;
     }
-    constexpr Rational& operator*=(const Rational& x2)
+    /**
+     * @brief 有理数同士の割り算
+     * 
+     * @param x1 
+     * @param x2 
+     * @return Rational& self
+     */
+    constexpr friend Rational& operator/=(Rational& x1, const Rational& x2)
     {
-        const T g12 = std::gcd(m_num, x2.m_den), g21 = std::gcd(x2.m_num, m_den);
-        return setRaw((m_num / g12) * (x2.m_num / g21), (m_den / g21) * (x2.m_den / g12)), *this;
+        const i64 g12 = std::gcd(x1.m_num, x2.m_num), g21 = std::gcd(x2.m_den, x1.m_den);
+        return x1 = {(x1.m_num / g12) * (x2.m_den / g21), (x1.m_den / g21) * (x2.m_num / g12)}, x1;
     }
-    constexpr Rational& operator/=(const Rational& x2)
+    /**
+     * @brief 有理数同士の和
+     * 
+     * @param x1 
+     * @param x2 
+     * @return Rational 和
+     */
+    constexpr friend Rational operator+(const Rational& x1, const Rational& x2)
     {
-        const T g12 = std::gcd(m_num, x2.m_num), g21 = std::gcd(x2.m_den, m_den);
-        return setRaw((m_num / g12) * (x2.m_den / g21), (m_den / g21) * (x2.m_num / g12)), *this;
+        auto ans = x1;
+        return ans += x2;
     }
-    constexpr Rational operator+(const Rational& x2) const
+    /**
+     * @brief 有理数同士の差
+     * 
+     * @param x1 
+     * @param x2 
+     * @return Rational 差
+     */
+    constexpr friend Rational operator-(const Rational& x1, const Rational& x2)
     {
-        auto v = *this;
-        return v += x2;
+        auto ans = x1;
+        return ans -= x2;
     }
-    constexpr Rational operator-(const Rational& x2) const
+    /**
+     * @brief 有理数同士の積
+     * 
+     * @param x1 
+     * @param x2 
+     * @return Rational 積
+     */
+    constexpr friend Rational operator*(const Rational& x1, const Rational& x2)
     {
-        auto v = *this;
-        return v -= x2;
+        auto ans = x1;
+        return ans *= x2;
     }
-    constexpr Rational operator*(const Rational& x2) const
+    /**
+     * @brief 有理数同士の商
+     * 
+     * @param x1 
+     * @param x2 
+     * @return Rational 商
+     */
+    constexpr friend Rational operator/(const Rational& x1, const Rational& x2)
     {
-        auto v = *this;
-        return v *= x2;
+        auto ans = x1;
+        return ans /= x2;
     }
-    constexpr Rational operator/(const Rational& x2) const
+    /**
+     * @brief 有理数同士の比較
+     * 
+     * @param x1 
+     * @param x2 
+     * @return true 一致
+     * @return false 不一致
+     */
+    constexpr friend bool operator==(const Rational& x1, const Rational& x2) { return x1.m_num == x2.m_num and x1.m_den == x2.m_den; }
+    /**
+     * @brief 有理数同士の一貫比較
+     * 
+     * @param x1
+     * @param x2
+     * @return 一貫比較結果
+     */
+    constexpr friend auto operator<=>(const Rational& x1, const Rational& x2)
     {
-        auto v = *this;
-        return v /= x2;
+        if (x1 == x2) { return std::strong_ordering::equal; }
+        if (x1.m_den == 0) { return x1.m_num <=> 0; }
+        if (x2.m_den == 0) { return 0 <=> x2.m_num; }
+        return x1.m_num * x2.m_den <=> x2.m_num * x1.m_den;
     }
-    constexpr bool operator==(const Rational& x2) const
-    {
-        return m_num == x2.m_num and m_den == x2.m_den;
-    }
-    constexpr bool operator<(const Rational& x2) const
-    {
-        if (x2.m_den == 0) { return x2.m_num > 0; }
-        if (m_den == 0) { return m_num < 0; }
-        return m_num * x2.m_den < x2.m_num * m_den;
-    }
-    constexpr bool operator>(const Rational& x2) const
-    {
-        if (x2.m_den == 0) { return x2.m_num < 0; }
-        if (m_den == 0) { return m_num > 0; }
-        return m_num * x2.m_den > x2.m_num * m_den;
-    }
-    constexpr bool operator<=(const Rational& x2) const { return not(*this > x2); }
-    constexpr bool operator>=(const Rational& x2) const { return not(*this < x2); }
+    /**
+     * @brief 分子,分母 のペア
+     * 
+     * @return Pair<i64, i64> {分子,分母}
+     */
+    constexpr Pair<i64, i64> val() const { return {m_num, m_den}; }
+    /**
+     * @brief 分子
+     * 
+     * @return i64 分子
+     */
+    constexpr i64 num() const { return m_num; }
+    /**
+     * @brief 分母
+     * 
+     * @return i64 分母
+     */
+    constexpr i64 den() const { return m_den; }
+#ifdef HOGEPACHI
     friend Ostream& operator<<(Ostream& os, const Rational& x)
     {
         const auto& [den, num] = x;
         return os << den << "/" << num;
     }
-    constexpr void setRaw(T num, T den) { m_num = num, m_den = den; }
-    constexpr Pair<T, T> val() const { return {m_num, m_den}; }
-    constexpr T num() const { return m_num; }
-    constexpr T den() const { return m_den; }
-
+#endif
 private:
-    static constexpr Pair<T, T> norm(T num, T den)
+    static constexpr Pair<i64, i64> norm(i64 num, i64 den)
     {
         if (den < 0) { num = -num, den = -den; }
         const auto g = std::gcd(num, den);
         return {num / g, den / g};
     }
-    T m_num, m_den;
+    i64 m_num, m_den;
 };

@@ -1,31 +1,21 @@
 #pragma once
 #include "../../common.hpp"
 #include "../graph.hpp"
-namespace diameter_impl {
-template<typename T>
-struct Edge
+/**
+ * @brief 木の直径
+ * 
+ * @param g 無向木
+ * @return Pair<T, Vec<int>> {直径,頂点列}
+ */
+template<typename T> Pair<T, Vec<int>> diameter(const Graph<T>& g)
 {
-    Edge(int i, int f, int t, T c) : id{i}, from{f}, to{t}, cost{c} {}
-    Edge(const Edge&) = default;
-    int id;
-    int from, to;
-    T cost;
-};
-};  // namespace diameter_impl
-template<typename T>
-Vec<diameter_impl::Edge<T>> diameter(const Graph<T>& g)
-{
-    auto ds = g.depths(0);
-    auto ps = g.parents(0);
+    auto ds = g.depths(0), ps = g.parents(0);
     const int s = maxInd(ds);
-    ds = g.depths(s);
-    ps = g.parents(s);
+    ds = g.depths(s), ps = g.parents(s);
     const int t = maxInd(ds);
-    Vec<diameter_impl::Edge<T>> es;
-    for (int u = t; ps[u] != -1; u = ps[u]) {
-        for (const auto& [id, v, c] : g[u]) {
-            if (v == ps[u]) { es.emplace_back(id, u, v, c); }
-        }
-    }
-    return es;
+    const i64 D = ds[s];
+    Vec<int> vs;
+    for (int u = t; u != s; u = ps[u]) { vs.push_back(u); }
+    vs.push_back(s);
+    return {D, vs};
 }

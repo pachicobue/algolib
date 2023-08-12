@@ -1,24 +1,15 @@
 #pragma once
 #include "../common.hpp"
-template<typename T>
-class DynamicMatrix
+template<typename T> class DynamicMatrix
 {
-    template<typename V>
-    using IList = std::initializer_list<V>;
-
+    template<typename V> using IList = std::initializer_list<V>;
 public:
-    DynamicMatrix(const int row, const int column)
-        : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, T{}))
-    {}
+    DynamicMatrix(const int row, const int column) : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, T{})) {}
     DynamicMatrix(const IList<IList<T>>& vss)
-        : m_row{(int)vss.size()},
-          m_column{(int)(vss.begin()->size())},
-          m_vss(m_row, Vec<T>(m_column, T{}))
+        : m_row{(int)vss.size()}, m_column{(int)(vss.begin()->size())}, m_vss(m_row, Vec<T>(m_column, T{}))
     {
         int i = 0;
-        for (auto it = vss.begin(); it != vss.end(); it++) {
-            std::copy(it->begin(), it->end(), m_vss[i++].begin());
-        }
+        for (auto it = vss.begin(); it != vss.end(); it++) { std::copy(it->begin(), it->end(), m_vss[i++].begin()); }
     }
     const Vec<T>& operator[](const int r) const
     {
@@ -86,18 +77,9 @@ public:
         return ans;
     }
     friend DynamicMatrix operator*(const T& t, const DynamicMatrix& m) { return m * t; }
-    friend DynamicMatrix& operator+=(DynamicMatrix& m1, const DynamicMatrix& m2)
-    {
-        return m1 = m1 + m2;
-    }
-    friend DynamicMatrix& operator-=(DynamicMatrix& m1, const DynamicMatrix& m2)
-    {
-        return m1 = m1 - m2;
-    }
-    friend DynamicMatrix& operator*=(DynamicMatrix& m1, const DynamicMatrix& m2)
-    {
-        return m1 = m1 * m2;
-    }
+    friend DynamicMatrix& operator+=(DynamicMatrix& m1, const DynamicMatrix& m2) { return m1 = m1 + m2; }
+    friend DynamicMatrix& operator-=(DynamicMatrix& m1, const DynamicMatrix& m2) { return m1 = m1 - m2; }
+    friend DynamicMatrix& operator*=(DynamicMatrix& m1, const DynamicMatrix& m2) { return m1 = m1 * m2; }
     friend DynamicMatrix& operator*=(DynamicMatrix& m, const T& t) { return m = m * t; }
     friend DynamicMatrix& operator/=(DynamicMatrix& m, const T& t) { return m = m / t; }
     friend Ostream& operator<<(Ostream& os, const DynamicMatrix& m)
@@ -110,8 +92,7 @@ public:
         }
         return (os << "]\n");
     }
-    template<typename N>
-    DynamicMatrix pow(N n) const
+    template<typename N> DynamicMatrix pow(N n) const
     {
         assert(m_row == m_column);
         return powerMonoid(*this, n, DynamicMatrix::I(m_row));
@@ -124,7 +105,6 @@ public:
     }
     int row() const { return m_row; }
     int column() const { return m_column; }
-
 private:
     int m_row, m_column;
     Vec<Vec<T>> m_vss;

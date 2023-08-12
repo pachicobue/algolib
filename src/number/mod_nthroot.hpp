@@ -2,8 +2,7 @@
 #include "../common.hpp"
 #include "../algorithm/ext_gcd.hpp"
 #include "prime_factors.hpp"
-template<typename mint>
-mint modNthRoot(mint A, i64 k)
+template<typename mint> mint modNthRoot(mint A, i64 k)
 {
     const i64 P = mint::mod();
     assert(P > 0);
@@ -11,7 +10,7 @@ mint modNthRoot(mint A, i64 k)
     if (k == 0) { return A; }
     const i64 g = std::gcd(P - 1, k);
     if (A.pow((P - 1) / g).val() != 1) { return 0; }
-    A = A.pow(inverse(k / g, (P - 1) / g));
+    A = A.pow(inverseMod(k / g, (P - 1) / g));
     if (g == 1) { return A; }
     const auto fs = primeFactors(g);
     for (const auto& [p, e] : fs) {
@@ -34,20 +33,20 @@ mint modNthRoot(mint A, i64 k)
                 break;
             }
         }
-        mint Error = A.pow(y * q);
+        mint Error   = A.pow(y * q);
         mint pEraser = Eraser;
         LOOP (Q - 1) { pEraser = pEraser.pow(p); }
         const mint ipEraser = pEraser.inv();
         UMap<i64, i64> memo;
         {
-            const i64 M = std::max(1_i64, (i64)(std::sqrt(p) * std::sqrt(Q - e)));
-            const i64 B = std::max(1_i64, ((i64)p - 1) / M);
+            const i64 M         = std::max(1_i64, (i64)(std::sqrt(p) * std::sqrt(Q - e)));
+            const i64 B         = std::max(1_i64, ((i64)p - 1) / M);
             const mint ppEraser = pEraser.pow(B);
-            mint prod = 1;
+            mint prod           = 1;
             for (i64 i = 0; i < (i64)p; i += B, prod *= ppEraser) { memo[prod.val()] = i; }
         }
         while (Error.val() != 1) {
-            i64 l = 0;
+            i64 l       = 0;
             mint pError = Error;
             for (i64 i : rep(Q)) {
                 const auto npError = pError.pow(p);
@@ -63,7 +62,7 @@ mint modNthRoot(mint A, i64 k)
                 for (i64 j = 0;; j++, small *= ipEraser) {
                     if (memo.count(small.val())) {
                         const i64 i = memo[small.val()];
-                        c = i + j;
+                        c           = i + j;
                         break;
                     }
                 }

@@ -1,15 +1,22 @@
 #pragma once
 #include "type.hpp"
-template<typename T>
-constexpr T LIMMIN = std::numeric_limits<T>::min();
-template<typename T>
-constexpr T LIMMAX = std::numeric_limits<T>::max();
-template<typename T = i64>
-constexpr T INF = (LIMMAX<T> - 1) / 2;
-template<typename T = f80>
-constexpr T PI = T{3.141592653589793238462643383279502884};
-template<typename T = u64>
-constexpr T TEN(int n)
-{
-    return n == 0 ? T{1} : TEN<T>(n - 1) * T{10};
-}
+/**
+ * @brief std::numeric_limits::min のラッパー
+ */
+template<typename T> constexpr T LIMMIN = std::numeric_limits<T>::min();
+/**
+ * @brief std::numeric_limits::max のラッパー
+ */
+template<typename T> constexpr T LIMMAX = std::numeric_limits<T>::max();
+/**
+ * @brief ∞として扱う定数
+ * @attention INF+INF がオーバーフローしないような設定
+ */
+template<typename T> constexpr T INF = (LIMMAX<T> - 1) / 2;
+/**
+ * @brief 10^N
+ * 
+ * @param N 指数
+ * @return T 10^N
+ */
+template<typename T = i64> constexpr T TEN(int N) { return N == 0 ? T{1} : TEN<T>(N - 1) * T{10}; }

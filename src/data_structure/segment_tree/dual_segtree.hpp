@@ -1,21 +1,41 @@
 #pragma once
 #include "../../common.hpp"
-template<typename OpMonoid>
-class DualSegTree
+/**
+ * @brief 双対セグ木
+ * 
+ * @tparam OpMonoid 作用素のモノイド
+ */
+template<typename OpMonoid> class DualSegTree
 {
     using F = typename OpMonoid::F;
     static constexpr F id() { return OpMonoid::id(); }
-
 public:
-    DualSegTree(const Vec<F>& vs)
-        : m_size(vs.size()),
-          m_half(bitCeil(m_size)),
-          m_depth(bitWidth(m_half)),
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param fs ベースとなる作用素列
+     */
+    DualSegTree(const Vec<F>& fs)
+        : m_size(fs.size()),
+          m_half((int)std::bit_ceil((u64)m_size)),
+          m_depth((int)std::bit_width((u64)m_half)),
           m_ops(m_half << 1, id())
     {
-        std::copy(vs.begin(), vs.end(), m_ops.begin() + m_half);
+        std::ranges::copy(fs, m_ops.begin() + m_half);
     }
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param N 作用素列長
+     * @param f 作用素の初期値
+     */
     DualSegTree(int N, const F& f = OpMonoid::id()) : DualSegTree{Vec<F>(N, f)} {}
+    /**
+     * @brief 1点取得 F[i]
+     * 
+     * @param i 
+     * @return F F[i]
+     */
     F get(int i) const
     {
         assert(0 <= i and i < m_size);
@@ -24,6 +44,12 @@ public:
         for (int h : per(m_depth)) { ans = compose(ans, m_ops[i >> h]); }
         return ans;
     }
+    /**
+     * @brief 1点更新 F[i] <- f
+     * 
+     * @param i 
+     * @param f 
+     */
     void set(int i, const F& f)
     {
         assert(0 <= i and i < m_size);
@@ -31,6 +57,13 @@ public:
         clean(i), clean(i + 1);
         m_ops[i] = f;
     }
+    /**
+     * @brief 区間作用 F[i] <- (f \circ F[i]) (l <= i < r)
+     * 
+     * @param l 
+     * @param r 
+     * @param f 
+     */
     void act(int l, int r, const F& f)
     {
         assert(0 <= l and r <= m_size);
@@ -42,13 +75,14 @@ public:
             if (ri & 1) { update(--ri, f); }
         }
     }
+#ifdef HOGEPACHI
     friend Ostream& operator<<(Ostream& os, const DualSegTree& seg)
     {
         os << "[";
         for (int i : rep(seg.m_size)) { os << (i == 0 ? "" : ",") << seg.get(i); }
         return (os << "]\n");
     }
-
+#endif
 private:
     void down(int i)
     {

@@ -1,24 +1,28 @@
 #pragma once
 #include "../common.hpp"
 #include "graph.hpp"
-template<typename T>
-Vec<T> dijkstra(const Graph<T>& g, int s)
+/**
+ * @brief Dijkstra
+ * 
+ * @param g グラフ (コストは非負)
+ * @param S 始点
+ * @return Vec<T> 頂点Sからの最短距離
+ */
+template<typename T> Vec<T> dijkstra(const Graph<T>& g, int S)
 {
-    const int N = g.v();
-    assert(0 <= s and s < N);
+    const int N = g.V();
+    assert(0 <= S and S < N);
     Vec<T> ds(N, INF<T>);
-    using P = Pair<T, int>;
-    MinHeap<P> Q;
-    ds[s] = 0;
-    Q.push({T{}, s});
+    MinHeap<Pair<T, int>> Q;
+    ds[S] = 0, Q.push({T{}, S});
     while (not Q.empty()) {
         const auto [c, u] = Q.top();
+        assert(c >= 0);
         Q.pop();
         if (ds[u] < c) { continue; }
-        for (UNUSED const auto& [_, v, c] : g[u]) {
+        for (const auto& [v, c] : g[u] | g.ToC) {
             if (ds[v] <= ds[u] + c) { continue; }
-            ds[v] = ds[u] + c;
-            Q.push({ds[v], v});
+            ds[v] = ds[u] + c, Q.push({ds[v], v});
         }
     }
     return ds;

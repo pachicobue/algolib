@@ -1,14 +1,29 @@
 #pragma once
 #include "../common.hpp"
 #include "../graph/strongly_connected_components.hpp"
-#include "../utility/rng.hpp"
 #include "../utility/nd_vec.hpp"
 #include "../utility/dynamic_bitset.hpp"
 
+/**
+ * @brief 2-SAT ソルバー
+ * @attention 変数X_i の指定は 1-indexed (i=1,2,...,N)
+ *            項X_i は i で、項(\lnot X_i) は -i で指定
+ */
 class TwoSat
 {
 public:
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param N 変数の数
+     */
     TwoSat(int N) : m_X{N}, m_V{N * 2}, m_g{m_V} {}
+    /**
+     * @brief 節 (x \lor y) を追加
+     *
+     * @param x 項1
+     * @param y 項2
+     */
     void addClause(int x, int y)
     {
         assert(x != 0 and std::abs(x) <= m_X);
@@ -17,29 +32,38 @@ public:
         m_g.addEdge(X2V(-y), X2V(x));
         m_g.addEdge(X2V(-x), X2V(y));
     }
-
-    Pair<bool, Vec<bool>> findSolution() const
+    /**
+     * @brief 2-SATの解を一つ返す
+     * 
+     * @return Opt<Vec<bool>> 解 (解なしの場合は std::nullopt)
+     */
+    Opt<Vec<bool>> findSolution() const
     {
         Vec<bool> ts(m_X + 1);
         const StronglyConnectedComponents scc{m_g};
         for (int x : irange(1, m_X + 1)) {
             const int v = X2V(x), nv = X2V(-x);
-            if (scc[v] == scc[nv]) { return {false, ts}; }
+            if (scc[v] == scc[nv]) { return std::nullopt; }
             ts[x] = (scc[v] > scc[nv]);
         }
-        return {true, ts};
+        return ts;
     }
-
+    /**
+     * @brief 2-SATの解を列挙する
+     * 
+     * @param K 列挙の打ち切り個数
+     * @return Vec<Vec<bool>> 解の列
+     */
     Vec<Vec<bool>> enumSolutions(int K = -1) const
     {
         const StronglyConnectedComponents scc{m_g};
-        const int C = scc.cnum();
+        const int C       = scc.cnum();
         const auto groups = scc.groups();
         Vec<int> antis(C);
         for (int c : rep(C)) {
-            const int u = groups[c].back();
+            const int u  = groups[c].back();
             const int nu = (u < m_X ? u + m_X : u - m_X);
-            antis[c] = scc[nu];
+            antis[c]     = scc[nu];
             if (antis[c] == c) { return {}; }
         }
         auto belows = ndVec({C}, DynamicBitset{C});
@@ -79,38 +103,9 @@ public:
         })(0, DynamicBitset{C});
         return sols;
     }
-
-    bool check(const Vec<bool>& ts) const
-    {
-        for (int u : rep(m_V)) {
-            for (int v : m_g[u]) {
-                const bool tu = (u < m_X ? ts[V2X(u)] : not ts[-V2X(u)]);
-                const bool tv = (v < m_X ? ts[V2X(v)] : not ts[-V2X(v)]);
-                if (tu and not tv) { return false; }
-            }
-        }
-        return true;
-    }
-
-    const Vec<Pair<int, int>>& getClauses() const { return m_clauses; }
-
 private:
-    int X2V(int x) const
-    {
-        if (x > 0) {
-            return x - 1;
-        } else {
-            return -x - 1 + m_X;
-        }
-    }
-    int V2X(int v) const
-    {
-        if (v < m_X) {
-            return v + 1;
-        } else {
-            return -(v - m_X + 1);
-        }
-    }
+    int X2V(int x) const { return (x > 0 ? x - 1 : -x - 1 + m_X); }
+    int V2X(int v) const { return v < m_X ? v + 1 : -(v - m_X + 1); }
     int m_X, m_V;
     Graph<int> m_g;
     Vec<Pair<int, int>> m_clauses;

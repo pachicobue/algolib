@@ -1,30 +1,40 @@
 #pragma once
 #include "../common.hpp"
-template<typename T>
-constexpr Pair<T, T> extgcd(const T a, const T b)  // [x,y] -> ax+by=gcd(a,b)
+/**
+ * @brief 拡張ユークリッド互除法
+ * @attention x はあり得る中で最小の非負整数(b != 0 の場合)
+ * 
+ * @param a 
+ * @param b 
+ * @return Pair<i64, i64> ax+by=gcd(a,b) を満たす {x,y}
+ */
+constexpr Pair<i64, i64> extgcd(i64 a, i64 b)
 {
-    static_assert(std::is_signed_v<T>, "Signed integer is allowed.");
     assert(a != 0 or b != 0);
-    if (a >= 0 and b >= 0) {
-        if (a < b) {
-            const auto [y, x] = extgcd(b, a);
-            return {x, y};
-        }
-        if (b == 0) { return {1, 0}; }
-        const auto [x, y] = extgcd(b, a % b);
-        return {y, x - (a / b) * y};
-    } else {
-        auto [x, y] = extgcd(std::abs(a), std::abs(b));
-        if (a < 0) { x = -x; }
-        if (b < 0) { y = -y; }
-        return {x, y};
-    }
+    const i64 A = ABS(a), B = ABS(b);
+    auto [x, y, g] = Fix([&](auto self, i64 a, i64 b) -> Tup<i64, i64, i64> {
+        assert(0 <= a and a < b);
+        if (a == 0) { return {0, 1, b}; }
+        const auto [px, py, pg] = self(b % a, a);
+        return {py - (b / a) * px, px, pg};
+    })(std::ranges::min(A, B), std::ranges::max(A, B));
+    if (A > B) { std::swap(x, y); }
+    if (a < 0) { x = -x; }
+    if (b < 0) { y = -y; }
+    // この時点で ax+by=gcd(A,B), |x|<B/g, |y|<=A/g になっているので微調整
+    if (x < 0) { x += B / g, y -= (b > 0 ? a / g : -a / g); }
+    return {x, y};
 }
-template<typename T>
-constexpr T inverse(const T a, const T mod)  // ax=gcd(a,M) (mod M)
+/**
+ * @brief MOD逆元 (互いに素じゃなくても使える)
+ * @attention 最小の非負整数を返す
+ * 
+ * @param a 
+ * @param mod 
+ * @return i64 ax=gcd(a,M) mod M を満たす x
+ */
+constexpr i64 inverseMod(i64 a, i64 mod)
 {
-    assert(a > 0 and mod > 0);
-    auto [x, y] = extgcd(a, mod);
-    if (x <= 0) { x += mod; }
-    return x;
+    assert(mod > 0 and a % mod);
+    return extgcd(a % mod, mod).first;
 }

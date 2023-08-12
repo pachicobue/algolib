@@ -1,10 +1,9 @@
 #pragma once
 #include "../common.hpp"
 #include "and_convolution.hpp"
-template<typename T>
-Vec<T> orConvolute(Vec<T> f, Vec<T> g)
+template<typename T> Vec<T> orConvolute(Vec<T> f, Vec<T> g)
 {
-    const int N = bitCeil(std::max(f.size(), g.size()));
+    const int N = std::bit_ceil(std::max(f.size(), g.size()));
     f.resize(N), g.resize(N);
     auto F = setZeta(f, true), G = setZeta(g, true);
     for (int i : rep(N)) { F[i] *= G[i]; }

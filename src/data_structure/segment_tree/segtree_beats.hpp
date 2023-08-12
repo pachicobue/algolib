@@ -1,39 +1,70 @@
 #pragma once
 #include "../../common.hpp"
-template<typename MergeMonoid, typename OpMonoid, typename Act>
-class SegBeats
+/**
+ * @brief Segment Tree Beats!
+ * 
+ * @tparam MergeMonoid 値のモノイド
+ * @tparam OpMonoid 作用素のモノイド
+ * @tparam Act 作用 (失敗する可能性あり)
+ */
+template<typename MergeMonoid, typename OpMonoid, typename Act> class SegBeats
 {
     using T = typename MergeMonoid::T;
     using F = typename OpMonoid::F;
     static constexpr T e() { return MergeMonoid::e(); }
     static constexpr F id() { return OpMonoid::id(); }
-
 public:
-    SegBeats(const Vec<T>& vs)
-        : m_size(vs.size()),
-          m_half(bitCeil(m_size)),
-          m_depth(bitWidth(m_half)),
-          m_vs(m_half << 1, e()),
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param xs ベースとなる数列
+     */
+    SegBeats(const Vec<T>& xs)
+        : m_size(xs.size()),
+          m_half((int)std::bit_ceil((u64)m_size)),
+          m_depth((int)std::bit_width((u64)m_half)),
+          m_vals(m_half << 1, e()),
           m_ops(m_half << 1, id())
     {
-        std::copy(vs.begin(), vs.end(), m_vs.begin() + m_half);
+        std::ranges::copy(xs, m_vals.begin() + m_half);
         for (int i : irange(m_half - 1, 0, -1)) { up(i); }
     }
-    SegBeats(int N, const T& v = MergeMonoid::e()) : SegBeats{Vec<T>(N, v)} {}
-    T get(const int a)
-    {
-        assert(a < m_size);
-        return fold(a, a + 1);
-    }
-    void set(int i, const T& v)
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param N 数列長
+     * @param x 初期値
+     */
+    SegBeats(int N, const T& x = MergeMonoid::e()) : SegBeats{Vec<T>(N, x)} {}
+    /**
+     * @brief 1点取得 X[i]
+     * 
+     * @param i 
+     * @return T X[i]
+     */
+    T get(int i) { return assert(i < m_size), fold(i, i + 1); }
+    /**
+     * @brief 1点更新 X[i] <- x
+     * 
+     * @param i 
+     * @param x 
+     */
+    void set(int i, const T& x)
     {
         assert(0 <= i and i < m_size);
         i += m_half;
         topDown(i), topDown(i + 1);
-        m_ops[i] = id();
-        m_vs[i] = v;
+        m_ops[i]  = id();
+        m_vals[i] = x;
         while (i >>= 1) { up(i); }
     }
+    /**
+     * @brief 範囲取得 \prod_{l<=i<r} X[i]
+     * 
+     * @param l 
+     * @param r 
+     * @return T 
+     */
     T fold(int l, int r)
     {
         assert(0 <= l and l <= r and r <= m_size);
@@ -42,11 +73,18 @@ public:
         topDown(l), topDown(r);
         T accl = e(), accr = e();
         for (; l < r; l >>= 1, r >>= 1) {
-            if (l & 1) { accl = merge(accl, m_vs[l++]); }
-            if (r & 1) { accr = merge(m_vs[--r], accr); }
+            if (l & 1) { accl = merge(accl, m_vals[l++]); }
+            if (r & 1) { accr = merge(m_vals[--r], accr); }
         }
         return merge(accl, accr);
     }
+    /**
+     * @brief 範囲作用 X[i] <- f(X[i]) (l<=i<r)
+     * 
+     * @param l 
+     * @param r 
+     * @param f 
+     */
     void act(int l, int r, const F& f)
     {
         assert(0 <= l and l <= r and r <= m_size);
@@ -58,6 +96,7 @@ public:
         }
         bottomUp(l + m_half), bottomUp(r + m_half);
     }
+#ifdef HOGEPACHI
     friend Ostream& operator<<(Ostream& os, const SegBeats& lseg)
     {
         auto lseg2 = lseg;
@@ -65,15 +104,15 @@ public:
         for (int i : rep(lseg.m_size)) { os << (i == 0 ? "" : ",") << lseg2.get(i); }
         return (os << "]\n");
     }
-
+#endif
 private:
-    void up(int i) { m_vs[i] = merge(m_vs[i << 1], m_vs[i << 1 | 1]); }
+    void up(int i) { m_vals[i] = merge(m_vals[i << 1], m_vals[i << 1 | 1]); }
     void update(int i, const F& f)
     {
         if (f == OpMonoid::id()) { return; }
-        m_ops[i] = compose(f, m_ops[i]);
-        m_vs[i] = apply(f, m_vs[i]);
-        if (apply.failed(m_vs[i])) {
+        m_ops[i]  = compose(f, m_ops[i]);
+        m_vals[i] = apply(f, m_vals[i]);
+        if (apply.failed(m_vals[i])) {
             down(i);
             up(i);
         }
@@ -98,7 +137,7 @@ private:
         for (; i >= 1; i >>= 1) { up(i); }
     }
     int m_size, m_half, m_depth;
-    Vec<T> m_vs;
+    Vec<T> m_vals;
     Vec<F> m_ops;
     static inline MergeMonoid merge;
     static inline OpMonoid compose;

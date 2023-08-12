@@ -3,24 +3,19 @@
 class RollingHash
 {
 public:
-    template<typename V>
-    RollingHash(const V& vs, u64 base)
-        : m_size(std::size(vs)), m_ps(m_size + 1, 1), m_hs(m_size + 1, 0), m_base{base}
+    template<typename V> RollingHash(const V& vs, u64 base) : m_size(std::size(vs)), m_ps(m_size + 1, 1), m_hs(m_size + 1, 0), m_base{base}
     {
         for (int i : irange(1, m_size + 1)) {
-            m_ps[i] = mod(mul(m_ps[i - 1], m_base)),
-            m_hs[i] = mod(mul(m_hs[i - 1], m_base) + vs[i - 1]);
+            m_ps[i] = mod(mul(m_ps[i - 1], m_base)), m_hs[i] = mod(mul(m_hs[i - 1], m_base) + vs[i - 1]);
         }
     }
     u64 operator()(int l, int r) const { return mod(m_hs[r] + offset - mul(m_hs[l], m_ps[r - l])); }
-    template<typename C>
-    void pushBack(C c)
+    template<typename C> void pushBack(C c)
     {
         m_size++;
         m_ps.push_back(mod(mul(m_ps.back(), m_base)));
         m_hs.push_back(mod(mul(m_hs.back(), m_base) + c));
     }
-
 private:
     static constexpr u64 mask30 = (1_u64 << 30) - 1;
     static constexpr u64 mask31 = (1_u64 << 31) - 1;
@@ -35,7 +30,7 @@ private:
     {
         const u64 xh = x >> 31, xl = x & mask31;
         const u64 yh = y >> 31, yl = y & mask31;
-        const u64 z = xl * yh + xh * yl;
+        const u64 z  = xl * yh + xh * yl;
         const u64 zh = z >> 30, zl = z & mask30;
         return xh * yh * 2 + zh + (zl << 31) + xl * yl;
     }

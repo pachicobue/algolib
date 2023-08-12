@@ -1,14 +1,26 @@
 #pragma once
 #include "type.hpp"
-template<typename T>
-constexpr T floorDiv(T x, T y)
+/**
+ * @brief floor(x/y)
+ * 
+ * @param x 
+ * @param y 
+ * @return i64 floor(x/y)
+ */
+constexpr i64 floorDiv(i64 x, i64 y)
 {
     assert(y != 0);
     if (y < 0) { x = -x, y = -y; }
     return x >= 0 ? x / y : (x - y + 1) / y;
 }
-template<typename T>
-constexpr T ceilDiv(T x, T y)
+/**
+ * @brief ceil(x/y)
+ * 
+ * @param x 
+ * @param y 
+ * @return i64 ceil(x/y)
+ */
+constexpr i64 ceilDiv(i64 x, i64 y)
 {
     assert(y != 0);
     if (y < 0) { x = -x, y = -y; }

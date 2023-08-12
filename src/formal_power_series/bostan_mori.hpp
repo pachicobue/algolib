@@ -1,12 +1,20 @@
 #pragma once
 #include "formal_power_series.hpp"
-template<typename mint, typename I>
-mint bostanMori(FormalPowerSeries<mint> f, FormalPowerSeries<mint> g, I N)
+#include "../algorithm/berlekamp_massey.hpp"
+/**
+ * @brief Bostan-Mori algorithm
+ * 
+ * @param f 
+ * @param g 
+ * @param N 
+ * @return mint (f(x)/g(x)) [x^N]
+ */
+template<typename mint> mint bostanMori(FormalPowerSeries<mint> f, FormalPowerSeries<mint> g, i64 N)
 {
     assert(not g.isZero());
     const int f_zero = f.lsb(), g_zero = g.lsb();
     assert(g_zero <= f_zero);
-    if (N < I(f_zero - g_zero)) { return 0; }
+    if (N < (i64)(f_zero - g_zero)) { return 0; }
     f <<= f_zero, g <<= g_zero;
     N -= (f_zero - g_zero);
     while (N > 0) {
@@ -22,11 +30,17 @@ mint bostanMori(FormalPowerSeries<mint> f, FormalPowerSeries<mint> g, I N)
     return f[0] / g[0];
 }
 
-template<typename mint, typename I>
-mint nthTermOfLinearRecurrentSequence(const Vec<mint>& as, I N)
+/**
+ * @brief 線形回帰数列AのN項目
+ * 
+ * @param A 線形回帰数列
+ * @param N 
+ * @return mint AのN項目
+ */
+template<typename mint> mint guessNthTerm(const Vec<mint>& As, i64 N)
 {
-    const FormalPowerSeries<mint> g{berlekampMassey(as)};
-    const int L = g.size();
-    const auto f = FormalPowerSeries<mint>{as}.mult(g, L - 1);
+    const FormalPowerSeries<mint> g{berlekampMassey(As)};
+    const int L  = g.size();
+    const auto f = FormalPowerSeries<mint>{As}.mult(g, L - 1);
     return bostanMori(f, g, N);
 }

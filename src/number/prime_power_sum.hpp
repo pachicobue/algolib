@@ -1,7 +1,6 @@
 #pragma once
 #include "../common.hpp"
-template<typename T, u32 MAXD = 2>
-class PrimePowerSum
+template<typename T, u32 MAXD = 2> class PrimePowerSum
 {
 public:
     PrimePowerSum(u64 N) : m_N{N}, m_sqrt{(u32)std::sqrt(N)}, m_ns{0}
@@ -35,7 +34,6 @@ public:
         assert(m_ns[i] == n);
         return m_hss[d][i];
     }
-
 protected:
     u32 id(u64 x) const { return x <= m_sqrt ? m_ns.size() - x : m_N / x; }
     u64 m_N;

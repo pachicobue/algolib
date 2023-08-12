@@ -1,103 +1,180 @@
 #pragma once
 #include "../common.hpp"
+/**
+ * @brief グラフ型
+ * 
+ * @tparam T コスト型
+ */
 template<typename T = int>
+    requires(not std::is_same_v<T, bool>)
 class Graph
 {
+public:
+    /**
+     * @brief 辺情報
+     * @attention eidは g.edge() の引数に使用できる
+     */
     struct Edge
     {
         Edge() = default;
-        Edge(int i, int t, T c) : id{i}, to{t}, cost{c} {}
-        int id;
+        Edge(int e, int t, const T& c) : eid{e}, to{t}, cost{c} {}
+        int eid;  // 辺番号
         int to;
         T cost;
         operator int() const { return to; }
     };
-
-public:
-    Graph(int n) : m_v{n}, m_edges(n) {}
-    void addEdge(int u, int v, bool bi = false)
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param N 頂点数
+     */
+    constexpr Graph(int N) : m_V{N}, m_lists(N), m_edges{} {}
+    /**
+     * @brief 辺追加 (コスト1)
+     * 
+     * @param u 
+     * @param v 
+     * @param bi 無向辺かどうか
+     */
+    constexpr void addEdge(int u, int v, bool bi = false)
+        requires std::is_same_v<T, int>
     {
-        assert(0 <= u and u < m_v);
-        assert(0 <= v and v < m_v);
-        m_edges[u].emplace_back(m_e, v, 1);
-        if (bi) { m_edges[v].emplace_back(m_e, u, 1); }
-        m_e++;
+        assert(0 <= u and u < m_V);
+        assert(0 <= v and v < m_V);
+        m_edges.push_back({u, v, 1});
+        m_lists[u].push_back({m_E, v, 1});
+        if (bi) { m_lists[v].push_back({m_E, u, 1}); }
+        m_E++;
     }
-    void addEdge(int u, int v, const T& c, bool bi = false)
+    /**
+     * @brief 辺追加 (任意コスト)
+     * 
+     * @param u 
+     * @param v 
+     * @param c コスト
+     * @param bi 無向辺かどうか
+     */
+    constexpr void addEdge(int u, int v, T c, bool bi = false)
     {
-        assert(0 <= u and u < m_v);
-        assert(0 <= v and v < m_v);
-        m_edges[u].emplace_back(m_e, v, c);
-        if (bi) { m_edges[v].emplace_back(m_e, u, c); }
-        m_e++;
+        assert(0 <= u and u < m_V);
+        assert(0 <= v and v < m_V);
+        m_edges.push_back({u, v, c});
+        m_lists[u].push_back({m_E, v, c});
+        if (bi) { m_lists[v].push_back({m_E, u, c}); }
+        m_E++;
     }
-    const Vec<Edge>& operator[](const int u) const
+    /**
+     * @brief 頂点u につながっている辺列 (const)
+     * 
+     * @param u 
+     * @return constexpr const Vec<Edge>& 辺列
+     */
+    constexpr const Vec<Edge>& operator[](int u) const
     {
-        assert(0 <= u and u < m_v);
-        return m_edges[u];
+        assert(0 <= u and u < m_V);
+        return m_lists[u];
     }
-    Vec<Edge>& operator[](const int u)
+    /**
+     * @brief 頂点u につながっている辺列 (mutable)
+     * 
+     * @param u 
+     * @return constexpr const Vec<Edge>& 辺列
+     */
+    constexpr Vec<Edge>& operator[](const int u)
     {
-        assert(0 <= u and u < m_v);
-        return m_edges[u];
+        assert(0 <= u and u < m_V);
+        return m_lists[u];
     }
-    int v() const { return m_v; }
-    int e() const { return m_e; }
-    friend Ostream& operator<<(Ostream& os, const Graph& g)
+    /**
+     * @brief 部分木サイズ列
+     * @attention 木 限定
+     * 
+     * @param R 根
+     * @return Vec<int> 部分木サイズ列
+     */
+    constexpr Vec<int> sizes(int R = 0) const
     {
-        for (int u : rep(g.v())) {
-            for (const auto& [id, v, c] : g[u]) {
-                os << "[" << id << "]: ";
-                os << u << "->" << v << "(" << c << ")\n";
-            }
-        }
-        return os;
-    }
-    Vec<T> sizes(int root = 0) const
-    {
-        const int N = v();
-        assert(0 <= root and root < N);
-        Vec<T> ss(N, 1);
-        Fix([&](auto dfs, int u, int p) -> void {
-            for (UNUSED const auto& [_, v, c] : m_edges[u]) {
+        Vec<int> Ans(V(), 1);
+        Fix([&](auto self, int u, int p) -> void {
+            for (int v : m_lists[u]) {
                 if (v == p) { continue; }
-                dfs(v, u);
-                ss[u] += ss[v];
+                self(v, u);
+                Ans[u] += Ans[v];
             }
-        })(root, -1);
-        return ss;
+        })(R, -1);
+        return Ans;
     }
-    Vec<T> depths(int root = 0) const
+    /**
+     * @brief 深さ列
+     * @attention 木 限定
+     * 
+     * @param R 根
+     * @return Vec<T> 深さ列
+     */
+    constexpr Vec<T> depths(int R = 0) const
     {
-        const int N = v();
-        assert(0 <= root and root < N);
-        Vec<T> ds(N, 0);
-        Fix([&](auto dfs, int u, int p) -> void {
-            for (UNUSED const auto& [_, v, c] : m_edges[u]) {
+        Vec<int> Ans(V(), 0);
+        Fix([&](auto self, int u, int p) -> void {
+            for (const auto& [v, c] : m_lists[u] | ToC) {
                 if (v == p) { continue; }
-                ds[v] = ds[u] + c;
-                dfs(v, u);
+                Ans[v] = Ans[u] + c;
+                self(v, u);
             }
-        })(root, -1);
-        return ds;
+        })(R, -1);
+        return Ans;
     }
-    Vec<int> parents(int root = 0) const
+    /**
+     * @brief 親頂点列
+     * @attention 木 限定
+     * 
+     * @param R 根
+     * @return Vec<int> 親頂点列 (根の親は -1 とする)
+     */
+    constexpr Vec<int> parents(int R = 0) const
     {
-        const int N = v();
-        assert(0 <= root and root < N);
-        Vec<int> ps(N, -1);
-        Fix([&](auto dfs, int u, int p) -> void {
-            for (UNUSED const auto& [_, v, c] : m_edges[u]) {
+        Vec<int> Ans(V(), -1);
+        Fix([&](auto self, int u, int p) -> void {
+            for (int v : m_lists[u]) {
                 if (v == p) { continue; }
-                ps[v] = u;
-                dfs(v, u);
+                Ans[v] += u;
+                self(v, u);
             }
-        })(root, -1);
-        return ps;
+        })(R, -1);
+        return Ans;
     }
-
+    /**
+     * @brief 辺取得
+     * 
+     * @param eid 辺番号
+     * @return constexpr const Edge& 辺情報
+     */
+    constexpr const Edge& edge(int eid) const
+    {
+        assert(0 <= eid and eid < m_E);
+        return m_edges[eid];
+    }
+    /**
+     * @brief 頂点数
+     * 
+     * @return constexpr int 頂点数
+     */
+    constexpr int V() const { return m_V; }
+    /**
+     * @brief 辺数
+     * 
+     * @return constexpr int 辺数
+     */
+    constexpr int E() const { return m_E; }
+    /**
+     * @brief 辺列から コスト 情報を削ぐ
+     */
+    static constexpr auto ETo = std::views::transform([](const Edge& e) { return makePair(e.eid, e.to); });
+    /**
+     * @brief 辺列から 辺番号 情報を削ぐ
+     */
+    static constexpr auto ToC = std::views::transform([](const Edge& e) { return makePair(e.to, e.cost); });
 private:
-    int m_v;
-    int m_e = 0;
-    Vec<Vec<Edge>> m_edges;
+    int m_V, m_E;
+    Vec<Vec<Edge>> m_lists;
+    Vec<Edge> m_edges;
 };

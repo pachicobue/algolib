@@ -1,70 +1,72 @@
 #pragma once
 #include "../common.hpp"
-template<typename T>
-class MonotoneCHT
+/**
+ * @brief 傾きやクエリ座標が単調な場合のCHT
+ * @attention 以下の単調性を要求する
+ *   - 追加される直線の傾きは単調減少
+ *   - クエリされる座標は単調増加
+ * 
+ * @tparam T 傾き/切片/クエリ座標の型
+ */
+template<typename T> class MonotoneCHT
 {
-    using L = Pair<T, T>;
-    static constexpr L NIL = {0, INF<T>};
-    static bool needLess(const L& l1, const L& l2, const L& l3)
+    using L                    = Pair<T, T>;
+    static constexpr auto Null = std::nullopt;
+    static bool comp(const L& l1, const L& l2, Opt<T> x)
     {
-        const auto [a1, b1] = l1;
-        const auto [a2, b2] = l2;
-        const auto [a3, b3] = l3;
-        const T x12 = floorDiv(b2 - b1, a1 - a2), x23 = floorDiv(b3 - b2, a2 - a3);
-        return x12 >= x23;
-    }
-    static bool comp(const L& l1, const L& l2, T x)
-    {
-        const auto [a1, b1] = l1;
-        const auto [a2, b2] = l2;
-        if (a1 == a2) {
-            return b1 <= b2;
-        } else if (a1 > a2) {
-            return x <= floorDiv(b2 - b1, a1 - a2);
-        } else {
-            return floorDiv(b1 - b2, a2 - a1) < x;
-        }
-    }
-
-public:
-    MonotoneCHT() : m_prev_x{-INF<T>} {}
-    void addLine(T a, T b)
-    {
-        const L l{a, b};
-        if (m_lines.empty()) {
-            m_lines.push_back(l);
-            return;
-        }
-        auto& [ma, mb] = m_lines.back();
-        assert(ma >= a);
-        if (a == ma) {
-            chmin(mb, b);
-        } else {
-            while (m_lines.size() >= 2) {
-                const int n = m_lines.size();
-                const auto& l0 = m_lines[n - 2];
-                const auto& l1 = m_lines[n - 1];
-                if (not needLess(l0, l1, l)) { break; }
-                m_lines.pop_back();
+        const auto& [a1, b1] = l1;
+        const auto& [a2, b2] = l2;
+        if (a1 == a2) { return b1 < b2; }
+        if (x == Null) { return a1 < a2; }
+        if constexpr (std::is_integral_v<T>) {
+            if (a1 > a2) {
+                return x.value() <= floorDiv(b2 - b1, a1 - a2);
+            } else {
+                return floorDiv(b1 - b2, a2 - a1) < x.value();
             }
-            m_lines.push_back(l);
+        } else {
+            return a1 * x.value() + b1 < a2 * x.value() + b2;
         }
     }
-    L minLine(const T x)
+public:
+    /**
+     * @brief コンストラクタ
+     */
+    MonotoneCHT() : m_prev_x{Null} {}
+    /**
+     * @brief 直線追加
+     * @attention 以前追加した直線の傾き以上である必要あり
+     * 
+     * @param l 直線
+     */
+    void addLine(const L& l)
     {
-        if (m_lines.empty()) { return NIL; }
-        assert(m_prev_x <= x);
+        assert(m_lines.empty() or m_lines.back().first >= l.first);
+        while (not m_lines.empty()) {
+            if (comp(m_lines.back(), l, m_prev_x)) { break; }
+            m_lines.pop_back();
+        }
+        m_lines.push_back(l);
+    }
+    /**
+     * @brief 座標xで最小値を取る直線を返す
+     * @attention 以前クエリした座標以上である必要あり
+     * 
+     * @param x クエリ座標
+     * @return Opt<L> 最小値を取る直線 (存在しなければNull)
+     */
+    Opt<L> minLine(T x)
+    {
+        if (m_lines.empty()) { return Null; }
+        assert(m_prev_x == Null or m_prev_x.value() <= x);
         m_prev_x = x;
         while (m_lines.size() >= 2) {
-            const auto& l0 = m_lines[0];
-            const auto& l1 = m_lines[1];
-            if (comp(l0, l1, x)) { break; }
+            if (comp(m_lines[0], m_lines[1], x)) { break; }
             m_lines.pop_front();
         }
         return m_lines.front();
     }
-
 private:
-    T m_prev_x;
+    Opt<T> m_prev_x;
     Deq<L> m_lines;
 };

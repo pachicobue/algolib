@@ -2,10 +2,9 @@
 #include "../common.hpp"
 #include "set_moebius.hpp"
 #include "set_zeta.hpp"
-template<typename T>
-Vec<T> andConvolute(Vec<T> f, Vec<T> g)
+template<typename T> Vec<T> andConvolute(Vec<T> f, Vec<T> g)
 {
-    const int N = bitCeil(std::max(f.size(), g.size()));
+    const int N = std::bit_ceil(std::max(f.size(), g.size()));
     f.resize(N), g.resize(N);
     auto F = setZeta(f, false), G = setZeta(g, false);
     for (int i : rep(N)) { F[i] *= G[i]; }

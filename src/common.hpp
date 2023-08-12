@@ -3,6 +3,8 @@
 #include "internal/environment.hpp"
 #include "internal/macro.hpp"
 #include "internal/constant.hpp"
+#include "internal/abs.hpp"
+#include "internal/abbreviation.hpp"
 #include "internal/chminmax.hpp"
 #include "internal/int_div.hpp"
 #include "internal/power.hpp"

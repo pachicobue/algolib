@@ -1,19 +1,32 @@
 #pragma once
 #include "../common.hpp"
 #include "bin_search.hpp"
-
-inline u64 intNthRoot(u64 a, u64 k)
+/**
+ * @brief floor(A^(1/K))
+ * 
+ * @param A 非負整数 (u64なので注意)
+ * @param K 非負整数
+ * @return u64 floor(A^(1/K))
+ */
+constexpr u64 intNthRoot(u64 A, int K)
 {
-    if (a == 0) { return 0; }
-    if (k == 1) { return a; }
-    if (k >= 64) { return 1; }
-    auto satPow = [&](const u128& a, int k) {
-        u128 x = 1;
-        LOOP (k) {
+    assert(K > 0);
+    if (A == 0) { return 0; }
+    if (K == 1) { return A; }
+    if (K > 64) { return 1; }
+    return binSearch(1_i64 << 32, 1_i64, [&](i64 a) {
+        u64 x = (u64)a;
+        LOOP (K) {
+            if (x > A / a) { return false; }
             x *= a;
-            if (x >= (u128(1) << 64)) { break; }
         }
-        return x;
-    };
-    return binSearch(1_i64 << 32, 1_i64, [&](i64 x) { return satPow(x, k) <= a; });
+        return true;
+    });
 }
+/**
+ * @brief floor(sqrt(A))
+ * 
+ * @param A 非負整数 (u64なので注意)
+ * @return u64 floor(sqrt(A))
+ */
+constexpr u64 intSqrt(u64 A) { return intNthRoot(A, 2); }

@@ -1,45 +1,69 @@
 #pragma once
 #include "../../common.hpp"
 #include "bit_vector.hpp"
-template<typename T>
+/**
+ * @brief Wavelet 行列
+ */
 class WaveletMatrix
 {
 public:
-    WaveletMatrix(Vec<T> vs)
-        : m_n(vs.size()),
-          m_min{vs[minInd(vs)]},
-          m_max{vs[maxInd(vs)]},
-          m_lg{bitWidth(m_max + 1)},
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param xs 数列(全て非負)
+     */
+    WaveletMatrix(Vec<i64> xs)
+        : m_n(xs.size()),
+          m_min{minAll(xs)},
+          m_max{maxAll(xs)},
+          m_lg{(int)std::bit_width((u64)m_max + 1)},
           m_bvs(m_lg, BitVector(m_n))
     {
         assert(m_min >= 0);
-        Vec<T> nvs(m_n);
+        Vec<i64> nvs(m_n);
         for (int bi : per(m_lg)) {
             for (int i : rep(m_n)) {
-                if (isBitOn(vs[i], bi)) { m_bvs[bi].set(i); }
+                if (isBitOn(xs[i], bi)) { m_bvs[bi].set(i); }
             }
             int is[2] = {0, m_bvs[bi].zero()};
-            for (int i : rep(m_n)) { nvs[is[isBitOn(vs[i], bi)]++] = vs[i]; }
-            std::swap(vs, nvs);
+            for (int i : rep(m_n)) { nvs[is[isBitOn(xs[i], bi)]++] = xs[i]; }
+            std::swap(xs, nvs);
         }
     }
-    int rangeFreq(int l, int r, T vmin, T vsup)
+    /**
+     * @brief 矩形カウント #{i | l<=i<r && vmin <= X[i] < vsup}
+     * 
+     * @param l 
+     * @param r 
+     * @param vmin 
+     * @param vsup 
+     * @return int 矩形カウント
+     */
+    int rangeFreq(int l, int r, i64 vmin, i64 vsup)
     {
         assert(0 <= l and l <= r and r <= m_n);
         assert(vmin <= vsup);
         return lessFreq(l, r, vsup) - lessFreq(l, r, vmin);
     }
-    T quantile(int l, int r, int k)
+    /**
+     * @brief X[l],...,X[r-1] で K番目に小さな値(0-indexed)
+     * 
+     * @param l 
+     * @param r 
+     * @param K 
+     * @return i64 K番目に小さな値(0-indexed)
+     */
+    i64 quantile(int l, int r, int K)
     {
         assert(0 <= l and l <= r and r <= m_n);
-        assert(0 <= k and k < r - l);
-        T ans = 0;
+        assert(0 <= K and K < r - l);
+        i64 ans = 0;
         for (int bi : per(m_lg)) {
             const int lz = m_bvs[bi].rank0(l), rz = m_bvs[bi].rank0(r);
-            if (rz - lz <= k) {
+            if (rz - lz <= K) {
                 const int z = m_bvs[bi].zero();
                 ans |= (T{1} << bi);
-                k -= (rz - lz);
+                K -= (rz - lz);
                 l += z - lz, r += z - rz;
             } else {
                 l = lz, r = rz;
@@ -47,9 +71,8 @@ public:
         }
         return ans;
     }
-
 private:
-    int lessFreq(int l, int r, T v)
+    int lessFreq(int l, int r, i64 v)
     {
         assert(0 <= l and l <= r and r <= m_n);
         if (v <= m_min) { return 0; }
@@ -68,7 +91,7 @@ private:
         return ans;
     }
     int m_n;
-    T m_min, m_max;
+    i64 m_min, m_max;
     int m_lg;
     Vec<BitVector> m_bvs;
 };

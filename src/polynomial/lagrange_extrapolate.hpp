@@ -1,8 +1,7 @@
 #pragma once
 #include "../common.hpp"
 
-template<typename mint>
-mint lagrangeExtrapolate(const Vec<mint>& ys, const mint& X)
+template<typename mint> mint lagrangeExtrapolate(const Vec<mint>& ys, const mint& X)
 {
     const int N = ys.size();
     const int x = X.val();

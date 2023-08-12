@@ -1,51 +1,90 @@
 #pragma once
 #include "../../common.hpp"
-template<typename T>
-class FenwickTree
+/**
+ * @brief Fenwick Tree
+ */
+template<typename T> class FenwickTree
 {
 public:
-    FenwickTree(const Vec<T>& vs) : m_size(vs.size()), m_cap(bitCeil(m_size)), m_vs(m_cap + 1, T{})
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param xs ベースとなる数列
+     */
+    FenwickTree(const Vec<T>& xs) : m_size(xs.size()), m_cap((int)std::bit_ceil((u64)m_size)), m_xs(m_cap + 1, T{})
     {
-        std::copy(vs.begin(), vs.end(), m_vs.begin() + 1);
-        for (int x : irange(1, m_cap)) { m_vs[x + (x & -x)] += m_vs[x]; }
+        std::ranges::copy(xs, m_xs.begin() + 1);
+        for (int x : irange(1, m_cap)) { m_xs[x + (x & -x)] += m_xs[x]; }
     }
-    FenwickTree(int N, const T& v = T{}) : FenwickTree{Vec<T>(N, v)} {}
-    void add(int i, const T& v)
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param N 数列長
+     * @param x 初期値
+     */
+    FenwickTree(int N, const T& x = T{}) : FenwickTree{Vec<T>(N, x)} {}
+    /**
+     * @brief 一点加算 X[i] <- X[i]+x
+     * 
+     * @param i 
+     * @param x 加算値
+     */
+    void add(int i, const T& x)
     {
         assert(0 <= i and i < m_size);
-        for (int ind = i + 1; ind <= m_cap; ind += ind & (-ind)) { m_vs[ind] += v; }
+        for (int ind = i + 1; ind <= m_cap; ind += ind & (-ind)) { m_xs[ind] += x; }
     }
-    T sum(int i) const
+    /**
+     * @brief 累積和 \sum_{0<=i<isup} X[i] 
+     * 
+     * @param isup 
+     * @return T 累積和
+     */
+    T sum(int isup) const
     {
-        assert(0 <= i and i <= m_size);
+        assert(0 <= isup and isup <= m_size);
         T sum{};
-        for (int ind = i; ind != 0; ind &= ind - 1) { sum += m_vs[ind]; }
+        for (int ind = isup; ind != 0; ind &= ind - 1) { sum += m_xs[ind]; }
         return sum;
     }
-    T sum(int l, int r) const
+    /**
+     * @brief 区間和 \sum_{imin<=i<isup} X[i] 
+     * 
+     * @param imin 
+     * @param imax 
+     * @return T 区間和
+     */
+    T sum(int imin, int imax) const
     {
-        assert(0 <= l and l <= r and r <= m_size);
-        return sum(r) - sum(l);
+        assert(0 <= imin and imin <= imax and imax <= m_size);
+        return sum(imax) - sum(imin);
     }
-    template<typename F>
-    int maxRight(F f)
+    /**
+     * @brief pred(\sum_{0<=i<x}) == True となる最小の x
+     * 
+     * @param pred 判定関数
+     * @return int 最小のx (Trueになる x が存在しない場合 N+1)
+     */
+    int maxRight(auto pred)
     {
-        assert(f(T{}));
+        if (pred(T{})) { return 0; }
         T sum = T{};
-        int x = 0;
-        for (int k = (m_cap >> 1); k >= 1; k >>= 1) {
-            if (x + k <= m_size and f(sum + m_vs[x + k])) { sum += m_vs[x + k], x += k; }
+        int x = 0;  // pred(\sum_{0<=i<x}) == False 確定
+        for (int width = m_cap; width >= 1; width /= 2) {
+            assert(x + width <= m_cap);
+            if (not pred(sum + m_xs[x + width])) { sum += m_xs[x + width], x += width; }
         }
-        return x;
+        return x + 1;
     }
+#ifdef HOGEPACHI
     friend Ostream& operator<<(Ostream& os, const FenwickTree& fw)
     {
         os << "[";
         for (int i : rep(fw.m_size)) { os << (i == 0 ? "" : ",") << fw.sum(i, i + 1); }
         return (os << "]\n");
     }
-
+#endif
 private:
     int m_size, m_cap;
-    Vec<T> m_vs;
+    Vec<T> m_xs;
 };

@@ -1,27 +1,53 @@
 #pragma once
 #include "../common.hpp"
+/**
+ * @brief Eratosthenesの篩
+ */
 class EratosthenesSieve
 {
 public:
-    EratosthenesSieve(int N) : m_N{N}, m_factors{iotaVec(N)}
+    /**
+     * @brief コンストラクタ
+     *
+     * @param N N未満に対する篩
+     */
+    constexpr EratosthenesSieve(int N) : m_N{N}, m_factors{iotaVec(N)}
     {
         for (int i : irange(2, N)) {
             if (m_factors[i] != i) { continue; }
             for (int j : irange(i + i, N, i)) { m_factors[j] = i; }
         }
     }
-    int maxPrimeFactor(int x) const
+    /**
+     * @brief xの最大素因数
+     * 
+     * @param x 
+     * @return int 最大素因数
+     */
+    constexpr int maxPrimeFactor(int x) const
     {
         assert(1 <= x and x < m_N);
         return m_factors[x];
     }
-    bool isPrime(int x) const
+    /**
+     * @brief xが素数か
+     * 
+     * @param x 
+     * @return true 素数
+     * @return false 合成数
+     */
+    constexpr bool isPrime(int x) const
     {
         assert(x < m_N);
         if (x <= 1) { return false; }
         return m_factors[x] == x;
     }
-    Vec<int> primes() const
+    /**
+     * @brief N未満の素数列
+     * 
+     * @return Vec<int> 素数列
+     */
+    constexpr Vec<int> primes() const
     {
         Vec<int> ps;
         for (int i : irange(2, m_N)) {
@@ -29,6 +55,12 @@ public:
         }
         return ps;
     }
+    /**
+     * @brief 素因数分解
+     * 
+     * @param x 
+     * @return Map<int, int> xの素因数分解
+     */
     Map<int, int> primeFactors(int x) const
     {
         assert(1 <= x and x < m_N);
@@ -40,7 +72,6 @@ public:
         }
         return fs;
     }
-
 private:
     int m_N;
     Vec<int> m_factors;
