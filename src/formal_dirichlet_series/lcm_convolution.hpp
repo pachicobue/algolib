@@ -28,5 +28,5 @@ template<typename T> constexpr Vec<T> lcmConvolute(Vec<T> f, Vec<T> g, int L, Ve
  */
 template<typename T> constexpr Vec<T> lcmConvolute(Vec<T> f, Vec<T> g, int L)
 {
-    return lcmConvolute(f, g, EratosthenesSieve{L}.primes());
+    return lcmConvolute(f, g, L, EratosthenesSieve{L}.primes());
 }

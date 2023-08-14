@@ -5,17 +5,15 @@
 #include "utility/scanner.hpp"
 int main()
 {
-    using mint = modint_998244353;
-    using Func = std::pair<mint, mint>;
+    using mint   = modint_998244353;
+    using Func   = std::pair<mint, mint>;
     const auto Q = in.val<int>();
     struct SemiGroup
     {
         using T = Func;
+        static constexpr T e() { return {1, 0}; }
         // f2 \circ f1 なので注意
-        T operator()(const T& f1, const T& f2) const
-        {
-            return T{f2.first * f1.first, f2.first * f1.second + f2.second};
-        }
+        T operator()(const T& f1, const T& f2) const { return T{f2.first * f1.first, f2.first * f1.second + f2.second}; }
     };
 
     auto queue = SwagQueue<SemiGroup>{};

@@ -13,7 +13,6 @@
 template<typename T> constexpr Vec<T> divisorsMoebius(const Vec<T>& xs, bool subset, const Vec<int>& primes)
 {
     assert(xs[0] == 0);
-    assert(primes.size() >= xs.size());
     const int N = (int)xs.size();
     auto ys     = xs;
     for (int p : primes) {

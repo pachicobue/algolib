@@ -17,12 +17,13 @@
 template<typename T, typename F> i64 discreteLogarithm(i64 N, T x, T y, F f, auto compose, auto act)
 {
     assert(N >= 0);
-    if (N == 0) { return (x == y ? 0 : -1); }
+    if (x == y) { return 0; }
+    if (N == 0) { return N; }
     const i64 W = (i64)intSqrt(N);
     const i64 M = ceilDiv(N, W);
 
-    UMap<T, u64> Ys;
-    for (T Y = y; i64 i : rep(M + 1)) { Ys[Y] = i, Y = act(f, Y); }
+    USet<T> Ys;
+    for (T Y = y; i64 i : rep(M)) { (void)(i), Y = act(f, Y), Ys.insert(Y); }
 
     const F fW = powerSemiGroup(f, W, compose);
     for (auto [X, failed] = makePair(x, 0); i64 k : irange(1, M + 1)) {

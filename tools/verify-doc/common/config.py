@@ -14,7 +14,7 @@ verification_dir: Path = library_root_dir / "verifications"
 compile_command: str = "g++"
 include_directories: List[Path] = [source_dir]
 defined_macro: List[str] = []
-compile_flags: List[str] = ["-std=c++17", "-O2"]
+compile_flags: List[str] = ["-std=c++20", "-O2"]
 
 for dir in include_directories:
     compile_flags += ["-I", str(dir)]

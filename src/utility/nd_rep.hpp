@@ -2,7 +2,7 @@
 #include "../common.hpp"
 /**
  * @brief 複数列のCartesian Product上の Rep
- * @note ndRep({A0,A1}, {B0, B1, B2}) = {(A0,B0),(A1,B0),(A0,B1),(A1,B1),(A0,B2),(A1,B2)} となる (※順番に注意)
+ * @note ndRep({{A0,A1}, {B0, B1, B2}}) = {(A0,B0),(A1,B0),(A0,B1),(A1,B1),(A0,B2),(A1,B2)} となる (※順番に注意)
  */
 class ndRep
 {

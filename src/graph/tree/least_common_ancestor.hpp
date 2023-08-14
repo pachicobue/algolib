@@ -16,11 +16,11 @@ public:
      * @param r 根
      */
     LowestCommonAncestor(const Graph<C>& g, int r = 0)
-        : m_V(g.v()),
-          m_ins(g.v(), 0),
+        : m_V(g.V()),
+          m_ins(g.V(), 0),
           m_ds([&]() {
               Vec<P> ans;
-              Vec<bool> used(g.v(), false);
+              Vec<bool> used(g.V(), false);
               Fix([&](auto dfs, const P& s) -> void {
                   const int u = s.second;
                   used[u]     = true;

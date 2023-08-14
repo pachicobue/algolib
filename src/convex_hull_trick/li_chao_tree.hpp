@@ -96,7 +96,7 @@ public:
         return Ans;
     }
 private:
-    void add(L l, int index, i64 lx, i64 rx)
+    void add(Opt<L> l, int index, i64 lx, i64 rx)
     {
         assert(l != Null);
         assert(index != NIL);

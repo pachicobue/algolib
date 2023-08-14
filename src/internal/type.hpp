@@ -39,3 +39,4 @@ template<typename... Ts> using Queue          = std::queue<Ts...>;
 template<typename T> using MaxHeap            = std::priority_queue<T>;
 template<typename T> using MinHeap            = std::priority_queue<T, Vec<T>, Gt<T>>;
 template<typename T> using Opt                = std::optional<T>;
+template<typename... Ts> using Span           = std::span<Ts...>;

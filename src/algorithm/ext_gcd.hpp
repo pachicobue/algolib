@@ -35,6 +35,6 @@ constexpr Pair<i64, i64> extgcd(i64 a, i64 b)
  */
 constexpr i64 inverseMod(i64 a, i64 mod)
 {
-    assert(mod > 0 and a % mod);
+    assert(mod > 0 and a % mod != 0);
     return extgcd(a % mod, mod).first;
 }

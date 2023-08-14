@@ -13,52 +13,52 @@ public:
      */
     constexpr Rational() : m_num{0}, m_den{1} {}
     /**
-     * @brief コンストラクタ
+     * @brief コンストラクタ (分子指定)
      * 
      * @param v 整数
      */
     constexpr Rational(const i64& v) : m_num{v}, m_den{1} {}
     /**
-     * @brief コンストラクタ
+     * @brief コンストラクタ (分子,分母 指定)
      * 
      * @param num 分子
      * @param den 分母
      */
     constexpr Rational(const i64& num, const i64& den) { std::tie(m_num, m_den) = norm(num, den); }
     /**
-     * @brief -1倍
+     * @brief -x
      * 
      * @return Rational -x
      */
     constexpr friend Rational operator-(const Rational& x) { return {-x.m_num, x.m_den}; }
     /**
-     * @brief 有理数同士の足し算
+     * @brief x1 <- x1+x2
      * 
      * @param x1
      * @param x2 
-     * @return Rational& self
+     * @return Rational& x1
      */
     constexpr friend Rational& operator+=(Rational& x1, const Rational& x2)
     {
         return x1 = {x1.m_num * x2.m_den + x2.m_num * x1.m_den, x1.m_den * x2.m_den}, x1;
     }
     /**
-     * @brief 有理数同士の足し算
+     * @brief x1 <- x1-x2
      * 
      * @param x1 
      * @param x2 
-     * @return Rational& self
+     * @return Rational& x1
      */
     constexpr friend Rational& operator-=(Rational& x1, const Rational& x2)
     {
         return x1 = {x1.m_num * x2.m_den - x2.m_num * x1.m_den, x1.m_den * x2.m_den}, x1;
     }
     /**
-     * @brief 有理数同士の掛け算
+     * @brief x1 <- x1*x2
      * 
      * @param x1 
      * @param x2 
-     * @return Rational& self
+     * @return Rational& x1
      */
     constexpr friend Rational& operator*=(Rational& x1, const Rational& x2)
     {
@@ -66,11 +66,11 @@ public:
         return x1 = {(x1.m_num / g12) * (x2.m_num / g21), (x1.m_den / g21) * (x2.m_den / g12)}, x1;
     }
     /**
-     * @brief 有理数同士の割り算
+     * @brief x1 <- x1/x2
      * 
      * @param x1 
      * @param x2 
-     * @return Rational& self
+     * @return Rational& x1
      */
     constexpr friend Rational& operator/=(Rational& x1, const Rational& x2)
     {
@@ -78,11 +78,11 @@ public:
         return x1 = {(x1.m_num / g12) * (x2.m_den / g21), (x1.m_den / g21) * (x2.m_num / g12)}, x1;
     }
     /**
-     * @brief 有理数同士の和
+     * @brief x1+x2
      * 
      * @param x1 
      * @param x2 
-     * @return Rational 和
+     * @return Rational x1+x2
      */
     constexpr friend Rational operator+(const Rational& x1, const Rational& x2)
     {
@@ -90,11 +90,11 @@ public:
         return ans += x2;
     }
     /**
-     * @brief 有理数同士の差
+     * @brief x1-x2
      * 
      * @param x1 
      * @param x2 
-     * @return Rational 差
+     * @return Rational x1-x2
      */
     constexpr friend Rational operator-(const Rational& x1, const Rational& x2)
     {
@@ -102,11 +102,11 @@ public:
         return ans -= x2;
     }
     /**
-     * @brief 有理数同士の積
+     * @brief x1*x2
      * 
      * @param x1 
      * @param x2 
-     * @return Rational 積
+     * @return Rational x1*x2
      */
     constexpr friend Rational operator*(const Rational& x1, const Rational& x2)
     {
@@ -114,11 +114,11 @@ public:
         return ans *= x2;
     }
     /**
-     * @brief 有理数同士の商
+     * @brief x1/x2
      * 
      * @param x1 
      * @param x2 
-     * @return Rational 商
+     * @return Rational x1/x2
      */
     constexpr friend Rational operator/(const Rational& x1, const Rational& x2)
     {
@@ -126,7 +126,7 @@ public:
         return ans /= x2;
     }
     /**
-     * @brief 有理数同士の比較
+     * @brief x1==x2
      * 
      * @param x1 
      * @param x2 
@@ -135,7 +135,7 @@ public:
      */
     constexpr friend bool operator==(const Rational& x1, const Rational& x2) { return x1.m_num == x2.m_num and x1.m_den == x2.m_den; }
     /**
-     * @brief 有理数同士の一貫比較
+     * @brief x1<=>x2
      * 
      * @param x1
      * @param x2

@@ -13,7 +13,7 @@ template<typename T> Vec<Vec<T>> floydWarshall(const Graph<T>& g)
     Vec<Vec<T>> dss(N, Vec<T>(N));
     for (int i : rep(N)) {
         for (int j : rep(N)) { dss[i][j] = (i == j ? T{} : INF<T>); }
-        for (const auto& [j, c] : g[i]) { chmin(dss[i][j], c); }
+        for (const auto& [j, c] : g[i] | g.ToC) { chmin(dss[i][j], c); }
     }
     for (int k : rep(N)) {
         for (int i : rep(N)) {

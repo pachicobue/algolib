@@ -2,12 +2,12 @@
 #include "../common.hpp"
 template<typename T> Vec<T> subsetConvolute(const Vec<T>& f, const Vec<T>& g)
 {
-    const int l = topBit(std::bit_ceil(std::max(f.size(), g.size())));
+    const int l = floorLog2(std::bit_ceil((u64)std::max(f.size(), g.size())));
     const int N = 1 << l;
     auto F      = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));
     auto G      = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));
-    for (int i : rep(f.size())) { F[i][std::popcount(i)] += f[i]; }
-    for (int i : rep(g.size())) { G[i][std::popcount(i)] += g[i]; }
+    for (int i : rep(f.size())) { F[i][std::popcount((u64)i)] += f[i]; }
+    for (int i : rep(g.size())) { G[i][std::popcount((u64)i)] += g[i]; }
     for (int i = 1; i < N; i <<= 1) {
         for (int j : rep(N)) {
             if ((j & i) == 0) {
@@ -35,6 +35,6 @@ template<typename T> Vec<T> subsetConvolute(const Vec<T>& f, const Vec<T>& g)
         }
     }
     Vec<T> ans(N);
-    for (int i : rep(N)) { ans[i] = H[i][std::popcount(i)]; }
+    for (int i : rep(N)) { ans[i] = H[i][std::popcount((u64)i)]; }
     return ans;
 }

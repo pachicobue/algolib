@@ -14,12 +14,12 @@ public:
      */
     WaveletMatrix(Vec<i64> xs)
         : m_n(xs.size()),
-          m_min{minAll(xs)},
-          m_max{maxAll(xs)},
+          m_min{(i64)minAll(xs)},
+          m_max{(i64)maxAll(xs)},
           m_lg{(int)std::bit_width((u64)m_max + 1)},
           m_bvs(m_lg, BitVector(m_n))
     {
-        assert(m_min >= 0);
+        assert(0 <= m_min);
         Vec<i64> nvs(m_n);
         for (int bi : per(m_lg)) {
             for (int i : rep(m_n)) {
@@ -62,7 +62,7 @@ public:
             const int lz = m_bvs[bi].rank0(l), rz = m_bvs[bi].rank0(r);
             if (rz - lz <= K) {
                 const int z = m_bvs[bi].zero();
-                ans |= (T{1} << bi);
+                ans |= (1_i64 << bi);
                 K -= (rz - lz);
                 l += z - lz, r += z - rz;
             } else {

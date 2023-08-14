@@ -9,7 +9,6 @@ void Test()
     assert(fenwick.maxRight([](int s) { return s <= 3; }) == 2);
     assert(fenwick.maxRight([](int s) { return s <= 21; }) == 6);
     assert(fenwick.maxRight([](int s) { return s <= 30; }) == 7);
-    std::cerr << fenwick << std::endl;
 }
 
 int main()

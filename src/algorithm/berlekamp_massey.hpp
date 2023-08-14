@@ -27,13 +27,17 @@ template<typename T> constexpr Vec<T> berlekampMassey(const Vec<T>& As)
         if (d == 0) { continue; }
         const Tup<Vec<T>, int, T> nlastFailure = {C, i, d};
         const auto& [pC, pi, pd]               = lastFailure;
-        const bool updateFailure               = (pC != C);  // 実は以前も失敗していた
-        if (pi != -1) {                                      // Cを調整
-            const auto [c, s] = makePair(d / pd, i - pi);
+        const int nl = i - (int)C.size(), pl = pi - (int)pC.size();
+        if (pi != -1) {  // Cを調整
+            const bool updateFailure = (pl < nl);
+            const auto [c, s]        = makePair(d / pd, i - pi);
             if (C.size() < pC.size() + s) { C.resize(pC.size() + s); }
             for (int j : rep(pC.size())) { C[j + s] -= pC[j] * c; }
+            if (updateFailure) { lastFailure = nlastFailure; }
+        } else {
+            C = Vec<T>(i + 2), C[0] = 1;
+            lastFailure = nlastFailure;
         }
-        if (updateFailure) { lastFailure = nlastFailure; }
     }
     return C;
 }

@@ -32,7 +32,4 @@ template<typename T> constexpr Vec<T> divisorsZeta(const Vec<T>& xs, bool subset
  * @retval Ans[i] = \sum_{j|i} X[j] (subset == Trueの場合)
  * @retval Ans[i] = \sum_{i|j} X[j] (subset == Falseの場合)
  */
-constexpr auto divisorsZeta(const auto& xs, bool subset)
-{
-    return divisorsZeta(xs, subset, EratosthenesSieve{(int)xs.size()}.primes());
-}
+constexpr auto divisorsZeta(const auto& xs, bool subset) { return divisorsZeta(xs, subset, EratosthenesSieve{(int)xs.size()}.primes()); }

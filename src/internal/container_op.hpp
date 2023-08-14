@@ -153,3 +153,25 @@ constexpr void reverseAll(auto& xs) { std::ranges::reverse(xs); }
  * @param xs 数列
  */
 constexpr void sortAll(auto& xs, auto... args) { std::ranges::sort(xs, args...); }
+/**
+ * @brief 連長圧縮
+ * 
+ * @param xs 数列
+ * @return auto {値,長さ}への圧縮結果
+ */
+constexpr auto runLengthEncode(const auto& xs)
+{
+    using T = typename std::decay<decltype(xs[0])>::type;
+    Vec<Pair<T, int>> Ans;
+    auto [l, px] = makePair(0, T{});
+    for (const T& x : xs) {
+        if (l == 0 or x != px) {
+            if (l > 0) { Ans.push_back({px, l}); }
+            l = 1, px = x;
+        } else {
+            l++;
+        }
+    }
+    if (l > 0) { Ans.push_back({px, l}); }
+    return Ans;
+}

@@ -5,11 +5,16 @@ int main()
 {
     const auto T = in.val<int>();
     LOOP (T) {
+        using mint           = modint_dynamic<0>;
         const auto [X, Y, M] = in.tup<i64, i64, i64>();
-        auto mul = [M](i64 x, i64 y) { return x * y % M; };
-        const auto K = discreteLogarithm(
-            M, 1_i64, Y, [&](i64 x) { return mul(x, X); }, mul, mul);
-        out.ln(K);
+        mint::setMod(M);
+        auto mul       = [](i64 x, i64 y) { return (i64)(mint(x) * y).val(); };
+        const auto Ans = discreteLogarithm(M + 1, 1_i64 % M, Y, X, mul, mul);
+        if (Ans < M) {
+            out.ln(Ans);
+        } else {
+            out.ln(-1);
+        }
     }
     return 0;
 }

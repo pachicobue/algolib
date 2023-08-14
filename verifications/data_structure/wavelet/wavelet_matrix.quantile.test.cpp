@@ -5,8 +5,8 @@
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();
-    const auto as = in.vec<u32>(N);
-    auto wm = WaveletMatrix(as);
+    const auto as     = in.vec<i64>(N);
+    auto wm           = WaveletMatrix(as);
     LOOP (Q) {
         const auto [l, r, k] = in.tup<int, int, int>();
         out.ln(wm.quantile(l, r, k));

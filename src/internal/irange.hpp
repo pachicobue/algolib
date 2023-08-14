@@ -9,15 +9,11 @@ class irange
 private:
     struct itr
     {
-        constexpr itr(i64 start, i64 end, i64 step) : m_cnt{start}, m_step{step}, m_end{end}, m_inc{end >= step} {}
-        constexpr bool operator!=(const itr&) const
-        {
-            return (m_inc ? m_cnt < m_end : m_end < m_cnt);
-        }  // endとの比較のみなので手抜き
+        constexpr itr(i64 start, i64 end, i64 step) : m_cnt{start}, m_step{step}, m_end{end} {}
+        constexpr bool operator!=(const itr&) const { return (m_step > 0 ? m_cnt < m_end : m_end < m_cnt); }  // endとの比較のみなので手抜き
         constexpr i64 operator*() { return m_cnt; }
         constexpr itr& operator++() { return m_cnt += m_step, *this; }
         i64 m_cnt, m_step, m_end;
-        bool m_inc;
     };
     i64 m_start, m_end, m_step;
 public:

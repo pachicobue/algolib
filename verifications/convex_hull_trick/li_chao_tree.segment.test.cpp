@@ -5,7 +5,7 @@
 int main()
 {
     const auto [N, Q] = in.tup<int, int>();
-    auto cht = LiChaoTree<i64>(-TEN<i64>(9), TEN<i64>(9));
+    auto cht          = LiChaoTree<i64>(-TEN<i64>(9), TEN<i64>(9));
     LOOP (N) {
         const auto [l, r, a, b] = in.tup<i64, i64, i64, i64>();
         cht.addSeg({a, b}, l, r);
@@ -17,9 +17,9 @@ int main()
             cht.addSeg({a, b}, l, r);
         } else {
             const auto p = in.val<i64>();
-            const auto [ok, l] = cht.minLine(p);
-            if (ok) {
-                out.ln(l.first * p + l.second);
+            const auto l = cht.minLine(p);
+            if (l) {
+                out.ln(l.value().first * p + l.value().second);
             } else {
                 out.ln("INFINITY");
             }

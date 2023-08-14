@@ -10,14 +10,8 @@ int main()
         const auto [u, v, c] = in.tup<int, int, i64>();
         g.addEdge(u, v, c, true);
     }
-    auto es = diameter(g);
-    i64 X = 0;
-    Vec<int> vs{es[0].from};
-    for (const auto& e : es) {
-        X += e.cost;
-        vs.push_back(e.to);
-    }
-    out.ln(X, vs.size());
+    const auto [D, vs] = diameter(g);
+    out.ln(D, vs.size());
     out.ln(vs);
     return 0;
 }

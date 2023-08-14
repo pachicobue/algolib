@@ -15,7 +15,7 @@ constexpr u64 intNthRoot(u64 A, int K)
     if (K == 1) { return A; }
     if (K > 64) { return 1; }
     return binSearch(1_i64 << 32, 1_i64, [&](i64 a) {
-        u64 x = (u64)a;
+        u64 x = (u64)1;
         LOOP (K) {
             if (x > A / a) { return false; }
             x *= a;

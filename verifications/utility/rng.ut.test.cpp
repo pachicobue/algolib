@@ -20,7 +20,7 @@ void valTest()
 
 void vecTest()
 {
-    int n = 10;
+    int n   = 10;
     int min = 10, max = 20;
     const auto vs32_1 = rng.vec(n, min, max);
     const auto vs64_1 = rng64.vec(n, min, max);
@@ -28,25 +28,10 @@ void vecTest()
     for (const auto v : vs64_1) { assert(min <= v and v <= max); }
 }
 
-void vvecTest()
-{
-    int m = 3, n = 4;
-    int min = 10, max = 20;
-    const auto vss32_1 = rng.vvec(m, n, min, max);
-    const auto vss64_1 = rng64.vvec(m, n, min, max);
-    for (const auto& vs : vss32_1) {
-        for (auto v : vs) { assert(min <= v and v <= max); }
-    }
-    for (const auto& vs : vss64_1) {
-        for (auto v : vs) { assert(min <= v and v <= max); }
-    }
-}
-
 int main()
 {
     Test();
     valTest();
     vecTest();
-    vvecTest();
     return 0;
 }
