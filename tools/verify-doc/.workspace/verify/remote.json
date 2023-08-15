@@ -1,14 +1,14 @@
 {
     "algorithm/discrete_logarithm.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "algorithm/linear_floor_sum.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "algorithm/mo.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "common/bit_op.test.cpp": {
@@ -56,23 +56,23 @@
         "result": "AC"
     },
     "convex_hull_trick/li_chao_tree.line.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
-        "result": "WA_TLE_RE"
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "AC"
     },
     "convex_hull_trick/li_chao_tree.segment.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
-        "result": "WA_TLE_RE"
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "AC"
     },
     "convex_hull_trick/monotone_cht.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
-        "result": "WA_TLE_RE"
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "AC"
     },
     "data_structure/fenwick_tree/fenwick.max_right.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
-        "result": "WA_TLE_RE"
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "AC"
     },
     "data_structure/fenwick_tree/fenwick.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "data_structure/segment_tree/dual_segtree.test.cpp": {
@@ -80,35 +80,35 @@
         "result": "AC"
     },
     "data_structure/segment_tree/lazy_segtree.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "data_structure/segment_tree/segtree.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "data_structure/segment_tree/segtree_beats.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "data_structure/sliding_window_aggregation/deque.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
-        "result": "WA_TLE_RE"
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "AC"
     },
     "data_structure/sliding_window_aggregation/queue.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
-        "result": "WA_TLE_RE"
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "AC"
     },
     "data_structure/sparse_table/disjoint_sparse_table.rmq.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "data_structure/sparse_table/static_rmq.rMq.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "data_structure/sparse_table/static_rmq.rmq.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "data_structure/union_find_tree/union_find_tree.test.cpp": {
@@ -116,12 +116,20 @@
         "result": "AC"
     },
     "data_structure/wavelet/wavelet_matrix.quantile.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "data_structure/wavelet/wavelet_matrix.rangefreq.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
+    },
+    "dirichlet_series/gcd_convolution.test.cpp": {
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "CE"
+    },
+    "dirichlet_series/lcm_convolution.test.cpp": {
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "CE"
     },
     "formal_dirichlet_series/gcd_convolution.test.cpp": {
         "date": "2023-08-15 05:19:12 +0900",
@@ -164,43 +172,43 @@
         "result": "CE"
     },
     "graph/bellman_ford.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "graph/dijkstra.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "graph/floyd_warshall.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "graph/strongly_connected_components.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "graph/tree/centroid_decomposition.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "graph/tree/diameter.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
-        "result": "WA_TLE_RE"
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "AC"
     },
     "graph/tree/heavy_light_decomposition.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "graph/tree/least_common_ancestor.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "graph/tree/level_ancestor.lca.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "graph/tree/level_ancestor.ut.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "internal/bit_op.test.cpp": {
@@ -248,27 +256,27 @@
         "result": "AC"
     },
     "linear_algebra/bit_bases.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "linear_algebra/bit_bases.ut.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
-        "result": "AC"
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "CE"
     },
     "linear_algebra/dynamic_matrix.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "linear_algebra/int_bases.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
-        "result": "AC"
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "CE"
     },
     "linear_algebra/int_bases.ut.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
-        "result": "AC"
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "CE"
     },
     "linear_algebra/static_matrix.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "number/discrete_log.test.cpp": {
@@ -312,7 +320,7 @@
         "result": "CE"
     },
     "numerical/convolution.ut.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "CE"
     },
     "polynomial/berlekamp_massey.test.cpp": {
@@ -320,35 +328,35 @@
         "result": "AC"
     },
     "polynomial/bostan_mori.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "CE"
     },
     "polynomial/polynomial.convolution.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "CE"
     },
     "polynomial/polynomial.convolution1000000007.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "CE"
     },
     "polynomial/polynomial.exp.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "CE"
     },
     "polynomial/polynomial.inv.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "CE"
     },
     "polynomial/polynomial.log.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "CE"
     },
     "polynomial/polynomial.pow.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "CE"
     },
     "polynomial/polynomial.tshift.test.cpp": {
-        "date": "2023-08-15 05:19:12 +0900",
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "CE"
     },
     "set_power_series/and_convolution.test.cpp": {
@@ -365,6 +373,22 @@
     },
     "set_power_series/xor_convolution.test.cpp": {
         "date": "2023-08-15 05:19:12 +0900",
+        "result": "AC"
+    },
+    "set_series/and_convolution.test.cpp": {
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "AC"
+    },
+    "set_series/or_convolution.test.cpp": {
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "AC"
+    },
+    "set_series/subset_convolution.test.cpp": {
+        "date": "2023-08-16 03:58:06 +0900",
+        "result": "AC"
+    },
+    "set_series/xor_convolution.test.cpp": {
+        "date": "2023-08-16 03:58:06 +0900",
         "result": "AC"
     },
     "string/manacher.test.cpp": {
