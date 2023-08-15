@@ -136,7 +136,7 @@ public:
         Fix([&](auto self, int u, int p) -> void {
             for (int v : m_lists[u]) {
                 if (v == p) { continue; }
-                Ans[v] += u;
+                Ans[v] = u;
                 self(v, u);
             }
         })(R, -1);

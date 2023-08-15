@@ -1,87 +1,216 @@
 #pragma once
 #include "../common.hpp"
+/**
+ * @brief 行列 (動的サイズ)
+ */
 template<typename T> class DynamicMatrix
 {
     template<typename V> using IList = std::initializer_list<V>;
 public:
-    DynamicMatrix(const int row, const int column) : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, T{})) {}
-    DynamicMatrix(const IList<IList<T>>& vss)
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param row 行数
+     * @param column 列数
+     */
+    constexpr DynamicMatrix(int row, int column) : m_row{row}, m_column{column}, m_vss(row, Vec<T>(column, T{})) {}
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param vss 
+     */
+    constexpr DynamicMatrix(const IList<IList<T>>& vss)
         : m_row{(int)vss.size()}, m_column{(int)(vss.begin()->size())}, m_vss(m_row, Vec<T>(m_column, T{}))
     {
         int i = 0;
-        for (auto it = vss.begin(); it != vss.end(); it++) { std::copy(it->begin(), it->end(), m_vss[i++].begin()); }
+        for (auto it = vss.begin(); it != vss.end(); it++) {
+            assert((int)it->size() == m_column);
+            std::ranges::copy(*it, m_vss[i++].begin());
+        }
     }
-    const Vec<T>& operator[](const int r) const
+    /**
+     * @brief 行アクセス (const)
+     * 
+     * @param r 行番号
+     * @return const Vec<T>& 行
+     */
+    constexpr const Vec<T>& operator[](int r) const { return assert(0 <= r and r < m_row), m_vss[r]; }
+    /**
+     * @brief 行アクセス (参照)
+     * 
+     * @param r 行番号
+     * @return const Vec<T>& 行
+     */
+    constexpr Vec<T>& operator[](int r) { return assert(0 <= r and r < m_row), m_vss[r]; }
+    /**
+     * @brief -V
+     * 
+     * @param V 
+     * @return DynamicMatrix -V
+     */
+    constexpr friend DynamicMatrix operator-(const DynamicMatrix& V)
     {
-        assert(0 <= r and r < m_row);
-        return m_vss[r];
-    }
-    Vec<T>& operator[](const int r)
-    {
-        assert(0 <= r and r < m_row);
-        return m_vss[r];
-    }
-    friend DynamicMatrix operator-(const DynamicMatrix& m)
-    {
-        DynamicMatrix ans(m.m_row, m.m_column);
-        for (int i : rep(m.m_row)) {
-            for (int j : rep(m.m_column)) { ans[i][j] = -m[i][j]; }
+        DynamicMatrix ans(V.m_row, V.m_column);
+        for (int i : rep(V.m_row)) {
+            for (int j : rep(V.m_column)) { ans[i][j] = -V[i][j]; }
         }
         return ans;
     }
-    friend DynamicMatrix operator+(const DynamicMatrix& m1, const DynamicMatrix& m2)
+    /**
+     * @brief V1+V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return DynamicMatrix V1+V2
+     */
+    constexpr friend DynamicMatrix operator+(const DynamicMatrix& V1, const DynamicMatrix& V2)
     {
-        assert(m1.m_row == m2.m_row);
-        assert(m1.m_column == m2.m_column);
-        DynamicMatrix ans(m1.m_row, m1.m_column);
-        for (int i : rep(m1.m_row)) {
-            for (int j : rep(m1.m_column)) { ans[i][j] = m1[i][j] + m2[i][j]; }
+        assert(V1.m_row == V2.m_row);
+        assert(V1.m_column == V2.m_column);
+        DynamicMatrix ans(V1.m_row, V1.m_column);
+        for (int i : rep(V1.m_row)) {
+            for (int j : rep(V1.m_column)) { ans[i][j] = V1[i][j] + V2[i][j]; }
         }
         return ans;
     }
-    friend DynamicMatrix operator-(const DynamicMatrix& m1, const DynamicMatrix& m2)
+    /**
+     * @brief V1-V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return DynamicMatrix V1-V2
+     */
+    constexpr friend DynamicMatrix operator-(const DynamicMatrix& V1, const DynamicMatrix& V2)
     {
-        assert(m1.m_row == m2.m_row);
-        assert(m1.m_column == m2.m_column);
-        DynamicMatrix ans(m1.m_row, m1.m_column);
-        for (int i : rep(m1.m_row)) {
-            for (int j : rep(m1.m_column)) { ans[i][j] = m1[i][j] - m2[i][j]; }
+        assert(V1.m_row == V2.m_row);
+        assert(V1.m_column == V2.m_column);
+        DynamicMatrix ans(V1.m_row, V1.m_column);
+        for (int i : rep(V1.m_row)) {
+            for (int j : rep(V1.m_column)) { ans[i][j] = V1[i][j] - V2[i][j]; }
         }
         return ans;
     }
-    friend DynamicMatrix operator*(const DynamicMatrix& m1, const DynamicMatrix& m2)
+    /**
+     * @brief V1*V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return DynamicMatrix V1*V2
+     */
+    constexpr friend DynamicMatrix operator*(const DynamicMatrix& V1, const DynamicMatrix& V2)
     {
-        assert(m1.m_column == m2.m_row);
-        DynamicMatrix ans(m1.m_row, m2.m_column);
-        for (int i : rep(m1.m_row)) {
-            for (int j : rep(m2.m_column)) {
-                for (int k : rep(m1.m_column)) { ans[i][j] += m1[i][k] * m2[k][j]; }
+        assert(V1.m_column == V2.m_row);
+        DynamicMatrix ans(V1.m_row, V2.m_column);
+        for (int i : rep(V1.m_row)) {
+            for (int j : rep(V2.m_column)) {
+                for (int k : rep(V1.m_column)) { ans[i][j] += V1[i][k] * V2[k][j]; }
             }
         }
         return ans;
     }
-    friend DynamicMatrix operator*(const DynamicMatrix& m, const T& t)
+    /**
+     * @brief cV 
+     * 
+     * @param V 
+     * @param c スカラー
+     * @return DynamicMatrix cV
+     */
+    constexpr friend DynamicMatrix operator*(const DynamicMatrix& V, const T& c)
     {
-        DynamicMatrix ans(m.m_row, m.m_column);
-        for (int i : rep(m.m_row)) {
-            for (int j : rep(m.m_column)) { ans[i][j] = m[i][j] * t; }
+        DynamicMatrix ans(V.m_row, V.m_column);
+        for (int i : rep(V.m_row)) {
+            for (int j : rep(V.m_column)) { ans[i][j] = V[i][j] * c; }
         }
         return ans;
     }
-    friend DynamicMatrix operator/(const DynamicMatrix& m, const T& t)
+    /**
+     * @brief V/c 
+     * 
+     * @param V 
+     * @param c スカラー
+     * @return DynamicMatrix V/c
+     */
+    constexpr friend DynamicMatrix operator/(const DynamicMatrix& V, const T& c)
     {
-        DynamicMatrix ans(m.m_row, m.m_column);
-        for (int i : rep(m.m_row)) {
-            for (int j : rep(m.m_column)) { ans[i][j] = m[i][j] / t; }
+        assert(c != 0);
+        DynamicMatrix ans(V.m_row, V.m_column);
+        for (int i : rep(V.m_row)) {
+            for (int j : rep(V.m_column)) { ans[i][j] = V[i][j] / c; }
         }
         return ans;
     }
-    friend DynamicMatrix operator*(const T& t, const DynamicMatrix& m) { return m * t; }
-    friend DynamicMatrix& operator+=(DynamicMatrix& m1, const DynamicMatrix& m2) { return m1 = m1 + m2; }
-    friend DynamicMatrix& operator-=(DynamicMatrix& m1, const DynamicMatrix& m2) { return m1 = m1 - m2; }
-    friend DynamicMatrix& operator*=(DynamicMatrix& m1, const DynamicMatrix& m2) { return m1 = m1 * m2; }
-    friend DynamicMatrix& operator*=(DynamicMatrix& m, const T& t) { return m = m * t; }
-    friend DynamicMatrix& operator/=(DynamicMatrix& m, const T& t) { return m = m / t; }
+    /**
+     * @brief V1 <- V1+V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return DynamicMatrix& V1
+     */
+    constexpr friend DynamicMatrix& operator+=(DynamicMatrix& V1, const DynamicMatrix& V2) { return V1 = V1 + V2; }
+    /**
+     * @brief V1 <- V1-V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return DynamicMatrix& V1
+     */
+    constexpr friend DynamicMatrix& operator-=(DynamicMatrix& V1, const DynamicMatrix& V2) { return V1 = V1 - V2; }
+    /**
+     * @brief V1 <- V1*V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return DynamicMatrix& V1
+     */
+    constexpr friend DynamicMatrix& operator*=(DynamicMatrix& V1, const DynamicMatrix& V2) { return V1 = V1 * V2; }
+    /**
+     * @brief V <- cV
+     * 
+     * @param V 
+     * @param c スカラー
+     * @return DynamicMatrix& V
+     */
+    constexpr friend DynamicMatrix& operator*=(DynamicMatrix& V, const T& c) { return V = V * c; }
+    /**
+     * @brief V <- V/c
+     * 
+     * @param V 
+     * @param c スカラー
+     * @return DynamicMatrix& V
+     */
+    constexpr friend DynamicMatrix& operator/=(DynamicMatrix& V, const T& c) { return V = V / c; }
+    /**
+     * @brief V^n
+     * 
+     * @param n 指数
+     * @return DynamicMatrix V^n
+     */
+    constexpr DynamicMatrix pow(i64 n) const { return assert(m_row == m_column), powerMonoid(*this, n, DynamicMatrix::I(m_row)); }
+    /**
+     * @brief 単位行列
+     * 
+     * @param N サイズ
+     * @return DynamicMatrix 単位行列
+     */
+    constexpr static DynamicMatrix I(int N)
+    {
+        DynamicMatrix ans(N, N);
+        for (int i : rep(N)) { ans[i][i] = 1; }
+        return ans;
+    }
+    /**
+     * @brief 行数
+     * 
+     * @return int 行数
+     */
+    constexpr int row() const { return m_row; }
+    /**
+     * @brief 列数
+     * 
+     * @return int 列数
+     */
+    constexpr int column() const { return m_column; }
+#ifdef HOGEPACHI
     friend Ostream& operator<<(Ostream& os, const DynamicMatrix& m)
     {
         os << "[\n";
@@ -92,19 +221,7 @@ public:
         }
         return (os << "]\n");
     }
-    template<typename N> DynamicMatrix pow(N n) const
-    {
-        assert(m_row == m_column);
-        return powerMonoid(*this, n, DynamicMatrix::I(m_row));
-    }
-    static DynamicMatrix I(int N)
-    {
-        DynamicMatrix ans(N, N);
-        for (int i : rep(N)) { ans[i][i] = 1; }
-        return ans;
-    }
-    int row() const { return m_row; }
-    int column() const { return m_column; }
+#endif
 private:
     int m_row, m_column;
     Vec<Vec<T>> m_vss;

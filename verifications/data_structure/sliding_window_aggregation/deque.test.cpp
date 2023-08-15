@@ -1,4 +1,4 @@
-// verification-helper: PROBLEM https://judge.yosupo.jp/problem/queue_operate_all_composite
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/deque_operate_all_composite
 #include "data_structure/sliding_window_aggregation/deque.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
@@ -21,9 +21,14 @@ int main()
         const auto t = in.val<int>();
         if (t == 0) {
             const auto [a, b] = in.tup<mint, mint>();
-            deque.pushBack(Func{a, b});
+            deque.pushFront(Func{a, b});
         } else if (t == 1) {
+            const auto [a, b] = in.tup<mint, mint>();
+            deque.pushBack(Func{a, b});
+        } else if (t == 2) {
             deque.popFront();
+        } else if (t == 3) {
+            deque.popBack();
         } else {
             const auto x = in.val<mint>();
             if (deque.empty()) {

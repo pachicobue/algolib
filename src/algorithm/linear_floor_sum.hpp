@@ -1,14 +1,14 @@
 #pragma once
 #include "../common.hpp"
 /**
- * @brief \sum_{0<=i<N} floor((Ai+B)/C)
+ * @brief \sum_{0<=i<N}floor((Ai+B)/C)
  * @attention オーバーフロー対策は無いので注意
  * 
  * @param N 
  * @param A 
  * @param B 
  * @param C 
- * @return i64 \sum_{0<=i<N} floor((Ai+B)/C)
+ * @return i64 \sum_{0<=i<N}floor((Ai+B)/C)
  */
 constexpr i64 linearFloorSum(i64 N, i64 A, i64 B, i64 C)
 {

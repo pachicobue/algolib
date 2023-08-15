@@ -1,86 +1,198 @@
 #pragma once
 #include "../common.hpp"
+/**
+ * @brief 行列 (静的サイズ)
+ */
 template<typename T, int row, int column> class StaticMatrix
 {
     template<typename V> using IList = std::initializer_list<V>;
 public:
-    StaticMatrix()
-    {
-        for (auto& vs : m_vss) { fillAll(vs, T{}); }
-    }
-    StaticMatrix(const IList<IList<T>>& vss)
+    /**
+     * @brief コンストラクタ
+     */
+    constexpr StaticMatrix() { fillAll(m_vss, T{}); }
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param vss 
+     */
+    constexpr StaticMatrix(const IList<IList<T>>& vss)
     {
         assert(row == vss.size());
         assert(column == vss.begin()->size());
         int i = 0;
-        for (auto it = vss.begin(); it != vss.end(); it++) { std::copy(it->begin(), it->end(), m_vss[i++].begin()); }
-    }
-    StaticMatrix(const StaticMatrix& m) : m_vss{m.m_vss} {}
-    StaticMatrix& operator=(const StaticMatrix& m)
-    {
-        for (const int i : rep(row)) {
-            for (const int j : rep(column)) { m_vss[i][j] = m[i][j]; }
+        for (auto it = vss.begin(); it != vss.end(); it++) {
+            assert((int)it->size() == column);
+            std::ranges::copy(*it, m_vss[i++].begin());
         }
-        return *this;
     }
-    const Arr<T, column>& operator[](const int r) const { return m_vss[r]; }
-    Arr<T, column>& operator[](const int r) { return m_vss[r]; }
-    friend StaticMatrix operator-(const StaticMatrix& m)
-    {
-        StaticMatrix ans;
-        for (const int r : rep(row)) {
-            for (const int c : rep(column)) { ans[r][c] = -m[r][c]; }
-        }
-        return ans;
-    }
-    friend StaticMatrix operator+(const StaticMatrix& m1, const StaticMatrix& m2)
-    {
-        StaticMatrix ans;
-        for (const int r : rep(row)) {
-            for (const int c : rep(column)) { ans[r][c] = m1[r][c] + m2[r][c]; }
-        }
-        return ans;
-    }
-    friend StaticMatrix operator-(const StaticMatrix& m1, const StaticMatrix& m2)
+    /**
+     * @brief 行アクセス (const)
+     * 
+     * @param r 行番号
+     * @return Arr<T, column>& 行
+     */
+    constexpr const Arr<T, column>& operator[](int r) const { return m_vss[r]; }
+    /**
+     * @brief 行アクセス (参照)
+     * 
+     * @param r 行番号
+     * @return Arr<T, column>& 行
+     */
+    constexpr Arr<T, column>& operator[](int r) { return m_vss[r]; }
+    /**
+     * @brief -V
+     * 
+     * @param V 
+     * @return StaticMatrix -V
+     */
+    constexpr friend StaticMatrix operator-(const StaticMatrix& V)
     {
         StaticMatrix ans;
         for (const int r : rep(row)) {
-            for (const int c : rep(column)) { ans[r][c] = m1[r][c] - m2[r][c]; }
+            for (const int c : rep(column)) { ans[r][c] = -V[r][c]; }
         }
         return ans;
     }
-    template<int c> friend StaticMatrix operator*(const StaticMatrix<T, row, c>& m1, const StaticMatrix<T, c, column>& m2)
+    /**
+     * @brief V1+V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return StaticMatrix V1+V2
+     */
+    constexpr friend StaticMatrix operator+(const StaticMatrix& V1, const StaticMatrix& V2)
+    {
+        StaticMatrix ans;
+        for (int i : rep(row)) {
+            for (int j : rep(column)) { ans[i][j] = V1[i][j] + V2[i][j]; }
+        }
+        return ans;
+    }
+    /**
+     * @brief V1-V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return StaticMatrix V1-V2
+     */
+    constexpr friend StaticMatrix operator-(const StaticMatrix& V1, const StaticMatrix& V2)
+    {
+        StaticMatrix ans;
+        for (int i : rep(row)) {
+            for (int j : rep(column)) { ans[i][j] = V1[i][j] - V2[i][j]; }
+        }
+        return ans;
+    }
+    /**
+     * @brief V1*V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return StaticMatrix V1*V2
+     */
+    template<int c> constexpr friend StaticMatrix operator*(const StaticMatrix<T, row, c>& V1, const StaticMatrix<T, c, column>& V2)
     {
         StaticMatrix<T, row, column> ans;
-        for (const int i : rep(row)) {
-            for (const int j : rep(column)) {
-                for (const int k : rep(c)) { ans[i][j] += m1[i][k] * m2[k][j]; }
+        for (int i : rep(row)) {
+            for (int j : rep(column)) {
+                for (int k : rep(c)) { ans[i][j] += V1[i][k] * V2[k][j]; }
             }
         }
         return ans;
     }
-    friend StaticMatrix operator*(const StaticMatrix& m, const T& t)
+    /**
+     * @brief cV 
+     * 
+     * @param V 
+     * @param c スカラー
+     * @return StaticMatrix cV
+     */
+    constexpr friend StaticMatrix operator*(const StaticMatrix& V, const T& c)
     {
         StaticMatrix ans;
-        for (const int r : rep(row)) {
-            for (const int c : rep(column)) { ans[r][c] = m[r][c] * t; }
+        for (int i : rep(row)) {
+            for (int j : rep(column)) { ans[i][j] = V[i][j] * c; }
         }
         return ans;
     }
-    friend StaticMatrix operator/(const StaticMatrix& m, const T& t)
+    /**
+     * @brief V/c 
+     * 
+     * @param V 
+     * @param c スカラー
+     * @return StaticMatrix V/c
+     */
+    constexpr friend StaticMatrix operator/(const StaticMatrix& V, const T& c)
     {
+        assert(c != 0);
         StaticMatrix ans;
-        for (const int r : rep(row)) {
-            for (const int c : rep(column)) { ans[r][c] = m[r][c] / t; }
+        for (int i : rep(row)) {
+            for (int j : rep(column)) { ans[i][j] = V[i][j] / c; }
         }
         return ans;
     }
-    friend StaticMatrix operator*(const T& t, const StaticMatrix& m) { return m * t; }
-    friend StaticMatrix& operator+=(StaticMatrix& m1, const StaticMatrix& m2) { return m1 = m1 + m2; }
-    friend StaticMatrix& operator-=(StaticMatrix& m1, const StaticMatrix& m2) { return m1 = m1 - m2; }
-    friend StaticMatrix& operator*=(StaticMatrix& m1, const StaticMatrix& m2) { return m1 = m1 * m2; }
-    friend StaticMatrix& operator*=(StaticMatrix& m, const T& t) { return m = m * t; }
-    friend StaticMatrix& operator/=(StaticMatrix& m, const T& t) { return m = m / t; }
+    /**
+     * @brief V1 <- V1+V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return StaticMatrix& V1
+     */
+    constexpr friend StaticMatrix& operator+=(StaticMatrix& V1, const StaticMatrix& V2) { return V1 = V1 + V2; }
+    /**
+     * @brief V1 <- V1-V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return StaticMatrix& V1
+     */
+    constexpr friend StaticMatrix& operator-=(StaticMatrix& V1, const StaticMatrix& V2) { return V1 = V1 - V2; }
+    /**
+     * @brief V1 <- V1*V2
+     * 
+     * @param V1 
+     * @param V2 
+     * @return StaticMatrix& V1
+     */
+    constexpr friend StaticMatrix& operator*=(StaticMatrix& V1, const StaticMatrix& V2) { return V1 = V1 * V2; }
+    /**
+     * @brief V <- cV
+     * 
+     * @param V 
+     * @param c スカラー
+     * @return StaticMatrix& V
+     */
+    constexpr friend StaticMatrix& operator*=(StaticMatrix& V, const T& c) { return V = V * c; }
+    /**
+     * @brief V <- V/c
+     * 
+     * @param V 
+     * @param c スカラー
+     * @return StaticMatrix& V
+     */
+    constexpr friend StaticMatrix& operator/=(StaticMatrix& V, const T& c) { return V = V / c; }
+    /**
+     * @brief V^n
+     * 
+     * @param n 指数
+     * @return StaticMatrix V^n
+     */
+    constexpr StaticMatrix pow(i64 n) const { return powerMonoid(*this, n, I()); }
+    /**
+     * @brief 単位行列
+     * 
+     * @param N サイズ
+     * @return StaticMatrix 単位行列
+     */
+    constexpr static StaticMatrix I()
+    {
+        static_assert(row == column, "StaticMatrix::I() should be rectangular!");
+        StaticMatrix ans;
+        for (const int i : rep(row)) { ans[i][i] = 1; }
+        return ans;
+    }
+#ifdef HOGEPACHI
     friend std::ostream& operator<<(std::ostream& os, const StaticMatrix& m)
     {
         os << "[\n";
@@ -91,14 +203,7 @@ public:
         }
         return (os << "]");
     }
-    template<typename Int> StaticMatrix pow(Int n) const { return powerMonoid(*this, n, I()); }
-    static StaticMatrix I()
-    {
-        static_assert(row == column, "StaticMatrix::I() should be rectangular!");
-        StaticMatrix ans;
-        for (const int i : rep(row)) { ans[i][i] = 1; }
-        return ans;
-    }
+#endif
 private:
     Arr<Arr<T, column>, row> m_vss;
 };

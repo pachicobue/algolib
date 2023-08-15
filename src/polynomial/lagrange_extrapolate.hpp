@@ -1,7 +1,14 @@
 #pragma once
 #include "../common.hpp"
-
-template<typename mint> mint lagrangeExtrapolate(const Vec<mint>& ys, const mint& X)
+/**
+ * @brief ラグランジュ補完
+ * 
+ * @tparam mint modint
+ * @param ys F(0),F(1),...,F(N-1)
+ * @param X 
+ * @return mint F(X)の値
+ */
+template<typename mint> constexpr mint lagrangeExtrapolate(const Vec<mint>& ys, const mint& X)
 {
     const int N = ys.size();
     const int x = X.val();

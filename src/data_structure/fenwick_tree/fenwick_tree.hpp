@@ -35,7 +35,7 @@ public:
         for (int ind = i + 1; ind <= m_cap; ind += ind & (-ind)) { m_xs[ind] += x; }
     }
     /**
-     * @brief 累積和 \sum_{0<=i<isup} X[i] 
+     * @brief 累積和 \sum_{0<=i<isup}X[i] 
      * 
      * @param isup 
      * @return T 累積和
@@ -48,7 +48,7 @@ public:
         return sum;
     }
     /**
-     * @brief 区間和 \sum_{imin<=i<isup} X[i] 
+     * @brief 区間和 \sum_{imin<=i<isup}X[i] 
      * 
      * @param imin 
      * @param imax 
@@ -60,7 +60,7 @@ public:
         return sum(imax) - sum(imin);
     }
     /**
-     * @brief pred(\sum_{0<=i<x}) == True となる最小の x
+     * @brief pred(\sum_{0<=i<x})==True となる最小の x
      * 
      * @param pred 判定関数
      * @return int 最小のx (Trueになる x が存在しない場合 N+1)
@@ -68,13 +68,18 @@ public:
     int maxRight(auto pred)
     {
         if (pred(T{})) { return 0; }
-        T sum = T{};
-        int x = 0;  // pred(\sum_{0<=i<x}) == False 確定
-        for (int width = m_cap; width >= 1; width /= 2) {
-            assert(x + width <= m_cap);
-            if (not pred(sum + m_xs[x + width])) { sum += m_xs[x + width], x += width; }
+        if (not pred(m_xs[m_cap])) { return m_size + 1; }
+        int ng = 0, ok = m_cap;
+        T sum = 0;
+        while (ok - ng > 1) {
+            const int mid = (ok + ng) / 2;
+            if (pred(sum + m_xs[mid])) {
+                ok = mid;
+            } else {
+                ng = mid, sum += m_xs[mid];
+            }
         }
-        return x + 1;
+        return ok;
     }
 #ifdef HOGEPACHI
     friend Ostream& operator<<(Ostream& os, const FenwickTree& fw)

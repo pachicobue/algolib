@@ -1,6 +1,11 @@
 #pragma once
 #include "../common.hpp"
 #include "../number/primitive_root.hpp"
+/**
+ * @brief Number Theoretic Transform
+ * 
+ * @tparam mint modint (NTT friendlyな素数)
+ */
 template<typename mint> class NumberTheoriticTransform
 {
 private:
@@ -8,20 +13,33 @@ private:
     static constexpr u64 root() { return primitiveRoot(mint::mod()); }
     static constexpr int order() { return order2(mint::mod() - 1); }
 public:
-    static constexpr Vec<mint> convolute(Vec<mint> as, Vec<mint> bs)
+    /**
+     * @brief 畳み込み
+     * 
+     * @param F 
+     * @param G 
+     * @return Vec<mint> 畳み込み結果
+     */
+    static constexpr Vec<mint> convolute(Vec<mint> F, Vec<mint> G)
     {
-        const int AN = as.size(), BN = bs.size();
-        const int CN = AN + BN - 1;
-        const int N  = (int)std::bit_ceil((u64)CN);
-        as.resize(N, 0), bs.resize(N, 0);
-        transform(as, false), transform(bs, false);
-        for (int i : rep(N)) { as[i] *= bs[i]; }
-        transform(as, true), as.resize(CN);
-        return as;
+        const int A = F.size(), B = G.size();
+        const int C = A + B - 1;
+        const int N = (int)std::bit_ceil((u64)C);
+        F.resize(N, 0), G.resize(N, 0);
+        transform(F, false), transform(G, false);
+        for (int i : rep(N)) { F[i] *= G[i]; }
+        transform(F, true), F.resize(C);
+        return F;
     }
-    static constexpr void transform(Vec<mint>& as, bool rev)
+    /**
+     * @brief NTTを行う
+     * 
+     * @param [in,out] F 変換する数列 (変換結果もここに入る)
+     * @param rev 逆変換か
+     */
+    static constexpr void transform(Vec<mint>& F, bool rev)
     {
-        const int N = as.size();
+        const int N = F.size();
         assert((N & (N - 1)) == 0);
         assert(N <= (1 << order()));
         if (N == 1) { return; }
@@ -33,16 +51,16 @@ public:
                 const mint W = zeta(l, rev);
                 for (mint W_h = 1; int h : rep(H / 2)) {
                     const int y1 = H * b + h, y2 = y1 + H / 2;
-                    const mint a1 = as[y1], a2 = as[y2];
-                    const mint na1 = (rev ? a1 + a2 * W_h : a1 + a2), na2 = (rev ? a1 - a2 * W_h : (a1 - a2) * W_h);
-                    as[y1] = na1, as[y2] = na2;
+                    const mint f1 = F[y1], f2 = F[y2];
+                    const mint nf1 = (rev ? f1 + f2 * W_h : f1 + f2), nf2 = (rev ? f1 - f2 * W_h : (f1 - f2) * W_h);
+                    F[y1] = nf1, F[y2] = nf2;
                     W_h *= W;
                 }
             }
         }
         if (rev) {
-            const mint iN = mint::sinv(N);
-            for (auto& a : as) { a *= iN; }
+            const mint iN = mint{1} / N;
+            for (auto& a : F) { a *= iN; }
         }
     }
 private:

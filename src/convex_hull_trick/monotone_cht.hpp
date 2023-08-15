@@ -12,21 +12,29 @@ template<typename T> class MonotoneCHT
 {
     using L                    = Pair<T, T>;
     static constexpr auto Null = std::nullopt;
+    static bool popAble(const L& l1, const L& l2, const L& l3)
+    {
+        const auto& [a1, b1] = l1;
+        const auto& [a2, b2] = l2;
+        const auto& [a3, b3] = l3;
+        assert(a1 > a2 and a2 > a3);
+        // if constexpr (std::is_integral_v<T>) {
+        //     return floorDiv(b2 - b1, a1 - a2) >= floorDiv(b3 - b1, a1 - a3);
+        // } else {
+        return (a1 - a3) * (b2 - b1) >= (a1 - a2) * (b3 - b1);
+        // }
+    }
     static bool comp(const L& l1, const L& l2, Opt<T> x)
     {
         const auto& [a1, b1] = l1;
         const auto& [a2, b2] = l2;
-        if (a1 == a2) { return b1 < b2; }
-        if (x == Null) { return a1 < a2; }
-        if constexpr (std::is_integral_v<T>) {
-            if (a1 > a2) {
-                return x.value() <= floorDiv(b2 - b1, a1 - a2);
-            } else {
-                return floorDiv(b1 - b2, a2 - a1) < x.value();
-            }
-        } else {
-            return a1 * x.value() + b1 < a2 * x.value() + b2;
-        }
+        assert(a1 > a2);
+        if (x == Null) { return true; }
+        // if constexpr (std::is_integral_v<T>) {
+        //     return x < ceilDiv(b2 - b1, a1 - a2);
+        // } else {
+        return a1 * x.value() + b1 < a2 * x.value() + b2;
+        // }
     }
 public:
     /**
@@ -35,15 +43,19 @@ public:
     MonotoneCHT() : m_prev_x{Null} {}
     /**
      * @brief 直線追加
-     * @attention 以前追加した直線の傾き以上である必要あり
+     * @attention 以前追加した直線の傾き以下である必要あり
      * 
      * @param l 直線
      */
     void addLine(const L& l)
     {
-        assert(m_lines.empty() or m_lines.back().first >= l.first);
-        while (not m_lines.empty()) {
-            if (comp(m_lines.back(), l, m_prev_x)) { break; }
+        if (m_lines.empty()) { return m_lines.push_back(l), void(); }
+        if (m_lines.back().first == l.first) {
+            if (m_lines.back().second <= l.second) { return; }
+            m_lines.pop_back();
+        }
+        while ((int)m_lines.size() >= 2) {
+            if (not popAble(m_lines[m_lines.size() - 2], m_lines[m_lines.size() - 1], l)) { break; }
             m_lines.pop_back();
         }
         m_lines.push_back(l);

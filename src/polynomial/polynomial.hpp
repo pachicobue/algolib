@@ -76,11 +76,12 @@ public:
     /**
      * @brief -F(x)
      * 
+     * @param F
      * @return Polynomial -F(x)
      */
-    constexpr Polynomial operator-() const
+    constexpr friend Polynomial operator-(const Polynomial& F)
     {
-        Polynomial ans = *this;
+        Polynomial ans = F;
         for (auto& v : ans) { v = -v; }
         return ans;
     }

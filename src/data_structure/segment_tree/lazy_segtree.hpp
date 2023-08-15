@@ -58,7 +58,7 @@ public:
         while (i >>= 1) { up(i); }
     }
     /**
-     * @brief 範囲取得 \prod_{l<=i<r} X[i]
+     * @brief 範囲取得 \prod_{l<=i<r}X[i]
      * 
      * @param l 
      * @param r 

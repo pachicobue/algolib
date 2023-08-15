@@ -1,5 +1,5 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/gcd_convolution
-#include "formal_dirichlet_series/gcd_convolution.hpp"
+#include "dirichlet_series/gcd_convolution.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"

@@ -41,9 +41,8 @@ public:
         assert(not empty());
         if (m_backs.empty()) {
             auto as = Vec<T>(m_fronts.begin() + 1, m_fronts.end());
-            m_fronts.clear(), m_Fronts.clear();
-            reverseAll(as);
-            const int half = std::ssize(as) / 2;
+            m_fronts.clear(), reverseAll(as);
+            const int half = (int)as.size() / 2;
             for (int i : per(half)) { m_fronts.push_back(as[i]); }
             for (int i : irange(half, as.size())) { m_backs.push_back(as[i]); }
             calc();
@@ -59,8 +58,8 @@ public:
         assert(not empty());
         if (m_fronts.empty()) {
             auto as = Vec<T>(m_backs.begin() + 1, m_backs.end());
-            m_backs.clear(), m_Backs.clear();
-            const int half = std::ssize(as) / 2;
+            m_backs.clear();
+            const int half = (int)as.size() / 2;
             for (int i : per(half)) { m_fronts.push_back(as[i]); }
             for (int i : irange(half, as.size())) { m_backs.push_back(as[i]); }
             calc();
@@ -84,14 +83,10 @@ public:
 private:
     void calc()
     {
-        if (not m_fronts.empty()) {
-            m_Fronts.push_back(Monoid::e());
-            for (int i : rep(m_fronts.size())) { m_Fronts.push_back(m_merge(m_fronts[i], m_Fronts.back())); }
-        }
-        if (not m_backs.empty()) {
-            m_Backs.push_back(Monoid::e());
-            for (int i : rep(m_backs.size())) { m_Backs.push_back(m_merge(m_Backs.back(), m_backs[i])); }
-        }
+        m_Fronts = {Monoid::e()};
+        for (int i : rep(m_fronts.size())) { m_Fronts.push_back(m_merge(m_fronts[i], m_Fronts.back())); }
+        m_Backs = {Monoid::e()};
+        for (int i : rep(m_backs.size())) { m_Backs.push_back(m_merge(m_Backs.back(), m_backs[i])); }
     }
     Vec<T> m_fronts, m_backs;
     Vec<T> m_Fronts, m_Backs;

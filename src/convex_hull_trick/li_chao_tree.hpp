@@ -32,10 +32,6 @@ template<typename T = i64> class LiChaoTree
             return a1 * T{x} + b1 < a2 * T{x} + b2;
         }
     }
-    static auto bindComp(i64 x)
-    {
-        return [&x](const Opt<L>& l1, const Opt<L>& l2) { return comp(l1, l2, x); };
-    }
 public:
     /**
      * @brief コンストラクタ
@@ -68,8 +64,8 @@ public:
                 add(line, index, lx, rx);
             } else {
                 ensureSub(index);
-                const auto& nindexs = m_nodes[index].sons;
-                const i64 nxs[3]    = {lx, (lx + rx) / 2, rx};
+                const auto nindexs = m_nodes[index].sons;
+                const i64 nxs[3]   = {lx, (lx + rx) / 2, rx};
                 for (int c : rep(2)) { self(nindexs[c], nxs[c], nxs[c + 1]); }
             }
         })(0, m_xmin, m_xsup);
@@ -86,7 +82,9 @@ public:
         Opt<L> Ans = Null;
         for (int index = 0; index != NIL;) {
             const auto& pl = m_nodes[index].line;
-            if (pl != Null) { chmin(Ans, pl, bindComp(x)); }
+            if (pl != Null) {
+                chmin(Ans, pl, [&](auto l1, auto l2) { return comp(l1, l2, x); });
+            }
             const i64 mx        = (lx + rx) / 2;
             const auto& nindexs = m_nodes[index].sons;
             const i64 nxs[3]    = {lx, mx, rx};
@@ -102,7 +100,7 @@ private:
         assert(index != NIL);
         while (true) {
             if (rx - lx == 1) {
-                chmin(m_nodes[index].line, l, bindComp(lx));
+                chmin(m_nodes[index].line, l, [&](auto l1, auto l2) { return comp(l1, l2, lx); });
                 break;
             }
             const auto& pl    = m_nodes[index].line;

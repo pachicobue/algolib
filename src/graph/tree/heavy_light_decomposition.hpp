@@ -66,7 +66,7 @@ public:
      * @brief 部分木に属する頂点の ET順区間
      * 
      * @param v 頂点番号
-     * @return P {l,r} : l <= ET < r が部分木
+     * @return P {l,r} : l<=ET<r が部分木
      */
     P sub(int v) const
     {

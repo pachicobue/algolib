@@ -1,5 +1,5 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/lcm_convolution
-#include "formal_dirichlet_series/lcm_convolution.hpp"
+#include "dirichlet_series/lcm_convolution.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"

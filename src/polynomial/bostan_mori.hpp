@@ -24,8 +24,8 @@ template<typename mint> constexpr mint bostanMori(Polynomial<mint> F, Polynomial
         for (int i : rep(G.size())) { mG[i] = G[i] * (i % 2 == 0 ? 1 : -1); }
         const auto nG = G * mG;
         const auto nF = F * mG;
-        for (int i : rep(ceilDiv(F.size(), 2))) { F[i] = nF.at(2 * i + (N % 2)); }
-        for (int i : rep(ceilDiv(G.size(), 2))) { G[i] = nG.at(2 * i); }
+        for (int i : rep(ceilDiv(nF.size(), 2))) { F[i] = nF.at(2 * i + (N % 2)); }
+        for (int i : rep(ceilDiv(nG.size(), 2))) { G[i] = nG.at(2 * i); }
         N /= 2;
     }
     return F[0] / G[0];

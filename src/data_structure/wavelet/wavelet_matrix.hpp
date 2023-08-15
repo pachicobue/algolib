@@ -31,7 +31,7 @@ public:
         }
     }
     /**
-     * @brief 矩形カウント #{i | l<=i<r && vmin <= X[i] < vsup}
+     * @brief 矩形カウント #{i | l<=i<r && vmin<=X[i]<vsup}
      * 
      * @param l 
      * @param r 

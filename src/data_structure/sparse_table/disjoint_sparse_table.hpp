@@ -32,7 +32,7 @@ public:
      * 
      * @param l 
      * @param r 
-     * @return T \prod{l<=i<r} X[i]
+     * @return T \prod{l<=i<r}X[i]
      */
     T fold(int l, int r) const
     {

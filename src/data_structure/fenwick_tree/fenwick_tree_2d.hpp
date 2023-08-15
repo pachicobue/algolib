@@ -50,7 +50,7 @@ public:
         }
     }
     /**
-     * @brief 2次元累積和 \sum_{0<=i<isup}\sum_{0<=j<jsup} X[i][j]
+     * @brief 2次元累積和 \sum_{0<=i<isup}\sum_{0<=j<jsup}X[i][j]
      * 
      * @param isup 
      * @param jsup 
@@ -67,7 +67,7 @@ public:
         return sum;
     }
     /**
-     * @brief 矩形領域和 \sum_{imin<=i<isup}\sum_{jmin<=j<jsup} X[i][j] を求める
+     * @brief 矩形領域和 \sum_{imin<=i<isup}\sum_{jmin<=j<jsup}X[i][j] を求める
      * 
      * @param imin 
      * @param isup 

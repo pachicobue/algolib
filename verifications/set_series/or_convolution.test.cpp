@@ -1,13 +1,13 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/bitwise_and_convolution
-#include "set_power_series/or_convolution.hpp"
+#include "set_series/or_convolution.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
 int main()
 {
-    using mint = modint_998244353;
-    const auto n = in.val<int>();
-    const int N = 1 << n;
+    using mint    = modint_998244353;
+    const auto n  = in.val<int>();
+    const int N   = 1 << n;
     const auto as = in.vec<mint>(N);
     const auto bs = in.vec<mint>(N);
     Vec<mint> As(N, 0), Bs(N, 0);

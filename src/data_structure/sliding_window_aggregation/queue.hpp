@@ -31,7 +31,6 @@ public:
         assert(not empty());
         if (m_fronts.empty()) {
             std::swap(m_fronts, m_backs), reverseAll(m_fronts), m_fronts.pop_back();
-            m_backs.clear(), m_Backs.clear();
             calc();
         } else {
             m_fronts.pop_back(), m_Fronts.pop_back();
@@ -53,14 +52,10 @@ public:
 private:
     void calc()
     {
-        if (not m_fronts.empty()) {
-            m_Fronts.push_back(Monoid::e());
-            for (int i : rep(m_fronts.size())) { m_Fronts.push_back(m_merge(m_fronts[i], m_Fronts.back())); }
-        }
-        if (not m_backs.empty()) {
-            m_Backs.push_back(Monoid::e());
-            for (int i : rep(m_backs.size())) { m_Backs.push_back(m_merge(m_Backs.back(), m_backs[i])); }
-        }
+        m_Fronts = {Monoid::e()};
+        for (int i : rep(m_fronts.size())) { m_Fronts.push_back(m_merge(m_fronts[i], m_Fronts.back())); }
+        m_Backs = {Monoid::e()};
+        for (int i : rep(m_backs.size())) { m_Backs.push_back(m_merge(m_Backs.back(), m_backs[i])); }
     }
     Vec<T> m_fronts, m_backs;
     Vec<T> m_Fronts, m_Backs;

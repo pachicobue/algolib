@@ -13,7 +13,7 @@ template<typename T> Pair<T, Vec<int>> diameter(const Graph<T>& g)
     const int s = maxInd(ds);
     ds = g.depths(s), ps = g.parents(s);
     const int t = maxInd(ds);
-    const i64 D = ds[s];
+    const i64 D = ds[t];
     Vec<int> vs;
     for (int u = t; u != s; u = ps[u]) { vs.push_back(u); }
     vs.push_back(s);

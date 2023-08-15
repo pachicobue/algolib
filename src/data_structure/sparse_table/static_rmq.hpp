@@ -48,7 +48,7 @@ public:
      * 
      * @param l 
      * @param r 
-     * @return T \min_{l<=i<r} X[i]
+     * @return T \min_{l<=i<r}X[i]
      */
     T fold(int l, int r) const
     {
@@ -57,12 +57,11 @@ public:
         if (lb > rb) {
             return brmq(l, r);
         } else {
-            return lb < rb
-                       ? (l < bs * lb ? (bs * rb < r ? std::min({m_st.fold(lb, rb), brmq(l, bs * lb), brmq(bs * rb, r)}, comp)
-                                                     : std::min(m_st.fold(lb, rb), brmq(l, bs * lb), comp))
-                                      : (bs * rb < r ? std::min(m_st.fold(lb, rb), brmq(bs * rb, r), comp) : m_st.fold(lb, rb)))
-                       : (l < bs * lb ? (bs * rb < r ? std::min(brmq(l, bs * lb), brmq(bs * rb, r), comp) : brmq(l, bs * lb))
-                                      : (bs * rb < r ? brmq(bs * rb, r) : T{}));
+            return lb < rb ? (l < bs * lb ? (bs * rb < r ? std::min({m_st.fold(lb, rb), brmq(l, bs * lb), brmq(bs * rb, r)}, comp)
+                                                         : std::min(m_st.fold(lb, rb), brmq(l, bs * lb), comp))
+                                          : (bs * rb < r ? std::min(m_st.fold(lb, rb), brmq(bs * rb, r), comp) : m_st.fold(lb, rb)))
+                           : (l < bs * lb ? (bs * rb < r ? std::min(brmq(l, bs * lb), brmq(bs * rb, r), comp) : brmq(l, bs * lb))
+                                          : (bs * rb < r ? brmq(bs * rb, r) : T{}));
         }
     }
 private:

@@ -41,7 +41,7 @@ public:
      * 
      * @param u 
      * @param v 
-     * @return int LCA
+     * @return int LCA(u,v)
      */
     int operator()(int u, int v) const
     {
