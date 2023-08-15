@@ -33,6 +33,7 @@ def _compile(verif_path: Path, directory: Path) -> bool:
         [compile_command] + compile_flags + ["-o", directory / "a.out", str(verif_path)]
     )  # [str]
     try:
+        print(command)
         subprocess.check_call(command)
     except Exception:
         traceback.print_exc()
