@@ -20,7 +20,7 @@ jobs:
           python-version: '3.10'
       
       - name: Install gcc 12
-        used: egor-tensin/setup-gcc@v1
+        uses: egor-tensin/setup-gcc@v1
         with: 
           version: 12
       
