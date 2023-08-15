@@ -3,7 +3,8 @@
 
 ## 注意
 - C++20以上前提
-  - AtCoderの言語アップデートが来たらC++23前提になるかも
+  - C++20対応をやりすぎて、Codeforces,QOJ辺りでコンパイルが通らなくなっちゃった
+    - constexpr関数内でのvector利用のせい。今更ifdefとかするのだるいがどうしよう...
 - `using namespace std;` すると動かなくなる可能性あり
   - `namespace algolib` とかした方がいいのかな
 
