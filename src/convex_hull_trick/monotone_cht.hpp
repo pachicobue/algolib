@@ -18,11 +18,11 @@ template<typename T> class MonotoneCHT
         const auto& [a2, b2] = l2;
         const auto& [a3, b3] = l3;
         assert(a1 > a2 and a2 > a3);
-        // if constexpr (std::is_integral_v<T>) {
-        //     return floorDiv(b2 - b1, a1 - a2) >= floorDiv(b3 - b1, a1 - a3);
-        // } else {
-        return (a1 - a3) * (b2 - b1) >= (a1 - a2) * (b3 - b1);
-        // }
+        if constexpr (std::is_integral_v<T>) {
+            return floorDiv(b2 - b1, a1 - a2) >= floorDiv(b3 - b1, a1 - a3);
+        } else {
+            return (a1 - a3) * (b2 - b1) >= (a1 - a2) * (b3 - b1);
+        }
     }
     static bool comp(const L& l1, const L& l2, Opt<T> x)
     {
@@ -30,11 +30,11 @@ template<typename T> class MonotoneCHT
         const auto& [a2, b2] = l2;
         assert(a1 > a2);
         if (x == Null) { return true; }
-        // if constexpr (std::is_integral_v<T>) {
-        //     return x < ceilDiv(b2 - b1, a1 - a2);
-        // } else {
-        return a1 * x.value() + b1 < a2 * x.value() + b2;
-        // }
+        if constexpr (std::is_integral_v<T>) {
+            return x < ceilDiv(b2 - b1, a1 - a2);
+        } else {
+            return a1 * x.value() + b1 < a2 * x.value() + b2;
+        }
     }
 public:
     /**

@@ -9,7 +9,7 @@
  * @param G 
  * @return Vec<T> H[i]=\sum{i=j&k}F[j]*G[k]
  */
-template<typename T> constexpr Vec<T> andConvolute(Vec<T> F, Vec<T> G)
+template<typename T> Vec<T> andConvolute(Vec<T> F, Vec<T> G)
 {
     const int N = (int)std::bit_ceil(std::max(F.size(), G.size()));
     F.resize(N), G.resize(N);

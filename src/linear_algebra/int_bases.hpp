@@ -10,7 +10,7 @@ public:
     /**
      * @brief コンストラクタ
      */
-    constexpr IntBases() { fillAll(m_vis, -1); }
+    IntBases() { fillAll(m_vis, -1); }
     /**
      * @brief 元vを追加する
      * 
@@ -18,7 +18,7 @@ public:
      * @return true Rankが増えた
      * @return false Rankが変わらず(vがもともと線形従属)
      */
-    constexpr bool add(u64 v)
+    bool add(u64 v)
     {
         auto reduced_v = v;
         u64 mask       = 0;
@@ -46,26 +46,26 @@ public:
      * 
      * @return const Vec<u64>& 基底をなす元の数列
      */
-    constexpr const Vec<u64>& origBases() const { return m_orig_bases; }
+    const Vec<u64>& origBases() const { return m_orig_bases; }
     /**
      * @brief 基底を掃き出した数列
      * 
      * @return const Vec<u64>& 基底を掃き出した数列
      */
-    constexpr const Vec<u64>& reducedBases() const { return m_reduced_bases; }
+    const Vec<u64>& reducedBases() const { return m_reduced_bases; }
     /**
      * @brief 階数
      * 
      * @return int 階数
      */
-    constexpr int rank() const { return m_reduced_bases.size(); }
+    int rank() const { return m_reduced_bases.size(); }
     /**
      * @brief 元vを基底の線形結合で表す
      * 
      * @param v 
      * @return Opt<T> 線形結合の係数 (vがspanに含まれてない場合は nullopt)
      */
-    constexpr Opt<u64> decomp(u64 v) const
+    Opt<u64> decomp(u64 v) const
     {
         u64 mask = 0;
         for (int j : irange(D - 1, -1, -1)) {

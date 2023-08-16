@@ -12,7 +12,7 @@ public:
     /**
      * @brief コンストラクタ
      */
-    constexpr BitBases() { fillAll(m_vis, -1); }
+    BitBases() { fillAll(m_vis, -1); }
     /**
      * @brief 元vを追加する
      * 
@@ -20,7 +20,7 @@ public:
      * @return true Rankが増えた
      * @return false Rankが変わらず(vがもともと線形従属)
      */
-    constexpr bool add(const T& v)
+    bool add(const T& v)
     {
         auto reduced = v;
         T mask       = 0;
@@ -56,26 +56,26 @@ public:
      * 
      * @return const Vec<T>& 基底をなす元の数列
      */
-    constexpr const Vec<T>& origBases() const { return m_orig_bases; }
+    const Vec<T>& origBases() const { return m_orig_bases; }
     /**
      * @brief 基底を掃き出した数列
      * 
      * @return const Vec<T>& 基底を掃き出した数列
      */
-    constexpr const Vec<T>& reducedBases() const { return m_reduced_bases; }
+    const Vec<T>& reducedBases() const { return m_reduced_bases; }
     /**
      * @brief 階数
      * 
      * @return int 階数
      */
-    constexpr int rank() const { return m_reduced_bases.size(); }
+    int rank() const { return m_reduced_bases.size(); }
     /**
      * @brief 元vを基底の線形結合で表す
      * 
      * @param v 
      * @return Opt<T> 線形結合の係数 (vがspanに含まれてない場合は nullopt)
      */
-    constexpr Opt<T> decomp(T v) const
+    Opt<T> decomp(T v) const
     {
         T mask = 0;
         for (int j : per(D)) {

@@ -28,7 +28,7 @@ public:
      * 
      * @param N 頂点数
      */
-    constexpr Graph(int N) : m_V{N}, m_lists(N), m_edges{} {}
+    Graph(int N) : m_V{N}, m_lists(N), m_edges{} {}
     /**
      * @brief 辺追加 (コスト1)
      * 
@@ -36,7 +36,7 @@ public:
      * @param v 
      * @param bi 無向辺かどうか
      */
-    constexpr void addEdge(int u, int v, bool bi = false)
+    void addEdge(int u, int v, bool bi = false)
         requires std::is_same_v<T, int>
     {
         assert(0 <= u and u < m_V);
@@ -54,7 +54,7 @@ public:
      * @param c コスト
      * @param bi 無向辺かどうか
      */
-    constexpr void addEdge(int u, int v, T c, bool bi = false)
+    void addEdge(int u, int v, T c, bool bi = false)
     {
         assert(0 <= u and u < m_V);
         assert(0 <= v and v < m_V);
@@ -67,9 +67,9 @@ public:
      * @brief 頂点u につながっている辺列 (const)
      * 
      * @param u 
-     * @return constexpr const Vec<Edge>& 辺列
+     * @return const Vec<Edge>& 辺列
      */
-    constexpr const Vec<Edge>& operator[](int u) const
+    const Vec<Edge>& operator[](int u) const
     {
         assert(0 <= u and u < m_V);
         return m_lists[u];
@@ -78,9 +78,9 @@ public:
      * @brief 頂点u につながっている辺列 (mutable)
      * 
      * @param u 
-     * @return constexpr const Vec<Edge>& 辺列
+     * @return const Vec<Edge>& 辺列
      */
-    constexpr Vec<Edge>& operator[](const int u)
+    Vec<Edge>& operator[](const int u)
     {
         assert(0 <= u and u < m_V);
         return m_lists[u];
@@ -92,7 +92,7 @@ public:
      * @param R 根
      * @return Vec<int> 部分木サイズ列
      */
-    constexpr Vec<int> sizes(int R = 0) const
+    Vec<int> sizes(int R = 0) const
     {
         Vec<int> Ans(V(), 1);
         Fix([&](auto self, int u, int p) -> void {
@@ -111,7 +111,7 @@ public:
      * @param R 根
      * @return Vec<T> 深さ列
      */
-    constexpr Vec<T> depths(int R = 0) const
+    Vec<T> depths(int R = 0) const
     {
         Vec<i64> Ans(V(), 0);
         Fix([&](auto self, int u, int p) -> void {
@@ -130,7 +130,7 @@ public:
      * @param R 根
      * @return Vec<int> 親頂点列 (根の親は -1 とする)
      */
-    constexpr Vec<int> parents(int R = 0) const
+    Vec<int> parents(int R = 0) const
     {
         Vec<int> Ans(V(), -1);
         Fix([&](auto self, int u, int p) -> void {
@@ -146,9 +146,9 @@ public:
      * @brief 辺取得
      * 
      * @param eid 辺番号
-     * @return constexpr const Edge& 辺情報
+     * @return const Edge& 辺情報
      */
-    constexpr const Edge& edge(int eid) const
+    const Edge& edge(int eid) const
     {
         assert(0 <= eid and eid < m_E);
         return m_edges[eid];
@@ -156,21 +156,23 @@ public:
     /**
      * @brief 頂点数
      * 
-     * @return constexpr int 頂点数
+     * @return  int 頂点数
      */
-    constexpr int V() const { return m_V; }
+    int V() const { return m_V; }
     /**
      * @brief 辺数
      * 
-     * @return constexpr int 辺数
+     * @return int 辺数
      */
-    constexpr int E() const { return m_E; }
+    int E() const { return m_E; }
     /**
      * @brief 辺列から コスト 情報を削ぐ
+     * @attention for(const auto [eid,to]: g[u]|g.ETo()) と使う
      */
     static constexpr auto ETo = std::views::transform([](const Edge& e) { return makePair(e.eid, e.to); });
     /**
      * @brief 辺列から 辺番号 情報を削ぐ
+     * @attention for(const auto [to,cost]: g[u]|g.ToC()) と使う
      */
     static constexpr auto ToC = std::views::transform([](const Edge& e) { return makePair(e.to, e.cost); });
 private:

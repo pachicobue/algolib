@@ -11,7 +11,7 @@
  * @param N 指数
  * @return mint G(x)*H(x)=F(x) (mod x^(N+1)) を満たすH(x)の x^N係数
  */
-template<typename mint> constexpr mint bostanMori(Polynomial<mint> F, Polynomial<mint> G, i64 N)
+template<typename mint> mint bostanMori(Polynomial<mint> F, Polynomial<mint> G, i64 N)
 {
     assert(not G.isZero());
     const int ford = F.order(), gord = G.order();
@@ -38,7 +38,7 @@ template<typename mint> constexpr mint bostanMori(Polynomial<mint> F, Polynomial
  * @param N 
  * @return mint AsのN項目
  */
-template<typename mint> constexpr mint guessNthTerm(const Vec<mint>& As, i64 N)
+template<typename mint> mint guessNthTerm(const Vec<mint>& As, i64 N)
 {
     const Polynomial<mint> G{berlekampMassey(As)};
     const int L = G.size();

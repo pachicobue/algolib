@@ -8,7 +8,7 @@
  * @param rev 逆変換かどうか
  * @return Vec<T> Hadamard変換後の数列
  */
-template<typename T> constexpr Vec<T> setHadamard(const Vec<T>& F, bool rev)
+template<typename T> Vec<T> setHadamard(const Vec<T>& F, bool rev)
 {
     const int N = (int)std::bit_ceil(F.size());
     Vec<T> nF(N);

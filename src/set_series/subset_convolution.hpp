@@ -7,7 +7,7 @@
  * @param G 
  * @return Vec<T> H[i]=\sum_{i=j|k && j&k==0}F[j]*G[k]
  */
-template<typename T> constexpr Vec<T> subsetConvolute(const Vec<T>& F, const Vec<T>& G)
+template<typename T> Vec<T> subsetConvolute(const Vec<T>& F, const Vec<T>& G)
 {
     const int l = floorLog2((u64)std::bit_ceil(std::max(F.size(), G.size())));
     const int N = 1 << l;

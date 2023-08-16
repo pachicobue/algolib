@@ -10,7 +10,7 @@ template<typename mint> class NumberTheoriticTransform
 {
 private:
     static constexpr u64 mod() { return mint::mod(); }
-    static constexpr u64 root() { return primitiveRoot(mint::mod()); }
+    static constexpr u64 root() { return primitiveRootFast(mint::mod()); }
     static constexpr int order() { return order2(mint::mod() - 1); }
 public:
     /**
@@ -20,7 +20,7 @@ public:
      * @param G 
      * @return Vec<mint> 畳み込み結果
      */
-    static constexpr Vec<mint> convolute(Vec<mint> F, Vec<mint> G)
+    static Vec<mint> convolute(Vec<mint> F, Vec<mint> G)
     {
         const int A = F.size(), B = G.size();
         const int C = A + B - 1;
@@ -37,7 +37,7 @@ public:
      * @param [in,out] F 変換する数列 (変換結果もここに入る)
      * @param rev 逆変換か
      */
-    static constexpr void transform(Vec<mint>& F, bool rev)
+    static void transform(Vec<mint>& F, bool rev)
     {
         const int N = F.size();
         assert((N & (N - 1)) == 0);

@@ -8,7 +8,7 @@ int main()
     const auto Q = in.val<int>();
     LOOP (Q) {
         const auto P = in.val<u64>();
-        out.ln(primitiveRoot(P));
+        out.ln(primitiveRootFast(P));
     }
     return 0;
 }

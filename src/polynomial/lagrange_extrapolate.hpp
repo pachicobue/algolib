@@ -8,7 +8,7 @@
  * @param X 
  * @return mint F(X)の値
  */
-template<typename mint> constexpr mint lagrangeExtrapolate(const Vec<mint>& ys, const mint& X)
+template<typename mint> mint lagrangeExtrapolate(const Vec<mint>& ys, const mint& X)
 {
     const int N = ys.size();
     const int x = X.val();

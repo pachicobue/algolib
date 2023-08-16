@@ -6,7 +6,7 @@
  * @param N 
  * @return Vec<i64> Nの約数列
  */
-constexpr Vec<i64> divisors(const i64 N)
+inline Vec<i64> divisors(const i64 N)
 {
     Vec<i64> head, tail;
     for (i64 i = 1; i * i <= N; i++) {

@@ -11,7 +11,7 @@ public:
      *
      * @param N N未満に対する篩
      */
-    constexpr EratosthenesSieve(int N) : m_N{N}, m_factors{iotaVec(N)}
+    EratosthenesSieve(int N) : m_N{N}, m_factors{iotaVec(N)}
     {
         for (int i : irange(2, N)) {
             if (m_factors[i] != i) { continue; }
@@ -24,7 +24,7 @@ public:
      * @param x 
      * @return int 最大素因数
      */
-    constexpr int maxPrimeFactor(int x) const
+    int maxPrimeFactor(int x) const
     {
         assert(1 <= x and x < m_N);
         return m_factors[x];
@@ -36,7 +36,7 @@ public:
      * @return true 素数
      * @return false 合成数
      */
-    constexpr bool isPrime(int x) const
+    bool isPrime(int x) const
     {
         assert(x < m_N);
         if (x <= 1) { return false; }
@@ -47,7 +47,7 @@ public:
      * 
      * @return Vec<int> 素数列
      */
-    constexpr Vec<int> primes() const
+    Vec<int> primes() const
     {
         Vec<int> ps;
         for (int i : irange(2, m_N)) {

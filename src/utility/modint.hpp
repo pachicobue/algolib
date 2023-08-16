@@ -41,7 +41,8 @@ public:
     static constexpr void setMod(u64 m)
         requires dynamic
     {
-        assert(0 < m and m <= LIMMAX<i64>), modRef() = m;
+        assert(0 < m and m <= LIMMAX<i64>);
+        modRef() = m, sinvRef() = factRef() = ifactRef() = {1, 1};
     }
     /**
      * @brief コンストラクタ (0初期化)

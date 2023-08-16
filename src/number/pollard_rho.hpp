@@ -10,7 +10,7 @@
  * @param X (1以上)
  * @return u64 Xの非自明な約数 (Xが素数の場合はXを返す)
  */
-constexpr u64 pollardRho(u64 X)
+inline u64 pollardRho(u64 X)
 {
     assert(1 <= X and X <= (u64)LIMMAX<i64>);
     if (X % 2 == 0) { return 2; }
@@ -44,7 +44,7 @@ constexpr u64 pollardRho(u64 X)
  * @param X 素因数分解する値
  * @return Vec<Pair<u64,int>> 素因数分解
  */
-constexpr Vec<Pair<u64, int>> primeFactors(u64 X)
+inline Vec<Pair<u64, int>> primeFactors(u64 X)
 {
     Vec<u64> Ans;
     Fix([&](auto dfs, u64 x) -> void {
@@ -63,7 +63,7 @@ constexpr Vec<Pair<u64, int>> primeFactors(u64 X)
  * @param factors 素因数分解
  * @return Vec<u64> 約数列 (ソート済み)
  */
-constexpr Vec<u64> divisors(const Vec<Pair<u64, int>>& factors)
+inline Vec<u64> divisors(const Vec<Pair<u64, int>>& factors)
 {
     Vec<u64> Ans{1};
     for (const auto& [p, e] : factors) {

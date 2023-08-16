@@ -9,7 +9,7 @@
  * @param As 数列
  * @return Vec<T> 係数列
  */
-template<typename T> constexpr Vec<T> berlekampMassey(const Vec<T>& As)
+template<typename T> Vec<T> berlekampMassey(const Vec<T>& As)
 {
     const int N = (int)As.size();
     Vec<T> C{1};                                    // 係数列

@@ -45,7 +45,7 @@ constexpr int find(const auto& xs, const auto& x)
  * @param xs1
  * @param xs2 
  */
-constexpr void concat(auto& xs1, const auto& xs2) { std::ranges::copy(xs2, std::back_inserter(xs1)); }
+void concat(auto& xs1, const auto& xs2) { std::ranges::copy(xs2, std::back_inserter(xs1)); }
 /**
  * @brief 結合した数列
  * 
@@ -53,7 +53,7 @@ constexpr void concat(auto& xs1, const auto& xs2) { std::ranges::copy(xs2, std::
  * @param xs2
  * @return auto xs1+xs2
  */
-constexpr auto concatCopy(const auto& xs1, const auto& xs2)
+auto concatCopy(const auto& xs1, const auto& xs2)
 {
     auto Ans = xs1;
     return concat(Ans, xs2), Ans;
@@ -80,7 +80,7 @@ template<typename Ts, typename T> constexpr void fillAll(Ts& arr, const T& x)
  * @param gen 値生成関数
  * @return Vec<T> genの結果を順に詰めた数列
  */
-template<typename T> constexpr Vec<T> genVec(int N, auto gen)
+template<typename T> Vec<T> genVec(int N, auto gen)
 {
     Vec<T> ans;
     std::ranges::generate_n(std::back_inserter(ans), N, gen);
@@ -125,7 +125,7 @@ constexpr int maxInd(const auto& xs, auto... args) { return std::ranges::max_ele
  * @param offset 初項
  * @return Vec<T> {offset, offset+1, ..., offset+N-1}
  */
-template<typename T = int> constexpr Vec<T> iotaVec(int N, T offset = 0)
+template<typename T = int> Vec<T> iotaVec(int N, T offset = 0)
 {
     Vec<T> ans(N);
     std::iota(std::begin(ans), std::end(ans), offset);
@@ -159,7 +159,7 @@ constexpr void sortAll(auto& xs, auto... args) { std::ranges::sort(xs, args...);
  * @param xs 数列
  * @return auto {値,長さ}への圧縮結果
  */
-constexpr auto runLengthEncode(const auto& xs)
+auto runLengthEncode(const auto& xs)
 {
     using T = typename std::decay<decltype(xs[0])>::type;
     Vec<Pair<T, int>> Ans;

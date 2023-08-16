@@ -11,7 +11,7 @@
  * @param G 
  * @return Vec<mint> H[i]=\sum_{i=j+k}F[j]*G[k] を満たす数列H
  */
-template<typename mint> constexpr Vec<mint> convoluteMod(const Vec<mint>& F, const Vec<mint>& G)
+template<typename mint> Vec<mint> convoluteMod(const Vec<mint>& F, const Vec<mint>& G)
 {
     const int LMAX = order2(mint::mod() - 1), NMAX = (1 << LMAX);
     const int A = F.size(), B = G.size();
@@ -55,7 +55,7 @@ template<typename mint> constexpr Vec<mint> convoluteMod(const Vec<mint>& F, con
  * @param G 
  * @return Vec<i64> H[i]=\sum_{i=j+k}F[j]*G[k] を満たす数列H
  */
-constexpr Vec<i64> convoluteInt(const Vec<i64>& F, const Vec<i64>& G)
+inline Vec<i64> convoluteInt(const Vec<i64>& F, const Vec<i64>& G)
 {
     const int A = F.size(), B = G.size();
     if (A == 0 or B == 0) { return {}; }
@@ -93,7 +93,7 @@ constexpr Vec<i64> convoluteInt(const Vec<i64>& F, const Vec<i64>& G)
  * @param G 
  * @return Vec<mint> H[i]=\sum_{i+j=k}F[j]*G[k] を満たす数列H
  */
-template<typename mint> constexpr Vec<mint> convoluteModReverse(Vec<mint> F, const Vec<mint>& G)
+template<typename mint> Vec<mint> convoluteModReverse(Vec<mint> F, const Vec<mint>& G)
 {
     const int A = (int)F.size(), B = (int)G.size();
     reverseAll(F);
@@ -110,7 +110,7 @@ template<typename mint> constexpr Vec<mint> convoluteModReverse(Vec<mint> F, con
  * @param G 
  * @return Vec<i64> H[i]=\sum_{i+j=k}F[j]*G[k] を満たす数列H
  */
-constexpr Vec<i64> convoluteIntReverse(Vec<i64> F, const Vec<i64>& G)
+inline Vec<i64> convoluteIntReverse(Vec<i64> F, const Vec<i64>& G)
 {
     const int A = (int)F.size(), B = (int)G.size();
     reverseAll(F);

@@ -33,8 +33,4 @@ constexpr Pair<i64, i64> extgcd(i64 a, i64 b)
  * @param mod 
  * @return i64 ax=gcd(a,M) mod M を満たす x
  */
-constexpr i64 inverseMod(i64 a, i64 mod)
-{
-    assert(mod > 0 and a % mod != 0);
-    return extgcd(a % mod, mod).first;
-}
+constexpr i64 inverseMod(i64 a, i64 mod) { return assert(mod > 0 and a % mod != 0), extgcd(a % mod, mod).first; }

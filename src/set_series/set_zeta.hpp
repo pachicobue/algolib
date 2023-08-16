@@ -8,7 +8,7 @@
  * @retval nF[i]=\sum_{j \subset i}F[j] (subset == Trueの場合)
  * @retval nF[i]=\sum_{i \subset j}F[j] (subset == Falseの場合)
  */
-template<typename T> constexpr Vec<T> setZeta(const Vec<T>& F, bool subset)
+template<typename T> Vec<T> setZeta(const Vec<T>& F, bool subset)
 {
     const int N = (int)std::bit_ceil(F.size());
     Vec<T> nF(N);

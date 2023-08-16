@@ -10,7 +10,7 @@
  * @retval nF[i]=\sum_{j|i}F[j] (subset == Trueの場合)
  * @retval nF[i]=\sum_{i|j}F[j] (subset == Falseの場合)
  */
-template<typename T> constexpr Vec<T> divisorsZeta(const Vec<T>& F, bool subset, const Vec<int>& primes)
+template<typename T> Vec<T> divisorsZeta(const Vec<T>& F, bool subset, const Vec<int>& primes)
 {
     assert(F[0] == 0);
     const int N = (int)F.size();
@@ -32,4 +32,4 @@ template<typename T> constexpr Vec<T> divisorsZeta(const Vec<T>& F, bool subset,
  * @retval nF[i]=\sum_{j|i}F[j] (subset == Trueの場合)
  * @retval nF[i]=\sum_{i|j}F[j] (subset == Falseの場合)
  */
-constexpr auto divisorsZeta(const auto& F, bool subset) { return divisorsZeta(F, subset, EratosthenesSieve{(int)F.size()}.primes()); }
+auto divisorsZeta(const auto& F, bool subset) { return divisorsZeta(F, subset, EratosthenesSieve{(int)F.size()}.primes()); }
