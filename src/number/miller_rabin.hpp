@@ -9,7 +9,7 @@
  * @return true Xが素数
  * @return false Xが合成数
  */
-constexpr bool millerRabin(u64 X, const Vec<u64>& as)
+template<int N> constexpr bool millerRabin(u64 X, u64 const (&as)[N])
 {
     using mint = modint_dynamic_reserved<81165>;
     mint::setMod(X);
