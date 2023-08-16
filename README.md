@@ -3,8 +3,9 @@
 
 ## 注意
 - C++20以上前提
-  - C++20対応をやりすぎて、Codeforces,QOJ辺りでコンパイルが通らなくなっちゃった
-    - constexpr関数内でのvector利用のせい。今更ifdefとかするのだるいがどうしよう...
+  - ~~C++20対応をやりすぎて、Codeforces,QOJ辺りでコンパイルが通らなくなっちゃった~~
+    - ~~constexpr関数内でのvector利用のせい。今更ifdefとかするのだるいがどうしよう...~~ 
+      - constexprにするメリットが薄いので消した（原始根だけは悩みどころだけど計算量を妥協することに）
 - `using namespace std;` すると動かなくなる可能性あり
   - `namespace algolib` とかした方がいいのかな
 
