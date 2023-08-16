@@ -244,11 +244,11 @@
         "result": "AC"
     },
     "number/mod_nthroot.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "number/mod_nthroot.yuki.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
+        "date": "2023-08-17 01:02:00 +0900",
         "result": "SKIPPED"
     },
     "number/mod_sqrt.test.cpp": {
@@ -260,56 +260,56 @@
         "result": "AC"
     },
     "number/pollard_rho.factorization.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "number/prime_powersum.primecount.test.cpp": {
         "date": "2023-08-17 00:06:19 +0900",
         "result": "AC"
     },
     "number/primitive_root.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "numerical/convolution.ut.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "polynomial/berlekamp_massey.test.cpp": {
         "date": "2023-08-17 00:06:19 +0900",
         "result": "AC"
     },
     "polynomial/bostan_mori.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "polynomial/polynomial.convolution.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "polynomial/polynomial.convolution1000000007.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "polynomial/polynomial.exp.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "polynomial/polynomial.inv.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "polynomial/polynomial.log.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "polynomial/polynomial.pow.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "polynomial/polynomial.tshift.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
-        "result": "CE"
+        "date": "2023-08-17 01:02:00 +0900",
+        "result": "AC"
     },
     "set_power_series/and_convolution.test.cpp": {
         "date": "2023-08-15 05:19:12 +0900",
