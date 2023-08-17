@@ -65,7 +65,7 @@ public:
      * @param pred 判定関数
      * @return int 最小のx (Trueになる x が存在しない場合 N+1)
      */
-    int maxRight(auto pred)
+    int minRight(auto pred)
     {
         if (pred(T{})) { return 0; }
         if (not pred(m_xs[m_cap])) { return m_size + 1; }
