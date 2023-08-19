@@ -41,7 +41,7 @@ public:
         assert(not empty());
         if (m_backs.empty()) {
             auto as = Vec<T>(m_fronts.begin() + 1, m_fronts.end());
-            m_fronts.clear(), reverseAll(as);
+            m_fronts.clear(), seqReverse(as);
             const int half = (int)as.size() / 2;
             for (int i : per(half)) { m_fronts.push_back(as[i]); }
             for (int i : irange(half, as.size())) { m_backs.push_back(as[i]); }

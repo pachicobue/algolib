@@ -28,6 +28,6 @@ template<typename T> Opt<Vec<int>> topologicalSort(const Graph<T>& g)
     for (int i : rep(N)) {
         if (not dfs(i)) { return std::nullopt; }
     }
-    reverseAll(ans);
+    seqReverse(ans);
     return ans;
 }

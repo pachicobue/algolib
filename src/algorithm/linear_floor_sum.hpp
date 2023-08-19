@@ -10,7 +10,7 @@
  * @param C 
  * @return i64 \sum_{0<=i<N}floor((Ai+B)/C)
  */
-constexpr i64 linearFloorSum(i64 N, i64 A, i64 B, i64 C)
+inline i64 linearFloorSum(i64 N, i64 A, i64 B, i64 C)
 {
     assert(C != 0);
     if (N == 0) { return 0; }

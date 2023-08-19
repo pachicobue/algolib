@@ -6,7 +6,7 @@ int main()
 {
     const auto [N, A, B, W] = in.tup<int, i64, i64, i64>();
     auto ds                 = Vec<i64>{0};
-    concat(ds, in.vec<i64>(N));
+    seqConcat(ds, in.vec<i64>(N));
     ds.push_back(0);
     Vec<i64> dp(N + 2, INF<i64>);
     dp[0] = 0;

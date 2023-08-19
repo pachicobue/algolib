@@ -39,7 +39,7 @@ public:
             if (used[i]) { continue; }
             dfs(i);
         }
-        reverseAll(st);
+        seqReverse(st);
         for (int i : st) {
             if (m_cs[i] != -1) { continue; }
             rdfs(i);

@@ -2,9 +2,9 @@
 #include "../common.hpp"
 /**
  * @brief 複数列のCartesian Product上の Rep
- * @note ndRep({{A0,A1}, {B0, B1, B2}}) = {(A0,B0),(A1,B0),(A0,B1),(A1,B1),(A0,B2),(A1,B2)} となる (※順番に注意)
+ * @note mdRep({{A0,A1}, {B0, B1, B2}}) = {(A0,B0),(A1,B0),(A0,B1),(A1,B1),(A0,B2),(A1,B2)} となる (※順番に注意)
  */
-class ndRep
+class mdRep
 {
 private:
     struct itr
@@ -39,7 +39,7 @@ public:
      * 
      * @param ranges (ranges[0] x ... x ranges[D-1]) が Rep範囲 になる
      */
-    ndRep(const Vec<Vec<i64>>& ranges) : m_ranges(ranges) { assert(not ranges.empty()); }
+    mdRep(const Vec<Vec<i64>>& ranges) : m_ranges(ranges) { assert(not ranges.empty()); }
     /**
      * @brief begin
      * @attention range-based for からのみ呼ばれる想定

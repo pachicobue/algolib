@@ -30,7 +30,7 @@ public:
     {
         assert(not empty());
         if (m_fronts.empty()) {
-            std::swap(m_fronts, m_backs), reverseAll(m_fronts), m_fronts.pop_back();
+            std::swap(m_fronts, m_backs), seqReverse(m_fronts), m_fronts.pop_back();
             calc();
         } else {
             m_fronts.pop_back(), m_Fronts.pop_back();

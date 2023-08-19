@@ -10,8 +10,8 @@ void Test()
     assert(bases.rank() == 3);  //011,101,001
     const auto origBases = bases.origBases();
     assert(origBases == (Vec<BSet<D>>{3, 1, 5}));
-    assert(bases.decomp(2).first);
-    assert(bases.decomp(2).second == 3);
+    assert(bases.decomp(2));
+    assert(bases.decomp(2).value() == 3);
 }
 
 int main()

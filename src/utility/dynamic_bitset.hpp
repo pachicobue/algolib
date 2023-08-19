@@ -291,7 +291,7 @@ public:
      */
     DynamicBitset& setAll()
     {
-        fillAll(m_blocks, LIMMAX<T>), trunk();
+        mdSeqFill(m_blocks, LIMMAX<T>), trunk();
         return *this;
     }
     /**
@@ -301,7 +301,7 @@ public:
      */
     DynamicBitset& resetAll()
     {
-        fillAll(m_blocks, 0);
+        mdSeqFill(m_blocks, 0);
         return *this;
     }
     /**
@@ -329,7 +329,7 @@ public:
             const auto [b, w] = I2B(i);
             if (isBitOn(bs.m_blocks[b], w)) { S[i] = '1'; }
         }
-        reverseAll(S);
+        seqReverse(S);
         return os << S;
     }
 #endif

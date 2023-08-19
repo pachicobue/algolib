@@ -26,7 +26,7 @@ int main()
             }
         }
     }
-    reverseAll(ans);
+    seqReverse(ans);
     out.ln(ds[T], ans.size());
     for (const auto& [u, v] : ans) { out.ln(u, v); }
     return 0;

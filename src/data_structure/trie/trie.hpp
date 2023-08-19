@@ -13,7 +13,7 @@ public:
     struct Node
     {
         Node() : Node{false, 0} {}
-        Node(bool isKey, int depth) : isKey{isKey}, depth{depth} { fillAll(sons, NIL); }
+        Node(bool isKey, int depth) : isKey{isKey}, depth{depth} { mdSeqFill(sons, NIL); }
         bool isKey;
         int depth;
         Arr<int, SIGMA> sons;

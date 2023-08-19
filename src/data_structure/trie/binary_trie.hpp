@@ -14,7 +14,7 @@ public:
     struct Node
     {
         Node() : Node{0} {}
-        Node(int sub) : sub{sub} { fillAll(sons, NIL); }
+        Node(int sub) : sub{sub} { mdSeqFill(sons, NIL); }
         int sub;
         Arr<int, 2> sons;
     };
@@ -71,13 +71,13 @@ public:
      * 
      * @return i64 最小値
      */
-    i64 minAll() const { return minMax(false); }
+    i64 mdSeqMin() const { return minMax(false); }
     /**
      * @brief 最大値
      * 
      * @return i64 最大値
      */
-    i64 maxAll() const { return minMax(true); }
+    i64 mdSeqMax() const { return minMax(true); }
     /**
      * @brief 一括削除
      */

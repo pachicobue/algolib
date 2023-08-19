@@ -10,7 +10,7 @@ public:
     /**
      * @brief コンストラクタ
      */
-    IntBases() { fillAll(m_vis, -1); }
+    IntBases() { mdSeqFill(m_vis, -1); }
     /**
      * @brief 元vを追加する
      * 

@@ -54,8 +54,7 @@ inline Vec<Pair<u64, int>> primeFactors(u64 X)
         if (d == x) { return Ans.push_back(d), void(); }
         dfs(d), dfs(x / d);
     })(X);
-    sortAll(Ans);
-    return runLengthEncode(Ans);
+    return seqSort(Ans), seqRleVec(Ans);
 }
 /**
  * @brief 約数列挙
@@ -74,5 +73,5 @@ inline Vec<u64> divisors(const Vec<Pair<u64, int>>& factors)
             pe *= p;
         }
     }
-    return sortAll(Ans), Ans;
+    return seqSort(Ans), Ans;
 }

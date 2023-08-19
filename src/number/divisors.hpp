@@ -15,6 +15,6 @@ inline Vec<i64> divisors(const i64 N)
             if (i * i != N) { tail.push_back(N / i); }
         }
     }
-    reverseAll(tail), concat(head, tail);
+    seqReverse(tail), seqConcat(head, tail);
     return head;
 }

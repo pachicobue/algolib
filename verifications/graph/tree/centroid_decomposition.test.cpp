@@ -1,6 +1,5 @@
 // verification-helper: PROBLEM https://yukicoder.me/problems/no/1002
 #include "graph/tree/centroid_decomposition.hpp"
-#include "utility/nd_vec.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
 
@@ -13,16 +12,13 @@ int main()
         g.addEdge(u, v, c, true);
     }
     CentroidDecomposition centros(g);
-    const int cr = centros.center();
+    const int cr  = centros.center();
     const auto cg = centros.centers();
     Vec<bool> used(N, false);
     using P = Pair<int, int>;
     i64 ans = 0;
 
-    auto f = [&](const Map<int, i64>& dp1,
-                 const Map<P, i64>& dp2,
-                 const Map<int, i64>& dp3,
-                 const i64 one) -> i64 {
+    auto f = [&](const Map<int, i64>& dp1, const Map<P, i64>& dp2, const Map<int, i64>& dp3, const i64 one) -> i64 {
         i64 ans = 0;
         i64 dbl = 0;
         for (const auto& [k, n] : dp1) {
@@ -68,7 +64,7 @@ int main()
                     const int v = e.to;
                     if (v == p or used[v]) { continue; }
                     const int k = e.cost;
-                    auto nks = ks;
+                    auto nks    = ks;
                     if (ks.first == k or ks.second == k) {
                         ;
                     } else if (ks.second == INF<int>) {

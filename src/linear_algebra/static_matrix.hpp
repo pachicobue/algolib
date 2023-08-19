@@ -10,7 +10,7 @@ public:
     /**
      * @brief コンストラクタ
      */
-    constexpr StaticMatrix() { fillAll(m_vss, T{}); }
+    constexpr StaticMatrix() { mdSeqFill(m_vss, T{}); }
     /**
      * @brief コンストラクタ
      * 

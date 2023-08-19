@@ -21,7 +21,7 @@ public:
         assert(f.size() == w.size());
         assert(std::ranges::all_of(f, [&](int x) { return -1 <= x and x <= m_N; }));
         Vec<int> nexts{0};
-        concat(nexts, f), nexts.push_back(m_N);
+        seqConcat(nexts, f), nexts.push_back(m_N);
         Vec<T> ws{Monoid::e()};
         m_nextss.push_back(nexts), m_wss.push_back(ws);
     }

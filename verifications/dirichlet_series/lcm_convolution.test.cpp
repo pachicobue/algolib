@@ -7,8 +7,8 @@ int main()
 {
     using mint    = modint_998244353;
     const auto N  = in.val<int>();
-    const auto as = concatCopy(Vec<mint>{0}, in.vec<mint>(N));
-    const auto bs = concatCopy(Vec<mint>{0}, in.vec<mint>(N));
+    const auto as = seqConcatCopy(Vec<mint>{0}, in.vec<mint>(N));
+    const auto bs = seqConcatCopy(Vec<mint>{0}, in.vec<mint>(N));
     const auto cs = lcmConvolute(as, bs, N + 1);
     Vec<int> Cs(N);
     for (int i : rep(N)) { Cs[i] = cs[i + 1].val(); }

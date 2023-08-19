@@ -22,7 +22,7 @@ public:
         const auto [my, My] = std::ranges::minmax(ys);
         const int L         = std::ranges::max(Mx - mx, My - my);
         const int B         = std::ranges::max(1, L / (int)intSqrt(xs.size()));
-        sortAll(m_is, [&](int i, int j) {
+        seqSort(m_is, [&](int i, int j) {
             const int bi = xs[i] / B, bj = xs[j] / B;
             return (bi == bj) ? ys[i] < ys[j] : bi < bj;
         });

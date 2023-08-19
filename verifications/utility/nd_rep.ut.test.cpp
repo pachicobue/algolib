@@ -1,10 +1,10 @@
 // verification-helper: UNITTEST
-#include "utility/nd_rep.hpp"
+#include "utility/md_rep.hpp"
 
 void Test()
 {
     std::vector<std::vector<i64>> iss;
-    for (auto is : ndRep({
+    for (auto is : mdRep({
              {0, 1},
              {2, 3, 4},
              {5, 6, 7, 8}

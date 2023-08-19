@@ -40,8 +40,8 @@ public:
     int zip(T X)
     {
         calc();
-        assert(find(m_vs, X) < (int)m_vs.size());
-        return lbInd(m_vs, X);
+        assert(sortedFind(m_vs, X) < (int)m_vs.size());
+        return sortedLbInd(m_vs, X);
     }
     /**
      * @brief 値を追加で圧縮
@@ -81,7 +81,7 @@ private:
     void calc()
     {
         if (not m_calced) {
-            sortAll(m_vs);
+            seqSort(m_vs);
             m_vs.erase(std::unique(m_vs.begin(), m_vs.end()), m_vs.end());
             m_calced = true;
         }

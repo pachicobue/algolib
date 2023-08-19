@@ -96,7 +96,7 @@ inline Vec<i64> convoluteInt(const Vec<i64>& F, const Vec<i64>& G)
 template<typename mint> Vec<mint> convoluteModReverse(Vec<mint> F, const Vec<mint>& G)
 {
     const int A = (int)F.size(), B = (int)G.size();
-    reverseAll(F);
+    seqReverse(F);
     const auto cs = convoluteMod(F, G);
     Vec<mint> ans(B);
     for (int i : rep(B)) { ans[i] = cs[i + A - 1]; }
@@ -113,7 +113,7 @@ template<typename mint> Vec<mint> convoluteModReverse(Vec<mint> F, const Vec<min
 inline Vec<i64> convoluteIntReverse(Vec<i64> F, const Vec<i64>& G)
 {
     const int A = (int)F.size(), B = (int)G.size();
-    reverseAll(F);
+    seqReverse(F);
     const auto cs = convoluteInt(F, G);
     Vec<i64> ans(B);
     for (int i : rep(B)) { ans[i] = cs[i + A - 1]; }

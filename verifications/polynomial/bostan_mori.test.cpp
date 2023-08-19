@@ -8,7 +8,7 @@ int main()
     using mint        = modint_998244353;
     const auto [D, K] = in.tup<int, i64>();
     const auto as     = in.vec<mint>(D);
-    const auto cs     = concatCopy(Vec<mint>{1}, in.vec<mint>(D));
+    const auto cs     = seqConcatCopy(Vec<mint>{1}, in.vec<mint>(D));
     Polynomial<mint> f{as};
     Polynomial<mint> g{cs};
     for (int i : irange(1, D + 1)) { g[i] *= (-1); }

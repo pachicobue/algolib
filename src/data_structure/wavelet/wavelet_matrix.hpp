@@ -14,8 +14,8 @@ public:
      */
     WaveletMatrix(Vec<i64> xs)
         : m_n(xs.size()),
-          m_min{(i64)minAll(xs)},
-          m_max{(i64)maxAll(xs)},
+          m_min{(i64)mdSeqMin(xs)},
+          m_max{(i64)mdSeqMax(xs)},
           m_lg{(int)std::bit_width((u64)m_max + 1)},
           m_bvs(m_lg, BitVector(m_n))
     {

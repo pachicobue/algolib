@@ -1,7 +1,7 @@
 #pragma once
 #include "../common.hpp"
 #include "../graph/strongly_connected_components.hpp"
-#include "../utility/nd_vec.hpp"
+#include "../utility/md_vec.hpp"
 #include "../utility/dynamic_bitset.hpp"
 
 /**
@@ -66,7 +66,7 @@ public:
             antis[c]     = scc[nu];
             if (antis[c] == c) { return {}; }
         }
-        auto belows = ndVec({C}, DynamicBitset{C});
+        auto belows = mdVec({C}, DynamicBitset{C});
         for (int c : per(C)) {
             belows[c].set(c);
             for (int u : groups[c]) {

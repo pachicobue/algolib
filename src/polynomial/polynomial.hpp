@@ -379,9 +379,9 @@ private:
         const int A = (int)F.deg(), B = (int)G.deg();
         if (A < B) { return Polynomial{0}; }
         Polynomial Frev = F, Grev = G;
-        reverseAll(Frev), reverseAll(Grev);
+        seqReverse(Frev), seqReverse(Grev);
         Polynomial qrev = (Frev.low(A - B + 1) * Grev.inv(A - B + 1)).low(A - B + 1);
-        return reverseAll(qrev), qrev;
+        return seqReverse(qrev), qrev;
     }
     void normalize()
     {

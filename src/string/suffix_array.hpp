@@ -4,7 +4,7 @@
 template<typename V> Vec<int> suffixArray(const V& vs)
 {
     const int N = (int)std::size(vs);
-    const int B = maxAll(vs) + 1;
+    const int B = mdSeqMax(vs) + 1;
     auto val    = [&](int i) { return (i == N ? 0 : vs[i] + 1); };
     Vec<bool> is_s(N + 1, true);
     for (int i : per(N)) { is_s[i] = val(i) == val(i + 1) ? is_s[i + 1] : val(i) < val(i + 1); }
@@ -27,7 +27,7 @@ template<typename V> Vec<int> suffixArray(const V& vs)
 
     Vec<int> sa(N + 1, -1);
     auto inducedSort = [&](const Vec<int>& lmss) {
-        fillAll(sa, -1);
+        mdSeqFill(sa, -1);
         Vec<int> inds = Vec<int>(B + 1, 0);
         auto pushL    = [&](int i) {
             if (i >= 0 and isL(i)) { sa[inds[val(i)]++] = i; }
