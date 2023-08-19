@@ -8,7 +8,7 @@
         "result": "AC"
     },
     "algorithm/mo.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
+        "date": "2023-08-17 21:42:34 +0900",
         "result": "AC"
     },
     "common/bit_op.test.cpp": {
@@ -67,8 +67,12 @@
         "date": "2023-08-17 00:06:19 +0900",
         "result": "AC"
     },
+    "data_structure/fenwick_tree/fenwick.min_right.test.cpp": {
+        "date": "2023-08-17 21:42:34 +0900",
+        "result": "AC"
+    },
     "data_structure/fenwick_tree/fenwick.test.cpp": {
-        "date": "2023-08-17 00:06:19 +0900",
+        "date": "2023-08-17 21:42:34 +0900",
         "result": "AC"
     },
     "data_structure/segment_tree/dual_segtree.test.cpp": {
