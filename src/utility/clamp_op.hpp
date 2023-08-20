@@ -42,6 +42,6 @@ constexpr i64 clampMul(i64 x, i64 y, i64 min, i64 max)
  * @param y 
  * @param min 
  * @param max 
- * @return i64 clamp(x*y,min,max)
+ * @return i64 clamp(x/y,min,max)
  */
 constexpr i64 clampDiv(i64 x, i64 y, i64 min, i64 max) { return std::ranges::clamp(floorDiv(x, y), min, max); }
