@@ -24,7 +24,7 @@ template<typename T> constexpr T powerSemiGroup(const T& x, i64 N, auto mul)
  * @param N 指数(N>=1)
  * @return T x^N
  */
-template<typename T> constexpr auto powerSemiGroup(const auto& v, i64 N) { return powerSemiGroup(v, N, std::multiplies<T>{}); }
+template<typename T> constexpr T powerSemiGroup(const T& x, i64 N) { return powerSemiGroup(x, N, std::multiplies<T>{}); }
 /**
  * @brief モノイドの累乗
  * 
@@ -49,7 +49,7 @@ template<typename T> constexpr T powerMonoid(const T& x, i64 N, const T& e, auto
  * @param e 単位元
  * @return T x^N
  */
-template<typename T> constexpr T powerMonoid(T x, i64 N, const T& e) { return powerMonoid(x, N, e, std::multiplies<T>{}); }
+template<typename T> constexpr T powerMonoid(const T& x, i64 N, const T& e) { return powerMonoid(x, N, e, std::multiplies<T>{}); }
 /**
  * @brief 整数の累乗
  * @attention オーバーフローのケアはしていないので注意
@@ -60,7 +60,7 @@ template<typename T> constexpr T powerMonoid(T x, i64 N, const T& e) { return po
  * @param e 単位元
  * @return T x^N
  */
-template<typename T> constexpr T powerInt(T x, i64 N) { return powerMonoid(x, N, T{1}); }
+template<typename T> constexpr T powerInt(const T& x, i64 N) { return powerMonoid(x, N, T{1}); }
 /**
  * @brief 整数の累乗(Mod)
  * 

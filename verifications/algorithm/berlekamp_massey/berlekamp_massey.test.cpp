@@ -5,10 +5,9 @@
 #include "utility/scanner.hpp"
 int main()
 {
-    using mint   = modint_998244353;
-    const auto N = in.val<int>();
-    Vec<mint> as(N);
-    for (auto& a : as) { a = in.val<int>(); }
+    using mint    = modint_998244353;
+    const auto N  = in.val<int>();
+    const auto as = in.vec<mint>(N);
     const auto cs = berlekampMassey(as);
     const int d   = cs.size();
     Vec<int> ans(d - 1);

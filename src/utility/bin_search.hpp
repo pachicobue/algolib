@@ -22,7 +22,7 @@ constexpr i64 binSearch(i64 ng, i64 ok, auto check)
  * @attention check(ng), check(ok) は呼び出されない(ng,okは無効値でも可)
  * 
  * @param ng check(ng)==False が保証される引数
- * @param ok check(ok)==False が保証される引数
+ * @param ok check(ok)==True が保証される引数
  * @param check 判定関数
  * @param times 反復回数
  * @return f80 check(x)となる x のうち ok から最も遠い値(近似値)
