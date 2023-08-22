@@ -547,6 +547,30 @@
         "date": "2023-08-21 01:18:16 +0900",
         "result": "AC"
     },
+    "utility/bin_search/binSearch.test.cpp": {
+        "date": "2023-08-21 03:40:10 +0900",
+        "result": "AC"
+    },
+    "utility/bin_search/fbinSearch.test.cpp": {
+        "date": "2023-08-21 03:40:10 +0900",
+        "result": "AC"
+    },
+    "utility/clamp_op/clampAdd.test.cpp": {
+        "date": "2023-08-21 03:40:10 +0900",
+        "result": "AC"
+    },
+    "utility/clamp_op/clampDiv.test.cpp": {
+        "date": "2023-08-21 03:40:10 +0900",
+        "result": "AC"
+    },
+    "utility/clamp_op/clampMul.test.cpp": {
+        "date": "2023-08-21 03:40:10 +0900",
+        "result": "AC"
+    },
+    "utility/clamp_op/clampSub.test.cpp": {
+        "date": "2023-08-21 03:40:10 +0900",
+        "result": "AC"
+    },
     "utility/int_nthroot.test.cpp": {
         "date": "2023-08-21 01:18:16 +0900",
         "result": "AC"
