@@ -2,7 +2,8 @@
 #include "../common.hpp"
 /**
  * @brief Vec<u64> ベースの bitset
- * @attention resize などは無いので可変長ではない
+ * @attention 実行時にサイズが決まる以外は普通のbitsetと同じ(resizeとかは非サポート)
+ * @attention operatorは同じbit長のbitset同士のみサポート
  */
 class DynamicBitset
 {
@@ -19,6 +20,21 @@ public:
      * @param N bit長
      */
     DynamicBitset(int N) : m_n{N}, m_bn{(int)ceilDiv(N, B)}, m_blocks(m_bn, 0) {}
+    /**
+     * @brief コンストラクタ
+     * 
+     * @param S 0/1文字列
+     */
+    DynamicBitset(const Str& S) : m_n{(int)S.size()}, m_bn{(int)ceilDiv(m_n, B)}, m_blocks(m_bn, 0)
+    {
+        assert(std::ranges::all_of(S, [](char c) { return c == '0' or c == '1'; }));
+        for (int i : rep(m_bn)) {
+            const int r = m_n - i * B, l = std::max(0, r - B);
+            T x = 0;
+            for (int j : irange(l, r)) { x |= (T)(S[j] - '0') << (r - j - 1); }
+            m_blocks[i] = x;
+        }
+    }
     /**
      * @brief bitset同士のAND
      * 
@@ -60,6 +76,7 @@ public:
     }
     /**
      * @brief bitsetの左Shift
+     * @attention bit長は変わらない
      * 
      * @param bs 
      * @param s シフト幅 (非負)
@@ -68,22 +85,19 @@ public:
     friend DynamicBitset& operator<<=(DynamicBitset& bs, int s)
     {
         assert(s >= 0);
-        if (s >= bs.size()) {
-            bs.resetAll();
-            return bs;
-        }
+        if (s >= bs.size()) { return bs.resetAll(); }
         if (s == 0) { return bs; }
         const auto [sb, sw] = I2B(s);
         for (int b : per(bs.m_bn)) {
             const T m0     = (b < sb ? T{0} : bs.m_blocks[b - sb]);
             const T m1     = (b <= sb ? T{0} : bs.m_blocks[b - sb - 1]);
-            bs.m_blocks[b] = (m0 << sw) | (m1 >> (B - sw));
+            bs.m_blocks[b] = (m0 << sw) | (sw == 0 ? T{0} : (m1 >> (B - sw)));
         }
-        bs.trunk();
-        return bs;
+        return bs.trunk(), bs;
     }
     /**
      * @brief bitsetの右Shift
+     * @attention bit長は変わらない
      * 
      * @param bs
      * @param s シフト幅 (非負)
@@ -92,16 +106,13 @@ public:
     friend DynamicBitset& operator>>=(DynamicBitset& bs, int s)
     {
         assert(s >= 0);
-        if (s >= bs.size()) {
-            bs.resetAll();
-            return bs;
-        }
+        if (s >= bs.size()) { return bs.resetAll(); }
         if (s == 0) { return bs; }
         const auto [sb, sw] = I2B(s);
         for (int b : rep(bs.m_bn)) {
             const T m0     = (b + sb >= bs.m_bn ? T{0} : bs.m_blocks[b + sb]);
             const T m1     = (b + sb + 1 >= bs.m_bn ? T{0} : bs.m_blocks[b + sb + 1]);
-            bs.m_blocks[b] = (m0 >> sw) | (m1 << (B - sw));
+            bs.m_blocks[b] = (m0 >> sw) | (sw == 0 ? T{0} : (m1 << (B - sw)));
         }
         return bs;
     }
@@ -143,6 +154,7 @@ public:
     }
     /**
      * @brief bitsetの左Shift
+     * @attention bit長は変わらない
      * 
      * @param bs
      * @param s シフト幅 (非負)
@@ -155,6 +167,7 @@ public:
     }
     /**
      * @brief bitsetの右Shift
+     * @attention bit長は変わらない
      * 
      * @param bs
      * @param s シフト幅 (非負)
@@ -181,7 +194,14 @@ public:
      * @param bs2
      * @return 一貫比較結果
      */
-    friend auto operator<=>(const DynamicBitset& bs1, const DynamicBitset& bs2) { return bs1.m_blocks <=> bs2.m_blocks; }
+    friend auto operator<=>(const DynamicBitset& bs1, const DynamicBitset& bs2)
+    {
+        assert(bs1.size() == bs2.size());
+        for (int i : per(bs1.m_bn)) {
+            if (bs1.m_blocks[i] != bs2.m_blocks[i]) { return bs1.m_blocks[i] <=> bs2.m_blocks[i]; }
+        }
+        return std::strong_ordering::equivalent;
+    }
     /**
      * @brief bitset全体のNOT
      * 
@@ -208,6 +228,14 @@ public:
         const auto [b, w] = I2B(i);
         return isBitOn(m_blocks[b], w);
     }
+    /**
+     * @brief i bit目を指定の値にする
+     * 
+     * @param i bit位置
+     * @param b 0/1
+     * @return DynamicBitset& self
+     */
+    DynamicBitset& set(int i, bool b) { return (b ? set(i) : reset(i)); }
     /**
      * @brief i bit目を立てる
      * 
@@ -249,6 +277,7 @@ public:
     }
     /**
      * @brief 立っている最初のbit位置
+     * @attention 存在しない場合は size() が返る
      * 
      * @return int bit位置
      */
@@ -264,13 +293,15 @@ public:
     }
     /**
      * @brief i bit目より後ろで立っている最初のbit位置
+     * @attention 存在しない場合は size() が返る
      * 
      * @param pi 基準位置
      * @return int bit位置
      */
     int findNext(int pi) const
     {
-        assert(0 <= pi and pi < m_n);
+        assert(pi < m_n);
+        if (pi < 0) { return findFirst(); }
         pi++;
         if (pi == m_n) { return size(); }
         const auto [pb, pw] = I2B(pi);
@@ -305,6 +336,20 @@ public:
         return *this;
     }
     /**
+     * @brief str
+     * 
+     * @return bit列を表す0/1文字列
+     */
+    Str str() const
+    {
+        Str S(size(), '0');
+        for (int i : rep(size())) {
+            const auto [b, w] = I2B(i);
+            if (isBitOn(m_blocks[b], w)) { S[i] = '1'; }
+        }
+        return seqReverse(S), S;
+    }
+    /**
      * @brief 立っているbit数取得
      * 
      * @return int 立っているbit数
@@ -322,21 +367,12 @@ public:
      */
     int size() const { return m_n; }
 #ifdef HOGEPACHI
-    friend Ostream& operator<<(Ostream& os, const DynamicBitset& bs)
-    {
-        Str S(bs.size(), '0');
-        for (int i : rep(bs.size())) {
-            const auto [b, w] = I2B(i);
-            if (isBitOn(bs.m_blocks[b], w)) { S[i] = '1'; }
-        }
-        seqReverse(S);
-        return os << S;
-    }
+    friend Ostream& operator<<(Ostream& os, const DynamicBitset& bs) { return os << bs.str(); }
 #endif
 private:
     static constexpr Pair<int, int> I2B(int i) { return {i / B, i % B}; }
     static constexpr int B2I(int b, int w) { return b * B + w; }
-    void trunk() { m_blocks.back() &= ~bitMask(m_n % B); }
+    void trunk() { m_blocks.back() &= bitMask(m_n % B); }
     int m_n;
     int m_bn;
     Vec<T> m_blocks;

@@ -1,7 +1,7 @@
 // verification-helper: UNITTEST
 #include "utility/md_vec.hpp"
 
-void Test()
+void test()
 {
     using V        = std::vector<int>;
     using VV       = std::vector<V>;
@@ -23,9 +23,8 @@ void Test()
                {{{1}, {1}}, {{1}, {1}}, {{1}, {1}}}
     }));
 }
-
 int main()
 {
-    Test();
+    test();
     return 0;
 }

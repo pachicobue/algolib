@@ -2,7 +2,7 @@
 #include "../common.hpp"
 /**
  * @brief 複数列のCartesian Product上の Rep
- * @note mdRep({{A0,A1}, {B0, B1, B2}}) = {(A0,B0),(A1,B0),(A0,B1),(A1,B1),(A0,B2),(A1,B2)} となる (※順番に注意)
+ * @note mdRep({{A0,A1}, {B0, B1, B2}}) = {(A0,B0),(A0,B1),(A0,B2),(A1,B0),(A1,B1),(A1,B2)} となる
  */
 class mdRep
 {
@@ -19,10 +19,10 @@ private:
         }
         itr& operator++()
         {
-            for (int i : rep(m_ranges.size())) {
+            for (int i : per(m_ranges.size())) {
                 m_indexes[i]++;
                 if (m_indexes[i] < (int)m_ranges[i].size()) { break; }
-                if (i == (int)m_ranges.size() - 1) { m_end = true; }
+                if (i == 0) { m_end = true; }
                 m_indexes[i] = 0;
             }
             return *this;

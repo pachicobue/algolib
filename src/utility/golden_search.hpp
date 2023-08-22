@@ -45,7 +45,7 @@ constexpr f80 goldenSearch(f80 xmin, f80 xmax, auto f, int times)
     assert(xmin <= xmax);
     f80 xl = xmin, xr = xmax;
     LOOP (times) {
-        const f80 nW = (xmax - xmin) / std::numbers::phi_v<T>;
+        const f80 nW = (xr - xl) / std::numbers::phi_v<f80>;
         const f80 yl = xr - nW, yr = xl + nW;
         const f80 nxs[] = {xl, yl, yr, xr};
         const bool c    = f(yl) > f(yr);
