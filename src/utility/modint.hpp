@@ -157,14 +157,10 @@ public:
         return ans /= x2;
     }
     /**
-     * @brief x1 == x2
-     * 
-     * @param x1 
-     * @param x2 
-     * @return true 一致
-     * @return false 不一致
+     * @brief x1 <=> x2
+     * @attention 不等号は本来定義出来ないが、Map,Setに使いたいので定義
      */
-    constexpr friend bool operator==(const modint& x1, const modint& x2) { return x1.m_val == x2.m_val; }
+    constexpr friend auto operator<=>(const modint& x1, const modint& x2) = default;
     /**
      * @brief modintの入力
      * 

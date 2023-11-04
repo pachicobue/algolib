@@ -12,6 +12,7 @@ constexpr Pair<i64, i64> extgcd(i64 a, i64 b)
 {
     assert(a != 0 or b != 0);
     const i64 A = ABS(a), B = ABS(b);
+    if (A == B) { return {0, (b < 0 ? -1 : 1)}; }
     auto [x, y, g] = Fix([&](auto self, i64 a, i64 b) -> Tup<i64, i64, i64> {
         assert(0 <= a and a < b);
         if (a == 0) { return {0, 1, b}; }
