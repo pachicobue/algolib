@@ -2,32 +2,10 @@
 #include "type.hpp"
 #include "constant.hpp"
 /**
- * @brief 半群の累乗
- * 
- * @tparam T 半群
- * @param x 
- * @param N 指数(N>=1)
- * @param mul 乗算
- * @return T x^N
- */
-template<typename T> constexpr T powerSemiGroup(const T& x, i64 N, auto mul)
-{
-    assert(N > 0);
-    if (N == 1) { return x; }
-    return (N % 2 == 1 ? mul(x, powerSemiGroup(x, N - 1, mul)) : powerSemiGroup(mul(x, x), N / 2, mul));
-}
-/**
- * @brief 半群の累乗
- * 
- * @tparam T 半群
- * @param x 
- * @param N 指数(N>=1)
- * @return T x^N
- */
-template<typename T> constexpr T powerSemiGroup(const T& x, i64 N) { return powerSemiGroup(x, N, std::multiplies<T>{}); }
-/**
- * @brief モノイドの累乗
- * 
+ * @brief モノイドの累乗(乗算演算指定)
+ * @note 半群の場合も使える(N>=1)
+ *       その場合は単位元はテキトーでいい
+ *
  * @tparam T モノイド
  * @param x 
  * @param N 指数(N>=0)
@@ -38,7 +16,9 @@ template<typename T> constexpr T powerSemiGroup(const T& x, i64 N) { return powe
 template<typename T> constexpr T powerMonoid(const T& x, i64 N, const T& e, auto mul)
 {
     assert(N >= 0);
-    return (N == 0 ? e : powerSemiGroup(x, N, mul));
+    if (N == 0) { return e; }
+    if (N == 1) { return x; }
+    return (N % 2 == 1 ? mul(x, powerMonoid(x, N - 1, e, mul)) : powerMonoid(mul(x, x), N / 2, e, mul));
 }
 /**
  * @brief モノイドの累乗

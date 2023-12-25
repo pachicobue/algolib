@@ -113,7 +113,7 @@ public:
      */
     Vec<T> depths(int R = 0) const
     {
-        Vec<i64> Ans(V(), 0);
+        Vec<T> Ans(V(), 0);
         Fix([&](auto self, int u, int p) -> void {
             for (const auto& [v, c] : m_lists[u] | ToC) {
                 if (v == p) { continue; }

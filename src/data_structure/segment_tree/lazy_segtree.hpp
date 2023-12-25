@@ -3,24 +3,44 @@
 /**
  * @brief 遅延セグ木
  * 
- * @tparam MergeMonoid 値のモノイド
- * @tparam OpMonoid 作用素のモノイド
- * @tparam Act 作用
+ * @tparam T 値型
+ * @tparam e 値の単位元
+ * @tparam merge 値のマージ
+ * @tparam F 作用素型
+ * @tparam id 作用素の単位元
+ * @tparam compose 作用素の合成
+ * @tparam apply モノイド作用
  */
-template<typename MergeMonoid, typename OpMonoid, typename Act> class LazySeg
+template<std::semiregular T, auto e, auto merge, std::semiregular F, auto id, auto compose, auto apply>
+    requires requires(const T& x, const T& y, const F& f, const F& g) {
+        {
+            e()
+        } -> std::same_as<T>;
+        {
+            merge(x, y)
+        } -> std::same_as<T>;
+        {
+            id()
+        } -> std::same_as<F>;
+        {
+            compose(f, g)
+        } -> std::same_as<F>;
+        {
+            apply(f, x)
+        } -> std::same_as<T>;
+    }
+class LazySeg
 {
-    using T = typename MergeMonoid::T;
-    using F = typename OpMonoid::F;
-    static constexpr T e() { return MergeMonoid::e(); }
-    static constexpr F id() { return OpMonoid::id(); }
 public:
     /**
      * @brief コンストラクタ
      * 
      * @param xs ベースとなる数列
      */
-    LazySeg(const Vec<T>& xs)
-        : m_size(xs.size()),
+    template<std::ranges::input_range Xs>
+        requires std::convertible_to<std::ranges::range_value_t<Xs>, T>
+    LazySeg(Xs&& xs)
+        : m_size(std::ranges::size(xs)),
           m_half((int)std::bit_ceil((u64)m_size)),
           m_depth((int)std::bit_width((u64)m_half)),
           m_vals(m_half << 1, e()),
@@ -35,7 +55,16 @@ public:
      * @param N 数列長
      * @param x 初期値
      */
-    LazySeg(int N, const T& x = MergeMonoid::e()) : LazySeg{Vec<T>(N, x)} {}
+    LazySeg(int N, const T& x = e())
+        : m_size(N),
+          m_half((int)std::bit_ceil((u64)m_size)),
+          m_depth((int)std::bit_width((u64)m_half)),
+          m_vals(m_half << 1, e()),
+          m_ops(m_half << 1, id())
+    {
+        std::ranges::fill_n(m_vals.begin() + m_half, N, x);
+        for (int i : irange(m_half - 1, 0, -1)) { up(i); }
+    }
     /**
      * @brief 1点取得 X[i]
      * 
@@ -70,12 +99,12 @@ public:
         if (l >= r) { return e(); }
         l += m_half, r += m_half;
         topDown(l), topDown(r);
-        T accl = e(), accr = e();
+        T xl = e(), xr = e();
         for (; l < r; l >>= 1, r >>= 1) {
-            if (l & 1) { accl = merge(accl, m_vals[l++]); }
-            if (r & 1) { accr = merge(m_vals[--r], accr); }
+            if (l & 1) { xl = merge(xl, m_vals[l++]); }
+            if (r & 1) { xr = merge(m_vals[--r], xr); }
         }
-        return merge(accl, accr);
+        return merge(xl, xr);
     }
     /**
      * @brief 範囲作用 X[i] <- f(X[i]) (l<=i<r)
@@ -133,7 +162,4 @@ private:
     int m_size, m_half, m_depth;
     Vec<T> m_vals;
     Vec<F> m_ops;
-    static inline MergeMonoid merge;
-    static inline OpMonoid compose;
-    static inline Act apply;
 };

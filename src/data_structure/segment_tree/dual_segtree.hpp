@@ -3,20 +3,29 @@
 /**
  * @brief 双対セグ木
  * 
- * @tparam OpMonoid 作用素のモノイド
+ * @tparam F 作用素型
+ * @tparam id 作用素の単位元
+ * @tparam compose 作用素の合成
  */
-template<typename OpMonoid> class DualSegTree
+template<std::semiregular F, auto id, auto compose>
+    requires requires(const F& f, const F& g) {
+        {
+            id()
+        } -> std::same_as<F>;
+        {
+            compose(f, g)
+        } -> std::same_as<F>;
+    }
+class DualSegTree
 {
-    using F = typename OpMonoid::F;
-    static constexpr F id() { return OpMonoid::id(); }
 public:
     /**
      * @brief コンストラクタ
      * 
      * @param fs ベースとなる作用素列
      */
-    DualSegTree(const Vec<F>& fs)
-        : m_size(fs.size()),
+    template<std::ranges::input_range Fs> DualSegTree(Fs&& fs)
+        : m_size(std::ranges::size(fs)),
           m_half((int)std::bit_ceil((u64)m_size)),
           m_depth((int)std::bit_width((u64)m_half)),
           m_ops(m_half << 1, id())
@@ -29,7 +38,11 @@ public:
      * @param N 作用素列長
      * @param f 作用素の初期値
      */
-    DualSegTree(int N, const F& f = OpMonoid::id()) : DualSegTree{Vec<F>(N, f)} {}
+    DualSegTree(int N, const F& f = id())
+        : m_size(N), m_half((int)std::bit_ceil((u64)m_size)), m_depth((int)std::bit_width((u64)m_half)), m_ops(m_half << 1, id())
+    {
+        std::ranges::fill_n(m_ops.begin() + m_half, N, f);
+    }
     /**
      * @brief 1点取得 F[i]
      * 
@@ -101,5 +114,4 @@ private:
     void update(int i, const F& f) { m_ops[i] = compose(f, m_ops[i]); }
     int m_size, m_half, m_depth;
     Vec<F> m_ops;
-    static inline OpMonoid compose;
 };
