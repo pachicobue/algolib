@@ -25,7 +25,7 @@ template<typename T, typename F> i64 discreteLogarithm(i64 N, T x, T y, F f, aut
     USet<T> Ys;
     for (T Y = y; i64 i : rep(M)) { (void)(i), Y = act(f, Y), Ys.insert(Y); }
 
-    const F fW = powerSemiGroup(f, W, compose);
+    const F fW = powerMonoid(f, W, f, compose);  // 単位元はテキトーに指定
     for (auto [X, failed] = makePair(x, 0); i64 k : irange(1, M + 1)) {
         T pX = X;
         X    = act(fW, X);

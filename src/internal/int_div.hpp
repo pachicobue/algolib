@@ -7,7 +7,7 @@
  * @param y 
  * @return i64 floor(x/y)
  */
-constexpr i64 floorDiv(i64 x, i64 y)
+constexpr auto floorDiv(i64 x, i64 y) -> i64
 {
     assert(y != 0);
     if (y < 0) { x = -x, y = -y; }
@@ -20,7 +20,7 @@ constexpr i64 floorDiv(i64 x, i64 y)
  * @param y 
  * @return i64 ceil(x/y)
  */
-constexpr i64 ceilDiv(i64 x, i64 y)
+constexpr auto ceilDiv(i64 x, i64 y) -> i64
 {
     assert(y != 0);
     if (y < 0) { x = -x, y = -y; }

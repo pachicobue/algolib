@@ -106,7 +106,7 @@ private:
             const auto& pl    = m_nodes[index].line;
             const i64 mx      = (lx + rx) / 2;
             const bool lunder = comp(l, pl, lx), munder = comp(l, pl, mx), runder = comp(l, pl, rx);
-            if (munder) { std::swap(l, m_nodes[index].line); }
+            if (munder) { std::ranges::swap(l, m_nodes[index].line); }
             if (lunder == runder) { break; }
             ensureSub(index);
             const auto& nindexs = m_nodes[index].sons;

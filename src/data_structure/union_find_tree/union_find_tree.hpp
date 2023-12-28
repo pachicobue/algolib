@@ -42,7 +42,7 @@ public:
     bool unite(int i, int j, auto merge, auto add, auto del)
     {
         i = find(i), j = find(j);
-        if (size(i) > size(j)) { std::swap(i, j); }
+        if (size(i) > size(j)) { std::ranges::swap(i, j); }
         del(i);
         if (i != j) {
             del(j);

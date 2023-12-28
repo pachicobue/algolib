@@ -6,7 +6,7 @@
  * @param xs 多次元数列
  * @param f 作用関数
  */
-void mdSeqAct(auto& xs, auto f)
+auto mdSeqAct(auto& xs, auto f) -> void
 {
     if constexpr (requires(const decltype(xs) xs) { std::begin(xs); }) {
         for (auto& x : xs) { mdSeqAct(x, f); }
@@ -21,7 +21,7 @@ void mdSeqAct(auto& xs, auto f)
  * @param op 二項演算
  * @return auto 総積
  */
-[[nodiscard]] auto mdSeqFold(const auto& xs, auto op)
+auto mdSeqFold(const auto& xs, auto op)
 {
     if constexpr (requires(const decltype(xs) xs) { std::begin(xs); }) {
         assert(std::size(xs) > 0);
@@ -38,7 +38,7 @@ void mdSeqAct(auto& xs, auto f)
  * @param xs 多次元数列
  * @param x Fillする値
  */
-void mdSeqFill(auto& xs, auto x)
+auto mdSeqFill(auto& xs, auto x) -> void
 {
     mdSeqAct(xs, [&x](auto& v) { v = x; });
 }
@@ -48,7 +48,7 @@ void mdSeqFill(auto& xs, auto x)
  * @param xs 多次元数列
  * @param x 加算する値
  */
-void mdSeqPlus(auto& xs, auto x)
+auto mdSeqPlus(auto& xs, auto x) -> void
 {
     mdSeqAct(xs, [&x](auto& v) { v += x; });
 }

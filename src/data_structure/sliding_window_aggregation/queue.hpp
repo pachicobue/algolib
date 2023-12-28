@@ -3,16 +3,26 @@
 /**
  * @brief Swag Queue
  * 
- * @tparam Monoid 値のモノイド
+ * @tparam T 値型
+ * @tparam e 値の単位元
+ * @tparam merge 値のマージ
  */
-template<typename Monoid> class SwagQueue
+template<std::semiregular T, auto e, auto merge>
+    requires requires(const T& x, const T& y) {
+        {
+            e()
+        } -> std::convertible_to<T>;
+        {
+            merge(x, y)
+        } -> std::convertible_to<T>;
+    }
+class SwagQueue
 {
-    using T = typename Monoid::T;
 public:
     /**
      * @brief コンストラクタ
      */
-    SwagQueue() : m_fronts{}, m_backs{}, m_Fronts{Monoid::e()}, m_Backs{Monoid::e()} {}
+    SwagQueue() : m_fronts{}, m_backs{}, m_Fronts{e()}, m_Backs{e()} {}
     /**
      * @brief pushBack
      * 
@@ -21,7 +31,7 @@ public:
     void pushBack(const T& x)
     {
         m_backs.push_back(x);
-        m_Backs.push_back(m_merge(m_Backs.back(), x));
+        m_Backs.push_back(merge(m_Backs.back(), x));
     }
     /**
      * @brief popFront()
@@ -30,7 +40,7 @@ public:
     {
         assert(not empty());
         if (m_fronts.empty()) {
-            std::swap(m_fronts, m_backs), seqReverse(m_fronts), m_fronts.pop_back();
+            std::ranges::swap(m_fronts, m_backs), seqReverse(m_fronts), m_fronts.pop_back();
             calc();
         } else {
             m_fronts.pop_back(), m_Fronts.pop_back();
@@ -41,7 +51,7 @@ public:
      * 
      * @return T 総積
      */
-    T foldAll() const { return m_merge(m_Fronts.back(), m_Backs.back()); }
+    T foldAll() const { return merge(m_Fronts.back(), m_Backs.back()); }
     /**
      * @brief 空かどうか
      * 
@@ -52,12 +62,11 @@ public:
 private:
     void calc()
     {
-        m_Fronts = {Monoid::e()};
-        for (int i : rep(m_fronts.size())) { m_Fronts.push_back(m_merge(m_fronts[i], m_Fronts.back())); }
-        m_Backs = {Monoid::e()};
-        for (int i : rep(m_backs.size())) { m_Backs.push_back(m_merge(m_Backs.back(), m_backs[i])); }
+        m_Fronts = {e()};
+        for (int i : rep(m_fronts.size())) { m_Fronts.push_back(merge(m_fronts[i], m_Fronts.back())); }
+        m_Backs = {e()};
+        for (int i : rep(m_backs.size())) { m_Backs.push_back(merge(m_Backs.back(), m_backs[i])); }
     }
     Vec<T> m_fronts, m_backs;
     Vec<T> m_Fronts, m_Backs;
-    static inline Monoid m_merge;
 };

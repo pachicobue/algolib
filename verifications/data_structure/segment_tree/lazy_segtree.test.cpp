@@ -15,16 +15,12 @@ int main()
     for (int i : rep(N)) { as[i].first = in.val<mint>(); }
 
     auto seg = LazySeg<T,
-                       []() -> T {
-                           return {0, 0};
-                       },
+                       FConst(T{0, 0}),
                        [](const T& x1, const T& x2) -> T {
                            return {x1.first + x2.first, x1.second + x2.second};
                        },
                        F,
-                       []() -> F {
-                           return {1, 0};
-                       },
+                       FConst(F{1, 0}),
                        [](const F& f1, const F& f2) -> F {
                            return {f1.first * f2.first, f1.first * f2.second + f1.second};
                        },

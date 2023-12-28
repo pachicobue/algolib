@@ -45,7 +45,7 @@ public:
         i = find(i), j = find(j);
         m_diffs.push_back({i, m_infos[i]}), m_diffs.push_back({j, m_infos[j]});
         snap(i), snap(j);
-        if (size(i) > size(j)) { std::swap(i, j); }
+        if (size(i) > size(j)) { std::ranges::swap(i, j); }
         del(i);
         if (i != j) {
             del(j);

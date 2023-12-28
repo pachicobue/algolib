@@ -9,7 +9,7 @@
  * @return true xが更新された
  * @return false xが更新されなかった
  */
-template<typename T> constexpr bool chmin(T& x, const T& y, auto comp) { return (comp(y, x) ? (x = y, true) : false); }
+template<typename T> constexpr auto chmin(T& x, const T& y, auto comp) -> bool { return (comp(y, x) ? (x = y, true) : false); }
 /**
  * @brief chmin
  * 
@@ -18,7 +18,7 @@ template<typename T> constexpr bool chmin(T& x, const T& y, auto comp) { return 
  * @return true xが更新された
  * @return false xが更新されなかった
  */
-template<typename T> constexpr bool chmin(T& x, const T& y) { return chmin(x, y, Lt<T>{}); }
+template<typename T> constexpr auto chmin(T& x, const T& y) -> bool { return chmin(x, y, Lt<T>{}); }
 /**
  * @brief chmax
  * 
@@ -28,7 +28,7 @@ template<typename T> constexpr bool chmin(T& x, const T& y) { return chmin(x, y,
  * @return true xが更新された
  * @return false xが更新されなかった
  */
-template<typename T> constexpr bool chmax(T& x, const T& y, auto comp) { return (comp(x, y) ? (x = y, true) : false); }
+template<typename T> constexpr auto chmax(T& x, const T& y, auto comp) -> bool { return (comp(x, y) ? (x = y, true) : false); }
 /**
  * @brief chmax
  * 
@@ -37,4 +37,4 @@ template<typename T> constexpr bool chmax(T& x, const T& y, auto comp) { return 
  * @return true xが更新された
  * @return false xが更新されなかった
  */
-template<typename T> constexpr bool chmax(T& x, const T& y) { return chmax(x, y, Lt<T>{}); }
+template<typename T> constexpr auto chmax(T& x, const T& y) -> bool { return chmax(x, y, Lt<T>{}); }

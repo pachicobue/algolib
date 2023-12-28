@@ -19,4 +19,4 @@ template<typename T> constexpr T INF = (LIMMAX<T> - 1) / 2;
  * @param N 指数
  * @return T 10^N
  */
-template<typename T = i64> constexpr T TEN(int N) { return N == 0 ? T{1} : TEN<T>(N - 1) * T{10}; }
+template<typename T = i64> constexpr auto TEN(int N) -> T { return N == 0 ? T{1} : TEN<T>(N - 1) * T{10}; }

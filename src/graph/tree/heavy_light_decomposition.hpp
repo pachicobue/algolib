@@ -26,7 +26,7 @@ public:
                 const int v = g[u][i];
                 if (p == v) { continue; }
                 szs[u] += self(v, u);
-                if (szs[(int)g[u][0]] < szs[v]) { std::swap(g[u][0], g[u][i]); }
+                if (szs[(int)g[u][0]] < szs[v]) { std::ranges::swap(g[u][0], g[u][i]); }
             }
             return szs[u];
         })(r, -1);

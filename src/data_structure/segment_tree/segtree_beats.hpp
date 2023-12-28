@@ -15,19 +15,19 @@ template<std::semiregular T, auto e, auto merge, std::regular F, auto id, auto c
     requires requires(const T& x, const T& y, const F& f, const F& g) {
         {
             e()
-        } -> std::same_as<T>;
+        } -> std::convertible_to<T>;
         {
             merge(x, y)
-        } -> std::same_as<T>;
+        } -> std::convertible_to<T>;
         {
             id()
-        } -> std::same_as<F>;
+        } -> std::convertible_to<F>;
         {
             compose(f, g)
-        } -> std::same_as<F>;
+        } -> std::convertible_to<F>;
         {
             apply(f, x)
-        } -> std::same_as<T>;
+        } -> std::convertible_to<T>;
         {
             failed(x)
         } -> std::same_as<bool>;
@@ -41,7 +41,7 @@ public:
      * @param xs ベースとなる数列
      */
     template<std::ranges::input_range Xs>
-        requires std::convertible_to<std::ranges::range_value_t<Xs>, T>
+        requires std::ranges::sized_range<Xs> && std::convertible_to<std::ranges::range_value_t<Xs>, T>
     SegBeats(Xs&& xs)
         : m_size(std::ranges::size(xs)),
           m_half((int)std::bit_ceil((u64)m_size)),
@@ -58,16 +58,7 @@ public:
      * @param N 数列長
      * @param x 初期値
      */
-    SegBeats(int N, const T& x = e())
-        : m_size(N),
-          m_half((int)std::bit_ceil((u64)m_size)),
-          m_depth((int)std::bit_width((u64)m_half)),
-          m_vals(m_half << 1, e()),
-          m_ops(m_half << 1, id())
-    {
-        std::ranges::fill_n(m_vals.begin() + m_half, N, x);
-        for (int i : irange(m_half - 1, 0, -1)) { up(i); }
-    }
+    SegBeats(int N, const T& x = e()) : SegBeats(Vec<T>(N, x)) {}
     /**
      * @brief 1点取得 X[i]
      * 

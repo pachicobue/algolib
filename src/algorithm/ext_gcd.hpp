@@ -19,7 +19,7 @@ constexpr Pair<i64, i64> extgcd(i64 a, i64 b)
         const auto [px, py, pg] = self(b % a, a);
         return {py - (b / a) * px, px, pg};
     })(std::ranges::min(A, B), std::ranges::max(A, B));
-    if (A > B) { std::swap(x, y); }
+    if (A > B) { std::ranges::swap(x, y); }
     if (a < 0) { x = -x; }
     if (b < 0) { y = -y; }
     // この時点で ax+by=gcd(A,B), |x|<B/g, |y|<=A/g になっているので微調整

@@ -11,10 +11,10 @@ template<std::semiregular T, auto e, auto merge>
     requires requires(const T& x, const T& y) {
         {
             e()
-        } -> std::same_as<T>;
+        } -> std::convertible_to<T>;
         {
             merge(x, y)
-        } -> std::same_as<T>;
+        } -> std::convertible_to<T>;
     }
 class SegTree
 {
@@ -25,7 +25,7 @@ public:
      * @param xs ベースとなる数列
      */
     template<std::ranges::input_range Xs>
-        requires std::convertible_to<std::ranges::range_value_t<Xs>, T>
+        requires std::ranges::sized_range<Xs> && std::convertible_to<std::ranges::range_value_t<Xs>, T>
     SegTree(Xs&& xs) : m_size(std::ranges::size(xs)), m_half((int)std::bit_ceil((u64)m_size)), m_vals(m_half << 1, e())
     {
         std::ranges::copy(xs, m_vals.begin() + m_half);
@@ -37,11 +37,7 @@ public:
      * @param N 数列長
      * @param x 初期値
      */
-    SegTree(int N, const T& x = e()) : m_size(N), m_half((int)std::bit_ceil((u64)m_size)), m_vals(m_half << 1, e())
-    {
-        std::ranges::fill_n(m_vals.begin() + m_half, N, x);
-        for (int i : irange(m_half - 1, 0, -1)) { up(i); }
-    }
+    SegTree(int N, const T& x = e()) : SegTree(Vec<T>(N, e)) {}
     /**
      * @brief 1点取得 X[i]
      * 

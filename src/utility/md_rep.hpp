@@ -4,16 +4,16 @@
  * @brief 複数列のCartesian Product上の Rep
  * @note mdRep({{A0,A1}, {B0, B1, B2}}) = {(A0,B0),(A0,B1),(A0,B2),(A1,B0),(A1,B1),(A1,B2)} となる
  */
-class mdRep
+template<typename T> class mdRep
 {
 private:
     struct itr
     {
-        itr(const Vec<Vec<i64>>& ranges) : m_ranges{ranges}, m_indexes(m_ranges.size(), 0), m_end{false} {}
+        itr(const Vec<Vec<T>>& ranges) : m_ranges{ranges}, m_indexes(m_ranges.size(), 0), m_end{ranges.empty()} {}
         bool operator!=(const itr&) const { return not m_end; }
-        const Vec<i64> operator*() const
+        const Vec<T> operator*() const
         {
-            Vec<i64> Ans(m_ranges.size());
+            Vec<T> Ans(m_ranges.size());
             for (int i : rep(m_ranges.size())) { Ans[i] = m_ranges[i][m_indexes[i]]; }
             return Ans;
         }
@@ -28,18 +28,18 @@ private:
             return *this;
         }
 
-        const Vec<Vec<i64>>& m_ranges;
+        const Vec<Vec<T>>& m_ranges;
         Vec<int> m_indexes;
         bool m_end;
     };
-    Vec<Vec<i64>> m_ranges;
+    Vec<Vec<T>> m_ranges;
 public:
     /**
      * @brief コンストラクタ
      * 
      * @param ranges (ranges[0] x ... x ranges[D-1]) が Rep範囲 になる
      */
-    mdRep(const Vec<Vec<i64>>& ranges) : m_ranges(ranges) { assert(not ranges.empty()); }
+    mdRep(const Vec<Vec<T>>& ranges) : m_ranges(ranges) {}
     /**
      * @brief begin
      * @attention range-based for からのみ呼ばれる想定

@@ -14,4 +14,5 @@
 #include "internal/show.hpp"
 #include "internal/bit_op.hpp"
 #include "internal/fixpoint.hpp"
+#include "internal/functional.hpp"
 #include "internal/irange.hpp"

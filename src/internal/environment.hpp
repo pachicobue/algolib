@@ -14,4 +14,4 @@ constexpr bool LOCAL = false;
  * @param local ローカルでの返り値
  * @return T 返り値
  */
-template<typename T> static constexpr T OjLocal(T oj, T local) { return LOCAL ? local : oj; }
+template<typename T> constexpr auto OjLocal(T oj, T local) -> T { return LOCAL ? local : oj; }

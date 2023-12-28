@@ -61,7 +61,7 @@ public:
     {
         assert(0 <= eid and eid < m_g.E());
         auto [u, v] = m_g.edge(eid);
-        if (m_depths[u] > m_depths[v]) { std::swap(u, v); }
+        if (m_depths[u] > m_depths[v]) { std::ranges::swap(u, v); }
         return m_depths[u] < m_lows[v];
     }
     /**

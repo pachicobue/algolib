@@ -36,7 +36,7 @@ public:
     {
         assert(0 <= u and u < m_V);
         assert(0 <= v and v < m_V);
-        if (m_ds[u] > m_ds[v]) { std::swap(u, v); }
+        if (m_ds[u] > m_ds[v]) { std::ranges::swap(u, v); }
         v = (*this)(v, m_ds[v] - m_ds[u]);
         if (u == v) { return u; }
         while (true) {

@@ -6,7 +6,7 @@
  * @param xs1
  * @param xs2 
  */
-void seqConcat(auto& xs1, const auto& xs2) { std::ranges::copy(xs2, std::back_inserter(xs1)); }
+auto seqConcat(auto& xs1, const auto& xs2) -> void { std::ranges::copy(xs2, std::back_inserter(xs1)); }
 /**
  * @brief 結合した数列
  * 
@@ -26,7 +26,7 @@ auto seqConcatCopy(const auto& xs1, const auto& xs2)
  * @param args
  * @return int 最小値のindex
  */
-int seqMinInd(const auto& xs, auto... args) { return std::ranges::min_element(xs, args...) - std::begin(xs); }
+auto seqMinInd(const auto& xs, auto... args) -> int { return std::ranges::min_element(xs, args...) - std::ranges::begin(xs); }
 /**
  * @brief 数列の最大値のindex
  * 
@@ -34,19 +34,19 @@ int seqMinInd(const auto& xs, auto... args) { return std::ranges::min_element(xs
  * @param args
  * @return int 最大値のindex
  */
-int seqMaxInd(const auto& xs, auto... args) { return std::ranges::max_element(xs, args...) - std::begin(xs); }
+auto seqMaxInd(const auto& xs, auto... args) -> int { return std::ranges::max_element(xs, args...) - std::ranges::begin(xs); }
 /**
  * @brief 数列をreverseする
  * 
  * @param xs 数列
  */
-void seqReverse(auto& xs) { std::ranges::reverse(xs); }
+auto seqReverse(auto& xs) -> void { std::ranges::reverse(xs); }
 /**
  * @brief 数列をソートする
  * 
  * @param xs 数列
  */
-void seqSort(auto& xs, auto... args) { std::ranges::sort(xs, args...); }
+auto seqSort(auto& xs, auto... args) -> void { std::ranges::sort(xs, args...); }
 /**
  * @brief 関数の結果列
  * 
@@ -54,7 +54,7 @@ void seqSort(auto& xs, auto... args) { std::ranges::sort(xs, args...); }
  * @param gen 値生成関数
  * @return Vec<T> genの結果を順に詰めた数列
  */
-template<typename T> Vec<T> genVec(int N, auto gen)
+template<typename T> auto genVec(int N, auto gen) -> Vec<T>
 {
     Vec<T> ans;
     std::ranges::generate_n(std::back_inserter(ans), N, gen);
@@ -67,10 +67,10 @@ template<typename T> Vec<T> genVec(int N, auto gen)
  * @param offset 初項
  * @return Vec<T> {offset, offset+1, ..., offset+N-1}
  */
-template<typename T = int> Vec<T> iotaVec(int N, T offset = 0)
+template<typename T = int> auto iotaVec(int N, T offset = 0) -> Vec<T>
 {
     Vec<T> ans(N);
-    std::iota(std::begin(ans), std::end(ans), offset);
+    std::iota(std::ranges::begin(ans), std::ranges::end(ans), offset);
     return ans;
 }
 /**

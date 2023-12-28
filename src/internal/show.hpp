@@ -3,7 +3,7 @@
 #ifdef HOGEPACHI
 #    include "print/print_stl.hpp"
 namespace show_impl {
-void dump(auto x, auto... args)
+auto dump(auto x, auto... args) -> void
 {
     std::cerr << x;
     if constexpr (sizeof...(args) > 0) { std::cerr << ", ", dump(args...); }

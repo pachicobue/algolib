@@ -27,7 +27,7 @@ public:
             }
             int is[2] = {0, m_bvs[bi].zero()};
             for (int i : rep(m_n)) { nvs[is[isBitOn(xs[i], bi)]++] = xs[i]; }
-            std::swap(xs, nvs);
+            std::ranges::swap(xs, nvs);
         }
     }
     /**

@@ -13,9 +13,7 @@ int main()
     const auto as     = in.vec<mint>(N);
 
     DualSegTree<F,
-                []() -> F {
-                    return {1, 0};
-                },
+                FConst(F{1, 0}),
                 [](const F& f1, const F& f2) -> F {
                     const auto& [a1, b1] = f1;
                     const auto& [a2, b2] = f2;

@@ -3,18 +3,30 @@
 /**
  * @brief Disjoint Sparse Table
  * 
- * @tparam SemiGroup 半群
+ * @tparam T 値型
+ * @tparam e 値の単位元
+ * @tparam merge 値のマージ
  */
-template<typename SemiGroup> class DisjointSparseTable
+template<std::semiregular T, auto e, auto merge>
+    requires requires(const T& x, const T& y) {
+        {
+            e()
+        } -> std::convertible_to<T>;
+        {
+            merge(x, y)
+        } -> std::convertible_to<T>;
+    }
+class DisjointSparseTable
 {
-    using T = typename SemiGroup::T;
 public:
     /**
      * @brief コンストラクタ
      * 
      * @param xs 数列
      */
-    DisjointSparseTable(const Vec<T>& xs) : m_size(xs.size()), m_depth((int)std::bit_width((u64)m_size)), m_xss(m_depth, xs)
+    template<std::ranges::random_access_range Xs>
+        requires std::ranges::sized_range<Xs> && std::convertible_to<std::ranges::range_value_t<Xs>, T>
+    DisjointSparseTable(Xs&& xs) : m_size(std::ranges::size(xs)), m_depth((int)std::bit_width((u64)m_size)), m_xss(m_depth, xs)
     {
         for (int d : rep(m_depth)) {
             const int w = 1 << (m_depth - d - 1);
@@ -36,7 +48,8 @@ public:
      */
     T fold(int l, int r) const
     {
-        assert(0 <= l and l < r and r <= m_size);
+        assert(0 <= l and l <= r and r <= m_size);
+        if (l == r) { return e(); }
         if (r - l == 1) { return m_xss.back()[l]; }
         const int d = m_depth - (int)std::bit_width((u64)(l ^ (r - 1)));
         return merge(m_xss[d][l], m_xss[d][r - 1]);
@@ -44,5 +57,4 @@ public:
 private:
     int m_size, m_depth;
     Vec<Vec<T>> m_xss;
-    static inline SemiGroup merge;
 };

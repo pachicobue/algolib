@@ -1,5 +1,6 @@
 #pragma once
 #include "../../common.hpp"
+#include "../../internal/repeat_view.hpp"
 /**
  * @brief 双対セグ木
  * 
@@ -11,10 +12,10 @@ template<std::semiregular F, auto id, auto compose>
     requires requires(const F& f, const F& g) {
         {
             id()
-        } -> std::same_as<F>;
+        } -> std::convertible_to<F>;
         {
             compose(f, g)
-        } -> std::same_as<F>;
+        } -> std::convertible_to<F>;
     }
 class DualSegTree
 {
@@ -25,6 +26,7 @@ public:
      * @param fs ベースとなる作用素列
      */
     template<std::ranges::input_range Fs> DualSegTree(Fs&& fs)
+        requires std::ranges::sized_range<Fs> && std::convertible_to<std::ranges::range_value_t<Fs>, F>
         : m_size(std::ranges::size(fs)),
           m_half((int)std::bit_ceil((u64)m_size)),
           m_depth((int)std::bit_width((u64)m_half)),
@@ -38,11 +40,19 @@ public:
      * @param N 作用素列長
      * @param f 作用素の初期値
      */
-    DualSegTree(int N, const F& f = id())
-        : m_size(N), m_half((int)std::bit_ceil((u64)m_size)), m_depth((int)std::bit_width((u64)m_half)), m_ops(m_half << 1, id())
-    {
-        std::ranges::fill_n(m_ops.begin() + m_half, N, f);
-    }
+    DualSegTree(int N, const F& f = id()) : DualSegTree(Vec<F>(N, f)) {}
+
+    // /**
+    //  * @brief コンストラクタ
+    //  *
+    //  * @param N 作用素列長
+    //  * @param f 作用素の初期値
+    //  */
+    // DualSegTree(int N, const F& f = id())
+    //     : m_size(N), m_half((int)std::bit_ceil((u64)m_size)), m_depth((int)std::bit_width((u64)m_half)), m_ops(m_half << 1, id())
+    // {
+    //     std::ranges::fill_n(m_ops.begin() + m_half, N, f);
+    // }
     /**
      * @brief 1点取得 F[i]
      * 

@@ -72,7 +72,7 @@ int main()
                     } else {
                         continue;
                     }
-                    if (nks.first > nks.second) { std::swap(nks.first, nks.second); }
+                    if (nks.first > nks.second) { std::ranges::swap(nks.first, nks.second); }
                     dfs(v, u, nks);
                 }
             })(e.to, c, P{e.cost, INF<int>});

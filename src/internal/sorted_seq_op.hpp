@@ -8,7 +8,10 @@
  * @param x 値
  * @return int x以上となる最小のindex
  */
-int sortedLbInd(const auto& xs, const auto& x, auto... args) { return std::ranges::lower_bound(xs, x, args...) - std::begin(xs); }
+auto sortedLbInd(const auto& xs, const auto& x, auto... args) -> int
+{
+    return std::ranges::lower_bound(xs, x, args...) - std::ranges::begin(xs);
+}
 /**
  * @brief ソート済み数列のupper_bound
  * @attention xを超える要素が存在しない場合は size(xs)
@@ -17,7 +20,10 @@ int sortedLbInd(const auto& xs, const auto& x, auto... args) { return std::range
  * @param x 値
  * @return int xを超える最小のindex
  */
-int sortedUbInd(const auto& xs, const auto& x, auto... args) { return std::ranges::upper_bound(xs, x, args...) - std::begin(xs); }
+auto sortedUbInd(const auto& xs, const auto& x, auto... args) -> int
+{
+    return std::ranges::upper_bound(xs, x, args...) - std::ranges::begin(xs);
+}
 /**
  * @brief ソート済み数列の検索
  * @attention 一致する要素が存在しない場合は size(xs)
@@ -26,9 +32,9 @@ int sortedUbInd(const auto& xs, const auto& x, auto... args) { return std::range
  * @param x 値
  * @return int xと一致する最小のindex
  */
-int sortedFind(const auto& xs, const auto& x, auto... args)
+auto sortedFind(const auto& xs, const auto& x, auto... args) -> int
 {
     const int i = sortedLbInd(xs, x, args...);
-    if (i < std::ssize(xs) and xs[i] == x) { return i; }
-    return std::ssize(xs);
+    if (i < std::ranges::ssize(xs) and xs[i] == x) { return i; }
+    return std::ranges::ssize(xs);
 }

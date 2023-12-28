@@ -49,13 +49,8 @@ public:
         return m_rmq.fold(ul, vl + 1).second;
     }
 private:
-    struct Ord
-    {
-        using T = P;
-        bool operator()(const T& p1, const T& p2) const { return p1 < p2; }
-    };
     int m_V;
     Vec<int> m_ins;
     Vec<P> m_ds;
-    StaticRMQ<Ord> m_rmq;
+    StaticRMQ<P, FConst(P{INF<int>, INF<int>}), Lt<P>{}> m_rmq;
 };
