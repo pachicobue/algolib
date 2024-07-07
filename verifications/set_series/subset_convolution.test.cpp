@@ -1,12 +1,12 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/subset_convolution
 #include "set_series/subset_convolution.hpp"
+#include "internal.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
-    using mint    = modint_998244353;
-    const auto N  = in.val<int>();
+int main() {
+    using mint = modint_998244353;
+    const auto N = in.val<int>();
     const auto as = in.vec<mint>(1 << N);
     const auto bs = in.vec<mint>(1 << N);
     const auto cs = subsetConvolute(as, bs);

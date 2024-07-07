@@ -1,12 +1,12 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_set_range_composite
 #include "data_structure/segment_tree/segtree.hpp"
+#include "internal.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
+int main() {
     using mint = modint_998244353;
-    using T    = Pair<mint, mint>;
+    using T = Pair<mint, mint>;
 
     const auto [N, Q] = in.tup<int, int>();
     Vec<T> fs(N);
@@ -21,7 +21,7 @@ int main()
             seg.set(p, T{c, d});
         } else {
             const auto [l, r, x] = in.tup<int, int, mint>();
-            const auto [a, b]    = seg.fold(l, r);
+            const auto [a, b] = seg.fold(l, r);
             out.ln((a * x + b).val());
         }
     }

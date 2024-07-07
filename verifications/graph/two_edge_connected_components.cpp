@@ -1,9 +1,10 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/two_edge_connected_components
 #include "graph/two_edge_connected_components.hpp"
+#include "graph/graph.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
+int main() {
     const auto [N, M] = in.tup<int, int>();
     Graph g(N);
     LOOP (M) {

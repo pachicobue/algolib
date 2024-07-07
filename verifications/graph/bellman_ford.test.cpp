@@ -1,10 +1,11 @@
 // verification-helper: PROBLEM https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B
 #include "graph/bellman_ford.hpp"
+#include "graph/graph.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
 
-int main()
-{
+int main() {
     const auto [V, E, r] = in.tup<int, int, int>();
     Graph<int> g(V);
     LOOP (E) {

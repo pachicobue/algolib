@@ -1,15 +1,17 @@
 #pragma once
-#include "../../common.hpp"
+#include <bit>
+#include <cassert>
+#include <concepts>
+#include "../../internal.hpp"
 #include "bit_vector.hpp"
 /**
  * @brief Wavelet 行列
  */
-class WaveletMatrix
-{
+class WaveletMatrix {
 public:
     /**
      * @brief コンストラクタ
-     * 
+     *
      * @param xs 数列(全て非負)
      */
     WaveletMatrix(Vec<i64> xs)
@@ -17,8 +19,7 @@ public:
           m_min{(i64)mdSeqMin(xs)},
           m_max{(i64)mdSeqMax(xs)},
           m_lg{(int)std::bit_width((u64)m_max + 1)},
-          m_bvs(m_lg, BitVector(m_n))
-    {
+          m_bvs(m_lg, BitVector(m_n)) {
         assert(0 <= m_min);
         Vec<i64> nvs(m_n);
         for (int bi : per(m_lg)) {
@@ -32,29 +33,27 @@ public:
     }
     /**
      * @brief 矩形カウント #{i | l<=i<r && vmin<=X[i]<vsup}
-     * 
-     * @param l 
-     * @param r 
-     * @param vmin 
-     * @param vsup 
+     *
+     * @param l
+     * @param r
+     * @param vmin
+     * @param vsup
      * @return int 矩形カウント
      */
-    int rangeFreq(int l, int r, i64 vmin, i64 vsup)
-    {
+    auto rangeFreq(int l, int r, i64 vmin, i64 vsup) -> int {
         assert(0 <= l and l <= r and r <= m_n);
         assert(vmin <= vsup);
         return lessFreq(l, r, vsup) - lessFreq(l, r, vmin);
     }
     /**
      * @brief X[l],...,X[r-1] で K番目に小さな値(0-indexed)
-     * 
-     * @param l 
-     * @param r 
-     * @param K 
+     *
+     * @param l
+     * @param r
+     * @param K
      * @return i64 K番目に小さな値(0-indexed)
      */
-    i64 quantile(int l, int r, int K)
-    {
+    auto quantile(int l, int r, int K) -> i64 {
         assert(0 <= l and l <= r and r <= m_n);
         assert(0 <= K and K < r - l);
         i64 ans = 0;
@@ -72,8 +71,7 @@ public:
         return ans;
     }
 private:
-    int lessFreq(int l, int r, i64 v)
-    {
+    auto lessFreq(int l, int r, i64 v) -> int {
         assert(0 <= l and l <= r and r <= m_n);
         if (v <= m_min) { return 0; }
         if (v - 1 >= m_max) { return r - l; }

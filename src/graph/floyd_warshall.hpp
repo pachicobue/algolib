@@ -1,14 +1,13 @@
 #pragma once
-#include "../common.hpp"
+#include "../internal.hpp"
 #include "graph.hpp"
 /**
  * @brief Floyd-Warshall
- * 
+ *
  * @param g グラフ
  * @return Vec<Vec<T>> 全点対最短距離
  */
-template<typename T> Vec<Vec<T>> floydWarshall(const Graph<T>& g)
-{
+template <typename T> auto floydWarshall(const Graph<T>& g) -> Vec<Vec<T>> {
     const int N = g.V();
     Vec<Vec<T>> dss(N, Vec<T>(N));
     for (int i : rep(N)) {

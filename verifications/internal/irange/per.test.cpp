@@ -1,15 +1,14 @@
 // verification-helper: UNITTEST
+#include <cassert>
 #include "internal/irange.hpp"
-void test()
-{
+void test() {
     int cnt = 0;
     for (int i : per(100)) {
         assert(i == 99 - cnt);
         cnt++;
     }
 }
-int main()
-{
+int main() {
     test();
     return 0;
 }

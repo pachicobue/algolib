@@ -1,16 +1,16 @@
 #pragma once
-#include "../common.hpp"
+#include <iterator>
+#include "../internal.hpp"
 
-template<typename V> Vec<int> suffixArray(const V& vs)
-{
+template <typename V> auto suffixArray(const V& vs) -> Vec<int> {
     const int N = (int)std::size(vs);
     const int B = mdSeqMax(vs) + 1;
-    auto val    = [&](int i) { return (i == N ? 0 : vs[i] + 1); };
+    auto val = [&](int i) { return (i == N ? 0 : vs[i] + 1); };
     Vec<bool> is_s(N + 1, true);
     for (int i : per(N)) { is_s[i] = val(i) == val(i + 1) ? is_s[i + 1] : val(i) < val(i + 1); }
-    auto isS           = [&](int i) { return is_s[i]; };
-    auto isL           = [&](int i) { return not isS(i); };
-    auto isLms         = [&](int i) { return i > 0 and isL(i - 1) and isS(i); };
+    auto isS = [&](int i) { return is_s[i]; };
+    auto isL = [&](int i) { return not isS(i); };
+    auto isLms = [&](int i) { return i > 0 and isL(i - 1) and isS(i); };
     auto sameLmsSubstr = [&](int i, int j) {
         if (val(i++) != val(j++)) { return false; }
         while (i <= N and j <= N) {
@@ -29,7 +29,7 @@ template<typename V> Vec<int> suffixArray(const V& vs)
     auto inducedSort = [&](const Vec<int>& lmss) {
         mdSeqFill(sa, -1);
         Vec<int> inds = Vec<int>(B + 1, 0);
-        auto pushL    = [&](int i) {
+        auto pushL = [&](int i) {
             if (i >= 0 and isL(i)) { sa[inds[val(i)]++] = i; }
         };
         auto pushS = [&](int i) {
@@ -46,14 +46,14 @@ template<typename V> Vec<int> suffixArray(const V& vs)
         for (int i : per(N + 1)) { pushS(sa[i] - 1); }
     };
 
-    Vec<int> lmss;  // LMSを登場順に詰めたもの
+    Vec<int> lmss; // LMSを登場順に詰めたもの
     for (int i : rep(N + 1)) {
         if (isLms(i)) { lmss.push_back(i); }
     }
     const int LMS = lmss.size();
-    inducedSort(lmss);  // テキトーに一回IS
+    inducedSort(lmss); // テキトーに一回IS
     if (LMS > 1) {
-        Vec<int> nlmss;  // LMS Substrの中身でソートしたLMS
+        Vec<int> nlmss; // LMS Substrの中身でソートしたLMS
         for (int i : rep(N + 1)) {
             if (isLms(sa[i])) { nlmss.push_back(sa[i]); }
         }

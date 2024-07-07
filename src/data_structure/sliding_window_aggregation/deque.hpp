@@ -1,23 +1,24 @@
 #pragma once
-#include "../../common.hpp"
+#include <cassert>
+#include <concepts>
+#include "../../internal.hpp"
 /**
  * @brief Swag Deque
- * 
+ *
  * @tparam T 値型
  * @tparam e 値の単位元
  * @tparam merge 値のマージ
  */
-template<std::semiregular T, auto e, auto merge>
-    requires requires(const T& x, const T& y) {
-        {
-            e()
-        } -> std::convertible_to<T>;
-        {
-            merge(x, y)
-        } -> std::convertible_to<T>;
-    }
-class SwagDeque
-{
+template <std::semiregular T, auto e, auto merge>
+requires requires(const T& x, const T& y) {
+    {
+        e()
+    } -> std::convertible_to<T>;
+    {
+        merge(x, y)
+    } -> std::convertible_to<T>;
+}
+class SwagDeque {
 public:
     /**
      * @brief コンストラクタ
@@ -25,29 +26,26 @@ public:
     SwagDeque() : m_fronts{}, m_backs{}, m_Fronts{e()}, m_Backs{e()} {}
     /**
      * @brief pushBack
-     * 
+     *
      * @param x 追加する値
      */
-    void pushBack(const T& x)
-    {
+    auto pushBack(const T& x) -> void {
         m_backs.push_back(x);
         m_Backs.push_back(merge(m_Backs.back(), x));
     }
     /**
      * @brief pushFront
-     * 
+     *
      * @param x 追加する値
      */
-    void pushFront(const T& x)
-    {
+    auto pushFront(const T& x) -> void {
         m_fronts.push_back(x);
         m_Fronts.push_back(merge(x, m_Fronts.back()));
     }
     /**
      * @brief popBack
      */
-    void popBack()
-    {
+    auto popBack() -> void {
         assert(not empty());
         if (m_backs.empty()) {
             auto as = Vec<T>(m_fronts.begin() + 1, m_fronts.end());
@@ -63,8 +61,7 @@ public:
     /**
      * @brief popFront
      */
-    void popFront()
-    {
+    auto popFront() -> void {
         assert(not empty());
         if (m_fronts.empty()) {
             auto as = Vec<T>(m_backs.begin() + 1, m_backs.end());
@@ -79,20 +76,19 @@ public:
     }
     /**
      * @brief 数列全体の総積
-     * 
+     *
      * @return T 総積
      */
-    T foldAll() const { return merge(m_Fronts.back(), m_Backs.back()); }
+    auto foldAll() const -> T { return merge(m_Fronts.back(), m_Backs.back()); }
     /**
      * @brief 空かどうか
-     * 
+     *
      * @return true 空
      * @return false 非空
      */
-    bool empty() const { return m_backs.empty() and m_fronts.empty(); }
+    auto empty() const -> bool { return m_backs.empty() and m_fronts.empty(); }
 private:
-    void calc()
-    {
+    auto calc() -> void {
         m_Fronts = {e()};
         for (int i : rep(m_fronts.size())) { m_Fronts.push_back(merge(m_fronts[i], m_Fronts.back())); }
         m_Backs = {e()};

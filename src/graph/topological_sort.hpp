@@ -1,14 +1,14 @@
 #pragma once
-#include "../common.hpp"
+#include <optional>
+#include "../internal.hpp"
 #include "graph.hpp"
 /**
  * @brief トポロジカルソート
- * 
+ *
  * @param g 有効グラフ
  * @return Opt<Vec<int>> トポロジカル順に頂点番号をソートした列 (不可能な場合は std::nullopt)
  */
-template<typename T> Opt<Vec<int>> topologicalSort(const Graph<T>& g)
-{
+template <typename T> auto topologicalSort(const Graph<T>& g) -> Opt<Vec<int>> {
     const int N = g.V();
     Vec<int> ans;
     Vec<int> used(N, 0);

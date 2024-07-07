@@ -1,15 +1,15 @@
 // verification-helper: UNITTEST
 #include "string/morris_pratt.hpp"
+#include <cassert>
+#include "internal.hpp"
 
-void Test()
-{
+void Test() {
     Str s = "aabaabaaa";
     const auto rs = morrisPratt(s);
     assert(rs == (Vec<int>{-1, 0, 1, 0, 1, 2, 3, 4, 5, 2}));
 }
 
-int main()
-{
+int main() {
     Test();
     return 0;
 }

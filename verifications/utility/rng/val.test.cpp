@@ -1,7 +1,8 @@
 // verification-helper: UNITTEST
+#include <cassert>
+#include "internal.hpp"
 #include "utility/rng.hpp"
-void test()
-{
+void test() {
     const i64 min = -10;
     const i64 max = 10;
     LOOP (100) {

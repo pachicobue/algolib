@@ -1,17 +1,17 @@
 #pragma once
+#include <algorithm>
 #include "../../data_structure/sparse_table/static_rmq.hpp"
-#include "../../common.hpp"
+#include "../../internal.hpp"
 #include "../graph.hpp"
 /**
  * @brief LCA
  */
-template<typename C> class LowestCommonAncestor
-{
+template <typename C> class LowestCommonAncestor {
     using P = Pair<int, int>;
 public:
     /**
      * @brief コンストラクタ
-     * 
+     *
      * @param g 無向木
      * @param r 根
      */
@@ -23,8 +23,8 @@ public:
               Vec<bool> used(g.V(), false);
               Fix([&](auto dfs, const P& s) -> void {
                   const int u = s.second;
-                  used[u]     = true;
-                  m_ins[u]    = ans.size();
+                  used[u] = true;
+                  m_ins[u] = ans.size();
                   ans.push_back(s);
                   for (int v : g[u]) {
                       if (used[v]) { continue; }
@@ -34,17 +34,15 @@ public:
               })(P{0, r});
               return ans;
           }()),
-          m_rmq(m_ds)
-    {}
+          m_rmq(m_ds) {}
     /**
      * @brief LCA(u,v)
-     * 
-     * @param u 
-     * @param v 
+     *
+     * @param u
+     * @param v
      * @return int LCA(u,v)
      */
-    int operator()(int u, int v) const
-    {
+    auto operator()(int u, int v) const -> int {
         const auto [ul, vl] = std::minmax({m_ins[u], m_ins[v]});
         return m_rmq.fold(ul, vl + 1).second;
     }

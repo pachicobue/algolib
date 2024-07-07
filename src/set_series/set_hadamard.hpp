@@ -1,15 +1,15 @@
 #pragma once
-#include "../common.hpp"
+#include <bit>
+#include "../internal.hpp"
 /**
  * @brief Hadamard変換
  * @attention 実際は逆変換だけに 1/(2^n)倍 を押し付けているので注意
- * 
+ *
  * @param F 変換前の数列
  * @param rev 逆変換かどうか
  * @return Vec<T> Hadamard変換後の数列
  */
-template<typename T> Vec<T> setHadamard(const Vec<T>& F, bool rev)
-{
+template <typename T> auto setHadamard(const Vec<T>& F, bool rev) -> Vec<T> {
     const int N = (int)std::bit_ceil(F.size());
     Vec<T> nF(N);
     for (int i : rep(F.size())) { nF[i] = F[i]; }

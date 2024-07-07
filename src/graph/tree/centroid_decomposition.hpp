@@ -1,23 +1,21 @@
 #pragma once
-#include "../../common.hpp"
+#include "../../internal.hpp"
 #include "../graph.hpp"
 /**
  * @brief 重心分解
  */
-template<typename T> class CentroidDecomposition
-{
+template <typename T> class CentroidDecomposition {
 public:
     /**
      * @brief コンストラクタ
-     * 
+     *
      * @param g 無向木
      */
-    CentroidDecomposition(const Graph<T>& g) : m_cs(g.V())
-    {
+    CentroidDecomposition(const Graph<T>& g) : m_cs(g.V()) {
         const int N = g.V();
         Vec<int> szs(N, 1);
         Vec<bool> used(N, false);
-        auto sizeDfs   = Fix([&](auto self, int u, int p) -> int {
+        auto sizeDfs = Fix([&](auto self, int u, int p) -> int {
             szs[u] = 1;
             for (int v : g[u]) {
                 if (v == p or used[v]) { continue; }
@@ -35,8 +33,8 @@ public:
         });
         Fix([&](auto self, int u, int pc) -> void {
             const int tot = sizeDfs(u, -1);
-            const int c   = getCentor(u, -1, tot);
-            used[c]       = true;
+            const int c = getCentor(u, -1, tot);
+            used[c] = true;
             if (pc != -1) { m_cs.addEdge(pc, c); }
             for (int v : g[c]) {
                 if (not used[v]) { self(v, c); }
@@ -45,16 +43,16 @@ public:
     }
     /**
      * @brief 重心
-     * 
+     *
      * @return int 重心の一つ
      */
-    int center() const { return m_center; }
+    auto center() const -> int { return m_center; }
     /**
      * @brief 重心分解を表す有向木
-     * 
+     *
      * @return const Graph<>& 重心同士を結んだ有効木
      */
-    const Graph<>& centers() const { return m_cs; }
+    auto centers() const -> const Graph<>& { return m_cs; }
 private:
     int m_center;
     Graph<> m_cs;

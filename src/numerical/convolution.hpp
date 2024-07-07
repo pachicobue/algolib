@@ -1,23 +1,25 @@
 #pragma once
-#include "number_theoritic_transform.hpp"
+#include <algorithm>
+#include <cassert>
+#include "../internal.hpp"
 #include "../number/garner.hpp"
 #include "../utility/modint.hpp"
+#include "number_theoritic_transform.hpp"
 /**
  * @brief H[i]=\sum_{i=j+k}F[j]*G[k] を満たす数列H (Mod)
  * @attention NTT-Friendlyじゃない場合は 長さ(1<<24) 未満にすること
- * 
+ *
  * @tparam mint modint
- * @param F 
- * @param G 
+ * @param F
+ * @param G
  * @return Vec<mint> H[i]=\sum_{i=j+k}F[j]*G[k] を満たす数列H
  */
-template<typename mint> Vec<mint> convoluteMod(const Vec<mint>& F, const Vec<mint>& G)
-{
+template <typename mint> auto convoluteMod(const Vec<mint>& F, const Vec<mint>& G) -> Vec<mint> {
     const int LMAX = order2(mint::mod() - 1), NMAX = (1 << LMAX);
     const int A = F.size(), B = G.size();
     if (A == 0 or B == 0) { return {}; }
     const int N = A + B - 1;
-    if (std::min(A, B) <= 100) {  // AB<=(A+B)log(A+B) で計算量的に損するケースはこれで潰せる
+    if (std::ranges::min(A, B) <= 100) { // AB<=(A+B)log(A+B) で計算量的に損するケースはこれで潰せる
         Vec<mint> ans(N, 0);
         for (int i : rep(A)) {
             for (int j : rep(B)) { ans[i + j] += F[i] * G[j]; }
@@ -50,17 +52,16 @@ template<typename mint> Vec<mint> convoluteMod(const Vec<mint>& F, const Vec<min
  * @brief H[i]=\sum_{i=j+k}F[j]*G[k] を満たす数列H (符号付き整数)
  * @attention 長さ(1<<24) 未満にすること
  * @attention オーバーフローに注意
- * 
- * @param F 
- * @param G 
+ *
+ * @param F
+ * @param G
  * @return Vec<i64> H[i]=\sum_{i=j+k}F[j]*G[k] を満たす数列H
  */
-inline Vec<i64> convoluteInt(const Vec<i64>& F, const Vec<i64>& G)
-{
+inline auto convoluteInt(const Vec<i64>& F, const Vec<i64>& G) -> Vec<i64> {
     const int A = F.size(), B = G.size();
     if (A == 0 or B == 0) { return {}; }
     const int N = A + B - 1;
-    if (std::min(A, B) <= 100) {  // AB<=(A+B)log(A+B) で計算量的に損するケースはこれで潰せる
+    if (std::min(A, B) <= 100) { // AB<=(A+B)log(A+B) で計算量的に損するケースはこれで潰せる
         Vec<i64> ans(N, 0);
         for (int i : rep(A)) {
             for (int j : rep(B)) { ans[i + j] += F[i] * G[j]; }
@@ -87,14 +88,13 @@ inline Vec<i64> convoluteInt(const Vec<i64>& F, const Vec<i64>& G)
 /**
  * @brief H[i]=\sum_{i+j=k}F[j]*G[k] を満たす数列H (mod)
  * @attention NTT-Friendlyじゃない場合は 長さ(1<<24) 未満にすること
- * 
+ *
  * @tparam mint modint
- * @param F 
- * @param G 
+ * @param F
+ * @param G
  * @return Vec<mint> H[i]=\sum_{i+j=k}F[j]*G[k] を満たす数列H
  */
-template<typename mint> Vec<mint> convoluteModReverse(Vec<mint> F, const Vec<mint>& G)
-{
+template <typename mint> auto convoluteModReverse(Vec<mint> F, const Vec<mint>& G) -> Vec<mint> {
     const int A = (int)F.size(), B = (int)G.size();
     seqReverse(F);
     const auto cs = convoluteMod(F, G);
@@ -105,13 +105,12 @@ template<typename mint> Vec<mint> convoluteModReverse(Vec<mint> F, const Vec<min
 /**
  * @brief H[i]=\sum_{i+j=k}F[j]*G[k] を満たす数列H (int)
  * @attention 長さ(1<<24) 未満にすること
- * 
- * @param F 
- * @param G 
+ *
+ * @param F
+ * @param G
  * @return Vec<i64> H[i]=\sum_{i+j=k}F[j]*G[k] を満たす数列H
  */
-inline Vec<i64> convoluteIntReverse(Vec<i64> F, const Vec<i64>& G)
-{
+inline auto convoluteIntReverse(Vec<i64> F, const Vec<i64>& G) -> Vec<i64> {
     const int A = (int)F.size(), B = (int)G.size();
     seqReverse(F);
     const auto cs = convoluteInt(F, G);

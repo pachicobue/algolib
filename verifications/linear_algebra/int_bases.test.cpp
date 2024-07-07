@@ -1,10 +1,10 @@
 // verification-helper: PROBLEM https://yukicoder.me/problems/no/184
 #include "linear_algebra/int_bases.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
 
-int main()
-{
+int main() {
     const auto N = in.val<int>();
     IntBases bases;
     LOOP (N) {

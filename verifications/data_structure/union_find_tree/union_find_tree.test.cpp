@@ -1,9 +1,9 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind
 #include "data_structure/union_find_tree/union_find_tree.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
+int main() {
     const auto [N, Q] = in.tup<int, int>();
     auto uf = UnionFindTree(N);
     LOOP (Q) {

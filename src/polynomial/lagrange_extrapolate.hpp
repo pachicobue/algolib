@@ -1,15 +1,14 @@
 #pragma once
-#include "../common.hpp"
+#include "../internal.hpp"
 /**
  * @brief ラグランジュ補完
- * 
+ *
  * @tparam mint modint
  * @param ys F(0),F(1),...,F(N-1)
- * @param X 
+ * @param X
  * @return mint F(X)の値
  */
-template<typename mint> mint lagrangeExtrapolate(const Vec<mint>& ys, const mint& X)
-{
+template <typename mint> auto lagrangeExtrapolate(const Vec<mint>& ys, const mint& X) -> mint {
     const int N = ys.size();
     const int x = X.val();
     if (x < N) { return ys[x]; }

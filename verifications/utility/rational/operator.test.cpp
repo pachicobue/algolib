@@ -1,8 +1,10 @@
 // verification-helper: UNITTEST
+#include <cassert>
+#include <numeric>
+#include "internal.hpp"
 #include "utility/rational.hpp"
 #include "utility/rng.hpp"
-void negTest()
-{
+void negTest() {
     LOOP (100) {
         const auto n = rng.val(-100, 100), d = rng.val(1, 100);
         const Rational v{n, d};
@@ -10,8 +12,7 @@ void negTest()
         assert(nv.num() == -v.num() and nv.den() == v.den());
     }
 }
-void plusEqTest()
-{
+void plusEqTest() {
     LOOP (100) {
         const auto n1 = rng.val(-100, 100), d1 = rng.val(1, 100);
         const auto n2 = rng.val(-100, 100), d2 = rng.val(1, 100);
@@ -23,8 +24,7 @@ void plusEqTest()
         assert(v1.num() == n and v1.den() == d);
     }
 }
-void minusEqTest()
-{
+void minusEqTest() {
     LOOP (100) {
         const auto n1 = rng.val(-100, 100), d1 = rng.val(1, 100);
         const auto n2 = rng.val(-100, 100), d2 = rng.val(1, 100);
@@ -36,8 +36,7 @@ void minusEqTest()
         assert(v1.num() == n and v1.den() == d);
     }
 }
-void prodEqTest()
-{
+void prodEqTest() {
     LOOP (100) {
         const auto n1 = rng.val(-100, 100), d1 = rng.val(1, 100);
         const auto n2 = rng.val(-100, 100), d2 = rng.val(1, 100);
@@ -49,8 +48,7 @@ void prodEqTest()
         assert(v1.num() == n and v1.den() == d);
     }
 }
-void divEqTest()
-{
+void divEqTest() {
     LOOP (100) {
         const auto n1 = rng.val(-100, 100), d1 = rng.val(1, 100);
         const auto n2 = rng.val(1, 100), d2 = rng.val(1, 100);
@@ -62,8 +60,7 @@ void divEqTest()
         assert(v1.num() == n and v1.den() == d);
     }
 }
-void plusTest()
-{
+void plusTest() {
     LOOP (100) {
         const auto n1 = rng.val(-100, 100), d1 = rng.val(1, 100);
         const auto n2 = rng.val(-100, 100), d2 = rng.val(1, 100);
@@ -75,8 +72,7 @@ void plusTest()
         assert(v.num() == n and v.den() == d);
     }
 }
-void minusTest()
-{
+void minusTest() {
     LOOP (100) {
         const auto n1 = rng.val(-100, 100), d1 = rng.val(1, 100);
         const auto n2 = rng.val(-100, 100), d2 = rng.val(1, 100);
@@ -88,8 +84,7 @@ void minusTest()
         assert(v.num() == n and v.den() == d);
     }
 }
-void prodTest()
-{
+void prodTest() {
     LOOP (100) {
         const auto n1 = rng.val(-100, 100), d1 = rng.val(1, 100);
         const auto n2 = rng.val(-100, 100), d2 = rng.val(1, 100);
@@ -101,8 +96,7 @@ void prodTest()
         assert(v.num() == n and v.den() == d);
     }
 }
-void divTest()
-{
+void divTest() {
     LOOP (100) {
         const auto n1 = rng.val(-100, 100), d1 = rng.val(1, 100);
         const auto n2 = rng.val(1, 100), d2 = rng.val(1, 100);
@@ -114,8 +108,7 @@ void divTest()
         assert(v.num() == n and v.den() == d);
     }
 }
-void compTest()
-{
+void compTest() {
     LOOP (1000) {
         auto n1 = rng.val(-100, 100), d1 = rng.val(-100, 100);
         auto n2 = rng.val(-100, 100), d2 = rng.val(-100, 100);
@@ -134,8 +127,7 @@ void compTest()
         assert((v1 >= v2) == (x1 >= x2));
     }
 }
-int main()
-{
+int main() {
     negTest();
 
     plusEqTest();

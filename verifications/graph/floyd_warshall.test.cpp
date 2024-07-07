@@ -1,10 +1,11 @@
 // verification-helper: PROBLEM https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C
 #include "graph/floyd_warshall.hpp"
+#include "graph/graph.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
 
-int main()
-{
+int main() {
     const auto [V, E] = in.tup<int, int>();
     Graph<i64> g(V);
     LOOP (E) {

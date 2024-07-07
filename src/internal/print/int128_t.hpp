@@ -1,5 +1,6 @@
 #pragma once
 #include "../type.hpp"
+#include <algorithm>
 inline Ostream& operator<<(Ostream& os, u128 v)
 {
     Str ans;

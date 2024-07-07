@@ -1,18 +1,18 @@
 #pragma once
-#include "../common.hpp"
+#include <bit>
+#include "../internal.hpp"
 /**
  * @brief H[i]=\sum_{i=j|k && j&k==0}F[j]*G[k]
- * 
- * @param F 
- * @param G 
+ *
+ * @param F
+ * @param G
  * @return Vec<T> H[i]=\sum_{i=j|k && j&k==0}F[j]*G[k]
  */
-template<typename T> Vec<T> subsetConvolute(const Vec<T>& F, const Vec<T>& G)
-{
+template <typename T> auto subsetConvolute(const Vec<T>& F, const Vec<T>& G) -> Vec<T> {
     const int l = floorLog2((u64)std::bit_ceil(std::max(F.size(), G.size())));
     const int N = 1 << l;
-    auto nF     = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));
-    auto nG     = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));
+    auto nF = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));
+    auto nG = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));
     for (int i : rep(F.size())) { nF[i][std::popcount((u64)i)] += F[i]; }
     for (int i : rep(G.size())) { nG[i][std::popcount((u64)i)] += G[i]; }
     for (int i = 1; i < N; i <<= 1) {

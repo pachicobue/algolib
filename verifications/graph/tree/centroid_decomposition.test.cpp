@@ -1,10 +1,11 @@
 // verification-helper: PROBLEM https://yukicoder.me/problems/no/1002
 #include "graph/tree/centroid_decomposition.hpp"
+#include "graph/graph.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
 
-int main()
-{
+int main() {
     const auto [N, K] = in.tup<int, int>();
     Graph<int> g(N);
     LOOP (N - 1) {
@@ -12,7 +13,7 @@ int main()
         g.addEdge(u, v, c, true);
     }
     CentroidDecomposition centros(g);
-    const int cr  = centros.center();
+    const int cr = centros.center();
     const auto cg = centros.centers();
     Vec<bool> used(N, false);
     using P = Pair<int, int>;
@@ -22,11 +23,11 @@ int main()
         i64 ans = 0;
         i64 dbl = 0;
         for (const auto& [k, n] : dp1) {
-            ans += n * (dp3.at(k) - n);  // 1色x2色
-            dbl += n * (one - n);        // 1色x1色
+            ans += n * (dp3.at(k) - n); // 1色x2色
+            dbl += n * (one - n);       // 1色x1色
         }
         for (UNUSED const auto& [_, n] : dp2) {
-            ans += n * (n - 1) / 2;  // 2色x2色
+            ans += n * (n - 1) / 2; // 2色x2色
         }
         return ans + dbl / 2;
     };
@@ -64,7 +65,7 @@ int main()
                     const int v = e.to;
                     if (v == p or used[v]) { continue; }
                     const int k = e.cost;
-                    auto nks    = ks;
+                    auto nks = ks;
                     if (ks.first == k or ks.second == k) {
                         ;
                     } else if (ks.second == INF<int>) {

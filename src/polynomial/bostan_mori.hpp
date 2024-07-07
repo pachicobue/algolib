@@ -1,18 +1,19 @@
 #pragma once
-#include "polynomial.hpp"
+#include <cassert>
 #include "../algorithm/berlekamp_massey.hpp"
+#include "../internal.hpp"
+#include "polynomial.hpp"
 /**
  * @brief Bostan-Mori algorithm
  *        G(x)*H(x)=F(x) (mod x^(N+1)) を満たすH(x)の x^N係数
- * 
- * @tparam mint 
- * @param F 
- * @param G 
+ *
+ * @tparam mint
+ * @param F
+ * @param G
  * @param N 指数
  * @return mint G(x)*H(x)=F(x) (mod x^(N+1)) を満たすH(x)の x^N係数
  */
-template<typename mint> mint bostanMori(Polynomial<mint> F, Polynomial<mint> G, i64 N)
-{
+template <typename mint> auto bostanMori(Polynomial<mint> F, Polynomial<mint> G, i64 N) -> mint {
     assert(not G.isZero());
     const int ford = F.order(), gord = G.order();
     assert(gord <= ford);
@@ -33,13 +34,12 @@ template<typename mint> mint bostanMori(Polynomial<mint> F, Polynomial<mint> G, 
 
 /**
  * @brief 線形回帰数列AsのN項目
- * 
+ *
  * @param As 線形回帰数列
- * @param N 
+ * @param N
  * @return mint AsのN項目
  */
-template<typename mint> mint guessNthTerm(const Vec<mint>& As, i64 N)
-{
+template <typename mint> auto guessNthTerm(const Vec<mint>& As, i64 N) -> mint {
     const Polynomial<mint> G{berlekampMassey(As)};
     const int L = G.size();
     if (L == 1) { return As[0]; }

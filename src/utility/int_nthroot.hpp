@@ -1,15 +1,16 @@
 #pragma once
-#include "../common.hpp"
+#include <cassert>
+#include "../internal/irange.hpp"
+#include "../internal/type.hpp"
 #include "bin_search.hpp"
 /**
  * @brief floor(A^(1/K))
- * 
+ *
  * @param A 非負整数 (u64なので注意)
  * @param K 非負整数
  * @return u64 floor(A^(1/K))
  */
-constexpr u64 intNthRoot(u64 A, int K)
-{
+constexpr auto intNthRoot(u64 A, int K) -> u64 {
     assert(K > 0);
     if (A == 0) { return 0; }
     if (K == 1) { return A; }
@@ -25,8 +26,8 @@ constexpr u64 intNthRoot(u64 A, int K)
 }
 /**
  * @brief floor(sqrt(A))
- * 
+ *
  * @param A 非負整数 (u64なので注意)
  * @return u64 floor(sqrt(A))
  */
-constexpr u64 intSqrt(u64 A) { return intNthRoot(A, 2); }
+constexpr auto intSqrt(u64 A) -> u64 { return intNthRoot(A, 2); }

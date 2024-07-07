@@ -1,20 +1,23 @@
 #pragma once
-#include "../common.hpp"
+#include <cassert>
+#include <cmath>
+#include <optional>
+#include "../graph/graph.hpp"
 #include "../graph/strongly_connected_components.hpp"
-#include "../utility/md_vec.hpp"
+#include "../internal.hpp"
 #include "../utility/dynamic_bitset.hpp"
+#include "../utility/md_vec.hpp"
 
 /**
  * @brief 2-SAT ソルバー
  * @attention 変数X_i の指定は 1-indexed (i=1,2,...,N)
  *            項X_i は i で、項(\lnot X_i) は -i で指定
  */
-class TwoSat
-{
+class TwoSat {
 public:
     /**
      * @brief コンストラクタ
-     * 
+     *
      * @param N 変数の数
      */
     TwoSat(int N) : m_X{N}, m_V{N * 2}, m_g{m_V} {}
@@ -24,8 +27,7 @@ public:
      * @param x 項1
      * @param y 項2
      */
-    void addClause(int x, int y)
-    {
+    auto addClause(int x, int y) -> void {
         assert(x != 0 and std::abs(x) <= m_X);
         assert(y != 0 and std::abs(y) <= m_X);
         m_clauses.push_back({x, y});
@@ -34,11 +36,10 @@ public:
     }
     /**
      * @brief 2-SATの解を一つ返す
-     * 
+     *
      * @return Opt<Vec<bool>> 解 (解なしの場合は std::nullopt)
      */
-    Opt<Vec<bool>> findSolution() const
-    {
+    auto findSolution() const -> Opt<Vec<bool>> {
         Vec<bool> ts(m_X + 1);
         const StronglyConnectedComponents scc{m_g};
         for (int x : irange(1, m_X + 1)) {
@@ -50,20 +51,19 @@ public:
     }
     /**
      * @brief 2-SATの解を列挙する
-     * 
+     *
      * @param K 列挙の打ち切り個数
      * @return Vec<Vec<bool>> 解の列
      */
-    Vec<Vec<bool>> enumSolutions(int K = -1) const
-    {
+    auto enumSolutions(int K = -1) const -> Vec<Vec<bool>> {
         const StronglyConnectedComponents scc{m_g};
-        const int C       = scc.cnum();
+        const int C = scc.cnum();
         const auto groups = scc.groups();
         Vec<int> antis(C);
         for (int c : rep(C)) {
-            const int u  = groups[c].back();
+            const int u = groups[c].back();
             const int nu = (u < m_X ? u + m_X : u - m_X);
-            antis[c]     = scc[nu];
+            antis[c] = scc[nu];
             if (antis[c] == c) { return {}; }
         }
         auto belows = mdVec({C}, DynamicBitset{C});

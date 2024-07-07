@@ -1,10 +1,10 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/enumerate_palindromes
 #include "string/manacher.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
 
-int main()
-{
+int main() {
     auto S = in.val<Str>();
     const int N = S.size();
     Str T;

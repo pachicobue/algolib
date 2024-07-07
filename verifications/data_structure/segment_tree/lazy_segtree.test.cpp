@@ -1,14 +1,14 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum
 #include "data_structure/segment_tree/lazy_segtree.hpp"
+#include "internal.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
 
-int main()
-{
+int main() {
     using mint = modint_998244353;
-    using T    = Pair<mint, mint>;
-    using F    = Pair<mint, mint>;
+    using T = Pair<mint, mint>;
+    using F = Pair<mint, mint>;
 
     const auto [N, Q] = in.tup<int, int>();
     Vec<Pair<mint, int>> as(N, {0, 1});

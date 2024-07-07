@@ -1,28 +1,26 @@
 #pragma once
-#include "type.hpp"
+#include <cassert>
 #include "macro.hpp"
+#include "type.hpp"
 /**
  * @brief 等差数列
  */
-class irange
-{
+class irange {
 private:
-    struct itr
-    {
+    struct itr {
         constexpr itr(i64 start, i64 end, i64 step) : m_cnt{start}, m_step{step}, m_end{end} {}
-        constexpr auto operator!=(const itr&) const -> bool
-        {
+        constexpr auto operator!=(const itr &) const -> bool {
             return (m_step > 0 ? m_cnt < m_end : m_end < m_cnt);
-        }  // endとの比較のみなので手抜き
+        } // endとの比較のみなので手抜き
         constexpr auto operator*() const -> i64 { return m_cnt; }
-        constexpr auto operator++() -> itr& { return m_cnt += m_step, *this; }
+        constexpr auto operator++() -> itr & { return m_cnt += m_step, *this; }
         i64 m_cnt, m_step, m_end;
     };
     i64 m_start, m_end, m_step;
 public:
     /**
      * @brief 等差数列
-     * 
+     *
      * @param start 初項
      * @param end
      * @param step 公差
@@ -32,14 +30,14 @@ public:
     /**
      * @brief begin
      * @attention range-based forからのみ呼び出される想定
-     * 
+     *
      * @return itr begin
      */
     constexpr auto begin() const -> itr { return itr{m_start, m_end, m_step}; }
     /**
      * @brief end
      * @attention range-based forからのみ呼び出される想定
-     * 
+     *
      * @return itr end
      */
     constexpr auto end() const -> itr { return itr{m_start, m_end, m_step}; }

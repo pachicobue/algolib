@@ -1,9 +1,9 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/persistent_unionfind
 #include "data_structure/union_find_tree/rollback_union_find_tree.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
+int main() {
     const auto [N, Q] = in.tup<int, int>();
     Vec<int> ts(Q), ks(Q), us(Q), vs(Q);
     Vec<Vec<Pair<int, Pair<int, int>>>> g(Q + 1);
@@ -11,7 +11,9 @@ int main()
     for (int q : rep(Q)) {
         std::tie(ts[q], ks[q], us[q], vs[q]) = in.tup<int, int, int, int>(0, -1, 0, 0);
         if (ts[q] == 0) {
-            g[ks[q]].push_back({q + 1, {us[q], vs[q]}});
+            g[ks[q]].push_back({
+                q + 1, {us[q], vs[q]}
+            });
         } else {
             qss[ks[q]].push_back(q);
         }

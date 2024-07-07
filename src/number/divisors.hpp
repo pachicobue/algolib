@@ -1,13 +1,12 @@
 #pragma once
-#include "../common.hpp"
+#include "../internal.hpp"
 /**
  * @brief 約数列挙
- * 
- * @param N 
+ *
+ * @param N
  * @return Vec<i64> Nの約数列
  */
-inline Vec<i64> divisors(const i64 N)
-{
+inline auto divisors(const i64 N) -> Vec<i64> {
     Vec<i64> head, tail;
     for (i64 i = 1; i * i <= N; i++) {
         if (N % i == 0) {

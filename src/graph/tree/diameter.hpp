@@ -1,14 +1,13 @@
 #pragma once
-#include "../../common.hpp"
+#include "../../internal.hpp"
 #include "../graph.hpp"
 /**
  * @brief 木の直径
- * 
+ *
  * @param g 無向木
  * @return Pair<T, Vec<int>> {直径,頂点列}
  */
-template<typename T> Pair<T, Vec<int>> diameter(const Graph<T>& g)
-{
+template <typename T> auto diameter(const Graph<T>& g) -> Pair<T, Vec<int>> {
     auto ds = g.depths(0), ps = g.parents(0);
     const int s = seqMaxInd(ds);
     ds = g.depths(s), ps = g.parents(s);

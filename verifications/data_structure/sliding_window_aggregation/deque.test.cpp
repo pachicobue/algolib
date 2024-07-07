@@ -1,12 +1,13 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/deque_operate_all_composite
 #include "data_structure/sliding_window_aggregation/deque.hpp"
+#include <utility>
+#include "internal.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
-    using mint   = modint_998244353;
-    using T      = std::pair<mint, mint>;
+int main() {
+    using mint = modint_998244353;
+    using T = std::pair<mint, mint>;
     const auto Q = in.val<int>();
 
     auto deque = SwagDeque<T, FConst(T{1, 0}), [](const T& x1, const T& x2) {

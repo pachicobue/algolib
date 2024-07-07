@@ -1,14 +1,15 @@
 // verification-helper: UNITTEST
+#include <cassert>
+#include <numeric>
+#include "internal.hpp"
 #include "utility/rational.hpp"
 #include "utility/rng.hpp"
-void emptyTest()
-{
-    Rational v;
+void emptyTest() {
+    Rational<i64> v;
     assert(v.num() == 0);
     assert(v.den() == 1);
 }
-void int1Test()
-{
+void int1Test() {
     LOOP (100) {
         const auto n = rng.val(-100, 100);
         Rational v{n};
@@ -16,8 +17,7 @@ void int1Test()
         assert(v.den() == 1);
     }
 }
-void int2Test()
-{
+void int2Test() {
     LOOP (100) {
         auto n = rng.val(-100, 100);
         auto d = rng.val(-100, 100);
@@ -30,8 +30,7 @@ void int2Test()
         assert(v.den() == d);
     }
 }
-int main()
-{
+int main() {
     emptyTest();
     int1Test();
     int2Test();

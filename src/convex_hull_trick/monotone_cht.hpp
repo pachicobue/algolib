@@ -1,19 +1,20 @@
 #pragma once
-#include "../common.hpp"
+#include <cassert>
+#include <optional>
+#include <type_traits>
+#include "../internal.hpp"
 /**
  * @brief 傾きやクエリ座標が単調な場合のCHT
  * @attention 以下の単調性を要求する
  *   - 追加される直線の傾きは単調減少
  *   - クエリされる座標は単調増加
- * 
+ *
  * @tparam T 傾き/切片/クエリ座標の型
  */
-template<typename T> class MonotoneCHT
-{
-    using L                    = Pair<T, T>;
+template <typename T> class MonotoneCHT {
+    using L = Pair<T, T>;
     static constexpr auto Null = std::nullopt;
-    static bool popAble(const L& l1, const L& l2, const L& l3)
-    {
+    static auto popAble(const L& l1, const L& l2, const L& l3) -> bool {
         const auto& [a1, b1] = l1;
         const auto& [a2, b2] = l2;
         const auto& [a3, b3] = l3;
@@ -24,8 +25,7 @@ template<typename T> class MonotoneCHT
             return (a2 - a3) * (b2 - b1) >= (a1 - a2) * (b3 - b2);
         }
     }
-    static bool comp(const L& l1, const L& l2, Opt<T> x)
-    {
+    static auto comp(const L& l1, const L& l2, Opt<T> x) -> bool {
         const auto& [a1, b1] = l1;
         const auto& [a2, b2] = l2;
         assert(a1 > a2);
@@ -44,11 +44,10 @@ public:
     /**
      * @brief 直線追加
      * @attention 以前追加した直線の傾き以下である必要あり
-     * 
+     *
      * @param l 直線
      */
-    void addLine(const L& l)
-    {
+    auto addLine(const L& l) -> void {
         if (m_lines.empty()) { return m_lines.push_back(l), void(); }
         if (m_lines.back().first == l.first) {
             if (m_lines.back().second <= l.second) { return; }
@@ -63,12 +62,11 @@ public:
     /**
      * @brief 座標xで最小値を取る直線を返す
      * @attention 以前クエリした座標以上である必要あり
-     * 
+     *
      * @param x クエリ座標
      * @return Opt<L> 最小値を取る直線 (存在しなければNull)
      */
-    Opt<L> minLine(T x)
-    {
+    auto minLine(T x) -> Opt<L> {
         if (m_lines.empty()) { return Null; }
         assert(m_prev_x == Null or m_prev_x.value() <= x);
         m_prev_x = x;

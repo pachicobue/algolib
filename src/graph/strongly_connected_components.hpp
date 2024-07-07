@@ -1,19 +1,18 @@
 #pragma once
-#include "../common.hpp"
+#include <cassert>
+#include "../internal.hpp"
 #include "graph.hpp"
 /**
  * @brief 強連結成分分解
  */
-template<typename T> class StronglyConnectedComponents
-{
+template <typename T> class StronglyConnectedComponents {
 public:
     /**
      * @brief コンストラクタ
-     * 
+     *
      * @param g 有向グラフ
      */
-    StronglyConnectedComponents(const Graph<T>& g) : m_V(g.V()), m_cnum{0}, m_cs(m_V, -1)
-    {
+    StronglyConnectedComponents(const Graph<T>& g) : m_V(g.V()), m_cnum{0}, m_cs(m_V, -1) {
         const int N = g.V();
         Graph rg(N);
         for (int u : rep(N)) {
@@ -21,7 +20,7 @@ public:
         }
         Vec<int> st;
         Vec<bool> used(N, false);
-        auto dfs  = Fix([&](auto self, int u) -> void {
+        auto dfs = Fix([&](auto self, int u) -> void {
             used[u] = true;
             for (int v : g[u]) {
                 if (not used[v]) { self(v); }
@@ -48,24 +47,23 @@ public:
     }
     /**
      * @brief 頂点が属する成分番号
-     * 
+     *
      * @param v 頂点番号
      * @return int 成分番号
      */
-    int operator[](int u) const { return assert(0 <= u and u < m_V), m_cs[u]; }
+    auto operator[](int u) const -> int { return assert(0 <= u and u < m_V), m_cs[u]; }
     /**
      * @brief 強連結成分数
-     * 
+     *
      * @return int 成分数
      */
-    int cnum() const { return m_cnum; }
+    auto cnum() const -> int { return m_cnum; }
     /**
      * @brief 各成分の頂点集合
-     * 
+     *
      * @return Vec<Vec<int>> 頂点番号列
      */
-    Vec<Vec<int>> groups() const
-    {
+    auto groups() const -> Vec<Vec<int>> {
         Vec<Vec<int>> iss(m_V);
         for (int i : rep(m_V)) { iss[m_cs[i]].push_back(i); }
         return iss;

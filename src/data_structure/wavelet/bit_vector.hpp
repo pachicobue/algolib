@@ -1,72 +1,68 @@
 #pragma once
-#include "../../common.hpp"
+#include <bit>
+#include <cassert>
+#include "../../internal.hpp"
 /**
  * @brief BitVector
  */
-class BitVector
-{
+class BitVector {
     static constexpr int B = 64;
-    static int rank(u64 v, int i)
-    {
+    static constexpr auto rank(u64 v, int i) -> int {
         if (i == 0) { return 0; }
         return std::popcount(v << (B - i));
     }
-    struct Block
-    {
+    struct Block {
         u64 bits = 0;
-        int rank = 0;  // ブロック先頭までに1が何個あるか
+        int rank = 0; // ブロック先頭までに1が何個あるか
     };
 public:
     /**
      * @brief コンストラクタ
-     * 
+     *
      * @param n bit長
      */
     BitVector(int n) : m_size{n}, m_bn{n / B + 1}, m_blocks(m_bn) {}
     /**
      * @brief i bit目を立てる
-     * 
-     * @param i 
+     *
+     * @param i
      */
-    void set(int i)
-    {
+    auto set(int i) -> void {
         assert(0 <= i and i < m_size);
         m_blocks[i / B].bits |= (1_u64 << (i % B));
         m_calced = false;
     }
     /**
      * @brief i bit目未満の 0 の個数
-     * 
-     * @param i 
+     *
+     * @param i
      * @return int 0 の個数
      */
-    int rank0(int i) { return i - rank1(i); }
+    auto rank0(int i) -> int { return i - rank1(i); }
     /**
      * @brief i bit目未満の 1 の個数
-     * 
-     * @param i 
+     *
+     * @param i
      * @return int 1 の個数
      */
-    int rank1(int i)
-    {
+    auto rank1(int i) -> int {
         assert(0 <= i and i <= m_size);
         return calc(), m_blocks[i / B].rank + rank(m_blocks[i / B].bits, i % B);
     }
     /**
      * @brief 0 の個数
-     * 
+     *
      * @return int 0 の個数
      */
-    int zero() { return calc(), m_zero; }
+    auto zero() -> int { return calc(), m_zero; }
     /**
      * @brief 1 の個数
-     * 
+     *
      * @return int 1 の個数
      */
-    int one() { return m_size - zero(); }
+    auto one() -> int { return m_size - zero(); }
 private:
-    void calc()
-    {
+    auto calc() -> void {
         if (not m_calced) {
             m_zero = m_size;
             for (int i : irange(1, m_bn)) {
@@ -82,5 +78,5 @@ private:
     int m_bn;
     Vec<Block> m_blocks;
     bool m_calced = false;
-    int m_zero    = 0;
+    int m_zero = 0;
 };

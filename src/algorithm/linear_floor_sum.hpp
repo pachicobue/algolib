@@ -1,17 +1,17 @@
 #pragma once
-#include "../common.hpp"
+#include <cassert>
+#include "../internal.hpp"
 /**
  * @brief \sum_{0<=i<N}floor((Ai+B)/C)
  * @attention オーバーフロー対策は無いので注意
- * 
- * @param N 
- * @param A 
- * @param B 
- * @param C 
+ *
+ * @param N
+ * @param A
+ * @param B
+ * @param C
  * @return i64 \sum_{0<=i<N}floor((Ai+B)/C)
  */
-inline i64 linearFloorSum(i64 N, i64 A, i64 B, i64 C)
-{
+inline auto linearFloorSum(i64 N, i64 A, i64 B, i64 C) -> i64 {
     assert(C != 0);
     if (N == 0) { return 0; }
     if (C < 0) { A = -A, B = -B, C = -C; }

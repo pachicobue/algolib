@@ -1,9 +1,9 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/two_sat
 #include "algorithm/two_sat.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
+int main() {
     const auto [_, _, N, M] = in.tup<Str, Str, int, int>();
     TwoSat twoSat(N);
     LOOP (M) {

@@ -1,9 +1,13 @@
 // verification-helper: UNITTEST
+#include <cassert>
+#include <chrono>
+#include <cmath>
+#include <thread>
+#include "internal.hpp"
 #include "utility/stopwatch.hpp"
-void test()
-{
+void test() {
     constexpr int DELTA = 10;
-    constexpr int ERR   = 1;
+    constexpr int ERR = 1;
     StopWatch sw;
     LOOP (10) {
         std::this_thread::sleep_for(std::chrono::milliseconds(DELTA));

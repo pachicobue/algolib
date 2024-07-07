@@ -1,15 +1,17 @@
 #pragma once
-#include "../common.hpp"
+#include <algorithm>
+#include <cassert>
+#include <concepts>
+#include "../internal.hpp"
 /**
  * @brief 拡張ユークリッド互除法
  * @attention x はあり得る中で最小の非負整数(b != 0 の場合)
- * 
- * @param a 
- * @param b 
+ *
+ * @param a
+ * @param b
  * @return Pair<i64, i64> ax+by=gcd(a,b) を満たす {x,y}
  */
-constexpr Pair<i64, i64> extgcd(i64 a, i64 b)
-{
+constexpr auto extgcd(i64 a, i64 b) -> Pair<i64, i64> {
     assert(a != 0 or b != 0);
     const i64 A = ABS(a), B = ABS(b);
     if (A == B) { return {0, (b < 0 ? -1 : 1)}; }
@@ -29,9 +31,9 @@ constexpr Pair<i64, i64> extgcd(i64 a, i64 b)
 /**
  * @brief MOD逆元 (互いに素じゃなくても使える)
  * @attention 最小の非負整数を返す
- * 
- * @param a 
- * @param mod 
+ *
+ * @param a
+ * @param mod
  * @return i64 ax=gcd(a,M) mod M を満たす x
  */
-constexpr i64 inverseMod(i64 a, i64 mod) { return assert(mod > 0 and a % mod != 0), extgcd(a % mod, mod).first; }
+constexpr auto inverseMod(i64 a, i64 mod) -> i64 { return assert(mod > 0 and a % mod != 0), extgcd(a % mod, mod).first; }

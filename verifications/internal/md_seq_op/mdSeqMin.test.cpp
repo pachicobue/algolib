@@ -1,13 +1,14 @@
 // verification-helper: UNITTEST
+#include <cassert>
+#include "internal/chminmax.hpp"
+#include "internal/constant.hpp"
 #include "internal/irange.hpp"
 #include "internal/md_seq_op.hpp"
-#include "internal/chminmax.hpp"
-#include "utility/md_vec.hpp"
+#include "internal/type.hpp"
 #include "utility/rng.hpp"
-template<typename Vssss> void lessTest()
-{
+template <typename Vssss> void lessTest() {
     Vssss xssss{
-        {{{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}},          {{11, 12, 13, 14, 15}, {16, 17, 18, 19, 20}}},
+        {         {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}}, {{11, 12, 13, 14, 15}, {16, 17, 18, 19, 20}}},
         {{{21, 22, 23, 24, 25}, {26, 27, 28, 29, 30}}, {{31, 32, 33, 34, 35}, {36, 37, 38, 39, 40}}},
         {{{41, 42, 43, 44, 45}, {46, 47, 48, 49, 50}}, {{51, 52, 53, 54, 55}, {56, 57, 58, 59, 60}}}
     };
@@ -24,10 +25,9 @@ template<typename Vssss> void lessTest()
     }
     assert(mdSeqMin(xssss) == M);
 }
-template<typename Vssss> void greaterTest()
-{
+template <typename Vssss> void greaterTest() {
     Vssss xssss{
-        {{{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}},          {{11, 12, 13, 14, 15}, {16, 17, 18, 19, 20}}},
+        {         {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}}, {{11, 12, 13, 14, 15}, {16, 17, 18, 19, 20}}},
         {{{21, 22, 23, 24, 25}, {26, 27, 28, 29, 30}}, {{31, 32, 33, 34, 35}, {36, 37, 38, 39, 40}}},
         {{{41, 42, 43, 44, 45}, {46, 47, 48, 49, 50}}, {{51, 52, 53, 54, 55}, {56, 57, 58, 59, 60}}}
     };
@@ -44,8 +44,7 @@ template<typename Vssss> void greaterTest()
     }
     assert(mdSeqMin(xssss, Gt<int>{}) == M);
 }
-int main()
-{
+int main() {
     lessTest<int[3][2][2][5]>();
     lessTest<Vec<Vec<Vec<Vec<int>>>>>();
     lessTest<Deq<Deq<Deq<Deq<int>>>>>();

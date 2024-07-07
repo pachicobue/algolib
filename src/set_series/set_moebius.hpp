@@ -1,15 +1,15 @@
 #pragma once
-#include "../common.hpp"
+#include <bit>
+#include "../internal.hpp"
 /**
  * @brief 集合のメビウス変換
- * 
- * @param F 
+ *
+ * @param F
  * @param subset 和を取る方向
  * @retval nF[i]=\sum_{j \subset i}F[j]*(-1)^|i^j| (subset == Trueの場合)
  * @retval nF[i]=\sum_{i \subset j}F[j]*(-1)^|i^j| (subset == Falseの場合)
  */
-template<typename T> Vec<T> setMoebius(const Vec<T>& F, bool subset)
-{
+template <typename T> auto setMoebius(const Vec<T>& F, bool subset) -> Vec<T> {
     const int N = (int)std::bit_ceil(F.size());
     Vec<T> nF(N);
     for (int i : rep(F.size())) { nF[i] = F[i]; }

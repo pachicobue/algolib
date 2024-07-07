@@ -1,8 +1,10 @@
 // verification-helper: UNITTEST
 #include "graph/tree/level_ancestor.hpp"
+#include <cassert>
+#include "graph/graph.hpp"
+#include "internal.hpp"
 
-void Test()
-{
+void Test() {
     Graph g(10);
     g.addEdge(1, 2, true);
     g.addEdge(2, 0, true);
@@ -51,8 +53,7 @@ void Test()
     assert(la(9, 0) == 9);
     assert(la(9, 1) == 1);
 }
-int main()
-{
+int main() {
     Test();
     return 0;
 }

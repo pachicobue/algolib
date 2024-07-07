@@ -1,14 +1,16 @@
 #pragma once
-#include "../../common.hpp"
+#include <algorithm>
+#include <bit>
+#include <cassert>
+#include "../../internal.hpp"
 /**
  * @brief 2次元Fenwick Tree
  */
-template<typename T> class FenwickTree2D
-{
+template <typename T> class FenwickTree2D {
 public:
     /**
      * @brief コンストラクタ
-     * 
+     *
      * @param xss ベースとなる2次元数列
      */
     FenwickTree2D(const Vec<Vec<T>>& xss)
@@ -16,8 +18,7 @@ public:
           m_wsize(xss.front().size()),
           m_hcap((int)std::bit_ceil((u64)m_hsize)),
           m_wcap((int)std::bit_ceil((u64)m_wsize)),
-          m_xss(m_hcap + 1, Vec<T>(m_wcap + 1, T{}))
-    {
+          m_xss(m_hcap + 1, Vec<T>(m_wcap + 1, T{})) {
         for (int i : rep(m_hsize)) { std::ranges::copy(xss[i], m_xss[i + 1].begin() + 1); }
         for (int i : irange(1, m_hcap)) {
             for (int j : irange(1, m_wcap)) { m_xss[i][j + (j & -j)] += m_xss[i][j]; }
@@ -28,7 +29,7 @@ public:
     }
     /**
      * @brief コンストラクタ
-     * 
+     *
      * @param N 縦
      * @param M 横
      * @param x 初期値
@@ -36,13 +37,12 @@ public:
     FenwickTree2D(int N, int M, const T& x = T{}) : FenwickTree2D{Vec<Vec<T>>(N, Vec<T>(M, x))} {}
     /**
      * @brief 一点加算 X[i][j] <- X[i][j]+x
-     * 
-     * @param i 
-     * @param j 
+     *
+     * @param i
+     * @param j
      * @param x 加算値
      */
-    void add(int i, int j, const T& x)
-    {
+    auto add(int i, int j, const T& x) -> void {
         assert(0 <= i and i < m_hsize);
         assert(0 <= j and j < m_wsize);
         for (int iind = i + 1; iind <= m_hcap; iind += iind & (-iind)) {
@@ -51,13 +51,12 @@ public:
     }
     /**
      * @brief 2次元累積和 \sum_{0<=i<isup}\sum_{0<=j<jsup}X[i][j]
-     * 
-     * @param isup 
-     * @param jsup 
+     *
+     * @param isup
+     * @param jsup
      * @return T 2次元累積和
      */
-    T sum(int isup, int jsup) const
-    {
+    auto sum(int isup, int jsup) const -> T {
         assert(0 <= isup and isup <= m_hsize);
         assert(0 <= jsup and jsup <= m_wsize);
         T sum{};
@@ -68,22 +67,20 @@ public:
     }
     /**
      * @brief 矩形領域和 \sum_{imin<=i<isup}\sum_{jmin<=j<jsup}X[i][j] を求める
-     * 
-     * @param imin 
-     * @param isup 
-     * @param jmin 
-     * @param jsup 
+     *
+     * @param imin
+     * @param isup
+     * @param jmin
+     * @param jsup
      * @return T 矩形領域和
      */
-    T sum(int imin, int isup, int jmin, int jsup) const
-    {
+    auto sum(int imin, int isup, int jmin, int jsup) const -> T {
         assert(0 <= imin and imin <= isup and isup <= m_hsize);
         assert(0 <= jmin and jmin <= jsup and jsup <= m_wsize);
         return sum(isup, jsup) - sum(isup, jmin) - sum(imin, jsup) + sum(imin, jmin);
     }
 #ifdef HOGEPACHI
-    friend Ostream& operator<<(Ostream& os, const FenwickTree2D& fw)
-    {
+    friend auto operator<<(Ostream& os, const FenwickTree2D& fw) -> Ostream& {
         os << "[";
         for (int i : rep(fw.m_hsize)) {
             os << "[";

@@ -1,14 +1,15 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/queue_operate_all_composite
 #include "data_structure/sliding_window_aggregation/queue.hpp"
+#include <utility>
+#include "internal.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
-    using mint   = modint_998244353;
-    using T      = std::pair<mint, mint>;
+int main() {
+    using mint = modint_998244353;
+    using T = std::pair<mint, mint>;
     const auto Q = in.val<int>();
-    auto queue   = SwagQueue<T, FConst(T{1, 0}), [](const T& x1, const T& x2) {
+    auto queue = SwagQueue<T, FConst(T{1, 0}), [](const T& x1, const T& x2) {
         return T{x2.first * x1.first, x2.first * x1.second + x2.second};
     }>{};
     LOOP (Q) {

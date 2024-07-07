@@ -1,9 +1,10 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/tree_diameter
 #include "graph/tree/diameter.hpp"
+#include "graph/graph.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
+int main() {
     const auto N = in.val<int>();
     Graph<i64> g(N);
     LOOP (N - 1) {

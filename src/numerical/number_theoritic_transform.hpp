@@ -1,27 +1,27 @@
 #pragma once
-#include "../common.hpp"
+#include <bit>
+#include <cassert>
+#include "../internal.hpp"
 #include "../number/primitive_root.hpp"
 /**
  * @brief Number Theoretic Transform
- * 
+ *
  * @tparam mint modint (NTT friendlyな素数)
  */
-template<typename mint> class NumberTheoriticTransform
-{
+template <typename mint> class NumberTheoriticTransform {
 private:
-    static constexpr u64 mod() { return mint::mod(); }
-    static constexpr u64 root() { return primitiveRootFast(mint::mod()); }
-    static constexpr int order() { return order2(mint::mod() - 1); }
+    static constexpr auto mod() -> u64 { return mint::mod(); }
+    static constexpr auto root() -> u64 { return primitiveRootFast(mint::mod()); }
+    static constexpr auto order() -> int { return order2(mint::mod() - 1); }
 public:
     /**
      * @brief 畳み込み
-     * 
-     * @param F 
-     * @param G 
+     *
+     * @param F
+     * @param G
      * @return Vec<mint> 畳み込み結果
      */
-    static Vec<mint> convolute(Vec<mint> F, Vec<mint> G)
-    {
+    static auto convolute(Vec<mint> F, Vec<mint> G) -> Vec<mint> {
         const int A = F.size(), B = G.size();
         const int C = A + B - 1;
         const int N = (int)std::bit_ceil((u64)C);
@@ -33,17 +33,16 @@ public:
     }
     /**
      * @brief NTTを行う
-     * 
+     *
      * @param [in,out] F 変換する数列 (変換結果もここに入る)
      * @param rev 逆変換か
      */
-    static void transform(Vec<mint>& F, bool rev)
-    {
+    static auto transform(Vec<mint>& F, bool rev) -> void {
         const int N = F.size();
         assert((N & (N - 1)) == 0);
         assert(N <= (1 << order()));
         if (N == 1) { return; }
-        const int L        = floorLog2(N);
+        const int L = floorLog2(N);
         const auto l_range = (rev ? irange(1, L + 1, 1) : irange(L, 0, -1));
         for (int l : l_range) {
             const int H = (1 << l), B = N / H;
@@ -64,9 +63,8 @@ public:
         }
     }
 private:
-    static mint zeta(int i, bool rev)
-    {
-        static Vec<mint> zs, izs;  // zs[i] = 1の2^i乗根, izs[i] = zs[i]の逆元
+    static auto zeta(int i, bool rev) -> mint {
+        static Vec<mint> zs, izs; // zs[i] = 1の2^i乗根, izs[i] = zs[i]の逆元
         if (zs.empty()) {
             const auto MOD = mod(), ROOT = root();
             const auto LMAX = order();

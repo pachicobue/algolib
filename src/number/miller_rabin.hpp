@@ -1,22 +1,21 @@
 #pragma once
-#include "../common.hpp"
+#include "../internal.hpp"
 #include "../utility/modint.hpp"
 /**
  * @brief Miller Rabin
- * 
+ *
  * @param X 素数判定する値
  * @param as テスト用シード数列
  * @return true Xが素数
  * @return false Xが合成数
  */
-template<int N> constexpr bool millerRabin(u64 X, u64 const (&as)[N])
-{
+template <int N> constexpr auto millerRabin(u64 X, u64 const (&as)[N]) -> bool {
     using mint = modint_dynamic_reserved<81165>;
     mint::setMod(X);
     const u64 d = (X - 1) >> order2(X - 1);
     for (u64 a : as) {
         if (X <= a) { break; }
-        u64 s  = d;
+        u64 s = d;
         mint x = mint(a).pow(s);
         while (x != 1 and x != X - 1 and s != X - 1) { s *= 2, x *= x; }
         if (x != X - 1 and s % 2 == 0) { return false; }
@@ -26,13 +25,12 @@ template<int N> constexpr bool millerRabin(u64 X, u64 const (&as)[N])
 /**
  * @brief 素数判定
  * @see https://zenn.dev/kaki_xxx/articles/40a92b43200215
- * 
- * @param X 
+ *
+ * @param X
  * @return true Xが素数
  * @return false Xが合成数
  */
-constexpr bool isPrime(u64 X)
-{
+constexpr auto isPrime(u64 X) -> bool {
     if (X == 1) { return false; }
     if (X % 2 == 0) { return X == 2; }
     if (X < 4759123141_u64) {

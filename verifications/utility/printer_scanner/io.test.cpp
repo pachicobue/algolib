@@ -1,10 +1,9 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/many_aplusb
-#include "common.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
 
-int main()
-{
+int main() {
     const auto T = in.val<int>();
     LOOP (T) {
         const auto [A, B] = in.tup<i64, i64>();

@@ -1,7 +1,7 @@
 // verification-helper: UNITTEST
+#include <cassert>
 #include "utility/zipper.hpp"
-void valTest()
-{
+void valTest() {
 
     Zipper<int> zipper({2, 4, 2, 6, 6, 2});
     assert(zipper.zip(2) == 0);
@@ -15,8 +15,7 @@ void valTest()
     assert(zipper.zip(4) == 3);
     assert(zipper.zip(6) == 4);
 }
-void vecTest()
-{
+void vecTest() {
     Zipper<int> zipper({2, 4, 2, 6, 6, 2});
     assert(zipper.zip(2) == 0);
     assert(zipper.zip(4) == 1);
@@ -28,8 +27,7 @@ void vecTest()
     assert(zipper.zip(4) == 3);
     assert(zipper.zip(6) == 4);
 }
-int main()
-{
+int main() {
     valTest();
     vecTest();
 }

@@ -1,8 +1,8 @@
 // verification-helper: UNITTEST
+#include <cassert>
+#include "internal.hpp"
 #include "utility/floor_divs.hpp"
-#include "utility/rng.hpp"
-void test()
-{
+void test() {
     for (i64 X : irange(1, 101)) {
         Vec<i64> actual;
         for (i64 i : irange(X, 0, -1)) {
@@ -13,8 +13,7 @@ void test()
         for (int i : rep(actual.size())) { assert(fds.at(i) == actual[i]); }
     }
 }
-int main()
-{
+int main() {
     test();
     return 0;
 }

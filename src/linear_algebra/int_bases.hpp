@@ -1,10 +1,11 @@
 #pragma once
-#include "../common.hpp"
+#include <cassert>
+#include <optional>
+#include "../internal.hpp"
 /**
  * @brief F_2上64次元ベクトル集合の基底管理
  */
-class IntBases
-{
+class IntBases {
     static constexpr int D = sizeof(u64) * 8;
 public:
     /**
@@ -13,15 +14,14 @@ public:
     IntBases() { mdSeqFill(m_vis, -1); }
     /**
      * @brief 元vを追加する
-     * 
-     * @param v 
+     *
+     * @param v
      * @return true Rankが増えた
      * @return false Rankが変わらず(vがもともと線形従属)
      */
-    bool add(u64 v)
-    {
+    auto add(u64 v) -> bool {
         auto reduced_v = v;
-        u64 mask       = 0;
+        u64 mask = 0;
         for (int i : rep(m_reduced_bases.size())) {
             if (chmin(reduced_v, reduced_v ^ m_reduced_bases[i])) { mask ^= m_masks[i]; }
         }
@@ -43,30 +43,29 @@ public:
     /**
      * @brief 基底をなす元の数列
      * @attention decomp結果と組み合わせる想定
-     * 
+     *
      * @return const Vec<u64>& 基底をなす元の数列
      */
-    const Vec<u64>& origBases() const { return m_orig_bases; }
+    auto origBases() const -> const Vec<u64>& { return m_orig_bases; }
     /**
      * @brief 基底を掃き出した数列
-     * 
+     *
      * @return const Vec<u64>& 基底を掃き出した数列
      */
-    const Vec<u64>& reducedBases() const { return m_reduced_bases; }
+    auto reducedBases() const -> const Vec<u64>& { return m_reduced_bases; }
     /**
      * @brief 階数
-     * 
+     *
      * @return int 階数
      */
-    int rank() const { return m_reduced_bases.size(); }
+    auto rank() const -> int { return m_reduced_bases.size(); }
     /**
      * @brief 元vを基底の線形結合で表す
-     * 
-     * @param v 
+     *
+     * @param v
      * @return Opt<T> 線形結合の係数 (vがspanに含まれてない場合は nullopt)
      */
-    Opt<u64> decomp(u64 v) const
-    {
+    auto decomp(u64 v) const -> Opt<u64> {
         u64 mask = 0;
         for (int j : irange(D - 1, -1, -1)) {
             if (isBitOn(v, j)) {
@@ -80,8 +79,8 @@ public:
         return mask;
     }
 private:
-    Vec<u64> m_orig_bases;     // 元の入力による基底
-    Vec<u64> m_reduced_bases;  // 縮約された基底
-    Vec<u64> m_masks;          // m_reduced[i]をm_origで作るための係数
+    Vec<u64> m_orig_bases;    // 元の入力による基底
+    Vec<u64> m_reduced_bases; // 縮約された基底
+    Vec<u64> m_masks;         // m_reduced[i]をm_origで作るための係数
     Arr<int, D> m_vis;
 };

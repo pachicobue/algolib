@@ -1,5 +1,5 @@
 #pragma once
-#include "../common.hpp"
+#include "../internal.hpp"
 #include "graph.hpp"
 /**
  * @brief LowLink

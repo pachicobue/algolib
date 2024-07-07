@@ -1,10 +1,11 @@
 #pragma once
-#include "../common.hpp"
-template<typename T, u32 MAXD = 2> class PrimePowerSum
-{
+#include <cassert>
+#include <cmath>
+#include "../internal.hpp"
+#include "../utility/int_nthroot.hpp"
+template <typename T, u32 MAXD = 2> class PrimePowerSum {
 public:
-    PrimePowerSum(u64 N) : m_N{N}, m_sqrt{(u32)std::sqrt(N)}, m_ns{0}
-    {
+    PrimePowerSum(u64 N) : m_N{N}, m_sqrt{(u32)intSqrt(N)}, m_ns{0} {
         assert(N >= 2);
         for (u64 i = N; i > 0; i = N / (N / i + 1)) { m_ns.push_back(i); }
         for (const auto n : m_ns) {
@@ -28,14 +29,13 @@ public:
             }
         }
     }
-    T get(u32 d, u64 n) const
-    {
+    auto get(u32 d, u64 n) const -> T {
         const u32 i = id(n);
         assert(m_ns[i] == n);
         return m_hss[d][i];
     }
 protected:
-    u32 id(u64 x) const { return x <= m_sqrt ? m_ns.size() - x : m_N / x; }
+    auto id(u64 x) const -> u32 { return x <= m_sqrt ? m_ns.size() - x : m_N / x; }
     u64 m_N;
     u32 m_sqrt;
     Vec<u64> m_ns, m_ps;

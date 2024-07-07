@@ -1,7 +1,7 @@
 // verification-helper: UNITTEST
+#include <cassert>
 #include "utility/zipper.hpp"
-void test()
-{
+void test() {
     Zipper<int> zipper({2, 4, 2, 6, 6, 2});
     assert(zipper.unzip(0) == 2);
     assert(zipper.unzip(1) == 4);

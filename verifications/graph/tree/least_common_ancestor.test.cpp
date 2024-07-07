@@ -1,9 +1,10 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/lca
 #include "graph/tree/least_common_ancestor.hpp"
+#include "graph/graph.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
+int main() {
     const auto [N, Q] = in.tup<int, int>();
     Graph g(N);
     for (int i : irange(1, N)) {

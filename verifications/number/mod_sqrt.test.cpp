@@ -1,14 +1,14 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/sqrt_mod
 #include "number/mod_sqrt.hpp"
+#include "internal.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
+int main() {
     const int T = in.val<int>();
     LOOP (T) {
         const auto [Y, P] = in.tup<i64, u64>();
-        using mint        = modint_dynamic<0>;
+        using mint = modint_dynamic<0>;
         mint::setMod(P);
         const auto ans = modSqrt(mint{Y});
         if (ans) {

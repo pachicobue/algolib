@@ -1,8 +1,9 @@
 // verification-helper: UNITTEST
+#include <cassert>
+#include "internal.hpp"
 #include "utility/dynamic_bitset.hpp"
 #include "utility/rng.hpp"
-void test()
-{
+void test() {
     const auto N = 1000;
     DynamicBitset bs{N};
     int first = N;
@@ -15,8 +16,7 @@ void test()
     bs.resetAll();
     assert(bs.findFirst() == N);
 }
-int main()
-{
+int main() {
     test();
     return 0;
 }

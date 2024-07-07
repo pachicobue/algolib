@@ -1,18 +1,17 @@
 #pragma once
-#include "../../common.hpp"
+#include <cassert>
+#include "../../internal.hpp"
 /**
  * @brief Binary Trie
- * 
+ *
  * @tparam D ビット幅
  */
-template<int D>
-    requires(D < 32)
-class BinaryTrie
-{
+template <int D>
+requires(D < 32)
+class BinaryTrie {
 public:
     static constexpr int NIL = -1;
-    struct Node
-    {
+    struct Node {
         Node() : Node{0} {}
         Node(int sub) : sub{sub} { mdSeqFill(sons, NIL); }
         int sub;
@@ -24,11 +23,10 @@ public:
     BinaryTrie() : m_xor{}, m_nodes{Node{}} {}
     /**
      * @brief 値追加
-     * 
+     *
      * @param X キー
      */
-    void addKey(i64 X)
-    {
+    auto addKey(i64 X) -> void {
         assert(0 <= X and X < (1_i64 << D));
         int index = 0;
         for (int d : per(D)) {
@@ -41,11 +39,10 @@ public:
     }
     /**
      * @brief 値削除
-     * 
+     *
      * @param X キー
      */
-    void delKey(i64 X)
-    {
+    auto delKey(i64 X) -> void {
         assert(0 <= X and X < (1_i64 << D));
         int index = 0;
         for (int d : per(D)) {
@@ -58,58 +55,54 @@ public:
     }
     /**
      * @brief 全体にxor適用する
-     * 
+     *
      * @param X 適用するxor値
      */
-    void operateXor(i64 X)
-    {
+    auto operateXor(i64 X) -> void {
         assert(0 <= X);
         m_xor ^= X;
     }
     /**
      * @brief 最小値
-     * 
+     *
      * @return i64 最小値
      */
-    i64 mdSeqMin() const { return minMax(false); }
+    auto mdSeqMin() const -> i64 { return minMax(false); }
     /**
      * @brief 最大値
-     * 
+     *
      * @return i64 最大値
      */
-    i64 mdSeqMax() const { return minMax(true); }
+    auto mdSeqMax() const -> i64 { return minMax(true); }
     /**
      * @brief 一括削除
      */
-    void clear()
-    {
+    auto clear() -> void {
         m_nodes = {Node{}};
         m_nodes.shrink_to_fit();
         m_xor = 0;
     }
     /**
      * @brief 要素数
-     * 
+     *
      * @return int 要素数
      */
     int size() const { return m_nodes[0].sub; }
     /**
      * @brief 空かどうか
-     * 
+     *
      * @return true 空
      * @return false 空ではない
      */
     bool empty() const { return size() == 0; }
 private:
-    int alloc(bool sub)
-    {
+    int alloc(bool sub) {
         m_nodes.push_back(Node{sub});
         return (int)m_nodes.size() - 1;
     }
-    i64 minMax(bool calcMax) const
-    {
+    i64 minMax(bool calcMax) const {
         assert(not empty());
-        i64 X     = 0;
+        i64 X = 0;
         int index = 0;
         for (int d : per(D)) {
             const int mv = isBitOn(m_xor, d) ^ calcMax;

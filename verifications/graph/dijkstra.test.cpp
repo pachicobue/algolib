@@ -1,9 +1,10 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/shortest_path
 #include "graph/dijkstra.hpp"
+#include "graph/graph.hpp"
+#include "internal.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
+int main() {
     const auto [N, M, S, T] = in.tup<int, int, int, int>();
     Graph<i64> g(N), rg(N);
     LOOP (M) {

@@ -1,33 +1,28 @@
 #pragma once
-#include "../common.hpp"
 #include "../data_structure/trie/trie.hpp"
+#include "../internal.hpp"
 
-template<int SIGMA> class AhoCorasick : public Trie<SIGMA>
-{
+template <int SIGMA> class AhoCorasick : public Trie<SIGMA> {
 public:
     using Trie<SIGMA>::NIL;
 
     AhoCorasick() : Trie<SIGMA>{}, m_link{NIL}, m_dirty{false} {}
     using Trie<SIGMA>::operator[];
     using Trie<SIGMA>::size;
-    template<typename Vs> void addKey(const Vs& vs)
-    {
+    template <typename Vs> auto addKey(const Vs& vs) -> void {
         m_dirty = true;
         Trie<SIGMA>::addKey(vs);
     }
-    template<typename V> int nextNode(int index, V v)
-    {
+    template <typename V> auto nextNode(int index, V v) -> int {
         if (m_dirty) { build(); }
         return nextUnsafe(index, v);
     }
-    int suffixLink(int index)
-    {
+    auto suffixLink(int index) -> int {
         if (m_dirty) { build(); }
         return m_link[index];
     }
 private:
-    template<typename V> int nextUnsafe(int index, V v) const
-    {
+    template <typename V> auto nextUnsafe(int index, V v) const -> int {
         while (index != NIL) {
             if ((*this)[index].sons[v] != NIL) {
                 return (*this)[index].sons[v];
@@ -38,8 +33,7 @@ private:
         return 0;
     }
 
-    void build()
-    {
+    auto build() -> void {
         m_link.resize(size(), NIL);
         Queue<int> Q;
         Q.push(0);

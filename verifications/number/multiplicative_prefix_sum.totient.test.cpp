@@ -1,10 +1,10 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/sum_of_totient_function
 #include "number/multiplicative_prefix_sum.hpp"
+#include "internal.hpp"
 #include "utility/modint.hpp"
 #include "utility/printer.hpp"
 #include "utility/scanner.hpp"
-int main()
-{
+int main() {
     using mint = modint_998244353;
     const auto N = in.val<u64>();
     if (N <= 2) { return out.ln(N); }

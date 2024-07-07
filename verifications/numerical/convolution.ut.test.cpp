@@ -1,10 +1,9 @@
 // verification-helper: UNITTEST
 #include "numerical/convolution.hpp"
+#include <cassert>
+#include "internal.hpp"
 #include "utility/rng.hpp"
-#include "utility/printer.hpp"
-#include "utility/scanner.hpp"
-int main()
-{
+int main() {
     const auto AN = rng.val<int>(1, 1000);
     const auto BN = rng.val<int>(1, 1000);
     const auto as = rng.vec<i64>(AN, -100000000, 100000000);

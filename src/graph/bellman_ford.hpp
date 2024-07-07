@@ -1,15 +1,15 @@
 #pragma once
-#include "../common.hpp"
+#include <cassert>
+#include "../internal.hpp"
 #include "graph.hpp"
 /**
  * @brief Bellman-Ford
- * 
+ *
  * @param g グラフ
  * @param S 始点
  * @return Vec<T> 頂点Sからの最短距離
  */
-template<typename T> Vec<T> bellmanFord(const Graph<T>& g, int S)
-{
+template <typename T> auto bellmanFord(const Graph<T>& g, int S) -> Vec<T> {
     const int N = g.V();
     assert(0 <= S and S < N);
     Vec<T> ds(N, INF<T>);

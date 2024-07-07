@@ -1,101 +1,32 @@
+---
 BasedOnStyle: LLVM
 AccessModifierOffset: -4
-AlignAfterOpenBracket: Align
-AlignArrayOfStructures: Left
-AlignConsecutiveAssignments: Consecutive
-AlignConsecutiveBitFields: AcrossEmptyLinesAndComments
-AlignConsecutiveDeclarations: None
-AlignConsecutiveMacros: Consecutive
-AlignEscapedNewlines: Left
-AlignOperands: Align
-AlignTrailingComments: true
-AllowAllArgumentsOnNextLine: true
-AllowAllParametersOfDeclarationOnNextLine: true
+AlignArrayOfStructures: Right
 AllowShortBlocksOnASingleLine: Always
 AllowShortCaseLabelsOnASingleLine: true
-AllowShortEnumsOnASingleLine: true
-AllowShortFunctionsOnASingleLine: All
-AllowShortIfStatementsOnASingleLine: WithoutElse
-AllowShortLambdasOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AllowShortLoopsOnASingleLine: true
-AlwaysBreakAfterReturnType: None
-AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: No
-BinPackArguments: false
-BinPackParameters: false
-BitFieldColonSpacing: After
-BreakBeforeBinaryOperators: All
-BreakBeforeBraces: Custom
-BreakBeforeConceptDeclarations: false
-BreakBeforeTernaryOperators: true
-BreakConstructorInitializers: BeforeColon
-BreakInheritanceList: BeforeColon
-BreakStringLiterals: true
-ColumnLimit: 140
-CompactNamespaces: false
-ConstructorInitializerIndentWidth: 4
-ContinuationIndentWidth: 4
-Cpp11BracedListStyle: true
-EmptyLineAfterAccessModifier: Never
+AttributeMacros:
+  - UNUSED
+BreakArrays: false
+ColumnLimit : 0
 EmptyLineBeforeAccessModifier: Never
-FixNamespaceComments: true
-ForEachMacros: ["LOOP"]
-IncludeBlocks: Regroup
-IndentAccessModifiers: false
-IndentCaseBlocks: true
-IndentCaseLabels: false
-IndentPPDirectives: AfterHash
-IndentRequires: true
+ForEachMacros:
+  - LOOP
+IncludeCategories:
+  - Regex: ^".*"
+    Priority: 1
+    SortPriority: 1
+    CaseSensitive: false
+  - Priority: 0
+    CaseSensitive: false
+    SortPriority: 0
+    Regex: ^<.*>
 IndentWidth: 4
 IndentWrappedFunctionNames: true
-KeepEmptyLinesAtTheStartOfBlocks: true
-LambdaBodyIndentation: Signature
-Language: Cpp
-MaxEmptyLinesToKeep: 2
-NamespaceIndentation: None
-PackConstructorInitializers: NextLine
+InsertBraces: true
+InsertNewlineAtEOF: true
 PointerAlignment: Left
-ReferenceAlignment: Pointer
-ReflowComments: false
-SortIncludes: Never
-SortUsingDeclarations: false
-SpaceAfterCStyleCast: false
-SpaceAfterLogicalNot: false
-SpaceAfterTemplateKeyword: false
-SpaceBeforeAssignmentOperators: true
-SpaceBeforeCaseColon: false
-SpaceBeforeCpp11BracedList: false
-SpaceBeforeCtorInitializerColon: true
-SpaceBeforeInheritanceColon: true
-SpaceBeforeParens: ControlStatements
-SpaceBeforeRangeBasedForLoopColon: true
-SpaceBeforeSquareBrackets: false
-SpaceInEmptyBlock: false
-SpaceInEmptyParentheses: false
-SpacesBeforeTrailingComments: 2
-SpacesInAngles: Never
-SpacesInCStyleCastParentheses: false
-SpacesInConditionalStatement: false
-SpacesInParentheses: false
-SpacesInSquareBrackets: false
-Standard: Latest
+RequiresClausePosition: SingleLine
 TabWidth: 4
-UseTab: Never
-BreakBeforeBraces: Custom
-BraceWrapping:
-  AfterCaseLabel: false
-  AfterClass: true
-  AfterControlStatement: Never
-  AfterEnum: false
-  AfterFunction: true
-  AfterNamespace: false
-  AfterStruct: true
-  AfterUnion: false
-  BeforeCatch: false
-  BeforeElse: false
-  BeforeLambdaBody: false
-  BeforeWhile: false
-  IndentBraces: false
-  SplitEmptyFunction: false
-  SplitEmptyRecord: false
-  SplitEmptyNamespace: false

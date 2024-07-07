@@ -1,28 +1,32 @@
 #pragma once
-#include "../../common.hpp"
+#include <algorithm>
+#include <bit>
+#include <cassert>
+#include <concepts>
+#include <ranges>
+#include "../../internal.hpp"
 #include "disjoint_sparse_table.hpp"
 /**
  * @brief 静的数列のRMQ
  * @see https://noshi91.hatenablog.com/entry/2018/08/16/125415
  * @see https://qiita.com/okateim/items/e2f4a734db4e5f90e410
- * 
+ *
  * @tparam T 値型
  * @tparam maximum 最大値(任意のxについて comp(maximum(),x)==False )
  * @tparam comp 比較関数
  */
-template<std::semiregular T, auto maximum, auto comp>
-    requires requires(const T& x, const T& y) {
-        {
-            maximum()
-        } -> std::convertible_to<T>;
-        {
-            comp(x, y)
-        } -> std::same_as<bool>;
-    }
-class StaticRMQ
-{
-    using B                    = u64;
-    static constexpr int bs    = sizeof(B) * 8;
+template <std::semiregular T, auto maximum, auto comp>
+requires requires(const T& x, const T& y) {
+    {
+        maximum()
+    } -> std::convertible_to<T>;
+    {
+        comp(x, y)
+    } -> std::same_as<bool>;
+}
+class StaticRMQ {
+    using B = u64;
+    static constexpr int bs = sizeof(B) * 8;
     static constexpr int bslog = (int)std::bit_width((u64)bs) - 1;
     static constexpr int wind(int n) { return n >> (bslog); }
     static constexpr int bind(int n) { return n ^ (wind(n) << bslog); }
@@ -30,11 +34,11 @@ class StaticRMQ
 public:
     /**
      * @brief コンストラクタ
-     * 
+     *
      * @param xs 数列
      */
-    template<std::ranges::input_range Xs>
-        requires std::ranges::sized_range<Xs> && std::convertible_to<std::ranges::range_value_t<Xs>, T>
+    template <std::ranges::input_range Xs>
+    requires std::ranges::sized_range<Xs> && std::convertible_to<std::ranges::range_value_t<Xs>, T>
     StaticRMQ(Xs&& xs)
         : m_size(std::ranges::size(xs)),
           m_bn{wind(m_size + bs - 1)},
@@ -44,8 +48,7 @@ public:
               Vec<T> ans(m_bn);
               for (int i : rep(m_size)) { ans[wind(i)] = (i % bs == 0 ? m_vals[i] : std::ranges::min(ans[wind(i)], m_vals[i], comp)); }
               return ans;
-          }()}
-    {
+          }()} {
         for (int i : rep(m_bn)) {
             Vec<int> g(bs, m_size), stack;
             for (const int j : rep(bs)) {
@@ -62,13 +65,12 @@ public:
     }
     /**
      * @brief 範囲Min
-     * 
-     * @param l 
-     * @param r 
+     *
+     * @param l
+     * @param r
      * @return T \min_{l<=i<r}X[i]
      */
-    T fold(int l, int r) const
-    {
+    auto fold(int l, int r) const -> T {
         assert(0 <= l and l <= r and r <= m_size);
         const int lb = (l + bs - 1) / bs, rb = r / bs;
         if (lb > rb) {
@@ -78,8 +80,7 @@ public:
         }
     }
 private:
-    T brmq(int l, int r) const
-    {
+    auto brmq(int l, int r) const -> T {
         if (l == r) { return maximum(); }
         const B w = m_masks[r - 1] >> (l % bs);
         return w == 0 ? m_vals[r - 1] : m_vals[l + order2(w)];

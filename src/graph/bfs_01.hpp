@@ -1,15 +1,15 @@
 #pragma once
-#include "../common.hpp"
+#include <cassert>
+#include "../internal.hpp"
 #include "graph.hpp"
 /**
  * @brief 0/1 BFS
- * 
+ *
  * @param g グラフ (コストが0/1)
  * @param S 始点
  * @return Vec<T> 頂点Sからの最短距離
  */
-template<typename T> Vec<T> bfs01(const Graph<T>& g, int S)
-{
+template <typename T> auto bfs01(const Graph<T>& g, int S) -> Vec<T> {
     const int N = g.V();
     assert(0 <= S and S < N);
     Vec<T> ds(N, INF<T>);

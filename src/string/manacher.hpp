@@ -1,7 +1,6 @@
 #pragma once
-#include "../common.hpp"
-template<typename V> Vec<int> manacher(const V& vs)
-{
+#include "../internal.hpp"
+template <typename V> auto manacher(const V& vs) -> Vec<int> {
     const int N = std::size(vs);
     Vec<int> ans(N);
     for (int i = 0, k = 1, j = 0; i < N; i += k, j -= k, k = 1) {
