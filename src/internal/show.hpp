@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <source_location>
 #include "print/int128_t.hpp" // IWYU pragma: export
 #ifdef HOGEPACHI
 #include "print/print_stl.hpp" // IWYU pragma: export
