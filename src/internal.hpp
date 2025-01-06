@@ -1,3 +1,4 @@
+#pragma once
 // IWYU pragma: begin_exports
 #include "internal/abbreviation.hpp"
 #include "internal/abs.hpp"
