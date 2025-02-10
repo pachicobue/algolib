@@ -17,18 +17,24 @@ public:
      */
     struct Edge {
         Edge() = default;
-        Edge(int e, int t, const T& c) : eid{e}, to{t}, cost{c} {}
+        Edge(int e, int t, const T& c)
+            : eid{e}, to{t}, cost{c} {
+        }
         int eid; // 辺番号
         int to;
         T cost;
-        operator int() const { return to; }
+        operator int() const {
+            return to;
+        }
     };
     /**
      * @brief コンストラクタ
      *
      * @param N 頂点数
      */
-    Graph(int N) : m_V{N}, m_lists(N), m_edges{} {}
+    Graph(int N)
+        : m_V{N}, m_lists(N), m_edges{} {
+    }
     /**
      * @brief 辺追加 (コスト1)
      *
@@ -43,7 +49,9 @@ public:
         assert(0 <= v and v < m_V);
         m_edges.push_back({u, v, 1});
         m_lists[u].push_back({m_E, v, 1});
-        if (bi) { m_lists[v].push_back({m_E, u, 1}); }
+        if (bi) {
+            m_lists[v].push_back({m_E, u, 1});
+        }
         m_E++;
     }
     /**
@@ -59,7 +67,9 @@ public:
         assert(0 <= v and v < m_V);
         m_edges.push_back({u, v, c});
         m_lists[u].push_back({m_E, v, c});
-        if (bi) { m_lists[v].push_back({m_E, u, c}); }
+        if (bi) {
+            m_lists[v].push_back({m_E, u, c});
+        }
         m_E++;
     }
     /**
@@ -93,7 +103,9 @@ public:
         Vec<int> Ans(V(), 1);
         Fix([&](auto self, int u, int p) -> void {
             for (int v : m_lists[u]) {
-                if (v == p) { continue; }
+                if (v == p) {
+                    continue;
+                }
                 self(v, u);
                 Ans[u] += Ans[v];
             }
@@ -111,7 +123,9 @@ public:
         Vec<T> Ans(V(), 0);
         Fix([&](auto self, int u, int p) -> void {
             for (const auto& [v, c] : m_lists[u] | ToC) {
-                if (v == p) { continue; }
+                if (v == p) {
+                    continue;
+                }
                 Ans[v] = Ans[u] + c;
                 self(v, u);
             }
@@ -129,7 +143,9 @@ public:
         Vec<int> Ans(V(), -1);
         Fix([&](auto self, int u, int p) -> void {
             for (int v : m_lists[u]) {
-                if (v == p) { continue; }
+                if (v == p) {
+                    continue;
+                }
                 Ans[v] = u;
                 self(v, u);
             }
@@ -151,23 +167,31 @@ public:
      *
      * @return  int 頂点数
      */
-    auto V() const -> int { return m_V; }
+    auto V() const -> int {
+        return m_V;
+    }
     /**
      * @brief 辺数
      *
      * @return int 辺数
      */
-    auto E() const -> int { return m_E; }
+    auto E() const -> int {
+        return m_E;
+    }
     /**
      * @brief 辺列から コスト 情報を削ぐ
      * @attention for(const auto [eid,to]: g[u]|g.ETo()) と使う
      */
-    static constexpr auto ETo = std::views::transform([](const Edge& e) { return makePair(e.eid, e.to); });
+    static constexpr auto ETo = std::views::transform([](const Edge& e) {
+        return makePair(e.eid, e.to);
+    });
     /**
      * @brief 辺列から 辺番号 情報を削ぐ
      * @attention for(const auto [to,cost]: g[u]|g.ToC()) と使う
      */
-    static constexpr auto ToC = std::views::transform([](const Edge& e) { return makePair(e.to, e.cost); });
+    static constexpr auto ToC = std::views::transform([](const Edge& e) {
+        return makePair(e.to, e.cost);
+    });
 private:
     int m_V, m_E;
     Vec<Vec<Edge>> m_lists;

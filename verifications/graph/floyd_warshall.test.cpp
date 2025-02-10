@@ -14,7 +14,9 @@ int main() {
     }
     const auto dss = floydWarshall(g);
     for (int i : rep(V)) {
-        if (dss[i][i] < 0) { return out.ln("NEGATIVE CYCLE"); }
+        if (dss[i][i] < 0) {
+            return out.ln("NEGATIVE CYCLE");
+        }
     }
     for (int i : rep(V)) {
         for (int j : rep(V)) {

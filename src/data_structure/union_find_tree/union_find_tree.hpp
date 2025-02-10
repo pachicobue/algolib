@@ -5,15 +5,19 @@
  * @brief UnionFind木
  */
 class UnionFindTree {
-    static constexpr auto NOP1 = [](int) {};
-    static constexpr auto NOP2 = [](int, int) {};
+    static constexpr auto NOP1 = [](int) {
+    };
+    static constexpr auto NOP2 = [](int, int) {
+    };
 public:
     /**
      * @brief コンストラクタ
      *
      * @param N 要素数
      */
-    UnionFindTree(int N) : m_V{N}, m_infos(m_V, -1) {}
+    UnionFindTree(int N)
+        : m_V{N}, m_infos(m_V, -1) {
+    }
     /**
      * @brief iを含む成分の代表元
      *
@@ -40,7 +44,9 @@ public:
      */
     auto unite(int i, int j, auto merge, auto add, auto del) -> bool {
         i = find(i), j = find(j);
-        if (size(i) > size(j)) { std::ranges::swap(i, j); }
+        if (size(i) > size(j)) {
+            std::ranges::swap(i, j);
+        }
         del(i);
         if (i != j) {
             del(j);
@@ -59,7 +65,9 @@ public:
      * @return true 意味のある併合が発生
      * @return false 元々同じ成分だった
      */
-    auto unite(int i, int j) -> bool { return unite(i, j, NOP2, NOP1, NOP1); }
+    auto unite(int i, int j) -> bool {
+        return unite(i, j, NOP2, NOP1, NOP1);
+    }
     /**
      * @brief iとjが同じ成分かどうか
      *
@@ -68,14 +76,18 @@ public:
      * @return true 同じ成分
      * @return false 異なる成分
      */
-    auto same(int i, int j) -> bool { return find(i) == find(j); }
+    auto same(int i, int j) -> bool {
+        return find(i) == find(j);
+    }
     /**
      * @brief iを含む成分のサイズ
      *
      * @param i
      * @return int サイズ
      */
-    auto size(int i) -> int { return -m_infos[find(i)]; }
+    auto size(int i) -> int {
+        return -m_infos[find(i)];
+    }
     /**
      * @brief 各成分の頂点集合
      *
@@ -83,7 +95,9 @@ public:
      */
     auto groups() -> Vec<Vec<int>> {
         Vec<Vec<int>> iss(m_V);
-        for (int i : rep(m_V)) { iss[find(i)].push_back(i); }
+        for (int i : rep(m_V)) {
+            iss[find(i)].push_back(i);
+        }
         return iss;
     }
 private:

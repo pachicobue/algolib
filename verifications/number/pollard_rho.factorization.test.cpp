@@ -10,7 +10,9 @@ int main() {
         const auto fs = primeFactors(a);
         Vec<u64> ans;
         for (const auto& [p, e] : fs) {
-            LOOP (e) { ans.push_back(p); }
+            LOOP (e) {
+                ans.push_back(p);
+            }
         }
         out.ln(ans.size(), ans);
     }

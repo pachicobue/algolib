@@ -13,6 +13,8 @@ template <typename T> auto xorConvolute(Vec<T> F, Vec<T> G) -> Vec<T> {
     const int N = (int)std::bit_ceil(std::max(F.size(), G.size()));
     F.resize(N), G.resize(N);
     auto nF = setHadamard(F, false), nG = setHadamard(G, false);
-    for (int i : rep(N)) { nF[i] *= nG[i]; }
+    for (int i : rep(N)) {
+        nF[i] *= nG[i];
+    }
     return setHadamard(nF, true);
 }

@@ -12,13 +12,18 @@ public:
      *
      * @param X 分子
      */
-    FloorDivs(i64 X) : m_numerator{X} {
+    FloorDivs(i64 X)
+        : m_numerator{X} {
         assert(X >= 1);
-        for (i64 y = 1; y * y <= X; y++) { m_quots.push_back(y); }
+        for (i64 y = 1; y * y <= X; y++) {
+            m_quots.push_back(y);
+        }
         const i64 Y = m_quots.back();
         for (i64 x = X / (Y + 1); x >= 1; x--) {
             const i64 y = X / x;
-            if (m_quots.back() < y) { m_quots.push_back(y); }
+            if (m_quots.back() < y) {
+                m_quots.push_back(y);
+            }
         }
     };
     /**
@@ -26,7 +31,9 @@ public:
      *
      * @return const Vec<i64>& 商の列
      */
-    auto divs() const -> const Vec<i64>& { return m_quots; }
+    auto divs() const -> const Vec<i64>& {
+        return m_quots;
+    }
     /**
      * @brief i番目に小さな商
      *
@@ -58,7 +65,9 @@ public:
      *
      * @return int 種類数
      */
-    auto quotNum() const -> int { return m_quots.size(); }
+    auto quotNum() const -> int {
+        return m_quots.size();
+    }
 private:
     i64 m_numerator;
     Vec<i64> m_quots;

@@ -18,23 +18,35 @@ auto berlekampMassey(const Vec<T>& As) -> Vec<T> {
     auto eval = [&](const Vec<T>& C, int i) {
         assert(not C.empty());
         const int D = (int)C.size() - 1;
-        if (i < D) { return T{}; }
+        if (i < D) {
+            return T{};
+        }
         T s = 0;
-        for (int j : rep(D + 1)) { s += As[i - j] * C[j]; }
+        for (int j : rep(D + 1)) {
+            s += As[i - j] * C[j];
+        }
         return s;
     };
     for (int i : rep(N)) {
         const T d = eval(C, i);
-        if (d == 0) { continue; }
+        if (d == 0) {
+            continue;
+        }
         const Tup<Vec<T>, int, T> nlastFailure = {C, i, d};
         const auto& [pC, pi, pd] = lastFailure;
         const int nl = i - (int)C.size(), pl = pi - (int)pC.size();
         if (pi != -1) { // Cを調整
             const bool updateFailure = (pl < nl);
             const auto [c, s] = makePair(d / pd, i - pi);
-            if (C.size() < pC.size() + s) { C.resize(pC.size() + s); }
-            for (int j : rep(pC.size())) { C[j + s] -= pC[j] * c; }
-            if (updateFailure) { lastFailure = nlastFailure; }
+            if (C.size() < pC.size() + s) {
+                C.resize(pC.size() + s);
+            }
+            for (int j : rep(pC.size())) {
+                C[j + s] -= pC[j] * c;
+            }
+            if (updateFailure) {
+                lastFailure = nlastFailure;
+            }
         } else {
             C = Vec<T>(i + 2), C[0] = 1;
             lastFailure = nlastFailure;

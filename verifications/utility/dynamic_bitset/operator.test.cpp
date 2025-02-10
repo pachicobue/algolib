@@ -12,7 +12,9 @@ void andEqTest() {
         bs1.set(i, vs1[i]), bs2.set(i, vs2[i]);
     }
     bs1 &= bs2;
-    for (int i : rep(N)) { assert(bs1.test(i) == (vs1[i] && vs2[i])); }
+    for (int i : rep(N)) {
+        assert(bs1.test(i) == (vs1[i] && vs2[i]));
+    }
 }
 void orEqTest() {
     const auto N = 1000;
@@ -23,7 +25,9 @@ void orEqTest() {
         bs1.set(i, vs1[i]), bs2.set(i, vs2[i]);
     }
     bs1 |= bs2;
-    for (int i : rep(N)) { assert(bs1.test(i) == (vs1[i] || vs2[i])); }
+    for (int i : rep(N)) {
+        assert(bs1.test(i) == (vs1[i] || vs2[i]));
+    }
 }
 void xorEqTest() {
     const auto N = 1000;
@@ -34,35 +38,51 @@ void xorEqTest() {
         bs1.set(i, vs1[i]), bs2.set(i, vs2[i]);
     }
     bs1 ^= bs2;
-    for (int i : rep(N)) { assert(bs1.test(i) == (vs1[i] ^ vs2[i])); }
+    for (int i : rep(N)) {
+        assert(bs1.test(i) == (vs1[i] ^ vs2[i]));
+    }
 }
 void andTest() {
     const auto N = 1000;
     DynamicBitset bs1{N}, bs2{N};
-    for (int i : rep(N)) { bs1.set(i, rng.val(0, 1)), bs2.set(i, rng.val(0, 1)); }
+    for (int i : rep(N)) {
+        bs1.set(i, rng.val(0, 1)), bs2.set(i, rng.val(0, 1));
+    }
     const auto ans = bs1 & bs2;
-    for (int i : rep(N)) { assert(ans.test(i) == (bs1.test(i) && bs2.test(i))); }
+    for (int i : rep(N)) {
+        assert(ans.test(i) == (bs1.test(i) && bs2.test(i)));
+    }
 }
 void orTest() {
     const auto N = 1000;
     DynamicBitset bs1{N}, bs2{N};
-    for (int i : rep(N)) { bs1.set(i, rng.val(0, 1)), bs2.set(i, rng.val(0, 1)); }
+    for (int i : rep(N)) {
+        bs1.set(i, rng.val(0, 1)), bs2.set(i, rng.val(0, 1));
+    }
     const auto ans = bs1 | bs2;
-    for (int i : rep(N)) { assert(ans.test(i) == (bs1.test(i) || bs2.test(i))); }
+    for (int i : rep(N)) {
+        assert(ans.test(i) == (bs1.test(i) || bs2.test(i)));
+    }
 }
 void xorTest() {
     const auto N = 1000;
     DynamicBitset bs1{N}, bs2{N};
-    for (int i : rep(N)) { bs1.set(i, rng.val(0, 1)), bs2.set(i, rng.val(0, 1)); }
+    for (int i : rep(N)) {
+        bs1.set(i, rng.val(0, 1)), bs2.set(i, rng.val(0, 1));
+    }
     const auto ans = bs1 ^ bs2;
-    for (int i : rep(N)) { assert(ans.test(i) == (bs1.test(i) ^ bs2.test(i))); }
+    for (int i : rep(N)) {
+        assert(ans.test(i) == (bs1.test(i) ^ bs2.test(i)));
+    }
 }
 void lshiftEqTest() {
     const auto N = 1000;
     LOOP (100) {
         Vec<int> vs(N);
         DynamicBitset bs{N};
-        for (int i : rep(N)) { vs[i] = rng.val(0, 1), bs.set(i, vs[i]); }
+        for (int i : rep(N)) {
+            vs[i] = rng.val(0, 1), bs.set(i, vs[i]);
+        }
         const auto s = rng.val(0, N * 2);
         bs <<= s;
         for (int i : rep(N)) {
@@ -79,7 +99,9 @@ void rshiftEqTest() {
     LOOP (100) {
         Vec<int> vs(N);
         DynamicBitset bs{N};
-        for (int i : rep(N)) { vs[i] = rng.val(0, 1), bs.set(i, vs[i]); }
+        for (int i : rep(N)) {
+            vs[i] = rng.val(0, 1), bs.set(i, vs[i]);
+        }
         const auto s = rng.val(0, N * 2);
         bs >>= s;
         for (int i : rep(N)) {
@@ -96,7 +118,9 @@ void lshiftTest() {
     LOOP (100) {
         Vec<int> vs(N);
         DynamicBitset bs{N};
-        for (int i : rep(N)) { bs.set(i, vs[i]); }
+        for (int i : rep(N)) {
+            bs.set(i, vs[i]);
+        }
         const auto s = rng.val(0, N * 2);
         const auto ans = bs << s;
         for (int i : rep(N)) {
@@ -113,7 +137,9 @@ void rshiftTest() {
     LOOP (100) {
         Vec<int> vs(N);
         DynamicBitset bs{N};
-        for (int i : rep(N)) { bs.set(i, vs[i]); }
+        for (int i : rep(N)) {
+            bs.set(i, vs[i]);
+        }
         const auto s = rng.val(0, N * 2);
         const auto ans = bs >> s;
         for (int i : rep(N)) {
@@ -134,7 +160,9 @@ void compTest() {
             vs1[i] = rng.val(0, 1), vs2[i] = rng.val(0, 1);
             bs1.set(i, vs1[i]), bs2.set(i, vs2[i]);
         }
-        if (rng.val(0, 5) == 0) { vs2 = vs1, bs2 = bs1; }
+        if (rng.val(0, 5) == 0) {
+            vs2 = vs1, bs2 = bs1;
+        }
         seqReverse(vs1), seqReverse(vs2);
         assert((bs1 < bs2) == (vs1 < vs2));
         assert((bs1 > bs2) == (vs1 > vs2));
@@ -147,9 +175,13 @@ void compTest() {
 void notTest() {
     const auto N = 1000;
     DynamicBitset bs{N};
-    for (int i : rep(N)) { bs.set(i, rng.val(0, 1)); }
+    for (int i : rep(N)) {
+        bs.set(i, rng.val(0, 1));
+    }
     const auto ans = ~bs;
-    for (int i : rep(N)) { assert(ans.test(i) == not bs.test(i)); }
+    for (int i : rep(N)) {
+        assert(ans.test(i) == not bs.test(i));
+    }
 }
 int main() {
     andEqTest();

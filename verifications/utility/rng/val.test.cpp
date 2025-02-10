@@ -10,4 +10,6 @@ void test() {
         assert(min <= x and x <= max);
     }
 }
-int main() { test(); }
+int main() {
+    test();
+}

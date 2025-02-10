@@ -10,7 +10,9 @@ void test() {
                                                                 : rng.val(L * 2, L / 2));
         const auto y = (i % 3 == 0 ? rng.val(-1, 1) : i % 3 == 1 ? rng.val(-4, 4)
                                                                  : rng.val(-4, 4));
-        if (y == 0) { continue; }
+        if (y == 0) {
+            continue;
+        }
         const auto z = clampDiv(x, y, L, U);
         if (floorDiv(x, y) > U) {
             assert(z == U);
@@ -21,4 +23,6 @@ void test() {
         }
     }
 }
-int main() { test(); }
+int main() {
+    test();
+}

@@ -16,11 +16,17 @@ template <typename T> auto bellmanFord(const Graph<T>& g, int S) -> Vec<T> {
     ds[S] = 0;
     for (int loop : rep(2 * N)) {
         for (int u : rep(N)) {
-            if (ds[u] == INF<T>) { continue; }
+            if (ds[u] == INF<T>) {
+                continue;
+            }
             for (const auto& [v, c] : g[u] | g.ToC) {
-                if (ds[v] <= ds[u] + c) { continue; }
+                if (ds[v] <= ds[u] + c) {
+                    continue;
+                }
                 ds[v] = ds[u] + c;
-                if (loop >= N - 1) { ds[v] = -INF<T>; }
+                if (loop >= N - 1) {
+                    ds[v] = -INF<T>;
+                }
             }
         }
     }

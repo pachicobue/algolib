@@ -27,14 +27,17 @@ public:
                   m_ins[u] = ans.size();
                   ans.push_back(s);
                   for (int v : g[u]) {
-                      if (used[v]) { continue; }
+                      if (used[v]) {
+                          continue;
+                      }
                       dfs(P{s.first + 1, v});
                       ans.push_back(s);
                   }
               })(P{0, r});
               return ans;
           }()),
-          m_rmq(m_ds) {}
+          m_rmq(m_ds) {
+    }
     /**
      * @brief LCA(u,v)
      *

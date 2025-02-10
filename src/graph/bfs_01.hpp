@@ -19,9 +19,13 @@ template <typename T> auto bfs01(const Graph<T>& g, int S) -> Vec<T> {
         const auto [c, u] = Q.front();
         assert(c == 0 or c == 1);
         Q.pop_front();
-        if (ds[u] < c) { continue; }
+        if (ds[u] < c) {
+            continue;
+        }
         for (const auto& [v, c] : g[u] | g.ToC) {
-            if (ds[v] <= ds[u] + c) { continue; }
+            if (ds[v] <= ds[u] + c) {
+                continue;
+            }
             ds[v] = ds[u] + c;
             if (c == 0) {
                 Q.push_front({ds[v], v});

@@ -6,9 +6,13 @@
 void test() {
     const auto N = 1000;
     DynamicBitset bs{N};
-    for (int i : rep(N)) { bs.set(i, rng.val(0, 1)); }
+    for (int i : rep(N)) {
+        bs.set(i, rng.val(0, 1));
+    }
     bs.setAll();
-    for (int i : rep(N)) { assert(bs.test(i)); }
+    for (int i : rep(N)) {
+        assert(bs.test(i));
+    }
 }
 int main() {
     test();

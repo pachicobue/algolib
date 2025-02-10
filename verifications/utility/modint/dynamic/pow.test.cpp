@@ -10,7 +10,9 @@ void test() {
         const mint v{(i64)rng.val(0_u64, MOD - 1)};
         const auto N = rng.val(0, 100);
         mint ans = 1;
-        LOOP (N) { ans *= v; }
+        LOOP (N) {
+            ans *= v;
+        }
         assert(v.pow(N) == ans);
     }
 }

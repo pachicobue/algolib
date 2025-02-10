@@ -20,7 +20,9 @@ public:
      *
      * @param N 変数の数
      */
-    TwoSat(int N) : m_X{N}, m_V{N * 2}, m_g{m_V} {}
+    TwoSat(int N)
+        : m_X{N}, m_V{N * 2}, m_g{m_V} {
+    }
     /**
      * @brief 節 (x \lor y) を追加
      *
@@ -44,7 +46,9 @@ public:
         const StronglyConnectedComponents scc{m_g};
         for (int x : irange(1, m_X + 1)) {
             const int v = X2V(x), nv = X2V(-x);
-            if (scc[v] == scc[nv]) { return std::nullopt; }
+            if (scc[v] == scc[nv]) {
+                return std::nullopt;
+            }
             ts[x] = (scc[v] > scc[nv]);
         }
         return ts;
@@ -64,25 +68,33 @@ public:
             const int u = groups[c].back();
             const int nu = (u < m_X ? u + m_X : u - m_X);
             antis[c] = scc[nu];
-            if (antis[c] == c) { return {}; }
+            if (antis[c] == c) {
+                return {};
+            }
         }
         auto belows = mdVec({C}, DynamicBitset{C});
         for (int c : per(C)) {
             belows[c].set(c);
             for (int u : groups[c]) {
-                for (int v : m_g[u]) { belows[c] |= belows[scc[v]]; }
+                for (int v : m_g[u]) {
+                    belows[c] |= belows[scc[v]];
+                }
             }
         }
 
         Vec<Vec<bool>> sols;
         Fix([&](auto self, int c, const DynamicBitset& T) -> void {
-            if ((int)sols.size() == K) { return; }
+            if ((int)sols.size() == K) {
+                return;
+            }
             if (c == C) {
                 Vec<bool> sol(m_X + 1);
                 for (int c : rep(C)) {
                     for (int u : groups[c]) {
                         const int x = V2X(u);
-                        if (x > 0) { sol[x] = T.test(c); }
+                        if (x > 0) {
+                            sol[x] = T.test(c);
+                        }
                     }
                 }
                 sols.push_back(sol);
@@ -95,7 +107,9 @@ public:
                 for (int b : rep(2)) {
                     const int c0 = (b == 0 ? c : nc);
                     const int c1 = (b == 0 ? nc : c);
-                    if (belows[c1].test(c0)) { continue; }
+                    if (belows[c1].test(c0)) {
+                        continue;
+                    }
                     const auto nT = T | belows[c1];
                     self(c + 1, nT);
                 }
@@ -104,8 +118,12 @@ public:
         return sols;
     }
 private:
-    int X2V(int x) const { return (x > 0 ? x - 1 : -x - 1 + m_X); }
-    int V2X(int v) const { return v < m_X ? v + 1 : -(v - m_X + 1); }
+    int X2V(int x) const {
+        return (x > 0 ? x - 1 : -x - 1 + m_X);
+    }
+    int V2X(int v) const {
+        return v < m_X ? v + 1 : -(v - m_X + 1);
+    }
     int m_X, m_V;
     Graph<int> m_g;
     Vec<Pair<int, int>> m_clauses;

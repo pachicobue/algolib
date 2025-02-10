@@ -16,24 +16,32 @@ public:
     /**
      * @brief コンストラクタ
      */
-    DynamicBitset() {}
+    DynamicBitset() {
+    }
     /**
      * @brief コンストラクタ
      *
      * @param N bit長
      */
-    DynamicBitset(int N) : m_n{N}, m_bn{(int)ceilDiv(N, B)}, m_blocks(m_bn, 0) {}
+    DynamicBitset(int N)
+        : m_n{N}, m_bn{(int)ceilDiv(N, B)}, m_blocks(m_bn, 0) {
+    }
     /**
      * @brief コンストラクタ
      *
      * @param S 0/1文字列
      */
-    DynamicBitset(const Str& S) : m_n{(int)S.size()}, m_bn{(int)ceilDiv(m_n, B)}, m_blocks(m_bn, 0) {
-        assert(std::ranges::all_of(S, [](char c) { return c == '0' or c == '1'; }));
+    DynamicBitset(const Str& S)
+        : m_n{(int)S.size()}, m_bn{(int)ceilDiv(m_n, B)}, m_blocks(m_bn, 0) {
+        assert(std::ranges::all_of(S, [](char c) {
+            return c == '0' or c == '1';
+        }));
         for (int i : rep(m_bn)) {
             const int r = m_n - i * B, l = std::max(0, r - B);
             T x = 0;
-            for (int j : irange(l, r)) { x |= (T)(S[j] - '0') << (r - j - 1); }
+            for (int j : irange(l, r)) {
+                x |= (T)(S[j] - '0') << (r - j - 1);
+            }
             m_blocks[i] = x;
         }
     }
@@ -46,7 +54,9 @@ public:
      */
     friend auto operator&=(DynamicBitset& bs1, const DynamicBitset& bs2) -> DynamicBitset& {
         assert(bs1.size() == bs2.size());
-        for (int b : rep(bs1.m_bn)) { bs1.m_blocks[b] &= bs2.m_blocks[b]; }
+        for (int b : rep(bs1.m_bn)) {
+            bs1.m_blocks[b] &= bs2.m_blocks[b];
+        }
         return bs1;
     }
     /**
@@ -58,7 +68,9 @@ public:
      */
     friend auto operator|=(DynamicBitset& bs1, const DynamicBitset& bs2) -> DynamicBitset& {
         assert(bs1.size() == bs2.size());
-        for (int b : rep(bs1.m_bn)) { bs1.m_blocks[b] |= bs2.m_blocks[b]; }
+        for (int b : rep(bs1.m_bn)) {
+            bs1.m_blocks[b] |= bs2.m_blocks[b];
+        }
         return bs1;
     }
     /**
@@ -70,7 +82,9 @@ public:
      */
     friend auto operator^=(DynamicBitset& bs1, const DynamicBitset& bs2) -> DynamicBitset& {
         assert(bs1.size() == bs2.size());
-        for (int b : rep(bs1.m_bn)) { bs1.m_blocks[b] ^= bs2.m_blocks[b]; }
+        for (int b : rep(bs1.m_bn)) {
+            bs1.m_blocks[b] ^= bs2.m_blocks[b];
+        }
         return bs1;
     }
     /**
@@ -83,8 +97,12 @@ public:
      */
     friend auto operator<<=(DynamicBitset& bs, int s) -> DynamicBitset& {
         assert(s >= 0);
-        if (s >= bs.size()) { return bs.resetAll(); }
-        if (s == 0) { return bs; }
+        if (s >= bs.size()) {
+            return bs.resetAll();
+        }
+        if (s == 0) {
+            return bs;
+        }
         const auto [sb, sw] = I2B(s);
         for (int b : per(bs.m_bn)) {
             const T m0 = (b < sb ? T{0} : bs.m_blocks[b - sb]);
@@ -103,8 +121,12 @@ public:
      */
     friend auto operator>>=(DynamicBitset& bs, int s) -> DynamicBitset& {
         assert(s >= 0);
-        if (s >= bs.size()) { return bs.resetAll(); }
-        if (s == 0) { return bs; }
+        if (s >= bs.size()) {
+            return bs.resetAll();
+        }
+        if (s == 0) {
+            return bs;
+        }
         const auto [sb, sw] = I2B(s);
         for (int b : rep(bs.m_bn)) {
             const T m0 = (b + sb >= bs.m_bn ? T{0} : bs.m_blocks[b + sb]);
@@ -178,7 +200,9 @@ public:
      * @return true 等しい
      * @return false 等しくない
      */
-    friend bool operator==(const DynamicBitset& bs1, const DynamicBitset& bs2) { return bs1.m_blocks == bs2.m_blocks; }
+    friend bool operator==(const DynamicBitset& bs1, const DynamicBitset& bs2) {
+        return bs1.m_blocks == bs2.m_blocks;
+    }
     /**
      * @brief bitset同士の一貫比較
      *
@@ -189,7 +213,9 @@ public:
     friend auto operator<=>(const DynamicBitset& bs1, const DynamicBitset& bs2) {
         assert(bs1.size() == bs2.size());
         for (int i : per(bs1.m_bn)) {
-            if (bs1.m_blocks[i] != bs2.m_blocks[i]) { return bs1.m_blocks[i] <=> bs2.m_blocks[i]; }
+            if (bs1.m_blocks[i] != bs2.m_blocks[i]) {
+                return bs1.m_blocks[i] <=> bs2.m_blocks[i];
+            }
         }
         return std::strong_ordering::equivalent;
     }
@@ -201,7 +227,9 @@ public:
      */
     friend auto operator~(const DynamicBitset& bs) -> DynamicBitset {
         auto ans = bs;
-        for (int i : rep(bs.m_bn)) { ans.m_blocks[i] = ~ans.m_blocks[i]; }
+        for (int i : rep(bs.m_bn)) {
+            ans.m_blocks[i] = ~ans.m_blocks[i];
+        }
         ans.trunk();
         return ans;
     }
@@ -224,7 +252,9 @@ public:
      * @param b 0/1
      * @return DynamicBitset& self
      */
-    auto set(int i, bool b) -> DynamicBitset& { return (b ? set(i) : reset(i)); }
+    auto set(int i, bool b) -> DynamicBitset& {
+        return (b ? set(i) : reset(i));
+    }
     /**
      * @brief i bit目を立てる
      *
@@ -269,7 +299,9 @@ public:
      */
     auto findFirst() const -> int {
         for (int b : rep(m_bn)) {
-            if (m_blocks[b] == 0) { continue; }
+            if (m_blocks[b] == 0) {
+                continue;
+            }
             const int w = order2(m_blocks[b]);
             const int i = B2I(b, w);
             return std::ranges::min(i, size());
@@ -285,14 +317,22 @@ public:
      */
     auto findNext(int pi) const -> int {
         assert(pi < m_n);
-        if (pi < 0) { return findFirst(); }
+        if (pi < 0) {
+            return findFirst();
+        }
         pi++;
-        if (pi == m_n) { return size(); }
+        if (pi == m_n) {
+            return size();
+        }
         const auto [pb, pw] = I2B(pi);
         for (int b : irange(pb, m_bn)) {
             T x = m_blocks[b];
-            if (b == pb) { x &= ~bitMask(0, pw); }
-            if (x == 0) { continue; }
+            if (b == pb) {
+                x &= ~bitMask(0, pw);
+            }
+            if (x == 0) {
+                continue;
+            }
             const int w = order2(x);
             const int i = B2I(b, w);
             return std::ranges::min(i, size());
@@ -326,7 +366,9 @@ public:
         Str S(size(), '0');
         for (int i : rep(size())) {
             const auto [b, w] = I2B(i);
-            if (isBitOn(m_blocks[b], w)) { S[i] = '1'; }
+            if (isBitOn(m_blocks[b], w)) {
+                S[i] = '1';
+            }
         }
         return seqReverse(S), S;
     }
@@ -337,7 +379,9 @@ public:
      */
     auto count() const -> int {
         int ans = 0;
-        for (int b : rep(m_bn)) { ans += std::popcount(m_blocks[b]); }
+        for (int b : rep(m_bn)) {
+            ans += std::popcount(m_blocks[b]);
+        }
         return ans;
     }
     /**
@@ -345,14 +389,24 @@ public:
      *
      * @return int bit長
      */
-    auto size() const -> int { return m_n; }
+    auto size() const -> int {
+        return m_n;
+    }
 #ifdef HOGEPACHI
-    friend auto operator<<(Ostream& os, const DynamicBitset& bs) -> Ostream& { return os << bs.str(); }
+    friend auto operator<<(Ostream& os, const DynamicBitset& bs) -> Ostream& {
+        return os << bs.str();
+    }
 #endif
 private:
-    static constexpr auto I2B(int i) -> Pair<int, int> { return {i / B, i % B}; }
-    static constexpr auto B2I(int b, int w) -> int { return b * B + w; }
-    auto trunk() -> void { m_blocks.back() &= bitMask(m_n % B); }
+    static constexpr auto I2B(int i) -> Pair<int, int> {
+        return {i / B, i % B};
+    }
+    static constexpr auto B2I(int b, int w) -> int {
+        return b * B + w;
+    }
+    auto trunk() -> void {
+        m_blocks.back() &= bitMask(m_n % B);
+    }
     int m_n;
     int m_bn;
     Vec<T> m_blocks;

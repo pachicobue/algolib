@@ -14,8 +14,12 @@ void test() {
         };
         const int x = goldenSearch(L, R, f);
         assert(L <= x and x < R);
-        if (L <= x - 1) { assert(f(x - 1) >= f(x)); }
-        if (x + 1 < R) { assert(f(x) <= f(x + 1)); }
+        if (L <= x - 1) {
+            assert(f(x - 1) >= f(x));
+        }
+        if (x + 1 < R) {
+            assert(f(x) <= f(x + 1));
+        }
     }
 }
 int main() {

@@ -14,12 +14,18 @@
 constexpr auto goldenSearch(i64 xmin, i64 xsup, auto f) -> i64 {
     assert(xmin < xsup);
     auto comp = [&](i64 i, i64 j) {
-        if (j >= xsup) { return true; }
-        if (i < xmin) { return false; }
+        if (j >= xsup) {
+            return true;
+        }
+        if (i < xmin) {
+            return false;
+        }
         return f(i) < f(j);
     };
     Vec<i64> Fs{1, 2}; // フィボナッチ数列
-    while (Fs[Fs.size() - 1] + Fs[Fs.size() - 2] <= xsup - xmin + 1) { Fs.push_back(Fs[Fs.size() - 1] + Fs[Fs.size() - 2]); }
+    while (Fs[Fs.size() - 1] + Fs[Fs.size() - 2] <= xsup - xmin + 1) {
+        Fs.push_back(Fs[Fs.size() - 1] + Fs[Fs.size() - 2]);
+    }
 
     i64 xl = xmin - 1, xr = xl + Fs.back();
     while (xr - xl > 2) {

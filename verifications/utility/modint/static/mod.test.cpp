@@ -4,7 +4,9 @@
 #include "utility/modint.hpp"
 constexpr u64 MOD = 998244353;
 using mint = modint<MOD>;
-void test() { assert(mint::mod() == MOD); }
+void test() {
+    assert(mint::mod() == MOD);
+}
 int main() {
     test();
     return 0;

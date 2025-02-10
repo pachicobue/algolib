@@ -11,13 +11,16 @@ public:
     /**
      * @brief コンストラクタ
      */
-    Zipper() {}
+    Zipper() {
+    }
     /**
      * @brief コンストラクタ
      *
      * @param Xs 座標列
      */
-    Zipper(const Vec<T>& Xs) : m_vs{Xs}, m_calced(false) {}
+    Zipper(const Vec<T>& Xs)
+        : m_vs{Xs}, m_calced(false) {
+    }
     /**
      * @brief 圧縮前の値
      *
@@ -46,14 +49,18 @@ public:
      *
      * @param X 値
      */
-    auto add(T X) -> void { m_vs.push_back(X), m_calced = false; }
+    auto add(T X) -> void {
+        m_vs.push_back(X), m_calced = false;
+    }
     /**
      * @brief 値列を追加で圧縮
      *
      * @param Xs 値列
      */
     auto add(const Vec<T>& Xs) -> void {
-        for (const auto& v : Xs) { m_vs.push_back(v); }
+        for (const auto& v : Xs) {
+            m_vs.push_back(v);
+        }
         m_calced = false;
     }
     /**

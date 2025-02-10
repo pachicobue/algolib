@@ -7,7 +7,9 @@
 #include "utility/rng.hpp"
 inline int check(u64 X) {
     int o = 0;
-    while (X % 2 == 0) { X /= 2, o++; }
+    while (X % 2 == 0) {
+        X /= 2, o++;
+    }
     return o;
 }
 int main() {

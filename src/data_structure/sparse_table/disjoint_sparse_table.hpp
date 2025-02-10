@@ -29,14 +29,17 @@ public:
      */
     template <std::ranges::random_access_range Xs>
     requires std::ranges::sized_range<Xs> && std::convertible_to<std::ranges::range_value_t<Xs>, T>
-    DisjointSparseTable(Xs&& xs) : m_size(std::ranges::size(xs)), m_depth((int)std::bit_width((u64)m_size)), m_xss(m_depth, xs) {
+    DisjointSparseTable(Xs&& xs)
+        : m_size(std::ranges::size(xs)), m_depth((int)std::bit_width((u64)m_size)), m_xss(m_depth, xs) {
         for (int d : rep(m_depth)) {
             const int w = 1 << (m_depth - d - 1);
             for (int i = 1; i * w < m_size; i += 2) {
                 int l = i * w - 1, r = i * w;
                 for (int j : irange(1, w)) {
                     m_xss[d][l - j] = merge(xs[l - j], m_xss[d][l - j + 1]);
-                    if (r + j < m_size) { m_xss[d][r + j] = merge(xs[r + j], m_xss[d][r + j - 1]); }
+                    if (r + j < m_size) {
+                        m_xss[d][r + j] = merge(xs[r + j], m_xss[d][r + j - 1]);
+                    }
                 }
             }
         }
@@ -50,8 +53,12 @@ public:
      */
     auto fold(int l, int r) const -> T {
         assert(0 <= l and l <= r and r <= m_size);
-        if (l == r) { return e(); }
-        if (r - l == 1) { return m_xss.back()[l]; }
+        if (l == r) {
+            return e();
+        }
+        if (r - l == 1) {
+            return m_xss.back()[l];
+        }
         const int d = m_depth - (int)std::bit_width((u64)(l ^ (r - 1)));
         return merge(m_xss[d][l], m_xss[d][r - 1]);
     }

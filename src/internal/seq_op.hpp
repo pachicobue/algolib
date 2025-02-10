@@ -12,7 +12,9 @@
  * @param xs1
  * @param xs2
  */
-auto seqConcat(auto& xs1, const auto& xs2) -> void { std::ranges::copy(xs2, std::back_inserter(xs1)); }
+auto seqConcat(auto& xs1, const auto& xs2) -> void {
+    std::ranges::copy(xs2, std::back_inserter(xs1));
+}
 /**
  * @brief 結合した数列
  *
@@ -31,7 +33,9 @@ auto seqConcatCopy(const auto& xs1, const auto& xs2) {
  * @param args
  * @return int 最小値のindex
  */
-auto seqMinInd(const auto& xs, auto... args) -> int { return std::ranges::min_element(xs, args...) - std::ranges::begin(xs); }
+auto seqMinInd(const auto& xs, auto... args) -> int {
+    return std::ranges::min_element(xs, args...) - std::ranges::begin(xs);
+}
 /**
  * @brief 数列の最大値のindex
  *
@@ -39,19 +43,25 @@ auto seqMinInd(const auto& xs, auto... args) -> int { return std::ranges::min_el
  * @param args
  * @return int 最大値のindex
  */
-auto seqMaxInd(const auto& xs, auto... args) -> int { return std::ranges::max_element(xs, args...) - std::ranges::begin(xs); }
+auto seqMaxInd(const auto& xs, auto... args) -> int {
+    return std::ranges::max_element(xs, args...) - std::ranges::begin(xs);
+}
 /**
  * @brief 数列をreverseする
  *
  * @param xs 数列
  */
-auto seqReverse(auto& xs) -> void { std::ranges::reverse(xs); }
+auto seqReverse(auto& xs) -> void {
+    std::ranges::reverse(xs);
+}
 /**
  * @brief 数列をソートする
  *
  * @param xs 数列
  */
-auto seqSort(auto& xs, auto... args) -> void { std::ranges::sort(xs, args...); }
+auto seqSort(auto& xs, auto... args) -> void {
+    std::ranges::sort(xs, args...);
+}
 /**
  * @brief 関数の結果列
  *
@@ -88,12 +98,16 @@ auto seqRleVec(const auto& xs) {
     auto [l, px] = makePair(0, T{});
     for (const T& x : xs) {
         if (l == 0 or x != px) {
-            if (l > 0) { Ans.push_back({px, l}); }
+            if (l > 0) {
+                Ans.push_back({px, l});
+            }
             l = 1, px = x;
         } else {
             l++;
         }
     }
-    if (l > 0) { Ans.push_back({px, l}); }
+    if (l > 0) {
+        Ans.push_back({px, l});
+    }
     return Ans;
 }

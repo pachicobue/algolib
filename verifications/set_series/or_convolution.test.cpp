@@ -17,7 +17,9 @@ int main() {
     }
     const auto Cs = orConvolute(As, Bs);
     Vec<int> ans(Cs.size());
-    for (int i : rep(N)) { ans[i] = Cs[N - i - 1].val(); }
+    for (int i : rep(N)) {
+        ans[i] = Cs[N - i - 1].val();
+    }
     out.ln(ans);
     return 0;
 }

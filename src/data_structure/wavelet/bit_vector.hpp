@@ -8,7 +8,9 @@
 class BitVector {
     static constexpr int B = 64;
     static constexpr auto rank(u64 v, int i) -> int {
-        if (i == 0) { return 0; }
+        if (i == 0) {
+            return 0;
+        }
         return std::popcount(v << (B - i));
     }
     struct Block {
@@ -21,7 +23,9 @@ public:
      *
      * @param n bit長
      */
-    BitVector(int n) : m_size{n}, m_bn{n / B + 1}, m_blocks(m_bn) {}
+    BitVector(int n)
+        : m_size{n}, m_bn{n / B + 1}, m_blocks(m_bn) {
+    }
     /**
      * @brief i bit目を立てる
      *
@@ -38,7 +42,9 @@ public:
      * @param i
      * @return int 0 の個数
      */
-    auto rank0(int i) -> int { return i - rank1(i); }
+    auto rank0(int i) -> int {
+        return i - rank1(i);
+    }
     /**
      * @brief i bit目未満の 1 の個数
      *
@@ -54,13 +60,17 @@ public:
      *
      * @return int 0 の個数
      */
-    auto zero() -> int { return calc(), m_zero; }
+    auto zero() -> int {
+        return calc(), m_zero;
+    }
     /**
      * @brief 1 の個数
      *
      * @return int 1 の個数
      */
-    auto one() -> int { return m_size - zero(); }
+    auto one() -> int {
+        return m_size - zero();
+    }
 private:
     auto calc() -> void {
         if (not m_calced) {

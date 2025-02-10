@@ -13,7 +13,9 @@ public:
     /**
      * @brief コンストラクタ
      */
-    BitBases() { mdSeqFill(m_vis, -1); }
+    BitBases() {
+        mdSeqFill(m_vis, -1);
+    }
     /**
      * @brief 元vを追加する
      *
@@ -56,19 +58,25 @@ public:
      *
      * @return const Vec<T>& 基底をなす元の数列
      */
-    auto origBases() const -> const Vec<T>& { return m_orig_bases; }
+    auto origBases() const -> const Vec<T>& {
+        return m_orig_bases;
+    }
     /**
      * @brief 基底を掃き出した数列
      *
      * @return const Vec<T>& 基底を掃き出した数列
      */
-    auto reducedBases() const -> const Vec<T>& { return m_reduced_bases; }
+    auto reducedBases() const -> const Vec<T>& {
+        return m_reduced_bases;
+    }
     /**
      * @brief 階数
      *
      * @return int 階数
      */
-    auto rank() const -> int { return m_reduced_bases.size(); }
+    auto rank() const -> int {
+        return m_reduced_bases.size();
+    }
     /**
      * @brief 元vを基底の線形結合で表す
      *
@@ -79,7 +87,9 @@ public:
         T mask = 0;
         for (int j : per(D)) {
             if (v[j]) {
-                if (m_vis[j] == -1) { return std::nullopt; }
+                if (m_vis[j] == -1) {
+                    return std::nullopt;
+                }
                 const int vi = m_vis[j];
                 v ^= m_reduced_bases[vi];
                 mask ^= m_masks[vi];

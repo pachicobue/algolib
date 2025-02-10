@@ -28,9 +28,12 @@ public:
      * @param w v->f(v)の辺に対する重み関数(w(-1)=0, w(N)=0 として扱う)
      *          以下 v->...->f^k(v) の 重み和を dist(v,f^(v)) と書く
      */
-    Doubling(Vec<int> f, const Vec<T>& w) : m_N{(int)f.size()} {
+    Doubling(Vec<int> f, const Vec<T>& w)
+        : m_N{(int)f.size()} {
         assert(f.size() == w.size());
-        assert(std::ranges::all_of(f, [&](int x) { return -1 <= x and x <= m_N; }));
+        assert(std::ranges::all_of(f, [&](int x) {
+            return -1 <= x and x <= m_N;
+        }));
         Vec<int> nexts{0};
         mdSeqPlus(f, 1), seqConcat(nexts, f), nexts.push_back(m_N + 1);
         Vec<T> ws{e()};
@@ -51,7 +54,9 @@ public:
         resize(K);
         T D = e();
         for (int d : rep(m_nextss.size())) {
-            if (isBitOn(K, d)) { D = merge(D, m_wss[d][x]), x = m_nextss[d][x]; }
+            if (isBitOn(K, d)) {
+                D = merge(D, m_wss[d][x]), x = m_nextss[d][x];
+            }
         }
         return {x - 1, D};
     }
@@ -69,7 +74,9 @@ public:
         x++;
         resize(Kmax);
         T D = e();
-        if (pred(x - 1, D)) { return 0; }
+        if (pred(x - 1, D)) {
+            return 0;
+        }
         const int lg = (int)m_nextss.size();
         i64 ans = 0;
         for (int d : per(lg)) {
@@ -84,14 +91,18 @@ public:
     }
 private:
     auto resize(i64 KMax) -> void {
-        if (KMax <= 1) { return; }
+        if (KMax <= 1) {
+            return;
+        }
         const int L = ceilLog2(KMax) + 1;
         while (std::ssize(m_nextss) < L) {
             const auto& pnexts = m_nextss.back();
             const auto& pws = m_wss.back();
             Vec<int> nnexts(m_N + 2);
             Vec<T> nws(m_N + 2);
-            for (int i : rep(m_N + 2)) { nnexts[i] = pnexts[pnexts[i]], nws[i] = merge(pws[i], pws[pnexts[i]]); }
+            for (int i : rep(m_N + 2)) {
+                nnexts[i] = pnexts[pnexts[i]], nws[i] = merge(pws[i], pws[pnexts[i]]);
+            }
             m_nextss.push_back(nnexts), m_wss.push_back(nws);
         }
     }

@@ -15,29 +15,39 @@ public:
      *
      * @return T 最小値
      */
-    static constexpr auto min() -> U { return Engine::min(); }
+    static constexpr auto min() -> U {
+        return Engine::min();
+    }
     /**
      * @brief 生成される値の最大値
      *
      * @return T 最大値
      */
-    static constexpr auto max() -> U { return Engine::max(); }
+    static constexpr auto max() -> U {
+        return Engine::max();
+    }
     /**
      * @brief コンストラクタ
      */
-    RNG() : RNG(std::random_device{}()) {}
+    RNG()
+        : RNG(std::random_device{}()) {
+    }
     /**
      * @brief コンストラクタ
      *
      * @param seed シード
      */
-    RNG(U seed) : m_rng(seed) {}
+    RNG(U seed)
+        : m_rng(seed) {
+    }
     /**
      * @brief 乱数生成
      *
      * @return T 乱数
      */
-    auto operator()() -> U { return m_rng(); }
+    auto operator()() -> U {
+        return m_rng();
+    }
     /**
      * @brief 乱数生成 (範囲指定)
      *
@@ -61,7 +71,9 @@ public:
      * @return Vec<T> 乱数列
      */
     template <typename T> auto vec(int N, T min, T max) -> Vec<T> {
-        return genVec<T>(N, [&]() { return val<T>(min, max); });
+        return genVec<T>(N, [&]() {
+            return val<T>(min, max);
+        });
     }
 private:
     Engine m_rng;

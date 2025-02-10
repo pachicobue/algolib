@@ -14,7 +14,9 @@ int main() {
     }
     const auto ds = bellmanFord(g, r);
     for (int i : rep(V)) {
-        if (ds[i] <= -INF<int>) { return out.ln("NEGATIVE CYCLE"); }
+        if (ds[i] <= -INF<int>) {
+            return out.ln("NEGATIVE CYCLE");
+        }
     }
     for (int i : rep(V)) {
         if (ds[i] >= INF<int>) {

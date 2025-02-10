@@ -39,7 +39,9 @@ int main() {
         Map<int, i64> dp3;
         int one = 0;
         for (const auto& e : g[c]) {
-            if (used[e.to]) { continue; }
+            if (used[e.to]) {
+                continue;
+            }
             Map<int, i64> subdp1;
             Map<P, i64> subdp2;
             Map<int, i64> subdp3;
@@ -63,7 +65,9 @@ int main() {
                 }
                 for (const auto& e : g[u]) {
                     const int v = e.to;
-                    if (v == p or used[v]) { continue; }
+                    if (v == p or used[v]) {
+                        continue;
+                    }
                     const int k = e.cost;
                     auto nks = ks;
                     if (ks.first == k or ks.second == k) {
@@ -73,14 +77,18 @@ int main() {
                     } else {
                         continue;
                     }
-                    if (nks.first > nks.second) { std::ranges::swap(nks.first, nks.second); }
+                    if (nks.first > nks.second) {
+                        std::ranges::swap(nks.first, nks.second);
+                    }
                     dfs(v, u, nks);
                 }
             })(e.to, c, P{e.cost, INF<int>});
             ans -= f(subdp1, subdp2, subdp3, sone);
         }
         ans += f(dp1, dp2, dp3, one);
-        for (int nc : cg[c]) { dfs(nc); }
+        for (int nc : cg[c]) {
+            dfs(nc);
+        }
     })(cr);
     out.ln(ans);
     return 0;

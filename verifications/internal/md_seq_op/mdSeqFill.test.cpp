@@ -13,7 +13,9 @@ template <typename Vssss> void test() {
     for (int i : rep(3)) {
         for (int j : rep(2)) {
             for (int k : rep(2)) {
-                for (int l : rep(5)) { assert(xssss[i][j][k][l] == X); }
+                for (int l : rep(5)) {
+                    assert(xssss[i][j][k][l] == X);
+                }
             }
         }
     }

@@ -17,16 +17,24 @@ template <typename mint> auto bostanMori(Polynomial<mint> F, Polynomial<mint> G,
     assert(not G.isZero());
     const int ford = F.order(), gord = G.order();
     assert(gord <= ford);
-    if (N < (i64)(ford - gord)) { return 0; }
+    if (N < (i64)(ford - gord)) {
+        return 0;
+    }
     F <<= ford, G <<= gord, N -= (ford - gord);
     while (N > 0) {
         F.shrink(N + 1), G.shrink(N + 1);
         Polynomial<mint> mG;
-        for (int i : rep(G.size())) { mG[i] = G[i] * (i % 2 == 0 ? 1 : -1); }
+        for (int i : rep(G.size())) {
+            mG[i] = G[i] * (i % 2 == 0 ? 1 : -1);
+        }
         const auto nG = G * mG;
         const auto nF = F * mG;
-        for (int i : rep(ceilDiv(nF.size(), 2))) { F[i] = nF.at(2 * i + (N % 2)); }
-        for (int i : rep(ceilDiv(nG.size(), 2))) { G[i] = nG.at(2 * i); }
+        for (int i : rep(ceilDiv(nF.size(), 2))) {
+            F[i] = nF.at(2 * i + (N % 2));
+        }
+        for (int i : rep(ceilDiv(nG.size(), 2))) {
+            G[i] = nG.at(2 * i);
+        }
         N /= 2;
     }
     return F[0] / G[0];
@@ -42,7 +50,9 @@ template <typename mint> auto bostanMori(Polynomial<mint> F, Polynomial<mint> G,
 template <typename mint> auto guessNthTerm(const Vec<mint>& As, i64 N) -> mint {
     const Polynomial<mint> G{berlekampMassey(As)};
     const int L = G.size();
-    if (L == 1) { return As[0]; }
+    if (L == 1) {
+        return As[0];
+    }
     const auto F = (Polynomial<mint>{As} * G).low(L - 1);
     return bostanMori(F, G, N);
 }

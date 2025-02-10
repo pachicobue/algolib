@@ -21,11 +21,15 @@ void int2Test() {
     LOOP (100) {
         auto n = rng.val(-100, 100);
         auto d = rng.val(-100, 100);
-        if (n == 0 and d == 0) { continue; }
+        if (n == 0 and d == 0) {
+            continue;
+        }
         Rational v{n, d};
         const auto g = std::gcd(n, d);
         n /= g, d /= g;
-        if (d < 0) { n = -n, d = -d; }
+        if (d < 0) {
+            n = -n, d = -d;
+        }
         assert(v.num() == n);
         assert(v.den() == d);
     }

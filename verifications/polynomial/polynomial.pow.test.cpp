@@ -11,7 +11,9 @@ int main() {
     Polynomial<mint> as{in.vec<mint>(N)};
     const auto bs = as.pow(M, N);
     Vec<mint> ans(N);
-    for (int i : rep(N)) { ans[i] = bs.at(i); }
+    for (int i : rep(N)) {
+        ans[i] = bs.at(i);
+    }
     out.ln(ans);
     return 0;
 }

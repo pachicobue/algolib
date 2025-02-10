@@ -7,7 +7,9 @@
 #include "utility/rng.hpp"
 inline int check(u64 X) {
     for (int i = 0; i < 64; i++) {
-        if ((1_u64 << i) >= X) { return i; }
+        if ((1_u64 << i) >= X) {
+            return i;
+        }
     }
     return 64;
 }

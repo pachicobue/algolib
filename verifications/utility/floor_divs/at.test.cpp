@@ -7,10 +7,14 @@ void test() {
         Vec<i64> actual;
         for (i64 i : irange(X, 0, -1)) {
             const i64 y = X / i;
-            if (actual.empty() or actual.back() != y) { actual.push_back(y); }
+            if (actual.empty() or actual.back() != y) {
+                actual.push_back(y);
+            }
         }
         const auto fds = FloorDivs{X};
-        for (int i : rep(actual.size())) { assert(fds.at(i) == actual[i]); }
+        for (int i : rep(actual.size())) {
+            assert(fds.at(i) == actual[i]);
+        }
     }
 }
 int main() {

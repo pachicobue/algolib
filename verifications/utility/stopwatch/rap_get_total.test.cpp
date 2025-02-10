@@ -16,4 +16,6 @@ void test() {
     }
     assert(std::abs(sw.total<std::chrono::milliseconds>() - DELTA * 10) <= ERR * 10);
 }
-int main() { test(); }
+int main() {
+    test();
+}

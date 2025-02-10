@@ -29,7 +29,9 @@ template <typename T> class MonotoneCHT {
         const auto& [a1, b1] = l1;
         const auto& [a2, b2] = l2;
         assert(a1 > a2);
-        if (x == Null) { return true; }
+        if (x == Null) {
+            return true;
+        }
         if constexpr (std::is_integral_v<T>) {
             return x < ceilDiv(b2 - b1, a1 - a2);
         } else {
@@ -40,7 +42,9 @@ public:
     /**
      * @brief コンストラクタ
      */
-    MonotoneCHT() : m_prev_x{Null} {}
+    MonotoneCHT()
+        : m_prev_x{Null} {
+    }
     /**
      * @brief 直線追加
      * @attention 以前追加した直線の傾き以下である必要あり
@@ -48,13 +52,19 @@ public:
      * @param l 直線
      */
     auto addLine(const L& l) -> void {
-        if (m_lines.empty()) { return m_lines.push_back(l), void(); }
+        if (m_lines.empty()) {
+            return m_lines.push_back(l), void();
+        }
         if (m_lines.back().first == l.first) {
-            if (m_lines.back().second <= l.second) { return; }
+            if (m_lines.back().second <= l.second) {
+                return;
+            }
             m_lines.pop_back();
         }
         while ((int)m_lines.size() >= 2) {
-            if (not popAble(m_lines[m_lines.size() - 2], m_lines[m_lines.size() - 1], l)) { break; }
+            if (not popAble(m_lines[m_lines.size() - 2], m_lines[m_lines.size() - 1], l)) {
+                break;
+            }
             m_lines.pop_back();
         }
         m_lines.push_back(l);
@@ -67,11 +77,15 @@ public:
      * @return Opt<L> 最小値を取る直線 (存在しなければNull)
      */
     auto minLine(T x) -> Opt<L> {
-        if (m_lines.empty()) { return Null; }
+        if (m_lines.empty()) {
+            return Null;
+        }
         assert(m_prev_x == Null or m_prev_x.value() <= x);
         m_prev_x = x;
         while (m_lines.size() >= 2) {
-            if (comp(m_lines[0], m_lines[1], x)) { break; }
+            if (comp(m_lines[0], m_lines[1], x)) {
+                break;
+            }
             m_lines.pop_front();
         }
         return m_lines.front();

@@ -11,7 +11,9 @@ inline auto divisors(const i64 N) -> Vec<i64> {
     for (i64 i = 1; i * i <= N; i++) {
         if (N % i == 0) {
             head.push_back(i);
-            if (i * i != N) { tail.push_back(N / i); }
+            if (i * i != N) {
+                tail.push_back(N / i);
+            }
         }
     }
     seqReverse(tail), seqConcat(head, tail);

@@ -12,7 +12,9 @@ int main() {
     const auto cs = seqConcatCopy(Vec<mint>{1}, in.vec<mint>(D));
     Polynomial<mint> f{as};
     Polynomial<mint> g{cs};
-    for (int i : irange(1, D + 1)) { g[i] *= (-1); }
+    for (int i : irange(1, D + 1)) {
+        g[i] *= (-1);
+    }
     (f *= g).shrink(D);
     const auto ans = bostanMori(f, g, K);
     out.ln(ans.val());

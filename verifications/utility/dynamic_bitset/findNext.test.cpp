@@ -6,11 +6,15 @@
 void test() {
     const auto N = 1000;
     DynamicBitset bs{N};
-    for (int i : rep(N)) { bs.set(i, rng.val(0, 1)); }
+    for (int i : rep(N)) {
+        bs.set(i, rng.val(0, 1));
+    }
     int p = -1;
     while (p + 1 < N) {
         int np = p + 1;
-        while (np < N and not bs.test(np)) { np++; }
+        while (np < N and not bs.test(np)) {
+            np++;
+        }
         assert(bs.findNext(p) == np);
         p = np;
     }

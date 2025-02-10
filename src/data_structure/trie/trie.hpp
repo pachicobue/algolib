@@ -11,8 +11,13 @@ template <int SIGMA> class Trie {
 public:
     static constexpr int NIL = -1;
     struct Node {
-        Node() : Node{false, 0} {}
-        Node(bool isKey, int depth) : isKey{isKey}, depth{depth} { mdSeqFill(sons, NIL); }
+        Node()
+            : Node{false, 0} {
+        }
+        Node(bool isKey, int depth)
+            : isKey{isKey}, depth{depth} {
+            mdSeqFill(sons, NIL);
+        }
         bool isKey;
         int depth;
         Arr<int, SIGMA> sons;
@@ -20,7 +25,9 @@ public:
     /**
      * @brief コンストラクタ
      */
-    Trie() : m_nodes{Node{}} {}
+    Trie()
+        : m_nodes{Node{}} {
+    }
     /**
      * @brief 文字列追加
      *
@@ -31,7 +38,9 @@ public:
         for (int d : rep(std::size(vs))) {
             const auto v = vs[d];
             assert(v < SIGMA);
-            if (m_nodes[index].sons[v] == NIL) { m_nodes[index].sons[v] = alloc(false, d + 1); }
+            if (m_nodes[index].sons[v] == NIL) {
+                m_nodes[index].sons[v] = alloc(false, d + 1);
+            }
             index = m_nodes[index].sons[v];
         }
         m_nodes[index].isKey = true;
@@ -42,20 +51,26 @@ public:
      * @param i ノードindex (indexはDFSで求まる)
      * @return Node& ノードの参照
      */
-    auto operator[](int i) -> Node& { return m_nodes[i]; }
+    auto operator[](int i) -> Node& {
+        return m_nodes[i];
+    }
     /**
      * @brief ノード参照
      *
      * @param i ノードindex (indexはDFSで求まる)
      * @return Node& ノードの参照
      */
-    auto operator[](int i) const -> const Node& { return m_nodes[i]; }
+    auto operator[](int i) const -> const Node& {
+        return m_nodes[i];
+    }
     /**
      * @brief ノード数
      *
      * @return int ノード数
      */
-    auto size() const -> int { return (int)m_nodes.size(); }
+    auto size() const -> int {
+        return (int)m_nodes.size();
+    }
 private:
     auto alloc(bool isKey, int depth) -> int {
         m_nodes.push_back(Node{isKey, depth});

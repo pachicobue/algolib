@@ -10,7 +10,9 @@ int main() {
     const auto [N, Q] = in.tup<int, int>();
     auto as = in.vec<u32>(N);
     Zipper<u32> zipper(as);
-    for (auto& a : as) { a = zipper.zip(a); }
+    for (auto& a : as) {
+        a = zipper.zip(a);
+    }
     const int L = zipper.size();
     FenwickTree<int> bit(Vec<int>(L, 0));
     u64 inv = 0;
@@ -36,10 +38,14 @@ int main() {
     };
 
     Vec<int> ls(Q), rs(Q);
-    for (int q : rep(Q)) { std::tie(ls[q], rs[q]) = in.tup<int, int>(); }
+    for (int q : rep(Q)) {
+        std::tie(ls[q], rs[q]) = in.tup<int, int>();
+    }
     Mo mo(ls, rs);
     Vec<u64> ans(Q);
-    mo.solve(right, left, down, up, [&](int q) { ans[q] = inv; });
+    mo.solve(right, left, down, up, [&](int q) {
+        ans[q] = inv;
+    });
     out.ln(ans);
 
     return 0;

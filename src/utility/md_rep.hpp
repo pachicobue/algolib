@@ -7,18 +7,28 @@
 template <typename T> class mdRep {
 private:
     struct itr {
-        itr(const Vec<Vec<T>>& ranges) : m_ranges{ranges}, m_indexes(m_ranges.size(), 0), m_end{ranges.empty()} {}
-        auto operator!=(const itr&) const -> bool { return not m_end; }
+        itr(const Vec<Vec<T>>& ranges)
+            : m_ranges{ranges}, m_indexes(m_ranges.size(), 0), m_end{ranges.empty()} {
+        }
+        auto operator!=(const itr&) const -> bool {
+            return not m_end;
+        }
         auto operator*() const -> const Vec<T>& {
             Vec<T> Ans(m_ranges.size());
-            for (int i : rep(m_ranges.size())) { Ans[i] = m_ranges[i][m_indexes[i]]; }
+            for (int i : rep(m_ranges.size())) {
+                Ans[i] = m_ranges[i][m_indexes[i]];
+            }
             return Ans;
         }
         auto operator++() -> itr& {
             for (int i : per(m_ranges.size())) {
                 m_indexes[i]++;
-                if (m_indexes[i] < (int)m_ranges[i].size()) { break; }
-                if (i == 0) { m_end = true; }
+                if (m_indexes[i] < (int)m_ranges[i].size()) {
+                    break;
+                }
+                if (i == 0) {
+                    m_end = true;
+                }
                 m_indexes[i] = 0;
             }
             return *this;
@@ -35,19 +45,25 @@ public:
      *
      * @param ranges (ranges[0] x ... x ranges[D-1]) が Rep範囲 になる
      */
-    mdRep(const Vec<Vec<T>>& ranges) : m_ranges(ranges) {}
+    mdRep(const Vec<Vec<T>>& ranges)
+        : m_ranges(ranges) {
+    }
     /**
      * @brief begin
      * @attention range-based for からのみ呼ばれる想定
      *
      * @return itr begin()
      */
-    auto begin() const -> itr { return itr{m_ranges}; }
+    auto begin() const -> itr {
+        return itr{m_ranges};
+    }
     /**
      * @brief end
      * @attention range-based for からのみ呼ばれる想定
      *
      * @return itr end()
      */
-    auto end() const -> itr { return itr{m_ranges}; }
+    auto end() const -> itr {
+        return itr{m_ranges};
+    }
 };

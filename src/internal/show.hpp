@@ -7,7 +7,9 @@
 namespace show_impl {
 auto dump(auto x, auto... args) -> void {
     std::cerr << x;
-    if constexpr (sizeof...(args) > 0) { std::cerr << ", ", dump(args...); }
+    if constexpr (sizeof...(args) > 0) {
+        std::cerr << ", ", dump(args...);
+    }
 }
 } // namespace show_impl
 

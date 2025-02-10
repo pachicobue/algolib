@@ -11,7 +11,9 @@ public:
     /**
      * @brief コンストラクタ
      */
-    IntBases() { mdSeqFill(m_vis, -1); }
+    IntBases() {
+        mdSeqFill(m_vis, -1);
+    }
     /**
      * @brief 元vを追加する
      *
@@ -23,7 +25,9 @@ public:
         auto reduced_v = v;
         u64 mask = 0;
         for (int i : rep(m_reduced_bases.size())) {
-            if (chmin(reduced_v, reduced_v ^ m_reduced_bases[i])) { mask ^= m_masks[i]; }
+            if (chmin(reduced_v, reduced_v ^ m_reduced_bases[i])) {
+                mask ^= m_masks[i];
+            }
         }
         if (reduced_v) {
             const int vi = m_reduced_bases.size();
@@ -46,19 +50,25 @@ public:
      *
      * @return const Vec<u64>& 基底をなす元の数列
      */
-    auto origBases() const -> const Vec<u64>& { return m_orig_bases; }
+    auto origBases() const -> const Vec<u64>& {
+        return m_orig_bases;
+    }
     /**
      * @brief 基底を掃き出した数列
      *
      * @return const Vec<u64>& 基底を掃き出した数列
      */
-    auto reducedBases() const -> const Vec<u64>& { return m_reduced_bases; }
+    auto reducedBases() const -> const Vec<u64>& {
+        return m_reduced_bases;
+    }
     /**
      * @brief 階数
      *
      * @return int 階数
      */
-    auto rank() const -> int { return m_reduced_bases.size(); }
+    auto rank() const -> int {
+        return m_reduced_bases.size();
+    }
     /**
      * @brief 元vを基底の線形結合で表す
      *
@@ -69,7 +79,9 @@ public:
         u64 mask = 0;
         for (int j : irange(D - 1, -1, -1)) {
             if (isBitOn(v, j)) {
-                if (m_vis[j] == -1) { return std::nullopt; }
+                if (m_vis[j] == -1) {
+                    return std::nullopt;
+                }
                 const int vi = m_vis[j];
                 v ^= m_reduced_bases[vi];
                 mask ^= m_masks[vi];

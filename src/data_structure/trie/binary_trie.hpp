@@ -12,15 +12,22 @@ class BinaryTrie {
 public:
     static constexpr int NIL = -1;
     struct Node {
-        Node() : Node{0} {}
-        Node(int sub) : sub{sub} { mdSeqFill(sons, NIL); }
+        Node()
+            : Node{0} {
+        }
+        Node(int sub)
+            : sub{sub} {
+            mdSeqFill(sons, NIL);
+        }
         int sub;
         Arr<int, 2> sons;
     };
     /**
      * @brief コンストラクタ
      */
-    BinaryTrie() : m_xor{}, m_nodes{Node{}} {}
+    BinaryTrie()
+        : m_xor{}, m_nodes{Node{}} {
+    }
     /**
      * @brief 値追加
      *
@@ -32,7 +39,9 @@ public:
         for (int d : per(D)) {
             m_nodes[index].sub++;
             const int v = isBitOn(X ^ m_xor, d);
-            if (m_nodes[index].sons[v] == NIL) { m_nodes[index].sons[v] = alloc(0); }
+            if (m_nodes[index].sons[v] == NIL) {
+                m_nodes[index].sons[v] = alloc(0);
+            }
             index = m_nodes[index].sons[v];
         }
         m_nodes[index].sub++;
@@ -67,13 +76,17 @@ public:
      *
      * @return i64 最小値
      */
-    auto mdSeqMin() const -> i64 { return minMax(false); }
+    auto mdSeqMin() const -> i64 {
+        return minMax(false);
+    }
     /**
      * @brief 最大値
      *
      * @return i64 最大値
      */
-    auto mdSeqMax() const -> i64 { return minMax(true); }
+    auto mdSeqMax() const -> i64 {
+        return minMax(true);
+    }
     /**
      * @brief 一括削除
      */
@@ -87,14 +100,18 @@ public:
      *
      * @return int 要素数
      */
-    int size() const { return m_nodes[0].sub; }
+    int size() const {
+        return m_nodes[0].sub;
+    }
     /**
      * @brief 空かどうか
      *
      * @return true 空
      * @return false 空ではない
      */
-    bool empty() const { return size() == 0; }
+    bool empty() const {
+        return size() == 0;
+    }
 private:
     int alloc(bool sub) {
         m_nodes.push_back(Node{sub});

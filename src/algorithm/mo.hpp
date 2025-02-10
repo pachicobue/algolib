@@ -15,7 +15,8 @@ public:
      * @param xs ターミナルのx座標
      * @param ys ターミナルのy座標
      */
-    Mo(const Vec<int>& xs, const Vec<int>& ys) : m_xs{xs}, m_ys{ys}, m_is{iotaVec(m_xs.size())} {
+    Mo(const Vec<int>& xs, const Vec<int>& ys)
+        : m_xs{xs}, m_ys{ys}, m_is{iotaVec(m_xs.size())} {
         assert(xs.size() == ys.size());
         assert(not xs.empty());
         const auto [mx, Mx] = std::ranges::minmax(xs);
@@ -42,10 +43,18 @@ public:
         for (int ii : rep(m_xs.size())) {
             const int i = m_is[ii];
             const int nx = m_xs[i], ny = m_ys[i];
-            for (; x > nx; x--) { left(x, y); }
-            for (; y < ny; y++) { down(x, y); }
-            for (; x < nx; x++) { right(x, y); }
-            for (; y > ny; y--) { up(x, y); }
+            for (; x > nx; x--) {
+                left(x, y);
+            }
+            for (; y < ny; y++) {
+                down(x, y);
+            }
+            for (; x < nx; x++) {
+                right(x, y);
+            }
+            for (; y > ny; y--) {
+                up(x, y);
+            }
             sol(i);
         }
     }

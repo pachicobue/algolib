@@ -19,12 +19,18 @@ public:
           m_hcap((int)std::bit_ceil((u64)m_hsize)),
           m_wcap((int)std::bit_ceil((u64)m_wsize)),
           m_xss(m_hcap + 1, Vec<T>(m_wcap + 1, T{})) {
-        for (int i : rep(m_hsize)) { std::ranges::copy(xss[i], m_xss[i + 1].begin() + 1); }
-        for (int i : irange(1, m_hcap)) {
-            for (int j : irange(1, m_wcap)) { m_xss[i][j + (j & -j)] += m_xss[i][j]; }
+        for (int i : rep(m_hsize)) {
+            std::ranges::copy(xss[i], m_xss[i + 1].begin() + 1);
         }
         for (int i : irange(1, m_hcap)) {
-            for (int j : irange(1, m_wcap)) { m_xss[i + (i & -i)][j] += m_xss[i][j]; }
+            for (int j : irange(1, m_wcap)) {
+                m_xss[i][j + (j & -j)] += m_xss[i][j];
+            }
+        }
+        for (int i : irange(1, m_hcap)) {
+            for (int j : irange(1, m_wcap)) {
+                m_xss[i + (i & -i)][j] += m_xss[i][j];
+            }
         }
     }
     /**
@@ -34,7 +40,9 @@ public:
      * @param M 横
      * @param x 初期値
      */
-    FenwickTree2D(int N, int M, const T& x = T{}) : FenwickTree2D{Vec<Vec<T>>(N, Vec<T>(M, x))} {}
+    FenwickTree2D(int N, int M, const T& x = T{})
+        : FenwickTree2D{Vec<Vec<T>>(N, Vec<T>(M, x))} {
+    }
     /**
      * @brief 一点加算 X[i][j] <- X[i][j]+x
      *
@@ -46,7 +54,9 @@ public:
         assert(0 <= i and i < m_hsize);
         assert(0 <= j and j < m_wsize);
         for (int iind = i + 1; iind <= m_hcap; iind += iind & (-iind)) {
-            for (int jind = j + 1; jind <= m_wcap; jind += jind & (-jind)) { m_xss[iind][jind] += x; }
+            for (int jind = j + 1; jind <= m_wcap; jind += jind & (-jind)) {
+                m_xss[iind][jind] += x;
+            }
         }
     }
     /**
@@ -61,7 +71,9 @@ public:
         assert(0 <= jsup and jsup <= m_wsize);
         T sum{};
         for (int i = isup; i != 0; i &= i - 1) {
-            for (int j = jsup; j != 0; j &= j - 1) { sum += m_xss[i][j]; }
+            for (int j = jsup; j != 0; j &= j - 1) {
+                sum += m_xss[i][j];
+            }
         }
         return sum;
     }
@@ -84,7 +96,9 @@ public:
         os << "[";
         for (int i : rep(fw.m_hsize)) {
             os << "[";
-            for (int j : rep(fw.m_wsize)) { os << (i == 0 ? "" : ",") << fw.sum(i, i + 1, j, j + 1); }
+            for (int j : rep(fw.m_wsize)) {
+                os << (i == 0 ? "" : ",") << fw.sum(i, i + 1, j, j + 1);
+            }
             os << "]\n";
         }
         return os;

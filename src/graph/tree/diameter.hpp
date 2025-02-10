@@ -14,7 +14,9 @@ template <typename T> auto diameter(const Graph<T>& g) -> Pair<T, Vec<int>> {
     const int t = seqMaxInd(ds);
     const i64 D = ds[t];
     Vec<int> vs;
-    for (int u = t; u != s; u = ps[u]) { vs.push_back(u); }
+    for (int u = t; u != s; u = ps[u]) {
+        vs.push_back(u);
+    }
     vs.push_back(s);
     return {D, vs};
 }

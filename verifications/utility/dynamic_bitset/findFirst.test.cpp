@@ -9,7 +9,9 @@ void test() {
     int first = N;
     for (int i : rep(N)) {
         const bool b = rng.val(0, 1);
-        if (b) { chmin(first, i); }
+        if (b) {
+            chmin(first, i);
+        }
         bs.set(i, b);
     }
     assert(bs.findFirst() == first);

@@ -10,7 +10,11 @@ void test() {
     LOOP (100) {
         const auto xs = rng.vec(N, min, max);
         assert((int)xs.size() == N);
-        assert(std::ranges::all_of(xs, [&](int x) { return min <= x and x <= max; }));
+        assert(std::ranges::all_of(xs, [&](int x) {
+            return min <= x and x <= max;
+        }));
     }
 }
-int main() { test(); }
+int main() {
+    test();
+}

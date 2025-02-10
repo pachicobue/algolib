@@ -10,7 +10,9 @@ void test() {
         const auto N = rng.val(1, 100);
         const auto M = rng.val(0, N + 1);
         mint ans = 1;
-        for (int i : rep(M)) { ans *= (N - i); }
+        for (int i : rep(M)) {
+            ans *= (N - i);
+        }
         assert(mint::perm(N, M) == ans);
     }
 }

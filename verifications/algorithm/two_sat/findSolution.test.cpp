@@ -15,7 +15,9 @@ int main() {
         out.ln("s SATISFIABLE");
         auto ans = iotaVec(N, 1);
         for (int i : rep(N)) {
-            if (not sol.value()[i + 1]) { ans[i] = -ans[i]; }
+            if (not sol.value()[i + 1]) {
+                ans[i] = -ans[i];
+            }
         }
         out.ln("v", ans, "0");
     } else {

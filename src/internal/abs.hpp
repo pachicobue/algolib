@@ -7,4 +7,6 @@
  * @param x
  * @return auto |x|
  */
-constexpr auto ABS(auto x) { return (x >= 0 ? x : -x); }
+constexpr auto ABS(auto x) {
+    return (x >= 0 ? x : -x);
+}

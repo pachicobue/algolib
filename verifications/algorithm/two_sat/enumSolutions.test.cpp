@@ -9,14 +9,18 @@ void test() {
     TwoSat twoSat{N};
     const auto M = rng.val(10, 1000);
     Vec<bool> sol(N + 1);
-    for (int i : rep(N + 1)) { sol[i] = rng.val(0, 1); }
+    for (int i : rep(N + 1)) {
+        sol[i] = rng.val(0, 1);
+    }
     Vec<Pair<int, int>> clauses;
     LOOP (M) {
         const auto x = rng.val(1, N);
         const auto xnot = rng.val(0, 1);
         const auto y = rng.val(1, N);
         const auto ynot = rng.val(0, 1);
-        if (((xnot ? 1 - sol[x] : sol[x]) or (ynot ? 1 - sol[y] : sol[y])) == false) { continue; }
+        if (((xnot ? 1 - sol[x] : sol[x]) or (ynot ? 1 - sol[y] : sol[y])) == false) {
+            continue;
+        }
         const int xi = x * (xnot ? -1 : 1);
         const int yi = y * (ynot ? -1 : 1);
         clauses.push_back({xi, yi});
@@ -28,7 +32,9 @@ void test() {
             const auto xnot = xi < 0;
             const auto y = std::abs(yi);
             const auto ynot = yi < 0;
-            if (((xnot ? 1 - sol[x] : sol[x]) or (ynot ? 1 - sol[y] : sol[y])) == false) { return false; }
+            if (((xnot ? 1 - sol[x] : sol[x]) or (ynot ? 1 - sol[y] : sol[y])) == false) {
+                return false;
+            }
         }
         return true;
     };

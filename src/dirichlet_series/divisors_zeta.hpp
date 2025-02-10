@@ -17,9 +17,13 @@ template <typename T> auto divisorsZeta(const Vec<T>& F, bool subset, const Vec<
     auto nF = F;
     for (const int p : primes) {
         if (subset) {
-            for (int i = 1; i * p < N; i++) { nF[i * p] += nF[i]; }
+            for (int i = 1; i * p < N; i++) {
+                nF[i * p] += nF[i];
+            }
         } else {
-            for (int i = (N - 1) / p; i >= 1; i--) { nF[i] += nF[i * p]; }
+            for (int i = (N - 1) / p; i >= 1; i--) {
+                nF[i] += nF[i * p];
+            }
         }
     }
     return nF;
@@ -32,4 +36,6 @@ template <typename T> auto divisorsZeta(const Vec<T>& F, bool subset, const Vec<
  * @retval nF[i]=\sum_{j|i}F[j] (subset == Trueの場合)
  * @retval nF[i]=\sum_{i|j}F[j] (subset == Falseの場合)
  */
-auto divisorsZeta(const auto& F, bool subset) { return divisorsZeta(F, subset, EratosthenesSieve{(int)F.size()}.primes()); }
+auto divisorsZeta(const auto& F, bool subset) {
+    return divisorsZeta(F, subset, EratosthenesSieve{(int)F.size()}.primes());
+}

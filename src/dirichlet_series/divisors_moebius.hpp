@@ -17,9 +17,13 @@ template <typename T> auto divisorsMoebius(const Vec<T>& F, bool subset, const V
     auto nF = F;
     for (int p : primes) {
         if (subset) {
-            for (int i = (N - 1) / p; i >= 1; i--) { nF[i * p] -= nF[i]; }
+            for (int i = (N - 1) / p; i >= 1; i--) {
+                nF[i * p] -= nF[i];
+            }
         } else {
-            for (int i = 1; i * p < N; i++) { nF[i] -= nF[i * p]; }
+            for (int i = 1; i * p < N; i++) {
+                nF[i] -= nF[i * p];
+            }
         }
     }
     return nF;
@@ -32,4 +36,6 @@ template <typename T> auto divisorsMoebius(const Vec<T>& F, bool subset, const V
  * @retval nF[i]=\sum_{j|i}F[j]*\mu(i/j) (subset == Trueの場合)
  * @retval nF[i]=\sum_{i|j}F[j]*\mu(j/i) (subset == Falseの場合)
  */
-auto divisorsMoebius(const auto& F, bool subset) { return divisorsMoebius(F, subset, EratosthenesSieve{(int)F.size()}.primes()); }
+auto divisorsMoebius(const auto& F, bool subset) {
+    return divisorsMoebius(F, subset, EratosthenesSieve{(int)F.size()}.primes());
+}

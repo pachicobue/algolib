@@ -15,7 +15,9 @@ int main() {
     T.push_back('$');
     auto rs = manacher(T);
     Vec<int> ans;
-    for (int i : irange(1, 2 * N)) { ans.push_back(rs[i] - 1); }
+    for (int i : irange(1, 2 * N)) {
+        ans.push_back(rs[i] - 1);
+    }
     out.ln(ans);
     return 0;
 }

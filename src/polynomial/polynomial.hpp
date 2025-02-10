@@ -21,27 +21,35 @@ public:
      *
      * @param args Vec<T>のコンストラクタに渡す引数
      */
-    Polynomial(const auto&... args) : Vec<mint>{args...} {}
+    Polynomial(const auto&... args)
+        : Vec<mint>{args...} {
+    }
 
     /**
      * @brief 数列としての参照(constのみ)
      *
      * @return const Vec<T>& 数列としての参照
      */
-    auto asVec() const -> const Vec<mint>& { return static_cast<const Vec<mint>&>(*this); }
+    auto asVec() const -> const Vec<mint>& {
+        return static_cast<const Vec<mint>&>(*this);
+    }
     /**
      * @brief 次数
      *
      * @return int deg(F)
      */
-    auto deg() const -> int { return (int)size() - 1; }
+    auto deg() const -> int {
+        return (int)size() - 1;
+    }
     /**
      * @brief F(x) <- F(x) mod x^n
      *
      * @param n 指数
      */
     auto shrink(i64 n) -> void {
-        if (n >= (i64)size()) { return; }
+        if (n >= (i64)size()) {
+            return;
+        }
         resize(n), normalize();
     }
     /**
@@ -61,7 +69,9 @@ public:
      * @return T& F(x)[x^n]
      */
     auto operator[](int n) -> mint& {
-        if (n >= (int)size()) { resize(n + 1, mint{}); }
+        if (n >= (int)size()) {
+            resize(n + 1, mint{});
+        }
         return Vec<mint>::operator[](n);
     }
     /**
@@ -70,7 +80,9 @@ public:
      * @param n 指数
      * @return T F(x)[x^n]
      */
-    auto at(i64 n) const -> mint { return (n < (i64)size() ? (*this)[n] : mint{0}); }
+    auto at(i64 n) const -> mint {
+        return (n < (i64)size() ? (*this)[n] : mint{0});
+    }
     /**
      * @brief -F(x)
      *
@@ -79,7 +91,9 @@ public:
      */
     friend auto operator-(const Polynomial& F) -> Polynomial {
         Polynomial ans = F;
-        for (auto& v : ans) { v = -v; }
+        for (auto& v : ans) {
+            v = -v;
+        }
         return ans;
     }
     /**
@@ -90,7 +104,9 @@ public:
      * @return Polynomial& F(x)
      */
     friend auto operator+=(Polynomial& F, const Polynomial& G) -> Polynomial& {
-        for (int i : rep(G.size())) { F[i] += G[i]; }
+        for (int i : rep(G.size())) {
+            F[i] += G[i];
+        }
         return F;
     }
     /**
@@ -101,7 +117,9 @@ public:
      * @return Polynomial& F(x)
      */
     friend auto operator-=(Polynomial& F, const Polynomial& G) -> Polynomial& {
-        for (int i : rep(G.size())) { F[i] -= G[i]; }
+        for (int i : rep(G.size())) {
+            F[i] -= G[i];
+        }
         return F;
     }
     /**
@@ -111,7 +129,9 @@ public:
      * @param G
      * @return Polynomial& F(x)
      */
-    friend auto operator*=(Polynomial& F, const Polynomial& G) -> Polynomial& { return F = F * G; }
+    friend auto operator*=(Polynomial& F, const Polynomial& G) -> Polynomial& {
+        return F = F * G;
+    }
     /**
      * @brief F(x) <- F(x)/G(x) (余り付き除算)
      *
@@ -119,7 +139,9 @@ public:
      * @param G
      * @return Polynomial& F(x)/G(x)
      */
-    friend auto operator/=(Polynomial& F, const Polynomial& G) -> Polynomial& { return F = F / G; }
+    friend auto operator/=(Polynomial& F, const Polynomial& G) -> Polynomial& {
+        return F = F / G;
+    }
     /**
      * @brief F(x) <- F(x)%G(x)
      *
@@ -127,7 +149,9 @@ public:
      * @param G
      * @return Polynomial& F(x)%G(x)
      */
-    friend auto operator%=(Polynomial& F, const Polynomial& G) -> Polynomial& { return F = F % G; }
+    friend auto operator%=(Polynomial& F, const Polynomial& G) -> Polynomial& {
+        return F = F % G;
+    }
     /**
      * @brief F(x) <- F(x)/(x^s) (切り捨て)
      * @attention bitシフトと逆向きなので注意(1+x+x^2+x^3 という順で考える)
@@ -136,7 +160,9 @@ public:
      * @param s シフト幅
      * @return Polynomial& F F(x)
      */
-    friend auto operator<<=(Polynomial& F, int s) -> Polynomial& { return F = (F << s); }
+    friend auto operator<<=(Polynomial& F, int s) -> Polynomial& {
+        return F = (F << s);
+    }
     /**
      * @brief F(x) <- F(x)*(x^s)
      * @attention bitシフトと逆向きなので注意(1+x+x^2+x^3 という順で考える)
@@ -145,7 +171,9 @@ public:
      * @param s シフト幅
      * @return Polynomial& F(x)
      */
-    friend auto operator>>=(Polynomial& F, int s) -> Polynomial& { return F = (F >> s); }
+    friend auto operator>>=(Polynomial& F, int s) -> Polynomial& {
+        return F = (F >> s);
+    }
     /**
      * @brief F(x)+G(x)
      *
@@ -175,7 +203,9 @@ public:
      * @param G
      * @return Polynomial F(x)*G(x)
      */
-    friend auto operator*(const Polynomial& F, const Polynomial& G) -> Polynomial { return Polynomial{convoluteMod(F, G)}; }
+    friend auto operator*(const Polynomial& F, const Polynomial& G) -> Polynomial {
+        return Polynomial{convoluteMod(F, G)};
+    }
     /**
      * @brief F(x)/G(x) (余り付き除算)
      *
@@ -183,7 +213,9 @@ public:
      * @param G
      * @return Polynomial F(x)/G(x)
      */
-    friend auto operator/(const Polynomial& F, const Polynomial& G) -> Polynomial { return quot(F, G); }
+    friend auto operator/(const Polynomial& F, const Polynomial& G) -> Polynomial {
+        return quot(F, G);
+    }
     /**
      * @brief F(x)%G(x)
      *
@@ -191,7 +223,9 @@ public:
      * @param G
      * @return Polynomial F(x)%G(x)
      */
-    friend auto operator%(const Polynomial& F, const Polynomial& G) -> Polynomial { return F - G * (F / G); }
+    friend auto operator%(const Polynomial& F, const Polynomial& G) -> Polynomial {
+        return F - G * (F / G);
+    }
     /**
      * @brief F(x)/(x^s) (切り捨て)
      * @attention bitシフトと逆向きなので注意(1+x+x^2+x^3 という順で考える)
@@ -203,7 +237,9 @@ public:
     friend auto operator<<(const Polynomial& F, int s) -> Polynomial {
         assert(s >= 0);
         Polynomial ans;
-        for (int i : irange(s, (int)F.size())) { ans[i - s] = F[i]; }
+        for (int i : irange(s, (int)F.size())) {
+            ans[i - s] = F[i];
+        }
         return ans;
     }
     /**
@@ -217,7 +253,9 @@ public:
     friend auto operator>>(const Polynomial& F, int s) -> Polynomial {
         assert(s >= 0);
         Polynomial ans;
-        for (int i : rep(F.size())) { ans[i + s] = F[i]; }
+        for (int i : rep(F.size())) {
+            ans[i + s] = F[i];
+        }
         return ans;
     }
     /**
@@ -227,7 +265,9 @@ public:
      */
     auto order() const -> int {
         for (int i : rep(size())) {
-            if ((*this)[i] != 0) { return i; }
+            if ((*this)[i] != 0) {
+                return i;
+            }
         }
         return size();
     }
@@ -237,7 +277,9 @@ public:
      * @return true F(x)==0
      * @return false F(x)!=0
      */
-    auto isZero() const -> bool { return (size() == 1) and ((*this)[0] == 0); }
+    auto isZero() const -> bool {
+        return (size() == 1) and ((*this)[0] == 0);
+    }
     /**
      * @brief (d/dx) F(x)
      *
@@ -245,7 +287,9 @@ public:
      */
     auto derivative() const -> Polynomial {
         Polynomial ans;
-        for (int i : irange(1, (int)size())) { ans[i - 1] = (*this)[i] * i; }
+        for (int i : irange(1, (int)size())) {
+            ans[i - 1] = (*this)[i] * i;
+        }
         return ans;
     }
     /**
@@ -255,7 +299,9 @@ public:
      */
     auto integral() const -> Polynomial {
         Polynomial ans;
-        for (int i : irange(1, (int)size() + 1)) { ans[i] = (*this)[i - 1] / i; }
+        for (int i : irange(1, (int)size() + 1)) {
+            ans[i] = (*this)[i - 1] / i;
+        }
         return ans;
     }
     /**
@@ -283,7 +329,9 @@ public:
      */
     auto log(int n) const -> Polynomial {
         assert(n >= 1);
-        if (n == 1) { return Polynomial{0}; }
+        if (n == 1) {
+            return Polynomial{0};
+        }
         assert((*this)[0] == 1);
         return (low(n).derivative() * inv(n)).low(n - 1).integral();
     }
@@ -313,10 +361,16 @@ public:
      */
     auto pow(i64 m, int n) const -> Polynomial {
         assert(n >= 1);
-        if (m == 0) { return Polynomial{1}; }
-        if (isZero()) { return Polynomial{0}; }
+        if (m == 0) {
+            return Polynomial{1};
+        }
+        if (isZero()) {
+            return Polynomial{0};
+        }
         const int k = order();
-        if ((i64)k >= ceilDiv((i64)n, m)) { return Polynomial{}; }
+        if ((i64)k >= ceilDiv((i64)n, m)) {
+            return Polynomial{};
+        }
         n -= k * m;
         auto f = ((*this) << k).low(n);
         const mint c = f[0];
@@ -337,7 +391,9 @@ public:
             ce *= c;
         }
         auto cs = convoluteModReverse(as, bs);
-        for (int i : rep(N)) { cs[i] *= mint::ifact(i); }
+        for (int i : rep(N)) {
+            cs[i] *= mint::ifact(i);
+        }
         return Polynomial{cs};
     }
     /**
@@ -348,7 +404,9 @@ public:
      */
     auto eval(const mint& x) const -> mint {
         mint ans = 0;
-        for (mint xe = 1; int i : rep(size())) { ans += xe * (*this)[i], xe *= x; }
+        for (mint xe = 1; int i : rep(size())) {
+            ans += xe * (*this)[i], xe *= x;
+        }
         return ans;
     }
 #ifdef HOGEPACHI
@@ -358,17 +416,25 @@ public:
     }
 #endif
 private:
-    auto operator[](const int n) const -> const mint& { return assert(n < (int)size()), Vec<mint>::operator[](n); }
+    auto operator[](const int n) const -> const mint& {
+        return assert(n < (int)size()), Vec<mint>::operator[](n);
+    }
     static Polynomial quot(const Polynomial& F, const Polynomial& G) {
         const int A = (int)F.deg(), B = (int)G.deg();
-        if (A < B) { return Polynomial{0}; }
+        if (A < B) {
+            return Polynomial{0};
+        }
         Polynomial Frev = F, Grev = G;
         seqReverse(Frev), seqReverse(Grev);
         Polynomial qrev = (Frev.low(A - B + 1) * Grev.inv(A - B + 1)).low(A - B + 1);
         return seqReverse(qrev), qrev;
     }
     void normalize() {
-        while (size() > 0 and back() == 0) { pop_back(); }
-        if (size() == 0) { push_back(0); }
+        while (size() > 0 and back() == 0) {
+            pop_back();
+        }
+        if (size() == 0) {
+            push_back(0);
+        }
     }
 };

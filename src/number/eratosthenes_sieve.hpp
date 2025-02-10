@@ -11,10 +11,15 @@ public:
      *
      * @param N N未満に対する篩
      */
-    EratosthenesSieve(int N) : m_N{N}, m_factors{iotaVec(N)} {
+    EratosthenesSieve(int N)
+        : m_N{N}, m_factors{iotaVec(N)} {
         for (int i : irange(2, N)) {
-            if (m_factors[i] != i) { continue; }
-            for (int j : irange(i + i, N, i)) { m_factors[j] = i; }
+            if (m_factors[i] != i) {
+                continue;
+            }
+            for (int j : irange(i + i, N, i)) {
+                m_factors[j] = i;
+            }
         }
     }
     /**
@@ -36,7 +41,9 @@ public:
      */
     auto isPrime(int x) const -> bool {
         assert(x < m_N);
-        if (x <= 1) { return false; }
+        if (x <= 1) {
+            return false;
+        }
         return m_factors[x] == x;
     }
     /**
@@ -47,7 +54,9 @@ public:
     auto primes() const -> Vec<int> {
         Vec<int> ps;
         for (int i : irange(2, m_N)) {
-            if (m_factors[i] == i) { ps.push_back(i); }
+            if (m_factors[i] == i) {
+                ps.push_back(i);
+            }
         }
         return ps;
     }

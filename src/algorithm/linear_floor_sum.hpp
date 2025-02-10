@@ -13,8 +13,12 @@
  */
 inline auto linearFloorSum(i64 N, i64 A, i64 B, i64 C) -> i64 {
     assert(C != 0);
-    if (N == 0) { return 0; }
-    if (C < 0) { A = -A, B = -B, C = -C; }
+    if (N == 0) {
+        return 0;
+    }
+    if (C < 0) {
+        A = -A, B = -B, C = -C;
+    }
 
     return Fix([&](auto self, i64 N, i64 A, i64 B, i64 C) -> i64 {
         const i64 a = floorDiv(A, C), b = floorDiv(B, C);

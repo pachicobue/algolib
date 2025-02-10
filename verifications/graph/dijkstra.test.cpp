@@ -12,7 +12,9 @@ int main() {
         g.addEdge(u, v, c), rg.addEdge(v, u, c);
     }
     const auto ds = dijkstra(g, S);
-    if (ds[T] >= INF<i64>) { return out.ln(-1); }
+    if (ds[T] >= INF<i64>) {
+        return out.ln(-1);
+    }
     using pii = Pair<int, int>;
     Vec<bool> used(N, false);
     Vec<pii> ans;
@@ -29,6 +31,8 @@ int main() {
     }
     seqReverse(ans);
     out.ln(ds[T], ans.size());
-    for (const auto& [u, v] : ans) { out.ln(u, v); }
+    for (const auto& [u, v] : ans) {
+        out.ln(u, v);
+    }
     return 0;
 }

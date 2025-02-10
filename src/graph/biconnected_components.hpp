@@ -14,11 +14,14 @@ public:
      *
      * @param g 無向グラフ
      */
-    BiConnectedComponent(const Graph<T>& g) : LowLink<T>{g}, m_cnum{0}, m_cs(g.E()), m_g{g} {
+    BiConnectedComponent(const Graph<T>& g)
+        : LowLink<T>{g}, m_cnum{0}, m_cs(g.E()), m_g{g} {
         Vec<int> freeEdges; // どこにも属していない辺 (祖先の関節点待ち)
         auto dfs = Fix([&](auto self, int u) -> void {
             for (const auto& [e, v] : g[u] | g.ETo) {
-                if (m_depths[v] < m_depths[u]) { continue; }
+                if (m_depths[v] < m_depths[u]) {
+                    continue;
+                }
                 freeEdges.push_back(e);
                 self(v);
                 if (m_lows[v] >= m_depths[u]) {
@@ -26,14 +29,18 @@ public:
                         const int se = freeEdges.back();
                         freeEdges.pop_back();
                         m_cs[se] = m_cnum;
-                        if (se == e) { break; }
+                        if (se == e) {
+                            break;
+                        }
                     }
                     m_cnum++;
                 }
             }
         });
         for (int i : rep(g.V())) {
-            if (m_depths[i] != 0) { continue; }
+            if (m_depths[i] != 0) {
+                continue;
+            }
             dfs(i), m_cnum++;
         }
     }
@@ -43,13 +50,17 @@ public:
      * @param eid 辺番号
      * @return int 成分番号
      */
-    auto operator[](int eid) const -> int { return assert(0 <= eid and eid < m_g.E()), m_cs[eid]; }
+    auto operator[](int eid) const -> int {
+        return assert(0 <= eid and eid < m_g.E()), m_cs[eid];
+    }
     /**
      * @brief 二重頂点連結成分数
      *
      * @return int 成分数
      */
-    auto cnum() const -> int { return m_cnum; }
+    auto cnum() const -> int {
+        return m_cnum;
+    }
     /**
      * @brief 各成分の辺集合
      *
@@ -57,7 +68,9 @@ public:
      */
     auto groups() const -> Vec<Vec<int>> {
         Vec<Vec<int>> iss(cnum());
-        for (int i : rep(m_g.V())) { iss[m_cs[i]].push_back(i); }
+        for (int i : rep(m_g.V())) {
+            iss[m_cs[i]].push_back(i);
+        }
         return iss;
     }
     /**
@@ -72,8 +85,12 @@ public:
             return (m_degs[u] >= 2);
         } else {
             for (int v : m_g[u]) {
-                if (m_depths[v] < m_depths[u]) { continue; }
-                if (m_lows[v] >= m_depths[u]) { return true; }
+                if (m_depths[v] < m_depths[u]) {
+                    continue;
+                }
+                if (m_lows[v] >= m_depths[u]) {
+                    return true;
+                }
             }
             return false;
         }
@@ -86,7 +103,9 @@ public:
     auto arts() -> Vec<int> {
         Vec<int> Ans;
         for (int u : rep(m_g.V())) {
-            if (isArt(u)) { Ans.push_back(u); }
+            if (isArt(u)) {
+                Ans.push_back(u);
+            }
         }
         return Ans;
     }

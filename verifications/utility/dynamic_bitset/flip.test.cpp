@@ -6,7 +6,9 @@
 void test() {
     const auto N = 1000;
     DynamicBitset bs{N};
-    for (int i : rep(N)) { bs.set(i, rng.val(0, 1)); }
+    for (int i : rep(N)) {
+        bs.set(i, rng.val(0, 1));
+    }
     LOOP (100) {
         const int i = rng.val(0, N - 1);
         const bool pb = bs.test(i);

@@ -19,7 +19,9 @@ template <typename T = i64> class LiChaoTree {
     };
     static auto comp(const Opt<L>& l1, const Opt<L>& l2, i64 x) -> bool // l1(x) < l2(x)
     {
-        if (l1 == Null or l2 == Null) { return l2 == Null; }
+        if (l1 == Null or l2 == Null) {
+            return l2 == Null;
+        }
         const auto& [a1, b1] = l1.value();
         const auto& [a2, b2] = l2.value();
         if constexpr (std::is_integral_v<T>) {
@@ -42,13 +44,18 @@ public:
      * @param xmin
      * @param xsup
      */
-    LiChaoTree(i64 xmin, i64 xsup) : m_xmin{xmin}, m_xsup{xsup}, m_nodes{Node{}} { assert(m_xmin < m_xsup); }
+    LiChaoTree(i64 xmin, i64 xsup)
+        : m_xmin{xmin}, m_xsup{xsup}, m_nodes{Node{}} {
+        assert(m_xmin < m_xsup);
+    }
     /**
      * @brief [x_min,x_sup) 全体に跨る直線を追加
      *
      * @param line 直線
      */
-    auto addLine(const L& line) -> void { add(line, 0, m_xmin, m_xsup); }
+    auto addLine(const L& line) -> void {
+        add(line, 0, m_xmin, m_xsup);
+    }
     /**
      * @brief [x_left, x_right) 上に跨る線分を追加
      *
@@ -57,17 +64,23 @@ public:
      * @param x_right
      */
     auto addSeg(const L& line, i64 x_left, i64 x_right) -> void {
-        if (x_left >= x_right) { return; }
+        if (x_left >= x_right) {
+            return;
+        }
         assert(m_xmin <= x_left and x_right <= m_xsup);
         Fix([&](auto self, int index, i64 lx, i64 rx) -> void {
-            if (x_right <= lx or rx <= x_left) { return; }
+            if (x_right <= lx or rx <= x_left) {
+                return;
+            }
             if (x_left <= lx and rx <= x_right) {
                 add(line, index, lx, rx);
             } else {
                 ensureSub(index);
                 const auto nindexs = m_nodes[index].sons;
                 const i64 nxs[3] = {lx, (lx + rx) / 2, rx};
-                for (int c : rep(2)) { self(nindexs[c], nxs[c], nxs[c + 1]); }
+                for (int c : rep(2)) {
+                    self(nindexs[c], nxs[c], nxs[c + 1]);
+                }
             }
         })(0, m_xmin, m_xsup);
     }
@@ -83,7 +96,9 @@ public:
         for (int index = 0; index != NIL;) {
             const auto& pl = m_nodes[index].line;
             if (pl != Null) {
-                chmin(Ans, pl, [&](auto l1, auto l2) { return comp(l1, l2, x); });
+                chmin(Ans, pl, [&](auto l1, auto l2) {
+                    return comp(l1, l2, x);
+                });
             }
             const i64 mx = (lx + rx) / 2;
             const auto& nindexs = m_nodes[index].sons;
@@ -99,14 +114,20 @@ private:
         assert(index != NIL);
         while (true) {
             if (rx - lx == 1) {
-                chmin(m_nodes[index].line, l, [&](auto l1, auto l2) { return comp(l1, l2, lx); });
+                chmin(m_nodes[index].line, l, [&](auto l1, auto l2) {
+                    return comp(l1, l2, lx);
+                });
                 break;
             }
             const auto& pl = m_nodes[index].line;
             const i64 mx = (lx + rx) / 2;
             const bool lunder = comp(l, pl, lx), munder = comp(l, pl, mx), runder = comp(l, pl, rx);
-            if (munder) { std::ranges::swap(l, m_nodes[index].line); }
-            if (lunder == runder) { break; }
+            if (munder) {
+                std::ranges::swap(l, m_nodes[index].line);
+            }
+            if (lunder == runder) {
+                break;
+            }
             ensureSub(index);
             const auto& nindexs = m_nodes[index].sons;
             const i64 nxs[3] = {lx, mx, rx};
@@ -120,7 +141,9 @@ private:
     }
     auto ensureSub(int index) -> void {
         for (int c : rep(2)) {
-            if (m_nodes[index].sons[c] == NIL) { m_nodes[index].sons[c] = alloc(); }
+            if (m_nodes[index].sons[c] == NIL) {
+                m_nodes[index].sons[c] = alloc();
+            }
         }
     }
     i64 m_xmin, m_xsup;

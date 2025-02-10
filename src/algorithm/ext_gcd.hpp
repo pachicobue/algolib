@@ -14,18 +14,30 @@
 constexpr auto extgcd(i64 a, i64 b) -> Pair<i64, i64> {
     assert(a != 0 or b != 0);
     const i64 A = ABS(a), B = ABS(b);
-    if (A == B) { return {0, (b < 0 ? -1 : 1)}; }
+    if (A == B) {
+        return {0, (b < 0 ? -1 : 1)};
+    }
     auto [x, y, g] = Fix([&](auto self, i64 a, i64 b) -> Tup<i64, i64, i64> {
         assert(0 <= a and a < b);
-        if (a == 0) { return {0, 1, b}; }
+        if (a == 0) {
+            return {0, 1, b};
+        }
         const auto [px, py, pg] = self(b % a, a);
         return {py - (b / a) * px, px, pg};
     })(std::ranges::min(A, B), std::ranges::max(A, B));
-    if (A > B) { std::ranges::swap(x, y); }
-    if (a < 0) { x = -x; }
-    if (b < 0) { y = -y; }
+    if (A > B) {
+        std::ranges::swap(x, y);
+    }
+    if (a < 0) {
+        x = -x;
+    }
+    if (b < 0) {
+        y = -y;
+    }
     // この時点で ax+by=gcd(A,B), |x|<B/g, |y|<=A/g になっているので微調整
-    if (x < 0) { x += B / g, y -= (b > 0 ? a / g : -a / g); }
+    if (x < 0) {
+        x += B / g, y -= (b > 0 ? a / g : -a / g);
+    }
     return {x, y};
 }
 /**
@@ -36,4 +48,6 @@ constexpr auto extgcd(i64 a, i64 b) -> Pair<i64, i64> {
  * @param mod
  * @return i64 ax=gcd(a,M) mod M を満たす x
  */
-constexpr auto inverseMod(i64 a, i64 mod) -> i64 { return assert(mod > 0 and a % mod != 0), extgcd(a % mod, mod).first; }
+constexpr auto inverseMod(i64 a, i64 mod) -> i64 {
+    return assert(mod > 0 and a % mod != 0), extgcd(a % mod, mod).first;
+}

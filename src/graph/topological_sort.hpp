@@ -18,7 +18,9 @@ template <typename T> auto topologicalSort(const Graph<T>& g) -> Opt<Vec<int>> {
         } else if (used[s] == 0) {
             used[s] = 1;
             for (int to : g[s]) {
-                if (not self(to)) { return false; }
+                if (not self(to)) {
+                    return false;
+                }
             }
             used[s] = 2;
             ans.push_back(s);
@@ -26,7 +28,9 @@ template <typename T> auto topologicalSort(const Graph<T>& g) -> Opt<Vec<int>> {
         return true;
     });
     for (int i : rep(N)) {
-        if (not dfs(i)) { return std::nullopt; }
+        if (not dfs(i)) {
+            return std::nullopt;
+        }
     }
     seqReverse(ans);
     return ans;

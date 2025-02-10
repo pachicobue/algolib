@@ -17,12 +17,16 @@
 template <typename mint> auto convoluteMod(const Vec<mint>& F, const Vec<mint>& G) -> Vec<mint> {
     const int LMAX = order2(mint::mod() - 1), NMAX = (1 << LMAX);
     const int A = F.size(), B = G.size();
-    if (A == 0 or B == 0) { return {}; }
+    if (A == 0 or B == 0) {
+        return {};
+    }
     const int N = A + B - 1;
     if (std::ranges::min(A, B) <= 100) { // AB<=(A+B)log(A+B) で計算量的に損するケースはこれで潰せる
         Vec<mint> ans(N, 0);
         for (int i : rep(A)) {
-            for (int j : rep(B)) { ans[i + j] += F[i] * G[j]; }
+            for (int j : rep(B)) {
+                ans[i + j] += F[i] * G[j];
+            }
         }
         return ans;
     }
@@ -38,13 +42,19 @@ template <typename mint> auto convoluteMod(const Vec<mint>& F, const Vec<mint>& 
         Vec<submint1> as1(A), bs1(B);
         Vec<submint2> as2(A), bs2(B);
         Vec<submint3> as3(A), bs3(B);
-        for (int i : rep(A)) { as1[i] = F[i].val(), as2[i] = F[i].val(), as3[i] = F[i].val(); }
-        for (int i : rep(B)) { bs1[i] = G[i].val(), bs2[i] = G[i].val(), bs3[i] = G[i].val(); }
+        for (int i : rep(A)) {
+            as1[i] = F[i].val(), as2[i] = F[i].val(), as3[i] = F[i].val();
+        }
+        for (int i : rep(B)) {
+            bs1[i] = G[i].val(), bs2[i] = G[i].val(), bs3[i] = G[i].val();
+        }
         const auto cs1 = NumberTheoriticTransform<submint1>::convolute(as1, bs1);
         const auto cs2 = NumberTheoriticTransform<submint2>::convolute(as2, bs2);
         const auto cs3 = NumberTheoriticTransform<submint3>::convolute(as3, bs3);
         Vec<mint> cs(N);
-        for (int i : rep(N)) { cs[i] = Garner::restoreMod<mint>(cs1[i], cs2[i], cs3[i]); }
+        for (int i : rep(N)) {
+            cs[i] = Garner::restoreMod<mint>(cs1[i], cs2[i], cs3[i]);
+        }
         return cs;
     }
 }
@@ -59,12 +69,16 @@ template <typename mint> auto convoluteMod(const Vec<mint>& F, const Vec<mint>& 
  */
 inline auto convoluteInt(const Vec<i64>& F, const Vec<i64>& G) -> Vec<i64> {
     const int A = F.size(), B = G.size();
-    if (A == 0 or B == 0) { return {}; }
+    if (A == 0 or B == 0) {
+        return {};
+    }
     const int N = A + B - 1;
     if (std::min(A, B) <= 100) { // AB<=(A+B)log(A+B) で計算量的に損するケースはこれで潰せる
         Vec<i64> ans(N, 0);
         for (int i : rep(A)) {
-            for (int j : rep(B)) { ans[i + j] += F[i] * G[j]; }
+            for (int j : rep(B)) {
+                ans[i + j] += F[i] * G[j];
+            }
         }
         return ans;
     }
@@ -76,13 +90,19 @@ inline auto convoluteInt(const Vec<i64>& F, const Vec<i64>& G) -> Vec<i64> {
     Vec<submint1> as1(A), bs1(B);
     Vec<submint2> as2(A), bs2(B);
     Vec<submint3> as3(A), bs3(B);
-    for (int i : rep(A)) { as1[i] = F[i], as2[i] = F[i], as3[i] = F[i]; }
-    for (int i : rep(B)) { bs1[i] = G[i], bs2[i] = G[i], bs3[i] = G[i]; }
+    for (int i : rep(A)) {
+        as1[i] = F[i], as2[i] = F[i], as3[i] = F[i];
+    }
+    for (int i : rep(B)) {
+        bs1[i] = G[i], bs2[i] = G[i], bs3[i] = G[i];
+    }
     const auto cs1 = NumberTheoriticTransform<submint1>::convolute(as1, bs1);
     const auto cs2 = NumberTheoriticTransform<submint2>::convolute(as2, bs2);
     const auto cs3 = NumberTheoriticTransform<submint3>::convolute(as3, bs3);
     Vec<i64> cs(N);
-    for (int i : rep(N)) { cs[i] = Garner::restoreInt(cs1[i], cs2[i], cs3[i]); }
+    for (int i : rep(N)) {
+        cs[i] = Garner::restoreInt(cs1[i], cs2[i], cs3[i]);
+    }
     return cs;
 }
 /**
@@ -99,7 +119,9 @@ template <typename mint> auto convoluteModReverse(Vec<mint> F, const Vec<mint>& 
     seqReverse(F);
     const auto cs = convoluteMod(F, G);
     Vec<mint> ans(B);
-    for (int i : rep(B)) { ans[i] = cs[i + A - 1]; }
+    for (int i : rep(B)) {
+        ans[i] = cs[i + A - 1];
+    }
     return ans;
 }
 /**
@@ -115,6 +137,8 @@ inline auto convoluteIntReverse(Vec<i64> F, const Vec<i64>& G) -> Vec<i64> {
     seqReverse(F);
     const auto cs = convoluteInt(F, G);
     Vec<i64> ans(B);
-    for (int i : rep(B)) { ans[i] = cs[i + A - 1]; }
+    for (int i : rep(B)) {
+        ans[i] = cs[i + A - 1];
+    }
     return ans;
 }

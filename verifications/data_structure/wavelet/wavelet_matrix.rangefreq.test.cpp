@@ -10,7 +10,9 @@ int main() {
     auto wm = WaveletMatrix(as);
     LOOP (Q) {
         const auto [l, r, k] = in.tup<int, int, int>();
-        const i64 ans = binSearch(TEN<i64>(9) + 1, 0_i64, [&, l = l, r = r, k = k](u32 x) { return wm.rangeFreq(l, r, 0, x) <= k; });
+        const i64 ans = binSearch(TEN<i64>(9) + 1, 0_i64, [&, l = l, r = r, k = k](u32 x) {
+            return wm.rangeFreq(l, r, 0, x) <= k;
+        });
         out.ln(ans);
     }
     return 0;

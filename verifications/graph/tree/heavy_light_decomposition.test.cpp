@@ -14,19 +14,33 @@ int main() {
     using T = Pair<mint, mint>;
 
     Vec<mint> as(N), bs(N);
-    for (int i : rep(N)) { std::tie(as[i], bs[i]) = in.tup<mint, mint>(); }
+    for (int i : rep(N)) {
+        std::tie(as[i], bs[i]) = in.tup<mint, mint>();
+    }
     LOOP (N - 1) {
         const auto [u, v] = in.tup<int, int>();
         g.addEdge(u, v, true);
     }
     const HeavyLightDecomposition hld{g};
     Vec<T> vs(N);
-    for (int i : rep(N)) { vs[hld.pos(i)] = T{as[i], bs[i]}; }
+    for (int i : rep(N)) {
+        vs[hld.pos(i)] = T{as[i], bs[i]};
+    }
 
-    auto merge = [](const T& x2, const T& x1) { return T{x1.first * x2.first, x1.first * x2.second + x1.second}; };
-    auto Rmerge = [](const T& x1, const T& x2) { return T{x1.first * x2.first, x1.first * x2.second + x1.second}; };
-    auto seg = SegTree<T, []() { return T{1, 0}; }, merge>(vs);
-    auto rseg = SegTree<T, []() { return T{1, 0}; }, Rmerge>(vs);
+    auto merge = [](const T& x2, const T& x1) {
+        return T{x1.first * x2.first, x1.first * x2.second + x1.second};
+    };
+    auto Rmerge = [](const T& x1, const T& x2) {
+        return T{x1.first * x2.first, x1.first * x2.second + x1.second};
+    };
+    auto seg = SegTree<T, []() {
+        return T{1, 0};
+    },
+                       merge>(vs);
+    auto rseg = SegTree<T, []() {
+        return T{1, 0};
+    },
+                        Rmerge>(vs);
     LOOP (Q) {
         const auto t = in.val<int>();
         if (t == 0) {
@@ -36,7 +50,9 @@ int main() {
             const auto [u, v, x] = in.tup<int, int, mint>();
             const auto ps = hld.path(u, v);
             T X{1, 0};
-            for (const auto& [a, b] : ps) { X = merge(X, a <= b ? seg.fold(a, b + 1) : rseg.fold(b, a + 1)); }
+            for (const auto& [a, b] : ps) {
+                X = merge(X, a <= b ? seg.fold(a, b + 1) : rseg.fold(b, a + 1));
+            }
             out.ln((X.first * x + X.second).val());
         }
     }

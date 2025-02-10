@@ -24,10 +24,14 @@ public:
         Vec<i64> nvs(m_n);
         for (int bi : per(m_lg)) {
             for (int i : rep(m_n)) {
-                if (isBitOn(xs[i], bi)) { m_bvs[bi].set(i); }
+                if (isBitOn(xs[i], bi)) {
+                    m_bvs[bi].set(i);
+                }
             }
             int is[2] = {0, m_bvs[bi].zero()};
-            for (int i : rep(m_n)) { nvs[is[isBitOn(xs[i], bi)]++] = xs[i]; }
+            for (int i : rep(m_n)) {
+                nvs[is[isBitOn(xs[i], bi)]++] = xs[i];
+            }
             std::ranges::swap(xs, nvs);
         }
     }
@@ -73,8 +77,12 @@ public:
 private:
     auto lessFreq(int l, int r, i64 v) -> int {
         assert(0 <= l and l <= r and r <= m_n);
-        if (v <= m_min) { return 0; }
-        if (v - 1 >= m_max) { return r - l; }
+        if (v <= m_min) {
+            return 0;
+        }
+        if (v - 1 >= m_max) {
+            return r - l;
+        }
         int ans = 0;
         for (int bi : per(m_lg)) {
             const int lz = m_bvs[bi].rank0(l), rz = m_bvs[bi].rank0(r);

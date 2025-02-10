@@ -23,7 +23,9 @@ public:
     /**
      * @brief コンストラクタ
      */
-    SwagQueue() : m_fronts{}, m_backs{}, m_Fronts{e()}, m_Backs{e()} {}
+    SwagQueue()
+        : m_fronts{}, m_backs{}, m_Fronts{e()}, m_Backs{e()} {
+    }
     /**
      * @brief pushBack
      *
@@ -50,20 +52,28 @@ public:
      *
      * @return T 総積
      */
-    auto foldAll() const -> T { return merge(m_Fronts.back(), m_Backs.back()); }
+    auto foldAll() const -> T {
+        return merge(m_Fronts.back(), m_Backs.back());
+    }
     /**
      * @brief 空かどうか
      *
      * @return true 空
      * @return false 非空
      */
-    auto empty() const -> bool { return m_backs.empty() and m_fronts.empty(); }
+    auto empty() const -> bool {
+        return m_backs.empty() and m_fronts.empty();
+    }
 private:
     auto calc() -> void {
         m_Fronts = {e()};
-        for (int i : rep(m_fronts.size())) { m_Fronts.push_back(merge(m_fronts[i], m_Fronts.back())); }
+        for (int i : rep(m_fronts.size())) {
+            m_Fronts.push_back(merge(m_fronts[i], m_Fronts.back()));
+        }
         m_Backs = {e()};
-        for (int i : rep(m_backs.size())) { m_Backs.push_back(merge(m_Backs.back(), m_backs[i])); }
+        for (int i : rep(m_backs.size())) {
+            m_Backs.push_back(merge(m_Backs.back(), m_backs[i]));
+        }
     }
     Vec<T> m_fronts, m_backs;
     Vec<T> m_Fronts, m_Backs;

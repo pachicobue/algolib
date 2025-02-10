@@ -42,7 +42,9 @@ public:
      * @param N 作用素列長
      * @param f 作用素の初期値
      */
-    DualSegTree(int N, const F& f = id()) : DualSegTree(Vec<F>(N, f)) {}
+    DualSegTree(int N, const F& f = id())
+        : DualSegTree(Vec<F>(N, f)) {
+    }
 
     /**
      * @brief 1点取得 F[i]
@@ -54,7 +56,9 @@ public:
         assert(0 <= i and i < m_size);
         F ans = id();
         i += m_half;
-        for (int h : per(m_depth)) { ans = compose(ans, m_ops[i >> h]); }
+        for (int h : per(m_depth)) {
+            ans = compose(ans, m_ops[i >> h]);
+        }
         return ans;
     }
     /**
@@ -78,18 +82,26 @@ public:
      */
     auto act(int l, int r, const F& f) -> void {
         assert(0 <= l and r <= m_size);
-        if (l >= r) { return; }
+        if (l >= r) {
+            return;
+        }
         int li = l + m_half, ri = r + m_half;
         clean(li), clean(ri);
         for (; li < ri; li >>= 1, ri >>= 1) {
-            if (li & 1) { update(li++, f); }
-            if (ri & 1) { update(--ri, f); }
+            if (li & 1) {
+                update(li++, f);
+            }
+            if (ri & 1) {
+                update(--ri, f);
+            }
         }
     }
 #ifdef HOGEPACHI
     friend auto operator<<(Ostream& os, const DualSegTree& seg) -> Ostream& {
         os << "[";
-        for (int i : rep(seg.m_size)) { os << (i == 0 ? "" : ",") << seg.get(i); }
+        for (int i : rep(seg.m_size)) {
+            os << (i == 0 ? "" : ",") << seg.get(i);
+        }
         return (os << "]\n");
     }
 #endif
@@ -102,11 +114,15 @@ private:
         const int b = (i / (i & -i)) >> 1;
         for (const int h : per(m_depth)) {
             const int v = i >> h;
-            if (v > b) { break; }
+            if (v > b) {
+                break;
+            }
             down(v);
         }
     }
-    auto update(int i, const F& f) -> void { m_ops[i] = compose(f, m_ops[i]); }
+    auto update(int i, const F& f) -> void {
+        m_ops[i] = compose(f, m_ops[i]);
+    }
     int m_size, m_half, m_depth;
     Vec<F> m_ops;
 };

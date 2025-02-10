@@ -10,4 +10,6 @@ void test() {
     assert(zipper.zip(4) == 1);
     assert(zipper.zip(6) == 2);
 }
-int main() { test(); }
+int main() {
+    test();
+}

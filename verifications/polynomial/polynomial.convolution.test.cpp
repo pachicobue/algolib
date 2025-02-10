@@ -11,7 +11,9 @@ int main() {
     Polynomial<mint> bs{in.vec<mint>(M)};
     auto cs = as * bs;
     Vec<mint> ans(N + M - 1);
-    for (int i : rep(N + M - 1)) { ans[i] = cs.at(i); }
+    for (int i : rep(N + M - 1)) {
+        ans[i] = cs.at(i);
+    }
     out.ln(ans);
     return 0;
 }

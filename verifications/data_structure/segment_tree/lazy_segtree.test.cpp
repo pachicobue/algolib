@@ -12,7 +12,9 @@ int main() {
 
     const auto [N, Q] = in.tup<int, int>();
     Vec<Pair<mint, int>> as(N, {0, 1});
-    for (int i : rep(N)) { as[i].first = in.val<mint>(); }
+    for (int i : rep(N)) {
+        as[i].first = in.val<mint>();
+    }
 
     auto seg = LazySeg<T,
                        FConst(T{0, 0}),

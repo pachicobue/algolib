@@ -14,11 +14,17 @@ template <int N> constexpr auto millerRabin(u64 X, u64 const (&as)[N]) -> bool {
     mint::setMod(X);
     const u64 d = (X - 1) >> order2(X - 1);
     for (u64 a : as) {
-        if (X <= a) { break; }
+        if (X <= a) {
+            break;
+        }
         u64 s = d;
         mint x = mint(a).pow(s);
-        while (x != 1 and x != X - 1 and s != X - 1) { s *= 2, x *= x; }
-        if (x != X - 1 and s % 2 == 0) { return false; }
+        while (x != 1 and x != X - 1 and s != X - 1) {
+            s *= 2, x *= x;
+        }
+        if (x != X - 1 and s % 2 == 0) {
+            return false;
+        }
     }
     return true;
 }
@@ -31,8 +37,12 @@ template <int N> constexpr auto millerRabin(u64 X, u64 const (&as)[N]) -> bool {
  * @return false Xが合成数
  */
 constexpr auto isPrime(u64 X) -> bool {
-    if (X == 1) { return false; }
-    if (X % 2 == 0) { return X == 2; }
+    if (X == 1) {
+        return false;
+    }
+    if (X % 2 == 0) {
+        return X == 2;
+    }
     if (X < 4759123141_u64) {
         return millerRabin(X, {2_u64, 7_u64, 61_u64});
     } else {

@@ -12,7 +12,9 @@
 template <typename T> auto setMoebius(const Vec<T>& F, bool subset) -> Vec<T> {
     const int N = (int)std::bit_ceil(F.size());
     Vec<T> nF(N);
-    for (int i : rep(F.size())) { nF[i] = F[i]; }
+    for (int i : rep(F.size())) {
+        nF[i] = F[i];
+    }
     for (int i = 1; i < N; i <<= 1) {
         for (int j : rep(N)) {
             if ((j & i) == 0) {

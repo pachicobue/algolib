@@ -19,9 +19,13 @@ template <typename T> auto dijkstra(const Graph<T>& g, int S) -> Vec<T> {
         const auto [c, u] = Q.top();
         assert(c >= 0);
         Q.pop();
-        if (ds[u] < c) { continue; }
+        if (ds[u] < c) {
+            continue;
+        }
         for (const auto& [v, c] : g[u] | g.ToC) {
-            if (ds[v] <= ds[u] + c) { continue; }
+            if (ds[v] <= ds[u] + c) {
+                continue;
+            }
             ds[v] = ds[u] + c, Q.push({ds[v], v});
         }
     }

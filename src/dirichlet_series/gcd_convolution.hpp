@@ -16,7 +16,9 @@ template <typename T> auto gcdConvolute(Vec<T> F, Vec<T> G, const Vec<int>& prim
     const int L = (int)std::ranges::min(F.size(), G.size());
     F.resize(L), G.resize(L);
     auto nF = divisorsZeta(F, false, primes), nG = divisorsZeta(G, false, primes);
-    for (int i : rep(L)) { nF[i] *= nG[i]; }
+    for (int i : rep(L)) {
+        nF[i] *= nG[i];
+    }
     return divisorsMoebius(nF, false, primes);
 }
 /**

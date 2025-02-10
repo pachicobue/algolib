@@ -19,7 +19,9 @@ public:
      * @return true 動的
      * @return false 静的
      */
-    static constexpr auto isDynamic() -> bool { return dynamic; }
+    static constexpr auto isDynamic() -> bool {
+        return dynamic;
+    }
     /**
      * @brief Mod
      *
@@ -46,20 +48,26 @@ public:
     /**
      * @brief コンストラクタ (0初期化)
      */
-    constexpr modint() : m_val{0} {}
+    constexpr modint()
+        : m_val{0} {
+    }
     /**
      * @brief コンストラクタ (値指定)
      *
      * @param v 値
      */
-    constexpr modint(i64 v) : m_val{normll(v)} {}
+    constexpr modint(i64 v)
+        : m_val{normll(v)} {
+    }
     /**
      * @brief -m
      *
      * @param m
      * @return modint -m
      */
-    constexpr friend auto operator-(const modint& x) -> modint { return modint{0} - x; }
+    constexpr friend auto operator-(const modint& x) -> modint {
+        return modint{0} - x;
+    }
     /**
      * @brief x1 <- x1+x2
      *
@@ -67,7 +75,9 @@ public:
      * @param x2
      * @return modint& x1
      */
-    constexpr friend auto operator+=(modint& x1, const modint& x2) -> modint& { return x1.m_val = norm(x1.m_val + x2.m_val), x1; }
+    constexpr friend auto operator+=(modint& x1, const modint& x2) -> modint& {
+        return x1.m_val = norm(x1.m_val + x2.m_val), x1;
+    }
     /**
      * @brief x1 <- x1-x2
      *
@@ -75,7 +85,9 @@ public:
      * @param x2
      * @return modint& x1
      */
-    constexpr friend auto operator-=(modint& x1, const modint& x2) -> modint& { return x1.m_val = norm(x1.m_val + mod() - x2.m_val), x1; }
+    constexpr friend auto operator-=(modint& x1, const modint& x2) -> modint& {
+        return x1.m_val = norm(x1.m_val + mod() - x2.m_val), x1;
+    }
     /**
      * @brief x1 <- x1*x2
      *
@@ -105,7 +117,9 @@ public:
      * @param x2
      * @return modint& x1
      */
-    constexpr friend auto operator/=(modint& x1, const modint& x2) -> modint& { return x1 *= x2.inv(); }
+    constexpr friend auto operator/=(modint& x1, const modint& x2) -> modint& {
+        return x1 *= x2.inv();
+    }
     /**
      * @brief x1+x2
      *
@@ -173,27 +187,35 @@ public:
      * @param m
      * @return Ostream& ostream
      */
-    friend auto operator<<(Ostream& os, const modint& x) -> Ostream& { return os << x.m_val; }
+    friend auto operator<<(Ostream& os, const modint& x) -> Ostream& {
+        return os << x.m_val;
+    }
     /**
      * @brief modintの内部値
      *
      * @return u64 値
      */
-    constexpr auto val() const -> u64 { return m_val; }
+    constexpr auto val() const -> u64 {
+        return m_val;
+    }
     /**
      * @brief 累乗
      *
      * @param n 指数
      * @return modint 累乗
      */
-    constexpr auto pow(i64 n) const -> modint { return powerInt(*this, n); }
+    constexpr auto pow(i64 n) const -> modint {
+        return powerInt(*this, n);
+    }
     /**
      * @brief 逆数
      * @attention 正確には xy=gcd(x,mod) となる y を返す
      *
      * @return modint 逆数
      */
-    constexpr auto inv() const -> modint { return inverseMod(m_val, mod()); }
+    constexpr auto inv() const -> modint {
+        return inverseMod(m_val, mod());
+    }
     /**
      * @brief 正整数nの逆数
      * @attention 均し線形かかるので注意
@@ -204,7 +226,9 @@ public:
     static auto sinv(int n) -> modint {
         assert(1 <= n);
         auto& is = sinvRef();
-        for (int i : irange((int)is.size(), n + 1)) { is.push_back(-is[mod() % i] * (mod() / i)); }
+        for (int i : irange((int)is.size(), n + 1)) {
+            is.push_back(-is[mod() % i] * (mod() / i));
+        }
         return is[n];
     }
     /**
@@ -217,7 +241,9 @@ public:
     static auto fact(int n) -> modint {
         assert(0 <= n);
         auto& fs = factRef();
-        for (int i : irange((int)fs.size(), n + 1)) { fs.push_back(fs.back() * i); }
+        for (int i : irange((int)fs.size(), n + 1)) {
+            fs.push_back(fs.back() * i);
+        }
         return fs[n];
     }
     /**
@@ -229,7 +255,9 @@ public:
      */
     static auto ifact(int n) -> modint {
         auto& ifs = ifactRef();
-        for (int i : irange((int)ifs.size(), n + 1)) { ifs.push_back(ifs.back() * sinv(i)); }
+        for (int i : irange((int)ifs.size(), n + 1)) {
+            ifs.push_back(ifs.back() * sinv(i));
+        }
         return ifs[n];
     }
     /**
@@ -240,7 +268,9 @@ public:
      * @param k
      * @return modint P(n,k)
      */
-    static auto perm(int n, int k) -> modint { return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k); }
+    static auto perm(int n, int k) -> modint {
+        return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k);
+    }
     /**
      * @brief C(n,K)
      * @attention 均し線形かかるので注意
@@ -249,7 +279,9 @@ public:
      * @param k
      * @return modint C(n,k)
      */
-    static auto comb(int n, int k) -> modint { return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k) * ifact(k); }
+    static auto comb(int n, int k) -> modint {
+        return k > n or k < 0 ? modint{0} : fact(n) * ifact(n - k) * ifact(k);
+    }
 private:
     static auto modRef() -> u64& requires dynamic
     {
@@ -268,7 +300,9 @@ private:
         static Vec<modint> ifs{1, 1};
         return ifs;
     }
-    static constexpr auto norm(u64 x) -> u64 { return x < mod() ? x : x - mod(); } // 0 <= x < mod*2
+    static constexpr auto norm(u64 x) -> u64 {
+        return x < mod() ? x : x - mod();
+    } // 0 <= x < mod*2
     static constexpr auto normll(i64 x) -> u64 {
         x %= (i64)mod();
         return norm(u64(x < 0 ? x + (i64)mod() : x));

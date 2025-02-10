@@ -9,7 +9,9 @@ void smallTest() {
     const u64 x = 1000234;
     const int N = 100;
     u64 ans = 1;
-    LOOP (N) { (ans *= x) %= MOD; }
+    LOOP (N) {
+        (ans *= x) %= MOD;
+    }
     assert(powerMod(x, N, MOD) == ans);
 }
 void largeTest() {
@@ -17,7 +19,9 @@ void largeTest() {
     const u64 x = 1000423231243234;
     const int N = 100;
     u128 ans = 1;
-    LOOP (N) { (ans *= x) %= MOD; }
+    LOOP (N) {
+        (ans *= x) %= MOD;
+    }
     assert(powerMod(x, N, MOD) == (u64)ans);
 }
 

@@ -24,9 +24,13 @@ public:
             m_ps[u] = p;
             for (int i : rep(g[u].size())) {
                 const int v = g[u][i];
-                if (p == v) { continue; }
+                if (p == v) {
+                    continue;
+                }
                 szs[u] += self(v, u);
-                if (szs[(int)g[u][0]] < szs[v]) { std::ranges::swap(g[u][0], g[u][i]); }
+                if (szs[(int)g[u][0]] < szs[v]) {
+                    std::ranges::swap(g[u][0], g[u][i]);
+                }
             }
             return szs[u];
         })(r, -1);
@@ -38,7 +42,9 @@ public:
             m_ords[m_ins[u]] = u;
             for (int i : rep(g[u].size())) {
                 const int v = g[u][i];
-                if (v == p) { continue; }
+                if (v == p) {
+                    continue;
+                }
                 if (i == 0) {
                     m_tops[v] = m_tops[u];
                 } else {
@@ -54,14 +60,18 @@ public:
      * @param v 頂点番号
      * @return int 訪問順
      */
-    auto pos(int v) const -> int { return assert(0 <= v and v < m_V), m_ins[v]; }
+    auto pos(int v) const -> int {
+        return assert(0 <= v and v < m_V), m_ins[v];
+    }
     /**
      * @brief ET順→頂点番号
      *
      * @param n ET順
      * @return int 頂点番号
      */
-    auto at(int i) const -> int { return assert(0 <= i and i < m_V), m_ords[i]; }
+    auto at(int i) const -> int {
+        return assert(0 <= i and i < m_V), m_ords[i];
+    }
     /**
      * @brief 部分木に属する頂点の ET順区間
      *
@@ -97,7 +107,9 @@ public:
         }
         head.push_back({m_ins[u], m_ins[v]});
         seqReverse(tail);
-        for (const auto& p : tail) { head.push_back(p); }
+        for (const auto& p : tail) {
+            head.push_back(p);
+        }
         return head;
     }
 private:

@@ -15,10 +15,14 @@
  * @param mul 乗算
  * @return T x^N
  */
-template <typename T> constexpr auto powerMonoid(const T &x, i64 N, const T &e, auto mul) -> T {
+template <typename T> constexpr auto powerMonoid(const T& x, i64 N, const T& e, auto mul) -> T {
     assert(N >= 0);
-    if (N == 0) { return e; }
-    if (N == 1) { return x; }
+    if (N == 0) {
+        return e;
+    }
+    if (N == 1) {
+        return x;
+    }
     return (N % 2 == 1 ? mul(x, powerMonoid(x, N - 1, e, mul)) : powerMonoid(mul(x, x), N / 2, e, mul));
 }
 /**
@@ -30,7 +34,9 @@ template <typename T> constexpr auto powerMonoid(const T &x, i64 N, const T &e, 
  * @param e 単位元
  * @return T x^N
  */
-template <typename T> constexpr auto powerMonoid(const T &x, i64 N, const T &e) -> T { return powerMonoid(x, N, e, std::multiplies<T>{}); }
+template <typename T> constexpr auto powerMonoid(const T& x, i64 N, const T& e) -> T {
+    return powerMonoid(x, N, e, std::multiplies<T>{});
+}
 /**
  * @brief 整数の累乗
  * @attention オーバーフローのケアはしていないので注意
@@ -41,7 +47,9 @@ template <typename T> constexpr auto powerMonoid(const T &x, i64 N, const T &e) 
  * @param e 単位元
  * @return T x^N
  */
-template <typename T> constexpr auto powerInt(const T &x, i64 N) -> T { return powerMonoid(x, N, T{1}); }
+template <typename T> constexpr auto powerInt(const T& x, i64 N) -> T {
+    return powerMonoid(x, N, T{1});
+}
 /**
  * @brief 整数の累乗(Mod)
  *

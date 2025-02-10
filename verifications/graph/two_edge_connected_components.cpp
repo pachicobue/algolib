@@ -15,6 +15,8 @@ int main() {
     const int C = two_ecc.cnum();
     const auto cvs = two_ecc.groups();
     out.ln(C);
-    for (int c : rep(C)) { out.ln(cvs[c].size(), cvs[c]); }
+    for (int c : rep(C)) {
+        out.ln(cvs[c].size(), cvs[c]);
+    }
     return 0;
 }

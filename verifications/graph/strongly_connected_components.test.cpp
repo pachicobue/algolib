@@ -19,15 +19,21 @@ int main() {
         const int uc = scc[u];
         for (const int v : g[u]) {
             const int vc = scc[v];
-            if (uc == vc) { continue; }
+            if (uc == vc) {
+                continue;
+            }
             dag.addEdge(uc, vc);
         }
     }
     Vec<Vec<int>> cvs(C);
-    for (int i : rep(N)) { cvs[scc[i]].push_back(i); }
+    for (int i : rep(N)) {
+        cvs[scc[i]].push_back(i);
+    }
     const auto cs = topologicalSort(dag);
     assert(cs);
     out.ln(C);
-    for (int c : cs.value()) { out.ln(cvs[c].size(), cvs[c]); }
+    for (int c : cs.value()) {
+        out.ln(cvs[c].size(), cvs[c]);
+    }
     return 0;
 }

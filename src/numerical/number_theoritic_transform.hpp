@@ -10,9 +10,15 @@
  */
 template <typename mint> class NumberTheoriticTransform {
 private:
-    static constexpr auto mod() -> u64 { return mint::mod(); }
-    static constexpr auto root() -> u64 { return primitiveRootFast(mint::mod()); }
-    static constexpr auto order() -> int { return order2(mint::mod() - 1); }
+    static constexpr auto mod() -> u64 {
+        return mint::mod();
+    }
+    static constexpr auto root() -> u64 {
+        return primitiveRootFast(mint::mod());
+    }
+    static constexpr auto order() -> int {
+        return order2(mint::mod() - 1);
+    }
 public:
     /**
      * @brief 畳み込み
@@ -27,7 +33,9 @@ public:
         const int N = (int)std::bit_ceil((u64)C);
         F.resize(N, 0), G.resize(N, 0);
         transform(F, false), transform(G, false);
-        for (int i : rep(N)) { F[i] *= G[i]; }
+        for (int i : rep(N)) {
+            F[i] *= G[i];
+        }
         transform(F, true), F.resize(C);
         return F;
     }
@@ -41,7 +49,9 @@ public:
         const int N = F.size();
         assert((N & (N - 1)) == 0);
         assert(N <= (1 << order()));
-        if (N == 1) { return; }
+        if (N == 1) {
+            return;
+        }
         const int L = floorLog2(N);
         const auto l_range = (rev ? irange(1, L + 1, 1) : irange(L, 0, -1));
         for (int l : l_range) {
@@ -59,7 +69,9 @@ public:
         }
         if (rev) {
             const mint iN = mint{1} / N;
-            for (auto& a : F) { a *= iN; }
+            for (auto& a : F) {
+                a *= iN;
+            }
         }
     }
 private:
@@ -70,7 +82,9 @@ private:
             const auto LMAX = order();
             zs.resize(LMAX + 1, 1), izs.resize(LMAX + 1, 1);
             zs[LMAX] = mint(ROOT).pow((MOD - 1) / (1 << LMAX)), izs[LMAX] = zs[LMAX].inv();
-            for (int l : per(LMAX)) { zs[l] = zs[l + 1] * zs[l + 1], izs[l] = izs[l + 1] * izs[l + 1]; }
+            for (int l : per(LMAX)) {
+                zs[l] = zs[l + 1] * zs[l + 1], izs[l] = izs[l + 1] * izs[l + 1];
+            }
         }
         return (rev ? izs[i] : zs[i]);
     }

@@ -15,7 +15,9 @@
 template <typename T> auto lcmConvolute(Vec<T> F, Vec<T> G, int L, Vec<int> primes) -> Vec<T> {
     F.resize(L), G.resize(L);
     auto nF = divisorsZeta(F, true, primes), nG = divisorsZeta(G, true, primes);
-    for (int i : rep(L)) { nF[i] *= nG[i]; }
+    for (int i : rep(L)) {
+        nF[i] *= nG[i];
+    }
     return divisorsMoebius(nF, true, primes);
 }
 /**
@@ -26,4 +28,6 @@ template <typename T> auto lcmConvolute(Vec<T> F, Vec<T> G, int L, Vec<int> prim
  * @param L 何項目まで計算するか
  * @return Vec<T> H[i]=\sum_{lcm(j,k)=i}F[j]G[k]
  */
-template <typename T> auto lcmConvolute(Vec<T> F, Vec<T> G, int L) { return lcmConvolute(F, G, L, EratosthenesSieve{L}.primes()); }
+template <typename T> auto lcmConvolute(Vec<T> F, Vec<T> G, int L) {
+    return lcmConvolute(F, G, L, EratosthenesSieve{L}.primes());
+}

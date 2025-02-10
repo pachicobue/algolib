@@ -12,7 +12,9 @@ int main() {
     const auto bs = in.vec<mint>(N);
     const auto cs = xorConvolute(as, bs);
     Vec<int> ans(cs.size());
-    for (int i : rep(N)) { ans[i] = cs[i].val(); }
+    for (int i : rep(N)) {
+        ans[i] = cs[i].val();
+    }
     out.ln(ans);
     return 0;
 }

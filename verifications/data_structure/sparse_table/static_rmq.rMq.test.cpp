@@ -6,7 +6,9 @@
 int main() {
     const auto [N, Q] = in.tup<int, int>();
     auto as = in.vec<int>(N);
-    for (auto& a : as) { a = -a; }
+    for (auto& a : as) {
+        a = -a;
+    }
     const auto rMq = StaticRMQ<int, FConst(-INF<int>), Gt<int>{}>(as);
     LOOP (Q) {
         const auto [l, r] = in.tup<int, int>();

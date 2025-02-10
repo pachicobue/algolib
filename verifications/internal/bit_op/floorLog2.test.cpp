@@ -8,7 +8,9 @@
 inline int check(u64 X) {
     int i = 0;
     for (i = 0; i < 64; i++) {
-        if ((1_u64 << i) > X) { break; }
+        if ((1_u64 << i) > X) {
+            break;
+        }
     }
     return i - 1;
 }

@@ -11,7 +11,9 @@ public:
     /**
      * @brief コンストラクタ
      */
-    StopWatch() : m_start{SysClock::now()}, m_rap{m_start} {}
+    StopWatch()
+        : m_start{SysClock::now()}, m_rap{m_start} {
+    }
     /**
      * @brief Rapを実行
      *

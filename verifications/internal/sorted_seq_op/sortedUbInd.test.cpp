@@ -8,7 +8,9 @@
 template <typename Vs> int check(const Vs& vs, int v) {
     int i = 0;
     for (; i < std::ssize(vs); i++) {
-        if (v < vs[i]) { break; }
+        if (v < vs[i]) {
+            break;
+        }
     }
     return i;
 }

@@ -15,7 +15,9 @@ auto secondMax(i64 a1, i64 a2, i64 b1, i64 b2) -> i64 {
                                      : b2 > a1   ? b2
                                                  : std::min(a1, b1);
 }
-auto clamp(i64 x, i64 low, i64 hi) -> i64 { return std::min(hi, std::max(low, x)); }
+auto clamp(i64 x, i64 low, i64 hi) -> i64 {
+    return std::min(hi, std::max(low, x));
+}
 
 struct T {
     Arr<i64, 2> mins; // 1st min, 2nd min
@@ -54,9 +56,13 @@ struct F // Clamp[low,hi] \circ Add[add]
 {
     i64 low, hi;
     i64 add;
-    friend bool operator==(const F& f1, const F& f2) { return f1.low == f2.low and f1.hi == f2.hi and f1.add == f2.add; }
+    friend bool operator==(const F& f1, const F& f2) {
+        return f1.low == f2.low and f1.hi == f2.hi and f1.add == f2.add;
+    }
 };
-auto id() -> F { return {-INF<i64>, INF<i64>, 0_i64}; }
+auto id() -> F {
+    return {-INF<i64>, INF<i64>, 0_i64};
+}
 auto compose(const F& f1, const F& f2) -> F {
     const auto& [low1, hi1, add1] = f1;
     const auto& [low2, hi2, add2] = f2;
@@ -103,7 +109,9 @@ auto apply(const F& f, const T& x) -> T {
     return nx;
 }
 
-auto failed(const T& x) -> bool { return x.failed; }
+auto failed(const T& x) -> bool {
+    return x.failed;
+}
 
 int main() {
     const auto [N, Q] = in.tup<int, int>();

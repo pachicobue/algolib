@@ -87,7 +87,9 @@ void eqTest() {
     LOOP (100) {
         const mint v1{(i64)rng.val(0_u64, MOD - 1)};
         mint v2{(i64)rng.val(1_u64, MOD - 1)};
-        if (rng.val(0, 5) == 0) { v2 = v1; }
+        if (rng.val(0, 5) == 0) {
+            v2 = v1;
+        }
         assert((v1 == v2) == (v1.val() == v2.val()));
     }
 }

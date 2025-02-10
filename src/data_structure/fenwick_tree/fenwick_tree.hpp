@@ -13,9 +13,12 @@ public:
      *
      * @param xs ベースとなる数列
      */
-    FenwickTree(const Vec<T>& xs) : m_size(xs.size()), m_cap((int)std::bit_ceil((u64)m_size)), m_xs(m_cap + 1, T{}) {
+    FenwickTree(const Vec<T>& xs)
+        : m_size(xs.size()), m_cap((int)std::bit_ceil((u64)m_size)), m_xs(m_cap + 1, T{}) {
         std::ranges::copy(xs, m_xs.begin() + 1);
-        for (int x : irange(1, m_cap)) { m_xs[x + (x & -x)] += m_xs[x]; }
+        for (int x : irange(1, m_cap)) {
+            m_xs[x + (x & -x)] += m_xs[x];
+        }
     }
     /**
      * @brief コンストラクタ
@@ -23,7 +26,9 @@ public:
      * @param N 数列長
      * @param x 初期値
      */
-    FenwickTree(int N, const T& x = T{}) : FenwickTree{Vec<T>(N, x)} {}
+    FenwickTree(int N, const T& x = T{})
+        : FenwickTree{Vec<T>(N, x)} {
+    }
     /**
      * @brief 一点加算 X[i] <- X[i]+x
      *
@@ -32,7 +37,9 @@ public:
      */
     auto add(int i, const T& x) -> void {
         assert(0 <= i and i < m_size);
-        for (int ind = i + 1; ind <= m_cap; ind += ind & (-ind)) { m_xs[ind] += x; }
+        for (int ind = i + 1; ind <= m_cap; ind += ind & (-ind)) {
+            m_xs[ind] += x;
+        }
     }
     /**
      * @brief 累積和 \sum_{0<=i<isup}X[i]
@@ -43,7 +50,9 @@ public:
     auto sum(int isup) const -> T {
         assert(0 <= isup and isup <= m_size);
         T sum{};
-        for (int ind = isup; ind != 0; ind &= ind - 1) { sum += m_xs[ind]; }
+        for (int ind = isup; ind != 0; ind &= ind - 1) {
+            sum += m_xs[ind];
+        }
         return sum;
     }
     /**
@@ -64,8 +73,12 @@ public:
      * @return int 最小のx (Trueになる x が存在しない場合 N+1)
      */
     auto minRight(auto pred) const -> int {
-        if (pred(T{})) { return 0; }
-        if (not pred(m_xs[m_cap])) { return m_size + 1; }
+        if (pred(T{})) {
+            return 0;
+        }
+        if (not pred(m_xs[m_cap])) {
+            return m_size + 1;
+        }
         int ng = 0, ok = m_cap;
         T sum = 0;
         while (ok - ng > 1) {
@@ -81,7 +94,9 @@ public:
 #ifdef HOGEPACHI
     friend auto operator<<(Ostream& os, const FenwickTree& fw) -> Ostream& {
         os << "[";
-        for (int i : rep(fw.m_size)) { os << (i == 0 ? "" : ",") << fw.sum(i, i + 1); }
+        for (int i : rep(fw.m_size)) {
+            os << (i == 0 ? "" : ",") << fw.sum(i, i + 1);
+        }
         return (os << "]\n");
     }
 #endif

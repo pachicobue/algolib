@@ -12,7 +12,9 @@ int main() {
     const auto cs = convoluteInt(as, bs);
     Vec<i64> ds(AN + BN - 1, 0);
     for (int i : rep(AN)) {
-        for (int j : rep(BN)) { ds[i + j] += (i64)as[i] * bs[j]; }
+        for (int j : rep(BN)) {
+            ds[i + j] += (i64)as[i] * bs[j];
+        }
     }
     assert(cs == ds);
     return 0;
