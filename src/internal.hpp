@@ -1,7 +1,6 @@
 #pragma once
 // IWYU pragma: begin_exports
 #include "internal/abbreviation.hpp"
-#include "internal/abs.hpp"
 #include "internal/bit_op.hpp"
 #include "internal/chminmax.hpp"
 #include "internal/constant.hpp"

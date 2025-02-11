@@ -2,6 +2,7 @@
 #include <bit>
 #include <cassert>
 #include "type.hpp"
+
 /**
  * @brief i bit目がONかどうか
  *
