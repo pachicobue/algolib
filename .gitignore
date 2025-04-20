@@ -1,21 +1,5 @@
-# tools
-tools/verify-doc/.workspace/verify/*
-!tools/verify-doc/.workspace/verify/remote.json
-tools/verify-doc/.workspace/doc/*
-
-# ccls
-.ccls-cache
-
-# Submission
-**/*_submission.cpp
-
-# Precompiled Headers
 *.gch
 *.pch
-
-# Executables
 *.exe
 *.out
-
-# Python Cache
-__pycache__
+.direnv
